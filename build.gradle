@@ -7,7 +7,7 @@ subprojects {
     apply plugin: 'maven-publish'
     apply plugin: 'signing'
 
-    group = 'org.civis-blockchain.ssm'
+    group = group
     version = version
 
     sourceCompatibility = 1.8
@@ -55,6 +55,67 @@ subprojects {
     task javadocJar(type: Jar, dependsOn: 'javadoc') {
         from javadoc.destinationDir
         archiveClassifier = 'javadoc'
+    }
+
+    afterEvaluate { Project project ->
+        publishing {
+            publications {
+                mavenJava(MavenPublication) {
+                    artifactId = project.name
+                    from components.java
+                    artifact sourcesJar
+                    artifact javadocJar
+                    versionMapping {
+                        usage('java-api') {
+                            fromResolutionOf('runtimeClasspath')
+                        }
+                        usage('java-runtime') {
+                            fromResolutionResult()
+                        }
+                    }
+                    pom {
+                        name = pomName
+                        description = pomDescription
+                        url = pomUrl
+                        licenses {
+                            license {
+                                name = 'The Apache License, Version 2.0'
+                                url = 'http://www.apache.org/licenses/LICENSE-2.0.txt'
+                            }
+                        }
+                        developers {
+                            developer {
+                                id = 'SmartB'
+                                name = 'Dev'
+                            }
+                        }
+                        scm {
+                            connection = pomScmConnection
+                            developerConnection = pomScmDeveloperConnection
+                            url = pomScmUrl
+                        }
+                    }
+                }
+            }
+            repositories {
+                maven {
+                    def releasesRepoUrl =  mavenRepoReleases
+                    def snapshotsRepoUrl = mavenRepoSnapshots
+                    url = version.endsWith('SNAPSHOT') ? snapshotsRepoUrl : releasesRepoUrl
+                    credentials {
+                        username sonatypeUsername
+                        password sonatypePassword
+                    }
+                }
+            }
+        }
+        signing {
+            def key = signingKey
+            def password = signingPassword
+            useInMemoryPgpKeys(key, password)
+            sign publishing.publications.mavenJava
+        }
+
     }
 
 }

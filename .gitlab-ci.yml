@@ -1,36 +1,109 @@
-image: civisblockchain/builder-ci:0.1.0-local-0
+image: smartbcity/gitlab-ci-jdk8:latest
 
 stages:
   - build
   - verify
   - version
   - package
+  - push
 
-test:
-  stage: verify
-  before_script:
-    - CONTAINER_NAME=$(docker ps --format '{{.Names}}' --filter name=$HOSTNAME*)
-    - docker-compose -f docker-compose-it.yaml up -d
-    - docker network connect bclannet-it $CONTAINER_NAME
-  after_script:
-    - CONTAINER_NAME=$(docker ps --format '{{.Names}}' --filter name=$HOSTNAME*)
-    - docker network disconnect bclannet-it $CONTAINER_NAME
-    - docker-compose -f docker-compose-it.yaml down
-  script:
-    - make test
+variables:
+  BRANCH_VERSION: "0.0.1-EXPERIMENTAL-SNAPSHOT"
+  MASTER_VERSION: "0.0.1-SNAPSHOT"
 
-version:
+.version:
   stage: version
-  image: civisblockchain/semantic-versioning:latest
+  image: smartbcity/gitlab-ci-semantic-versioning:latest
   script:
-    - make -f /opt/io.smart-b/semantic-versioning/Makefile debug_version
     - make -f /opt/io.smart-b/semantic-versioning/Makefile next_version >> version.build
   artifacts:
     paths:
       - version*
 
-package:
+.package:
   stage: package
+  before_script:
+    - cp $gradleproperties ./gradle.properties
   script:
     - export VERSION_BUILD=$(cat version.build)
     - make package -e VERSION=${VERSION_BUILD}
+  artifacts:
+    paths:
+      - build
+
+.push:
+  stage: push
+  before_script:
+    - cp $gradleproperties ./gradle.properties
+  script:
+    - export VERSION_BUILD=$(cat version.build)
+    - make push -e VERSION=${VERSION_BUILD}
+
+#.push-latest:
+#  stage: push
+#  before_script:
+#    - echo "$CI_REGISTRY_PASSWORD" | docker login -u "$CI_REGISTRY_USER" --password-stdin
+#  script:
+#    - export VERSION_BUILD=$(cat version.build)
+#    - make push-latest -e VERSION=${VERSION_BUILD}
+.onlyBranch: &onlyBranch
+  only:
+    refs:
+      - branches
+  except:
+    refs:
+      - master
+
+.onlyMaster: &onlyMaster
+  only:
+    refs:
+      - master
+version-branch:
+  <<: *onlyBranch
+  extends: .version
+  script:
+    - echo $BRANCH_VERSION > version.build
+
+package-branch:
+  <<: *onlyBranch
+  extends: .package
+  artifacts:
+    paths:
+      - version*
+
+push-branch:
+  <<: *onlyBranch
+  extends: .push
+  when: manual
+
+version-master:
+  <<: *onlyMaster
+  extends: .version
+  script:
+    - echo $MASTER_VERSION > version.build
+
+
+package-master:
+  <<: *onlyMaster
+  extends: .package
+  when: manual
+
+push-master:
+  <<: *onlyMaster
+  extends: .push
+  when: manual
+
+version-tags:
+  extends: .version
+  only:
+    - tags
+
+package-tags:
+  extends: .package
+  only:
+    - tags
+
+push-tags:
+  extends: .push
+  only:
+    - tags

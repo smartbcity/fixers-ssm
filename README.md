@@ -35,4 +35,5 @@ make package
 
  * Publish
  ```bash
-make push
+make push -e VERSION=0.0.0-SNAPSHOT
+```

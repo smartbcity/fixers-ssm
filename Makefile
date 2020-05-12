@@ -1,7 +1,3 @@
-NAME   	:= civisblockchain/ssm
-IMG    	:= ${NAME}:${VERSION}
-LATEST  := ${NAME}:latest
-
 clean: clean-ssm-java
 
 test: test-ssm-java
@@ -20,4 +16,4 @@ package-ssm-java:
 	./gradlew build -x test
 
 push-ssm-java:
-	./gradlew -p ./sdk/java publish -P version=${VERSION}
+	./gradlew publish -P version=${VERSION}
