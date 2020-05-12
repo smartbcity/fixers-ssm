@@ -20,7 +20,7 @@ public class SsmClientItTest {
 
     private static String uuid = UUID.randomUUID().toString();
     private static final String NETWORK = "bclan-it/";
-    public static final String ADMIN_NAME = "adam";
+    public static final String ADMIN_NAME = "ssm-admin";
     public static final String USER1_NAME = "bob"+"-"+uuid;
     public static final String USER2_NAME = "sam"+"-"+uuid;
     public static final String USER1_FILENAME = NETWORK+"bob";

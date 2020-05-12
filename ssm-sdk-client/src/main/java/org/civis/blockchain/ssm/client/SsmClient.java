@@ -1,11 +1,15 @@
 package org.civis.blockchain.ssm.client;
 
-import org.civis.blockchain.ssm.client.command.*;
+import org.civis.blockchain.ssm.client.command.CreateCommand;
+import org.civis.blockchain.ssm.client.command.PerformCommand;
+import org.civis.blockchain.ssm.client.command.RegisterCommand;
+import org.civis.blockchain.ssm.client.command.StartCommand;
 import org.civis.blockchain.ssm.client.domain.*;
-import org.civis.blockchain.ssm.client.repository.CoopRepository;
+import org.civis.blockchain.ssm.client.query.AdminQuery;
+import org.civis.blockchain.ssm.client.query.AgentQuery;
+import org.civis.blockchain.ssm.client.query.SessionQuery;
+import org.civis.blockchain.ssm.client.query.SsmQuery;
 import org.civis.blockchain.ssm.client.repository.InvokeReturn;
-import org.civis.blockchain.ssm.client.repository.RepositoryFactory;
-import org.civis.blockchain.ssm.client.query.*;
 
 import java.io.IOException;
 import java.util.List;
@@ -15,14 +19,11 @@ import java.util.concurrent.CompletableFuture;
 public class SsmClient {
 
     public static SsmClient fromConfigFile(String filename) throws IOException {
-        SsmClientConfig config = SsmClientConfig.fromConfigFile(filename);
-        return fromConfig(config);
+        return SsmClientBuilder.builder(filename).build();
     }
 
-    public static SsmClient fromConfig(SsmClientConfig config) throws IOException {
-        RepositoryFactory factory = new RepositoryFactory(config.getBaseUrl());
-        CoopRepository coopRepository = factory.buildCoopRepository();
-        return new SsmClient(new SsmRequester(coopRepository));
+    public static SsmClient fromConfig(SsmClientConfig config) {
+        return SsmClientBuilder.builder(config).build();
     }
 
     private final SsmRequester ssmRequester;
