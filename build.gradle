@@ -42,9 +42,13 @@ subprojects {
 
     test {
         useJUnitPlatform()
-//        testLogging {
-//            events "passed", "skipped", "failed"
-//        }
+        testLogging {
+            events "passed", "skipped", "failed"
+        }
+        reports {
+            junitXml.enabled = true
+            html.enabled = false
+        }
     }
 
     task sourcesJar(type: Jar) {

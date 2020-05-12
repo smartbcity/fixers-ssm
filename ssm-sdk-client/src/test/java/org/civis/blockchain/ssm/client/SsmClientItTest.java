@@ -56,7 +56,7 @@ public class SsmClientItTest {
         agentUser1 = Agent.loadFromFile(signerUser1.getName(), USER1_FILENAME);
         agentUser2 = Agent.loadFromFile(signerUser2.getName(), USER2_FILENAME);
 
-        client = SsmClient.fromConfigFile("ssm-client.properties");
+        client = SsmClientTestBuilder.build();
 
         ssmName = "CarDealership-" + uuid;
         Map<String, String> roles = ImmutableMap.of(signerUser1.getName(), "Buyer", signerUser2.getName(), "Seller");

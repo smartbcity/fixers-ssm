@@ -16,7 +16,7 @@ public class SsmClientOptionalTest {
 
     @BeforeAll
     public static void init() throws Exception {
-        client = SsmClient.fromConfigFile("ssm-client.properties");
+        client = SsmClientTestBuilder.build();
     }
 
     @Test
