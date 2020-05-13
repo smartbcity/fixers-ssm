@@ -14,7 +14,7 @@ public class SsmClientTestBuilder {
         System.out.println("////////////////////////////");
         System.out.println(profile);
         System.out.println("////////////////////////////");
-        if(profile.equalsIgnoreCase("gitlab")) {
+        if("gitlab".equalsIgnoreCase(profile)) {
             return "ssm-client-gitlab.properties";
         }
         return "ssm-client.properties";
