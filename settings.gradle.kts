@@ -5,7 +5,7 @@ pluginManagement {
 	}
 }
 
-rootProject.name = "ssm-sdk"
+rootProject.name = "ssm"
 
 enableFeaturePreview("GRADLE_METADATA")
 
