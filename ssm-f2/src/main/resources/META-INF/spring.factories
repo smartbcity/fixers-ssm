@@ -1,0 +1,3 @@
+org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
+ssm.f2.config.SSMConfig,\
+ssm.f2.SsmFunctionImpl

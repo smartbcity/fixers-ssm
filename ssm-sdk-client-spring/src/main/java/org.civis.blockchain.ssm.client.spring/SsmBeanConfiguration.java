@@ -1,8 +1,8 @@
 package org.civis.blockchain.ssm.client.spring;
 
-import org.civis.blockchain.ssm.client.SsmClient;
-import org.civis.blockchain.ssm.client.SsmClientConfig;
-import org.civis.blockchain.ssm.client.domain.SignerAdmin;
+import ssm.client.SsmClient;
+import ssm.client.SsmClientConfig;
+import ssm.client.domain.SignerAdmin;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;

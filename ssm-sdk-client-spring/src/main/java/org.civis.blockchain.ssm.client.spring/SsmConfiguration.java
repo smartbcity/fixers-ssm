@@ -1,7 +1,7 @@
 package org.civis.blockchain.ssm.client.spring;
 
-import org.civis.blockchain.ssm.client.domain.SignerAdmin;
-import org.civis.blockchain.ssm.client.domain.Signer;
+import ssm.client.domain.SignerAdmin;
+import ssm.client.domain.Signer;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 
 import java.util.StringJoiner;
