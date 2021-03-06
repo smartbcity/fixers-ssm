@@ -8,11 +8,8 @@ import org.springframework.context.annotation.Configuration
 import ssm.client.SsmClient
 import ssm.client.asAgent
 import ssm.client.domain.Signer
-import ssm.dsl.InvokeReturn
 import ssm.dsl.SSMFunction
-import ssm.dsl.command.SsmCreateFunction
-import ssm.dsl.command.SsmPerformCommand
-import ssm.dsl.command.SsmStartCommand
+import ssm.dsl.command.*
 import ssm.dsl.query.GetSsmFunction
 import ssm.dsl.query.GetSsmResult
 import ssm.dsl.query.GetSsmSessionFunction
@@ -26,18 +23,21 @@ class SsmFunctionImpl(
 ) : SSMFunction {
 
 	@Bean
-	override fun perform(): F2Function<SsmPerformCommand, InvokeReturn> = f2Function { cmd ->
-		ssmClient.perform(signer, cmd.action, cmd.context).await()
+	override fun perform(): F2Function<SsmPerformCommand, SsmPerformResult> = f2Function { cmd ->
+		val invoke = ssmClient.perform(signer, cmd.action, cmd.context).await()
+		SsmPerformResult(invoke)
 	}
 
 	@Bean
-	override fun start(): F2Function<SsmStartCommand, InvokeReturn> = f2Function { cmd ->
-		ssmClient.start(signer, cmd.session).await()
+	override fun start(): F2Function<SsmStartCommand, SsmStartResult> = f2Function { cmd ->
+		val invoke = ssmClient.start(signer, cmd.session).await()
+		SsmStartResult(invoke)
 	}
 
 	@Bean
 	override fun create(): SsmCreateFunction = f2Function { cmd ->
-		initializer.init(signer.asAgent(), cmd.ssm)
+		val invoke = initializer.init(signer.asAgent(), cmd.ssm)
+		SsmCreateResult(invoke)
 	}
 
 	@Bean

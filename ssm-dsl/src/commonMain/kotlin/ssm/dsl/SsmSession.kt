@@ -6,8 +6,8 @@ import kotlin.js.JsName
 
 @Serializable
 @JsExport
-@JsName("Session")
-open class Session (
+@JsName("SsmSession")
+open class SsmSession (
 	open val ssm: String,
 	open val session: String,
 	open val roles: Map<String, String>,

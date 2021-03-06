@@ -1,7 +1,7 @@
 package ssm.client.invoke.command;
 
 import ssm.client.domain.Signer;
-import ssm.dsl.Session;
+import ssm.dsl.SsmSession;
 
 //{
 //    "InvokeArgs": [
@@ -22,11 +22,11 @@ import ssm.dsl.Session;
 //}
 
 //    echo "Usage: start <session> <signer>"
-public class StartCommandSigner extends CommandSigner<Session> {
+public class StartCommandSigner extends CommandSigner<SsmSession> {
 
     private final static String COMMAND_NAME = "start";
 
-    public StartCommandSigner(Signer signer, Session session) {
+    public StartCommandSigner(Signer signer, SsmSession session) {
         super(signer, COMMAND_NAME, session);
     }
 

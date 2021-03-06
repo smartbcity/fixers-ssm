@@ -4,9 +4,8 @@ import com.google.common.collect.ImmutableMap;
 import ssm.client.crypto.Sha256RSASigner;
 import ssm.client.domain.Signer;
 import org.junit.jupiter.api.Test;
-import ssm.dsl.Session;
+import ssm.dsl.SsmSession;
 
-import java.util.HashMap;
 import java.util.Map;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -25,7 +24,7 @@ public class StartCommandTest {
         //    }
         Map<String, String> roles = ImmutableMap.of("chuck", "Buyer", "sarah","Seller");
         Signer signer = Signer.loadFromFile("adam", "command/adam");
-        Session session = new Session("Car dealership", "deal20181201", roles,"Used car for 100 dollars.", null);
+        SsmSession session = new SsmSession("Car dealership", "deal20181201", roles,"Used car for 100 dollars.", null);
 
         InvokeArgs invokeArgs = new StartCommandSigner(signer, session).invoke();
         invokeArgs.getArgs().forEach(System.out::println);

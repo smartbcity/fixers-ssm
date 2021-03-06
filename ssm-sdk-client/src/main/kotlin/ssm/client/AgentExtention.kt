@@ -3,22 +3,22 @@ package ssm.client
 
 import org.bouncycastle.crypto.CryptoException
 import ssm.client.crypto.KeyPairReader
-import ssm.dsl.Agent
+import ssm.dsl.SsmAgent
 import java.security.PublicKey
 
 @Throws(Exception::class)
-fun loadFromFile(name: String): Agent {
+fun loadFromFile(name: String): SsmAgent {
 	val pub = KeyPairReader.loadPublicKey(name)
-	return Agent(name, pub.encoded)
+	return SsmAgent(name, pub.encoded)
 }
 
 @Throws(Exception::class)
-fun loadFromFile(name: String, filename: String): Agent {
+fun loadFromFile(name: String, filename: String): SsmAgent {
 	val pub = KeyPairReader.loadPublicKey(filename)
-	return Agent(name, pub.encoded)
+	return SsmAgent(name, pub.encoded)
 }
 
 @Throws(CryptoException::class)
-fun Agent.getPubAsKey(): PublicKey {
+fun SsmAgent.getPubAsKey(): PublicKey {
 	return KeyPairReader.fromByteArray(pub)
 }

@@ -7,7 +7,7 @@ import kotlin.js.JsName
 @Serializable
 @JsExport
 @JsName("Agent")
-data class Agent(
+data class SsmAgent(
 	val name: String,
 	val pub: ByteArray,
 ) {
@@ -15,7 +15,7 @@ data class Agent(
 		if (this === other) return true
 		if (other == null || this::class != other::class) return false
 
-		other as Agent
+		other as SsmAgent
 
 		if (name != other.name) return false
 		if (!pub.contentEquals(other.pub)) return false

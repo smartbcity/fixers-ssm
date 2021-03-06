@@ -5,11 +5,10 @@ import ssm.client.AgentUtils;
 import ssm.client.domain.Signer;
 import ssm.client.crypto.KeyPairReader;
 import org.junit.jupiter.api.Test;
-import ssm.dsl.Agent;
-import ssm.dsl.Context;
+import ssm.dsl.SsmAgent;
+import ssm.dsl.SsmContext;
 
 import java.security.KeyPair;
-import java.util.HashMap;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -23,7 +22,7 @@ public class PerformCommandTest {
         Signer signer = new Signer("adam", adamPair);
 
 //        "{\"session\":\"deal20181201\",\"public\":\"100 dollars 1978 Camaro\",\"iteration\":0}"
-        Context context = new Context("deal20181201", "100 dollars 1978 Camaro", 0, null);
+        SsmContext context = new SsmContext("deal20181201", "100 dollars 1978 Camaro", 0, null);
 
         InvokeArgs invokeArgs = new PerformCommandSigner(signer, "Sell", context).invoke();
         invokeArgs.getArgs().forEach(System.out::println);
@@ -46,10 +45,10 @@ public class PerformCommandTest {
         KeyPair adamPair = KeyPairReader.loadKeyPair("command/adam");
 
         Signer signer = new Signer("adam", adamPair);
-        Agent agent = AgentUtils.loadFromFile("vivi", "command/adam");
+        SsmAgent agent = AgentUtils.loadFromFile("vivi", "command/adam");
 
 //        "{\"session\":\"deal20181201\",\"public\":\"100 dollars 1978 Camaro\",\"iteration\":0}"
-        Context context = new Context("deal20181201", "100 dollars 1978 Camaro", 0,   ImmutableMap.of("vivi", "message"));
+        SsmContext context = new SsmContext("deal20181201", "100 dollars 1978 Camaro", 0,   ImmutableMap.of("vivi", "message"));
 
         InvokeArgs invokeArgs = new PerformCommandSigner(signer, "Sell", context).invoke();
         invokeArgs.getArgs().forEach(System.out::println);

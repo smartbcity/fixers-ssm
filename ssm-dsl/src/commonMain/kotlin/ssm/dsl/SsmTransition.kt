@@ -7,7 +7,7 @@ import kotlin.js.JsName
 @Serializable
 @JsExport
 @JsName("Transition")
-data class Transition(
+data class SsmTransition(
 	val from: Int,
 	val to: Int,
 	val role: String,

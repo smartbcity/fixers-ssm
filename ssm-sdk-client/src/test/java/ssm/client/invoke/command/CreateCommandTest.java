@@ -6,7 +6,7 @@ import ssm.client.crypto.KeyPairReader;
 import org.assertj.core.util.Lists;
 import org.junit.jupiter.api.Test;
 import ssm.dsl.Ssm;
-import ssm.dsl.Transition;
+import ssm.dsl.SsmTransition;
 
 import java.security.KeyPair;
 
@@ -36,8 +36,8 @@ public class CreateCommandTest {
         KeyPair adamPair = KeyPairReader.loadKeyPair("command/adam");
 
         Signer signer = new Signer("adam", adamPair);
-        Transition sell = new Transition(0, 1, "Seller", "Sell");
-        Transition buy = new Transition(1, 2, "Buyer", "Buy");
+        SsmTransition sell = new SsmTransition(0, 1, "Seller", "Sell");
+        SsmTransition buy = new SsmTransition(1, 2, "Buyer", "Buy");
 
         Ssm ssm = new Ssm("dealership", Lists.newArrayList(sell, buy));
 

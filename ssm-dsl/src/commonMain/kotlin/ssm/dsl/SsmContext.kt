@@ -7,7 +7,7 @@ import kotlin.js.JsName
 @Serializable
 @JsExport
 @JsName("Context")
-data class Context (
+data class SsmContext (
 	val session: String,
 	val public: String,
 	val iteration: Int,

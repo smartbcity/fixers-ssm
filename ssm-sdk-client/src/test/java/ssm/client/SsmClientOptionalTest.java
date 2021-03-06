@@ -2,8 +2,8 @@ package ssm.client;
 
 
 import org.junit.jupiter.api.*;
-import ssm.dsl.Agent;
-import ssm.dsl.SessionState;
+import ssm.dsl.SsmAgent;
+import ssm.dsl.SsmSessionState;
 import ssm.dsl.Ssm;
 
 import java.util.Optional;
@@ -23,15 +23,15 @@ public class SsmClientOptionalTest {
 
     @Test
     public void getAdminUser() throws Exception {
-        CompletableFuture<Optional<Agent>> agentRet = client.getAdmin(UUID.randomUUID().toString());
-        Optional<Agent> agentFormClient = agentRet.get();
+        CompletableFuture<Optional<SsmAgent>> agentRet = client.getAdmin(UUID.randomUUID().toString());
+        Optional<SsmAgent> agentFormClient = agentRet.get();
         assertThat(agentFormClient).isEmpty();
     }
 
     @Test
     public void getAgentUser2() throws Exception {
-        CompletableFuture<Optional<Agent>> agentRet = client.getAgent(UUID.randomUUID().toString());
-        Optional<Agent> agentFormClient = agentRet.get();
+        CompletableFuture<Optional<SsmAgent>> agentRet = client.getAgent(UUID.randomUUID().toString());
+        Optional<SsmAgent> agentFormClient = agentRet.get();
         assertThat(agentFormClient).isEmpty();
     }
 
@@ -44,8 +44,8 @@ public class SsmClientOptionalTest {
 
     @Test
     public void getSession() throws Exception {
-        CompletableFuture<Optional<SessionState>> ses = client.getSession(UUID.randomUUID().toString());
-        Optional<SessionState> sesReq = ses.get();
+        CompletableFuture<Optional<SsmSessionState>> ses = client.getSession(UUID.randomUUID().toString());
+        Optional<SsmSessionState> sesReq = ses.get();
         assertThat(sesReq).isEmpty();
     }
 

@@ -1,7 +1,7 @@
 package ssm.client.invoke.command;
 
 import ssm.client.domain.Signer;
-import ssm.dsl.Context;
+import ssm.dsl.SsmContext;
 
 //{
 //    "InvokeArgs": [
@@ -13,13 +13,13 @@ import ssm.dsl.Context;
 //    ]
 //}
 //    echo "Usage: perform <action> <context> <signer>"
-public class PerformCommandSigner extends CommandSigner<Context> {
+public class PerformCommandSigner extends CommandSigner<SsmContext> {
 
     private final static String COMMAND_NAME = "perform";
 
     private final String action;
 
-    public PerformCommandSigner(Signer signer, String action, Context context) {
+    public PerformCommandSigner(Signer signer, String action, SsmContext context) {
         super(signer, COMMAND_NAME, context);
         this.action = action;
     }

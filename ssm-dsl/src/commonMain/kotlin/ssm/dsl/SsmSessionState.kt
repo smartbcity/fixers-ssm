@@ -6,14 +6,14 @@ import kotlin.js.JsName
 
 @Serializable
 @JsExport
-@JsName("SessionState")
-data class SessionState(
+@JsName("SsmSessionState")
+data class SsmSessionState(
 	override val ssm: String,
 	override val session: String,
 	override val roles: Map<String, String>,
 	override val public: String,
 	override val private: Map<String, String>? = hashMapOf(),
-	val origin: Transition?,
+	val origin: SsmTransition?,
 	val current: Int,
 	val iteration: Int,
-): Session(ssm, session, roles, public, private), WithPrivate
+): SsmSession(ssm, session, roles, public, private), WithPrivate

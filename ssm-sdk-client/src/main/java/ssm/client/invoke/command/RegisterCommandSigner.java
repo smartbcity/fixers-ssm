@@ -1,7 +1,7 @@
 package ssm.client.invoke.command;
 
 import ssm.client.domain.Signer;
-import ssm.dsl.Agent;
+import ssm.dsl.SsmAgent;
 
 //{
 //    "name": "bob3",
@@ -17,11 +17,11 @@ import ssm.dsl.Agent;
 //  ]
 //}
 //    echo "Usage: register <user> <signer>"
-public class RegisterCommandSigner extends CommandSigner<Agent> {
+public class RegisterCommandSigner extends CommandSigner<SsmAgent> {
 
     private static final String COMMAND_NAME = "register";
 
-    public RegisterCommandSigner(Signer signer, Agent agent) {
+    public RegisterCommandSigner(Signer signer, SsmAgent agent) {
         super(signer, COMMAND_NAME, agent);
     }
 

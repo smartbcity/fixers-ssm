@@ -5,42 +5,41 @@ import org.bouncycastle.crypto.CryptoException
 import ssm.client.crypto.RSACipher
 import ssm.client.domain.Signer
 import ssm.dsl.*
-import java.beans.Transient
 import java.security.PrivateKey
 import java.security.PublicKey
 
 @Throws(CryptoException::class)
-fun Context.addPrivateMessage(value: String, agent: Agent): Context {
+fun SsmContext.addPrivateMessage(value: String, agent: SsmAgent): SsmContext {
 	return addPrivateMessage(value, agent.name, agent.getPubAsKey())
 }
 
 @Throws(CryptoException::class)
-fun Context.addPrivateMessage(value: String, name: String, publicKey: PublicKey): Context {
+fun SsmContext.addPrivateMessage(value: String, name: String, publicKey: PublicKey): SsmContext {
 	val newMap = addPrivate(value, publicKey, name)
 	return this.copy(private = newMap)
 }
 
 
 @Throws(CryptoException::class)
-fun Session.addPrivateMessage(value: String, agent: Agent) {
+fun SsmSession.addPrivateMessage(value: String, agent: SsmAgent) {
 	addPrivateMessage(value, agent.name, agent.getPubAsKey())
 }
 
 @Throws(CryptoException::class)
-fun Session.addPrivateMessage(value: String, name: String, publicKey: PublicKey): Session {
+fun SsmSession.addPrivateMessage(value: String, name: String, publicKey: PublicKey): SsmSession {
 	val newPrivate = addPrivate(value, publicKey, name)
-	return Session(
+	return SsmSession(
 		ssm, session, roles, public, newPrivate
 	)
 }
 
 @Throws(CryptoException::class)
-fun SessionState.addPrivateMessage(value: String, agent: Agent) {
+fun SsmSessionState.addPrivateMessage(value: String, agent: SsmAgent) {
 	addPrivateMessage(value, agent.name, agent.getPubAsKey())
 }
 
 @Throws(CryptoException::class)
-fun SessionState.addPrivateMessage(value: String, name: String, publicKey: PublicKey): SessionState {
+fun SsmSessionState.addPrivateMessage(value: String, name: String, publicKey: PublicKey): SsmSessionState {
 	val newPrivate = addPrivate(value, publicKey, name)
 	return copy(private = newPrivate)
 }

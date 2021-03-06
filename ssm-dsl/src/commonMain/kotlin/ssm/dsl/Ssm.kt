@@ -9,5 +9,5 @@ import kotlin.js.JsName
 @JsName("Ssm")
 data class Ssm(
 	val name: String,
-	val transitions: List<Transition>,
+	val transitions: List<SsmTransition>,
 )

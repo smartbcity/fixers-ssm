@@ -34,14 +34,14 @@ public class SsmClientItTest {
     private static Signer signerUser1;
     private static Signer signerUser2;
 
-    private static Agent agentAdmin;
-    private static Agent agentUser1;
-    private static Agent agentUser2;
+    private static SsmAgent agentAdmin;
+    private static SsmAgent agentUser1;
+    private static SsmAgent agentUser2;
 
     private static SsmClient client;
     private static String ssmName;
     private static String sessionName;
-    private static Session session;
+    private static SsmSession session;
 
     @BeforeAll
     public static void init() throws Exception {
@@ -58,7 +58,7 @@ public class SsmClientItTest {
         ssmName = "CarDealership-" + uuid;
         Map<String, String> roles = ImmutableMap.of(signerUser1.getName(), "Buyer", signerUser2.getName(), "Seller");
         sessionName = "deal20181201-" + uuid;
-        session = new Session(ssmName, sessionName, roles,"Used car for 100 dollars.", new HashMap());
+        session = new SsmSession(ssmName, sessionName, roles,"Used car for 100 dollars.", new HashMap());
     }
 
     @AfterEach
@@ -79,8 +79,8 @@ public class SsmClientItTest {
     @Test
     @Order(10)
     public void getAdminUser() throws Exception {
-        CompletableFuture<Optional<Agent>> agentRet = client.getAdmin(ADMIN_NAME);
-        Optional<Agent> agentFormClient = agentRet.get();
+        CompletableFuture<Optional<SsmAgent>> agentRet = client.getAdmin(ADMIN_NAME);
+        Optional<SsmAgent> agentFormClient = agentRet.get();
         assertThat(agentFormClient.get()).isEqualTo(agentAdmin);
     }
 
@@ -99,8 +99,8 @@ public class SsmClientItTest {
     @Test
     @Order(30)
     public void getAgentUser1() throws Exception {
-        CompletableFuture<Optional<Agent>> agentRet = client.getAgent(agentUser1.getName());
-        Optional<Agent> agentFormClient = agentRet.get();
+        CompletableFuture<Optional<SsmAgent>> agentRet = client.getAgent(agentUser1.getName());
+        Optional<SsmAgent> agentFormClient = agentRet.get();
         assertThat(agentFormClient.get()).isEqualTo(agentUser1);
     }
 
@@ -117,8 +117,8 @@ public class SsmClientItTest {
     @Test
     @Order(50)
     public void getAgentUser2() throws Exception {
-        CompletableFuture<Optional<Agent>> agentRet = client.getAgent(agentUser2.getName());
-        Optional<Agent> agentFormClient = agentRet.get();
+        CompletableFuture<Optional<SsmAgent>> agentRet = client.getAgent(agentUser2.getName());
+        Optional<SsmAgent> agentFormClient = agentRet.get();
         assertThat(agentFormClient.get()).isEqualTo(agentUser2);
     }
 
@@ -133,8 +133,8 @@ public class SsmClientItTest {
     @Test
     @Order(60)
     public void createSsm() throws Exception {
-        Transition sell = new Transition(0, 1, "Seller", "Sell");
-        Transition buy = new Transition(1, 2, "Buyer", "Buy");
+        SsmTransition sell = new SsmTransition(0, 1, "Seller", "Sell");
+        SsmTransition buy = new SsmTransition(1, 2, "Buyer", "Buy");
         Ssm ssm = new Ssm(ssmName, Lists.newArrayList(sell, buy));
 
         CompletableFuture<InvokeReturn> transactionEvent = client.create(signerAdmin, ssm);
@@ -158,7 +158,7 @@ public class SsmClientItTest {
     @Order(80)
     public void start() throws Exception {
         Map<String, String> roles = ImmutableMap.of(agentUser1.getName(), "Buyer", agentUser2.getName(), "Seller");
-        Session session = new Session(ssmName, sessionName, roles, "Used car for 100 dollars.", new HashMap());
+        SsmSession session = new SsmSession(ssmName, sessionName, roles, "Used car for 100 dollars.", new HashMap());
 
         CompletableFuture<InvokeReturn> transactionEvent = client.start(signerAdmin, session);
         InvokeReturn trans = transactionEvent.get();
@@ -171,8 +171,8 @@ public class SsmClientItTest {
     @Test
     @Order(90)
     public void getSession() throws Exception {
-        CompletableFuture<Optional<SessionState>> ses = client.getSession(sessionName);
-        Optional<SessionState> sesReq = ses.get();
+        CompletableFuture<Optional<SsmSessionState>> ses = client.getSession(sessionName);
+        Optional<SsmSessionState> sesReq = ses.get();
 
         assertThat(sesReq.get().getCurrent()).isEqualTo(0);
         assertThat(sesReq.get().getIteration()).isEqualTo(0);
@@ -190,7 +190,7 @@ public class SsmClientItTest {
     @Test
     @Order(100)
     public void performSell() throws Exception {
-        Context context = new Context(sessionName, "100 dollars 1978 Camaro", 0, new HashMap());
+        SsmContext context = new SsmContext(sessionName, "100 dollars 1978 Camaro", 0, new HashMap());
         context = PrivateMessageUtils.addPrivateMessage(context, "Message to signer1", agentUser1);
         privateMessage = context.getPrivate();
         CompletableFuture<InvokeReturn> transactionEvent = client.perform(signerUser2, "Sell", context);
@@ -204,10 +204,10 @@ public class SsmClientItTest {
     @Test
     @Order(110)
     public void getSessionAfterSell() throws Exception {
-        Transition sell = new Transition(0, 1, "Seller", "Sell");
-        CompletableFuture<Optional<SessionState>> sesReq = client.getSession(sessionName);
-        Optional<SessionState> state = sesReq.get();
-        SessionState stateExpected = new SessionState(ssmName, sessionName, session.getRoles(), "100 dollars 1978 Camaro", privateMessage, sell, 1, 1);
+        SsmTransition sell = new SsmTransition(0, 1, "Seller", "Sell");
+        CompletableFuture<Optional<SsmSessionState>> sesReq = client.getSession(sessionName);
+        Optional<SsmSessionState> state = sesReq.get();
+        SsmSessionState stateExpected = new SsmSessionState(ssmName, sessionName, session.getRoles(), "100 dollars 1978 Camaro", privateMessage, sell, 1, 1);
         assertThat(state.get()).isEqualTo(stateExpected);
 
         String expectedMessage = PrivateMessageUtils.getPrivateMessage(stateExpected, signerUser1);
@@ -216,9 +216,9 @@ public class SsmClientItTest {
     @Test
     @Order(110)
     public void getSessionAfterSellShouldReturnEncryptMessage() throws Exception {
-        Transition sell = new Transition(0, 1, "Seller", "Sell");
-        CompletableFuture<Optional<SessionState>> sesReq = client.getSession(sessionName);
-        Optional<SessionState> state = sesReq.get();
+        SsmTransition sell = new SsmTransition(0, 1, "Seller", "Sell");
+        CompletableFuture<Optional<SsmSessionState>> sesReq = client.getSession(sessionName);
+        Optional<SsmSessionState> state = sesReq.get();
         String expectedMessage = PrivateMessageUtils.getPrivateMessage(state.get(), signerUser1);
         assertThat(expectedMessage).isEqualTo("Message to signer1");
 
@@ -227,7 +227,7 @@ public class SsmClientItTest {
     @Test
     @Order(120)
     public void performBuy() throws Exception {
-        Context context = new Context(sessionName, "Deal !", 1, new HashMap());
+        SsmContext context = new SsmContext(sessionName, "Deal !", 1, new HashMap());
         CompletableFuture<InvokeReturn> transactionEvent = client.perform(signerUser1, "Buy", context);
         InvokeReturn trans = transactionEvent.get();
         assertThat(trans).isNotNull();
@@ -237,10 +237,10 @@ public class SsmClientItTest {
     @Test
     @Order(130)
     public void getSessionAfterBuy() throws Exception {
-        Transition buy = new Transition(1, 2, "Buyer", "Buy");
-        CompletableFuture<Optional<SessionState>> sesReq = client.getSession(sessionName);
-        Optional<SessionState> state = sesReq.get();
-        SessionState stateExcpected = new SessionState(ssmName, sessionName, session.getRoles(),"Deal !", new HashMap(), buy, 2, 2);
+        SsmTransition buy = new SsmTransition(1, 2, "Buyer", "Buy");
+        CompletableFuture<Optional<SsmSessionState>> sesReq = client.getSession(sessionName);
+        Optional<SsmSessionState> state = sesReq.get();
+        SsmSessionState stateExcpected = new SsmSessionState(ssmName, sessionName, session.getRoles(),"Deal !", new HashMap(), buy, 2, 2);
         assertThat(state.get()).isEqualTo(stateExcpected);
     }
 

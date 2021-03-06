@@ -16,4 +16,4 @@ package-ssm-java:
 	./gradlew build -x test
 
 push-ssm-java:
-	./gradlew publish -P version=${VERSION}
+	VERSION=${VERSION} ./gradlew publish

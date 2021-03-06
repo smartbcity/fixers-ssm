@@ -4,7 +4,7 @@ import f2.dsl.cqrs.Command
 import f2.dsl.cqrs.Event
 import f2.dsl.function.F2Function
 import f2.dsl.function.F2FunctionRemote
-import ssm.dsl.SessionState
+import ssm.dsl.SsmSessionState
 
 typealias GetSsmSessionFunction = F2Function<GetSsmSessionQuery, GetSsmSessionResult>
 typealias GetSsmSessionRemoteFunction = F2FunctionRemote<GetSsmSessionQuery, GetSsmSessionResult>
@@ -14,5 +14,5 @@ class GetSsmSessionQuery(
 ): Command
 
 class GetSsmSessionResult(
-	val session: SessionState?
+	val session: SsmSessionState?
 ): Event

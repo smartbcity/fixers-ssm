@@ -4,7 +4,7 @@ import kotlinx.coroutines.future.await
 import org.springframework.stereotype.Service
 import ssm.client.SsmClient
 import ssm.client.domain.SignerAdmin
-import ssm.dsl.Agent
+import ssm.dsl.SsmAgent
 import ssm.dsl.InvokeReturn
 import ssm.dsl.Ssm
 
@@ -15,7 +15,7 @@ class SsmInitializer(
     private val signerAdmin: SignerAdmin
         ) {
 
-    suspend fun init(agent: Agent, ssm: Ssm): List<InvokeReturn> {
+    suspend fun init(agent: SsmAgent, ssm: Ssm): List<InvokeReturn> {
         val retInitUser = initUser(agent)
         val retInitSsm = initSsm(ssm)
         return listOfNotNull(retInitUser, retInitSsm)
@@ -25,7 +25,7 @@ class SsmInitializer(
         return createIfNotExist(ssm, { this.fetchSsm(ssm.name) }, { this.createSsm(it) })
     }
 
-    suspend fun initUser(user: Agent): InvokeReturn? {
+    suspend fun initUser(user: SsmAgent): InvokeReturn? {
         return createIfNotExist(user, { this.fetchUser(user.name) }, { this.createUser(it) })
     }
 
@@ -33,7 +33,7 @@ class SsmInitializer(
         return ssmClient.getSsm(name).await().orElse(null)
     }
 
-    private suspend fun fetchUser(name: String): Agent? {
+    private suspend fun fetchUser(name: String): SsmAgent? {
         return ssmClient.getAgent(name).await().orElse(null)
     }
     
@@ -51,7 +51,7 @@ class SsmInitializer(
         }
     }
 
-    private suspend fun createUser(agent: Agent): InvokeReturn {
+    private suspend fun createUser(agent: SsmAgent): InvokeReturn {
         try {
             return ssmClient.registerUser(signerAdmin, agent).await()
         } catch (e: Exception) {

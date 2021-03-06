@@ -11,7 +11,8 @@ enableFeaturePreview("GRADLE_METADATA")
 
 include(
 	"ssm-dsl",
-	"ssm-f2"
+	"ssm-f2",
+	"ssm-f2-client"
 )
 include(
 	"ssm-sdk-client",
