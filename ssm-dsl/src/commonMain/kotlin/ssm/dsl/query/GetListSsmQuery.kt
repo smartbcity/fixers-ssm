@@ -9,19 +9,19 @@ import ssm.dsl.Ssm
 import kotlin.js.JsExport
 import kotlin.js.JsName
 
-typealias GetSsmFunction = F2Function<GetSsmQuery, GetSsmResult>
-typealias GetSsmRemoteFunction = F2FunctionRemote<GetSsmQuery, GetSsmResult>
+typealias GetListSsmQueryFunction = F2Function<GetListSsmQuery, GetListSsmResult>
+typealias GetListSsmQueryRemoteFunction = F2FunctionRemote<GetListSsmQuery, GetListSsmResult>
 
 @JsExport
 @Serializable
-@JsName("GetSsmQuery")
-class GetSsmQuery(
-	val name: String
+@JsName("GetListSsmQuery")
+class GetListSsmQuery(
 ): Command
 
+
 @JsExport
 @Serializable
-@JsName("GetSsmResult")
-class GetSsmResult(
-	val ssm: Ssm?
+@JsName("GetListSsmResult")
+class GetListSsmResult(
+	val values: List<String>
 ): Event

@@ -14,7 +14,13 @@ include(
 	"ssm-f2",
 	"ssm-f2-client"
 )
+
 include(
-	"ssm-sdk-client",
-	"ssm-sdk-client-spring"
+	"ssm-sdk-client"
+)
+
+include(
+	"ssm-f2:ssm-f2-create-ssm",
+	"ssm-f2:ssm-f2-session-perform-action",
+	"ssm-f2:ssm-f2-session-start"
 )

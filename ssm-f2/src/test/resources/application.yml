@@ -1,5 +1,5 @@
-f2:
-  ssm:
+ssm:
+  f2:
     baseUrl: http://localhost:9090
     signer:
       user:

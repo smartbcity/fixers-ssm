@@ -8,8 +8,6 @@ import ssm.dsl.SsmAgent
 import ssm.dsl.InvokeReturn
 import ssm.dsl.Ssm
 
-
-@Service
 class SsmInitializer(
     private val ssmClient: SsmClient,
     private val signerAdmin: SignerAdmin

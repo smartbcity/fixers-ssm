@@ -16,6 +16,10 @@ Ex: `ssm-rest-client/src/test/resources/ssm-client.properties`
 sdk-core/src/test/java/io/civis/ssm/sdk/client/SsmClientItTest.java
 ```
 
+### F2 Function
+
+ * `ssm-f2-start-session` -> Function to start ssm session
+
 ## Gradle
 
  * Start local blockchain

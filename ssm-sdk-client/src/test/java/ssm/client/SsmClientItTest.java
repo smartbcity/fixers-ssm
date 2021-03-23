@@ -165,7 +165,7 @@ public class SsmClientItTest {
 
         assertThat(trans).isNotNull();
         assertThat(trans.getStatus()).isEqualTo("SUCCESS");
-//        assertThat(trans.getTransactionId()).isNotNull();
+        assertThat(trans.getTransactionId()).isNotNull();
     }
 
     @Test
