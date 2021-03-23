@@ -1,10 +1,10 @@
-package ssm.f2
+package ssm.f2.query
 
-import org.assertj.core.api.Assertions
-import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.TestInstance
 import org.junit.jupiter.api.extension.ExtendWith
 import org.springframework.beans.factory.annotation.Autowired
+import org.springframework.boot.autoconfigure.SpringBootApplication
+import org.springframework.boot.runApplication
 import org.springframework.boot.test.context.SpringBootTest
 import org.springframework.cloud.function.context.FunctionCatalog
 import org.springframework.test.context.junit.jupiter.SpringExtension
@@ -12,18 +12,10 @@ import org.springframework.test.context.junit.jupiter.SpringExtension
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
 @ExtendWith(SpringExtension::class)
 @SpringBootTest
-class SsmFunctionImplTest {
-
+class FunctionTestBase {
 	@Autowired
 	lateinit var catalog: FunctionCatalog
-
-	@Test
-	fun checkFuntionIsRegistred() {
-		val performF2: Any = catalog.lookup("perform")
-		Assertions.assertThat(performF2).isNotNull
-		val startF2: Any = catalog.lookup("start")
-		Assertions.assertThat(startF2).isNotNull
-		val initF2: Any = catalog.lookup("create")
-		Assertions.assertThat(initF2).isNotNull
-	}
 }
+
+@SpringBootApplication(scanBasePackages= ["ssm.f2"])
+class TestApplication

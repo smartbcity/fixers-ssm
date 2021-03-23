@@ -10,13 +10,15 @@ import ssm.dsl.SsmAgent
 import kotlin.js.JsExport
 import kotlin.js.JsName
 
-typealias GetListUserQueryFunction = F2Function<GetListUserQuery, GetListUserResult>
+typealias ListUserQueryFunction = F2Function<GetListUserQuery, GetListUserResult>
 typealias GetListUserQueryRemoteFunction = F2FunctionRemote<GetListUserQuery, GetListUserResult>
 
 @JsExport
 @Serializable
 @JsName("GetListUserQuery")
 class GetListUserQuery(
+	val baseUrl: String,
+	val jwt: String?,
 ): Command
 
 @JsExport
