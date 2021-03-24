@@ -9,7 +9,7 @@ import ssm.client.SsmClientConfig
 import ssm.client.asAgent
 
 @Configuration
-class CreateSsmFunctionImpl {
+class SsmCreateFunctionImpl {
 
 	@Bean
 	fun ssmCreateFunction(): SsmCreateFunction = f2Function { cmd ->

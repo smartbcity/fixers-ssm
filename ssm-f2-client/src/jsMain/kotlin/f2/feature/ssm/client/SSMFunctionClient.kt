@@ -7,7 +7,7 @@ import f2.client.F2Client
 import f2.client.promise
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.promise
-import ssm.dsl.command.*
+//import ssm.dsl.command.*
 import kotlin.js.Promise
 
 @JsName("ssmClient")
@@ -20,8 +20,8 @@ fun ssmClient(protocol: Protocol, host: String, port: Int, path: String? = null)
 
 actual open class SSMFunctionClient actual constructor(val client: F2Client) : SSMRemoteFunction {
 
-	override fun perform() = object : SsmPerformRemoteFunction {
-		override fun invoke(cmd: SsmPerformCommand): Promise<SsmPerformResult> = client.promise("perform", cmd)
-	}
+//	override fun perform() = object : SsmPerformRemoteFunction {
+//		override fun invoke(cmd: SsmPerformCommand): Promise<SsmPerformResult> = client.promise("perform", cmd)
+//	}
 
 }
