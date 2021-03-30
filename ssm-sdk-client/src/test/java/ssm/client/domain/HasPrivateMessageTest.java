@@ -1,19 +1,19 @@
 package ssm.client.domain;
 
+import java.security.PrivateKey;
+import java.util.HashMap;
+import java.util.UUID;
+
 import org.assertj.core.api.Assertions;
+import org.junit.jupiter.api.Test;
+
 import ssm.client.AgentUtils;
 import ssm.client.PrivateMessageUtils;
 import ssm.client.SsmClientItTest;
 import ssm.client.sign.crypto.KeyPairReader;
-import org.junit.jupiter.api.Test;
-
 import ssm.client.sign.model.Signer;
 import ssm.dsl.SsmAgent;
 import ssm.dsl.SsmContext;
-
-import java.security.PrivateKey;
-import java.util.HashMap;
-import java.util.UUID;
 
 class HasPrivateMessageTest {
 
@@ -35,7 +35,7 @@ class HasPrivateMessageTest {
         SsmAgent agent = AgentUtils.loadFromFile(SsmClientItTest.USER1_NAME, SsmClientItTest.USER1_FILENAME);
         context = PrivateMessageUtils.addPrivateMessage(context, "Value to encrypt", agent);
 
-        PrivateKey privKey = KeyPairReader.loadPrivateKey(SsmClientItTest.USER1_FILENAME);
+        PrivateKey privKey = KeyPairReader.Companion.loadPrivateKey(SsmClientItTest.USER1_FILENAME);
         String val = PrivateMessageUtils.getPrivateMessage(context, SsmClientItTest.USER1_NAME, privKey);
         Assertions.assertThat(val).isNotEmpty().isEqualTo("Value to encrypt");
     }
@@ -46,7 +46,7 @@ class HasPrivateMessageTest {
         SsmContext context = new SsmContext(sessionName, "100 dollars 1978 Camaro", 0, new HashMap<>());
         SsmAgent agent = AgentUtils.loadFromFile(SsmClientItTest.USER1_NAME, SsmClientItTest.USER1_FILENAME);
         context = PrivateMessageUtils.addPrivateMessage(context, "Value to encrypt", agent);
-        Signer signerUser1 = Signer.loadFromFile(SsmClientItTest.USER1_NAME, SsmClientItTest.USER1_FILENAME);
+        Signer signerUser1 = Signer.Companion.loadFromFile(SsmClientItTest.USER1_NAME, SsmClientItTest.USER1_FILENAME);
         String val = PrivateMessageUtils.getPrivateMessage(context, signerUser1);
         Assertions.assertThat(val).isNotEmpty().isEqualTo("Value to encrypt");
     }

@@ -1,16 +1,18 @@
 package ssm.client;
 
-
-import org.junit.jupiter.api.*;
-import ssm.dsl.SsmAgent;
-import ssm.dsl.SsmSessionState;
-import ssm.dsl.Ssm;
+import static org.assertj.core.api.Assertions.assertThat;
 
 import java.util.Optional;
 import java.util.UUID;
 import java.util.concurrent.CompletableFuture;
 
-import static org.assertj.core.api.Assertions.assertThat;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Disabled;
+import org.junit.jupiter.api.Test;
+
+import ssm.dsl.Ssm;
+import ssm.dsl.SsmAgent;
+import ssm.dsl.SsmSessionState;
 
 public class SsmClientOptionalTest {
 

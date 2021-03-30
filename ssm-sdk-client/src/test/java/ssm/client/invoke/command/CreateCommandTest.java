@@ -1,16 +1,17 @@
 package ssm.client.invoke.command;
 
-import ssm.client.sign.crypto.Sha256RSASigner;
-import ssm.client.sign.model.Signer;
-import ssm.client.sign.crypto.KeyPairReader;
-import org.assertj.core.util.Lists;
-import org.junit.jupiter.api.Test;
-import ssm.dsl.Ssm;
-import ssm.dsl.SsmTransition;
+import static org.assertj.core.api.Assertions.assertThat;
 
 import java.security.KeyPair;
 
-import static org.assertj.core.api.Assertions.assertThat;
+import org.assertj.core.util.Lists;
+import org.junit.jupiter.api.Test;
+
+import ssm.client.sign.crypto.KeyPairReader;
+import ssm.client.sign.crypto.Sha256RSASigner;
+import ssm.client.sign.model.Signer;
+import ssm.dsl.Ssm;
+import ssm.dsl.SsmTransition;
 
 public class CreateCommandTest {
 
@@ -33,7 +34,7 @@ public class CreateCommandTest {
      */
     @Test
     public void testExecute() throws Exception {
-        KeyPair adamPair = KeyPairReader.loadKeyPair("command/adam");
+        KeyPair adamPair = KeyPairReader.Companion.loadKeyPair("command/adam");
 
         Signer signer = new Signer("adam", adamPair);
         SsmTransition sell = new SsmTransition(0, 1, "Seller", "Sell");
@@ -65,7 +66,7 @@ public class CreateCommandTest {
                 .containsExactly(
                         expectedJson,
                         "adam",
-                        Sha256RSASigner.rsaSignAsB64(expectedJson, signer.getPair().getPrivate())
+                        Sha256RSASigner.Companion.rsaSignAsB64(expectedJson, signer.getPair().getPrivate())
                 );
 
     }

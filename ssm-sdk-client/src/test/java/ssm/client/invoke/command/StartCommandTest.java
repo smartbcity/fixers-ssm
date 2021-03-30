@@ -1,14 +1,16 @@
 package ssm.client.invoke.command;
 
-import com.google.common.collect.ImmutableMap;
-import ssm.client.sign.crypto.Sha256RSASigner;
-import ssm.client.sign.model.Signer;
-import org.junit.jupiter.api.Test;
-import ssm.dsl.SsmSession;
+import static org.assertj.core.api.Assertions.assertThat;
 
 import java.util.Map;
 
-import static org.assertj.core.api.Assertions.assertThat;
+import org.junit.jupiter.api.Test;
+
+import com.google.common.collect.ImmutableMap;
+
+import ssm.client.sign.crypto.Sha256RSASigner;
+import ssm.client.sign.model.Signer;
+import ssm.dsl.SsmSession;
 
 public class StartCommandTest {
 
@@ -23,7 +25,7 @@ public class StartCommandTest {
         //       "sarah":"Seller"
         //    }
         Map<String, String> roles = ImmutableMap.of("chuck", "Buyer", "sarah","Seller");
-        Signer signer = Signer.loadFromFile("adam", "command/adam");
+        Signer signer = Signer.Companion.loadFromFile("adam", "command/adam");
         SsmSession session = new SsmSession("Car dealership", "deal20181201", roles,"Used car for 100 dollars.", null);
 
         InvokeArgs invokeArgs = new StartCommandSigner(signer, session).invoke();
@@ -36,7 +38,7 @@ public class StartCommandTest {
                 .containsExactly(
                         expectedJson,
                         "adam",
-                        Sha256RSASigner.rsaSignAsB64(expectedJson, signer.getPair().getPrivate())
+                    Sha256RSASigner.Companion.rsaSignAsB64(expectedJson, signer.getPair().getPrivate())
                 );
 
     }

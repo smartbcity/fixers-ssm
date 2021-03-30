@@ -1,16 +1,33 @@
 package ssm.client;
 
+import static org.assertj.core.api.Assertions.assertThat;
 
-import com.google.common.collect.ImmutableMap;
-import org.assertj.core.util.Lists;
-import org.junit.jupiter.api.*;
-import ssm.client.sign.model.Signer;
-import ssm.dsl.*;
-
-import java.util.*;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Optional;
+import java.util.UUID;
 import java.util.concurrent.CompletableFuture;
 
-import static org.assertj.core.api.Assertions.assertThat;
+import org.assertj.core.util.Lists;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Disabled;
+import org.junit.jupiter.api.MethodOrderer;
+import org.junit.jupiter.api.Order;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.TestMethodOrder;
+
+import com.google.common.collect.ImmutableMap;
+
+import ssm.client.sign.model.Signer;
+import ssm.dsl.InvokeReturn;
+import ssm.dsl.Ssm;
+import ssm.dsl.SsmAgent;
+import ssm.dsl.SsmContext;
+import ssm.dsl.SsmSession;
+import ssm.dsl.SsmSessionState;
+import ssm.dsl.SsmTransition;
 
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 public class SsmClientItTest {
@@ -45,9 +62,9 @@ public class SsmClientItTest {
 
     @BeforeAll
     public static void init() throws Exception {
-        signerAdmin = Signer.loadFromFile(ADMIN_NAME, NETWORK + ADMIN_NAME);
-        signerUser1 = Signer.loadFromFile(USER1_NAME, USER1_FILENAME);
-        signerUser2 = Signer.loadFromFile(USER2_NAME, USER2_FILENAME);
+        signerAdmin = Signer.Companion.loadFromFile(ADMIN_NAME, NETWORK + ADMIN_NAME);
+        signerUser1 = Signer.Companion.loadFromFile(USER1_NAME, USER1_FILENAME);
+        signerUser2 = Signer.Companion.loadFromFile(USER2_NAME, USER2_FILENAME);
 
         agentAdmin = AgentUtils.loadFromFile(ADMIN_NAME, NETWORK + ADMIN_NAME);
         agentUser1 = AgentUtils.loadFromFile(signerUser1.getName(), USER1_FILENAME);

@@ -1,19 +1,19 @@
 package ssm.client.invoke.command;
 
+import static org.assertj.core.api.Assertions.assertThat;
+
+import org.junit.jupiter.api.Test;
 
 import ssm.client.AgentUtils;
 import ssm.client.sign.model.Signer;
-import org.junit.jupiter.api.Test;
 import ssm.dsl.SsmAgent;
-
-import static org.assertj.core.api.Assertions.assertThat;
 
 
 public class RegisterCommandTest {
 
     @Test
     public void test_execute() throws Exception {
-        Signer signer = Signer.loadFromFile("adam", "command/adam");
+        Signer signer = Signer.Companion.loadFromFile("adam", "command/adam");
 
         SsmAgent agent = AgentUtils.loadFromFile("vivi", "command/vivi");
         InvokeArgs invokeArgs = new RegisterCommandSigner(signer, agent).invoke();

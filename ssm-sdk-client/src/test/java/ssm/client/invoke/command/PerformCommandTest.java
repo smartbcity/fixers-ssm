@@ -1,23 +1,25 @@
 package ssm.client.invoke.command;
 
-import com.google.common.collect.ImmutableMap;
-import ssm.client.AgentUtils;
-import ssm.client.sign.model.Signer;
-import ssm.client.sign.crypto.KeyPairReader;
-import org.junit.jupiter.api.Test;
-import ssm.dsl.SsmAgent;
-import ssm.dsl.SsmContext;
+import static org.assertj.core.api.Assertions.assertThat;
 
 import java.security.KeyPair;
 
-import static org.assertj.core.api.Assertions.assertThat;
+import org.junit.jupiter.api.Test;
+
+import com.google.common.collect.ImmutableMap;
+
+import ssm.client.AgentUtils;
+import ssm.client.sign.crypto.KeyPairReader;
+import ssm.client.sign.model.Signer;
+import ssm.dsl.SsmAgent;
+import ssm.dsl.SsmContext;
 
 public class PerformCommandTest {
 
     @Test
     public void test_execute() throws Exception {
 
-        KeyPair adamPair = KeyPairReader.loadKeyPair("command/adam");
+        KeyPair adamPair = KeyPairReader.Companion.loadKeyPair("command/adam");
 
         Signer signer = new Signer("adam", adamPair);
 
@@ -42,7 +44,7 @@ public class PerformCommandTest {
     @Test
     public void test_executeWithPrivateMessage() throws Exception {
 
-        KeyPair adamPair = KeyPairReader.loadKeyPair("command/adam");
+        KeyPair adamPair = KeyPairReader.Companion.loadKeyPair("command/adam");
 
         Signer signer = new Signer("adam", adamPair);
         SsmAgent agent = AgentUtils.loadFromFile("vivi", "command/adam");
