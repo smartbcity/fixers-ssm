@@ -1,4 +1,4 @@
-package ssm.client.crypto;
+package ssm.client.sign.crypto;
 
 import org.bouncycastle.crypto.CryptoException;
 

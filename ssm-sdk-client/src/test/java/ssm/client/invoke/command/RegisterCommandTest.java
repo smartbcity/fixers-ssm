@@ -2,7 +2,7 @@ package ssm.client.invoke.command;
 
 
 import ssm.client.AgentUtils;
-import ssm.client.domain.Signer;
+import ssm.client.sign.model.Signer;
 import org.junit.jupiter.api.Test;
 import ssm.dsl.SsmAgent;
 

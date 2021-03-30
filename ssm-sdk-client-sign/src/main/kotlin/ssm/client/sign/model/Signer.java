@@ -1,6 +1,6 @@
-package ssm.client.domain;
+package ssm.client.sign.model;
 
-import ssm.client.crypto.KeyPairReader;
+import ssm.client.sign.crypto.KeyPairReader;
 
 import java.security.KeyPair;
 import java.util.Objects;

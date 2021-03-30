@@ -1,8 +1,8 @@
 package ssm.client.invoke.command;
 
-import ssm.client.crypto.Sha256RSASigner;
-import ssm.client.domain.Signer;
-import ssm.client.crypto.KeyPairReader;
+import ssm.client.sign.crypto.Sha256RSASigner;
+import ssm.client.sign.model.Signer;
+import ssm.client.sign.crypto.KeyPairReader;
 import org.assertj.core.util.Lists;
 import org.junit.jupiter.api.Test;
 import ssm.dsl.Ssm;

@@ -1,9 +1,8 @@
 package ssm.f2
 
 import kotlinx.coroutines.future.await
-import org.springframework.stereotype.Service
 import ssm.client.SsmClient
-import ssm.client.domain.SignerAdmin
+import ssm.client.sign.model.SignerAdmin
 import ssm.dsl.SsmAgent
 import ssm.dsl.InvokeReturn
 import ssm.dsl.Ssm

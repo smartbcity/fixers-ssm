@@ -1,4 +1,4 @@
-package ssm.client.domain;
+package ssm.client.sign.model;
 
 import java.security.KeyPair;
 

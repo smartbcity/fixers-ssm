@@ -1,6 +1,6 @@
 package ssm.client;
 
-import ssm.client.Utils.FileUtils;
+import ssm.client.sign.utils.FileUtils;
 
 import java.io.FileInputStream;
 import java.io.IOException;

@@ -4,8 +4,10 @@ import org.assertj.core.api.Assertions;
 import ssm.client.AgentUtils;
 import ssm.client.PrivateMessageUtils;
 import ssm.client.SsmClientItTest;
-import ssm.client.crypto.KeyPairReader;
+import ssm.client.sign.crypto.KeyPairReader;
 import org.junit.jupiter.api.Test;
+
+import ssm.client.sign.model.Signer;
 import ssm.dsl.SsmAgent;
 import ssm.dsl.SsmContext;
 

@@ -1,7 +1,4 @@
-package ssm.client.Utils;
-
-import com.google.common.io.Resources;
-import retrofit2.http.Url;
+package ssm.client.sign.utils;
 
 import java.io.File;
 import java.io.IOException;
@@ -9,6 +6,8 @@ import java.io.InputStreamReader;
 import java.io.Reader;
 import java.net.MalformedURLException;
 import java.net.URL;
+
+import com.google.common.io.Resources;
 
 public class FileUtils {
 

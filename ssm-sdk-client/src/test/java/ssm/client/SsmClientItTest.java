@@ -4,7 +4,7 @@ package ssm.client;
 import com.google.common.collect.ImmutableMap;
 import org.assertj.core.util.Lists;
 import org.junit.jupiter.api.*;
-import ssm.client.domain.Signer;
+import ssm.client.sign.model.Signer;
 import ssm.dsl.*;
 
 import java.util.*;

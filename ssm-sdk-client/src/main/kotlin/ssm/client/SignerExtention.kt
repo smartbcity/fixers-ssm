@@ -1,7 +1,7 @@
 @file:JvmName("SignerUtils")
 package ssm.client
 
-import ssm.client.domain.Signer
+import ssm.client.sign.model.Signer
 import ssm.dsl.SsmAgent
 
 fun Signer.asAgent(): SsmAgent {

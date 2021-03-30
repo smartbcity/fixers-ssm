@@ -1,6 +1,6 @@
 package ssm.client.invoke.command;
 
-import ssm.client.domain.Signer;
+import ssm.client.sign.model.Signer;
 import ssm.dsl.Ssm;
 
 //

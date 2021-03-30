@@ -2,8 +2,8 @@ package ssm.client.invoke.command;
 
 import com.google.common.collect.ImmutableMap;
 import ssm.client.AgentUtils;
-import ssm.client.domain.Signer;
-import ssm.client.crypto.KeyPairReader;
+import ssm.client.sign.model.Signer;
+import ssm.client.sign.crypto.KeyPairReader;
 import org.junit.jupiter.api.Test;
 import ssm.dsl.SsmAgent;
 import ssm.dsl.SsmContext;

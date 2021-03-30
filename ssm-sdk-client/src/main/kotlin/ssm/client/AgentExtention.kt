@@ -2,7 +2,7 @@
 package ssm.client
 
 import org.bouncycastle.crypto.CryptoException
-import ssm.client.crypto.KeyPairReader
+import ssm.client.sign.crypto.KeyPairReader
 import ssm.dsl.SsmAgent
 import java.security.PublicKey
 

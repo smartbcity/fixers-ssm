@@ -3,6 +3,7 @@ plugins {
 }
 
 dependencies {
+    api(project(":ssm-sdk-client-sign"))
     implementation(project(":ssm-dsl"))
     implementation("org.slf4j:slf4j-api:${Versions.slf4j}")
 

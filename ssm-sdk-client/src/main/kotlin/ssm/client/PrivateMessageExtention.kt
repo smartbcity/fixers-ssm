@@ -2,8 +2,8 @@
 package ssm.client
 
 import org.bouncycastle.crypto.CryptoException
-import ssm.client.crypto.RSACipher
-import ssm.client.domain.Signer
+import ssm.client.sign.crypto.RSACipher
+import ssm.client.sign.model.Signer
 import ssm.dsl.*
 import java.security.PrivateKey
 import java.security.PublicKey
@@ -45,18 +45,17 @@ fun SsmSessionState.addPrivateMessage(value: String, name: String, publicKey: Pu
 }
 
 private fun WithPrivate.addPrivate(
-	value: String,
-	publicKey: PublicKey,
-	name: String,
+		value: String,
+		publicKey: PublicKey,
+		name: String,
 ): Map<String, String> {
 	val encrypted = RSACipher.encrypt(value.toByteArray(), publicKey)
-	val newMap = (private ?: hashMapOf()) + mapOf(name to encrypted)
-	return newMap
+	return (private ?: hashMapOf()) + mapOf(name to encrypted)
 }
 
 @Throws(CryptoException::class)
 fun WithPrivate.getPrivateMessage(signer: Signer): String? {
-	return getPrivateMessage(signer.getName(), signer.getPair().getPrivate())
+	return getPrivateMessage(signer.name, signer.pair.private)
 }
 
 

@@ -1,4 +1,4 @@
-package ssm.client.crypto;
+package ssm.client.sign.crypto;
 
 import java.security.PrivateKey;
 import java.security.Signature;

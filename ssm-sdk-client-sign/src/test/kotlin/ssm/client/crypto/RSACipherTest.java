@@ -7,6 +7,9 @@ import org.junit.jupiter.api.Test;
 import java.security.PrivateKey;
 import java.security.PublicKey;
 
+import ssm.client.sign.crypto.KeyPairReader;
+import ssm.client.sign.crypto.RSACipher;
+
 class RSACipherTest {
 
     @Test

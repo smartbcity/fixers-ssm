@@ -8,8 +8,8 @@ import ssm.client.invoke.query.AdminQuery;
 import ssm.client.invoke.query.AgentQuery;
 import ssm.client.invoke.query.SessionQuery;
 import ssm.client.invoke.query.SsmQuery;
+import ssm.client.sign.model.Signer;
 import ssm.dsl.*;
-import ssm.client.domain.*;
 
 import java.io.IOException;
 import java.util.List;

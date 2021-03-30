@@ -1,8 +1,8 @@
 package ssm.client.invoke.command;
 
 import ssm.client.Utils.JsonUtils;
-import ssm.client.crypto.Sha256RSASigner;
-import ssm.client.domain.Signer;
+import ssm.client.sign.crypto.Sha256RSASigner;
+import ssm.client.sign.model.Signer;
 
 import java.util.Base64;
 
