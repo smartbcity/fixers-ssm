@@ -6,17 +6,6 @@ import java.util.*
 
 open class Signer(val name: String, val pair: KeyPair) {
 
-    override fun equals(other: Any?): Boolean {
-        if (this === other) return true
-        if (other == null || this.javaClass != other.javaClass) return false
-        val signer = other as Signer
-        return this.name == signer.name && this.pair == signer.pair
-    }
-
-    override fun hashCode(): Int {
-        return Objects.hash(name, pair)
-    }
-
     companion object {
         @Throws(Exception::class)
         fun loadFromFile(filename: String): Signer {
@@ -29,5 +18,16 @@ open class Signer(val name: String, val pair: KeyPair) {
             val keypair = KeyPairReader.loadKeyPair(filename!!)
             return Signer(name, keypair)
         }
+    }
+
+    override fun equals(other: Any?): Boolean {
+        if (this === other) return true
+        if (other == null || this.javaClass != other.javaClass) return false
+        val signer = other as Signer
+        return this.name == signer.name && this.pair == signer.pair
+    }
+
+    override fun hashCode(): Int {
+        return Objects.hash(name, pair)
     }
 }
