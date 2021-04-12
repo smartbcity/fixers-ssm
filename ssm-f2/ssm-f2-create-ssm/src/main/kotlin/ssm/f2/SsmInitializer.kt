@@ -3,14 +3,14 @@ package ssm.f2
 import kotlinx.coroutines.future.await
 import ssm.client.SsmClient
 import ssm.client.sign.model.SignerAdmin
-import ssm.dsl.SsmAgent
 import ssm.dsl.InvokeReturn
 import ssm.dsl.Ssm
+import ssm.dsl.SsmAgent
 
 class SsmInitializer(
-    private val ssmClient: SsmClient,
-    private val signerAdmin: SignerAdmin
-        ) {
+        private val ssmClient: SsmClient,
+        private val signerAdmin: SignerAdmin
+) {
 
     suspend fun init(agent: SsmAgent, ssm: Ssm): List<InvokeReturn> {
         val retInitUser = initUser(agent)

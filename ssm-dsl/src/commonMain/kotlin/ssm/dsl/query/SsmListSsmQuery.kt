@@ -16,7 +16,7 @@ typealias SsmListSsmQueryRemoteFunction = F2FunctionRemote<SsmListSsmQuery, SsmL
 @JsName("SsmListSsmQuery")
 class SsmListSsmQuery(
 	val baseUrl: String,
-	val jwt: String?,
+	val jwt: String? = null,
 ): Command
 
 

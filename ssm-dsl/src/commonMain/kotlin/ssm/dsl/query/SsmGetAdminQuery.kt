@@ -17,7 +17,7 @@ typealias SsmGetAdminRemoteFunction = F2FunctionRemote<SsmGetAdminQuery, SsmGetA
 @JsName("SsmGetAdminQuery")
 class SsmGetAdminQuery(
 	val baseUrl: String,
-	val jwt: String?,
+	val jwt: String? = null,
 	val name: String
 ): Command
 

@@ -17,7 +17,7 @@ typealias SsmGetUserRemoteFunction = F2FunctionRemote<SsmGetUserQuery, SsmGetUse
 @JsName("SsmGetUserQuery")
 class SsmGetUserQuery(
 	val baseUrl: String,
-	val jwt: String?,
+	val jwt: String? = null,
 	val name: String
 ): Command
 

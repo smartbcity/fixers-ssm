@@ -17,7 +17,7 @@ typealias SsmGetSessionRemoteFunction = F2FunctionRemote<SsmGetSessionQuery, Ssm
 @JsName("SsmGetSessionQuery")
 class SsmGetSessionQuery(
 	val baseUrl: String,
-	val jwt: String?,
+	val jwt: String? = null,
 	val name: String
 ): Command
 

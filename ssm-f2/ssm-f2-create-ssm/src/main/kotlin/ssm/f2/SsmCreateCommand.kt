@@ -17,8 +17,8 @@ class SsmCreateCommand(
         val signerAdmin: SignerAdmin,
         val ssm: Ssm,
         val agent: SsmAgent
-) : Command
+): Command
 
 class SsmCreateResult(
 	val invokeReturn: List<InvokeReturn>,
-) : Event
+): Event
