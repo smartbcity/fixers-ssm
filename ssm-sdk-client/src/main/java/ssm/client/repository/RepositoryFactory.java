@@ -1,15 +1,15 @@
 package ssm.client.repository;
 
+import java.util.concurrent.TimeUnit;
+
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import retrofit2.Retrofit;
 import retrofit2.converter.jackson.JacksonConverterFactory;
 
-import java.util.concurrent.TimeUnit;
-
 public class RepositoryFactory {
 
-    private static OkHttpClient.Builder httpClient = new OkHttpClient.Builder();
+    private static OkHttpClient.Builder httpClient;
 
     private final Retrofit retrofit;
 
@@ -18,24 +18,31 @@ public class RepositoryFactory {
     }
 
     private Retrofit buildRetrofit(String baseUrl) {
-        OkHttpClient client = httpClient
-                .addInterceptor(chain -> {
-                    Request original = chain.request();
-                    Request.Builder requestBuilder = original.newBuilder()
-                            .header("Content-Type", "application/json").method(original.method(), original.body());
-                    return chain.proceed(requestBuilder.build());
-                })
-                .connectTimeout(20, TimeUnit.SECONDS)
-                .readTimeout(20, TimeUnit.SECONDS)
-                .writeTimeout(20, TimeUnit.SECONDS)
-                .build();
-
+        initializeHttpBuilder();
+        OkHttpClient client = httpClient.build();
 
         return new Retrofit.Builder()
                 .baseUrl(baseUrl)
                 .addConverterFactory(JacksonConverterFactory.create())
                 .client(client)
                 .build();
+    }
+
+    private void initializeHttpBuilder() {
+        if (httpClient != null) {
+            return;
+        }
+
+        httpClient = new OkHttpClient.Builder()
+            .addInterceptor(chain -> {
+                Request original = chain.request();
+                Request.Builder requestBuilder = original.newBuilder()
+                    .header("Content-Type", "application/json").method(original.method(), original.body());
+                return chain.proceed(requestBuilder.build());
+            })
+            .connectTimeout(20, TimeUnit.SECONDS)
+            .readTimeout(20, TimeUnit.SECONDS)
+            .writeTimeout(20, TimeUnit.SECONDS);
     }
 
     public CoopRepository buildCoopRepository() {
