@@ -21,6 +21,7 @@ include(
 )
 
 include(
+        "ssm-f2:ssm-f2-commons",
         "ssm-f2:ssm-f2-query",
         "ssm-f2:ssm-f2-create-ssm",
         "ssm-f2:ssm-f2-session-perform-action",

@@ -1,18 +1,21 @@
 package ssm.client;
 
+import java.io.IOException;
+
 import com.google.common.base.Preconditions;
+
 import ssm.client.json.JSONConverter;
 import ssm.client.json.ObjectMapperJSONConverter;
 import ssm.client.repository.CoopRepository;
 import ssm.client.repository.RepositoryFactory;
-
-import java.io.IOException;
 
 public class SsmClientBuilder {
 
     private CoopRepository coopRepository;
     private JSONConverter jsonConverter;
 
+    private String channelId;
+    private String ssmId;
 
     public static SsmClientBuilder builder() {
         return new SsmClientBuilder();
@@ -25,12 +28,14 @@ public class SsmClientBuilder {
 
 
     public static SsmClientBuilder builder(SsmClientConfig config) {
-        RepositoryFactory factory = new RepositoryFactory(config.getBaseUrl());
+        RepositoryFactory factory = new RepositoryFactory(config.getBaseUrl(), config.getBearerToken());
         CoopRepository coopRepository = factory.buildCoopRepository();
         JSONConverter converter = new ObjectMapperJSONConverter();
         return SsmClientBuilder.builder()
                 .withCoopRepository(coopRepository)
-                .withJSONConverter(converter);
+                .withJSONConverter(converter)
+                .withChannelId(config.getChannelId())
+                .withSsmId(config.getChaincodeId());
     }
 
 
@@ -48,9 +53,19 @@ public class SsmClientBuilder {
         return this;
     }
 
+    public SsmClientBuilder withChannelId(String channelId) {
+        this.channelId = channelId;
+        return this;
+    }
+
+    public SsmClientBuilder withSsmId(String ssmId) {
+        this.ssmId = ssmId;
+        return this;
+    }
+
     public SsmClient build() {
         Preconditions.checkNotNull(coopRepository);
         Preconditions.checkNotNull(jsonConverter);
-        return new SsmClient(new SsmRequester(jsonConverter, coopRepository));
+        return new SsmClient(new SsmRequester(channelId, ssmId, jsonConverter, coopRepository));
     }
 }

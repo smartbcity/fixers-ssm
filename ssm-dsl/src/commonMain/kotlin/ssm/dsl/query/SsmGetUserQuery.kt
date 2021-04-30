@@ -1,11 +1,11 @@
 package ssm.dsl.query
 
-import f2.dsl.cqrs.Command
 import f2.dsl.cqrs.Event
 import f2.dsl.function.F2Function
 import f2.dsl.function.F2FunctionRemote
 import kotlinx.serialization.Serializable
 import ssm.dsl.SsmAgent
+import ssm.dsl.SsmCommand
 import kotlin.js.JsExport
 import kotlin.js.JsName
 
@@ -16,14 +16,16 @@ typealias SsmGetUserRemoteFunction = F2FunctionRemote<SsmGetUserQuery, SsmGetUse
 @Serializable
 @JsName("SsmGetUserQuery")
 class SsmGetUserQuery(
-	val baseUrl: String,
-	val jwt: String? = null,
-	val name: String
-): Command
+		override val baseUrl: String,
+		override val channelId: String?,
+		override val chaincodeId: String?,
+		override val bearerToken: String? = null,
+		val name: String
+): SsmCommand
 
 @JsExport
 @Serializable
 @JsName("SsmGetUserResult")
 class SsmGetUserResult(
-	val user: SsmAgent?
+		val user: SsmAgent?
 ): Event

@@ -1,20 +1,17 @@
 package ssm.f2.query
 
-import f2.function.spring.adapter.f2Function
 import kotlinx.coroutines.future.await
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
-import ssm.client.SsmClient
-import ssm.client.SsmClientConfig
-import ssm.dsl.query.*
+import ssm.dsl.query.SsmGetSessionFunction
+import ssm.dsl.query.SsmGetSessionResult
+import ssm.f2.commons.ssmF2Function
 
 @Configuration
 class SsmGetSessionFunctionImpl {
 
 	@Bean
-	fun ssmGetSessionFunction(): SsmGetSessionFunction = f2Function { cmd ->
-		val config = SsmClientConfig(cmd.baseUrl)
-		val ssmClient = SsmClient.fromConfig(config)
+	fun ssmGetSessionFunction(): SsmGetSessionFunction = ssmF2Function { cmd, ssmClient ->
 		val sessionState = ssmClient.getSession(cmd.name).await().orElse(null)
 		SsmGetSessionResult(sessionState)
 	}
