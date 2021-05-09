@@ -1,0 +1,7 @@
+ssm:
+  couchdb:
+    url: http://peer1.pr-commune.smartb.network:5984
+    username: admin
+    password: smartb
+    serviceName: unitTest
+

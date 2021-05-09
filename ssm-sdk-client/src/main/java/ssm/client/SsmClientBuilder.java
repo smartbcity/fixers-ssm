@@ -3,11 +3,10 @@ package ssm.client;
 import java.io.IOException;
 
 import com.google.common.base.Preconditions;
-
-import ssm.client.json.JSONConverter;
-import ssm.client.json.ObjectMapperJSONConverter;
 import ssm.client.repository.CoopRepository;
 import ssm.client.repository.RepositoryFactory;
+import ssm.sdk.json.JSONConverter;
+import ssm.sdk.json.JSONConverterObjectMapper;
 
 public class SsmClientBuilder {
 
@@ -30,7 +29,7 @@ public class SsmClientBuilder {
     public static SsmClientBuilder builder(SsmClientConfig config) {
         RepositoryFactory factory = new RepositoryFactory(config.getBaseUrl(), config.getBearerToken());
         CoopRepository coopRepository = factory.buildCoopRepository();
-        JSONConverter converter = new ObjectMapperJSONConverter();
+        JSONConverter converter = new JSONConverterObjectMapper();
         return SsmClientBuilder.builder()
                 .withCoopRepository(coopRepository)
                 .withJSONConverter(converter)

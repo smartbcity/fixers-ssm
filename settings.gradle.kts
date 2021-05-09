@@ -1,13 +1,17 @@
 pluginManagement {
-    repositories {
-        gradlePluginPortal()
-        jcenter()
-    }
+	repositories {
+		gradlePluginPortal()
+		mavenCentral()
+	}
 }
 
 rootProject.name = "ssm"
 
-enableFeaturePreview("GRADLE_METADATA")
+include(
+	"ssm-couchdb:ssm-couchdb-autoconfiguration",
+	"ssm-couchdb:ssm-couchdb-client",
+	"ssm-couchdb:ssm-couchdb-f2"
+)
 
 include(
         "ssm-dsl",
@@ -16,9 +20,11 @@ include(
 )
 
 include(
-        "ssm-sdk-client",
-        "ssm-sdk-client-sign"
+	"ssm-sdk-client",
+	"ssm-sdk-client-sign",
+	"ssm-sdk:ssm-sdk-json"
 )
+
 
 include(
         "ssm-f2:ssm-f2-commons",

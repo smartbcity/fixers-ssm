@@ -12,10 +12,10 @@ import ssm.client.invoke.command.CommandSigner;
 import ssm.client.invoke.command.InvokeArgs;
 import ssm.client.invoke.query.HasGet;
 import ssm.client.invoke.query.HasList;
-import ssm.client.json.JSONConverter;
 import ssm.client.repository.CommandArgs;
 import ssm.client.repository.CoopRepository;
 import ssm.dsl.InvokeReturn;
+import ssm.sdk.json.JSONConverter;
 
 public class SsmRequester {
 

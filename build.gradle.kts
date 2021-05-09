@@ -53,6 +53,7 @@ subprojects {
 			sourceSets {
 				val commonMain by getting {
 					dependencies {
+						implementation(kotlin("reflect"))
 						Dependencies.common.coroutines.forEach { api(it) }
 						Dependencies.common.kserialization.forEach { api(it) }
 					}

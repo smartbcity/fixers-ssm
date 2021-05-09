@@ -12,6 +12,8 @@ object Versions {
 	const val springFramework = "5.3.4"
 	const val springData = "2.4.5"
 
+	const val cloudant = "0.0.24"
+
 	const val bouncycastleVersion = "1.61"
 	const val okhttpVersion = "3.14.0"
 	const val retrofitVersion = "2.5.0"
