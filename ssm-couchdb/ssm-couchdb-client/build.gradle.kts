@@ -4,7 +4,6 @@ plugins {
 }
 
 dependencies {
-
     api(project(":ssm-dsl"))
     implementation(project(":ssm-sdk:ssm-sdk-json"))
 

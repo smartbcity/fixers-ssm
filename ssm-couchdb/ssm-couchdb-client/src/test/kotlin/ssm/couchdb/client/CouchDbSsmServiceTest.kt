@@ -3,13 +3,14 @@ package ssm.couchdb.client
 import org.assertj.core.api.Assertions
 import org.junit.jupiter.api.Test
 import ssm.couchdb.client.builder.SsmCouchDbBasicAuth
+import ssm.dsl.DocType
 
 class CouchDbSsmServiceTest {
 
-	private val ssmName = "marius_ssm"
-	private val username = "admin"
-	private val password = "smartb"
-	private val serviceUrl = "http://peer1.pr-commune.smartb.network:5984"
+	private val ssmName = "sandbox_ssm"
+	private val username = "couchdb"
+	private val password = "couchdb"
+	private val serviceUrl = "http://localhost:5984"
 
 	private var couchDbSsmService: SsmCouchDbClient = SsmCouchDbClient.builder()
 		.withUrl(serviceUrl)
@@ -21,14 +22,21 @@ class CouchDbSsmServiceTest {
 
 	@Test
 	fun shouldReturnAdmin() {
-		val admin = couchDbSsmService.getAllAdmins(ssmName)
+		val admin = couchDbSsmService.fetchAllByDocType(ssmName, DocType.Admin)
 		Assertions.assertThat(admin).isNotNull
 	}
 
 	@Test
-	fun shouldReturnSsm() {
-		val ssms = couchDbSsmService.getAllSsm(ssmName)
+	fun shouldReturnSsmCount() {
+		val ssms = couchDbSsmService.fetchAllByDocType(ssmName, DocType.Ssm)
 		Assertions.assertThat(ssms).isNotNull
+	}
+
+	@Test
+	fun shouldReturnSsm() {
+		val ssmCount = couchDbSsmService.getCount(ssmName, DocType.Ssm)
+		val ssms = couchDbSsmService.fetchAllByDocType(ssmName, DocType.Ssm)
+		Assertions.assertThat(ssms.size).isEqualTo(ssmCount)
 	}
 
 //	@Test

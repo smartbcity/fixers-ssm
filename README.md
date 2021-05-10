@@ -20,6 +20,18 @@ sdk-core/src/test/java/io/civis/ssm/sdk/client/SsmClientItTest.java
 
  * `ssm-f2-start-session` -> Function to start ssm session
 
+## SSM CouchDb
+ * counting
+```
+http://localhost:5984/sandbox_ssm/_design/indexTypeDoc/_view/indexType?group_level=1&key=[%22ssm%22]
+{
+  "rows":[{
+    "key":["ssm"],
+    "value":8
+  }]
+}
+```
+
 ## Gradle
 
  * Start local blockchain
