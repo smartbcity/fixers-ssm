@@ -4,10 +4,7 @@ import ssm.client.invoke.command.CreateCommandSigner;
 import ssm.client.invoke.command.PerformCommandSigner;
 import ssm.client.invoke.command.RegisterCommandSigner;
 import ssm.client.invoke.command.StartCommandSigner;
-import ssm.client.invoke.query.AdminQuery;
-import ssm.client.invoke.query.AgentQuery;
-import ssm.client.invoke.query.SessionQuery;
-import ssm.client.invoke.query.SsmQuery;
+import ssm.client.invoke.query.*;
 import ssm.client.sign.model.Signer;
 import ssm.dsl.*;
 
@@ -85,6 +82,12 @@ public class SsmClient {
     public CompletableFuture<Optional<SsmSessionState>> getSession(String sessionId) {
         SessionQuery query = new SessionQuery();
         return ssmRequester.query(sessionId, query, SsmSessionState.class);
+    }
+
+
+    public CompletableFuture<List<SsmSessionStateLog>> log(String sessionId) {
+        LogQuery query = new LogQuery();
+        return ssmRequester.log(sessionId, query, SsmSessionStateLog.class);
     }
 
     public CompletableFuture<List<String>> listSession() {

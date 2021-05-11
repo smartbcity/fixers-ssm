@@ -36,6 +36,14 @@ public class SsmRequester {
         this.chaincodeId = chaincodeId;
     }
 
+    public <T> CompletableFuture<List<T>> log(String value, HasGet query, Class<T> clazz) {
+        InvokeArgs args = query.queryArgs(value);
+        CompletableFuture<ResponseBody> request = coopRepository.command(QUERY, channelId, chaincodeId, args.getFcn(), args.getArgs());
+
+        logger.info("Query the blockchain in channel[{}] and ssm[{}] with fcn[{}] with args:{}", channelId, chaincodeId, args.getFcn(), args.getArgs());
+        return request.thenApply(jsonConverter.toCompletableObjects(clazz));
+    }
+
     public <T> CompletableFuture<Optional<T>> query(String value, HasGet query, Class<T> clazz) {
         InvokeArgs args = query.queryArgs(value);
         CompletableFuture<ResponseBody> request = coopRepository.command(QUERY, channelId, chaincodeId, args.getFcn(), args.getArgs());

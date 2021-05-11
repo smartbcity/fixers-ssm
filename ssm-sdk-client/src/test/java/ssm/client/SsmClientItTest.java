@@ -21,13 +21,7 @@ import org.junit.jupiter.api.TestMethodOrder;
 import com.google.common.collect.ImmutableMap;
 
 import ssm.client.sign.model.Signer;
-import ssm.dsl.InvokeReturn;
-import ssm.dsl.Ssm;
-import ssm.dsl.SsmAgent;
-import ssm.dsl.SsmContext;
-import ssm.dsl.SsmSession;
-import ssm.dsl.SsmSessionState;
-import ssm.dsl.SsmTransition;
+import ssm.dsl.*;
 
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 public class SsmClientItTest {
@@ -259,6 +253,14 @@ public class SsmClientItTest {
         Optional<SsmSessionState> state = sesReq.get();
         SsmSessionState stateExcpected = new SsmSessionState(ssmName, sessionName, session.getRoles(),"Deal !", new HashMap(), buy, 2, 2);
         assertThat(state.get()).isEqualTo(stateExcpected);
+    }
+
+    @Test
+    @Order(135)
+    public void logSession() throws Exception {
+        CompletableFuture<List<SsmSessionStateLog>> sesReq = client.log(sessionName);
+        List<SsmSessionStateLog> stateLog = sesReq.get();
+        assertThat(stateLog.size()).isEqualTo(3);
     }
 
     @Test
