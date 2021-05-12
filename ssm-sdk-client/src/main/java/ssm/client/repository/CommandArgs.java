@@ -11,17 +11,13 @@ public class CommandArgs {
 
     private String cmd;
     private String fcn;
-    private String channelid;
-    private String chaincodeid;
     private List<String> args;
 
     public static CommandArgs from(String cmd, InvokeArgs invokeArgs, String channelId, String chaincodeId) {
         return new CommandArgs()
             .setCmd(cmd)
             .setFcn(invokeArgs.getFcn())
-            .setArgs(invokeArgs.getArgs())
-            .setChannelid(channelId)
-            .setChaincodeid(chaincodeId);
+            .setArgs(invokeArgs.getArgs());
     }
 
     public String getCmd() {
@@ -39,24 +35,6 @@ public class CommandArgs {
 
     public CommandArgs setFcn(String fcn) {
         this.fcn = fcn;
-        return this;
-    }
-
-    public String getChannelid() {
-        return channelid;
-    }
-
-    public CommandArgs setChannelid(String channelid) {
-        this.channelid = channelid;
-        return this;
-    }
-
-    public String getChaincodeid() {
-        return chaincodeid;
-    }
-
-    public CommandArgs setChaincodeid(String chaincodeid) {
-        this.chaincodeid = chaincodeid;
         return this;
     }
 
@@ -90,14 +68,6 @@ public class CommandArgs {
             .add("cmd", cmd)
             .add("fcn", fcn)
             .add("args", args);
-
-        if (this.channelid != null) {
-            stringHelper.add("channelid", channelid);
-        }
-
-        if (this.chaincodeid != null) {
-            stringHelper.add("chaincodeid", chaincodeid);
-        }
 
         return stringHelper.toString();
     }

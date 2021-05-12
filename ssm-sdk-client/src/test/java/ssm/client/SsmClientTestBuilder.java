@@ -6,7 +6,7 @@ public class SsmClientTestBuilder {
 
     public static SsmClient build() throws IOException {
         String configFileName = getConfigFileName();
-        return SsmClient.fromConfigFile(configFileName);
+        return SsmClientBuilder.builder(configFileName).withChannelId("sandbox").withSsmId("ssm").build();
     }
 
     private static String getConfigFileName() {

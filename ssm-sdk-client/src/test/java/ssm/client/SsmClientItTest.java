@@ -8,6 +8,7 @@ import java.util.Map;
 import java.util.Optional;
 import java.util.UUID;
 import java.util.concurrent.CompletableFuture;
+import java.util.concurrent.ExecutionException;
 
 import org.assertj.core.util.Lists;
 import org.junit.jupiter.api.AfterEach;
@@ -22,6 +23,8 @@ import com.google.common.collect.ImmutableMap;
 
 import ssm.client.sign.model.Signer;
 import ssm.dsl.*;
+import ssm.dsl.blockchain.Block;
+import ssm.dsl.blockchain.Transaction;
 
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 public class SsmClientItTest {
@@ -101,9 +104,7 @@ public class SsmClientItTest {
         CompletableFuture<InvokeReturn> transactionEvent = client.registerUser(signerAdmin, agentUser1);
         InvokeReturn trans = transactionEvent.get();
 
-        assertThat(trans).isNotNull();
-        assertThat(trans.getStatus()).isEqualTo("SUCCESS");
-//        assertThat(trans.getTransactionId()).isNotNull();
+        assertThatTransactionExists(trans);
 
     }
 
@@ -120,9 +121,7 @@ public class SsmClientItTest {
     public void registerUser2() throws Exception {
         CompletableFuture<InvokeReturn> transactionEvent = client.registerUser(signerAdmin, agentUser2);
         InvokeReturn trans = transactionEvent.get();
-        assertThat(trans).isNotNull();
-        assertThat(trans.getStatus()).isEqualTo("SUCCESS");
-//        assertThat(trans.getTransactionId()).isNotNull();
+        assertThatTransactionExists(trans);
     }
 
     @Test
@@ -150,10 +149,7 @@ public class SsmClientItTest {
 
         CompletableFuture<InvokeReturn> transactionEvent = client.create(signerAdmin, ssm);
         InvokeReturn trans = transactionEvent.get();
-
-        assertThat(trans).isNotNull();
-        assertThat(trans.getStatus()).isEqualTo("SUCCESS");
-//        assertThat(trans.getTransactionId()).isNotNull();
+        assertThatTransactionExists(trans);
     }
 
     @Test
@@ -173,10 +169,7 @@ public class SsmClientItTest {
 
         CompletableFuture<InvokeReturn> transactionEvent = client.start(signerAdmin, session);
         InvokeReturn trans = transactionEvent.get();
-
-        assertThat(trans).isNotNull();
-        assertThat(trans.getStatus()).isEqualTo("SUCCESS");
-        assertThat(trans.getTransactionId()).isNotNull();
+        assertThatTransactionExists(trans);
     }
 
     @Test
@@ -206,9 +199,7 @@ public class SsmClientItTest {
         privateMessage = context.getPrivate();
         CompletableFuture<InvokeReturn> transactionEvent = client.perform(signerUser2, "Sell", context);
         InvokeReturn trans = transactionEvent.get();
-        assertThat(trans).isNotNull();
-        assertThat(trans.getStatus()).isEqualTo("SUCCESS");
-//        assertThat(trans.getTransactionId()).isNotNull();
+        assertThatTransactionExists(trans);
     }
 
 
@@ -241,8 +232,17 @@ public class SsmClientItTest {
         SsmContext context = new SsmContext(sessionName, "Deal !", 1, new HashMap());
         CompletableFuture<InvokeReturn> transactionEvent = client.perform(signerUser1, "Buy", context);
         InvokeReturn trans = transactionEvent.get();
+        assertThatTransactionExists(trans);
+    }
+
+    void assertThatTransactionExists(InvokeReturn trans) throws ExecutionException, InterruptedException {
         assertThat(trans).isNotNull();
         assertThat(trans.getStatus()).isEqualTo("SUCCESS");
+        Transaction transaction = client.getTransaction(trans.getTransactionId()).get().orElse(null);
+        assertThat(transaction).isNotNull();
+        assertThat(transaction.getBlockId()).isNotNull();
+        Block block = client.getBlock(transaction.getBlockId()).get().orElse(null);
+        assertThat(block).isNotNull();
     }
 
     @Test

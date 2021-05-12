@@ -4,10 +4,7 @@ import java.util.List;
 import java.util.concurrent.CompletableFuture;
 
 import okhttp3.ResponseBody;
-import retrofit2.http.Body;
-import retrofit2.http.GET;
-import retrofit2.http.POST;
-import retrofit2.http.Query;
+import retrofit2.http.*;
 
 public interface CoopRepository {
 
@@ -18,6 +15,19 @@ public interface CoopRepository {
             @Query("chaincodeid") String chaincodeid,
             @Query("fcn") String fcn,
             @Query("args") List<String> args
+    );
+
+
+    @GET("/blocks/{blockId}")
+    CompletableFuture<ResponseBody> getBlock(
+            @Path("blockId") Long blockId,
+            @Query("channelid") String channelid
+    );
+
+    @GET("/transactions/{txId}")
+    CompletableFuture<ResponseBody> getTransaction(
+            @Path("txId") String txId,
+            @Query("channelid") String channelid
     );
 
     @POST("/")

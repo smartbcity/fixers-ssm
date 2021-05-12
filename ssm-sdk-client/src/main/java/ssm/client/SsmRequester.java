@@ -15,6 +15,8 @@ import ssm.client.invoke.query.HasList;
 import ssm.client.repository.CommandArgs;
 import ssm.client.repository.CoopRepository;
 import ssm.dsl.InvokeReturn;
+import ssm.dsl.blockchain.Block;
+import ssm.dsl.blockchain.Transaction;
 import ssm.sdk.json.JSONConverter;
 
 public class SsmRequester {
@@ -68,4 +70,13 @@ public class SsmRequester {
                 .thenApply(Optional::get);
     }
 
+    public CompletableFuture<Optional<Transaction>> getTransaction(String transactionId) {
+        return coopRepository.getTransaction(transactionId, channelId)
+                .thenApply(jsonConverter.toCompletableObject(Transaction.class));
+    }
+
+    public CompletableFuture<Optional<Block>> getBlock(Long blockId) {
+        return coopRepository.getBlock(blockId, channelId)
+                .thenApply(jsonConverter.toCompletableObject(Block.class));
+    }
 }

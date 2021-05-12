@@ -45,7 +45,7 @@ services:
 
   coop-rest-java:
     container_name: coop-rest-bclan-network-it
-    image: smartbcity/commune-sandbox-ssm-rest:latest
+    image: smartbcity/commune-sandbox-ssm-rest:experimental
     ports:
       - 9090:9090
     networks:

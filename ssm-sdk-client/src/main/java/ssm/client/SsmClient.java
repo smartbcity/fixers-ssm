@@ -7,6 +7,8 @@ import ssm.client.invoke.command.StartCommandSigner;
 import ssm.client.invoke.query.*;
 import ssm.client.sign.model.Signer;
 import ssm.dsl.*;
+import ssm.dsl.blockchain.Block;
+import ssm.dsl.blockchain.Transaction;
 
 import java.io.IOException;
 import java.util.List;
@@ -93,6 +95,14 @@ public class SsmClient {
     public CompletableFuture<List<String>> listSession() {
         SessionQuery query = new SessionQuery();
         return ssmRequester.list(query, String.class);
+    }
+
+    public CompletableFuture<Optional<Transaction>> getTransaction(String txId) {
+        return ssmRequester.getTransaction(txId);
+    }
+
+    public CompletableFuture<Optional<Block>> getBlock(Long blockId) {
+        return ssmRequester.getBlock(blockId);
     }
 
 }
