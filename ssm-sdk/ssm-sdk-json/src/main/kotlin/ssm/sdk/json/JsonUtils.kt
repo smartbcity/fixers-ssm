@@ -18,24 +18,20 @@ class JsonUtils {
 			.setSerializationInclusion(JsonInclude.Include.NON_NULL)
 			.setVisibility(PropertyAccessor.FIELD, JsonAutoDetect.Visibility.ANY)
 			.registerModule(KotlinModule())
-	}
 
-	@Throws(JsonProcessingException::class)
-	fun toJson(obj: Any): String {
-		mapper.setVisibility(PropertyAccessor.FIELD, JsonAutoDetect.Visibility.ANY)
-		return mapper.writeValueAsString(obj)
-	}
+		@Throws(JsonProcessingException::class)
+		fun toJson(obj: Any): String {
+			return mapper.writeValueAsString(obj)
+		}
 
-	@Throws(IOException::class)
-	fun <T> toObject(value: String, clazz: Class<T>): T {
-		mapper.setVisibility(PropertyAccessor.FIELD, JsonAutoDetect.Visibility.ANY)
-		return mapper.readValue(value, clazz)
-	}
+		@Throws(IOException::class)
+		fun <T> toObject(value: String, clazz: Class<T>): T {
+			return mapper.readValue(value, clazz)
+		}
 
-	@Throws(IOException::class)
-	fun <T> toObject(value: String, clazz: TypeReference<T>): T {
-		mapper.setVisibility(PropertyAccessor.FIELD, JsonAutoDetect.Visibility.ANY)
-		return mapper.readValue(value, clazz)
+		@Throws(IOException::class)
+		fun <T> toObject(value: String, clazz: TypeReference<T>): T {
+			return mapper.readValue(value, clazz)
+		}
 	}
-
 }

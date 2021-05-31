@@ -1,9 +1,10 @@
 package ssm.client.invoke.command;
 
-import ssm.sdk.json.JsonUtils;
 import java.util.Base64;
+
 import ssm.client.sign.crypto.Sha256RSASigner;
 import ssm.client.sign.model.Signer;
+import ssm.sdk.json.JsonUtils;
 
 public abstract class CommandSigner<T> {
 
@@ -18,7 +19,7 @@ public abstract class CommandSigner<T> {
     }
 
     public InvokeArgs invoke() throws Exception {
-        String json = new JsonUtils().toJson(value);
+        String json = JsonUtils.Companion.toJson(value);
         String toSign = valueToSign(json);
         byte[] signature = Sha256RSASigner.Companion.rsaSign(toSign, signer.getPair().getPrivate());
         String b64Signature = Base64.getEncoder().encodeToString(signature);
