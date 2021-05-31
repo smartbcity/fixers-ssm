@@ -11,7 +11,6 @@ import ssm.couchdb.client.builder.SsmCouchDbBasicAuth
 @EnableConfigurationProperties(SsmCouchdbProperties::class)
 class SsmCouchdbAutoconfiguration {
 
-
 	@Bean
 	fun ssmCouchDbClient(properties: SsmCouchdbProperties): SsmCouchDbClient {
 		return SsmCouchDbClient.builder()
@@ -25,6 +24,4 @@ class SsmCouchdbAutoconfiguration {
 
 	@Bean
 	fun client(ssmCouchDbClient: SsmCouchDbClient): Cloudant = ssmCouchDbClient.cloudant
-
-
 }

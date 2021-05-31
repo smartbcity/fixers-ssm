@@ -13,7 +13,7 @@ internal class CdbGetDatabasesFunctionImplTest : FunctionTestBase() {
 	lateinit var cdbGetDatabasesFunction: F2Supplier<String>
 
 	@Test
-	fun `must return cdbGetDatasesFunction from catalog`() {
+	fun `must return cdbGetDatabasesFunction from catalog`() {
 		val fnc: Any = catalog.lookup("cdbGetDatabasesFunction")
 		Assertions.assertThat(fnc).isNotNull
 	}
