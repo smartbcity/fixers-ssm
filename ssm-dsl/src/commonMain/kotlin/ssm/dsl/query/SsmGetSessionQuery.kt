@@ -9,8 +9,8 @@ import ssm.dsl.SsmSessionState
 import kotlin.js.JsExport
 import kotlin.js.JsName
 
-typealias SsmGetSessionFunction = F2Function<SsmGetSessionQuery, SsmGetSessionResult>
-typealias SsmGetSessionRemoteFunction = F2FunctionRemote<SsmGetSessionQuery, SsmGetSessionResult>
+typealias SsmGetSessionQueryFunction = F2Function<SsmGetSessionQuery, SsmGetSessionResult>
+typealias SsmGetSessionQueryRemoteFunction = F2FunctionRemote<SsmGetSessionQuery, SsmGetSessionResult>
 
 @JsExport
 @Serializable
