@@ -8,10 +8,10 @@ import kotlin.js.JsName
 @JsExport
 @JsName("SsmSessionState")
 data class SsmSessionState(
-	override val ssm: String,
+	override val ssm: String?,
 	override val session: String,
-	override val roles: Map<String, String>,
-	override val public: String,
+	override val roles: Map<String, String>?,
+	override val public: Any?,
 	override val private: Map<String, String>? = hashMapOf(),
 	val origin: SsmTransition?,
 	val current: Int,

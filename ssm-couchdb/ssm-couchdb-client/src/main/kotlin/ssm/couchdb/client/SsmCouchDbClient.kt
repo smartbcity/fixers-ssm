@@ -25,10 +25,11 @@ class SsmCouchDbClient(
 		}
 	}
 
-	fun <T: Any> fetchAllByDocType(dbName: String, docType: DocType<T>): List<T> {
+	fun <T: Any> fetchAllByDocType(dbName: String, docType: DocType<T>, filters: Map<String, Any> = emptyMap()): List<T> {
 		val selector = mapOf(
 			"docType" to mapOf("\$eq" to docType.docType)
-		)
+		).plus(filters)
+
 		val findOptions = PostFindOptions.Builder()
 			.db(dbName)
 			.selector(selector)
@@ -37,7 +38,7 @@ class SsmCouchDbClient(
 
 		val result: Response<FindResult> = cloudant.postFind(findOptions).execute()
 
-		return result.result.docs.map { document ->
+		return result.result.docs.mapNotNull { document ->
 			converter.toObject(docType.clazz.java).apply(document.toString()).orElse(null)
 		}
 	}

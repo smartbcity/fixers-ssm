@@ -1,4 +1,5 @@
 org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
 ssm.couchdb.f2.query.CdbGetDatabasesFunctionImpl, \
 ssm.couchdb.f2.query.CdbGetDatabaseFunctionImpl, \
-ssm.couchdb.f2.query.CdbGetSsmListQueryFunctionImpl
+ssm.couchdb.f2.query.CdbGetSsmListQueryFunctionImpl, \
+ssm.couchdb.f2.query.CdbGetSsmSessionListQueryFunctionImpl
