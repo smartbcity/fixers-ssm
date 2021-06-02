@@ -1,19 +1,31 @@
 package ssm.client;
 
-import ssm.client.invoke.command.CreateCommandSigner;
-import ssm.client.invoke.command.PerformCommandSigner;
-import ssm.client.invoke.command.RegisterCommandSigner;
-import ssm.client.invoke.command.StartCommandSigner;
-import ssm.client.invoke.query.*;
-import ssm.client.sign.model.Signer;
-import ssm.dsl.*;
-import ssm.dsl.blockchain.Block;
-import ssm.dsl.blockchain.Transaction;
-
 import java.io.IOException;
 import java.util.List;
 import java.util.Optional;
 import java.util.concurrent.CompletableFuture;
+
+import ssm.client.invoke.command.CreateCommandSigner;
+import ssm.client.invoke.command.PerformCommandSigner;
+import ssm.client.invoke.command.RegisterCommandSigner;
+import ssm.client.invoke.command.StartCommandSigner;
+import ssm.client.invoke.query.AdminQuery;
+import ssm.client.invoke.query.AgentQuery;
+import ssm.client.invoke.query.BlockQuery;
+import ssm.client.invoke.query.LogQuery;
+import ssm.client.invoke.query.SessionQuery;
+import ssm.client.invoke.query.SsmQuery;
+import ssm.client.invoke.query.TransactionQuery;
+import ssm.client.sign.model.Signer;
+import ssm.dsl.InvokeReturn;
+import ssm.dsl.Ssm;
+import ssm.dsl.SsmAgent;
+import ssm.dsl.SsmContext;
+import ssm.dsl.SsmSession;
+import ssm.dsl.SsmSessionState;
+import ssm.dsl.SsmSessionStateLog;
+import ssm.dsl.blockchain.Block;
+import ssm.dsl.blockchain.Transaction;
 
 public class SsmClient {
 
@@ -98,11 +110,13 @@ public class SsmClient {
     }
 
     public CompletableFuture<Optional<Transaction>> getTransaction(String txId) {
-        return ssmRequester.getTransaction(txId);
+        TransactionQuery query = new TransactionQuery();
+        return ssmRequester.query(txId, query, Transaction.class);
     }
 
     public CompletableFuture<Optional<Block>> getBlock(Long blockId) {
-        return ssmRequester.getBlock(blockId);
+        BlockQuery query = new BlockQuery();
+        return ssmRequester.query(blockId.toString(), query, Block.class);
     }
 
 }
