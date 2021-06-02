@@ -11,7 +11,6 @@ import ssm.coucbdb.dsl.query.CdbGetSsmSessionListQuery
 import ssm.coucbdb.dsl.query.CdbGetSsmSessionListQueryFunction
 import ssm.dsl.SsmSessionState
 import ssm.dsl.query.SsmGetQueryFunction
-import ssm.dsl.query.SsmGetSessionLogQueryFunction
 import ssm.dsl.query.SsmGetSessionQueryFunction
 import ssm.dsl.query.SsmListSessionQueryFunction
 import ssm.dsl.query.SsmListSsmQueryFunction
