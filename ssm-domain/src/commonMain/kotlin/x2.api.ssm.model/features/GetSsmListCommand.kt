@@ -10,7 +10,7 @@ interface GetSsmListCommand {
 }
 
 @JsExport
-@JsName("GetSsmListBase")
+@JsName("GetSsmListCommandBase")
 class GetSsmListCommandBase(
     override val dbName: String
 ): GetSsmListCommand

@@ -5,23 +5,21 @@ import kotlin.js.JsExport
 import kotlin.js.JsName
 
 @JsExport
-@JsName("GetSsmSessionListCommand")
-interface GetSsmSessionListCommand: SsmCommand {
+@JsName("GetSsmSessionCommand")
+interface GetSsmSessionCommand: SsmCommand {
+    val name: String
     override val baseUrl: String
     override val channelId: String?
     override val chaincodeId: String?
     override val bearerToken: String?
-    val dbName: String
-    val ssm: String?
 }
 
 @JsExport
-@JsName("GetSsmSessionListCommandBase")
-class GetSsmSessionListCommandBase(
+@JsName("GetSsmSessionCommandBase")
+class GetSsmSessionCommandBase(
+    override val name: String,
     override val baseUrl: String,
-    override val dbName: String,
     override val channelId: String?,
     override val chaincodeId: String?,
-    override val bearerToken: String?,
-    override val ssm: String?
-): GetSsmSessionListCommand
+    override val bearerToken: String?
+): GetSsmSessionCommand
