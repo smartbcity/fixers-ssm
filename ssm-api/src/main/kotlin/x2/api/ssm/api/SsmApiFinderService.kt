@@ -9,17 +9,24 @@ import ssm.coucbdb.dsl.query.CdbGetSsmListQuery
 import ssm.coucbdb.dsl.query.CdbGetSsmListQueryFunction
 import ssm.coucbdb.dsl.query.CdbGetSsmSessionListQuery
 import ssm.coucbdb.dsl.query.CdbGetSsmSessionListQueryFunction
+import ssm.dsl.SsmCommand
 import ssm.dsl.SsmSessionState
+import ssm.dsl.SsmSessionStateLog
 import ssm.dsl.query.SsmGetQueryFunction
+import ssm.dsl.query.SsmGetSessionFirstAndLastTransactionQuery
+import ssm.dsl.query.SsmGetSessionFirstAndLastTransactionQueryFunction
+import ssm.dsl.query.SsmGetSessionLogsQuery
+import ssm.dsl.query.SsmGetSessionLogsQueryFunction
+import ssm.dsl.query.SsmGetSessionQuery
 import ssm.dsl.query.SsmGetSessionQueryFunction
-import ssm.dsl.query.SsmListSessionQueryFunction
-import ssm.dsl.query.SsmListSsmQueryFunction
 import x2.api.ssm.api.model.toSession
 import x2.api.ssm.api.model.toSsm
 import x2.api.ssm.model.SsmBase
 import x2.api.ssm.model.SsmSessionBase
 import x2.api.ssm.model.features.GetSsmListCommandBase
+import x2.api.ssm.model.features.GetSsmSessionCommandBase
 import x2.api.ssm.model.features.GetSsmSessionListCommandBase
+import java.net.URLEncoder
 
 @Service
 class SsmApiFinderService(
@@ -27,8 +34,8 @@ class SsmApiFinderService(
 	private val cdbGetSsmListQueryFunction: CdbGetSsmListQueryFunction,
 	private val ssmGetQueryFunction: SsmGetQueryFunction,
 	private val ssmGetSessionQueryFunction: SsmGetSessionQueryFunction,
-	private val ssmListSsmQueryFunction: SsmListSsmQueryFunction,
-	private val ssmListSessionQueryFunction: SsmListSessionQueryFunction
+	private val ssmGetSessionFirstAndLastTransactionQueryFunction: SsmGetSessionFirstAndLastTransactionQueryFunction,
+	private val ssmGetSessionLogsQueryFunction: SsmGetSessionLogsQueryFunction,
 ) {
 
 	@Bean
@@ -42,9 +49,6 @@ class SsmApiFinderService(
 	}
 
 	@Bean
-	fun getAllSsmIds() = ssmListSsmQueryFunction
-
-	@Bean
 	fun getSsm() = ssmGetQueryFunction
 
 	@Bean
@@ -55,12 +59,41 @@ class SsmApiFinderService(
 		)
 		cdbGetSsmSessionListQueryFunction.invokeSingle(command)
 			.sessions
-			.map(SsmSessionState::toSession)
+			.filter { sessionState -> sessionState.session.isNotBlank() }
+			.map { sessionState -> sessionState.toSession(cmd)
+			}
 	}
 
 	@Bean
-	fun getAllSessionIds() = ssmListSessionQueryFunction
+	fun getSession(): F2Function<GetSsmSessionCommandBase, SsmSessionBase?> = f2Function { cmd ->
+		val query = SsmGetSessionQuery(
+			name = cmd.name,
+			baseUrl = cmd.baseUrl,
+			channelId = cmd.channelId,
+			chaincodeId = cmd.chaincodeId,
+			bearerToken = cmd.bearerToken
+		)
+
+		val sessionState = ssmGetSessionQueryFunction.invokeSingle(query).session
+		sessionState?.toSession(cmd)
+	}
 
 	@Bean
-	fun getSession() = ssmGetSessionQueryFunction
+	fun getSessionLogs(): F2Function<SsmGetSessionLogsQuery, List<SsmSessionStateLog>> = f2Function { cmd ->
+		ssmGetSessionLogsQueryFunction.invokeSingle(cmd).logs
+	}
+
+	private suspend fun SsmSessionState.toSession(cmd: SsmCommand): SsmSessionBase {
+		val sanitizedSession = URLEncoder.encode(this.session, "utf-8")
+		val query = SsmGetSessionFirstAndLastTransactionQuery(
+			session = sanitizedSession,
+			baseUrl = cmd.baseUrl,
+			channelId = cmd.channelId,
+			chaincodeId = cmd.chaincodeId,
+			bearerToken = cmd.bearerToken
+		)
+		val result = ssmGetSessionFirstAndLastTransactionQueryFunction.invokeSingle(query)
+
+		return this.toSession(result.firstTransaction, result.lastTransaction)
+	}
 }

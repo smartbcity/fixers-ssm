@@ -9,7 +9,7 @@ interface SsmSession {
     val id: SsmSessionId
     val channel: String
     val creationDate: Long
-    val currentStep: SsmSessionStep
+    val lastTransaction: SsmTransaction
 }
 
 @JsExport
@@ -18,7 +18,7 @@ class SsmSessionBase(
     override val id: SsmSessionId,
     override val channel: String,
     override val creationDate: Long,
-    override val currentStep: SsmSessionStepBase
+    override val lastTransaction: SsmTransactionBase
 ): SsmSession
 
 typealias SsmSessionId = String

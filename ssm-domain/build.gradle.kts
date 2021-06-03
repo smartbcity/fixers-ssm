@@ -1,6 +1,5 @@
 plugins {
     kotlin("multiplatform")
-    id("com.moowork.node")
 }
 
 dependencies {
