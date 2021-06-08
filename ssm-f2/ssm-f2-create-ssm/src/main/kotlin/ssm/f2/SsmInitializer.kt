@@ -6,8 +6,6 @@ import ssm.client.sign.model.SignerAdmin
 import ssm.dsl.InvokeReturn
 import ssm.dsl.SsmBase
 import ssm.dsl.SsmAgentBase
-import ssm.client.domain.SignerAdmin
-import ssm.dsl.InvokeReturn
 
 class SsmInitializer(
         private val ssmClient: SsmClient,

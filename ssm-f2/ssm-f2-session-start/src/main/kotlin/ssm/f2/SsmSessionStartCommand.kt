@@ -17,10 +17,6 @@ class SsmSessionStartCommand(
 		val signerAdmin: SignerAdmin,
 		val session: SsmSessionBase,
 ): SsmCommand
-    val baseUrl: String,
-    val signerAdmin: SignerAdmin,
-    val session: SsmSessionBase,
-): Command
 
 class SsmSessionStartResult(
 		val invokeReturn: InvokeReturn
