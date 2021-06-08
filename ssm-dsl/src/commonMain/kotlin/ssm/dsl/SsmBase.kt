@@ -8,7 +8,7 @@ import kotlin.js.JsName
 @JsName("Ssm")
 interface Ssm {
 	val name: String
-	val transitions: List<SsmTransition>
+	val transitions: List<SsmTransitionBase>
 }
 
 @Serializable

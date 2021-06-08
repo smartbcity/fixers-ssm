@@ -2,10 +2,10 @@
 package ssm.client
 
 import ssm.client.domain.Signer
-import ssm.dsl.SsmAgent
+import ssm.dsl.SsmAgentBase
 
-fun Signer.asAgent(): SsmAgent {
-    return SsmAgent(
+fun Signer.asAgent(): SsmAgentBase {
+    return SsmAgentBase(
             this.name,
             this.pair.public.encoded
     )

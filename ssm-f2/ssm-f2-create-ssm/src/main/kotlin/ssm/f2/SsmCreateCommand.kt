@@ -6,9 +6,8 @@ import f2.dsl.function.F2Function
 import f2.dsl.function.F2FunctionRemote
 import ssm.client.domain.SignerAdmin
 import ssm.dsl.InvokeReturn
-import ssm.dsl.Ssm
-import ssm.dsl.SsmAgent
-import ssm.dsl.SsmSession
+import ssm.dsl.SsmBase
+import ssm.dsl.SsmAgentBase
 
 typealias SsmCreateFunction = F2Function<SsmCreateCommand, SsmCreateResult>
 typealias SsmCreateRemoteFunction = F2FunctionRemote<SsmCreateCommand, SsmCreateResult>
@@ -16,8 +15,8 @@ typealias SsmCreateRemoteFunction = F2FunctionRemote<SsmCreateCommand, SsmCreate
 class SsmCreateCommand(
 	val baseUrl: String,
 	val signerAdmin: SignerAdmin,
-	val ssm: Ssm,
-	val agent: SsmAgent
+	val ssmBase: SsmBase,
+	val agent: SsmAgentBase
 ) : Command
 
 class SsmCreateResult(

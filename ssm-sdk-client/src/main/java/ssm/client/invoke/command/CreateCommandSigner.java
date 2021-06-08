@@ -1,7 +1,7 @@
 package ssm.client.invoke.command;
 
 import ssm.client.domain.Signer;
-import ssm.dsl.Ssm;
+import ssm.dsl.SsmBase;
 
 //
 //{
@@ -31,11 +31,11 @@ import ssm.dsl.Ssm;
 //}
 //
 //echo "Usage: create <command> <signer>"
-public class CreateCommandSigner extends CommandSigner<Ssm> {
+public class CreateCommandSigner extends CommandSigner<SsmBase> {
 
     private final static String COMMAND_NAME = "create";
 
-    public CreateCommandSigner(Signer signer, Ssm ssm) {
+    public CreateCommandSigner(Signer signer, SsmBase ssm) {
         super(signer, COMMAND_NAME, ssm);
     }
 

@@ -5,8 +5,8 @@ import kotlin.js.JsExport
 import kotlin.js.JsName
 
 @JsExport
-@JsName("Context")
-interface Context: WithPrivate {
+@JsName("SsmContext")
+interface SsmContext: WithPrivate {
 	val session: String
 	val public: String
 	val iteration: Int
@@ -21,4 +21,4 @@ data class SsmContextBase(
 	override val public: String,
 	override val iteration: Int,
 	override val private: Map<String, String>? = null,
-): Context
+): SsmContext

@@ -22,7 +22,7 @@ data class SsmAgentBase(
 		if (this === other) return true
 		if (other == null || this::class != other::class) return false
 
-		other as SsmAgent
+		other as SsmAgentBase
 
 		if (name != other.name) return false
 		if (!pub.contentEquals(other.pub)) return false

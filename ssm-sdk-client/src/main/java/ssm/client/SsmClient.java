@@ -32,17 +32,17 @@ public class SsmClient {
         this.ssmRequester = ssmRequester;
     }
 
-    public CompletableFuture<InvokeReturn> registerUser(Signer signer, SsmAgent agent) throws Exception {
+    public CompletableFuture<InvokeReturn> registerUser(Signer signer, SsmAgentBase agent) throws Exception {
         RegisterCommandSigner cmd = new RegisterCommandSigner(signer, agent);
         return ssmRequester.invoke(cmd);
     }
 
-    public CompletableFuture<InvokeReturn> create(Signer signer, Ssm ssm) throws Exception {
+    public CompletableFuture<InvokeReturn> create(Signer signer, SsmBase ssm) throws Exception {
         CreateCommandSigner cmd = new CreateCommandSigner(signer, ssm);
         return ssmRequester.invoke(cmd);
     }
 
-    public CompletableFuture<InvokeReturn> start(Signer signer, SsmSession session) throws Exception {
+    public CompletableFuture<InvokeReturn> start(Signer signer, SsmSessionBase session) throws Exception {
         StartCommandSigner cmd = new StartCommandSigner(signer, session);
         return ssmRequester.invoke(cmd);
     }
@@ -57,9 +57,9 @@ public class SsmClient {
         return ssmRequester.list(query, String.class);
     }
 
-    public CompletableFuture<Optional<SsmAgent>> getAdmin(String username) {
+    public CompletableFuture<Optional<SsmAgentBase>> getAdmin(String username) {
         AdminQuery query = new AdminQuery();
-        return ssmRequester.query(username, query, SsmAgent.class);
+        return ssmRequester.query(username, query, SsmAgentBase.class);
     }
 
     public CompletableFuture<List<String>> listAgent() {
@@ -67,9 +67,9 @@ public class SsmClient {
         return ssmRequester.list(query, String.class);
     }
 
-    public CompletableFuture<Optional<SsmAgent>> getAgent(String agentName)  {
+    public CompletableFuture<Optional<SsmAgentBase>> getAgent(String agentName)  {
         AgentQuery query = new AgentQuery();
-        return ssmRequester.query(agentName, query, SsmAgent.class);
+        return ssmRequester.query(agentName, query, SsmAgentBase.class);
     }
 
     public CompletableFuture<List<String>> listSsm() {
@@ -77,14 +77,14 @@ public class SsmClient {
         return ssmRequester.list(query, String.class);
     }
 
-    public CompletableFuture<Optional<Ssm>> getSsm(String name) {
+    public CompletableFuture<Optional<SsmBase>> getSsm(String name) {
         SsmQuery query = new SsmQuery();
-        return ssmRequester.query(name, query, Ssm.class);
+        return ssmRequester.query(name, query, SsmBase.class);
     }
 
-    public CompletableFuture<Optional<SsmSessionState>> getSession(String sessionId) {
+    public CompletableFuture<Optional<SsmSessionStateBase>> getSession(String sessionId) {
         SessionQuery query = new SessionQuery();
-        return ssmRequester.query(sessionId, query, SsmSessionState.class);
+        return ssmRequester.query(sessionId, query, SsmSessionStateBase.class);
     }
 
     public CompletableFuture<List<String>> listSession() {

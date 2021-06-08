@@ -6,8 +6,9 @@ import ssm.client.PrivateMessageUtils;
 import ssm.client.SsmClientItTest;
 import ssm.client.crypto.KeyPairReader;
 import org.junit.jupiter.api.Test;
-import ssm.dsl.SsmAgent;
+import ssm.dsl.SsmAgentBase;
 import ssm.dsl.SsmContext;
+import ssm.dsl.SsmContextBase;
 
 import java.security.PrivateKey;
 import java.util.HashMap;
@@ -18,9 +19,9 @@ class HasPrivateMessageTest {
     @Test
     void shouldEncryptMessage() throws Exception {
         String sessionName = "deal20181201-" + UUID.randomUUID().toString();
-        SsmContext context = new SsmContext(sessionName, "100 dollars 1978 Camaro", 0, new HashMap<>());
+        SsmContextBase context = new SsmContextBase(sessionName, "100 dollars 1978 Camaro", 0, new HashMap<>());
 
-        SsmAgent agent = AgentUtils.loadFromFile(SsmClientItTest.USER1_NAME, SsmClientItTest.USER1_FILENAME);
+        SsmAgentBase agent = AgentUtils.loadFromFile(SsmClientItTest.USER1_NAME, SsmClientItTest.USER1_FILENAME);
         context = PrivateMessageUtils.addPrivateMessage(context, "Value to encrypt", agent);
         String val = context.getPrivate().get(agent.getName());
         Assertions.assertThat(val).isNotEmpty().isNotEqualTo("Value to encrypt");
@@ -29,8 +30,8 @@ class HasPrivateMessageTest {
     @Test
     void shouldDecryptMessage() throws Exception {
         String sessionName = "deal20181201-" + UUID.randomUUID().toString();
-        SsmContext context = new SsmContext(sessionName, "100 dollars 1978 Camaro", 0, new HashMap<>());
-        SsmAgent agent = AgentUtils.loadFromFile(SsmClientItTest.USER1_NAME, SsmClientItTest.USER1_FILENAME);
+        SsmContextBase context = new SsmContextBase(sessionName, "100 dollars 1978 Camaro", 0, new HashMap<>());
+        SsmAgentBase agent = AgentUtils.loadFromFile(SsmClientItTest.USER1_NAME, SsmClientItTest.USER1_FILENAME);
         context = PrivateMessageUtils.addPrivateMessage(context, "Value to encrypt", agent);
 
         PrivateKey privKey = KeyPairReader.loadPrivateKey(SsmClientItTest.USER1_FILENAME);
@@ -41,8 +42,8 @@ class HasPrivateMessageTest {
     @Test
     void shouldDecryptMessageWithSigner() throws Exception {
         String sessionName = "deal20181201-" + UUID.randomUUID().toString();
-        SsmContext context = new SsmContext(sessionName, "100 dollars 1978 Camaro", 0, new HashMap<>());
-        SsmAgent agent = AgentUtils.loadFromFile(SsmClientItTest.USER1_NAME, SsmClientItTest.USER1_FILENAME);
+        SsmContextBase context = new SsmContextBase(sessionName, "100 dollars 1978 Camaro", 0, new HashMap<>());
+        SsmAgentBase agent = AgentUtils.loadFromFile(SsmClientItTest.USER1_NAME, SsmClientItTest.USER1_FILENAME);
         context = PrivateMessageUtils.addPrivateMessage(context, "Value to encrypt", agent);
         Signer signerUser1 = Signer.loadFromFile(SsmClientItTest.USER1_NAME, SsmClientItTest.USER1_FILENAME);
         String val = PrivateMessageUtils.getPrivateMessage(context, signerUser1);

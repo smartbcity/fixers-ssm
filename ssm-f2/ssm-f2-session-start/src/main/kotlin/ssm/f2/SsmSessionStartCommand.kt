@@ -5,14 +5,14 @@ import f2.dsl.cqrs.Event
 import f2.dsl.function.F2Function
 import ssm.client.domain.SignerAdmin
 import ssm.dsl.InvokeReturn
-import ssm.dsl.SsmSession
+import ssm.dsl.SsmSessionBase
 
 typealias SsmSessionStartFunction = F2Function<SsmSessionStartCommand, SsmSessionStartResult>
 
 class SsmSessionStartCommand(
-	val baseUrl: String,
-	val signerAdmin: SignerAdmin,
-	val session: SsmSession,
+    val baseUrl: String,
+    val signerAdmin: SignerAdmin,
+    val session: SsmSessionBase,
 ): Command
 
 class SsmSessionStartResult(

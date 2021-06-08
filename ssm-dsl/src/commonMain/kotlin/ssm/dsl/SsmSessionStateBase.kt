@@ -12,7 +12,7 @@ interface SsmSessionState: SsmSession, WithPrivate  {
 	override val roles: Map<String, String>
 	override val public: String
 	override val private: Map<String, String>?
-	val origin: SsmTransition?
+	val origin: SsmTransitionBase?
 	val current: Int
 	val iteration: Int
 }
@@ -20,7 +20,7 @@ interface SsmSessionState: SsmSession, WithPrivate  {
 @Serializable
 @JsExport
 @JsName("SsmSessionStateBase")
-open class SsmSessionStateBase(
+data class SsmSessionStateBase(
 	override val ssm: String,
 	override val session: String,
 	override val roles: Map<String, String>,

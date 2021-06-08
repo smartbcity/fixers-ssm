@@ -1,37 +1,36 @@
 package ssm.f2
 
 import kotlinx.coroutines.future.await
-import org.springframework.stereotype.Service
 import ssm.client.SsmClient
 import ssm.client.domain.SignerAdmin
-import ssm.dsl.SsmAgent
+import ssm.dsl.SsmAgentBase
 import ssm.dsl.InvokeReturn
-import ssm.dsl.Ssm
+import ssm.dsl.SsmBase
 
 class SsmInitializer(
     private val ssmClient: SsmClient,
     private val signerAdmin: SignerAdmin
         ) {
 
-    suspend fun init(agent: SsmAgent, ssm: Ssm): List<InvokeReturn> {
+    suspend fun init(agent: SsmAgentBase, ssmBase: SsmBase): List<InvokeReturn> {
         val retInitUser = initUser(agent)
-        val retInitSsm = initSsm(ssm)
+        val retInitSsm = initSsm(ssmBase)
         return listOfNotNull(retInitUser, retInitSsm)
     }
 
-    suspend fun initSsm(ssm: Ssm): InvokeReturn? {
-        return createIfNotExist(ssm, { this.fetchSsm(ssm.name) }, { this.createSsm(it) })
+    suspend fun initSsm(ssmBase: SsmBase): InvokeReturn? {
+        return createIfNotExist(ssmBase, { this.fetchSsm(ssmBase.name) }, { this.createSsm(it) })
     }
 
-    suspend fun initUser(user: SsmAgent): InvokeReturn? {
+    suspend fun initUser(user: SsmAgentBase): InvokeReturn? {
         return createIfNotExist(user, { this.fetchUser(user.name) }, { this.createUser(it) })
     }
 
-    private suspend fun fetchSsm(name: String): Ssm? {
+    private suspend fun fetchSsm(name: String): SsmBase? {
         return ssmClient.getSsm(name).await().orElse(null)
     }
 
-    private suspend fun fetchUser(name: String): SsmAgent? {
+    private suspend fun fetchUser(name: String): SsmAgentBase? {
         return ssmClient.getAgent(name).await().orElse(null)
     }
     
@@ -41,15 +40,15 @@ class SsmInitializer(
             create(objToCreate)
     }
 
-    private suspend fun createSsm(ssm: Ssm): InvokeReturn {
+    private suspend fun createSsm(ssmBase: SsmBase): InvokeReturn {
         try {
-            return ssmClient.create(signerAdmin, ssm).await()
+            return ssmClient.create(signerAdmin, ssmBase).await()
         } catch (e: Exception) {
             throw RuntimeException(e)
         }
     }
 
-    private suspend fun createUser(agent: SsmAgent): InvokeReturn {
+    private suspend fun createUser(agent: SsmAgentBase): InvokeReturn {
         try {
             return ssmClient.registerUser(signerAdmin, agent).await()
         } catch (e: Exception) {

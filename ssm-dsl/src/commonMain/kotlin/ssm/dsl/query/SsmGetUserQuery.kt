@@ -5,7 +5,7 @@ import f2.dsl.cqrs.Event
 import f2.dsl.function.F2Function
 import f2.dsl.function.F2FunctionRemote
 import kotlinx.serialization.Serializable
-import ssm.dsl.SsmAgent
+import ssm.dsl.SsmAgentBase
 import kotlin.js.JsExport
 import kotlin.js.JsName
 
@@ -25,5 +25,5 @@ class SsmGetUserQuery(
 @Serializable
 @JsName("SsmGetUserResult")
 class SsmGetUserResult(
-	val user: SsmAgent?
+	val user: SsmAgentBase?
 ): Event

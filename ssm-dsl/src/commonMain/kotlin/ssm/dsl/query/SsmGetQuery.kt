@@ -5,7 +5,7 @@ import f2.dsl.cqrs.Event
 import f2.dsl.function.F2Function
 import f2.dsl.function.F2FunctionRemote
 import kotlinx.serialization.Serializable
-import ssm.dsl.Ssm
+import ssm.dsl.SsmBase
 import kotlin.js.JsExport
 import kotlin.js.JsName
 
@@ -25,5 +25,5 @@ class SsmGetQuery(
 @Serializable
 @JsName("SsmGetResult")
 class SsmGetResult(
-	val ssm: Ssm?
+	val ssmBase: SsmBase?
 ): Event
