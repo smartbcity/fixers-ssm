@@ -14,7 +14,7 @@ class SsmListSessionQueryFunctionImpl {
 	@Bean
 	fun ssmListSessionQueryFunction(): SsmListSessionQueryFunction = ssmF2Function { _, ssmClient ->
 		val list = ssmClient.listSession().await()
-		SsmListSessionResult(list)
+		SsmListSessionResult(list.toTypedArray())
 	}
 
 }

@@ -11,8 +11,8 @@ import com.google.common.collect.ImmutableMap;
 import ssm.client.AgentUtils;
 import ssm.client.sign.crypto.KeyPairReader;
 import ssm.client.sign.model.Signer;
-import ssm.dsl.SsmAgent;
-import ssm.dsl.SsmContext;
+import ssm.dsl.SsmAgentBase;
+import ssm.dsl.SsmContextBase;
 
 public class PerformCommandTest {
 
@@ -24,7 +24,7 @@ public class PerformCommandTest {
         Signer signer = new Signer("adam", adamPair);
 
 //        "{\"session\":\"deal20181201\",\"public\":\"100 dollars 1978 Camaro\",\"iteration\":0}"
-        SsmContext context = new SsmContext("deal20181201", "100 dollars 1978 Camaro", 0, null);
+        SsmContextBase context = new SsmContextBase("deal20181201", "100 dollars 1978 Camaro", 0, null);
 
         InvokeArgs invokeArgs = new PerformCommandSigner(signer, "Sell", context).invoke();
         invokeArgs.getArgs().forEach(System.out::println);
@@ -47,10 +47,10 @@ public class PerformCommandTest {
         KeyPair adamPair = KeyPairReader.Companion.loadKeyPair("command/adam");
 
         Signer signer = new Signer("adam", adamPair);
-        SsmAgent agent = AgentUtils.loadFromFile("vivi", "command/adam");
+        SsmAgentBase agent = AgentUtils.loadFromFile("vivi", "command/adam");
 
 //        "{\"session\":\"deal20181201\",\"public\":\"100 dollars 1978 Camaro\",\"iteration\":0}"
-        SsmContext context = new SsmContext("deal20181201", "100 dollars 1978 Camaro", 0,   ImmutableMap.of("vivi", "message"));
+        SsmContextBase context = new SsmContextBase("deal20181201", "100 dollars 1978 Camaro", 0,   ImmutableMap.of("vivi", "message"));
 
         InvokeArgs invokeArgs = new PerformCommandSigner(signer, "Sell", context).invoke();
         invokeArgs.getArgs().forEach(System.out::println);

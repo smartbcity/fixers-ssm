@@ -10,8 +10,8 @@ import org.junit.jupiter.api.Test;
 import ssm.client.sign.crypto.KeyPairReader;
 import ssm.client.sign.crypto.Sha256RSASigner;
 import ssm.client.sign.model.Signer;
-import ssm.dsl.Ssm;
-import ssm.dsl.SsmTransition;
+import ssm.dsl.SsmBase;
+import ssm.dsl.SsmTransitionBase;
 
 public class CreateCommandTest {
 
@@ -37,10 +37,10 @@ public class CreateCommandTest {
         KeyPair adamPair = KeyPairReader.Companion.loadKeyPair("command/adam");
 
         Signer signer = new Signer("adam", adamPair);
-        SsmTransition sell = new SsmTransition(0, 1, "Seller", "Sell");
-        SsmTransition buy = new SsmTransition(1, 2, "Buyer", "Buy");
+        SsmTransitionBase sell = new SsmTransitionBase(0, 1, "Seller", "Sell");
+        SsmTransitionBase buy = new SsmTransitionBase(1, 2, "Buyer", "Buy");
 
-        Ssm ssm = new Ssm("dealership", Lists.newArrayList(sell, buy));
+        SsmBase ssm = new SsmBase("dealership", Lists.newArrayList(sell, buy).toArray(new SsmTransitionBase[2]));
 
 
         InvokeArgs invokeArgs = new CreateCommandSigner(signer, ssm).invoke();

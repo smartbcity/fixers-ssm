@@ -13,7 +13,7 @@ class SsmListSsmQueryFunctionImpl {
 	@Bean
 	fun ssmListSsmQueryFunction(): SsmListSsmQueryFunction = ssmF2Function { _, ssmClient ->
 		val list = ssmClient.listSsm().await()
-		SsmListSsmResult(list)
+		SsmListSsmResult(list.toTypedArray())
 	}
 
 }

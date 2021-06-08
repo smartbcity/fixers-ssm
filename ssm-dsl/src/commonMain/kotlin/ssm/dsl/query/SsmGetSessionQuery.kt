@@ -5,7 +5,7 @@ import f2.dsl.function.F2Function
 import f2.dsl.function.F2FunctionRemote
 import kotlinx.serialization.Serializable
 import ssm.dsl.SsmCommand
-import ssm.dsl.SsmSessionState
+import ssm.dsl.SsmSessionStateBase
 import kotlin.js.JsExport
 import kotlin.js.JsName
 
@@ -27,5 +27,5 @@ class SsmGetSessionQuery(
 @Serializable
 @JsName("SsmGetSessionResult")
 class SsmGetSessionResult(
-		val session: SsmSessionState?
+	val session: SsmSessionStateBase?
 ): Event

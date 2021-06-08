@@ -4,10 +4,17 @@ import kotlinx.serialization.Serializable
 import kotlin.js.JsExport
 import kotlin.js.JsName
 
-@Serializable
 @JsExport
 @JsName("Ssm")
-data class Ssm(
-	val name: String,
-	val transitions: List<SsmTransition>,
-)
+interface Ssm {
+	val name: String
+	val transitions: Array<SsmTransitionBase>
+}
+
+@Serializable
+@JsExport
+@JsName("SsmBase")
+data class SsmBase(
+	override val name: String,
+	override val transitions: Array<SsmTransitionBase>,
+): Ssm

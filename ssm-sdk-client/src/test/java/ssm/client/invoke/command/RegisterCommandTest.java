@@ -6,7 +6,7 @@ import org.junit.jupiter.api.Test;
 
 import ssm.client.AgentUtils;
 import ssm.client.sign.model.Signer;
-import ssm.dsl.SsmAgent;
+import ssm.dsl.SsmAgentBase;
 
 
 public class RegisterCommandTest {
@@ -15,7 +15,7 @@ public class RegisterCommandTest {
     public void test_execute() throws Exception {
         Signer signer = Signer.Companion.loadFromFile("adam", "command/adam");
 
-        SsmAgent agent = AgentUtils.loadFromFile("vivi", "command/vivi");
+        SsmAgentBase agent = AgentUtils.loadFromFile("vivi", "command/vivi");
         InvokeArgs invokeArgs = new RegisterCommandSigner(signer, agent).invoke();
         invokeArgs.getArgs().forEach(System.out::println);
 

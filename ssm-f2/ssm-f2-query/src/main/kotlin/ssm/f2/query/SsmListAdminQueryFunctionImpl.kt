@@ -13,7 +13,7 @@ class SsmListAdminQueryFunctionImpl {
 	@Bean
 	fun ssmListAdminQueryFunction(): SsmListAdminQueryFunction = ssmF2Function { _, ssmClient ->
 		val list = ssmClient.listAdmins().await()
-		SsmListAdminResult(list)
+		SsmListAdminResult(list.toTypedArray())
 	}
 
 }

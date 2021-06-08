@@ -13,7 +13,7 @@ class SsmListUserQueryFunctionImpl {
 	@Bean
 	fun ssmListUserQueryFunction(): SsmListUserQueryFunction = ssmF2Function { _, ssmClient ->
 		val list = ssmClient.listAgent().await()
-		SsmListUserResult(list)
+		SsmListUserResult(list.toTypedArray())
 	}
 
 }
