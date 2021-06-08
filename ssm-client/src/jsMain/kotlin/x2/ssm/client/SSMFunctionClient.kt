@@ -11,11 +11,11 @@ import kotlinx.coroutines.promise
 import ssm.dsl.SsmSessionStateLog
 import ssm.dsl.query.SsmGetQueryRemoteFunction
 import ssm.dsl.query.SsmGetSessionLogsQuery
-import x2.api.ssm.model.Ssm
-import x2.api.ssm.model.SsmSession
-import x2.api.ssm.model.features.GetSsmListCommand
-import x2.api.ssm.model.features.GetSsmSessionListCommand
-import x2.api.ssm.model.features.GetSsmSessionQueryRemoteFunction
+import x2.api.ssm.domain.model.TxSsmSession
+import x2.api.ssm.domain.features.GetSsmListCommand
+import x2.api.ssm.domain.features.GetSsmSessionListCommand
+import x2.api.ssm.domain.features.GetSsmSessionQueryRemoteFunction
+import x2.api.ssm.domain.model.TxSsm
 import kotlin.js.Promise
 
 
@@ -32,7 +32,7 @@ fun ssmClient(host: String, port: Int, path: String? = null): Promise<SSMFunctio
 actual open class SSMFunctionClient actual constructor(private val client: F2Client) {
 
 	@JsName("getAllSsm")
-	fun getAllSsm(msg: GetSsmListCommand): Promise<Array<Ssm>> = invokePromise<GetSsmListCommand, String> { msg ->
+	fun getAllSsm(msg: GetSsmListCommand): Promise<Array<TxSsm>> = invokePromise<GetSsmListCommand, String> { msg ->
 		client.promise("getAllSsm", msg)
 	}.invoke(msg).then {
 		JSON.parse(it)
@@ -44,7 +44,7 @@ actual open class SSMFunctionClient actual constructor(private val client: F2Cli
 	}
 
 	@JsName("getAllSessions")
-	fun getAllSessions(msg: GetSsmSessionListCommand): Promise<Array<SsmSession>> = invokePromise<GetSsmSessionListCommand, Array<SsmSession>> { msg ->
+	fun getAllSessions(msg: GetSsmSessionListCommand): Promise<Array<TxSsmSession>> = invokePromise<GetSsmSessionListCommand, Array<TxSsmSession>> { msg ->
 		client.promise("getAllSessions", msg)
 	}.invoke(msg)
 

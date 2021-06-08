@@ -1,14 +1,18 @@
 package x2.api.ssm.api.model
 
-import ssm.dsl.SsmSessionState
-import x2.api.ssm.model.SsmSessionBase
-import x2.api.ssm.model.SsmTransactionBase
-import x2.api.ssm.model.SsmUserBase
+import ssm.dsl.SsmSessionStateBase
+import x2.api.ssm.domain.model.TxSsmSessionBase
+import x2.api.ssm.domain.model.SsmTransactionBase
+import x2.api.ssm.domain.model.SsmUserBase
+import x2.api.ssm.domain.model.TxChannelBase
 
-fun SsmSessionState.toSession(firstTransaction: ssm.dsl.blockchain.Transaction?, lastTransaction: ssm.dsl.blockchain.Transaction?): SsmSessionBase {
-    return SsmSessionBase(
-        id = this.session,
-        channel = "Not implemented",
+/**
+ *
+ */
+fun SsmSessionStateBase.toSession(firstTransaction: ssm.dsl.blockchain.Transaction?, lastTransaction: ssm.dsl.blockchain.Transaction?): TxSsmSessionBase {
+    return TxSsmSessionBase(
+        state = this,
+        channel = TxChannelBase("Not implemented"),
         creationDate = firstTransaction?.timestamp ?: 0,
         lastTransaction = SsmTransactionBase(
             id = lastTransaction?.transactionId ?: "",

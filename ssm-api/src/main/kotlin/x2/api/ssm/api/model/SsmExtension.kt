@@ -1,11 +1,13 @@
 package x2.api.ssm.api.model
 
-import x2.api.ssm.model.SsmBase
+import x2.api.ssm.domain.model.SsmBase
+import ssm.dsl.SsmTransition
+import x2.api.ssm.domain.model.TxChannelBase
 
 fun ssm.dsl.Ssm.toSsm(): SsmBase {
     return SsmBase(
-        name = this.name,
+        ssm = this,
         version = "Not implemented",
-        transitions = this.transitions.map(ssm.dsl.SsmTransition::toTransition)
+        channel = TxChannelBase( "Not implemented")
     )
 }

@@ -10,7 +10,7 @@ import ssm.coucbdb.dsl.query.CdbGetSsmListQueryFunction
 import ssm.coucbdb.dsl.query.CdbGetSsmSessionListQuery
 import ssm.coucbdb.dsl.query.CdbGetSsmSessionListQueryFunction
 import ssm.dsl.SsmCommand
-import ssm.dsl.SsmSessionState
+import ssm.dsl.SsmSessionStateBase
 import ssm.dsl.SsmSessionStateLog
 import ssm.dsl.query.SsmGetQueryFunction
 import ssm.dsl.query.SsmGetSessionFirstAndLastTransactionQuery
@@ -21,11 +21,11 @@ import ssm.dsl.query.SsmGetSessionQuery
 import ssm.dsl.query.SsmGetSessionQueryFunction
 import x2.api.ssm.api.model.toSession
 import x2.api.ssm.api.model.toSsm
-import x2.api.ssm.model.SsmBase
-import x2.api.ssm.model.SsmSessionBase
-import x2.api.ssm.model.features.GetSsmListCommandBase
-import x2.api.ssm.model.features.GetSsmSessionCommandBase
-import x2.api.ssm.model.features.GetSsmSessionListCommandBase
+import x2.api.ssm.domain.model.SsmBase
+import x2.api.ssm.domain.model.TxSsmSessionBase
+import x2.api.ssm.domain.features.GetSsmListCommandBase
+import x2.api.ssm.domain.features.GetSsmSessionCommandBase
+import x2.api.ssm.domain.features.GetSsmSessionListCommandBase
 import java.net.URLEncoder
 
 @Service
@@ -52,7 +52,7 @@ class SsmApiFinderService(
 	fun getSsm() = ssmGetQueryFunction
 
 	@Bean
-	fun getAllSessions(): F2Function<GetSsmSessionListCommandBase, List<SsmSessionBase>> = f2Function { cmd ->
+	fun getAllSessions(): F2Function<GetSsmSessionListCommandBase, List<TxSsmSessionBase>> = f2Function { cmd ->
 		val command = CdbGetSsmSessionListQuery(
 			dbName = cmd.dbName,
 			ssm = cmd.ssm
@@ -65,7 +65,7 @@ class SsmApiFinderService(
 	}
 
 	@Bean
-	fun getSession(): F2Function<GetSsmSessionCommandBase, SsmSessionBase?> = f2Function { cmd ->
+	fun getSession(): F2Function<GetSsmSessionCommandBase, TxSsmSessionBase?> = f2Function { cmd ->
 		val query = SsmGetSessionQuery(
 			name = cmd.name,
 			baseUrl = cmd.baseUrl,
@@ -83,7 +83,7 @@ class SsmApiFinderService(
 		ssmGetSessionLogsQueryFunction.invokeSingle(cmd).logs
 	}
 
-	private suspend fun SsmSessionState.toSession(cmd: SsmCommand): SsmSessionBase {
+	private suspend fun SsmSessionStateBase.toSession(cmd: SsmCommand): TxSsmSessionBase {
 		val sanitizedSession = URLEncoder.encode(this.session, "utf-8")
 		val query = SsmGetSessionFirstAndLastTransactionQuery(
 			session = sanitizedSession,

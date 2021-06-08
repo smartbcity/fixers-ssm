@@ -1,10 +1,10 @@
-package x2.api.ssm.model
+package x2.api.ssm.domain
 
 import f2.dsl.function.F2FunctionRemote
 import ssm.dsl.SsmSessionStateLog
 import ssm.dsl.query.SsmGetQueryRemoteFunction
 import ssm.dsl.query.SsmGetSessionLogsQuery
-import x2.api.ssm.model.features.*
+import x2.api.ssm.domain.features.*
 import kotlin.js.JsExport
 import kotlin.js.JsName
 
