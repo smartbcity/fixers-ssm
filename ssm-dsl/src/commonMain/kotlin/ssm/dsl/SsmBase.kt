@@ -8,7 +8,7 @@ import kotlin.js.JsName
 @JsName("Ssm")
 interface Ssm {
 	val name: String
-	val transitions: List<SsmTransitionBase>
+	val transitions: Array<SsmTransitionBase>
 }
 
 @Serializable
@@ -16,5 +16,5 @@ interface Ssm {
 @JsName("SsmBase")
 data class SsmBase(
 	override val name: String,
-	override val transitions: List<SsmTransitionBase>,
+	override val transitions: Array<SsmTransitionBase>,
 ): Ssm

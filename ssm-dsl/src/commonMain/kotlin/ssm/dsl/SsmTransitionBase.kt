@@ -16,7 +16,7 @@ interface SsmTransition {
 @Serializable
 @JsExport
 @JsName("SsmTransitionBase")
-open class SsmTransitionBase(
+data class SsmTransitionBase(
 	override val from: Int,
 	override val to: Int,
 	override val role: String,

@@ -16,7 +16,7 @@ class SsmListAdminQueryFunctionImpl {
 		val config = SsmClientConfig(cmd.baseUrl)
 		val ssmClient = SsmClient.fromConfig(config)
 		val list = ssmClient.listAdmins().await()
-		SsmListAdminResult(list)
+		SsmListAdminResult(list.toTypedArray())
 	}
 
 }

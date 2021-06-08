@@ -24,5 +24,5 @@ class SsmListSessionQuery(
 @Serializable
 @JsName("SsmListSessionResult")
 class SsmListSessionResult(
-	val values: List<String>
+	val values: Array<String>
 ): Event

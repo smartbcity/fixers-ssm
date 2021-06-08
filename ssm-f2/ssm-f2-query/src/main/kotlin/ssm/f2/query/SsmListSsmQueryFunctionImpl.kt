@@ -16,7 +16,7 @@ class SsmListSsmQueryFunctionImpl {
 		val config = SsmClientConfig(cmd.baseUrl)
 		val ssmClient = SsmClient.fromConfig(config)
 		val list = ssmClient.listSsm().await()
-		SsmListSsmResult(list)
+		SsmListSsmResult(list.toTypedArray())
 	}
 
 }

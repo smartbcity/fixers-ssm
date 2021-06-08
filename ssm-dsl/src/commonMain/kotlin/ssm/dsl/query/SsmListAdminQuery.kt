@@ -23,5 +23,5 @@ class SsmListAdminQuery(
 @Serializable
 @JsName("SsmListAdminResult")
 class SsmListAdminResult(
-	val values: List<String>
+	val values: Array<String>
 ): Event

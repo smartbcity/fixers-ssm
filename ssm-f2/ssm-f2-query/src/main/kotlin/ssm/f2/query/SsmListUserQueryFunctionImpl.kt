@@ -17,7 +17,7 @@ class SsmListUserQueryFunctionImpl {
 		val config = SsmClientConfig(cmd.baseUrl)
 		val ssmClient = SsmClient.fromConfig(config)
 		val list = ssmClient.listAgent().await()
-		SsmListUserResult(list)
+		SsmListUserResult(list.toTypedArray())
 	}
 
 }

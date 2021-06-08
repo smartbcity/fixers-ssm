@@ -135,8 +135,7 @@ public class SsmClientItTest {
     public void createSsm() throws Exception {
         SsmTransitionBase sell = new SsmTransitionBase(0, 1, "Seller", "Sell");
         SsmTransitionBase buy = new SsmTransitionBase(1, 2, "Buyer", "Buy");
-        SsmBase ssm = new SsmBase(ssmName, Lists.newArrayList(sell, buy));
-
+        SsmBase ssm = new SsmBase(ssmName, Lists.newArrayList(sell, buy).toArray(new SsmTransitionBase[2]));
         CompletableFuture<InvokeReturn> transactionEvent = client.create(signerAdmin, ssm);
         InvokeReturn trans = transactionEvent.get();
 
