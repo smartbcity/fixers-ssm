@@ -26,7 +26,7 @@ open class SsmSessionStateBase(
 	override val roles: Map<String, String>,
 	override val public: String,
 	override val private: Map<String, String>? = hashMapOf(),
-	override val origin: SsmTransition?,
+	override val origin: SsmTransitionBase?,
 	override val current: Int,
 	override val iteration: Int,
 ): SsmSessionState

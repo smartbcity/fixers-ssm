@@ -16,5 +16,5 @@ interface Ssm {
 @JsName("SsmBase")
 data class SsmBase(
 	override val name: String,
-	override val transitions: List<SsmTransition>,
+	override val transitions: List<SsmTransitionBase>,
 ): Ssm
