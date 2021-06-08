@@ -4,13 +4,24 @@ import kotlinx.serialization.Serializable
 import kotlin.js.JsExport
 import kotlin.js.JsName
 
-@Serializable
 @JsExport
 @JsName("SsmSession")
-open class SsmSession (
-	open val ssm: String,
-	open val session: String,
-	open val roles: Map<String, String>,
-	open val public: String,
+interface SsmSession: WithPrivate {
+	val ssm: String
+	val session: String
+	val roles: Map<String, String>
+	val public: String
+	override val private: Map<String, String>?
+}
+
+@Serializable
+@JsExport
+@JsName("SsmSessionBase")
+open class SsmSessionBase(
+	override val ssm: String,
+	override val session: String,
+	override val roles: Map<String, String>,
+	override val public: String,
 	override val private: Map<String, String>? = hashMapOf(),
-): WithPrivate
+): SsmSession
+

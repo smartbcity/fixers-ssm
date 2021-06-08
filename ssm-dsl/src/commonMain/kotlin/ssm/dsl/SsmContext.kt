@@ -4,12 +4,21 @@ import kotlinx.serialization.Serializable
 import kotlin.js.JsExport
 import kotlin.js.JsName
 
-@Serializable
 @JsExport
 @JsName("Context")
-data class SsmContext (
-	val session: String,
-	val public: String,
-	val iteration: Int,
+interface Context: WithPrivate {
+	val session: String
+	val public: String
+	val iteration: Int
+	override val private: Map<String, String>?
+}
+
+@Serializable
+@JsExport
+@JsName("SsmContextBase")
+data class SsmContextBase(
+	override val session: String,
+	override val public: String,
+	override val iteration: Int,
 	override val private: Map<String, String>? = null,
-): WithPrivate
+): Context
