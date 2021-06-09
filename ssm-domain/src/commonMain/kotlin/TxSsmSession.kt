@@ -1,5 +1,3 @@
-package x2.api.ssm.domain.model
-
 import ssm.dsl.SsmSessionState
 import ssm.dsl.SsmSessionStateBase
 import kotlin.js.JsExport
