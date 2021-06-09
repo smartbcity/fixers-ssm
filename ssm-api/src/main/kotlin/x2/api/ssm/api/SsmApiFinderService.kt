@@ -1,5 +1,10 @@
 package x2.api.ssm.api
 
+import GetSsmListCommandBase
+import GetSsmSessionCommandBase
+import GetSsmSessionListCommandBase
+import TxSsmBase
+import TxSsmSessionBase
 import f2.dsl.function.F2Function
 import f2.function.spring.adapter.f2Function
 import f2.function.spring.invokeSingle
@@ -21,11 +26,6 @@ import ssm.dsl.query.SsmGetSessionQuery
 import ssm.dsl.query.SsmGetSessionQueryFunction
 import x2.api.ssm.api.model.toSession
 import x2.api.ssm.api.model.toSsm
-import x2.api.ssm.domain.features.GetSsmListCommandBase
-import x2.api.ssm.domain.features.GetSsmSessionCommandBase
-import x2.api.ssm.domain.features.GetSsmSessionListCommandBase
-import x2.api.ssm.domain.model.TxSsmBase
-import x2.api.ssm.domain.model.TxSsmSessionBase
 import java.net.URLEncoder
 
 @Service

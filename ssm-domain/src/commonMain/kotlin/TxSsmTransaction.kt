@@ -1,5 +1,3 @@
-package x2.api.ssm.domain.model
-
 import kotlin.js.JsExport
 import kotlin.js.JsName
 
@@ -20,7 +18,7 @@ class TxSsmTransactionBase(
     override val from: Int,
     override val to: Int,
     override val date: Long,
-    override  val signer: TxSsmUserBase
+    override val signer: TxSsmUserBase
 ): TxSsmTransaction
 
 typealias TxSsmTransactionId = String

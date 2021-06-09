@@ -1,10 +1,6 @@
-package x2.api.ssm.domain.features
-
 import f2.dsl.function.F2Function
 import f2.dsl.function.F2FunctionRemote
 import ssm.dsl.SsmCommand
-import x2.api.ssm.domain.model.TxSsmSession
-import x2.api.ssm.domain.model.TxSsmSessionBase
 import kotlin.js.JsExport
 import kotlin.js.JsName
 

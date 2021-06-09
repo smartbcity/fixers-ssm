@@ -1,5 +1,3 @@
-package x2.api.ssm.domain.model
-
 import ssm.dsl.Ssm
 import kotlin.js.JsExport
 import kotlin.js.JsName

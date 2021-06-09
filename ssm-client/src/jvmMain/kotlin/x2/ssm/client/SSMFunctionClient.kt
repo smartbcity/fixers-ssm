@@ -1,5 +1,8 @@
 package x2.ssm.client
 
+import GetSsmListQueryRemoteFunction
+import GetSsmSessionListQueryRemoteFunction
+import GetSsmSessionQueryRemoteFunction
 import f2.client.F2Client
 import f2.client.executeInvoke
 import f2.dsl.function.F2FunctionRemote
@@ -9,12 +12,9 @@ import ssm.dsl.query.SsmGetQueryRemoteFunction
 import ssm.dsl.query.SsmGetResult
 import ssm.dsl.query.SsmGetSessionLogsQuery
 import x2.api.ssm.domain.SsmApiFinder
-import x2.api.ssm.domain.features.GetSsmListQueryRemoteFunction
-import x2.api.ssm.domain.features.GetSsmSessionListQueryRemoteFunction
-import x2.api.ssm.domain.features.GetSsmSessionQueryRemoteFunction
 
 actual open class SSMFunctionClient actual constructor(private val client: F2Client) : SsmApiFinder {
-	override fun getAllSsm(): GetSsmListQueryRemoteFunction= invokeSuspend { cmd ->
+	override fun getAllSsm(): GetSsmListQueryRemoteFunction = invokeSuspend { cmd ->
 		client.executeInvoke("getAllSsm", cmd)
 	}
 
@@ -22,7 +22,7 @@ actual open class SSMFunctionClient actual constructor(private val client: F2Cli
 		client.executeInvoke("getSsm", cmd)
 	}
 
-	override fun getAllSessions(): GetSsmSessionListQueryRemoteFunction= invokeSuspend { cmd ->
+	override fun getAllSessions(): GetSsmSessionListQueryRemoteFunction = invokeSuspend { cmd ->
 		client.executeInvoke("getAllSessions", cmd)
 	}
 

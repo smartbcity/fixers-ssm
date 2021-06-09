@@ -1,5 +1,10 @@
 package x2.ssm.client
 
+import GetSsmListCommand
+import GetSsmSessionListCommand
+import GetSsmSessionQueryRemoteFunction
+import TxSsm
+import TxSsmSession
 import f2.client.F2Client
 import f2.client.ktor.F2ClientBuilder
 import f2.client.ktor.HTTP
@@ -11,11 +16,6 @@ import kotlinx.coroutines.promise
 import ssm.dsl.SsmSessionStateLog
 import ssm.dsl.query.SsmGetQueryRemoteFunction
 import ssm.dsl.query.SsmGetSessionLogsQuery
-import x2.api.ssm.domain.model.TxSsmSession
-import x2.api.ssm.domain.features.GetSsmListCommand
-import x2.api.ssm.domain.features.GetSsmSessionListCommand
-import x2.api.ssm.domain.features.GetSsmSessionQueryRemoteFunction
-import x2.api.ssm.domain.model.TxSsm
 import kotlin.js.Promise
 
 
