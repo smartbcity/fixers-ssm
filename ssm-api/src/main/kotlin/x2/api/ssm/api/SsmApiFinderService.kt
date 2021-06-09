@@ -21,11 +21,11 @@ import ssm.dsl.query.SsmGetSessionQuery
 import ssm.dsl.query.SsmGetSessionQueryFunction
 import x2.api.ssm.api.model.toSession
 import x2.api.ssm.api.model.toSsm
-import x2.api.ssm.domain.model.SsmBase
-import x2.api.ssm.domain.model.TxSsmSessionBase
 import x2.api.ssm.domain.features.GetSsmListCommandBase
 import x2.api.ssm.domain.features.GetSsmSessionCommandBase
 import x2.api.ssm.domain.features.GetSsmSessionListCommandBase
+import x2.api.ssm.domain.model.TxSsmBase
+import x2.api.ssm.domain.model.TxSsmSessionBase
 import java.net.URLEncoder
 
 @Service
@@ -39,7 +39,7 @@ class SsmApiFinderService(
 ) {
 
 	@Bean
-	fun getAllSsm(): F2Function<GetSsmListCommandBase, List<SsmBase>> = f2Function { cmd ->
+	fun getAllSsm(): F2Function<GetSsmListCommandBase, List<TxSsmBase>> = f2Function { cmd ->
 		val command = CdbGetSsmListQuery(
 			dbName = cmd.dbName
 		)

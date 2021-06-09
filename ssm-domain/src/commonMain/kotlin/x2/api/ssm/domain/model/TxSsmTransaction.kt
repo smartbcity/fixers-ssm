@@ -4,23 +4,23 @@ import kotlin.js.JsExport
 import kotlin.js.JsName
 
 @JsExport
-@JsName("SsmTransaction")
-interface SsmTransaction {
-    val id: SsmTransactionId
+@JsName("TxSsmTransaction")
+interface TxSsmTransaction {
+    val id: TxSsmTransactionId
     val from: Int
     val to: Int
     val date: Long
-    val signer: SsmUser
+    val signer: TxSsmUser
 }
 
 @JsExport
-@JsName("SsmTransactionBase")
-class SsmTransactionBase(
-    override val id: SsmTransactionId,
+@JsName("TxSsmTransactionBase")
+class TxSsmTransactionBase(
+    override val id: TxSsmTransactionId,
     override val from: Int,
     override val to: Int,
     override val date: Long,
-    override val signer: SsmUserBase
-): SsmTransaction
+    override  val signer: TxSsmUserBase
+): TxSsmTransaction
 
-typealias SsmTransactionId = String
+typealias TxSsmTransactionId = String

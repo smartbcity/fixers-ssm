@@ -5,14 +5,14 @@ import kotlin.js.JsName
 
 @JsExport
 @JsName("SsmUser")
-interface SsmUser {
+interface TxSsmUser {
     val name: String
     val publicKey: String
 }
 
 @JsExport
 @JsName("SsmUserBase")
-class SsmUserBase(
+class TxSsmUserBase(
     override val name: String,
     override val publicKey: String
-): SsmUser
+): TxSsmUser

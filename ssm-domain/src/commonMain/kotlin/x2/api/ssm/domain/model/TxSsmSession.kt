@@ -14,16 +14,14 @@ interface TxSsmSession {
     val channel: TxChannel
     val creationDate: Long
     //TODO We should have List<SsmTransaction?
-    val lastTransaction: SsmTransaction
+    val lastTransaction: TxSsmTransaction
 }
 
 @JsExport
-@JsName("SsmSessionBase")
+@JsName("TxSsmSessionBase")
 class TxSsmSessionBase(
     override val state: SsmSessionStateBase,
     override val channel: TxChannelBase,
     override val creationDate: Long,
-    override val lastTransaction: SsmTransactionBase
+    override val lastTransaction: TxSsmTransactionBase
 ): TxSsmSession
-
-typealias SsmSessionId = String

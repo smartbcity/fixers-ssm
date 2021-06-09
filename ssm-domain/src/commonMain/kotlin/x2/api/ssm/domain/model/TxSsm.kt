@@ -13,8 +13,8 @@ interface TxSsm {
 }
 
 @JsExport
-@JsName("SsmBase")
-class SsmBase(
+@JsName("TwSsmBase")
+class TxSsmBase(
     override val ssm: Ssm,
     override val channel: TxChannelBase,
     override val version: String

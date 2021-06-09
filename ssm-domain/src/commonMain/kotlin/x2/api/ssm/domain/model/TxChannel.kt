@@ -15,4 +15,4 @@ interface TxChannel {
 @JsName("TxChannelBase")
 class TxChannelBase (
 	override val id: ChannelId,
-) : TxChannel
+): TxChannel
