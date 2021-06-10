@@ -2,25 +2,18 @@ package x2.api.ssm.api.model
 
 import TxChannelBase
 import TxSsmSessionBase
-import TxSsmTransactionBase
-import TxSsmUserBase
+import TxSsmSessionStateBase
 import ssm.dsl.SsmSessionStateBase
-import ssm.dsl.blockchain.Transaction
+import ssm.dsl.blockchain.TransactionBase
 
-fun SsmSessionStateBase.toSession(firstTransaction: Transaction?, lastTransaction: Transaction?): TxSsmSessionBase {
+fun SsmSessionStateBase.toTxSession(firstTransaction: TransactionBase?, lastTransaction: TransactionBase?): TxSsmSessionBase {
     return TxSsmSessionBase(
-        state = this,
+        id = this.session,
+        currentState = TxSsmSessionStateBase(
+            details = this,
+            transaction = lastTransaction
+        ),
         channel = TxChannelBase("Not implemented"),
-        creationDate = firstTransaction?.timestamp ?: 0,
-        lastTransaction = TxSsmTransactionBase(
-            id = lastTransaction?.transactionId ?: "",
-            from = this.origin?.from ?: 0,
-            to = this.origin?.to ?: 0,
-            date = lastTransaction?.timestamp ?: 0,
-            signer = TxSsmUserBase(
-                name = lastTransaction?.creator?.mspid ?: "",
-                publicKey = lastTransaction?.creator?.id ?: ""
-            )
-        )
+        creationTransaction = firstTransaction
     )
 }

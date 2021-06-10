@@ -1,25 +1,22 @@
-import ssm.dsl.SsmSessionState
-import ssm.dsl.SsmSessionStateBase
+import ssm.dsl.blockchain.Transaction
+import ssm.dsl.blockchain.TransactionBase
 import kotlin.js.JsExport
 import kotlin.js.JsName
-
 
 @JsExport
 @JsName("TxSsmSession")
 interface TxSsmSession {
-    //TODO We should have SsmSession?
-    val state: SsmSessionState
+    val id: String
+    val currentState: TxSsmSessionState
     val channel: TxChannel
-    val creationDate: Long
-    //TODO We should have List<SsmTransaction?
-    val lastTransaction: TxSsmTransaction
+    val creationTransaction: Transaction?
 }
 
 @JsExport
 @JsName("TxSsmSessionBase")
 class TxSsmSessionBase(
-    override val state: SsmSessionStateBase,
+    override val id: String,
+    override val currentState: TxSsmSessionStateBase,
     override val channel: TxChannelBase,
-    override val creationDate: Long,
-    override val lastTransaction: TxSsmTransactionBase
+    override val creationTransaction: TransactionBase?,
 ): TxSsmSession
