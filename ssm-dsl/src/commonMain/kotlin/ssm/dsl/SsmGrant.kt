@@ -6,7 +6,7 @@ import kotlin.js.JsName
 
 @Serializable
 @JsExport
-@JsName("Grant")
+@JsName("SsmGrant")
 data class SsmGrant(
 	val user: String,
 	val iteration: Int,

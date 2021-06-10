@@ -5,7 +5,7 @@ import kotlin.js.JsExport
 import kotlin.js.JsName
 
 @JsExport
-@JsName("Agent")
+@JsName("SsmAgent")
 interface SsmAgent {
 	val name: String
 	val pub: ByteArray
@@ -13,7 +13,7 @@ interface SsmAgent {
 
 @Serializable
 @JsExport
-@JsName("AgentBase")
+@JsName("SsmAgentBase")
 data class SsmAgentBase(
 	override val name: String,
 	override val pub: ByteArray,
