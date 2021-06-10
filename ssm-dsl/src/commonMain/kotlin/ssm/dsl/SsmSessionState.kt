@@ -12,7 +12,7 @@ interface SsmSessionState: SsmSession, WithPrivate  {
 	override val roles: Map<String, String>?
 	override val public: Any?
 	override val private: Map<String, String>?
-	val origin: SsmTransitionBase?
+	val origin: SsmTransition?
 	val current: Int
 	val iteration: Int
 }
