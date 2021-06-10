@@ -2,7 +2,7 @@ package ssm.coucbdb.dsl.query
 
 import f2.dsl.function.F2Function
 import f2.dsl.function.F2FunctionRemote
-import ssm.dsl.Ssm
+import ssm.dsl.SsmBase
 import kotlin.js.JsExport
 import kotlin.js.JsName
 
@@ -18,5 +18,5 @@ class CdbGetSsmListQuery(
 @JsExport
 @JsName("CdbGetSsmListQueryResult")
 class CdbGetSsmListQueryResult(
-    val ssmList: List<Ssm>
+    val ssmList: List<SsmBase>
 )

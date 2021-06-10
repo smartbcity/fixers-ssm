@@ -10,5 +10,5 @@ import kotlin.js.JsName
 @JsName("SsmSessionStateLog")
 data class SsmSessionStateLog(
 	val txId: TransactionId,
-	val state: SsmSessionState
+	val state: SsmSessionStateBase
 )

@@ -21,6 +21,7 @@ class CdbGetSsmSessionListQueryFunctionImpl(
         } ?: emptyMap()
 
         ssmCouchDbClient.fetchAllByDocType(cmd.dbName, DocType.State, filters)
+            .toTypedArray()
             .let(::CdbGetSsmSessionListQueryResult)
     }
 }

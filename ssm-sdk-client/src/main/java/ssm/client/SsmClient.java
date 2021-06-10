@@ -18,14 +18,14 @@ import ssm.client.invoke.query.SsmQuery;
 import ssm.client.invoke.query.TransactionQuery;
 import ssm.client.sign.model.Signer;
 import ssm.dsl.InvokeReturn;
-import ssm.dsl.SsmBase;
 import ssm.dsl.SsmAgentBase;
-import ssm.dsl.SsmContext;
+import ssm.dsl.SsmBase;
+import ssm.dsl.SsmContextBase;
 import ssm.dsl.SsmSessionBase;
 import ssm.dsl.SsmSessionStateBase;
 import ssm.dsl.SsmSessionStateLog;
-import ssm.dsl.blockchain.Block;
-import ssm.dsl.blockchain.Transaction;
+import ssm.dsl.blockchain.BlockBase;
+import ssm.dsl.blockchain.TransactionBase;
 
 public class SsmClient {
 
@@ -58,7 +58,7 @@ public class SsmClient {
         return ssmRequester.invoke(cmd);
     }
 
-    public CompletableFuture<InvokeReturn> perform(Signer signer, String action, SsmContext context) throws Exception {
+    public CompletableFuture<InvokeReturn> perform(Signer signer, String action, SsmContextBase context) throws Exception {
         PerformCommandSigner cmd = new PerformCommandSigner(signer, action, context);
         return ssmRequester.invoke(cmd);
     }
@@ -109,14 +109,14 @@ public class SsmClient {
         return ssmRequester.list(query, String.class);
     }
 
-    public CompletableFuture<Optional<Transaction>> getTransaction(String txId) {
+    public CompletableFuture<Optional<TransactionBase>> getTransaction(String txId) {
         TransactionQuery query = new TransactionQuery();
-        return ssmRequester.query(txId, query, Transaction.class);
+        return ssmRequester.query(txId, query, TransactionBase.class);
     }
 
-    public CompletableFuture<Optional<Block>> getBlock(Long blockId) {
+    public CompletableFuture<Optional<BlockBase>> getBlock(Long blockId) {
         BlockQuery query = new BlockQuery();
-        return ssmRequester.query(blockId.toString(), query, Block.class);
+        return ssmRequester.query(blockId.toString(), query, BlockBase.class);
     }
 
 }

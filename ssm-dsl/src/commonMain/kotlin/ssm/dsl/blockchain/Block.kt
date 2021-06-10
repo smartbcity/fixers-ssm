@@ -1,10 +1,24 @@
 package ssm.dsl.blockchain
 
-typealias BlockId = Long
+import kotlin.js.JsExport
+import kotlin.js.JsName
 
-class Block(
-	val blockId: BlockId,
-	val previousHash: ByteArray,
-	val dataHash: ByteArray,
-	val transactions: List<Transaction>
-)
+@JsExport
+@JsName("Block")
+interface Block {
+    val blockId: BlockId
+    val previousHash: ByteArray
+    val dataHash: ByteArray
+    val transactions: List<Transaction>
+}
+
+@JsExport
+@JsName("BlockBase")
+class BlockBase(
+    override val blockId: BlockId,
+    override val previousHash: ByteArray,
+    override val dataHash: ByteArray,
+    override val transactions: List<TransactionBase>
+): Block
+
+typealias BlockId = Long
