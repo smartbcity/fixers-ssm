@@ -64,8 +64,7 @@ class SsmApiFinderService(
 		cdbGetSsmSessionListQueryFunction.invokeSingle(command)
 			.sessions
 			.filter { sessionState -> sessionState.session.isNotBlank() }
-			.map { sessionState -> sessionState.toSession(cmd)
-			}
+			.map { sessionState -> sessionState.toTxSession(cmd) }
 	}
 
 	@Bean
