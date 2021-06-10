@@ -4,6 +4,7 @@ ssm.f2.query.SsmGetQueryFunctionImpl,\
 ssm.f2.query.SsmGetSessionFunctionImpl,\
 ssm.f2.query.SsmGetSessionFirstAndLastTransactionQueryFunctionImpl,\
 ssm.f2.query.SsmGetSessionLogsQueryFunctionImpl,\
+ssm.f2.query.SsmGetTransactionQueryFunctionImpl,\
 ssm.f2.query.SsmGetUserFunctionImpl,\
 ssm.f2.query.SsmListAdminQueryFunctionImpl,\
 ssm.f2.query.SsmListSsmQueryFunctionImpl,\
