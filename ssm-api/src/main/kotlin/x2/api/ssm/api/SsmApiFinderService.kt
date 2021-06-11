@@ -6,6 +6,7 @@ import GetSsmSessionListCommandBase
 import GetSsmSessionLogsCommandBase
 import TxSsmBase
 import TxSsmSessionBase
+import TxSsmSessionId
 import TxSsmSessionStateBase
 import f2.dsl.function.F2Function
 import f2.function.spring.adapter.f2Function
@@ -30,7 +31,6 @@ import ssm.dsl.query.SsmGetTransactionQuery
 import ssm.dsl.query.SsmGetTransactionQueryFunction
 import x2.api.ssm.api.model.toSsm
 import x2.api.ssm.api.model.toTxSession
-import java.net.URLEncoder
 
 @Service
 class SsmApiFinderService(
@@ -77,9 +77,14 @@ class SsmApiFinderService(
 			bearerToken = cmd.bearerToken
 		)
 
-		ssmGetSessionQueryFunction.invokeSingle(sessionQuery)
-			.session
-			?.toTxSession(cmd)
+		try {
+			ssmGetSessionQueryFunction.invokeSingle(sessionQuery)
+				.session
+				?.toTxSession(cmd)
+		} catch (e: Exception) {
+			e.printStackTrace()
+			null
+		}
 	}
 
 	@Bean
@@ -95,7 +100,7 @@ class SsmApiFinderService(
 		}
 	}
 
-	private suspend fun getSessionLogs(session: String, cmd: SsmCommand): List<SsmSessionStateLog> {
+	private suspend fun getSessionLogs(session: TxSsmSessionId, cmd: SsmCommand): List<SsmSessionStateLog> {
 		val query = SsmGetSessionLogsQuery(
 			session = session,
 			baseUrl = cmd.baseUrl,
@@ -103,7 +108,13 @@ class SsmApiFinderService(
 			chaincodeId = cmd.chaincodeId,
 			bearerToken = cmd.bearerToken
 		)
-		return ssmGetSessionLogsQueryFunction.invokeSingle(query).logs
+
+		return try {
+			ssmGetSessionLogsQueryFunction.invokeSingle(query).logs
+		} catch (e: Exception) {
+			e.printStackTrace()
+			emptyList()
+		}
 	}
 
 	private suspend fun getTransaction(id: TransactionId?, cmd: SsmCommand): TransactionBase? {
@@ -120,8 +131,7 @@ class SsmApiFinderService(
 	}
 
 	private suspend fun SsmSessionStateBase.toTxSession(cmd: SsmCommand): TxSsmSessionBase {
-		val sanitizedSession = URLEncoder.encode(this.session, "utf-8")
-		val sessionLogs = getSessionLogs(sanitizedSession, cmd)
+		val sessionLogs = getSessionLogs(session, cmd)
 
 		val firstTransactionId = sessionLogs.minByOrNull { sessionLog -> sessionLog.state.iteration }?.txId
 		val lastTransactionId = sessionLogs.maxByOrNull { sessionLog -> sessionLog.state.iteration }?.txId
