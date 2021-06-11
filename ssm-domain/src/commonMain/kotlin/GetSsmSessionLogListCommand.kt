@@ -4,9 +4,9 @@ import kotlin.js.JsExport
 import kotlin.js.JsName
 
 @JsExport
-@JsName("GetSsmSessionLogsCommand")
-interface GetSsmSessionLogsCommand: SsmCommand {
-    val sessionId: String
+@JsName("GetSsmSessionLogListCommand")
+interface GetSsmSessionLogListCommand: SsmCommand {
+    val sessionId: TxSsmSessionId
     override val baseUrl: String
     override val channelId: String?
     override val chaincodeId: String?
@@ -14,11 +14,11 @@ interface GetSsmSessionLogsCommand: SsmCommand {
 }
 
 @JsExport
-@JsName("GetSsmSessionLogsBaseCommand")
-class GetSsmSessionLogsCommandBase(
-    override val sessionId: String,
+@JsName("GetSsmSessionLogListBaseCommand")
+class GetSsmSessionLogListCommandBase(
+    override val sessionId: TxSsmSessionId,
     override val baseUrl: String,
     override val channelId: String?,
     override val chaincodeId: String?,
     override val bearerToken: String?
-): GetSsmSessionLogsCommand
+): GetSsmSessionLogListCommand

@@ -3,7 +3,8 @@ package x2.api.ssm.api
 import GetSsmListCommandBase
 import GetSsmSessionCommandBase
 import GetSsmSessionListCommandBase
-import GetSsmSessionLogsCommandBase
+import GetSsmSessionLogCommandBase
+import GetSsmSessionLogListCommandBase
 import TxSsmBase
 import TxSsmSessionBase
 import TxSsmSessionId
@@ -88,7 +89,7 @@ class SsmApiFinderService(
 	}
 
 	@Bean
-	fun getSessionLogs(): F2Function<GetSsmSessionLogsCommandBase, List<TxSsmSessionStateBase>> = f2Function { cmd ->
+	fun getSessionLogs(): F2Function<GetSsmSessionLogListCommandBase, List<TxSsmSessionStateBase>> = f2Function { cmd ->
 		val logs = getSessionLogs(cmd.sessionId, cmd)
 
 		logs.map { log ->
@@ -98,6 +99,22 @@ class SsmApiFinderService(
 				transaction = transaction
 			)
 		}
+	}
+
+	@Bean
+	fun getOneSessionLog(): F2Function<GetSsmSessionLogCommandBase, TxSsmSessionStateBase?> = f2Function { cmd ->
+		val logs = getSessionLogs(cmd.sessionId, cmd)
+
+		val state = logs.firstOrNull { log -> log.txId == cmd.txId }
+			?.state
+			?: return@f2Function null
+
+		val transaction = getTransaction(cmd.txId, cmd)
+
+		TxSsmSessionStateBase(
+			details = state,
+			transaction = transaction
+		)
 	}
 
 	private suspend fun getSessionLogs(session: TxSsmSessionId, cmd: SsmCommand): List<SsmSessionStateLog> {

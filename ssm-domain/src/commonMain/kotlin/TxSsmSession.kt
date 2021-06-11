@@ -6,7 +6,7 @@ import kotlin.js.JsName
 @JsExport
 @JsName("TxSsmSession")
 interface TxSsmSession {
-    val id: String
+    val id: TxSsmSessionId
     val currentState: TxSsmSessionState
     val channel: TxChannel
     val creationTransaction: Transaction?
@@ -15,8 +15,10 @@ interface TxSsmSession {
 @JsExport
 @JsName("TxSsmSessionBase")
 class TxSsmSessionBase(
-    override val id: String,
+    override val id: TxSsmSessionId,
     override val currentState: TxSsmSessionStateBase,
     override val channel: TxChannelBase,
     override val creationTransaction: TransactionBase?,
 ): TxSsmSession
+
+typealias TxSsmSessionId = String
