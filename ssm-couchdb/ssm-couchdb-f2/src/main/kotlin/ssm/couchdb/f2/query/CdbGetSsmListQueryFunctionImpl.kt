@@ -1,21 +1,18 @@
 package ssm.couchdb.f2.query
 
-import f2.function.spring.adapter.f2Function
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
-import ssm.coucbdb.dsl.query.CdbGetSsmListQueryFunction
-import ssm.coucbdb.dsl.query.CdbGetSsmListQueryResult
-import ssm.couchdb.client.SsmCouchDbClient
+import ssm.couchdb.dsl.query.CdbGetSsmListQueryFunction
+import ssm.couchdb.dsl.query.CdbGetSsmListQueryResult
+import ssm.couchdb.f2.commons.cdbF2Function
 import ssm.dsl.DocType
 
 @Configuration
-class CdbGetSsmListQueryFunctionImpl(
-    private val ssmCouchDbClient: SsmCouchDbClient
-) {
+class CdbGetSsmListQueryFunctionImpl {
 
     @Bean
-    fun cdbGetSsmListQueryFunction(): CdbGetSsmListQueryFunction = f2Function { cmd ->
-        ssmCouchDbClient.fetchAllByDocType(cmd.dbName, DocType.Ssm)
+    fun cdbGetSsmListQueryFunction(): CdbGetSsmListQueryFunction = cdbF2Function { cmd, cdbClient ->
+        cdbClient.fetchAllByDocType(cmd.dbName, DocType.Ssm)
             .let(::CdbGetSsmListQueryResult)
     }
 }
