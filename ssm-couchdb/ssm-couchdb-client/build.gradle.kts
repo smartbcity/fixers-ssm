@@ -4,7 +4,8 @@ plugins {
 }
 
 dependencies {
-    api(project(":ssm-dsl"))
+    api(project(":ssm-chaincode:ssm-chaincode-dsl"))
+
     implementation(project(":ssm-sdk:ssm-sdk-json"))
 
     api("com.ibm.cloud:cloudant:${Versions.cloudant}")

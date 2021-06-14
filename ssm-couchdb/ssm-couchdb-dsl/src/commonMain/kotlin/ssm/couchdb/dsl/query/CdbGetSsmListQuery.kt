@@ -2,8 +2,8 @@ package ssm.couchdb.dsl.query
 
 import f2.dsl.function.F2Function
 import f2.dsl.function.F2FunctionRemote
+import ssm.chaincode.dsl.SsmBase
 import ssm.couchdb.dsl.CdbCommand
-import ssm.dsl.SsmBase
 import kotlin.js.JsExport
 import kotlin.js.JsName
 

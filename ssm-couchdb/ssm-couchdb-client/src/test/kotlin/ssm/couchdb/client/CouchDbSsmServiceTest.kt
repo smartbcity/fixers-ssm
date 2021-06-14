@@ -2,8 +2,8 @@ package ssm.couchdb.client
 
 import org.assertj.core.api.Assertions
 import org.junit.jupiter.api.Test
+import ssm.chaincode.dsl.DocType
 import ssm.couchdb.client.builder.SsmCouchDbBasicAuth
-import ssm.dsl.DocType
 
 class CouchDbSsmServiceTest {
 

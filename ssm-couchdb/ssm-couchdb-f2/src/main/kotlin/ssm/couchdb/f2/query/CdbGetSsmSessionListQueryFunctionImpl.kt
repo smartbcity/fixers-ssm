@@ -2,11 +2,11 @@ package ssm.couchdb.f2.query
 
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
+import ssm.chaincode.dsl.DocType
+import ssm.chaincode.dsl.SsmSessionState
 import ssm.couchdb.dsl.query.CdbGetSsmSessionListQueryFunction
 import ssm.couchdb.dsl.query.CdbGetSsmSessionListQueryResult
 import ssm.couchdb.f2.commons.cdbF2Function
-import ssm.dsl.DocType
-import ssm.dsl.SsmSessionState
 
 @Configuration
 class CdbGetSsmSessionListQueryFunctionImpl {
