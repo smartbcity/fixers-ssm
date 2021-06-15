@@ -19,7 +19,6 @@ private class CdbF2Initializer(
 }
 
 fun <T: CdbCommand, R> cdbF2Function(fnc: suspend (T, SsmCouchDbClient) -> R): F2Function<T, R> = f2Function { cmd ->
-    println(config.ssmCouchDbClients())
     val cdbClient = config.ssmCouchDbClients()[cmd.dbConfig]
         ?: throw IllegalArgumentException("Couchdb config [${cmd.dbConfig}] not found")
 
