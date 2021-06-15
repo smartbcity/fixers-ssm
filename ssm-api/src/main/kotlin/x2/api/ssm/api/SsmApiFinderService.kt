@@ -1,5 +1,6 @@
 package x2.api.ssm.api
 
+import GetSsmCommandBase
 import GetSsmListCommandBase
 import GetSsmSessionCommandBase
 import GetSsmSessionListCommandBase
@@ -21,6 +22,7 @@ import ssm.chaincode.dsl.SsmSessionStateBase
 import ssm.chaincode.dsl.SsmSessionStateLog
 import ssm.chaincode.dsl.blockchain.TransactionBase
 import ssm.chaincode.dsl.blockchain.TransactionId
+import ssm.chaincode.dsl.query.SsmGetQuery
 import ssm.chaincode.dsl.query.SsmGetQueryFunction
 import ssm.chaincode.dsl.query.SsmGetSessionLogsQuery
 import ssm.chaincode.dsl.query.SsmGetSessionLogsQueryFunction
@@ -67,7 +69,21 @@ class SsmApiFinderService(
 	}
 
 	@Bean
-	fun getSsm() = ssmGetQueryFunction
+	fun getSsm(): F2Function<GetSsmCommandBase, TxSsmBase?> = x2F2Function { cmd, ssmConfig ->
+		val config = ssmConfig.entries.first().value
+
+		val command = SsmGetQuery(
+			name = cmd.ssm,
+			baseUrl = config.baseUrl,
+			channelId = config.channel,
+			chaincodeId = config.chaincode,
+			bearerToken = cmd.bearerToken
+		)
+
+		ssmGetQueryFunction.invokeSingle(command)
+			.ssmBase
+			?.toTxSsm()
+	}
 
 	@Bean
 	fun getAllSessions(): F2Function<GetSsmSessionListCommandBase, List<TxSsmSessionBase>> = x2F2Function { cmd, ssmConfig ->
