@@ -1,15 +1,12 @@
 
-import ssm.dsl.SsmCommand
 import kotlin.js.JsExport
 import kotlin.js.JsName
 
 @JsExport
 @JsName("GetSsmSessionLogListCommand")
-interface GetSsmSessionLogListCommand: SsmCommand {
+interface GetSsmSessionLogListCommand: TxSsmCommand {
     val sessionId: TxSsmSessionId
-    override val baseUrl: String
-    override val channelId: String?
-    override val chaincodeId: String?
+    override val ssm: SsmName
     override val bearerToken: String?
 }
 
@@ -17,8 +14,6 @@ interface GetSsmSessionLogListCommand: SsmCommand {
 @JsName("GetSsmSessionLogListBaseCommand")
 class GetSsmSessionLogListCommandBase(
     override val sessionId: TxSsmSessionId,
-    override val baseUrl: String,
-    override val channelId: String?,
-    override val chaincodeId: String?,
+    override val ssm: SsmName,
     override val bearerToken: String?
 ): GetSsmSessionLogListCommand

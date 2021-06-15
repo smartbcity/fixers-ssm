@@ -1,6 +1,5 @@
 import f2.dsl.function.F2Function
 import f2.dsl.function.F2FunctionRemote
-import ssm.dsl.SsmCommand
 import kotlin.js.JsExport
 import kotlin.js.JsName
 
@@ -10,11 +9,9 @@ typealias GetSsmSessionQueryRemoteFunction = F2FunctionRemote<GetSsmSessionComma
 
 @JsExport
 @JsName("GetSsmSessionCommand")
-interface GetSsmSessionCommand: SsmCommand {
+interface GetSsmSessionCommand: TxSsmCommand {
     val sessionId: String
-    override val baseUrl: String
-    override val channelId: String?
-    override val chaincodeId: String?
+    override val ssm: SsmName
     override val bearerToken: String?
 }
 
@@ -22,8 +19,6 @@ interface GetSsmSessionCommand: SsmCommand {
 @JsName("GetSsmSessionCommandBase")
 class GetSsmSessionCommandBase(
     override val sessionId: String,
-    override val baseUrl: String,
-    override val channelId: String?,
-    override val chaincodeId: String?,
+    override val ssm: SsmName,
     override val bearerToken: String?
 ): GetSsmSessionCommand

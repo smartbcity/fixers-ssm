@@ -12,26 +12,32 @@ import TxSsmSessionStateBase
 import f2.dsl.function.F2Function
 import f2.function.spring.adapter.f2Function
 import f2.function.spring.invokeSingle
+import kotlinx.coroutines.flow.asFlow
+import kotlinx.coroutines.flow.toList
 import org.springframework.context.annotation.Bean
 import org.springframework.stereotype.Service
-import ssm.coucbdb.dsl.query.CdbGetSsmListQuery
-import ssm.coucbdb.dsl.query.CdbGetSsmListQueryFunction
-import ssm.coucbdb.dsl.query.CdbGetSsmSessionListQuery
-import ssm.coucbdb.dsl.query.CdbGetSsmSessionListQueryFunction
-import ssm.dsl.SsmCommand
-import ssm.dsl.SsmSessionStateBase
-import ssm.dsl.SsmSessionStateLog
-import ssm.dsl.blockchain.TransactionBase
-import ssm.dsl.blockchain.TransactionId
-import ssm.dsl.query.SsmGetQueryFunction
-import ssm.dsl.query.SsmGetSessionLogsQuery
-import ssm.dsl.query.SsmGetSessionLogsQueryFunction
-import ssm.dsl.query.SsmGetSessionQuery
-import ssm.dsl.query.SsmGetSessionQueryFunction
-import ssm.dsl.query.SsmGetTransactionQuery
-import ssm.dsl.query.SsmGetTransactionQueryFunction
-import x2.api.ssm.api.model.toSsm
+import ssm.chaincode.dsl.SsmBase
+import ssm.chaincode.dsl.SsmSessionStateBase
+import ssm.chaincode.dsl.SsmSessionStateLog
+import ssm.chaincode.dsl.blockchain.TransactionBase
+import ssm.chaincode.dsl.blockchain.TransactionId
+import ssm.chaincode.dsl.query.SsmGetQueryFunction
+import ssm.chaincode.dsl.query.SsmGetSessionLogsQuery
+import ssm.chaincode.dsl.query.SsmGetSessionLogsQueryFunction
+import ssm.chaincode.dsl.query.SsmGetSessionQuery
+import ssm.chaincode.dsl.query.SsmGetSessionQueryFunction
+import ssm.chaincode.dsl.query.SsmGetTransactionQuery
+import ssm.chaincode.dsl.query.SsmGetTransactionQueryFunction
+import ssm.couchdb.dsl.query.CdbGetSsmListQuery
+import ssm.couchdb.dsl.query.CdbGetSsmListQueryFunction
+import ssm.couchdb.dsl.query.CdbGetSsmListQueryResult
+import ssm.couchdb.dsl.query.CdbGetSsmSessionListQuery
+import ssm.couchdb.dsl.query.CdbGetSsmSessionListQueryFunction
+import x2.api.config.SsmLocationProperties
+import x2.api.config.X2SsmConfig
 import x2.api.ssm.api.model.toTxSession
+import x2.api.ssm.api.model.toTxSsm
+import x2.api.ssm.api.utils.x2F2Function
 
 @Service
 class SsmApiFinderService(
@@ -41,47 +47,57 @@ class SsmApiFinderService(
 	private val ssmGetSessionQueryFunction: SsmGetSessionQueryFunction,
 	private val ssmGetSessionLogsQueryFunction: SsmGetSessionLogsQueryFunction,
 	private val ssmGetTransactionQueryFunction: SsmGetTransactionQueryFunction,
+	private val x2SsmConfig: X2SsmConfig
 ) {
 
 	@Bean
-	fun getAllSsm(): F2Function<GetSsmListCommandBase, List<TxSsmBase>> = f2Function { cmd ->
-		val command = CdbGetSsmListQuery(
-			dbName = cmd.dbName
-		)
-		cdbGetSsmListQueryFunction.invokeSingle(command)
-			.ssmList
-			.map(ssm.dsl.Ssm::toSsm)
+	fun getAllSsm(): F2Function<GetSsmListCommandBase, List<TxSsmBase>> = f2Function {
+		val commands = x2SsmConfig.ssmMap().flatMap { (ssmName, ssmConfigs) ->
+			ssmConfigs.map { (ssmVersion, ssmConfig) ->
+				CdbGetSsmListQuery(
+					dbConfig = ssmConfig.couchdb,
+					dbName = ssmConfig.dbName
+				)
+			}
+		}.asFlow()
+
+		cdbGetSsmListQueryFunction(commands).toList()
+			.flatMap(CdbGetSsmListQueryResult::ssmList)
+			.map(SsmBase::toTxSsm)
 	}
 
 	@Bean
 	fun getSsm() = ssmGetQueryFunction
 
 	@Bean
-	fun getAllSessions(): F2Function<GetSsmSessionListCommandBase, List<TxSsmSessionBase>> = f2Function { cmd ->
+	fun getAllSessions(): F2Function<GetSsmSessionListCommandBase, List<TxSsmSessionBase>> = x2F2Function { cmd, ssmConfig ->
+		val config = ssmConfig.entries.first().value
 		val command = CdbGetSsmSessionListQuery(
-			dbName = cmd.dbName,
+			dbConfig = config.couchdb,
+			dbName = config.dbName,
 			ssm = cmd.ssm
 		)
 		cdbGetSsmSessionListQueryFunction.invokeSingle(command)
 			.sessions
 			.filter { sessionState -> sessionState.session.isNotBlank() }
-			.map { sessionState -> sessionState.toTxSession(cmd) }
+			.map { sessionState -> sessionState.toTxSession(config, cmd.bearerToken) }
 	}
 
 	@Bean
-	fun getSession(): F2Function<GetSsmSessionCommandBase, TxSsmSessionBase?> = f2Function { cmd ->
+	fun getSession(): F2Function<GetSsmSessionCommandBase, TxSsmSessionBase?> = x2F2Function { cmd, ssmConfig ->
+		val config = ssmConfig.entries.first().value
 		val sessionQuery = SsmGetSessionQuery(
 			name = cmd.sessionId,
-			baseUrl = cmd.baseUrl,
-			channelId = cmd.channelId,
-			chaincodeId = cmd.chaincodeId,
+			baseUrl = config.baseUrl,
+			channelId = config.channel,
+			chaincodeId = config.chaincode,
 			bearerToken = cmd.bearerToken
 		)
 
 		try {
 			ssmGetSessionQueryFunction.invokeSingle(sessionQuery)
 				.session
-				?.toTxSession(cmd)
+				?.toTxSession(config, cmd.bearerToken)
 		} catch (e: Exception) {
 			e.printStackTrace()
 			null
@@ -89,11 +105,12 @@ class SsmApiFinderService(
 	}
 
 	@Bean
-	fun getSessionLogs(): F2Function<GetSsmSessionLogListCommandBase, List<TxSsmSessionStateBase>> = f2Function { cmd ->
-		val logs = getSessionLogs(cmd.sessionId, cmd)
+	fun getSessionLogs(): F2Function<GetSsmSessionLogListCommandBase, List<TxSsmSessionStateBase>> = x2F2Function { cmd, ssmConfig ->
+		val config = ssmConfig.entries.first().value
+		val logs = getSessionLogs(cmd.sessionId, config, cmd.bearerToken)
 
 		logs.map { log ->
-			val transaction = getTransaction(log.txId, cmd)
+			val transaction = getTransaction(log.txId, config, cmd.bearerToken)
 			TxSsmSessionStateBase(
 				details = log.state,
 				transaction = transaction
@@ -102,14 +119,15 @@ class SsmApiFinderService(
 	}
 
 	@Bean
-	fun getOneSessionLog(): F2Function<GetSsmSessionLogCommandBase, TxSsmSessionStateBase?> = f2Function { cmd ->
-		val logs = getSessionLogs(cmd.sessionId, cmd)
+	fun getOneSessionLog(): F2Function<GetSsmSessionLogCommandBase, TxSsmSessionStateBase?> = x2F2Function { cmd, ssmConfig ->
+		val config = ssmConfig.entries.first().value
+		val logs = getSessionLogs(cmd.sessionId, config, cmd.bearerToken)
 
 		val state = logs.firstOrNull { log -> log.txId == cmd.txId }
 			?.state
-			?: return@f2Function null
+			?: return@x2F2Function null
 
-		val transaction = getTransaction(cmd.txId, cmd)
+		val transaction = getTransaction(cmd.txId, config, cmd.bearerToken)
 
 		TxSsmSessionStateBase(
 			details = state,
@@ -117,13 +135,13 @@ class SsmApiFinderService(
 		)
 	}
 
-	private suspend fun getSessionLogs(session: TxSsmSessionId, cmd: SsmCommand): List<SsmSessionStateLog> {
+	private suspend fun getSessionLogs(session: TxSsmSessionId, ssmConfig: SsmLocationProperties, bearerToken: String?): List<SsmSessionStateLog> {
 		val query = SsmGetSessionLogsQuery(
 			session = session,
-			baseUrl = cmd.baseUrl,
-			channelId = cmd.channelId,
-			chaincodeId = cmd.chaincodeId,
-			bearerToken = cmd.bearerToken
+			baseUrl = ssmConfig.baseUrl,
+			channelId = ssmConfig.channel,
+			chaincodeId = ssmConfig.chaincode,
+			bearerToken = bearerToken
 		)
 
 		return try {
@@ -134,27 +152,27 @@ class SsmApiFinderService(
 		}
 	}
 
-	private suspend fun getTransaction(id: TransactionId?, cmd: SsmCommand): TransactionBase? {
+	private suspend fun getTransaction(id: TransactionId?, ssmConfig: SsmLocationProperties, bearerToken: String?): TransactionBase? {
 		id ?: return null
 
 		val query = SsmGetTransactionQuery(
 			id = id,
-			baseUrl = cmd.baseUrl,
-			channelId = cmd.channelId,
-			chaincodeId = cmd.chaincodeId,
-			bearerToken = cmd.bearerToken
+			baseUrl = ssmConfig.baseUrl,
+			channelId = ssmConfig.channel,
+			chaincodeId = ssmConfig.chaincode,
+			bearerToken = bearerToken
 		)
 		return ssmGetTransactionQueryFunction.invokeSingle(query).transaction
 	}
 
-	private suspend fun SsmSessionStateBase.toTxSession(cmd: SsmCommand): TxSsmSessionBase {
-		val sessionLogs = getSessionLogs(session, cmd)
+	private suspend fun SsmSessionStateBase.toTxSession(ssmConfig: SsmLocationProperties, bearerToken: String?): TxSsmSessionBase {
+		val sessionLogs = getSessionLogs(session, ssmConfig, bearerToken)
 
 		val firstTransactionId = sessionLogs.minByOrNull { sessionLog -> sessionLog.state.iteration }?.txId
 		val lastTransactionId = sessionLogs.maxByOrNull { sessionLog -> sessionLog.state.iteration }?.txId
 
-		val firstTransaction = getTransaction(firstTransactionId, cmd)
-		val lastTransaction = getTransaction(lastTransactionId, cmd)
+		val firstTransaction = getTransaction(firstTransactionId, ssmConfig, bearerToken)
+		val lastTransaction = getTransaction(lastTransactionId, ssmConfig, bearerToken)
 
 		return this.toTxSession(firstTransaction, lastTransaction)
 	}

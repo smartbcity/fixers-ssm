@@ -9,11 +9,11 @@ typealias GetSsmListQueryRemoteFunction = F2FunctionRemote<GetSsmListCommand, Ar
 @JsExport
 @JsName("GetSsmListCommand")
 interface GetSsmListCommand {
-    val dbName: String
+    val bearerToken: String?
 }
 
 @JsExport
 @JsName("GetSsmListCommandBase")
 class GetSsmListCommandBase(
-    override val dbName: String
+    override val bearerToken: String?,
 ): GetSsmListCommand

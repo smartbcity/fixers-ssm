@@ -1,16 +1,13 @@
-import ssm.dsl.SsmCommand
-import ssm.dsl.blockchain.TransactionId
+import ssm.chaincode.dsl.blockchain.TransactionId
 import kotlin.js.JsExport
 import kotlin.js.JsName
 
 @JsExport
 @JsName("GetSsmSessionLogCommand")
-interface GetSsmSessionLogCommand: SsmCommand {
+interface GetSsmSessionLogCommand: TxSsmCommand {
     val sessionId: TxSsmSessionId
     val txId: TransactionId
-    override val baseUrl: String
-    override val channelId: String?
-    override val chaincodeId: String?
+    override val ssm: SsmName
     override val bearerToken: String?
 }
 
@@ -19,8 +16,6 @@ interface GetSsmSessionLogCommand: SsmCommand {
 class GetSsmSessionLogCommandBase(
     override val sessionId: TxSsmSessionId,
     override val txId: TransactionId,
-    override val baseUrl: String,
-    override val channelId: String?,
-    override val chaincodeId: String?,
+    override val ssm: SsmName,
     override val bearerToken: String?
 ): GetSsmSessionLogCommand
