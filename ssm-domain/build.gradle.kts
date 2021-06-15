@@ -3,5 +3,5 @@ plugins {
 }
 
 dependencies {
-    commonMainApi("city.smartb.ssm:ssm-dsl:${Versions.ssm}")
+    commonMainApi("city.smartb.ssm:ssm-chaincode-dsl:${Versions.ssm}")
 }

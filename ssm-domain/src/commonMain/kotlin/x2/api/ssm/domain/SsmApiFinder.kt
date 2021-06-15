@@ -4,9 +4,9 @@ import GetSsmListQueryRemoteFunction
 import GetSsmSessionListQueryRemoteFunction
 import GetSsmSessionQueryRemoteFunction
 import f2.dsl.function.F2FunctionRemote
-import ssm.dsl.SsmSessionStateLog
-import ssm.dsl.query.SsmGetQueryRemoteFunction
-import ssm.dsl.query.SsmGetSessionLogsQuery
+import ssm.chaincode.dsl.SsmSessionStateLog
+import ssm.chaincode.dsl.query.SsmGetQueryRemoteFunction
+import ssm.chaincode.dsl.query.SsmGetSessionLogsQuery
 import kotlin.js.JsExport
 import kotlin.js.JsName
 

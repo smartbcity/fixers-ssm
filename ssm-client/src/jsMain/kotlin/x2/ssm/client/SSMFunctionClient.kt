@@ -13,9 +13,9 @@ import f2.client.promise
 import f2.dsl.function.F2FunctionRemote
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.promise
-import ssm.dsl.SsmSessionStateLog
-import ssm.dsl.query.SsmGetQueryRemoteFunction
-import ssm.dsl.query.SsmGetSessionLogsQuery
+import ssm.chaincode.dsl.SsmSessionStateLog
+import ssm.chaincode.dsl.query.SsmGetQueryRemoteFunction
+import ssm.chaincode.dsl.query.SsmGetSessionLogsQuery
 import kotlin.js.Promise
 
 

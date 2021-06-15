@@ -6,11 +6,11 @@ import GetSsmSessionQueryRemoteFunction
 import f2.client.F2Client
 import f2.client.executeInvoke
 import f2.dsl.function.F2FunctionRemote
-import ssm.dsl.SsmSessionStateLog
-import ssm.dsl.query.SsmGetQuery
-import ssm.dsl.query.SsmGetQueryRemoteFunction
-import ssm.dsl.query.SsmGetResult
-import ssm.dsl.query.SsmGetSessionLogsQuery
+import ssm.chaincode.dsl.SsmSessionStateLog
+import ssm.chaincode.dsl.query.SsmGetQuery
+import ssm.chaincode.dsl.query.SsmGetQueryRemoteFunction
+import ssm.chaincode.dsl.query.SsmGetResult
+import ssm.chaincode.dsl.query.SsmGetSessionLogsQuery
 import x2.api.ssm.domain.SsmApiFinder
 
 actual open class SSMFunctionClient actual constructor(private val client: F2Client) : SsmApiFinder {

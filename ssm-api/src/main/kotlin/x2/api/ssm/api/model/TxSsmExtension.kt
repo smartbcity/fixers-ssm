@@ -2,9 +2,9 @@ package x2.api.ssm.api.model
 
 import TxChannelBase
 import TxSsmBase
-import ssm.dsl.Ssm
+import ssm.chaincode.dsl.SsmBase
 
-fun Ssm.toSsm(): TxSsmBase {
+fun SsmBase.toTxSsm(): TxSsmBase {
     return TxSsmBase(
         ssm = this,
         version = "Not implemented",

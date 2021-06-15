@@ -1,5 +1,5 @@
-import ssm.dsl.blockchain.Transaction
-import ssm.dsl.blockchain.TransactionBase
+import ssm.chaincode.dsl.blockchain.Transaction
+import ssm.chaincode.dsl.blockchain.TransactionBase
 import kotlin.js.JsExport
 import kotlin.js.JsName
 
