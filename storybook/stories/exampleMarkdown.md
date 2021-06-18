@@ -16,7 +16,7 @@ Disputed amount. Usually the amount of the charge, but can differ (usually becau
 </article>
 <article>
 
-_charge_ `string` [EXPANDABLE](https://example.com)
+_charge_ `string` [EXPANDABLE](#transition)
 
 ID of the charge that was disputed.
 

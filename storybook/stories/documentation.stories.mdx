@@ -1,8 +1,8 @@
 import { Meta } from "@storybook/addon-docs/blocks";
-import md from '!raw-loader!./exampleMarkdown.md'
-import mdTAble from '!raw-loader!./exampleMarkdownTable.md'
-import mdSession from '!raw-loader!./ssmSession.md'
-import {DescriptedCode} from '@smartb/archetypes-ui-documentation'
+import Md from './exampleMarkdown.md'
+import MdTAble from './exampleMarkdownTable.md'
+import MdSession from './ssmSession.md'
+import {DescriptedCode, MarkdownHighlighter} from '@smartb/archetypes-ui-documentation'
 
 <Meta title="Documentation" parameters={{ previewTabs: { canvas: { hidden: true } } }} />
 
@@ -10,8 +10,10 @@ import {DescriptedCode} from '@smartb/archetypes-ui-documentation'
 
 Welcome to the documentation side
 
+
+
 <DescriptedCode
-  markdownDescription={mdSession}
+  description={<MdSession />}
   code={`
   fun createFuntion(creatCommand: Command) : event
   fun createFuntion(creatCommand: Command) : event
@@ -26,8 +28,12 @@ Welcome to the documentation side
 
 ---
 
+## Transition
+
+[EXPANDABLE](#transition)
+
 <DescriptedCode
-  markdownDescription={md}
+  description={<Md />}
   code={`{
   "id": "dp_1J2zu82eZvKYlo2CI0ivPgUD",
   "object": "dispute",
@@ -83,7 +89,7 @@ Welcome to the documentation side
 ---
 
 <DescriptedCode
-  markdownDescription={mdTAble}
+  description={<MdTAble />}
   code={`{
   "id": "dp_1J2zu82eZvKYlo2CI0ivPgUD",
   "object": "dispute",
