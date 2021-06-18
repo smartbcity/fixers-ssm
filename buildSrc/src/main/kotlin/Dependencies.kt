@@ -17,7 +17,7 @@ object Versions {
 	const val bouncycastleVersion = "1.61"
 	const val okhttpVersion = "3.14.0"
 	const val retrofitVersion = "2.5.0"
-	const val jacksonKotlin = "2.12.2"
+	const val jacksonKotlin = "2.10.2"
 
 	const val junit = "5.7.0"
 	const val assertj = "3.15.0"

@@ -2,7 +2,7 @@ image: smartbcity/gitlab-ci-jdk8:latest
 
 stages:
   - build
-  - verify
+#  - verify
   - version
   - package
   - push
@@ -40,7 +40,6 @@ variables:
 .verify:
   stage: verify
   before_script:
-    - cp $gradleproperties ./gradle.properties
     - CONTAINER_NAME=$(docker ps --format '{{.Names}}' --filter name=$HOSTNAME*)
     - echo $CONTAINER_NAME
     - docker network connect bclannet-it $CONTAINER_NAME

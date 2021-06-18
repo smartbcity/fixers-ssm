@@ -1,24 +1,21 @@
 package ssm.couchdb.f2.query
 
-import com.ibm.cloud.cloudant.v1.Cloudant
-import com.ibm.cloud.sdk.core.http.Response
-import com.ibm.cloud.sdk.core.http.ServiceCall
-import f2.dsl.function.F2Supplier
+import f2.dsl.function.F2Function
+import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.asFlow
 import kotlinx.coroutines.flow.onEach
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
+import ssm.couchdb.dsl.query.CdbGetDatabasesQuery
+import ssm.couchdb.f2.commons.cdbF2Function
 
 @Configuration
-class CdbGetDatabasesFunctionImpl(
-	private val client: Cloudant,
-) {
+class CdbGetDatabasesFunctionImpl {
 
 	@Bean
-	fun cdbGetDatabasesFunction(): F2Supplier<String> = {
-		client.allDbs.execute().result.asFlow().onEach { db ->
+	fun cdbGetDatabasesFunction(): F2Function<CdbGetDatabasesQuery, Flow<String>> = cdbF2Function { _, cdbClient ->
+		cdbClient.cloudant.allDbs.execute().result.asFlow().onEach { db ->
 			println(db)
 		}
 	}
-
 }
