@@ -8,7 +8,6 @@ const useStyles = highLevelStyles()({
             margin: 0,
             marginBottom: '10px',
             fontSize: '14px',
-            lineHeight: '22px',
         },
         '& .sbdocs-h1, & .sbdocs-h2, & .sbdocs-h3, & .sbdocs-h4, & .sbdocs-h5, & .sbdocs-h6': {
             marginTop: '20px',
@@ -33,6 +32,12 @@ const useStyles = highLevelStyles()({
         },
         '& blockquote': {
             margin: '10px 0'
+        },
+        "& .sbdocs-a:hover": {
+            textDecoration: "underline"
+        },
+        "& .sbdocs-a code": {
+            color: "#1EA7FD"
         }
     }
 })
