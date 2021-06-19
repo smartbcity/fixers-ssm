@@ -8,6 +8,12 @@ pluginManagement {
 rootProject.name = "ssm"
 
 include(
+	"ssm-tx:ssm-tx-autoconfiguration",
+	"ssm-tx:ssm-tx-client",
+	"ssm-tx:ssm-tx-dsl",
+	"ssm-tx:ssm-tx-f2"
+)
+include(
 	"ssm-couchdb:ssm-couchdb-autoconfiguration",
 	"ssm-couchdb:ssm-couchdb-client",
 	"ssm-couchdb:ssm-couchdb-dsl",

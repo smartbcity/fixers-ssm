@@ -10,8 +10,8 @@ import kotlinx.coroutines.promise
 //import ssm.dsl.command.*
 import kotlin.js.Promise
 
-@JsName("ssmClient")
 @JsExport
+@JsName("ssmClient")
 fun ssmClient(protocol: Protocol, host: String, port: Int, path: String? = null): Promise<SSMFunctionClient> =
 	GlobalScope.promise {
 		val s2Client = F2ClientBuilder.get(protocol, host, port, path)
