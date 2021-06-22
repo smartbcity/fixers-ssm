@@ -40,17 +40,17 @@ docker-compose -f docker-compose-it.yaml up -d
 ```
 
  * Test
- ```bash
+```bash
 make test 
 ```
 
  * Test
- ```bash
+```bash
 make package 
 ```
 
  * Publish
- ```bash
+```bash
 make push -e VERSION=0.0.0-SNAPSHOT
 ```
 
@@ -68,7 +68,7 @@ invokes: "{object} {action}" + sign
 
 * **init:** creates a new chaincode instance, with a list of admins.
 
-```
+```text
 Command
 -------
   "init", admins: <Agent>*
@@ -83,7 +83,7 @@ Result
 
 * **register:** A new user is registered by an admin, Agent structure is signed with the admin private key.
 
-```
+```text
 Command
 -------
   "register", user:Agent, admin_name:string, signature:b64
@@ -95,7 +95,7 @@ Result
 
 * **grant:** A user is granted / revoked API rights by an admin, Grant structure is signed with the admin private key.
 
-```
+```text
 Command
 -------
   "grant", rights:Grant, admin_name:string, signature:b64
@@ -109,7 +109,7 @@ Result
 
 * **create:** A new SSM is registered by an admin, SSM structure is signed with the admin private key.
 
-```
+```text
 Command
 -------
   "create", ssm:SigningStateMachine, admin_name:string, signature:b64
@@ -121,7 +121,7 @@ Result
 
 * **start:** A new SSM session is initiated by an admin, SSM init state is signed with the admin private key.
 
-```
+```text
 Command
 -------
   "start", init:State, admin_name:string, signature:b64
@@ -133,7 +133,7 @@ Result
 
 * **limit:** Sets or removes a limit to the maximum iterations count of an existing SSM session. The uppdated session state is signed with the admin private key.
 
-```
+```text
 Command
 -------
   "limit", context:State, admin_name:string, signature:b64
@@ -166,7 +166,7 @@ Result
 
 * **session:** Get a SSM session state.
 
-```
+```text
 Query
 -------
   "session", <session id>
@@ -180,7 +180,7 @@ Result
 
 * **ssm:** Get a SigningStateMachine transitions list.
 
-```
+```text
 Query
 -------
   "ssm", <ssm name> 
@@ -194,8 +194,8 @@ Result
 
 * **user:** Get a user's public key.
 
-```
-Query
+```text
+QueryComma
 -------
   "user", <user name> 
   
@@ -208,7 +208,7 @@ Result
 
 * **credits:** Get a user's API credits aka grants.
 
-```
+```text
 Query
 -------
   "credits", <user name> 
@@ -222,7 +222,7 @@ Result
 
 * **admin:** Get an administrator's public key.
 
-```
+```text
 Query
 -------
   "admin", <admin name> 
@@ -236,7 +236,7 @@ Result
 
 * **list:** List all Sessions, SigningStateMachines, Users, Admins, Transactions or Blocks
 
-```
+```text
 Query
 -------
   "list", <session|ssm|user|admin|transaction|block> 
@@ -255,7 +255,7 @@ Result
 
 * **log:** Log a session history
 
-```
+```text
 Query
 -------
   "log", <session id> 
@@ -269,7 +269,7 @@ Result
 
 * **transaction:** Get a transaction
 
-```
+```text
 Query
 -------
   "transaction", <transaction id> 
@@ -283,7 +283,7 @@ Result
 
 * **block:** Get a block
 
-```
+```text
 Query
 -------
   "block", <block id> 
@@ -301,7 +301,7 @@ Result
 
 * **SsmGetAdminQuery:** Get an admin
 
-```
+```text
 Query
 -------
     adminName
@@ -313,7 +313,7 @@ Result
 
 * **SsmListAdminQuery:** List all admins
 
-```
+```text
 Query
 -------
 
@@ -324,7 +324,7 @@ Result
 
 * **SsmGetUserQuery:** Get a user
 
-```
+```text
 Query
 -------
     userName
@@ -336,7 +336,7 @@ Result
 
 * **SsmListUserQuery:** List all users
 
-```
+```text
 Query
 -------
 
@@ -347,7 +347,7 @@ Result
 
 * **SsmGetQuery:** Get an SSM structure
 
-```
+```text
 Query
 -------
    ssmId
@@ -359,7 +359,7 @@ Result
 
 * **SsmListSsmQuery:** List all SSM structures
 
-```
+```text
 Query
 -------
 
