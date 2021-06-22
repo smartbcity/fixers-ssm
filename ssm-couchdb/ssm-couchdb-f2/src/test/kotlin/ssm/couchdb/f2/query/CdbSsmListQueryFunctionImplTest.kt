@@ -1,16 +1,17 @@
 package ssm.couchdb.f2.query
 
+import f2.function.spring.invokeSingle
 import kotlinx.coroutines.runBlocking
 import org.assertj.core.api.Assertions
 import org.junit.jupiter.api.Test
 import org.springframework.beans.factory.annotation.Autowired
 import ssm.couchdb.dsl.query.CdbSsmListQuery
-import ssm.couchdb.dsl.query.CdbGetSsmListQueryFunction
+import ssm.couchdb.dsl.query.CdbSsmListQueryFunction
 
-internal class CdbGetSsmListQueryFunctionImplTest : FunctionTestBase() {
+internal class CdbSsmListQueryFunctionImplTest : FunctionTestBase() {
 
 	@Autowired
-	lateinit var cdbGetSsmListQueryFunction: CdbGetSsmListQueryFunction
+	lateinit var cdbSsmListQueryFunction: CdbSsmListQueryFunction
 
 //	@Autowired
 //	lateinit var ssmCouchDbClient: SsmCouchDbClient
@@ -23,17 +24,15 @@ internal class CdbGetSsmListQueryFunctionImplTest : FunctionTestBase() {
 
 	@Test
 	fun `must return cdbGetSsmListQueryFunction from catalog`() {
-		val fnc: Any = catalog.lookup("cdbGetSsmListQueryFunction")
+		val fnc: Any = catalog.lookup("cdbSsmListQueryFunction")
 		Assertions.assertThat(fnc).isNotNull
 	}
 
 
 	@Test
 	fun `must return all ssm`(): Unit = runBlocking {
-//		val expectedSsmListSize = ssmCouchDbClient.getCount(DB_NAME, DocType.Ssm)
-
 		val command = CdbSsmListQuery(DB_NAME, DB_CONF)
-		val ssmList = cdbGetSsmListQueryFunction.invokeSingle(command).ssmList
+		val ssmList = cdbSsmListQueryFunction.invokeSingle(command).ssmList
 
 		Assertions.assertThat(ssmList).isNotEmpty
 	}

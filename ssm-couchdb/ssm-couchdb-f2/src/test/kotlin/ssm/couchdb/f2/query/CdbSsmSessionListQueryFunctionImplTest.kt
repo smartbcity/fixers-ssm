@@ -1,16 +1,17 @@
 package ssm.couchdb.f2.query
 
+import f2.function.spring.invokeSingle
 import kotlinx.coroutines.runBlocking
 import org.assertj.core.api.Assertions
 import org.junit.jupiter.api.Test
 import org.springframework.beans.factory.annotation.Autowired
 import ssm.couchdb.dsl.query.CdbSsmSessionListQuery
-import ssm.couchdb.dsl.query.CdbGetSsmSessionListQueryFunction
+import ssm.couchdb.dsl.query.CdbSsmSessionListQueryFunction
 
-internal class CdbGetSsmSessionListQueryFunctionImplTest : FunctionTestBase() {
+internal class CdbSsmSessionListQueryFunctionImplTest : FunctionTestBase() {
 
 	@Autowired
-	lateinit var cdbGetSsmSessionListQueryFunction: CdbGetSsmSessionListQueryFunction
+	lateinit var cdbSsmSessionListQueryFunction: CdbSsmSessionListQueryFunction
 
 //	@Autowired
 //	lateinit var ssmCouchDbClient: SsmCouchDbClient
@@ -22,7 +23,7 @@ internal class CdbGetSsmSessionListQueryFunctionImplTest : FunctionTestBase() {
 
 	@Test
 	fun `must return cdbGetSsmSessionListQueryFunction from catalog`() {
-		val fnc: Any = catalog.lookup("cdbGetSsmSessionListQueryFunction")
+		val fnc: Any = catalog.lookup("cdbSsmSessionListQueryFunction")
 		Assertions.assertThat(fnc).isNotNull
 	}
 
@@ -32,7 +33,7 @@ internal class CdbGetSsmSessionListQueryFunctionImplTest : FunctionTestBase() {
 //		val expectedSsmSessionListSize = ssmCouchDbClient.getCount(DB_NAME, DocType.State)
 
 		val command = CdbSsmSessionListQuery(DB_NAME, null, DB_CONF)
-		val sessions = cdbGetSsmSessionListQueryFunction.invokeSingle(command).sessions
+		val sessions = cdbSsmSessionListQueryFunction.invokeSingle(command).sessions
 
 		Assertions.assertThat(sessions).isNotEmpty
 	}
