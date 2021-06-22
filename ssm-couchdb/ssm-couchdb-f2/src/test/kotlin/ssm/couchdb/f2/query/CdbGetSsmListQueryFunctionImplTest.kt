@@ -1,13 +1,10 @@
 package ssm.couchdb.f2.query
 
-import f2.function.spring.invokeSingle
 import kotlinx.coroutines.runBlocking
 import org.assertj.core.api.Assertions
 import org.junit.jupiter.api.Test
 import org.springframework.beans.factory.annotation.Autowired
-import ssm.chaincode.dsl.DocType
-import ssm.couchdb.client.SsmCouchDbClient
-import ssm.couchdb.dsl.query.CdbGetSsmListQuery
+import ssm.couchdb.dsl.query.CdbSsmListQuery
 import ssm.couchdb.dsl.query.CdbGetSsmListQueryFunction
 
 internal class CdbGetSsmListQueryFunctionImplTest : FunctionTestBase() {
@@ -15,11 +12,11 @@ internal class CdbGetSsmListQueryFunctionImplTest : FunctionTestBase() {
 	@Autowired
 	lateinit var cdbGetSsmListQueryFunction: CdbGetSsmListQueryFunction
 
-	@Autowired
-	lateinit var ssmCouchDbClient: SsmCouchDbClient
+//	@Autowired
+//	lateinit var ssmCouchDbClient: SsmCouchDbClient
 
 	companion object {
-		const val DB_CONF = "test"
+		const val DB_CONF = "sandbox_ssm"
 		const val DB_NAME = "sandbox_ssm"
 //		const val DB_NAME = "proudhon_ssm"
 	}
@@ -32,12 +29,12 @@ internal class CdbGetSsmListQueryFunctionImplTest : FunctionTestBase() {
 
 
 	@Test
-	fun `must return all ssms`(): Unit = runBlocking {
-		val expectedSsmListSize = ssmCouchDbClient.getCount(DB_NAME, DocType.Ssm)
+	fun `must return all ssm`(): Unit = runBlocking {
+//		val expectedSsmListSize = ssmCouchDbClient.getCount(DB_NAME, DocType.Ssm)
 
-		val command = CdbGetSsmListQuery(DB_NAME, DB_CONF)
+		val command = CdbSsmListQuery(DB_NAME, DB_CONF)
 		val ssmList = cdbGetSsmListQueryFunction.invokeSingle(command).ssmList
 
-		Assertions.assertThat(ssmList.size).isEqualTo(expectedSsmListSize)
+		Assertions.assertThat(ssmList).isNotEmpty
 	}
 }

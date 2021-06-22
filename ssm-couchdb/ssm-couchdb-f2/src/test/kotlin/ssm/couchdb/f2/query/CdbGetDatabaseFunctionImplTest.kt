@@ -7,13 +7,14 @@ import kotlinx.coroutines.runBlocking
 import org.assertj.core.api.Assertions
 import org.junit.jupiter.api.Test
 import org.springframework.beans.factory.annotation.Autowired
+import ssm.couchdb.dsl.query.CdbSsmDatabaseGetQuery
 
 class CdbGetDatabaseFunctionImplTest : FunctionTestBase() {
 
 	private val ssmName = "sandbox_ssm"
 
 	@Autowired
-	lateinit var cdbGetDatabaseFunction: F2Function<String, DatabaseInformation>
+	lateinit var cdbGetDatabaseFunction: F2Function<CdbSsmDatabaseGetQuery, DatabaseInformation?>
 
 	@Test
 	fun `must return cdbGetDatabaseFunction from catalog`() {
@@ -23,7 +24,7 @@ class CdbGetDatabaseFunctionImplTest : FunctionTestBase() {
 
 	@Test
 	fun `must return one database by name`(): Unit = runBlocking {
-		val db = cdbGetDatabaseFunction.invokeSingle(ssmName)
+		val db = cdbGetDatabaseFunction.invokeSingle(CdbSsmDatabaseGetQuery(ssmName, ssmName))
 		Assertions.assertThat(db).isNotNull
 	}
 }

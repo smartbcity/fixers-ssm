@@ -1,16 +1,21 @@
 package ssm.couchdb.f2.query
 
-import f2.dsl.function.F2Supplier
+import f2.dsl.function.F2Function
+import f2.function.spring.invokeSingle
+import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.toList
 import kotlinx.coroutines.runBlocking
 import org.assertj.core.api.Assertions
 import org.junit.jupiter.api.Test
 import org.springframework.beans.factory.annotation.Autowired
+import ssm.couchdb.dsl.query.SsmCdbGetDatabasesQuery
 
 internal class CdbGetDatabasesFunctionImplTest : FunctionTestBase() {
 
+	private val ssmName = "sandbox_ssm"
+
 	@Autowired
-	lateinit var cdbGetDatabasesFunction: F2Supplier<String>
+	lateinit var cdbGetDatabasesFunction: F2Function<SsmCdbGetDatabasesQuery, Flow<String>>
 
 	@Test
 	fun `must return cdbGetDatabasesFunction from catalog`() {
@@ -21,7 +26,11 @@ internal class CdbGetDatabasesFunctionImplTest : FunctionTestBase() {
 
 	@Test
 	fun `must return all databases`(): Unit = runBlocking {
-		val db = cdbGetDatabasesFunction.invoke().toList()
+		val db = cdbGetDatabasesFunction.invokeSingle(
+			SsmCdbGetDatabasesQuery(
+				ssmName,
+			)
+		).toList()
 
 		Assertions.assertThat(db).isNotEmpty
 	}

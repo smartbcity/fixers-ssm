@@ -9,18 +9,18 @@ import kotlin.js.JsName
 @JsName("TxSsmSessionDTO")
 interface TxSsmSessionDTO {
     val id: TxSsmSessionId
-    val currentState: TxSsmSessionStateDTO
+    val state: TxSsmSessionStateDTO
     val channel: TxChannelDTO
-    val creationTransaction: Transaction?
+    val transaction: Transaction?
 }
 
 @JsExport
 @JsName("TxSsmSession")
 class TxSsmSession(
 	override val id: TxSsmSessionId,
-	override val currentState: TxSsmSessionState,
+	override val state: TxSsmSessionState,
 	override val channel: TxChannel,
-	override val creationTransaction: TransactionBase?,
+	override val transaction: TransactionBase?,
 ): TxSsmSessionDTO
 
 typealias TxSsmSessionId = String

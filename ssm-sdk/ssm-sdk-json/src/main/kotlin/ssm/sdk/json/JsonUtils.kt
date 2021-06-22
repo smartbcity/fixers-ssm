@@ -20,7 +20,7 @@ class JsonUtils {
 			.registerModule(KotlinModule())
 
 		@Throws(JsonProcessingException::class)
-		fun toJson(obj: Any): String {
+		fun <T> toJson(obj: T): String {
 			return mapper.writeValueAsString(obj)
 		}
 

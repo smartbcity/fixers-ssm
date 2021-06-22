@@ -27,8 +27,8 @@ import ssm.tx.dsl.features.query.*
 
 @Service
 class SsmApiFinderService(
-	private val cdbGetSsmSessionListQueryFunction: CdbGetSsmSessionListQueryFunction,
-	private val cdbGetSsmListQueryFunction: CdbGetSsmListQueryFunction,
+	private val cdbSsmSessionListQueryFunction: CdbSsmSessionListQueryFunction,
+	private val cdbSsmListQueryFunction: CdbSsmListQueryFunction,
 	private val ssmGetQueryFunction: SsmGetQueryFunction,
 	private val ssmGetSessionQueryFunction: SsmGetSessionQueryFunction,
 	private val ssmGetSessionLogsQueryFunction: SsmGetSessionLogsQueryFunction,
@@ -38,21 +38,19 @@ class SsmApiFinderService(
 
 	@Bean
 	override fun txSsmListQueryFunction(): TxSsmListQueryFunction = f2Function { _ ->
-		val commands = txSsmConfig.values.flatMap { ssmConfigs ->
+		val commands = txSsmConfig.flatMap { (_, ssmConfigs) ->
 			ssmConfigs.map { (_, ssmConfig) ->
-				CdbGetSsmListQuery(
+				CdbSsmListQuery(
 					dbConfig = ssmConfig.couchdb,
 					dbName = ssmConfig.dbName
 				)
 			}
 		}.asFlow()
 
-		cdbGetSsmListQueryFunction(commands).toList()
-			.flatMap(CdbGetSsmListQueryResult::ssmList)
+		cdbSsmListQueryFunction(commands).toList()
+			.flatMap(CdbSsmListQueryResultDTO::ssmList)
 			.map(SsmBase::toTxSsm)
-			.let{
-				TxSsmListQueryResult(it)
-			}
+			.let(::TxSsmListQueryResult)
 	}
 
 	@Bean
@@ -76,12 +74,13 @@ class SsmApiFinderService(
 	@Bean
 	override fun txSsmSessionGetListQueryFunction(): TxSsmSessionListQueryFunction = f2Function { cmd ->
 		val config = getConfig(cmd)
-		val command = CdbGetSsmSessionListQuery(
+		val command = CdbSsmSessionListQuery(
 			dbConfig = config.couchdb,
+
 			dbName = config.dbName,
 			ssm = cmd.ssm
 		)
-		cdbGetSsmSessionListQueryFunction.invokeSingle(command)
+		cdbSsmSessionListQueryFunction.invokeSingle(command)
 			.sessions
 			.filter { sessionState -> sessionState.session.isNotBlank() }
 			.map { sessionState -> sessionState.toTxSession(config, cmd.bearerToken) }.let {

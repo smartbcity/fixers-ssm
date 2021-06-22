@@ -4,6 +4,7 @@ plugins {
 }
 
 dependencies {
+    api(project(":ssm-couchdb:ssm-couchdb-dsl"))
     api(project(":ssm-chaincode:ssm-chaincode-dsl"))
 
     implementation(project(":ssm-sdk:ssm-sdk-json"))

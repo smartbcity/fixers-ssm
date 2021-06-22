@@ -9,11 +9,11 @@ import ssm.tx.dsl.model.TxChannel
 fun SsmSessionStateBase.toTxSession(firstTransaction: TransactionBase?, lastTransaction: TransactionBase?): TxSsmSession {
     return TxSsmSession(
         id = this.session,
-        currentState = TxSsmSessionState(
+        state = TxSsmSessionState(
             details = this,
             transaction = lastTransaction
         ),
         channel = TxChannel("Not implemented"),
-        creationTransaction = firstTransaction
+        transaction = firstTransaction
     )
 }

@@ -15,19 +15,5 @@ class SsmCouchdbAutoconfiguration {
 		return HashMap()
 	}
 
-	@Bean
-	fun ssmCouchDbClients(): Map<String, SsmCouchDbClient> {
-		return dbMap().mapValues { (_, config) ->
-			SsmCouchDbClient.builder()
-				.withUrl(config.url)
-				.withName(config.serviceName)
-				.withAuth(
-					SsmCouchDbBasicAuth(
-						username = config.username,
-						password = config.password,
-					)
-				).build()
-		}
-	}
 }
 

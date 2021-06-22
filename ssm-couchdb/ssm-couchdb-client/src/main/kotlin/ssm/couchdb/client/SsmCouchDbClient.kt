@@ -7,8 +7,8 @@ import com.ibm.cloud.cloudant.v1.model.GetDatabaseInformationOptions
 import com.ibm.cloud.cloudant.v1.model.PostFindOptions
 import com.ibm.cloud.cloudant.v1.model.PostViewOptions
 import com.ibm.cloud.sdk.core.http.Response
-import ssm.chaincode.dsl.DocType
 import ssm.couchdb.client.builder.SsmCouchDbClientBuilder
+import ssm.couchdb.dsl.DocType
 import ssm.sdk.json.JSONConverter
 
 class SsmCouchDbClient(
