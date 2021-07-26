@@ -31,6 +31,7 @@ object Versions {
 	const val ktor = "1.6.1"
 	const val rsocket = "0.13.1"
 
+	const val d2 = "0.1.0-SNAPSHOT"
 	const val f2 = "experimental-SNAPSHOT"
 }
 

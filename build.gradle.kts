@@ -27,7 +27,8 @@ allprojects {
 	}
 }
 
-
+val dokkaStorybook = "dokkaStorybook"
+val dokkaStorybookPartial = "${dokkaStorybook}Partial"
 
 subprojects {
 	plugins.withType(org.jetbrains.kotlin.gradle.plugin.KotlinMultiplatformPluginWrapper::class.java).whenPluginAdded {
@@ -131,10 +132,24 @@ subprojects {
 		}
 	}
 
-	plugins.apply("org.jetbrains.dokka")
+	tasks {
+		register<org.jetbrains.dokka.gradle.DokkaTask>(dokkaStorybookPartial) {
+			dependencies {
+				plugins("city.smartb.d2:dokka-storybook-plugin:${Versions.d2}")
+			}
+		}
+	}
 }
 
 tasks {
+
+	register<org.jetbrains.dokka.gradle.DokkaCollectorTask>(dokkaStorybook) {
+		dependencies {
+			plugins("city.smartb.d2:dokka-storybook-plugin:${Versions.d2}")
+		}
+		addChildTask(dokkaStorybookPartial)
+		addSubprojectChildTasks(dokkaStorybookPartial)
+	}
 
 	create<com.moowork.gradle.node.yarn.YarnTask>("installYarn") {
 		dependsOn("build")
