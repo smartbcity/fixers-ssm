@@ -149,6 +149,8 @@ tasks {
 		}
 		addChildTask(dokkaStorybookPartial)
 		addSubprojectChildTasks(dokkaStorybookPartial)
+
+		outputDirectory.set(file("storybook/stories/d2"))
 	}
 
 	create<com.moowork.gradle.node.yarn.YarnTask>("installYarn") {
