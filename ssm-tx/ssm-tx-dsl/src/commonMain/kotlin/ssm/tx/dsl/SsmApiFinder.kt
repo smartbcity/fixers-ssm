@@ -10,19 +10,19 @@ interface SsmApiFinder {
 	@JsName("txSsmListQueryFunction")
 	fun txSsmListQueryFunction(): TxSsmListQueryFunction
 
-	@JsName("txSsmGetOneQueryFunction")
-	fun txSsmGetOneQueryFunction(): TxSsmGetQueryFunction
+	@JsName("txSsmGetQueryFunction")
+	fun txSsmGetQueryFunction(): TxSsmGetQueryFunction
 
-	@JsName("txSsmSessionGetListQueryFunction")
-	fun txSsmSessionGetListQueryFunction(): TxSsmSessionListQueryFunction
+	@JsName("txSsmSessionListQueryFunction")
+	fun txSsmSessionListQueryFunction(): TxSsmSessionListQueryFunction
 
-	@JsName("txSsmSessionGetOneQueryFunction")
-	fun txSsmSessionGetOneQueryFunction(): TxSsmSessionGetOneQueryFunction
+	@JsName("txSsmSessionGetQueryFunction")
+	fun txSsmSessionGetQueryFunction(): TxSsmSessionGetQueryFunction
 
-	@JsName("txSsmSessionLogGetListQueryFunction")
-	fun txSsmSessionLogGetListQueryFunction(): TxSsmSessionLogListQueryFunction
+	@JsName("txSsmSessionLogListQueryFunction")
+	fun txSsmSessionLogListQueryFunction(): TxSsmSessionLogListQueryFunction
 
-	@JsName("txSsmSessionLogGetOneQueryFunction")
+	@JsName("txSsmSessionLogGetQueryFunction")
 	fun txSsmSessionLogGetQueryFunction(): TxSsmSessionLogGetQueryFunction
 }
 
@@ -32,18 +32,18 @@ interface SsmApiFinderClient {
 	@JsName("txSsmListQueryFunction")
 	fun txSsmListQueryFunction(): TxSsmListQueryRemoteFunction
 
-	@JsName("txSsmGetOneQueryFunction")
-	fun txSsmGetOneQueryFunction(): TxSsmGetQueryRemoteFunction
+	@JsName("txSsmGetQueryFunction")
+	fun txSsmGetQueryFunction(): TxSsmGetQueryRemoteFunction
 
-	@JsName("txSsmSessionGetListQueryFunction")
-	fun txSsmSessionGetListQueryFunction(): TxSsmSessionListQueryRemoteFunction
+	@JsName("txSsmSessionListQueryFunction")
+	fun txSsmSessionListQueryFunction(): TxSsmSessionListQueryRemoteFunction
 
-	@JsName("txSsmSessionGetOneQueryFunction")
-	fun txSsmSessionGetOneQueryFunction(): TxSsmSessionLogGetQueryRemoteFunction
+	@JsName("txSsmSessionGetQueryFunction")
+	fun txSsmSessionGetQueryFunction(): TxSsmSessionLogGetQueryRemoteFunction
 
-	@JsName("txSsmSessionLogGetListQueryFunction")
-	fun txSsmSessionLogGetListQueryFunction(): TxSsmSessionLogListQueryRemoteFunction
+	@JsName("txSsmSessionLogListQueryFunction")
+	fun txSsmSessionLogListQueryFunction(): TxSsmSessionLogListQueryRemoteFunction
 
-	@JsName("txSsmSessionLogGetOneQueryFunction")
-	fun txSsmSessionLogGetOneQueryFunction(): TxSsmSessionLogGetQueryRemoteFunction
+	@JsName("txSsmSessionLogGetQueryFunction")
+	fun txSsmSessionLogGetQueryFunction(): TxSsmSessionLogGetQueryRemoteFunction
 }

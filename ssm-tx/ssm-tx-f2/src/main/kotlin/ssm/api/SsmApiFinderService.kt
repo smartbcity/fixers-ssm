@@ -54,7 +54,7 @@ class SsmApiFinderService(
 	}
 
 	@Bean
-	override fun txSsmGetOneQueryFunction(): TxSsmGetQueryFunction = f2Function { cmd ->
+	override fun txSsmGetQueryFunction(): TxSsmGetQueryFunction = f2Function { cmd ->
 		val config = getConfig(cmd)
 
 		val command = SsmGetQuery(
@@ -72,7 +72,7 @@ class SsmApiFinderService(
 	}
 
 	@Bean
-	override fun txSsmSessionGetListQueryFunction(): TxSsmSessionListQueryFunction = f2Function { cmd ->
+	override fun txSsmSessionListQueryFunction(): TxSsmSessionListQueryFunction = f2Function { cmd ->
 		val config = getConfig(cmd)
 		val command = CdbSsmSessionListQuery(
 			dbConfig = config.couchdb,
@@ -89,7 +89,7 @@ class SsmApiFinderService(
 	}
 
 	@Bean
-	override fun txSsmSessionGetOneQueryFunction(): TxSsmSessionGetOneQueryFunction = f2Function { cmd ->
+	override fun txSsmSessionGetQueryFunction(): TxSsmSessionGetQueryFunction = f2Function { cmd ->
 		val config = getConfig(cmd)
 		val sessionQuery = SsmGetSessionQuery(
 			name = cmd.sessionId,
@@ -120,7 +120,7 @@ class SsmApiFinderService(
 	}
 
 	@Bean
-	override fun txSsmSessionLogGetListQueryFunction(): TxSsmSessionLogListQueryFunction = f2Function { cmd ->
+	override fun txSsmSessionLogListQueryFunction(): TxSsmSessionLogListQueryFunction = f2Function { cmd ->
 		val config = getConfig(cmd)
 		val logs = getSessionLogs(cmd.sessionId, config, cmd.bearerToken)
 

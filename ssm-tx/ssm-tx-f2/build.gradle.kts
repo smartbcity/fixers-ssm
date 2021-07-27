@@ -11,3 +11,5 @@ dependencies {
 
     implementation("city.smartb.f2:f2-spring-boot-starter-function-http:${Versions.f2}")
 }
+
+apply(from = rootProject.file("gradle/publishing.gradle"))

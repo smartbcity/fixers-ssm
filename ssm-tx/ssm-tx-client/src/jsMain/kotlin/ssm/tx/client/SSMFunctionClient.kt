@@ -12,7 +12,6 @@ import ssm.tx.dsl.SsmApiFinderClient
 import ssm.tx.dsl.features.query.*
 import kotlin.js.Promise
 
-
 @JsName("ssmClient")
 @JsExport
 fun ssmClient(host: String, port: Int, path: String? = null): Promise<SsmApiFinderClient> =
@@ -28,23 +27,23 @@ actual open class SSMFunctionClient actual constructor(private val client: F2Cli
 		client.promise("txSsmListQueryFunction", msg)
 	}
 
-	override fun txSsmGetOneQueryFunction(): TxSsmGetQueryRemoteFunction = invokePromise { msg ->
+	override fun txSsmGetQueryFunction(): TxSsmGetQueryRemoteFunction = invokePromise { msg ->
 		client.promise("txSsmGetOneQueryFunction", msg)
 	}
 
-	override fun txSsmSessionGetListQueryFunction(): TxSsmSessionListQueryRemoteFunction = invokePromise { msg ->
+	override fun txSsmSessionListQueryFunction(): TxSsmSessionListQueryRemoteFunction = invokePromise { msg ->
 		client.promise("txSsmSessionGetListQueryFunction", msg)
 	}
 
-	override fun txSsmSessionGetOneQueryFunction(): TxSsmSessionLogGetQueryRemoteFunction = invokePromise { msg ->
+	override fun txSsmSessionGetQueryFunction(): TxSsmSessionLogGetQueryRemoteFunction = invokePromise { msg ->
 		client.promise("txSsmSessionGetOneQueryFunction", msg)
 	}
 
-	override fun txSsmSessionLogGetListQueryFunction(): TxSsmSessionLogListQueryRemoteFunction = invokePromise { msg ->
+	override fun txSsmSessionLogListQueryFunction(): TxSsmSessionLogListQueryRemoteFunction = invokePromise { msg ->
 		client.promise("txSsmListQueryFunction", msg)
 	}
 
-	override fun txSsmSessionLogGetOneQueryFunction(): TxSsmSessionLogGetQueryRemoteFunction = invokePromise { msg ->
+	override fun txSsmSessionLogGetQueryFunction(): TxSsmSessionLogGetQueryRemoteFunction = invokePromise { msg ->
 		client.promise("txSsmSessionLogGetOneQueryFunction", msg)
 	}
 

@@ -7,7 +7,7 @@ import ssm.tx.dsl.model.TxSsmSessionDTO
 import kotlin.js.JsExport
 import kotlin.js.JsName
 
-typealias TxSsmSessionGetOneQueryFunction = F2Function<TxSsmSessionGetQueryDTO, TxSsmSessionQueryGetResultDTO>
+typealias TxSsmSessionGetQueryFunction = F2Function<TxSsmSessionGetQueryDTO, TxSsmSessionQueryGetResultDTO>
 typealias TxSsmSessionGetQueryRemoteFunction = F2FunctionRemote<TxSsmSessionGetQueryDTO, TxSsmSessionQueryGetResultDTO>
 
 

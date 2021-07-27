@@ -12,24 +12,24 @@ actual open class SSMFunctionClient actual constructor(private val client: F2Cli
 		client.executeInvoke(SSMFunctionClient::txSsmListQueryFunction.name, cmd)
 	}
 
-	override fun txSsmGetOneQueryFunction(): TxSsmGetQueryRemoteFunction = invokeSuspend { cmd ->
-		client.executeInvoke(SSMFunctionClient::txSsmGetOneQueryFunction.name, cmd)
+	override fun txSsmGetQueryFunction(): TxSsmGetQueryRemoteFunction = invokeSuspend { cmd ->
+		client.executeInvoke(SSMFunctionClient::txSsmGetQueryFunction.name, cmd)
 	}
 
-	override fun txSsmSessionGetListQueryFunction(): TxSsmSessionListQueryRemoteFunction = invokeSuspend { cmd ->
-		client.executeInvoke(SSMFunctionClient::txSsmSessionGetListQueryFunction.name, cmd)
+	override fun txSsmSessionListQueryFunction(): TxSsmSessionListQueryRemoteFunction = invokeSuspend { cmd ->
+		client.executeInvoke(SSMFunctionClient::txSsmSessionListQueryFunction.name, cmd)
 	}
 
-	override fun txSsmSessionGetOneQueryFunction(): TxSsmSessionLogGetQueryRemoteFunction = invokeSuspend { cmd ->
-		client.executeInvoke(SSMFunctionClient::txSsmSessionGetOneQueryFunction.name, cmd)
+	override fun txSsmSessionGetQueryFunction(): TxSsmSessionLogGetQueryRemoteFunction = invokeSuspend { cmd ->
+		client.executeInvoke(SSMFunctionClient::txSsmSessionGetQueryFunction.name, cmd)
 	}
 
-	override fun txSsmSessionLogGetListQueryFunction(): TxSsmSessionLogListQueryRemoteFunction = invokeSuspend { cmd ->
-		client.executeInvoke(SSMFunctionClient::txSsmSessionLogGetListQueryFunction.name, cmd)
+	override fun txSsmSessionLogListQueryFunction(): TxSsmSessionLogListQueryRemoteFunction = invokeSuspend { cmd ->
+		client.executeInvoke(SSMFunctionClient::txSsmSessionLogListQueryFunction.name, cmd)
 	}
 
-	override fun txSsmSessionLogGetOneQueryFunction(): TxSsmSessionLogGetQueryRemoteFunction = invokeSuspend { cmd ->
-		client.executeInvoke(SSMFunctionClient::txSsmSessionLogGetOneQueryFunction.name, cmd)
+	override fun txSsmSessionLogGetQueryFunction(): TxSsmSessionLogGetQueryRemoteFunction = invokeSuspend { cmd ->
+		client.executeInvoke(SSMFunctionClient::txSsmSessionLogGetQueryFunction.name, cmd)
 	}
 }
 
