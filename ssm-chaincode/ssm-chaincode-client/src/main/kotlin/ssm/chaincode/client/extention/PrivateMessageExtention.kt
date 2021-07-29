@@ -2,7 +2,11 @@
 package ssm.chaincode.client
 
 import org.bouncycastle.crypto.CryptoException
-import ssm.chaincode.dsl.*
+import ssm.chaincode.dsl.SsmAgent
+import ssm.chaincode.dsl.SsmContext
+import ssm.chaincode.dsl.SsmSession
+import ssm.chaincode.dsl.SsmSessionState
+import ssm.chaincode.dsl.WithPrivate
 import ssm.sdk.sign.crypto.RSACipher
 import ssm.sdk.sign.model.Signer
 import java.security.PrivateKey
@@ -34,12 +38,12 @@ fun SsmSession.addPrivateMessage(value: String, name: String, publicKey: PublicK
 }
 
 @Throws(CryptoException::class)
-fun SsmSessionStateBase.addPrivateMessage(value: String, agent: SsmAgent) {
+fun SsmSessionState.addPrivateMessage(value: String, agent: SsmAgent) {
 	addPrivateMessage(value, agent.name, agent.getPubAsKey())
 }
 
 @Throws(CryptoException::class)
-fun SsmSessionStateBase.addPrivateMessage(value: String, name: String, publicKey: PublicKey): SsmSessionStateBase {
+fun SsmSessionState.addPrivateMessage(value: String, name: String, publicKey: PublicKey): SsmSessionState {
 	val newPrivate = addPrivate(value, publicKey, name)
 	return copy(private = newPrivate)
 }

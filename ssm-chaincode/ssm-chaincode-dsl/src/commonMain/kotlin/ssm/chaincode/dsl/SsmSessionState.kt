@@ -17,8 +17,8 @@ expect interface SsmSessionStateDTO: SsmSessionDTO, WithPrivate  {
 
 @Serializable
 @JsExport
-@JsName("SsmSessionStateBase")
-data class SsmSessionStateBase(
+@JsName("SsmSessionState")
+data class SsmSessionState(
 	override val ssm: String?,
 	override val session: String,
 	override val roles: Map<String, String>?,

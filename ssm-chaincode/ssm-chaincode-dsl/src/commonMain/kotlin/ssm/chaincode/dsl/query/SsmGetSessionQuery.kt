@@ -4,7 +4,7 @@ import f2.dsl.cqrs.Event
 import f2.dsl.fnc.F2Function
 import kotlinx.serialization.Serializable
 import ssm.chaincode.dsl.SsmCommandDTO
-import ssm.chaincode.dsl.SsmSessionStateBase
+import ssm.chaincode.dsl.SsmSessionState
 import kotlin.js.JsExport
 import kotlin.js.JsName
 
@@ -25,5 +25,5 @@ class SsmGetSessionQuery(
 @JsExport
 @JsName("SsmGetSessionResult")
 class SsmGetSessionResult(
-	val session: SsmSessionStateBase?
+	val session: SsmSessionState?
 ): Event

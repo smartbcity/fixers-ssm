@@ -1,6 +1,6 @@
 package ssm.couchdb.dsl.query
 
-import ssm.chaincode.dsl.SsmSessionStateBase
+import ssm.chaincode.dsl.SsmSessionState
 import ssm.couchdb.dsl.CdbQueryDTO
 
 @JsExport
@@ -14,5 +14,5 @@ actual external interface CdbSsmSessionListQueryDTO : CdbQueryDTO {
 @JsExport
 @JsName("CdbSsmSessionListQueryResultDTO")
 actual external interface CdbSsmSessionListQueryResultDTO {
-	actual val sessions: Array<SsmSessionStateBase>
+	actual val sessions: Array<SsmSessionState>
 }

@@ -1,12 +1,12 @@
 package ssm.api.model
 
-import ssm.tx.dsl.model.TxSsmSession
-import ssm.tx.dsl.model.TxSsmSessionState
-import ssm.chaincode.dsl.SsmSessionStateBase
+import ssm.chaincode.dsl.SsmSessionState
 import ssm.chaincode.dsl.blockchain.Transaction
 import ssm.tx.dsl.model.TxChannel
+import ssm.tx.dsl.model.TxSsmSession
+import ssm.tx.dsl.model.TxSsmSessionState
 
-fun SsmSessionStateBase.toTxSession(firstTransaction: Transaction?, lastTransaction: Transaction?): TxSsmSession {
+fun SsmSessionState.toTxSession(firstTransaction: Transaction?, lastTransaction: Transaction?): TxSsmSession {
     return TxSsmSession(
         id = this.session,
         state = TxSsmSessionState(

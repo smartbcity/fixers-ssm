@@ -1,6 +1,6 @@
 object PluginVersions {
 	const val kotlin = "1.5.21"
-	const val dokka = "1.5.0"
+	const val dokka = "1.4.32"
 	const val springBoot = "2.5.3"
 
 	const val npmPublish = "1.0.4"

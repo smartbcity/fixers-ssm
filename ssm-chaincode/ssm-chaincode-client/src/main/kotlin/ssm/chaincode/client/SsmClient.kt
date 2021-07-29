@@ -4,8 +4,20 @@ import ssm.chaincode.client.invoke.command.CreateCommandSigner
 import ssm.chaincode.client.invoke.command.PerformCommandSigner
 import ssm.chaincode.client.invoke.command.RegisterCommandSigner
 import ssm.chaincode.client.invoke.command.StartCommandSigner
-import ssm.chaincode.client.invoke.query.*
-import ssm.chaincode.dsl.*
+import ssm.chaincode.client.invoke.query.AdminQuery
+import ssm.chaincode.client.invoke.query.AgentQuery
+import ssm.chaincode.client.invoke.query.BlockQuery
+import ssm.chaincode.client.invoke.query.LogQuery
+import ssm.chaincode.client.invoke.query.SessionQuery
+import ssm.chaincode.client.invoke.query.SsmQuery
+import ssm.chaincode.client.invoke.query.TransactionQuery
+import ssm.chaincode.dsl.InvokeReturn
+import ssm.chaincode.dsl.Ssm
+import ssm.chaincode.dsl.SsmAgent
+import ssm.chaincode.dsl.SsmContext
+import ssm.chaincode.dsl.SsmSession
+import ssm.chaincode.dsl.SsmSessionState
+import ssm.chaincode.dsl.SsmSessionStateLog
 import ssm.chaincode.dsl.blockchain.Block
 import ssm.chaincode.dsl.blockchain.Transaction
 import ssm.sdk.sign.model.Signer
@@ -67,9 +79,9 @@ class SsmClient(private val ssmRequester: SsmRequester) {
         return ssmRequester.query(name, query, Ssm::class.java)
     }
 
-    fun getSession(sessionId: String): CompletableFuture<SsmSessionStateBase> {
+    fun getSession(sessionId: String): CompletableFuture<SsmSessionState> {
         val query = SessionQuery()
-        return ssmRequester.query(sessionId, query, SsmSessionStateBase::class.java)
+        return ssmRequester.query(sessionId, query, SsmSessionState::class.java)
     }
 
     fun log(sessionId: String): CompletableFuture<List<SsmSessionStateLog>> {

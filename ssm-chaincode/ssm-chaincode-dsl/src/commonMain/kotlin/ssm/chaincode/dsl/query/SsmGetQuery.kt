@@ -25,5 +25,5 @@ class SsmGetQuery(
 @Serializable
 @JsName("SsmGetResult")
 class SsmGetResult(
-	val ssmBase: Ssm?
+	val ssm: Ssm?
 ): Event

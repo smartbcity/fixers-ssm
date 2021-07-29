@@ -2,7 +2,7 @@ package ssm.couchdb.dsl.query
 
 import f2.dsl.fnc.F2Function
 import kotlinx.serialization.Serializable
-import ssm.chaincode.dsl.SsmSessionStateBase
+import ssm.chaincode.dsl.SsmSessionState
 import ssm.couchdb.dsl.CdbQueryDTO
 import kotlin.js.JsExport
 import kotlin.js.JsName
@@ -25,12 +25,12 @@ class CdbSsmSessionListQuery(
 ): CdbSsmSessionListQueryDTO
 
 expect interface CdbSsmSessionListQueryResultDTO{
-    val sessions: Array<SsmSessionStateBase>
+    val sessions: Array<SsmSessionState>
 }
 
 @Serializable
 @JsExport
 @JsName("CdbSsmSessionListQueryResult")
 class CdbSsmSessionListQueryResult(
-    override val sessions: Array<SsmSessionStateBase>
+    override val sessions: Array<SsmSessionState>
 ): CdbSsmSessionListQueryResultDTO

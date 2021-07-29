@@ -15,5 +15,5 @@ expect interface SsmSessionStateLogDTO {
 @JsName("SsmSessionStateLog")
 data class SsmSessionStateLog(
 	override val txId: TransactionId,
-	override val state: SsmSessionStateBase
+	override val state: SsmSessionState
 ): SsmSessionStateLogDTO
