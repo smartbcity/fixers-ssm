@@ -16,10 +16,16 @@ expect interface TransactionDTO {
     val validationCode: Byte
 }
 
+/**
+ * @d2 model
+ */
 @Serializable
 @JsExport
 @JsName("Transaction")
 class Transaction(
+    /**
+     * @example "c7de3ab6-56e0-4e7d-8fa4-905823ed982e"
+     */
     override val transactionId: TransactionId,
     override val blockId: Long,
     override val timestamp: Long,
