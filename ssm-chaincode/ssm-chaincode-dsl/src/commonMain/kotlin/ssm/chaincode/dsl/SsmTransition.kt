@@ -4,43 +4,43 @@ import kotlinx.serialization.Serializable
 import kotlin.js.JsExport
 import kotlin.js.JsName
 
+expect interface SsmTransitionDTO {
+	val from: Int
+	val to: Int
+	val role: String
+	val action: String
+}
+
 /**
  * @D2 model
  * @parent [Ssm]
  * @title SSM Transition
  */
-expect interface SsmTransitionDTO {
+@Serializable
+@JsExport
+@JsName("SsmTransition")
+data class SsmTransition(
 	/**
 	 * Origin of the transition
 	 * @example 1
 	 */
-	val from: Int
+	override val from: Int,
 
 	/**
 	 * Destination of the transition
 	 * @example 2
 	 */
-	val to: Int
+	override val to: Int,
 
 	/**
 	 * Role of the user allowed to trigger the transition
 	 * @example "Seller"
 	 */
-	val role: String
+	override val role: String,
 
 	/**
 	 * Trigger of the transition
 	 * @example "Sell"
 	 */
-	val action: String
-}
-
-@Serializable
-@JsExport
-@JsName("SsmTransition")
-data class SsmTransition(
-	override val from: Int,
-	override val to: Int,
-	override val role: String,
 	override val action: String,
 ): SsmTransitionDTO
