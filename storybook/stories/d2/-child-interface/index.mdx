@@ -1,0 +1,14 @@
+import ChildInterfaceDesc from './desc.md'
+import ChildInterfaceSample from './sample.json'
+import { DescriptedCode } from '@smartb/archetypes-ui-documentation'
+import { Meta } from '@storybook/addon-docs/blocks'
+
+<Meta title="ChildInterface" parameters={{ previewTabs: { canvas: { hidden: true } } }} />
+
+<DescriptedCode
+  description={<ChildInterfaceDesc />}
+  code={`{
+"toy" : "a cube"
+}
+`}
+/>

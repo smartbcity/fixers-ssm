@@ -1,0 +1,18 @@
+import ChildInterfaceIndex from '../-child-interface/index.mdx'
+import BoringInterfaceDesc from './desc.md'
+import BoringInterfaceSample from '!!raw-loader!./sample.json'
+import { DescriptedCode } from '@smartb/archetypes-ui-documentation'
+import { Meta } from '@storybook/addon-docs/blocks'
+
+<Meta title="BoringInterface" parameters={{ previewTabs: { canvas: { hidden: true } } }} />
+
+<DescriptedCode
+  description={<BoringInterfaceDesc />}
+  code={`{
+"name" : "Stuff",
+"description" : "Well calling it stuff is a bit... It's more like a pile of things being... existent",
+"things" : [ "Weird thingy", "Eww wat is dis" ]
+}`}
+/>
+
+<ChildInterfaceIndex />
