@@ -8,7 +8,6 @@ object PluginVersions {
 }
 
 object Versions {
-	const val guava = "30.1-jre"
 	const val springBoot = PluginVersions.springBoot
 	const val springFramework = "5.3.4"
 	const val springData = "2.4.5"

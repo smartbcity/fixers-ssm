@@ -1,6 +1,5 @@
 package ssm.chaincode.client.repository
 
-import com.google.common.base.MoreObjects
 import ssm.chaincode.client.invoke.command.InvokeArgs
 import java.util.*
 
@@ -41,11 +40,7 @@ class CommandArgs {
     }
 
     override fun toString(): String {
-        val stringHelper = MoreObjects.toStringHelper(this)
-            .add("cmd", cmd)
-            .add("fcn", fcn)
-            .add("args", args)
-        return stringHelper.toString()
+        return "cmd: ${cmd}, fcn: ${fcn}, args: ${args}"
     }
 
     companion object {

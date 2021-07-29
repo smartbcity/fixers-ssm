@@ -4,7 +4,6 @@ plugins {
 
 dependencies {
     implementation("org.bouncycastle:bcprov-jdk15on:${ Versions.bouncycastleVersion}")
-    implementation("com.google.guava:guava:${Versions.guava}")
 
 }
 

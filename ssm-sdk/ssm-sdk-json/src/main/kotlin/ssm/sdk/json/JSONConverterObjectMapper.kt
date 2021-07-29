@@ -1,7 +1,6 @@
 package ssm.sdk.json
 
 import com.fasterxml.jackson.core.type.TypeReference
-import com.google.common.base.Strings
 import okhttp3.ResponseBody
 import java.io.IOException
 import java.util.concurrent.CompletionException
@@ -30,7 +29,7 @@ class JSONConverterObjectMapper : JSONConverter {
 
 	override fun <T> toObject(clazz: Class<T>): Function<String, T?> = Function<String, T?> { value: String ->
 		try {
-			if (Strings.isNullOrEmpty(value)) {
+			if (value.isBlank()) {
 				null
 			} else {
 				JsonUtils.toObject(value, clazz)
