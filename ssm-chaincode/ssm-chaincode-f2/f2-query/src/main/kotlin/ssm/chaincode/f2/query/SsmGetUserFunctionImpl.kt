@@ -12,7 +12,7 @@ class SsmGetUserFunctionImpl {
 
 	@Bean
 	fun ssmGetUserFunction(): SsmGetUserFunction = ssmF2Function { cmd, ssmClient ->
-		val sessionState = ssmClient.getAgent(cmd.name).await().orElse( null)
+		val sessionState = ssmClient.getAgent(cmd.name).await()
 		SsmGetUserResult(sessionState)
 	}
 

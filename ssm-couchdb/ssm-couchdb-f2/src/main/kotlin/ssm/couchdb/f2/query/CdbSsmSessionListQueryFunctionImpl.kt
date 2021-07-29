@@ -2,7 +2,7 @@ package ssm.couchdb.f2.query
 
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
-import ssm.chaincode.dsl.SsmSessionState
+import ssm.chaincode.dsl.SsmSessionStateDTO
 import ssm.couchdb.dsl.DocType
 import ssm.couchdb.dsl.query.CdbSsmSessionListQueryFunction
 import ssm.couchdb.dsl.query.CdbSsmSessionListQueryResult
@@ -16,7 +16,7 @@ class CdbSsmSessionListQueryFunctionImpl(
     @Bean
     fun cdbSsmSessionListQueryFunction(): CdbSsmSessionListQueryFunction = cbdf2.function { cmd, cdbClient ->
         val filters = cmd.ssm?.let { ssm ->
-            mapOf(SsmSessionState::ssm.name to ssm)
+            mapOf(SsmSessionStateDTO::ssm.name to ssm)
         } ?: emptyMap()
 
         cdbClient.fetchAllByDocType(cmd.dbName, DocType.State, filters)

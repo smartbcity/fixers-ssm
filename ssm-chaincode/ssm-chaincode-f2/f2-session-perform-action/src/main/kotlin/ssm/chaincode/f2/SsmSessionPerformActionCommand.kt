@@ -1,15 +1,13 @@
 package ssm.chaincode.f2
 
 import f2.dsl.cqrs.Event
-import f2.dsl.function.F2Function
-import f2.dsl.function.F2FunctionRemote
+import f2.dsl.fnc.F2Function
 import ssm.chaincode.dsl.InvokeReturn
-import ssm.chaincode.dsl.SsmCommand
-import ssm.chaincode.dsl.SsmContextBase
+import ssm.chaincode.dsl.SsmCommandDTO
+import ssm.chaincode.dsl.SsmContext
 import ssm.sdk.sign.model.Signer
 
 typealias SsmSessionPerformActionFunction = F2Function<SsmSessionPerformActionCommand, SsmSessionPerformActionResult>
-typealias SsmSessionPerformActionRemoteFunction = F2FunctionRemote<SsmSessionPerformActionCommand, SsmSessionPerformActionResult>
 
 class SsmSessionPerformActionCommand(
 	override val baseUrl: String,
@@ -18,8 +16,8 @@ class SsmSessionPerformActionCommand(
 	override val bearerToken: String?,
 	val signer: Signer,
 	val action: String,
-	val context: SsmContextBase
-): SsmCommand
+	val context: SsmContext
+): SsmCommandDTO
 
 
 class SsmSessionPerformActionResult(

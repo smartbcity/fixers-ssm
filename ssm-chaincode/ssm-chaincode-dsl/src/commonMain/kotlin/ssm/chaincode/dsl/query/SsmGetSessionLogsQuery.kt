@@ -1,15 +1,15 @@
 package ssm.chaincode.dsl.query
 
-import f2.dsl.function.F2Function
-import f2.dsl.function.F2FunctionRemote
-import ssm.chaincode.dsl.SsmCommand
+import f2.dsl.fnc.F2Function
+import kotlinx.serialization.Serializable
+import ssm.chaincode.dsl.SsmCommandDTO
 import ssm.chaincode.dsl.SsmSessionStateLog
 import kotlin.js.JsExport
 import kotlin.js.JsName
 
 typealias SsmGetSessionLogsQueryFunction = F2Function<SsmGetSessionLogsQuery, SsmGetSessionLogsQueryResult>
-typealias SsmGetSessionLogsQueryFunctionRemote = F2FunctionRemote<SsmGetSessionLogsQuery, SsmGetSessionLogsQueryResult>
 
+@Serializable
 @JsExport
 @JsName("SsmGetSessionLogsQuery")
 class SsmGetSessionLogsQuery(
@@ -18,8 +18,9 @@ class SsmGetSessionLogsQuery(
     override val channelId: String?,
     override val chaincodeId: String?,
     override val bearerToken: String?
-): SsmCommand
+): SsmCommandDTO
 
+@Serializable
 @JsExport
 @JsName("SsmGetSessionLogsQueryResult")
 data class SsmGetSessionLogsQueryResult(

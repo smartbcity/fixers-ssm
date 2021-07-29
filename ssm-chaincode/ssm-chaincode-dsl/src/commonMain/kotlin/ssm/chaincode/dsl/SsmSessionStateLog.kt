@@ -5,10 +5,15 @@ import ssm.chaincode.dsl.blockchain.TransactionId
 import kotlin.js.JsExport
 import kotlin.js.JsName
 
+expect interface SsmSessionStateLogDTO {
+	val txId: TransactionId
+	val state: SsmSessionStateDTO
+}
+
 @Serializable
 @JsExport
 @JsName("SsmSessionStateLog")
 data class SsmSessionStateLog(
-	val txId: TransactionId,
-	val state: SsmSessionStateBase
-)
+	override val txId: TransactionId,
+	override val state: SsmSessionStateBase
+): SsmSessionStateLogDTO

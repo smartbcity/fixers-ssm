@@ -8,7 +8,6 @@ import ssm.chaincode.client.repository.CommandArgs
 import ssm.chaincode.client.repository.CoopRepository
 import ssm.chaincode.dsl.InvokeReturn
 import ssm.sdk.json.JSONConverter
-import java.util.*
 import java.util.concurrent.CompletableFuture
 
 class SsmRequester(
@@ -29,7 +28,7 @@ class SsmRequester(
         return request.thenApply(jsonConverter.toCompletableObjects(clazz))
     }
 
-    fun <T> query(value: String, query: HasGet, clazz: Class<T>): CompletableFuture<Optional<T>> {
+    fun <T> query(value: String, query: HasGet, clazz: Class<T>): CompletableFuture<T> {
         val args = query.queryArgs(value)
         val request = coopRepository.command(QUERY,
             channelId,
@@ -57,7 +56,6 @@ class SsmRequester(
         logger.info("Invoke the blockchain in channel[${channelId}}] and ssm[$chaincodeId}] with command[${cmd.commandName}] with args:${invokeArgs}")
         return coopRepository.invoke(CommandArgs.from(INVOKE, invokeArgs, channelId, chaincodeId))
             .thenApply(jsonConverter.toCompletableObject(InvokeReturn::class.java))
-            .thenApply(Optional<InvokeReturn>::get)
     }
 
     companion object {

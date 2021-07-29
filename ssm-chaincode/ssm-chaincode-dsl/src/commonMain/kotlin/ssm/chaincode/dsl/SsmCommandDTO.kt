@@ -4,9 +4,7 @@ import f2.dsl.cqrs.Command
 import kotlin.js.JsExport
 import kotlin.js.JsName
 
-@JsExport
-@JsName("SsmCommand")
-interface SsmCommand: Command {
+expect interface SsmCommandDTO: Command {
     val baseUrl: String
     val channelId: String?
     val chaincodeId: String?

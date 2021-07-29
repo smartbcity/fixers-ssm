@@ -12,7 +12,7 @@ class SsmGetQueryFunctionImpl {
 
 	@Bean
 	fun ssmGetQueryFunction(): SsmGetQueryFunction = ssmF2Function { cmd, ssmClient ->
-		val ssm = ssmClient.getSsm(cmd.name).await().orElse( null)
+		val ssm = ssmClient.getSsm(cmd.name).await()
 		SsmGetResult(ssm )
 	}
 

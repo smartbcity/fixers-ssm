@@ -1,22 +1,20 @@
 package ssm.couchdb.dsl.query
 
-import f2.dsl.function.F2Function
-import f2.dsl.function.F2FunctionRemote
-import ssm.chaincode.dsl.SsmBase
-import ssm.couchdb.dsl.CdbQuery
+import f2.dsl.fnc.F2Function
+import kotlinx.serialization.Serializable
+import ssm.chaincode.dsl.Ssm
+import ssm.couchdb.dsl.CdbQueryDTO
 import kotlin.js.JsExport
 import kotlin.js.JsName
 
 typealias CdbSsmListQueryFunction = F2Function<CdbSsmListQueryDTO, CdbSsmListQueryResultDTO>
-typealias CdbSsmListQueryFunctionRemote = F2FunctionRemote<CdbSsmListQueryDTO, CdbSsmListQueryResultDTO>
 
-@JsExport
-@JsName("CdbSsmListQueryDTO")
-interface CdbSsmListQueryDTO: CdbQuery {
+expect interface CdbSsmListQueryDTO: CdbQueryDTO {
     val dbName: String
     override val dbConfig: String
 }
 
+@Serializable
 @JsExport
 @JsName("CdbSsmListQuery")
 class CdbSsmListQuery(
@@ -24,14 +22,13 @@ class CdbSsmListQuery(
     override val dbConfig: String,
 ): CdbSsmListQueryDTO
 
-@JsExport
-@JsName("CdbSsmListQueryResultDTO")
-interface CdbSsmListQueryResultDTO{
-    val ssmList: List<SsmBase>
+expect interface CdbSsmListQueryResultDTO{
+    val ssmList: List<Ssm>
 }
 
+@Serializable
 @JsExport
 @JsName("CdbSsmListQueryResult")
 class CdbSsmListQueryResult(
-    override val ssmList: List<SsmBase>
+    override val ssmList: List<Ssm>
 ): CdbSsmListQueryResultDTO

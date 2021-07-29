@@ -1,7 +1,7 @@
 package ssm.api
 
-import f2.function.spring.adapter.f2Function
-import f2.function.spring.invokeSingle
+import f2.dsl.fnc.f2Function
+import f2.dsl.fnc.invoke
 import kotlinx.coroutines.flow.asFlow
 import kotlinx.coroutines.flow.toList
 import org.springframework.context.annotation.Bean
@@ -13,10 +13,10 @@ import ssm.tx.dsl.model.TxSsmSessionId
 import ssm.tx.dsl.model.TxSsmSessionState
 import ssm.api.model.toTxSession
 import ssm.api.model.toTxSsm
-import ssm.chaincode.dsl.SsmBase
+import ssm.chaincode.dsl.Ssm
 import ssm.chaincode.dsl.SsmSessionStateBase
 import ssm.chaincode.dsl.SsmSessionStateLog
-import ssm.chaincode.dsl.blockchain.TransactionBase
+import ssm.chaincode.dsl.blockchain.Transaction
 import ssm.chaincode.dsl.blockchain.TransactionId
 import ssm.chaincode.dsl.query.*
 import ssm.chaincode.dsl.query.SsmGetQuery
@@ -49,7 +49,7 @@ class SsmApiFinderService(
 
 		cdbSsmListQueryFunction(commands).toList()
 			.flatMap(CdbSsmListQueryResultDTO::ssmList)
-			.map(SsmBase::toTxSsm)
+			.map(Ssm::toTxSsm)
 			.let(::TxSsmListQueryResult)
 	}
 
@@ -65,7 +65,7 @@ class SsmApiFinderService(
 			bearerToken = cmd.bearerToken
 		)
 
-		ssmGetQueryFunction.invokeSingle(command)
+		ssmGetQueryFunction(command)
 			.ssmBase
 			?.toTxSsm()
 			.let(::TxSsmGetQueryResult)
@@ -80,7 +80,7 @@ class SsmApiFinderService(
 			dbName = config.dbName,
 			ssm = cmd.ssm
 		)
-		cdbSsmSessionListQueryFunction.invokeSingle(command)
+		cdbSsmSessionListQueryFunction(command)
 			.sessions
 			.filter { sessionState -> sessionState.session.isNotBlank() }
 			.map { sessionState -> sessionState.toTxSession(config, cmd.bearerToken) }.let {
@@ -100,7 +100,7 @@ class SsmApiFinderService(
 		)
 
 		try {
-			ssmGetSessionQueryFunction.invokeSingle(sessionQuery)
+			ssmGetSessionQueryFunction(sessionQuery)
 				.session
 				?.toTxSession(config, cmd.bearerToken).let {
 					TxSsmSessionGetQueryResult(
@@ -162,14 +162,14 @@ class SsmApiFinderService(
 		)
 
 		return try {
-			ssmGetSessionLogsQueryFunction.invokeSingle(query).logs
+			ssmGetSessionLogsQueryFunction(query).logs
 		} catch (e: Exception) {
 			e.printStackTrace()
 			emptyList()
 		}
 	}
 
-	private suspend fun getTransaction(id: TransactionId?, ssmConfig: TxSsmLocationProperties, bearerToken: String?): TransactionBase? {
+	private suspend fun getTransaction(id: TransactionId?, ssmConfig: TxSsmLocationProperties, bearerToken: String?): Transaction? {
 		return id?.let {
 			val query = SsmGetTransactionQuery(
 				id = id,
@@ -178,7 +178,7 @@ class SsmApiFinderService(
 				chaincodeId = ssmConfig.chaincode,
 				bearerToken = bearerToken
 			)
-			ssmGetTransactionQueryFunction.invokeSingle(query).transaction
+			ssmGetTransactionQueryFunction(query).transaction
 		}
 	}
 

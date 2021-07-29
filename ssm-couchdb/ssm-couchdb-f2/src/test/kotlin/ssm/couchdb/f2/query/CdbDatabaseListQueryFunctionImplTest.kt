@@ -1,6 +1,6 @@
 package ssm.couchdb.f2.query
 
-import f2.function.spring.invokeSingle
+import f2.dsl.fnc.invoke
 import kotlinx.coroutines.runBlocking
 import org.assertj.core.api.Assertions
 import org.junit.jupiter.api.Test
@@ -23,7 +23,7 @@ class CdbDatabaseListQueryFunctionImplTest : FunctionTestBase() {
 
 	@Test
 	fun `must return one database by name`(): Unit = runBlocking {
-		val db = cdbDatabaseListQueryFunction.invokeSingle(CdbDatabaseListQuery(ssmName))
+		val db = cdbDatabaseListQueryFunction(CdbDatabaseListQuery(ssmName))
 		Assertions.assertThat(db).isNotNull
 	}
 }

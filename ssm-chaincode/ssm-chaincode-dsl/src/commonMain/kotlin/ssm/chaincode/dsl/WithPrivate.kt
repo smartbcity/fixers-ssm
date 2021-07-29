@@ -1,5 +1,5 @@
 package ssm.chaincode.dsl
 
-interface WithPrivate {
+expect interface WithPrivate {
 	val private: Map<String, String>?
 }

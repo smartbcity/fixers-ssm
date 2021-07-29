@@ -4,17 +4,15 @@ import kotlinx.serialization.Serializable
 import kotlin.js.JsExport
 import kotlin.js.JsName
 
-@JsExport
-@JsName("Ssm")
-interface Ssm {
+expect interface SsmDTO {
 	val name: String
-	val transitions: List<SsmTransition>
+	val transitions: List<SsmTransitionDTO>
 }
 
 @Serializable
 @JsExport
-@JsName("SsmBase")
-data class SsmBase(
+@JsName("Ssm")
+data class Ssm(
 	override val name: String,
-	override val transitions: List<SsmTransitionBase>,
-): Ssm
+	override val transitions: List<SsmTransition>,
+): SsmDTO

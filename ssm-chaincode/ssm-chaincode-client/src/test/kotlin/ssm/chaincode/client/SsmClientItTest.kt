@@ -6,8 +6,8 @@ import org.assertj.core.util.Lists
 import org.junit.jupiter.api.*
 import org.junit.jupiter.api.MethodOrderer.OrderAnnotation
 import ssm.chaincode.dsl.*
-import ssm.chaincode.dsl.blockchain.Block
-import ssm.chaincode.dsl.blockchain.Transaction
+import ssm.chaincode.dsl.blockchain.BlockDTO
+import ssm.chaincode.dsl.blockchain.TransactionDTO
 import ssm.sdk.sign.model.Signer
 import java.util.*
 import java.util.concurrent.CompletableFuture
@@ -33,13 +33,13 @@ class SsmClientItTest {
 		private lateinit var signerAdmin: Signer
 		private lateinit var signerUser1: Signer
 		private lateinit var signerUser2: Signer
-		private lateinit var agentAdmin: SsmAgentBase
-		private lateinit var agentUser1: SsmAgentBase
-		private lateinit var agentUser2: SsmAgentBase
+		private lateinit var agentAdmin: SsmAgent
+		private lateinit var agentUser1: SsmAgent
+		private lateinit var agentUser2: SsmAgent
 		private lateinit var client: SsmClient
 		private lateinit var ssmName: String
 		private lateinit var sessionName: String
-		private lateinit var session: SsmSessionBase
+		private lateinit var session: SsmSession
 
 		@BeforeAll
 		@JvmStatic
@@ -56,7 +56,7 @@ class SsmClientItTest {
 			val roles: Map<String, String> = ImmutableMap.of(
 				signerUser1.name, "Buyer", signerUser2.name, "Seller")
 			sessionName = "deal20181201-" + uuid
-			session = SsmSessionBase(ssmName,
+			session = SsmSession(ssmName,
 				sessionName, roles, "Used car for 100 dollars.", emptyMap())
 		}
 
@@ -82,7 +82,7 @@ class SsmClientItTest {
 	fun adminUser(): Unit {
 		val agentRet = client.getAdmin(ADMIN_NAME)
 		val agentFormClient = agentRet.get()
-		Assertions.assertThat(agentFormClient.get()).isEqualTo(agentAdmin)
+		Assertions.assertThat(agentFormClient).isEqualTo(agentAdmin)
 	}
 
 	@Test
@@ -99,7 +99,7 @@ class SsmClientItTest {
 		val agentRet = client.getAgent(
 			Companion.agentUser1.name)
 		val agentFormClient = agentRet.get()
-		Assertions.assertThat(agentFormClient.get()).isEqualTo(Companion.agentUser1)
+		Assertions.assertThat(agentFormClient).isEqualTo(Companion.agentUser1)
 	}
 
 	@Test
@@ -116,7 +116,7 @@ class SsmClientItTest {
 		val agentRet = client.getAgent(
 			Companion.agentUser2.name)
 		val agentFormClient = agentRet.get()
-		Assertions.assertThat(agentFormClient.get()).isEqualTo(Companion.agentUser2)
+		Assertions.assertThat(agentFormClient).isEqualTo(Companion.agentUser2)
 	}
 
 	@Test
@@ -130,9 +130,9 @@ class SsmClientItTest {
 	@Test
 	@Order(60)
 	fun createSsm() {
-		val sell = SsmTransitionBase(0, 1, "Seller", "Sell")
-		val buy = SsmTransitionBase(1, 2, "Buyer", "Buy")
-		val ssm = SsmBase(ssmName, Lists.newArrayList(sell, buy))
+		val sell = SsmTransition(0, 1, "Seller", "Sell")
+		val buy = SsmTransition(1, 2, "Buyer", "Buy")
+		val ssm = Ssm(ssmName, Lists.newArrayList(sell, buy))
 		val transactionEvent = client.create(signerAdmin, ssm)
 		val trans = transactionEvent.get()
 		assertThatTransactionExists(trans)
@@ -144,8 +144,8 @@ class SsmClientItTest {
 		val ssmReq = client.getSsm(
 			ssmName)
 		val ssm = ssmReq.get()
-		Assertions.assertThat(ssm).isPresent
-		Assertions.assertThat(ssm.get().name).isEqualTo(ssmName)
+		Assertions.assertThat(ssm).isNotNull
+		Assertions.assertThat(ssm.name).isEqualTo(ssmName)
 	}
 
 	@Test
@@ -153,7 +153,7 @@ class SsmClientItTest {
 	fun start() {
 		val roles: Map<String, String> = ImmutableMap.of(
 			Companion.agentUser1.name, "Buyer", Companion.agentUser2.name, "Seller")
-		val session = SsmSessionBase(ssmName,
+		val session = SsmSession(ssmName,
 			sessionName, roles, "Used car for 100 dollars.", emptyMap())
 		val transactionEvent = client.start(signerAdmin, session)
 		val trans = transactionEvent.get()
@@ -166,19 +166,19 @@ class SsmClientItTest {
 		val ses = client.getSession(
 			sessionName)
 		val sesReq = ses.get()
-		Assertions.assertThat(sesReq.get().current).isEqualTo(0)
-		Assertions.assertThat(sesReq.get().iteration).isEqualTo(0)
-		Assertions.assertThat(sesReq.get().origin).isNull()
-		Assertions.assertThat(sesReq.get().ssm).isEqualTo(ssmName)
-		Assertions.assertThat(sesReq.get().roles).isEqualTo(Companion.session.roles)
-		Assertions.assertThat(sesReq.get().session).isEqualTo(Companion.session.session)
-		Assertions.assertThat(sesReq.get().public).isEqualTo(Companion.session.public)
+		Assertions.assertThat(sesReq.current).isEqualTo(0)
+		Assertions.assertThat(sesReq.iteration).isEqualTo(0)
+		Assertions.assertThat(sesReq.origin).isNull()
+		Assertions.assertThat(sesReq.ssm).isEqualTo(ssmName)
+		Assertions.assertThat(sesReq.roles).isEqualTo(Companion.session.roles)
+		Assertions.assertThat(sesReq.session).isEqualTo(Companion.session.session)
+		Assertions.assertThat(sesReq.public).isEqualTo(Companion.session.public)
 	}
 
 	@Test
 	@Order(100)
 	fun performSell() {
-		var context = SsmContextBase(sessionName, "100 dollars 1978 Camaro", 0, emptyMap())
+		var context = SsmContext(sessionName, "100 dollars 1978 Camaro", 0, emptyMap())
 		context = context.addPrivateMessage("Message to signer1",
 			Companion.agentUser1)
 		privateMessage = context.private
@@ -190,31 +190,31 @@ class SsmClientItTest {
 	@Order(110)
 	@Test
 	fun sessionAfterSell(): Unit {
-		val sell = SsmTransitionBase(0, 1, "Seller", "Sell")
+		val sell = SsmTransition(0, 1, "Seller", "Sell")
 		val sesReq = client.getSession(
 			sessionName)
 		val state = sesReq.get()
 		val stateExpected = SsmSessionStateBase(ssmName,
 			sessionName, Companion.session.roles, "100 dollars 1978 Camaro", privateMessage, sell, 1, 1)
-		Assertions.assertThat(state.get()).isEqualTo(stateExpected)
+		Assertions.assertThat(state).isEqualTo(stateExpected)
 		val expectedMessage = stateExpected.getPrivateMessage(signerUser1)
 	}
 
 	@Order(110)
 	@Test
 	fun sessionAfterSellShouldReturnEncryptMessage(): Unit {
-		val (from, to, role, action) = SsmTransitionBase(0, 1, "Seller", "Sell")
+		val (from, to, role, action) = SsmTransition(0, 1, "Seller", "Sell")
 		val sesReq = client.getSession(
 			sessionName)
 		val state = sesReq.get()
-		val expectedMessage = state.get().getPrivateMessage(signerUser1)
+		val expectedMessage = state.getPrivateMessage(signerUser1)
 		Assertions.assertThat(expectedMessage).isEqualTo("Message to signer1")
 	}
 
 	@Test
 	@Order(120)
 	fun performBuy() {
-		val context = SsmContextBase(sessionName, "Deal !", 1, emptyMap())
+		val context = SsmContext(sessionName, "Deal !", 1, emptyMap())
 		val transactionEvent = client.perform(signerUser1, "Buy", context)
 		val trans = transactionEvent.get()
 		assertThatTransactionExists(trans)
@@ -223,23 +223,23 @@ class SsmClientItTest {
 	fun assertThatTransactionExists(trans: InvokeReturn) {
 		Assertions.assertThat(trans).isNotNull
 		Assertions.assertThat(trans.status).isEqualTo("SUCCESS")
-		val transaction: Transaction = client.getTransaction(trans.transactionId).get().orElse(null)
+		val transaction: TransactionDTO = client.getTransaction(trans.transactionId).get()
 		Assertions.assertThat(transaction).isNotNull
 		Assertions.assertThat(transaction.blockId).isNotNull
-		val block: Block = client.getBlock(transaction.blockId).get().orElse(null)
+		val block: BlockDTO = client.getBlock(transaction.blockId).get()
 		Assertions.assertThat(block).isNotNull
 	}
 
 	@Order(130)
 	@Test
 	fun sessionAfterBuy(): Unit {
-		val buy = SsmTransitionBase(1, 2, "Buyer", "Buy")
+		val buy = SsmTransition(1, 2, "Buyer", "Buy")
 		val sesReq = client.getSession(
 			sessionName)
 		val state = sesReq.get()
 		val stateExcpected = SsmSessionStateBase(ssmName,
 			sessionName, Companion.session.roles, "Deal !", emptyMap(), buy, 2, 2)
-		Assertions.assertThat(state.get()).isEqualTo(stateExcpected)
+		Assertions.assertThat(state).isEqualTo(stateExcpected)
 	}
 
 	@Test

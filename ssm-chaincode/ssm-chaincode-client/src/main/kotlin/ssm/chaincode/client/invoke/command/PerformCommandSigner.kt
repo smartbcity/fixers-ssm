@@ -1,6 +1,6 @@
 package ssm.chaincode.client.invoke.command
 
-import ssm.chaincode.dsl.SsmContext
+import ssm.chaincode.dsl.SsmContextDTO
 import ssm.sdk.sign.model.Signer
 
 //{
@@ -13,8 +13,8 @@ import ssm.sdk.sign.model.Signer
 //    ]
 //}
 //    echo "Usage: perform <action> <context> <signer>"
-class PerformCommandSigner(signer: Signer?, private val action: String, context: SsmContext?) :
-    CommandSigner<SsmContext?>(signer!!, COMMAND_NAME, context) {
+class PerformCommandSigner(signer: Signer?, private val action: String, context: SsmContextDTO?) :
+    CommandSigner<SsmContextDTO?>(signer!!, COMMAND_NAME, context) {
     @Throws(Exception::class)
     override fun valueToSign(json: String): String {
         return action + json

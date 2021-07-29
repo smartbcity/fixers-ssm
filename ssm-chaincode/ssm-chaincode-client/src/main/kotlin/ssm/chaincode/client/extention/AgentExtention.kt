@@ -2,23 +2,23 @@
 package ssm.chaincode.client
 
 import org.bouncycastle.crypto.CryptoException
-import ssm.chaincode.dsl.SsmAgentBase
+import ssm.chaincode.dsl.SsmAgent
 import ssm.sdk.sign.crypto.KeyPairReader
 import java.security.PublicKey
 
 @Throws(Exception::class)
-fun loadFromFile(name: String): SsmAgentBase {
+fun loadFromFile(name: String): SsmAgent {
 	val pub = KeyPairReader.loadPublicKey(name)
-	return SsmAgentBase(name, pub.encoded)
+	return SsmAgent(name, pub.encoded)
 }
 
 @Throws(Exception::class)
-fun loadFromFile(name: String, filename: String): SsmAgentBase {
+fun loadFromFile(name: String, filename: String): SsmAgent {
 	val pub = KeyPairReader.loadPublicKey(filename)
-	return SsmAgentBase(name, pub.encoded)
+	return SsmAgent(name, pub.encoded)
 }
 
 @Throws(CryptoException::class)
-fun SsmAgentBase.getPubAsKey(): PublicKey {
+fun SsmAgent.getPubAsKey(): PublicKey {
 	return KeyPairReader.fromByteArray(pub)
 }

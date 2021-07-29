@@ -14,7 +14,6 @@ class SsmGetTransactionQueryFunctionImpl {
     fun ssmGetTransactionQueryFunction(): SsmGetTransactionQueryFunction = ssmF2Function { cmd, ssmClient ->
         ssmClient.getTransaction(cmd.id)
             .await()
-            .orElse(null)
             .let(::SsmGetTransactionQueryResult)
     }
 }

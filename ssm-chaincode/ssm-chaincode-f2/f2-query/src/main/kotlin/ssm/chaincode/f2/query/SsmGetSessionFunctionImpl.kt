@@ -12,7 +12,7 @@ class SsmGetSessionFunctionImpl {
 
 	@Bean
 	fun ssmGetSessionQueryFunction(): SsmGetSessionQueryFunction = ssmF2Function { cmd, ssmClient ->
-		val sessionState = ssmClient.getSession(cmd.name).await().orElse(null)
+		val sessionState = ssmClient.getSession(cmd.name).await()
 		SsmGetSessionResult(sessionState)
 	}
 

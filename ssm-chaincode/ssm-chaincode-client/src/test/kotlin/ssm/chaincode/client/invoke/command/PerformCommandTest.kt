@@ -3,9 +3,8 @@ package ssm.chaincode.client.invoke.command
 import com.google.common.collect.ImmutableMap
 import org.assertj.core.api.Assertions
 import org.junit.jupiter.api.Test
-import ssm.chaincode.client.invoke.command.PerformCommandSigner
 import ssm.chaincode.client.loadFromFile
-import ssm.chaincode.dsl.SsmContextBase
+import ssm.chaincode.dsl.SsmContext
 import ssm.sdk.sign.crypto.KeyPairReader.Companion.loadKeyPair
 import ssm.sdk.sign.model.Signer
 import java.util.function.Consumer
@@ -18,7 +17,7 @@ class PerformCommandTest {
         val signer = Signer("adam", adamPair)
 
 //        "{\"session\":\"deal20181201\",\"public\":\"100 dollars 1978 Camaro\",\"iteration\":0}"
-        val context = SsmContextBase("deal20181201", "100 dollars 1978 Camaro", 0, null)
+        val context = SsmContext("deal20181201", "100 dollars 1978 Camaro", 0, null)
         val (fcn, args) = PerformCommandSigner(signer, "Sell", context).invoke()
         args.forEach(Consumer { s: String? -> println(s) })
         Assertions.assertThat(fcn).isEqualTo("perform")
@@ -40,7 +39,7 @@ class PerformCommandTest {
         val (name, pub) = loadFromFile("vivi", "command/adam")
 
 //        "{\"session\":\"deal20181201\",\"public\":\"100 dollars 1978 Camaro\",\"iteration\":0}"
-        val context = SsmContextBase("deal20181201", "100 dollars 1978 Camaro", 0, ImmutableMap.of("vivi", "message"))
+        val context = SsmContext("deal20181201", "100 dollars 1978 Camaro", 0, ImmutableMap.of("vivi", "message"))
         val (fcn, args) = PerformCommandSigner(signer, "Sell", context).invoke()
         args.forEach(Consumer { s: String? -> println(s) })
         Assertions.assertThat(fcn).isEqualTo("perform")

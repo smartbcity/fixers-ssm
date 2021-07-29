@@ -3,8 +3,7 @@ package ssm.chaincode.client.invoke.command
 import com.google.common.collect.ImmutableMap
 import org.assertj.core.api.Assertions
 import org.junit.jupiter.api.Test
-import ssm.chaincode.client.invoke.command.StartCommandSigner
-import ssm.chaincode.dsl.SsmSessionBase
+import ssm.chaincode.dsl.SsmSession
 import ssm.sdk.sign.crypto.Sha256RSASigner.Companion.rsaSignAsB64
 import ssm.sdk.sign.model.Signer.Companion.loadFromFile
 import java.util.function.Consumer
@@ -23,7 +22,7 @@ class StartCommandTest {
         //    }
         val roles: Map<String, String> = ImmutableMap.of("chuck", "Buyer", "sarah", "Seller")
         val signer = loadFromFile("adam", "command/adam")
-        val session = SsmSessionBase("Car dealership", "deal20181201", roles, "Used car for 100 dollars.", null)
+        val session = SsmSession("Car dealership", "deal20181201", roles, "Used car for 100 dollars.", null)
         val (fcn, args) = StartCommandSigner(signer, session).invoke()
         args.forEach(Consumer { s: String? -> println(s) })
         val expectedJson =
