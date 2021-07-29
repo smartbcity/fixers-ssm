@@ -16,7 +16,6 @@ dependencies {
     implementation("com.squareup.okhttp3:okhttp:${Versions.okhttpVersion}")
     implementation("com.squareup.retrofit2:retrofit:${ Versions.retrofitVersion}")
     implementation("com.squareup.retrofit2:converter-jackson:${Versions.retrofitVersion}")
-    implementation("com.google.guava:guava:${Versions.guava}")
 
 }
 

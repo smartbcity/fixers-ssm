@@ -1,6 +1,5 @@
 package ssm.chaincode.client.invoke.command
 
-import com.google.common.collect.ImmutableMap
 import org.assertj.core.api.Assertions
 import org.junit.jupiter.api.Test
 import ssm.chaincode.client.loadFromFile
@@ -39,7 +38,7 @@ class PerformCommandTest {
         val (name, pub) = loadFromFile("vivi", "command/adam")
 
 //        "{\"session\":\"deal20181201\",\"public\":\"100 dollars 1978 Camaro\",\"iteration\":0}"
-        val context = SsmContext("deal20181201", "100 dollars 1978 Camaro", 0, ImmutableMap.of("vivi", "message"))
+        val context = SsmContext("deal20181201", "100 dollars 1978 Camaro", 0, mapOf("vivi" to "message"))
         val (fcn, args) = PerformCommandSigner(signer, "Sell", context).invoke()
         args.forEach(Consumer { s: String? -> println(s) })
         Assertions.assertThat(fcn).isEqualTo("perform")

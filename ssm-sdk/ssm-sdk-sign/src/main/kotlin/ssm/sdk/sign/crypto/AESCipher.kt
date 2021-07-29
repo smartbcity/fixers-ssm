@@ -1,6 +1,5 @@
 package ssm.sdk.sign.crypto
 
-import com.google.common.io.ByteStreams
 import org.bouncycastle.crypto.CryptoException
 import java.io.*
 import java.security.NoSuchAlgorithmException
@@ -55,7 +54,7 @@ class AESCipher {
             var output: OutputStream? = null
             try {
                 output = getEncryptCipher(outputStream, key)
-                ByteStreams.copy(fileInput!!, output)
+                fileInput!!.copyTo(output)
             } catch (e: Exception) {
                 throw CryptoException("Error encrypting:", e)
             } finally {

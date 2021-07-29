@@ -1,15 +1,17 @@
 package ssm.sdk.sign.crypto
 
-import com.google.common.io.CharStreams
-import com.google.common.io.Files
 import org.assertj.core.api.Assertions
 import org.bouncycastle.crypto.CryptoException
 import org.junit.jupiter.api.Test
 import ssm.sdk.sign.utils.FileUtils
 import java.io.*
+import java.nio.channels.FileChannel
+import java.nio.file.Files
+import java.nio.file.Path
 import java.security.NoSuchAlgorithmException
 import java.util.*
 import javax.crypto.SecretKey
+
 
 internal class AESCipherTest {
 
@@ -28,8 +30,8 @@ internal class AESCipherTest {
             val os = FileOutputStream(encryptedFile)
             val key: SecretKey = AESCipher.secretKeyFromBase64("+cRaRuaSK1/RObE9oEOm6Q==")
             AESCipher.encrypt(fileToEncrypt, os, key)
-            val areFileEquals = Files.equal(encryptedFile, encryptedFileProof)
-            Assertions.assertThat(areFileEquals).isTrue
+            val te = FileUtils.sameContent(encryptedFile.toPath(), encryptedFileProof.toPath())
+            Assertions.assertThat(te).isTrue
         } finally {
             encryptedFile.delete()
         }
@@ -42,7 +44,7 @@ internal class AESCipherTest {
         try {
             val key: SecretKey = AESCipher.secretKeyFromBase64("+cRaRuaSK1/RObE9oEOm6Q==")
             val decryptedStream: InputStream = AESCipher.decrypt(FileInputStream(encryptedFile), key)
-            val value = CharStreams.toString(InputStreamReader(decryptedStream))
+            val value = decryptedStream.bufferedReader().use(BufferedReader::readText)
             Assertions.assertThat(value).isEqualTo("to commit")
         } finally {
             encryptedFile.delete()

@@ -1,6 +1,5 @@
 package ssm.chaincode.client
 
-import com.google.common.collect.ImmutableMap
 import org.assertj.core.api.Assertions
 import org.assertj.core.util.Lists
 import org.junit.jupiter.api.AfterEach
@@ -63,8 +62,8 @@ class SsmClientItTest {
 			agentUser2 = loadFromFile(signerUser2.name, USER2_FILENAME)
 			client = SsmClientTestBuilder.build()
 			ssmName = "CarDealership-" + uuid
-			val roles: Map<String, String> = ImmutableMap.of(
-				signerUser1.name, "Buyer", signerUser2.name, "Seller")
+			val roles = mapOf(
+				signerUser1.name to "Buyer", signerUser2.name to "Seller")
 			sessionName = "deal20181201-" + uuid
 			session = SsmSession(ssmName,
 				sessionName, roles, "Used car for 100 dollars.", emptyMap())
@@ -161,8 +160,8 @@ class SsmClientItTest {
 	@Test
 	@Order(80)
 	fun start() {
-		val roles: Map<String, String> = ImmutableMap.of(
-			Companion.agentUser1.name, "Buyer", Companion.agentUser2.name, "Seller")
+		val roles: Map<String, String> = mapOf(
+			Companion.agentUser1.name to "Buyer", Companion.agentUser2.name to "Seller")
 		val session = SsmSession(ssmName,
 			sessionName, roles, "Used car for 100 dollars.", emptyMap())
 		val transactionEvent = client.start(signerAdmin, session)

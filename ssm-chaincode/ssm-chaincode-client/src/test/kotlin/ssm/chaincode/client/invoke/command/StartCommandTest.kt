@@ -1,6 +1,5 @@
 package ssm.chaincode.client.invoke.command
 
-import com.google.common.collect.ImmutableMap
 import org.assertj.core.api.Assertions
 import org.junit.jupiter.api.Test
 import ssm.chaincode.dsl.SsmSession
@@ -20,7 +19,7 @@ class StartCommandTest {
         //      "chuck":"Buyer",
         //       "sarah":"Seller"
         //    }
-        val roles: Map<String, String> = ImmutableMap.of("chuck", "Buyer", "sarah", "Seller")
+        val roles: Map<String, String> = mapOf("chuck" to "Buyer", "sarah" to "Seller")
         val signer = loadFromFile("adam", "command/adam")
         val session = SsmSession("Car dealership", "deal20181201", roles, "Used car for 100 dollars.", null)
         val (fcn, args) = StartCommandSigner(signer, session).invoke()
