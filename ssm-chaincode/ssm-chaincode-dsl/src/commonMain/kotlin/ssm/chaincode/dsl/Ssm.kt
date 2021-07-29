@@ -4,6 +4,11 @@ import kotlinx.serialization.Serializable
 import kotlin.js.JsExport
 import kotlin.js.JsName
 
+expect interface SsmDTO {
+	val name: String
+	val transitions: List<SsmTransitionDTO>
+}
+
 /**
  * @D2 model
  * @title SSM Object
@@ -15,12 +20,15 @@ import kotlin.js.JsName
  * A Signing State Machine (SSM) is a smart contract written with a more constrained paradigm than plain programming languages, based on a finite state automaton.
  * @@title SSM
  */
-expect interface SsmDTO {
+@Serializable
+@JsExport
+@JsName("Ssm")
+data class Ssm(
 	/**
 	 * Unique identifier for the SSM.
 	 * @example "ProductLogistic"
 	 */
-	val name: String
+	override val name: String,
 
 	/**
 	 * The definition of the State Machine
@@ -43,13 +51,5 @@ expect interface SsmDTO {
 	 * 	}
 	 * ]
 	 */
-	val transitions: List<SsmTransitionDTO>
-}
-
-@Serializable
-@JsExport
-@JsName("Ssm")
-data class Ssm(
-	override val name: String,
 	override val transitions: List<SsmTransition>,
 ): SsmDTO
