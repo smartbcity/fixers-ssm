@@ -2,7 +2,7 @@ package ssm.couchdb.dsl
 
 import ssm.chaincode.dsl.SsmAgent
 import ssm.chaincode.dsl.SsmGrant
-import ssm.chaincode.dsl.SsmSessionStateBase
+import ssm.chaincode.dsl.SsmSessionState
 import kotlin.reflect.KClass
 
 sealed class DocType<T: Any>(
@@ -13,5 +13,5 @@ sealed class DocType<T: Any>(
 	object User: DocType<SsmAgent>("user", SsmAgent::class)
 	object Grant: DocType<SsmGrant>("grant", SsmGrant::class)
 	object Ssm: DocType<ssm.chaincode.dsl.Ssm>("ssm", ssm.chaincode.dsl.Ssm::class)
-	object State: DocType<SsmSessionStateBase>("state", SsmSessionStateBase::class)
+	object State: DocType<SsmSessionState>("state", SsmSessionState::class)
 }

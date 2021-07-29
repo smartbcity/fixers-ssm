@@ -1427,11 +1427,12 @@
     prop-types "^15.6.1"
     react-lifecycles-compat "^3.0.4"
 
-"@smartb/archetypes-ui-documentation@^0.1.44":
-  version "0.1.44"
-  resolved "https://registry.yarnpkg.com/@smartb/archetypes-ui-documentation/-/archetypes-ui-documentation-0.1.44.tgz#83e5c41e16f7668c0970c3bc807e26422ab6e4df"
-  integrity sha512-RSGnjTPuSJSREJ2zxAedXSHQirt0pNH1GNLDD6fI6A744IU2SscGEzSZKuR9qWge6HZ2E76TeNLn54pUNyobcw==
+"@smartb/archetypes-ui-documentation@^0.1.46":
+  version "0.1.46"
+  resolved "https://registry.yarnpkg.com/@smartb/archetypes-ui-documentation/-/archetypes-ui-documentation-0.1.46.tgz#2ed8529ced8024a8ac356d07ce2386232a256955"
+  integrity sha512-EqXQiy4HfYAmWvsbSQS53M+brKe9aGPcKbnLThdzCAY7LB83LBhA1eXVLLUN0ZRFnur6rQ/AV8+9UL0fyoGPug==
   dependencies:
+    "@smartb/archetypes-ui-themes" "^0.1.46"
     clsx "^1.1.1"
     github-markdown-css "^4.0.0"
     react-markdown "^6.0.2"
@@ -1440,10 +1441,10 @@
     rehype-sanitize "^4.0.0"
     remark-gfm "^1.0.0"
 
-"@smartb/archetypes-ui-themes@^0.1.44":
-  version "0.1.44"
-  resolved "https://registry.yarnpkg.com/@smartb/archetypes-ui-themes/-/archetypes-ui-themes-0.1.44.tgz#f30e00a3f9f558dce34785f0dc14aab38cc29ed5"
-  integrity sha512-oBChQ+RSFHfsC29JBhQqNdgqHvCDfuSZKMA6QH+bEGaPzua3jXqbLq4UbzH6Ik6fb6MY23s/chE+GWrzycaPvw==
+"@smartb/archetypes-ui-themes@^0.1.46":
+  version "0.1.46"
+  resolved "https://registry.yarnpkg.com/@smartb/archetypes-ui-themes/-/archetypes-ui-themes-0.1.46.tgz#aeef04ddeeb6f870193e6b322c6f0e1e7071f2a4"
+  integrity sha512-/dM0ozOcC16ZLRiiIoj7LrARXwVHecPYsbJt1xqr9N5mCCUUP7q/RgEwG0f/iL+b/OGxEpqv76d199laNNwqAw==
 
 "@storybook/addon-actions@6.3.0-rc.10", "@storybook/addon-actions@^6.3.0-rc.10":
   version "6.3.0-rc.10"

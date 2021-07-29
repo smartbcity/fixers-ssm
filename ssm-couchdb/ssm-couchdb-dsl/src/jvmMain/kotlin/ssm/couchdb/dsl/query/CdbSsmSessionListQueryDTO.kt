@@ -1,6 +1,6 @@
 package ssm.couchdb.dsl.query
 
-import ssm.chaincode.dsl.SsmSessionStateBase
+import ssm.chaincode.dsl.SsmSessionState
 import ssm.couchdb.dsl.CdbQueryDTO
 
 actual interface CdbSsmSessionListQueryDTO : CdbQueryDTO {
@@ -10,5 +10,5 @@ actual interface CdbSsmSessionListQueryDTO : CdbQueryDTO {
 }
 
 actual interface CdbSsmSessionListQueryResultDTO {
-	actual val sessions: Array<SsmSessionStateBase>
+	actual val sessions: Array<SsmSessionState>
 }

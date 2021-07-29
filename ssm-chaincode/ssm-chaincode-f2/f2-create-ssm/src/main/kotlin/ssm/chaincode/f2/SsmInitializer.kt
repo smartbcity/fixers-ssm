@@ -3,8 +3,8 @@ package ssm.chaincode.f2
 import kotlinx.coroutines.future.await
 import ssm.chaincode.client.SsmClient
 import ssm.chaincode.dsl.InvokeReturn
-import ssm.chaincode.dsl.SsmAgent
 import ssm.chaincode.dsl.Ssm
+import ssm.chaincode.dsl.SsmAgent
 import ssm.sdk.sign.model.SignerAdmin
 
 class SsmInitializer(
@@ -12,14 +12,14 @@ class SsmInitializer(
 	private val signerAdmin: SignerAdmin
 ) {
 
-    suspend fun init(agent: SsmAgent, ssmBase: Ssm): List<InvokeReturn> {
+    suspend fun init(agent: SsmAgent, ssm: Ssm): List<InvokeReturn> {
         val retInitUser = initUser(agent)
-        val retInitSsm = initSsm(ssmBase)
+        val retInitSsm = initSsm(ssm)
         return listOfNotNull(retInitUser, retInitSsm)
     }
 
-    suspend fun initSsm(ssmBase: Ssm): InvokeReturn? {
-        return createIfNotExist(ssmBase, { this.fetchSsm(ssmBase.name) }, { this.createSsm(it) })
+    suspend fun initSsm(ssm: Ssm): InvokeReturn? {
+        return createIfNotExist(ssm, { this.fetchSsm(ssm.name) }, { this.createSsm(it) })
     }
 
     suspend fun initUser(user: SsmAgent): InvokeReturn? {
@@ -40,9 +40,9 @@ class SsmInitializer(
             create(objToCreate)
     }
 
-    private suspend fun createSsm(ssmBase: Ssm): InvokeReturn {
+    private suspend fun createSsm(ssm: Ssm): InvokeReturn {
         try {
-            return ssmClient.create(signerAdmin, ssmBase).await()
+            return ssmClient.create(signerAdmin, ssm).await()
         } catch (e: Exception) {
             throw RuntimeException(e)
         }

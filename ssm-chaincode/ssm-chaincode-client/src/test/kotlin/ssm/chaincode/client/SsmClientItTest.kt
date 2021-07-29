@@ -3,13 +3,23 @@ package ssm.chaincode.client
 import com.google.common.collect.ImmutableMap
 import org.assertj.core.api.Assertions
 import org.assertj.core.util.Lists
-import org.junit.jupiter.api.*
+import org.junit.jupiter.api.AfterEach
+import org.junit.jupiter.api.BeforeAll
 import org.junit.jupiter.api.MethodOrderer.OrderAnnotation
-import ssm.chaincode.dsl.*
+import org.junit.jupiter.api.Order
+import org.junit.jupiter.api.Test
+import org.junit.jupiter.api.TestMethodOrder
+import ssm.chaincode.dsl.InvokeReturn
+import ssm.chaincode.dsl.Ssm
+import ssm.chaincode.dsl.SsmAgent
+import ssm.chaincode.dsl.SsmContext
+import ssm.chaincode.dsl.SsmSession
+import ssm.chaincode.dsl.SsmSessionState
+import ssm.chaincode.dsl.SsmTransition
 import ssm.chaincode.dsl.blockchain.BlockDTO
 import ssm.chaincode.dsl.blockchain.TransactionDTO
 import ssm.sdk.sign.model.Signer
-import java.util.*
+import java.util.UUID
 import java.util.concurrent.CompletableFuture
 
 @TestMethodOrder(OrderAnnotation::class)
@@ -194,7 +204,7 @@ class SsmClientItTest {
 		val sesReq = client.getSession(
 			sessionName)
 		val state = sesReq.get()
-		val stateExpected = SsmSessionStateBase(ssmName,
+		val stateExpected = SsmSessionState(ssmName,
 			sessionName, Companion.session.roles, "100 dollars 1978 Camaro", privateMessage, sell, 1, 1)
 		Assertions.assertThat(state).isEqualTo(stateExpected)
 		val expectedMessage = stateExpected.getPrivateMessage(signerUser1)
@@ -237,7 +247,7 @@ class SsmClientItTest {
 		val sesReq = client.getSession(
 			sessionName)
 		val state = sesReq.get()
-		val stateExcpected = SsmSessionStateBase(ssmName,
+		val stateExcpected = SsmSessionState(ssmName,
 			sessionName, Companion.session.roles, "Deal !", emptyMap(), buy, 2, 2)
 		Assertions.assertThat(state).isEqualTo(stateExcpected)
 	}

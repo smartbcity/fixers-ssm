@@ -6,24 +6,45 @@ import kotlinx.coroutines.flow.asFlow
 import kotlinx.coroutines.flow.toList
 import org.springframework.context.annotation.Bean
 import org.springframework.stereotype.Service
-import ssm.tx.dsl.config.TxSsmLocationProperties
-import ssm.tx.dsl.SsmApiFinder
-import ssm.tx.dsl.model.TxSsmSession
-import ssm.tx.dsl.model.TxSsmSessionId
-import ssm.tx.dsl.model.TxSsmSessionState
 import ssm.api.model.toTxSession
 import ssm.api.model.toTxSsm
 import ssm.chaincode.dsl.Ssm
-import ssm.chaincode.dsl.SsmSessionStateBase
+import ssm.chaincode.dsl.SsmSessionState
 import ssm.chaincode.dsl.SsmSessionStateLog
 import ssm.chaincode.dsl.blockchain.Transaction
 import ssm.chaincode.dsl.blockchain.TransactionId
-import ssm.chaincode.dsl.query.*
 import ssm.chaincode.dsl.query.SsmGetQuery
 import ssm.chaincode.dsl.query.SsmGetQueryFunction
-import ssm.couchdb.dsl.query.*
+import ssm.chaincode.dsl.query.SsmGetSessionLogsQuery
+import ssm.chaincode.dsl.query.SsmGetSessionLogsQueryFunction
+import ssm.chaincode.dsl.query.SsmGetSessionQuery
+import ssm.chaincode.dsl.query.SsmGetSessionQueryFunction
+import ssm.chaincode.dsl.query.SsmGetTransactionQuery
+import ssm.chaincode.dsl.query.SsmGetTransactionQueryFunction
+import ssm.couchdb.dsl.query.CdbSsmListQuery
+import ssm.couchdb.dsl.query.CdbSsmListQueryFunction
+import ssm.couchdb.dsl.query.CdbSsmListQueryResultDTO
+import ssm.couchdb.dsl.query.CdbSsmSessionListQuery
+import ssm.couchdb.dsl.query.CdbSsmSessionListQueryFunction
+import ssm.tx.dsl.SsmApiFinder
 import ssm.tx.dsl.config.TxSsmConfig
-import ssm.tx.dsl.features.query.*
+import ssm.tx.dsl.config.TxSsmLocationProperties
+import ssm.tx.dsl.features.query.TxQueryDTO
+import ssm.tx.dsl.features.query.TxSsmGetQueryFunction
+import ssm.tx.dsl.features.query.TxSsmGetQueryResult
+import ssm.tx.dsl.features.query.TxSsmListQueryFunction
+import ssm.tx.dsl.features.query.TxSsmListQueryResult
+import ssm.tx.dsl.features.query.TxSsmSessionGetQueryFunction
+import ssm.tx.dsl.features.query.TxSsmSessionGetQueryResult
+import ssm.tx.dsl.features.query.TxSsmSessionListQueryFunction
+import ssm.tx.dsl.features.query.TxSsmSessionListQueryResult
+import ssm.tx.dsl.features.query.TxSsmSessionLogGetQueryFunction
+import ssm.tx.dsl.features.query.TxSsmSessionLogGetQueryResult
+import ssm.tx.dsl.features.query.TxSsmSessionLogListQueryFunction
+import ssm.tx.dsl.features.query.TxSsmSessionLogListQueryResult
+import ssm.tx.dsl.model.TxSsmSession
+import ssm.tx.dsl.model.TxSsmSessionId
+import ssm.tx.dsl.model.TxSsmSessionState
 
 @Service
 class SsmApiFinderService(
@@ -66,7 +87,7 @@ class SsmApiFinderService(
 		)
 
 		ssmGetQueryFunction(command)
-			.ssmBase
+			.ssm
 			?.toTxSsm()
 			.let(::TxSsmGetQueryResult)
 	}
@@ -182,7 +203,7 @@ class SsmApiFinderService(
 		}
 	}
 
-	private suspend fun SsmSessionStateBase.toTxSession(ssmConfig: TxSsmLocationProperties, bearerToken: String?): TxSsmSession {
+	private suspend fun SsmSessionState.toTxSession(ssmConfig: TxSsmLocationProperties, bearerToken: String?): TxSsmSession {
 		val sessionLogs = getSessionLogs(session, ssmConfig, bearerToken)
 
 		val firstTransactionId = sessionLogs.minByOrNull { sessionLog -> sessionLog.state.iteration }?.txId
