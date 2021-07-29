@@ -1,28 +1,26 @@
 package ssm.chaincode.dsl.query
 
 import f2.dsl.cqrs.Event
-import f2.dsl.function.F2Function
-import f2.dsl.function.F2FunctionRemote
+import f2.dsl.fnc.F2Function
 import kotlinx.serialization.Serializable
-import ssm.chaincode.dsl.SsmCommand
+import ssm.chaincode.dsl.SsmCommandDTO
 import kotlin.js.JsExport
 import kotlin.js.JsName
 
 typealias SsmListAdminQueryFunction = F2Function<SsmListAdminQuery, SsmListAdminResult>
-typealias SsmListAdminQueryRemoteFunction = F2FunctionRemote<SsmListAdminQuery, SsmListAdminResult>
 
-@JsExport
 @Serializable
+@JsExport
 @JsName("SsmListAdminQuery")
 class SsmListAdminQuery(
 		override val baseUrl: String,
 		override val channelId: String?,
 		override val chaincodeId: String?,
 		override val bearerToken: String? = null,
-): SsmCommand
+): SsmCommandDTO
 
-@JsExport
 @Serializable
+@JsExport
 @JsName("SsmListAdminResult")
 class SsmListAdminResult(
 	val values: Array<String>

@@ -1,7 +1,7 @@
 package ssm.tx.dsl.features.query
 
-import f2.dsl.function.F2Function
-import f2.dsl.function.F2FunctionRemote
+import f2.dsl.fnc.F2Function
+import kotlinx.serialization.Serializable
 import ssm.chaincode.dsl.blockchain.TransactionId
 import ssm.tx.dsl.model.TxSsmSessionId
 import ssm.tx.dsl.model.TxSsmSessionStateDTO
@@ -9,17 +9,15 @@ import kotlin.js.JsExport
 import kotlin.js.JsName
 
 typealias TxSsmSessionLogGetQueryFunction = F2Function<TxSsmSessionLogGetQueryDTO, TxSsmSessionLogGetQueryResultDTO>
-typealias TxSsmSessionLogGetQueryRemoteFunction = F2FunctionRemote<TxSsmSessionLogGetQueryDTO, TxSsmSessionLogGetQueryResultDTO>
 
-@JsExport
-@JsName("TxSsmSessionLogGetQueryDTO")
-interface TxSsmSessionLogGetQueryDTO: TxQueryDTO {
+expect interface TxSsmSessionLogGetQueryDTO: TxQueryDTO {
     val sessionId: TxSsmSessionId
     val txId: TransactionId
     override val ssm: SsmName
     override val bearerToken: String?
 }
 
+@Serializable
 @JsExport
 @JsName("TxSsmSessionLogGetQuery")
 class TxSsmSessionLogGetQuery(
@@ -29,12 +27,11 @@ class TxSsmSessionLogGetQuery(
 	override val bearerToken: String?
 ): TxSsmSessionLogGetQueryDTO
 
-@JsExport
-@JsName("TxSsmSessionLogGetQueryResultDTO")
-interface TxSsmSessionLogGetQueryResultDTO{
+expect interface TxSsmSessionLogGetQueryResultDTO{
 	val ssmSessionState: TxSsmSessionStateDTO?
 }
 
+@Serializable
 @JsExport
 @JsName("TxSsmSessionLogGetQueryResult")
 class TxSsmSessionLogGetQueryResult(

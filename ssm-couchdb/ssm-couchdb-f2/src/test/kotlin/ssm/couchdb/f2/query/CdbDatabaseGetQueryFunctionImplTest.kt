@@ -1,6 +1,6 @@
 package ssm.couchdb.f2.query
 
-import f2.function.spring.invokeSingle
+import f2.dsl.fnc.invoke
 import kotlinx.coroutines.runBlocking
 import org.assertj.core.api.Assertions
 import org.junit.jupiter.api.Test
@@ -25,7 +25,7 @@ internal class CdbDatabaseGetQueryFunctionImplTest : FunctionTestBase() {
 
 	@Test
 	fun `must return all databases`(): Unit = runBlocking {
-		val db = cdbDatabaseGetQueryFunction.invokeSingle(
+		val db = cdbDatabaseGetQueryFunction.invoke(
 			CdbDatabaseGetQuery(
 				dbName = ssmName, dbConfig = dbConfig
 			)

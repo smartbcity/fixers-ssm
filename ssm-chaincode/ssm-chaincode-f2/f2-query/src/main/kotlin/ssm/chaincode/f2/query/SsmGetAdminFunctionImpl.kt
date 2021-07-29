@@ -12,7 +12,7 @@ class SsmGetAdminFunctionImpl {
 
 	@Bean
 	fun ssmGetAdminFunction(): SsmGetAdminFunction = ssmF2Function { cmd, ssmClient ->
-		val sessionState = ssmClient.getAdmin(cmd.name).await().orElse( null)
+		val sessionState = ssmClient.getAdmin(cmd.name).await()
 		SsmGetAdminResult(sessionState)
 	}
 

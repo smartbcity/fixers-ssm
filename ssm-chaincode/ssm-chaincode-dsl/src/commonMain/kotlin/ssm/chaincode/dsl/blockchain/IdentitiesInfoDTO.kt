@@ -1,18 +1,18 @@
 package ssm.chaincode.dsl.blockchain
 
+import kotlinx.serialization.Serializable
 import kotlin.js.JsExport
 import kotlin.js.JsName
 
-@JsExport
-@JsName("IdentitiesInfo")
-interface IdentitiesInfo {
+expect interface IdentitiesInfoDTO {
     val id: String
     val mspid: String
 }
 
+@Serializable
 @JsExport
-@JsName("IdentitiesInfoBase")
-class IdentitiesInfoBase(
+@JsName("IdentitiesInfo")
+class IdentitiesInfo(
     override val id: String,
     override val mspid: String
-): IdentitiesInfo
+): IdentitiesInfoDTO

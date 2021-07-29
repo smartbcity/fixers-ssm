@@ -1,18 +1,18 @@
 package ssm.tx.dsl.model
 
+import kotlinx.serialization.Serializable
+import ssm.chaincode.dsl.SsmAgentDTO
 import ssm.chaincode.dsl.SsmAgent
-import ssm.chaincode.dsl.SsmAgentBase
 import kotlin.js.JsExport
 import kotlin.js.JsName
 
-@JsExport
-@JsName("TxSsmUserDTO")
-interface TxSsmUserDTO {
-    val agent: SsmAgent
+expect interface TxSsmUserDTO {
+    val agent: SsmAgentDTO
 }
 
+@Serializable
 @JsExport
 @JsName("TxSsmUser")
 class TxSsmUser(
-    override val agent: SsmAgentBase,
+    override val agent: SsmAgent,
 ): TxSsmUserDTO

@@ -1,25 +1,22 @@
 package ssm.couchdb.dsl.query
 
-import f2.dsl.function.F2Function
-import f2.dsl.function.F2FunctionRemote
-import ssm.couchdb.dsl.CdbQuery
+import f2.dsl.fnc.F2Function
+import kotlinx.serialization.Serializable
+import ssm.couchdb.dsl.CdbQueryDTO
 import ssm.couchdb.dsl.Database
 import ssm.couchdb.dsl.DatabaseDTO
-import ssm.couchdb.dsl.DatabaseName
 import kotlin.js.JsExport
 import kotlin.js.JsName
 
 typealias CdbDatabaseGetQueryFunction = F2Function<CdbDatabaseGetQueryDTO, CdbDatabaseGetQueryResultDTO>
-typealias CdbDatabaseGetQueryFunctionRemote = F2FunctionRemote<CdbDatabaseGetQueryDTO, CdbDatabaseGetQueryResultDTO>
 
 
-@JsExport
-@JsName("CdbDatabaseGetQueryDTO")
-interface CdbDatabaseGetQueryDTO : CdbQuery {
+expect interface CdbDatabaseGetQueryDTO : CdbQueryDTO {
 	val dbName: String
 	override val dbConfig: String
 }
 
+@Serializable
 @JsExport
 @JsName("CdbDatabaseGetQuery")
 class CdbDatabaseGetQuery(
@@ -28,12 +25,11 @@ class CdbDatabaseGetQuery(
 ) : CdbDatabaseGetQueryDTO
 
 
-@JsExport
-@JsName("CdbDatabaseGetQueryResultDTO")
-interface CdbDatabaseGetQueryResultDTO {
+expect interface CdbDatabaseGetQueryResultDTO {
 	val item: DatabaseDTO
 }
 
+@Serializable
 @JsExport
 @JsName("CdbSsmDatabaseGetQueryResult")
 class CdbSsmDatabaseGetQueryResult(

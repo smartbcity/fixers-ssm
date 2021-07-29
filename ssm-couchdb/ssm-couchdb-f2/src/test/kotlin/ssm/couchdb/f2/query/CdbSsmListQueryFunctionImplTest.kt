@@ -1,6 +1,6 @@
 package ssm.couchdb.f2.query
 
-import f2.function.spring.invokeSingle
+import f2.dsl.fnc.invoke
 import kotlinx.coroutines.runBlocking
 import org.assertj.core.api.Assertions
 import org.junit.jupiter.api.Test
@@ -32,7 +32,7 @@ internal class CdbSsmListQueryFunctionImplTest : FunctionTestBase() {
 	@Test
 	fun `must return all ssm`(): Unit = runBlocking {
 		val command = CdbSsmListQuery(DB_NAME, DB_CONF)
-		val ssmList = cdbSsmListQueryFunction.invokeSingle(command).ssmList
+		val ssmList = cdbSsmListQueryFunction(command).ssmList
 
 		Assertions.assertThat(ssmList).isNotEmpty
 	}

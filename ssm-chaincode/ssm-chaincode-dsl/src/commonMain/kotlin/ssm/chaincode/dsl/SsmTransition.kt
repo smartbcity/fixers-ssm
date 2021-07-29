@@ -4,9 +4,7 @@ import kotlinx.serialization.Serializable
 import kotlin.js.JsExport
 import kotlin.js.JsName
 
-@JsExport
-@JsName("SsmTransition")
-interface SsmTransition {
+expect interface SsmTransitionDTO {
 	val from: Int
 	val to: Int
 	val role: String
@@ -15,10 +13,10 @@ interface SsmTransition {
 
 @Serializable
 @JsExport
-@JsName("SsmTransitionBase")
-data class SsmTransitionBase(
+@JsName("SsmTransition")
+data class SsmTransition(
 	override val from: Int,
 	override val to: Int,
 	override val role: String,
 	override val action: String,
-): SsmTransition
+): SsmTransitionDTO

@@ -39,7 +39,7 @@ class SsmCouchDbClient(
 		val result: Response<FindResult> = cloudant.postFind(findOptions).execute()
 
 		return result.result.docs.mapNotNull { document ->
-			converter.toObject(docType.clazz.java).apply(document.toString()).orElse(null)
+			converter.toObject(docType.clazz.java).apply(document.toString())
 		}
 	}
 

@@ -3,9 +3,8 @@ package ssm.chaincode.client.invoke.command
 import org.assertj.core.api.Assertions
 import org.assertj.core.util.Lists
 import org.junit.jupiter.api.Test
-import ssm.chaincode.client.invoke.command.CreateCommandSigner
-import ssm.chaincode.dsl.SsmBase
-import ssm.chaincode.dsl.SsmTransitionBase
+import ssm.chaincode.dsl.Ssm
+import ssm.chaincode.dsl.SsmTransition
 import ssm.sdk.sign.crypto.KeyPairReader.Companion.loadKeyPair
 import ssm.sdk.sign.crypto.Sha256RSASigner.Companion.rsaSignAsB64
 import ssm.sdk.sign.model.Signer
@@ -34,9 +33,9 @@ class CreateCommandTest {
     fun testExecute() {
         val adamPair = loadKeyPair("command/adam")
         val signer = Signer("adam", adamPair)
-        val sell = SsmTransitionBase(0, 1, "Seller", "Sell")
-        val buy = SsmTransitionBase(1, 2, "Buyer", "Buy")
-        val ssm = SsmBase("dealership", Lists.newArrayList(sell, buy))
+        val sell = SsmTransition(0, 1, "Seller", "Sell")
+        val buy = SsmTransition(1, 2, "Buyer", "Buy")
+        val ssm = Ssm("dealership", Lists.newArrayList(sell, buy))
         val (fcn, args) = CreateCommandSigner(signer, ssm).invoke()
         args.forEach(Consumer { s: String? -> println(s) })
         /**

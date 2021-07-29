@@ -1,6 +1,6 @@
 package ssm.couchdb.f2.query
 
-import f2.function.spring.invokeSingle
+import f2.dsl.fnc.invoke
 import kotlinx.coroutines.runBlocking
 import org.assertj.core.api.Assertions
 import org.junit.jupiter.api.Test
@@ -33,7 +33,7 @@ internal class CdbSsmSessionListQueryFunctionImplTest : FunctionTestBase() {
 //		val expectedSsmSessionListSize = ssmCouchDbClient.getCount(DB_NAME, DocType.State)
 
 		val command = CdbSsmSessionListQuery(DB_NAME, null, DB_CONF)
-		val sessions = cdbSsmSessionListQueryFunction.invokeSingle(command).sessions
+		val sessions = cdbSsmSessionListQueryFunction(command).sessions
 
 		Assertions.assertThat(sessions).isNotEmpty
 	}

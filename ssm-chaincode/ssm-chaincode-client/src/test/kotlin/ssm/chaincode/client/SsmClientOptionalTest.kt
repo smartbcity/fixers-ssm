@@ -13,7 +13,7 @@ class SsmClientOptionalTest {
         get() {
             val agentRet = client!!.getAdmin(UUID.randomUUID().toString())
             val agentFormClient = agentRet.get()
-            Assertions.assertThat(agentFormClient).isEmpty
+            Assertions.assertThat(agentFormClient).isNotNull
         }
 
     @get:Throws(Exception::class)
@@ -22,7 +22,7 @@ class SsmClientOptionalTest {
         get() {
             val agentRet = client!!.getAgent(UUID.randomUUID().toString())
             val agentFormClient = agentRet.get()
-            Assertions.assertThat(agentFormClient).isEmpty
+            Assertions.assertThat(agentFormClient).isNotNull
         }
 
     @get:Throws(Exception::class)
@@ -31,7 +31,7 @@ class SsmClientOptionalTest {
         get() {
             val ssmReq = client!!.getSsm(UUID.randomUUID().toString())
             val ssm = ssmReq.get()
-            Assertions.assertThat(ssm).isEmpty
+            Assertions.assertThat(ssm).isNotNull
         }
 
     @get:Throws(Exception::class)
@@ -40,7 +40,7 @@ class SsmClientOptionalTest {
         get() {
             val ses = client!!.getSession(UUID.randomUUID().toString())
             val sesReq = ses.get()
-            Assertions.assertThat(sesReq).isEmpty
+            Assertions.assertThat(sesReq).isNotNull
         }
 
     companion object {

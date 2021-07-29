@@ -9,32 +9,32 @@ import java.security.PrivateKey
 import java.security.PublicKey
 
 @Throws(CryptoException::class)
-fun SsmContextBase.addPrivateMessage(value: String, agent: SsmAgentBase): SsmContextBase {
+fun SsmContext.addPrivateMessage(value: String, agent: SsmAgent): SsmContext {
 	return addPrivateMessage(value, agent.name, agent.getPubAsKey())
 }
 
 @Throws(CryptoException::class)
-fun SsmContextBase.addPrivateMessage(value: String, name: String, publicKey: PublicKey): SsmContextBase {
+fun SsmContext.addPrivateMessage(value: String, name: String, publicKey: PublicKey): SsmContext {
 	val newMap = addPrivate(value, publicKey, name)
 	return this.copy(private = newMap)
 }
 
 
 @Throws(CryptoException::class)
-fun SsmSessionBase.addPrivateMessage(value: String, agent: SsmAgentBase) {
+fun SsmSession.addPrivateMessage(value: String, agent: SsmAgent) {
 	addPrivateMessage(value, agent.name, agent.getPubAsKey())
 }
 
 @Throws(CryptoException::class)
-fun SsmSessionBase.addPrivateMessage(value: String, name: String, publicKey: PublicKey): SsmSessionBase {
+fun SsmSession.addPrivateMessage(value: String, name: String, publicKey: PublicKey): SsmSession {
 	val newPrivate = addPrivate(value, publicKey, name)
-	return SsmSessionBase(
+	return SsmSession(
 		ssm, session, roles, public, newPrivate
 	)
 }
 
 @Throws(CryptoException::class)
-fun SsmSessionStateBase.addPrivateMessage(value: String, agent: SsmAgentBase) {
+fun SsmSessionStateBase.addPrivateMessage(value: String, agent: SsmAgent) {
 	addPrivateMessage(value, agent.name, agent.getPubAsKey())
 }
 

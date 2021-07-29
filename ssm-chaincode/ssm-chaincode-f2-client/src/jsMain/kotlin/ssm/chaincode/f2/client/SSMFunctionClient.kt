@@ -13,8 +13,7 @@ import kotlin.js.Promise
 @JsExport
 @JsName("ssmClient")
 fun ssmClient(protocol: Protocol, host: String, port: Int, path: String? = null): Promise<SSMFunctionClient> =
-	GlobalScope.promise {
-		val s2Client = F2ClientBuilder.get(protocol, host, port, path)
+	F2ClientBuilder.get(protocol, host, port, path).then { s2Client->
 		SSMFunctionClient(s2Client)
 	}
 

@@ -1,38 +1,35 @@
 package ssm.tx.dsl.features.query
 
-import ssm.tx.dsl.model.TxSsmSessionDTO
+import f2.dsl.fnc.F2Function
+import kotlinx.serialization.Serializable
 import ssm.tx.dsl.model.TxSsmSession
-import f2.dsl.function.F2Function
-import f2.dsl.function.F2FunctionRemote
+import ssm.tx.dsl.model.TxSsmSessionDTO
 import kotlin.js.JsExport
 import kotlin.js.JsName
 
 typealias TxSsmSessionListQueryFunction = F2Function<TxSsmSessionListQueryDTO, TxSsmSessionListQueryResultDTO>
-typealias TxSsmSessionListQueryRemoteFunction = F2FunctionRemote<TxSsmSessionListQueryDTO, TxSsmSessionListQueryResultDTO>
 
 
-@JsExport
-@JsName("TxSsmSessionListQueryDTO")
-interface TxSsmSessionListQueryDTO: TxQueryDTO {
-    override val ssm: String
+expect interface TxSsmSessionListQueryDTO : TxQueryDTO {
+	override val ssm: String
 }
 
+@Serializable
 @JsExport
 @JsName("TxSsmSessionListQuery")
 class TxSsmSessionListQuery(
-    override val ssm: String,
-    override val bearerToken: String?
-): TxSsmSessionListQueryDTO
+	override val ssm: String,
+	override val bearerToken: String?,
+) : TxSsmSessionListQueryDTO
 
 
-@JsExport
-@JsName("TxSsmSessionListQueryResultDTO")
-interface TxSsmSessionListQueryResultDTO{
-    val list: List<TxSsmSessionDTO>
+expect interface TxSsmSessionListQueryResultDTO {
+	val list: List<TxSsmSessionDTO>
 }
 
+@Serializable
 @JsExport
 @JsName("TxSsmSessionListQueryResult")
 class TxSsmSessionListQueryResult(
-    override val list: List<TxSsmSession>
-): TxSsmSessionListQueryResultDTO
+	override val list: List<TxSsmSession>,
+) : TxSsmSessionListQueryResultDTO

@@ -4,25 +4,23 @@ import kotlinx.serialization.Serializable
 import kotlin.js.JsExport
 import kotlin.js.JsName
 
-@JsExport
-@JsName("SsmAgent")
-interface SsmAgent {
+expect interface SsmAgentDTO {
 	val name: String
 	val pub: ByteArray
 }
 
 @Serializable
 @JsExport
-@JsName("SsmAgentBase")
-data class SsmAgentBase(
+@JsName("SsmAgent")
+data class SsmAgent(
 	override val name: String,
 	override val pub: ByteArray,
-): SsmAgent {
+): SsmAgentDTO {
 	override fun equals(other: Any?): Boolean {
 		if (this === other) return true
 		if (other == null || this::class != other::class) return false
 
-		other as SsmAgentBase
+		other as SsmAgent
 
 		if (name != other.name) return false
 		if (!pub.contentEquals(other.pub)) return false

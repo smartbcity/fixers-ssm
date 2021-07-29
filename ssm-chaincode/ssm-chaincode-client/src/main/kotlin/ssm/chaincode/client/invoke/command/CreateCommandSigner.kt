@@ -1,6 +1,6 @@
 package ssm.chaincode.client.invoke.command
 
-import ssm.chaincode.dsl.SsmBase
+import ssm.chaincode.dsl.Ssm
 import ssm.sdk.sign.model.Signer
 
 //
@@ -31,7 +31,7 @@ import ssm.sdk.sign.model.Signer
 //}
 //
 //echo "Usage: create <command> <signer>"
-class CreateCommandSigner(signer: Signer?, ssm: SsmBase?) : CommandSigner<SsmBase?>(signer!!, COMMAND_NAME, ssm) {
+class CreateCommandSigner(signer: Signer?, ssm: Ssm?) : CommandSigner<Ssm?>(signer!!, COMMAND_NAME, ssm) {
     companion object {
         const val COMMAND_NAME = "create"
     }
