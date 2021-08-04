@@ -8,6 +8,6 @@ actual interface TxSsmSessionGetQueryDTO: TxQueryDTO {
 	actual override val bearerToken: String?
 }
 
-actual interface TxSsmSessionQueryGetResultDTO {
+actual interface TxSsmSessionGetQueryResultDTO {
 	actual val session: TxSsmSessionDTO?
 }

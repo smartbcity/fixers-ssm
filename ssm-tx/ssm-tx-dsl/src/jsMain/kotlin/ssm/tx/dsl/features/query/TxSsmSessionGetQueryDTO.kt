@@ -11,7 +11,7 @@ actual external interface TxSsmSessionGetQueryDTO: TxQueryDTO {
 }
 
 @JsExport
-@JsName("TxSsmSessionQueryGetResultDTO")
-actual external interface TxSsmSessionQueryGetResultDTO {
+@JsName("TxSsmSessionGetQueryResultDTO")
+actual external interface TxSsmSessionGetQueryResultDTO {
 	actual val session: TxSsmSessionDTO?
 }

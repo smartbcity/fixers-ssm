@@ -7,7 +7,7 @@ import ssm.tx.dsl.model.TxSsmSessionDTO
 import kotlin.js.JsExport
 import kotlin.js.JsName
 
-typealias TxSsmSessionGetQueryFunction = F2Function<TxSsmSessionGetQueryDTO, TxSsmSessionQueryGetResultDTO>
+typealias TxSsmSessionGetQueryFunction = F2Function<TxSsmSessionGetQueryDTO, TxSsmSessionGetQueryResultDTO>
 
 expect interface TxSsmSessionGetQueryDTO: TxQueryDTO {
     val sessionId: String
@@ -25,7 +25,7 @@ class TxSsmSessionGetQuery(
 ): TxSsmSessionGetQueryDTO
 
 
-expect interface TxSsmSessionQueryGetResultDTO{
+expect interface TxSsmSessionGetQueryResultDTO{
 	val session: TxSsmSessionDTO?
 }
 
@@ -34,4 +34,4 @@ expect interface TxSsmSessionQueryGetResultDTO{
 @JsName("TxSsmSessionGetQueryResult")
 class TxSsmSessionGetQueryResult(
 	override val session: TxSsmSession?,
-): TxSsmSessionQueryGetResultDTO
+): TxSsmSessionGetQueryResultDTO
