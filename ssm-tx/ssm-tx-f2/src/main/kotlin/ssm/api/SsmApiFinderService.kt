@@ -26,6 +26,7 @@ import ssm.couchdb.dsl.query.CdbSsmListQueryFunction
 import ssm.couchdb.dsl.query.CdbSsmListQueryResultDTO
 import ssm.couchdb.dsl.query.CdbSsmSessionListQuery
 import ssm.couchdb.dsl.query.CdbSsmSessionListQueryFunction
+import ssm.tx.autoconfiguration.SsmConfigProperties
 import ssm.tx.dsl.SsmApiFinder
 import ssm.tx.dsl.config.TxSsmConfig
 import ssm.tx.dsl.config.TxSsmLocationProperties
@@ -54,21 +55,21 @@ class SsmApiFinderService(
 	private val ssmGetSessionQueryFunction: SsmGetSessionQueryFunction,
 	private val ssmGetSessionLogsQueryFunction: SsmGetSessionLogsQueryFunction,
 	private val ssmGetTransactionQueryFunction: SsmGetTransactionQueryFunction,
-	private val txSsmConfig: TxSsmConfig
+	private val ssmConfigProperties: SsmConfigProperties
 ): SsmApiFinder {
 
 	@Bean
 	override fun txSsmListQueryFunction(): TxSsmListQueryFunction = f2Function { _ ->
-		val commands = txSsmConfig.flatMap { (_, ssmConfigs) ->
+		val commands = ssmConfigProperties.list.flatMap { (_, ssmConfigs) ->
 			ssmConfigs.map { (_, ssmConfig) ->
 				CdbSsmListQuery(
 					dbConfig = ssmConfig.couchdb,
 					dbName = ssmConfig.dbName
 				)
 			}
-		}.asFlow()
+		}
 
-		cdbSsmListQueryFunction(commands).toList()
+		cdbSsmListQueryFunction(commands.asFlow()).toList()
 			.flatMap(CdbSsmListQueryResultDTO::ssmList)
 			.map(Ssm::toTxSsm)
 			.let(::TxSsmListQueryResult)
@@ -136,7 +137,7 @@ class SsmApiFinderService(
 
 
 	private fun getConfig(cmd: TxQueryDTO): TxSsmLocationProperties {
-		return txSsmConfig[cmd.ssm]?.entries?.first()?.value
+		return ssmConfigProperties.list[cmd.ssm]?.entries?.first()?.value
 			?: throw IllegalArgumentException("Configuration of SSM [${cmd.ssm}] not found")
 	}
 

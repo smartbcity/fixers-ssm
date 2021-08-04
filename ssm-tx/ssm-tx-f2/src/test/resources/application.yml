@@ -1,0 +1,75 @@
+server:
+  port: 8082
+
+spring:
+  cloud:
+    function:
+      web:
+        path: /api
+
+ssm:
+  couchdb:
+    peer0_pr-commune:
+      url: http://peer1.pr-commune.smartb.network:5984
+      username: admin
+      password: smartb
+      serviceName: ssm-couchdb-unit
+  list:
+    account:
+      v1_0:
+        baseUrl: http://peer1.pr-commune.smartb.network
+        channel: proudhon
+        chaincode: ssm
+        couchdb: peer0_pr-commune
+        dbName: proudhon_ssm
+#    Delivery:
+#      v0_2:
+#        baseUrl: http://peer0.pr-commune.smartb.network
+#        channel: proudhon
+#        chaincode: ssm
+#        couchdb: peer0_pr-commune
+#        dbName: proudhon_ssm
+#    MobilityImpactSsm:
+#      v1_0:
+#        baseUrl: http://peer0.pr-commune.smartb.network
+#        channel: proudhon
+#        chaincode: ssm
+#        couchdb: peer0_pr-commune
+#        dbName: proudhon_ssm
+#    Negociation:
+#      v1_0:
+#        baseUrl: http://peer0.pr-commune.smartb.network
+#        channel: proudhon
+#        chaincode: ssm
+#        couchdb: peer0_pr-commune
+#        dbName: proudhon_ssm
+
+
+#couchdb:
+#  peer0_pr-commune:
+#    url: http://peer0.pr-commune.smartb.network:5984
+#    username: admin
+#    password: smartb
+#    serviceName: ssm-couchdb-unit
+#
+#chaincode:
+#  peer0_pr-commune_proudhon_ssm:
+#    baseUrl: http://peer0.pr-commune.smartb.network
+#    channel: proudhon
+#    chaincode: ssm
+#    couchdb: peer0_pr-commune
+#    dbName: proudhon_ssm
+#
+#ssm:
+#  account:
+#    v1_0:
+#      - peer0_pr-commune_proudhon_ssm
+#  Delivery:
+#    v0_2:
+#      - peer0_pr-commune_proudhon_ssm
+#  MobilityImpactSsm:
+#    v1_0:
+#      - peer0_pr-commune_proudhon_ssm
+#  Negociation:
+#    v1_0:
+#      - peer0_pr-commune_proudhon_ssm
