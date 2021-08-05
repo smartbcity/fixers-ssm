@@ -13,6 +13,7 @@ import kotlin.js.JsName
  * @d2 function
  * @parent [Ssm]
  * @title Get SSM
+ * @order 10
  */
 typealias SsmGetQueryFunction = F2Function<SsmGetQuery, SsmGetResult>
 

@@ -12,14 +12,15 @@ import kotlin.js.JsName
  * Retrieves a list of the existing SSMs
  * @d2 function
  * @parent [Ssm]
- * @title Get list SSM
+ * @title List SSMs
+ * @order 20
  */
 typealias SsmListSsmQueryFunction = F2Function<SsmListSsmQuery, SsmListSsmResult>
 
 /**
  * @d2 query
  * @parent [SsmListSsmQueryFunction]
- * @title Get list SSM: Parameters
+ * @title List SSMs: Parameters
  */
 @Serializable
 @JsExport
@@ -34,7 +35,7 @@ class SsmListSsmQuery(
 /**
  * @d2 event
  * @parent [SsmListSsmQueryFunction]
- * @title Get list SSM: Result
+ * @title List SSMs: Result
  */
 @Serializable
 @JsExport

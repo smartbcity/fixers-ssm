@@ -7,12 +7,35 @@ import kotlin.js.JsName
 typealias BlockId = Long
 
 expect interface BlockDTO {
+    /**
+     * Identifier of the block
+     * @example 10
+     */
     val blockId: BlockId
+
+    /**
+     * Hash of the previous block within the blockchain
+     * @example "TODO"
+     */
     val previousHash: ByteArray
+
+    /**
+     * TODO
+     * @example "TODO"
+     */
     val dataHash: ByteArray
+
+    /**
+     * Transactions within the block
+     */
     val transactions: List<TransactionDTO>
 }
 
+/**
+ * Block of transactions stored within the blockchain
+ * @d2 model
+ * @parent [Transaction]
+ */
 @Serializable
 @JsExport
 @JsName("Block")
