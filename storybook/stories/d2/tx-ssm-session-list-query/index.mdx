@@ -1,0 +1,17 @@
+import { CodeHighlighter, DescriptedCode } from '@smartb/archetypes-ui-documentation'
+import { Meta } from '@storybook/addon-docs/blocks'
+import TxSsmSessionListQueryDesc from './desc.md'
+import TxSsmSessionListQuerySample from './sample.json'
+
+<Meta title="List Sessions: Parameters" parameters={{ previewTabs: { canvas: { hidden: true } } }} />
+
+<DescriptedCode
+  leftElement={<TxSsmSessionListQueryDesc />}
+  rightElement={
+    <CodeHighlighter
+      object={TxSsmSessionListQuerySample}
+      language={"json"}
+      title={"Example"}
+    />
+  }
+/>

@@ -1,0 +1,23 @@
+import { CodeHighlighter, DescriptedCode } from '@smartb/archetypes-ui-documentation'
+import { Meta } from '@storybook/addon-docs/blocks'
+import TxSsmDesc from './desc.md'
+import TxSsmGetQueryFunctionIndex from '../tx-ssm-get-query-function/index.mdx'
+import TxSsmListQueryFunctionIndex from '../tx-ssm-list-query-function/index.mdx'
+import TxSsmSample from './sample.json'
+
+<Meta title="TxSsm" parameters={{ previewTabs: { canvas: { hidden: true } } }} />
+
+<DescriptedCode
+  leftElement={<TxSsmDesc />}
+  rightElement={
+    <CodeHighlighter
+      object={TxSsmSample}
+      language={"json"}
+      title={"Example"}
+    />
+  }
+/>
+
+<TxSsmGetQueryFunctionIndex />
+
+<TxSsmListQueryFunctionIndex />
