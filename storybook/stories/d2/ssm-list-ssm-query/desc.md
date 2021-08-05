@@ -1,6 +1,6 @@
 
 
-## Get list SSM: Parameters  
+### List SSMs: Parameters  
   
 <article>
 

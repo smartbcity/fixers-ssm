@@ -1,6 +1,6 @@
 
 
-## Get list SSM: Result  
+### List SSMs: Result  
   
 <article>
 

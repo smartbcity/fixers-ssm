@@ -1,6 +1,6 @@
 
 
-## Get list SSM  
+## List SSMs  
 
 
 Retrieves a list of the existing SSMs

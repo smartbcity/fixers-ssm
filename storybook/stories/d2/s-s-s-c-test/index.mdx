@@ -1,0 +1,17 @@
+import { CodeHighlighter, DescriptedCode } from '@smartb/archetypes-ui-documentation'
+import { Meta } from '@storybook/addon-docs/blocks'
+import SSSCTestDesc from './desc.md'
+import SSSCTestSample from './sample.json'
+
+<Meta title="SSSCTest" parameters={{ previewTabs: { canvas: { hidden: true } } }} />
+
+<DescriptedCode
+  leftElement={<SSSCTestDesc />}
+  rightElement={
+    <CodeHighlighter
+      object={SSSCTestSample}
+      language={"json"}
+      title={"Example"}
+    />
+  }
+/>

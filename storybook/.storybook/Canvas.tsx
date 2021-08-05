@@ -13,6 +13,9 @@ const useStyles = highLevelStyles()({
             marginTop: '20px',
             marginBottom: '13px',
         },
+        '& .sbdocs-h2, & .sbdocs-h3, & .sbdocs-h4, & .sbdocs-h5, & .sbdocs-h6': {
+            borderBottom: '1px solid rgba(0,0,0,.1)'
+        },
         '& .sbdocs-hr': {
             height: '.15em',
             margin: '15px 0',
