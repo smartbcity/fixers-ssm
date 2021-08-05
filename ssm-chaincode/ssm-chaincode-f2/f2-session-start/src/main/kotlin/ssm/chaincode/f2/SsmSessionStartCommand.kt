@@ -3,7 +3,6 @@ package ssm.chaincode.f2
 import f2.dsl.cqrs.Event
 import f2.dsl.fnc.F2Function
 import ssm.chaincode.dsl.InvokeReturn
-import ssm.chaincode.dsl.Ssm
 import ssm.chaincode.dsl.SsmCommandDTO
 import ssm.chaincode.dsl.SsmSession
 import ssm.sdk.sign.model.SignerAdmin
@@ -38,12 +37,6 @@ class SsmSessionStartCommand(
 	 */
 	val signerAdmin: SignerAdmin,
 ): SsmCommandDTO
-
-/**
- * @d2 command
- * @parent [SsmSessionStartFunction]
- */
-interface SSSCTest: SsmCommandDTO
 
 /**
  * @d2 event
