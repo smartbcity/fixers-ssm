@@ -1,6 +1,6 @@
 
 
-## Get SSM  
+### Get SSM  
 
 
 Retrieves an SSM

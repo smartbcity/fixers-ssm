@@ -1,6 +1,6 @@
 
 
-### Get SSM: Result  
+#### Get SSM: Result  
   
 <article>
 

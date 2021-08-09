@@ -1,6 +1,6 @@
 
 
-### Get Session Logs: Parameters  
+#### Get Session Logs: Parameters  
   
 <article>
 

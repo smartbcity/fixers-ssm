@@ -1,6 +1,6 @@
 
 
-### Get Session: Result  
+#### Get Session: Result  
   
 <article>
 

@@ -1,6 +1,6 @@
 
 
-### Get SSM: Parameters  
+#### Get SSM: Parameters  
   
 <article>
 

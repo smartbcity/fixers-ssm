@@ -1,0 +1,23 @@
+import CdbSsmListQueryFunctionIndex from '../cdb-ssm-list-query-function/index.mdx'
+import CdbSsmSessionListQueryFunctionIndex from '../cdb-ssm-session-list-query-function/index.mdx'
+import { CodeHighlighter, DescriptedCode } from '@smartb/archetypes-ui-documentation'
+import DatabaseDesc from './desc.md'
+import DatabaseSample from './sample.json'
+import { Meta } from '@storybook/addon-docs/blocks'
+
+<Meta title="Database" parameters={{ previewTabs: { canvas: { hidden: true } } }} />
+
+<DescriptedCode
+  leftElement={<DatabaseDesc />}
+  rightElement={
+    <CodeHighlighter
+      object={DatabaseSample}
+      language={"json"}
+      title={"Example"}
+    />
+  }
+/>
+
+<CdbSsmListQueryFunctionIndex />
+
+<CdbSsmSessionListQueryFunctionIndex />

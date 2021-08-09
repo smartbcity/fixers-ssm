@@ -1,6 +1,6 @@
 
 
-### Get Session Log: Result  
+#### Get Session Log: Result  
   
 <article>
 

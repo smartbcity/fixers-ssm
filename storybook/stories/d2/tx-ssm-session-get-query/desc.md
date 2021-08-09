@@ -1,6 +1,6 @@
 
 
-### Get Session: Parameters  
+#### Get Session: Parameters  
   
 <article>
 
