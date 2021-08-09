@@ -7,13 +7,29 @@ import ssm.couchdb.dsl.CdbQueryDTO
 import kotlin.js.JsExport
 import kotlin.js.JsName
 
+/**
+ * Retrieve the list of all known SSMs
+ * @d2 function
+ * @parent [ssm.couchdb.dsl.Database]
+ * @order 10
+ * @title List SSMs
+ */
 typealias CdbSsmListQueryFunction = F2Function<CdbSsmListQueryDTO, CdbSsmListQueryResultDTO>
 
 expect interface CdbSsmListQueryDTO: CdbQueryDTO {
+    /**
+     * Name of the database to query on
+     * @example [ssm.couchdb.dsl.Database.name]
+     */
     val dbName: String
     override val dbConfig: String
 }
 
+/**
+ * @d2 query
+ * @parent [CdbSsmListQueryFunction]
+ * @title List SSMs: Parameters
+ */
 @Serializable
 @JsExport
 @JsName("CdbSsmListQuery")
@@ -23,9 +39,17 @@ class CdbSsmListQuery(
 ): CdbSsmListQueryDTO
 
 expect interface CdbSsmListQueryResultDTO{
+    /**
+     * Retrieved SSMs
+     */
     val ssmList: List<Ssm>
 }
 
+/**
+ * @d2 event
+ * @parent [CdbSsmListQueryFunction]
+ * @title List SSMs: Result
+ */
 @Serializable
 @JsExport
 @JsName("CdbSsmListQueryResult")
