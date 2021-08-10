@@ -5,12 +5,36 @@ import kotlin.js.JsExport
 import kotlin.js.JsName
 
 expect interface SsmContextDTO: WithPrivate {
+	/**
+	 * Described session
+	 * @example [SsmSession.session]
+	 */
 	val session: String
+
+	/**
+	 * Public data attached to the session for this iteration
+	 * @example [SsmSession.public]
+	 */
 	val public: String
+
+	/**
+	 * Described iteration
+	 * @example [SsmSessionState.iteration]
+	 */
 	val iteration: Int
+
+	/**
+	 * Private data attached to the session
+	 * @example [SsmSession.private]
+	 */
 	override val private: Map<String, String>?
 }
 
+/**
+ * Describes a session context for a given iteration
+ * @d2 model
+ * @parent [SsmSession]
+ */
 @Serializable
 @JsExport
 @JsName("SsmContext")

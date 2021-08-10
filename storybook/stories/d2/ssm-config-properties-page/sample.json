@@ -1,0 +1,23 @@
+{
+  "ssm" : {
+    "couchdb" : {
+      "smartbase" : {
+        "url" : "http://peer.sandbox.smartb.network:9000",
+        "username" : "admin",
+        "password" : "admin",
+        "serviceName" : "ssm-couchdb"
+      }
+    },
+    "list" : {
+      "ProductLogistic" : {
+        "1.0" : {
+          "baseUrl" : "http://peer.sandbox.smartb.network:9000",
+          "channel" : "channel-smartb",
+          "chaincode" : "ssm-smartb",
+          "couchdb" : "smartbase",
+          "dbName" : "smartbase_ssm"
+        }
+      }
+    }
+  }
+}

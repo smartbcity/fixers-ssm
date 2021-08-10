@@ -4,9 +4,7 @@ import ssm.tx.dsl.model.TxSsmSessionDTO
 
 @JsExport
 @JsName("TxSsmSessionListQueryDTO")
-actual external interface TxSsmSessionListQueryDTO : TxQueryDTO {
-	actual override val ssm: String
-}
+actual external interface TxSsmSessionListQueryDTO: TxQueryDTO
 
 @JsExport
 @JsName("TxSsmSessionListQueryResultDTO")

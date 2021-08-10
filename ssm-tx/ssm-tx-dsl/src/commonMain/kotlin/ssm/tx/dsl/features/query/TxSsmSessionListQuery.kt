@@ -7,13 +7,22 @@ import ssm.tx.dsl.model.TxSsmSessionDTO
 import kotlin.js.JsExport
 import kotlin.js.JsName
 
+/**
+ * Retrieve a list of all known sessions of a given SSM
+ * @d2 function
+ * @parent [TxSsmSession]
+ * @order 20
+ * @title List Sessions
+ */
 typealias TxSsmSessionListQueryFunction = F2Function<TxSsmSessionListQueryDTO, TxSsmSessionListQueryResultDTO>
 
+expect interface TxSsmSessionListQueryDTO: TxQueryDTO
 
-expect interface TxSsmSessionListQueryDTO : TxQueryDTO {
-	override val ssm: String
-}
-
+/**
+ * @d2 query
+ * @parent [TxSsmSessionListQueryFunction]
+ * @title List Sessions: Parameters
+ */
 @Serializable
 @JsExport
 @JsName("TxSsmSessionListQuery")
@@ -24,9 +33,17 @@ class TxSsmSessionListQuery(
 
 
 expect interface TxSsmSessionListQueryResultDTO {
+	/**
+	 * List of all the retrieved sessions
+	 */
 	val list: List<TxSsmSessionDTO>
 }
 
+/**
+ * @d2 event
+ * @parent [TxSsmSessionListQueryFunction]
+ * @title List Sessions: Result
+ */
 @Serializable
 @JsExport
 @JsName("TxSsmSessionListQueryResult")

@@ -1,6 +1,6 @@
 
 
-## SSM Object  
+## Ssm  
   
 <article>
 
@@ -11,7 +11,7 @@ Unique identifier for the SSM.
 </article>
 <article>
 
-*transitions* `List<SsmTransition>` 
+*transitions* [`List<SsmTransition>`](#ssmtransition) 
 
 The definition of the State Machine
 

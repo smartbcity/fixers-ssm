@@ -1,0 +1,23 @@
+import BlockIndex from '../block/index.mdx'
+import { CodeHighlighter, DescriptedCode } from '@smartb/archetypes-ui-documentation'
+import IdentitiesInfoIndex from '../identities-info/index.mdx'
+import { Meta } from '@storybook/addon-docs/blocks'
+import TransactionDesc from './desc.md'
+import TransactionSample from './sample.json'
+
+<Meta title="Transaction" parameters={{ previewTabs: { canvas: { hidden: true } } }} />
+
+<DescriptedCode
+  leftElement={<TransactionDesc />}
+  rightElement={
+    <CodeHighlighter
+      object={TransactionSample}
+      language={"json"}
+      title={"Example"}
+    />
+  }
+/>
+
+<BlockIndex />
+
+<IdentitiesInfoIndex />

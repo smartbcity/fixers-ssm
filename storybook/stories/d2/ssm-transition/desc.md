@@ -1,6 +1,6 @@
 
 
-## SSM Transition  
+## SsmTransition  
   
 <article>
 
@@ -20,7 +20,7 @@ Origin of the transition
 
 *role* `String` 
 
-Role of the user allowed to trigger the transition
+Role of the [agent](/docs/chaincode-dsl-agent--page#ssmagent) allowed to trigger the transition
 
 </article>
 <article>

@@ -1,10 +1,13 @@
 import { CodeHighlighter, DescriptedCode } from '@smartb/archetypes-ui-documentation'
 import { Meta } from '@storybook/addon-docs/blocks'
+import SsmCreateFunctionIndex from '../ssm-create-function/index.mdx'
 import SsmDesc from './desc.md'
+import SsmGetQueryFunctionIndex from '../ssm-get-query-function/index.mdx'
+import SsmListSsmQueryFunctionIndex from '../ssm-list-ssm-query-function/index.mdx'
 import SsmSample from './sample.json'
 import SsmTransitionIndex from '../ssm-transition/index.mdx'
 
-<Meta title="SSM Object" parameters={{ previewTabs: { canvas: { hidden: true } } }} />
+<Meta title="Ssm" parameters={{ previewTabs: { canvas: { hidden: true } } }} />
 
 <DescriptedCode
   leftElement={<SsmDesc />}
@@ -18,3 +21,9 @@ import SsmTransitionIndex from '../ssm-transition/index.mdx'
 />
 
 <SsmTransitionIndex />
+
+<SsmGetQueryFunctionIndex />
+
+<SsmListSsmQueryFunctionIndex />
+
+<SsmCreateFunctionIndex />

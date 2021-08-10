@@ -4,11 +4,6 @@ import kotlinx.serialization.Serializable
 import kotlin.js.JsExport
 import kotlin.js.JsName
 
-/**
- * @D2 model
- * @parent [Ssm]
- * @title SSM Transition
- */
 expect interface SsmTransitionDTO {
 	/**
 	 * Origin of the transition
@@ -23,7 +18,7 @@ expect interface SsmTransitionDTO {
 	val to: Int
 
 	/**
-	 * Role of the user allowed to trigger the transition
+	 * Role of the [agent][SsmAgent] allowed to trigger the transition
 	 * @example "Seller"
 	 */
 	val role: String
@@ -35,6 +30,10 @@ expect interface SsmTransitionDTO {
 	val action: String
 }
 
+/**
+ * @D2 model
+ * @parent [Ssm]
+ */
 @Serializable
 @JsExport
 @JsName("SsmTransition")
