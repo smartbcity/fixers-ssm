@@ -61,7 +61,7 @@ expect interface TransactionDTO {
 
 /**
  * @d2 model
- * @page .
+ * @page
  * @@title Chaincode-DSL/Blockchain Content
  */
 @Serializable

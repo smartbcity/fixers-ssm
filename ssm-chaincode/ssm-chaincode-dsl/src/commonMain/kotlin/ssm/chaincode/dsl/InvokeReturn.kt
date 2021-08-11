@@ -16,7 +16,6 @@ expect interface InvokeReturnDTO {
  * @d2 model
  *
  * @page
- * .
  * @@title Chaincode-DSL/InvokeReturn
  */
 @Serializable
