@@ -14,6 +14,10 @@ expect interface InvokeReturnDTO {
 /**
  * Response of the API after a command has been executed
  * @d2 model
+ *
+ * @page
+ * .
+ * @@title Chaincode-DSL/InvokeReturn
  */
 @Serializable
 @JsExport

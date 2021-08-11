@@ -4,7 +4,7 @@
   
 <article>
 
-*invokeReturn* [`InvokeReturn`](/docs/invokereturn--page#invokereturn) 
+*invokeReturn* [`InvokeReturn`](/docs/chaincode-dsl-invokereturn--page#invokereturn) 
 
 </article>
 
