@@ -20,7 +20,7 @@ services:
       - COUCHDB_USER=couchdb
       - COUCHDB_PASSWORD=couchdb
     ports:
-      - 5984:5984
+      - "5984:5984"
     networks:
       - bclannet-it
     depends_on:

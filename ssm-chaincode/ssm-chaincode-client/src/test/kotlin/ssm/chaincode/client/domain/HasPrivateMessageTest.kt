@@ -4,7 +4,7 @@ import org.assertj.core.api.Assertions
 import org.junit.jupiter.api.Test
 import ssm.chaincode.client.addPrivateMessage
 import ssm.chaincode.client.getPrivateMessage
-import ssm.chaincode.client.loadFromFile
+import ssm.chaincode.client.extention.loadFromFile
 import ssm.chaincode.dsl.SsmContext
 import ssm.sdk.sign.crypto.KeyPairReader.Companion.loadPrivateKey
 import ssm.sdk.sign.model.Signer

@@ -1,11 +1,14 @@
 @file:JvmName("AgentUtils")
-package ssm.chaincode.client
+package ssm.chaincode.client.extention
 
 import org.bouncycastle.crypto.CryptoException
 import ssm.chaincode.dsl.SsmAgent
 import ssm.sdk.sign.crypto.KeyPairReader
 import java.security.PublicKey
 
+/**
+ * TODO MOVE TO a commons module
+ */
 @Throws(Exception::class)
 fun loadFromFile(name: String): SsmAgent {
 	val pub = KeyPairReader.loadPublicKey(name)

@@ -2,6 +2,7 @@
 package ssm.chaincode.client
 
 import org.bouncycastle.crypto.CryptoException
+import ssm.chaincode.client.extention.getPubAsKey
 import ssm.chaincode.dsl.SsmAgent
 import ssm.chaincode.dsl.SsmContext
 import ssm.chaincode.dsl.SsmSession

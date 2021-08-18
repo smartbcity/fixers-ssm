@@ -2,8 +2,7 @@ package ssm.chaincode.client.invoke.command
 
 import org.assertj.core.api.Assertions
 import org.junit.jupiter.api.Test
-import ssm.chaincode.client.invoke.command.RegisterCommandSigner
-import ssm.chaincode.client.loadFromFile
+import ssm.chaincode.client.extention.loadFromFile
 import ssm.sdk.sign.model.Signer
 import java.util.function.Consumer
 

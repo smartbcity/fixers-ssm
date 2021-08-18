@@ -8,6 +8,7 @@ import org.junit.jupiter.api.MethodOrderer.OrderAnnotation
 import org.junit.jupiter.api.Order
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.TestMethodOrder
+import ssm.chaincode.client.extention.loadFromFile
 import ssm.chaincode.dsl.InvokeReturn
 import ssm.chaincode.dsl.Ssm
 import ssm.chaincode.dsl.SsmAgent
@@ -88,7 +89,7 @@ class SsmClientItTest {
 
 	@Order(10)
 	@Test
-	fun adminUser(): Unit {
+	fun adminUser() {
 		val agentRet = client.getAdmin(ADMIN_NAME)
 		val agentFormClient = agentRet.get()
 		Assertions.assertThat(agentFormClient).isEqualTo(agentAdmin)
@@ -121,9 +122,8 @@ class SsmClientItTest {
 
 	@Order(50)
 	@Test
-	fun agentUser2(): Unit {
-		val agentRet = client.getAgent(
-			Companion.agentUser2.name)
+	fun agentUser2() {
+		val agentRet = client.getAgent(Companion.agentUser2.name)
 		val agentFormClient = agentRet.get()
 		Assertions.assertThat(agentFormClient).isEqualTo(Companion.agentUser2)
 	}
@@ -161,7 +161,7 @@ class SsmClientItTest {
 	@Order(80)
 	fun start() {
 		val roles: Map<String, String> = mapOf(
-			Companion.agentUser1.name to "Buyer", Companion.agentUser2.name to "Seller")
+			agentUser1.name to "Buyer", agentUser2.name to "Seller")
 		val session = SsmSession(ssmName,
 			sessionName, roles, "Used car for 100 dollars.", emptyMap())
 		val transactionEvent = client.start(signerAdmin, session)
@@ -271,10 +271,9 @@ class SsmClientItTest {
 
 	@Test
 	@Order(150)
-	fun listSession() {
+	private fun listSession() {
 		val agentRet: CompletableFuture<List<String>> = client.listSession()
 		val agentFormClient = agentRet.get()
 		Assertions.assertThat(agentFormClient).contains(sessionName)
 	}
-
 }
