@@ -4,11 +4,14 @@ import f2.dsl.fnc.f2Function
 import f2.dsl.fnc.invoke
 import kotlinx.coroutines.flow.asFlow
 import kotlinx.coroutines.flow.toList
+import org.springframework.boot.context.config.ConfigDataLocation
+import org.springframework.boot.context.config.ConfigDataLocationNotFoundException
 import org.springframework.context.annotation.Bean
 import org.springframework.stereotype.Service
 import ssm.api.model.toTxSession
 import ssm.api.model.toTxSsm
 import ssm.chaincode.dsl.Ssm
+import ssm.chaincode.dsl.SsmChaincodeProperties
 import ssm.chaincode.dsl.SsmSessionState
 import ssm.chaincode.dsl.SsmSessionStateLog
 import ssm.chaincode.dsl.blockchain.Transaction
@@ -28,7 +31,6 @@ import ssm.couchdb.dsl.query.CdbSsmSessionListQuery
 import ssm.couchdb.dsl.query.CdbSsmSessionListQueryFunction
 import ssm.tx.autoconfiguration.SsmConfigProperties
 import ssm.tx.dsl.SsmApiFinder
-import ssm.tx.dsl.config.TxSsmConfig
 import ssm.tx.dsl.config.TxSsmLocationProperties
 import ssm.tx.dsl.features.query.TxQueryDTO
 import ssm.tx.dsl.features.query.TxSsmGetQueryFunction
@@ -81,9 +83,7 @@ class SsmApiFinderService(
 
 		val command = SsmGetQuery(
 			name = cmd.ssm,
-			baseUrl = config.baseUrl,
-			channelId = config.channel,
-			chaincodeId = config.chaincode,
+			chaincode = config.toChaincodeProperties(),
 			bearerToken = cmd.bearerToken
 		)
 
@@ -115,9 +115,7 @@ class SsmApiFinderService(
 		val config = getConfig(cmd)
 		val sessionQuery = SsmGetSessionQuery(
 			name = cmd.sessionId,
-			baseUrl = config.baseUrl,
-			channelId = config.channel,
-			chaincodeId = config.chaincode,
+			chaincode = config.toChaincodeProperties(),
 			bearerToken = cmd.bearerToken
 		)
 
@@ -177,9 +175,7 @@ class SsmApiFinderService(
 	private suspend fun getSessionLogs(session: TxSsmSessionId, ssmConfig: TxSsmLocationProperties, bearerToken: String?): List<SsmSessionStateLog> {
 		val query = SsmGetSessionLogsQuery(
 			session = session,
-			baseUrl = ssmConfig.baseUrl,
-			channelId = ssmConfig.channel,
-			chaincodeId = ssmConfig.chaincode,
+			chaincode = ssmConfig.toChaincodeProperties(),
 			bearerToken = bearerToken
 		)
 
@@ -195,9 +191,7 @@ class SsmApiFinderService(
 		return id?.let {
 			val query = SsmGetTransactionQuery(
 				id = id,
-				baseUrl = ssmConfig.baseUrl,
-				channelId = ssmConfig.channel,
-				chaincodeId = ssmConfig.chaincode,
+				chaincode = ssmConfig.toChaincodeProperties(),
 				bearerToken = bearerToken
 			)
 			ssmGetTransactionQueryFunction(query).transaction
@@ -216,4 +210,8 @@ class SsmApiFinderService(
 		return this.toTxSession(firstTransaction, lastTransaction)
 	}
 
+	private fun TxSsmLocationProperties.toChaincodeProperties(): SsmChaincodeProperties {
+		return ssmConfigProperties.chaincode[chaincode]
+			?: throw ConfigDataLocationNotFoundException(ConfigDataLocation.of("ssm.chaincode.$chaincode"))
+	}
 }

@@ -2,6 +2,7 @@ package ssm.chaincode.dsl.query
 
 import f2.dsl.fnc.F2Function
 import kotlinx.serialization.Serializable
+import ssm.chaincode.dsl.SsmChaincodeProperties
 import ssm.chaincode.dsl.SsmCommandDTO
 import ssm.chaincode.dsl.blockchain.Transaction
 import ssm.chaincode.dsl.blockchain.TransactionId
@@ -15,9 +16,7 @@ typealias SsmGetTransactionQueryFunction = F2Function<SsmGetTransactionQuery, Ss
 @JsName("SsmGetTransactionQuery")
 data class SsmGetTransactionQuery(
     val id: TransactionId,
-    override val baseUrl: String,
-    override val channelId: String?,
-    override val chaincodeId: String?,
+    override val chaincode: SsmChaincodeProperties,
     override val bearerToken: String?
 ): SsmCommandDTO
 

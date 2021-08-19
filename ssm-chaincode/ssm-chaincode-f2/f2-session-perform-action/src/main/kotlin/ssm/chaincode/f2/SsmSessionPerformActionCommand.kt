@@ -3,6 +3,7 @@ package ssm.chaincode.f2
 import f2.dsl.cqrs.Event
 import f2.dsl.fnc.F2Function
 import ssm.chaincode.dsl.InvokeReturn
+import ssm.chaincode.dsl.SsmChaincodeProperties
 import ssm.chaincode.dsl.SsmCommandDTO
 import ssm.chaincode.dsl.SsmContext
 import ssm.chaincode.dsl.SsmSession
@@ -23,9 +24,7 @@ typealias SsmSessionPerformActionFunction = F2Function<SsmSessionPerformActionCo
  * @title Perform Transition: Parameters
  */
 class SsmSessionPerformActionCommand(
-	override val baseUrl: String,
-	override val channelId: String?,
-	override val chaincodeId: String?,
+	override val chaincode: SsmChaincodeProperties,
 	override val bearerToken: String?,
 
 	/**

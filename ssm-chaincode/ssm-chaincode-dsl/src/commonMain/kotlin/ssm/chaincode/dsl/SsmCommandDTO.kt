@@ -4,22 +4,9 @@ import f2.dsl.cqrs.Command
 
 expect interface SsmCommandDTO: Command {
     /**
-     * URL of the peer to contact
-     * @example "http://peer.sandbox.smartb.network:9000"
+     * Chaincode to execute the command or query on
      */
-    val baseUrl: String
-
-    /**
-     * Identifier of the channel on which the command or query is executed
-     * @example "channel-smartb"
-     */
-    val channelId: String?
-
-    /**
-     * Identifier of the chaincode on which the command or query is executed
-     * @example "ssm-smartb"
-     */
-    val chaincodeId: String?
+    val chaincode: SsmChaincodePropertiesDTO
 
     /**
      * Authentication token

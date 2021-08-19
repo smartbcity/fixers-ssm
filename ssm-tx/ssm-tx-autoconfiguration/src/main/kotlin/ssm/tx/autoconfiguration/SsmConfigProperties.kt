@@ -2,6 +2,7 @@ package ssm.tx.autoconfiguration
 
 import org.springframework.boot.context.properties.ConfigurationProperties
 import org.springframework.boot.context.properties.ConstructorBinding
+import ssm.chaincode.dsl.SsmChaincodeProperties
 import ssm.tx.dsl.config.TxSsmConfig
 
 /**
@@ -23,14 +24,19 @@ import ssm.tx.dsl.config.TxSsmConfig
  *				serviceName: "ssm-couchdb"
  *			}
  *		},
+ *		chaincode: {
+ *			smartcode-ssm: {
+ *				baseUrl: "http://peer.sandbox.smartb.network:9000",
+ *	 			channelId: "channel-smartb",
+ *	 			chaincodeId: "ssm-smartb"
+ *	 		}
+ *		}
  * 		list: {
  *		 	ProductLogistic: {
  *			 	"1.0": {
  *				 	baseUrl: "http://peer.sandbox.smartb.network:9000",
  *				 	channel: "channel-smartb",
- *				 	chaincode: "ssm-smartb",
- *				 	couchdb: "smartbase",
- *				 	dbName: "smartbase_ssm"
+ *				 	chaincode: "smartcode-ssm",
  *				}
  *			}
  *		}
@@ -41,4 +47,5 @@ import ssm.tx.dsl.config.TxSsmConfig
 @ConstructorBinding
 class SsmConfigProperties(
 	val list: TxSsmConfig,
+	val chaincode: Map<String, SsmChaincodeProperties>
 )

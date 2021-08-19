@@ -3,7 +3,7 @@ package ssm.chaincode.dsl.query
 import f2.dsl.cqrs.Event
 import f2.dsl.fnc.F2Function
 import kotlinx.serialization.Serializable
-import ssm.chaincode.dsl.Ssm
+import ssm.chaincode.dsl.SsmChaincodeProperties
 import ssm.chaincode.dsl.SsmCommandDTO
 import ssm.chaincode.dsl.SsmSessionState
 import kotlin.js.JsExport
@@ -27,9 +27,7 @@ typealias SsmGetSessionQueryFunction = F2Function<SsmGetSessionQuery, SsmGetSess
 @JsExport
 @JsName("SsmGetSessionQuery")
 class SsmGetSessionQuery(
-	override val baseUrl: String,
-	override val channelId: String?,
-	override val chaincodeId: String?,
+	override val chaincode: SsmChaincodeProperties,
 	override val bearerToken: String? = null,
 
 	/**

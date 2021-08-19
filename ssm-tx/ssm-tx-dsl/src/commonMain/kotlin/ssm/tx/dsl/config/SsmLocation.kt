@@ -29,20 +29,8 @@ typealias TxSsmConfig = Map<SsmName, Map<SsmVersion, TxSsmLocationProperties>>
  */
 data class TxSsmLocationProperties(
     /**
-     * URL of the peer to contact
-     * @example "http://peer.sandbox.smartb.network:9000"
-    */
-    val baseUrl: String,
-
-    /**
-     * Identifier of the channel in which the SSM has been instantiated
-     * @example "channel-smartb"
-     */
-    val channel: String,
-
-    /**
-     * Identifier of the chaincode in which the SSM has been instantiated
-     * @example "ssm-smartb"
+     * Name of the chaincode configuration to use
+     * @example "smartcode-ssm"
      */
     val chaincode: String,
 
