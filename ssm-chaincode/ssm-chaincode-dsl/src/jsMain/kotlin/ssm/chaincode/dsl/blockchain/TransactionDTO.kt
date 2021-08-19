@@ -1,7 +1,7 @@
 package ssm.chaincode.dsl.blockchain
 
 @JsExport
-@JsName("Transaction")
+@JsName("TransactionDTO")
 actual external interface TransactionDTO {
 	actual val transactionId: TransactionId
 	actual val blockId: Long
