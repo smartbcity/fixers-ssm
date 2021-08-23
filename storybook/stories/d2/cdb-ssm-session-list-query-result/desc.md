@@ -4,7 +4,7 @@
   
 <article>
 
-*sessions* [`Array<SsmSessionState>`](/docs/chaincode-dsl-session--page#ssmsessionstate) 
+*sessions* [`Array<SsmSessionState>`](/docs/ssm-chaincode-session--page#ssmsessionstate) 
 
 Retrieved sessions
 

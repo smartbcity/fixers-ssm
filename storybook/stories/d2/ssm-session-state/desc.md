@@ -22,7 +22,7 @@ Number of iterations the session has undergone before attaining the current stat
 </article>
 <article>
 
-*origin* [`SsmTransition?`](/docs/chaincode-dsl-signing-state-machine--page#ssmtransition) 
+*origin* [`SsmTransition?`](/docs/ssm-chaincode-signing-state-machine--page#ssmtransition) 
 
 Transition that lead to the current state
 
@@ -59,7 +59,7 @@ Identifier of the session
 
 *ssm* `String?` 
 
-Identifier of the instantiated [SSM](/docs/chaincode-dsl-signing-state-machine--page#ssm)
+Identifier of the instantiated [SSM](/docs/ssm-chaincode-signing-state-machine--page#ssm)
 
 </article>
 

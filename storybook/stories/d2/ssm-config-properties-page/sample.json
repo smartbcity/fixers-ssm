@@ -8,14 +8,19 @@
         "serviceName" : "ssm-couchdb"
       }
     },
+    "chaincode" : {
+      "smartcode-ssm" : {
+        "baseUrl" : "http://peer.sandbox.smartb.network:9000",
+        "channelId" : "channel-smartb",
+        "chaincodeId" : "ssm-smartb"
+      }
+    },
     "list" : {
       "ProductLogistic" : {
         "1.0" : {
           "baseUrl" : "http://peer.sandbox.smartb.network:9000",
           "channel" : "channel-smartb",
-          "chaincode" : "ssm-smartb",
-          "couchdb" : "smartbase",
-          "dbName" : "smartbase_ssm"
+          "chaincode" : "smartcode-ssm"
         }
       }
     }

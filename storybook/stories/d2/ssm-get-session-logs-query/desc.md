@@ -4,13 +4,6 @@
   
 <article>
 
-*baseUrl* `String` 
-
-URL of the peer to contact
-
-</article>
-<article>
-
 *bearerToken* `String?` 
 
 Authentication token
@@ -18,16 +11,9 @@ Authentication token
 </article>
 <article>
 
-*chaincodeId* `String?` 
+*chaincode* `SsmChaincodeProperties` 
 
-Identifier of the chaincode on which the command or query is executed
-
-</article>
-<article>
-
-*channelId* `String?` 
-
-Identifier of the channel on which the command or query is executed
+Chaincode to execute the command or query on
 
 </article>
 <article>

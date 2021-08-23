@@ -3,12 +3,12 @@
 ## TxSsmUser  
 
 
-Represents an [SSM Agent](/docs/chaincode-dsl-agent--page#ssmagent)
+Represents an [SSM Agent](/docs/ssm-chaincode-agent--page#ssmagent)
 
   
 <article>
 
-*agent* [`SsmAgent`](/docs/chaincode-dsl-agent--page#ssmagent) 
+*agent* [`SsmAgent`](/docs/ssm-chaincode-agent--page#ssmagent) 
 
 Agent able to interact with an SSM
 

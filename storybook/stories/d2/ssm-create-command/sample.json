@@ -22,8 +22,5 @@
     "name" : "Adam",
     "pub" : "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEA3MO+2nIRi/cs4WbE+ykzA1ErTfs0QmBIdpZoAsU7YVMKBnBNulxhy2BI93QHK9uQreLhANBDexagMZg9ZzCxtKLi9UNHSm08099znPfMKn2cITHI8ShyZC7OogsbNmqrY0iy01r4IVpPi4CMNhLTCWyLGWS+L0hsmZOQQWV5BeER4nufBgGmA8plD14T/AXaHF7pMJAGlvauqjcjhb9YAoDUjSmdy4h3KzNq0c1KSQwORgQhgGItUxs5X8jvAXsikRDs7OkqbEDWpSf5z6FSyenvPmnplrqL/5bjiis6ObbOA+BjpMpyuouXOA3WuGv61a5Wrx62bcfeCx9471EKFQIDAQAB"
   },
-  "baseUrl" : "http://peer.sandbox.smartb.network:9000",
-  "channelId" : "channel-smartb",
-  "chaincodeId" : "ssm-smartb",
   "bearerToken" : "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCIsImtpZCI6ImhvTnZUSXpDZ3pCa2lkazNaQlZ1NW5TekJrYTQtQkFORGpVNF82TEpzSFUifQ.eyJ2YWx1ZSI6ImJsYmxibCIsImZpc3J0bmFtZSI6IkpvaG4iLCJsYXN0bmFtZSI6IkRldWYifQ.df8lUW26IQclW2T8uP-CQllithvr1rZAF19WFh3enmA6P-ZPHJZa6WVapzbkISxu2PsnLUBkoLFEuJQYozbBfLtpysUpGNv8qSuegDqjsysbWB8x6jZiZoozSoe-5KugKoI8Y3yqQmzFZ-MtgdK0rq-_ojsWVYqwQxxmAknQuow"
 }

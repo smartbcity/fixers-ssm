@@ -1,7 +1,5 @@
 {
-  "baseUrl" : "http://peer.sandbox.smartb.network:9000",
-  "channel" : "channel-smartb",
-  "chaincode" : "ssm-smartb",
+  "chaincode" : "smartcode-ssm",
   "couchdb" : "smartbase",
   "dbName" : "smartbase_ssm"
 }
