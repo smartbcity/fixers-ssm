@@ -34,7 +34,7 @@ Identifier of the session
 
 *ssm* `String` 
 
-Identifier of the instantiated [SSM](/docs/chaincode-dsl-signing-state-machine--page#ssm)
+Identifier of the instantiated [SSM](/docs/ssm-chaincode-signing-state-machine--page#ssm)
 
 </article>
 

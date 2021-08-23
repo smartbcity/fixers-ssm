@@ -4,14 +4,14 @@
   
 <article>
 
-*details* [`SsmSessionState`](/docs/chaincode-dsl-session--page#ssmsessionstate) 
+*details* [`SsmSessionState`](/docs/ssm-chaincode-session--page#ssmsessionstate) 
 
 The state of an SSM session
 
 </article>
 <article>
 
-*transaction* [`Transaction?`](/docs/chaincode-dsl-blockchain-content--page#transaction) 
+*transaction* [`Transaction?`](/docs/ssm-chaincode-blockchain-content--page#transaction) 
 
 Transaction that initiated the state of the session
 

@@ -4,14 +4,14 @@
   
 <article>
 
-*channel* [`TxChannel`](/docs/ssm-api-general--page#txchannel) 
+*channel* [`TxChannel`](/docs/ssm-tx-general--page#txchannel) 
 
 Channel in which the SSM has been instantiated
 
 </article>
 <article>
 
-*ssm* [`Ssm`](/docs/chaincode-dsl-signing-state-machine--page#ssm) 
+*ssm* [`Ssm`](/docs/ssm-chaincode-signing-state-machine--page#ssm) 
 
 Description of a state machine
 

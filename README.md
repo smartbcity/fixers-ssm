@@ -1,445 +1,59 @@
-# Kotlin lib for blockchain-ssm
+# Introduction
 
-[Blockchain-ssm](https://github.com/civis-blockchain/blockchain-ssm) is a signing state machines chaincode developped for Hyperleger Fabric.  
-This sdk has been tested with [fabric bclan configuration](https://github.com/civis-blockchain/blockchain-coop/tree/master/bclan) fabric network configuration
+This SDK is a Kotlin library used to interact with a [Blockchain-SSM](https://github.com/civis-blockchain/blockchain-ssm) chaincode hosted with Hyperledger Fabric.
 
-## Configuration example
+It contains three submodules, each with a different level of abstraction.  
 
+<img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAQUAAADyCAYAAABEdtCEAAAAAXNSR0IArs4c6QAABip0RVh0bXhmaWxlACUzQ214ZmlsZSUyMGhvc3QlM0QlMjJhcHAuZGlhZ3JhbXMubmV0JTIyJTIwbW9kaWZpZWQlM0QlMjIyMDIxLTA4LTIwVDA5JTNBMTclM0E0MC43NDBaJTIyJTIwYWdlbnQlM0QlMjI1LjAlMjAoTWFjaW50b3NoJTNCJTIwSW50ZWwlMjBNYWMlMjBPUyUyMFglMjAxMF8xNV83KSUyMEFwcGxlV2ViS2l0JTJGNTM3LjM2JTIwKEtIVE1MJTJDJTIwbGlrZSUyMEdlY2tvKSUyMENocm9tZSUyRjkyLjAuNDUxNS4xNTklMjBTYWZhcmklMkY1MzcuMzYlMjIlMjBldGFnJTNEJTIyc3JfRGxiV0EwbnFCV182T1B3d3MlMjIlMjB2ZXJzaW9uJTNEJTIyMTQuOS44JTIyJTIwdHlwZSUzRCUyMmdvb2dsZSUyMiUzRSUzQ2RpYWdyYW0lMjBpZCUzRCUyMllaTE1fLVJPTENmdll1Q1M2UU1rJTIyJTIwbmFtZSUzRCUyMlBhZ2UtMSUyMiUzRTFWamJjcHN3RVAwYVA4WURFbUR6R050cE81MmtreGwzcHNtakRBcW93U3dSY216bjZ5c1pjVFBCbHpqWXpSUHNTaXZRT1h0MkJUMDhucSUyQiUyQmM1S0VkJTJCRFRxSWNNZjlYRGt4NUNwbWxpZVZHZWRlWnhYRHR6Qkp6NWVsTHBtTEkzcXAyRzlpNllUOVBhUkFFUUNaYlVuUjdFTWZWRXpVYzRoMlY5MmhORTlhY21KS0FOeDlRalVkUDdoJTJGa2l6THhETkNqOVB5Z0x3dnpKcHVObUkzT1NUOVk3U1VQaXc3TGl3amM5UE9ZQUlydWJyOFkwVXVEbHVHUngzMXBHaXhmak5CYUhCRER2NSUyQjFUbVBBYll6YTd2bjRKZm9YJTJCeTVWcDZaY1Q2M3pIMUpjQWFET0dXRjVHSEJheFQ5VTZoclNBaXhBQ2lFbDBDNUJJcHltZGY2a1FhMDBmV1FpUXJsRE1JejFLVjB3OHFQQyUyQnJhM0h5c2hrcFZmZUdPdmNpQVZmVjRLVSUyQlZnZEs4TTJWaDZYYlVqdG9oVW83VXBod1QyNkN4MmRjSVFIVk95WVp4VjBTaDFRbUZQNVBqS08wNGdJOWxwJTJGRDZJVE1pam1sWnpKRzAzYk1SUm02NzZTYUtHZk5KM2VYWTFEd21KUHlySEJiNTNNWmNnRW5TWmtnOE5TYXJoT25GNmJja0ZYdSUyQkZzYmw4SElFc0xRRmNBWkd0N1dlckp6RVVTVnJUa0dGMGhocjlDMG1NSFY5UCUyQnl1Z2JKdHFUJTJCeHZybm5JbWdhTDg4d1dCRGhTRWZVbEJvUGNGQVFzdm5Jd3VMZ2M4JTJGTyUyRmtZSjlaRGdpNUZVRVlmZGZGdTBVaGpRNlRHcCUyQllyRHIwSHBoOGNzbXowY0p6dmtRbUloMjFSV0h4R2lldzZweVoxWUhqSGw3bXZpS2oxbllqczl5ek1vcmZyV3UlMkZIeTVlMHJZN3ZEbHNsclNpZkZWTDJyWWtQcSUyQmtvVDJnbkpEcFpxMTJJWHQzb2hmOXZIYUU3UmV0dmZ0RHJIVmd6M1l1MmJPdFJtNlBJdkNlUFhXS1BTMiUyRlZXWXolMkJUMTNIYkVnbHI0NTgzMjFVQmVKaiUyRkdCdmR6dExQR05CcEFOJTJCQUtKWDlLNmUlMkYwaFRXYjVkT05ZVkN6RDNvdks0SnlnRE02QnlRNDZXcEhLeTFRRkdNdHBBdU00SFFGajd3Y21EVW1pYm4waVNDcUEwJTJCTVZKMVNCUFV4dTdmUzFZOWhNTHZ3ZWhsMGxsJTJGT1ZNY3glMkZ5bDBXd21FRHdyYVBOYmx2VVFlS2FJQTh1WDkxbEd5djk1eW03RTFMV1BXTlJKM1RObHV4UnoxN290YVNQVCUyRk4ycjlhT2hVY251a1lJdURsZ2ZuakZMVFZnblc5SXU0cGt1aDRFcVJaJTJGbVhNRHFQbHYxcDg4dzglM0QlM0MlMkZkaWFncmFtJTNFJTNDJTJGbXhmaWxlJTNFQctEbAAAIABJREFUeF7tXQeUFcXSLpIEyYjknDOKhCegSJAsChJXkJyV/IiSJb6FR845o/AkJwmKRAFJIjmjEiTn5H+++t/cd3fZ3Ts723O35071OR51b09N9VdV31RXz3THIKK/SZogIAgIAv9FIAZI4e+/hRfEIwQBQYAoRowYJKQgniAICAIeBIQUxBkEAUEgBAJCCuIQgoAgIKQgPiAICALhIyCZ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" />
+<br /><br />
+
+## SSM-Chaincode
+
+[SSM-Chaincode](/docs/chaincode-dsl-signing-state-machine--page) communicates directly with the blockchain API and is able to make simple queries and transactions over Signing State Machines.
+
+**Import with Gradle**
+```kotlin
+// Data models and query function definitions
+implementation("city.smartb.ssm:ssm-chaincode-dsl:${Versions.ssm}")
+
+// Implementation of query functions defined in ssm-chaincode-dsl
+implementation("city.smartb.ssm:f2-query:${Versions.ssm}")
+
+// Function to create an SSM
+implementation("city.smartb.ssm:f2-create-ssm:${Versions.ssm}")
+
+// Function to start a session on a given SSM
+implementation("city.smartb.ssm:f2-session-start:${Versions.ssm}")
+
+// Function to perform an action on a given session
+implementation("city.smartb.ssm:f2-session-perform-action:${Versions.ssm}")
 ```
-ssm.rest.url=http://peer0.pr-bc1.civis-blockchain.org:9090
+> Note: All functions are implemented as Spring Beans, so they can be instantiated with Dependency Injection mechanism
+
+## SSM-CouchDB
+
+[SSM-CouchDB](/docs/ssm-couchdb-general--page) is able to query a CouchDB attached to a blockchain in order to optimize costly requests.
+
+**Import with Gradle**
+```kotlin
+// Data models and query function definitions
+implementation("city.smartb.ssm:ssm-couchdb-dsl:${Versions.ssm}")
+
+// Implementation of query functions defined in ssm-couchdb-dsl
+implementation("city.smartb.ssm:ssm-couchdb-f2:${Versions.ssm}")
 ```
+> Note: All functions are implemented as Spring Beans, so they can be instantiated with Dependency Injection mechanism
 
-Ex: `ssm-rest-client/src/test/resources/ssm-client.properties`
+## SSM-Tx
 
-##Usage example
-``` 
-sdk-core/src/test/java/io/civis/ssm/sdk/client/SsmClientItTest.java
+[SSM-Tx](/docs/ssm-tx-general--page) uses the two previous modules to provide more complex and detailed queries.
+
+**Import with Gradle**
+```kotlin
+// Data models and query function definitions
+implementation("city.smartb.ssm:ssm-tx-dsl:${Versions.ssm}")
+
+// Implementation of query functions defined in ssm-couchdb-dsl
+implementation("city.smartb.ssm:ssm-tx-f2:${Versions.ssm}")
 ```
-
-### F2 Function
-
- * `ssm-f2-start-session` -> Function to start ssm session
-
-## SSM CouchDb
- * counting
-```
-http://localhost:5984/sandbox_ssm/_design/indexTypeDoc/_view/indexType?group_level=1&key=[%22ssm%22]
-{
-  "rows":[{
-    "key":["ssm"],
-    "value":8
-  }]
-}
-```
-
-## Gradle
-
- * Start local blockchain
-```
-docker-compose -f docker-compose-it.yaml up -d
-```
-
- * Test
-```bash
-make test 
-```
-
- * Test
-```bash
-make package 
-```
-
- * Publish
-```bash
-make push -e VERSION=0.0.0-SNAPSHOT
-```
-
-## SSM Chaincode API
-
-### Operations
-
-objects: ssm, session, agent, transaction, block
-
-request types: query, invoke \
-queries: "list {object}", "{object} id" \
-invokes: "{object} {action}" + sign
-
-#### Chaincode instanciation
-
-* **init:** creates a new chaincode instance, with a list of admins.
-
-```text
-Command
--------
-  "init", admins: <Agent>*
-
-Result
-------
-  Chaincode is instantiated, DB stores a list of admins.
-```
-
-
-#### User management
-
-* **register:** A new user is registered by an admin, Agent structure is signed with the admin private key.
-
-```text
-Command
--------
-  "register", user:Agent, admin_name:string, signature:b64
-
-Result
-------
-  User is stored in the DB.
-```
-
-* **grant:** A user is granted / revoked API rights by an admin, Grant structure is signed with the admin private key.
-
-```text
-Command
--------
-  "grant", rights:Grant, admin_name:string, signature:b64
-
-Result
-------
-  Grant is stored / updated in the DB.
-```
-
-#### SSM management
-
-* **create:** A new SSM is registered by an admin, SSM structure is signed with the admin private key.
-
-```text
-Command
--------
-  "create", ssm:SigningStateMachine, admin_name:string, signature:b64
-
-Result
-------
-  SSM is stored in the DB.
-```
-
-* **start:** A new SSM session is initiated by an admin, SSM init state is signed with the admin private key.
-
-```text
-Command
--------
-  "start", init:State, admin_name:string, signature:b64
-
-Result
-------
-  State is stored in the DB.
-```
-
-* **limit:** Sets or removes a limit to the maximum iterations count of an existing SSM session. The uppdated session state is signed with the admin private key.
-
-```text
-Command
--------
-  "limit", context:State, admin_name:string, signature:b64
-
-Result
-------
-  Session state is updated. 
-```
-
-**Note**: In the `State` structure of the `context` parameter, `session` and `iteration` fields are mandatory, `limit` field is optional, other fields are read-only.
-
-
-#### SSM execution
-
-* **perform:** A user performs an action on a SSM session. The action to perform and the new session state are signed with the user private key.
-
-```
-Command
--------
-  "perform", action:string, context:State, user_name:string, signature:b64
-
-Result
-------
-  Session state is updated. 
-```
-
-**Note**: In the `State` structure of the `context` parameter, `session` and `iteration` fields are mandatory, `public` and `private` data fields are optional, other fields are read-only.
-
-#### SSM queries
-
-* **session:** Get a SSM session state.
-
-```text
-Query
--------
-  "session", <session id>
- 
-  curl -x GET '$BASE_URL/?cmd=query&fcn=session&args=$SESSION_ID'
-
-Result
-------
-  Returns current session State structure.
-```
-
-* **ssm:** Get a SigningStateMachine transitions list.
-
-```text
-Query
--------
-  "ssm", <ssm name> 
-  
-  curl -x GET '$BASE_URL/?cmd=query&fcn=ssm&args=$SSM_NAME'
-
-Result
-------
-  Returns corresponding SigningStateMachine structure.
-```
-
-* **user:** Get a user's public key.
-
-```text
-QueryComma
--------
-  "user", <user name> 
-  
-  curl -x GET '$BASE_URL/?cmd=query&fcn=user&args=$USER_NAME'
-
-Result
-------
-  Returns corresponding Agent structure.
-```
-
-* **credits:** Get a user's API credits aka grants.
-
-```text
-Query
--------
-  "credits", <user name> 
-  
-  curl -x GET '$BASE_URL/?cmd=query&fcn=user&args=$USER_NAME'
-
-Result
-------
-  Returns corresponding Grant structure.
-```
-
-* **admin:** Get an administrator's public key.
-
-```text
-Query
--------
-  "admin", <admin name> 
-  
-  curl -x GET '$BASE_URL/?cmd=query&fcn=admin&args=$ADMIN_NAME'
-
-Result
-------
-  Returns corresponding Agent structure.
-```
-
-* **list:** List all Sessions, SigningStateMachines, Users, Admins, Transactions or Blocks
-
-```text
-Query
--------
-  "list", <session|ssm|user|admin|transaction|block> 
-  
-  curl -x GET '$BASE_URL/?cmd=query&fcn=list&args=session'
-  curl -x GET '$BASE_URL/?cmd=query&fcn=list&args=ssm'
-  curl -x GET '$BASE_URL/?cmd=query&fcn=list&args=user'
-  curl -x GET '$BASE_URL/?cmd=query&fcn=list&args=admin'
-  curl -x GET '$BASE_URL/?cmd=query&fcn=list&args=transaction'
-  curl -x GET '$BASE_URL/?cmd=query&fcn=list&args=block'
-
-Result
-------
-  Returns the list of corresponding identifiers.
-```
-
-* **log:** Log a session history
-
-```text
-Query
--------
-  "log", <session id> 
-  
-  curl -x GET '$BASE_URL/?cmd=query&fcn=log&args=$SESSION_ID'
-
-Result
-------
-  Returns the successive session states with the corresponding transaction ids.
-```
-
-* **transaction:** Get a transaction
-
-```text
-Query
--------
-  "transaction", <transaction id> 
-  
-  curl -x GET '$BASE_URL/?cmd=query&fcn=transaction&args=TRANSACTION_ID'
-
-Result
-------
-  Returns corresponding transaction.
-```
-
-* **block:** Get a block
-
-```text
-Query
--------
-  "block", <block id> 
-  
-  curl -x GET '$BASE_URL/?cmd=query&fcn=block&args=$BLOCK_ID'
-
-Result
-------
-  Returns corresponding block.
-```
-
-## SSM Chaincode F2
-
-#### Chaincode Queries
-
-* **SsmGetAdminQuery:** Get an admin
-
-```text
-Query
--------
-    adminName
-
-Result
-------
-  Returns corresponding admin
-```
-
-* **SsmListAdminQuery:** List all admins
-
-```text
-Query
--------
-
-Result
-------
-  Returns all admins
-```
-
-* **SsmGetUserQuery:** Get a user
-
-```text
-Query
--------
-    userName
-
-Result
-------
-  Returns corresponding user
-```
-
-* **SsmListUserQuery:** List all users
-
-```text
-Query
--------
-
-Result
-------
-  Returns all users
-```
-
-* **SsmGetQuery:** Get an SSM structure
-
-```text
-Query
--------
-   ssmId
-
-Result
-------
-  Returns corresponding SSM structure
-```
-
-* **SsmListSsmQuery:** List all SSM structures
-
-```text
-Query
--------
-
-Result
-------
-  Returns all SSM structure
-```
-
-* **SsmGetSessionQuery:** Get a session
-
-```
-Query
--------
-   sessionId
-
-Result
-------
-  Returns corresponding session
-```
-
-* **SsmListSessionQuery:** List all sessions
-
-```
-Query
--------
-
-Result
-------
-  Returns all sessions
-```
-
-* **SsmGetSessionLogsQuery:** Get the current and previous states of a session, along with their associated transaction ids
-
-```
-Query
--------
-  sessionId
-
-Result
-------
-  Returns all sessions logs
-```
-
-* **SsmGetTransactionQuery:** Get a transaction
-
-```
-Query
--------
-  transactionId
- 
-Result
-------
-  Returns corresponding transaction
-```
-
-## SSM Couchdb F2
-
-#### Couchdb Queries
-
-* **CdbGetSsmListQuery:** List all SSM
-
-```
-Query
--------
-    dbName
-
-Result
-------
-  Returns all SSM in corresponding database
-```
-
-
-* **CdbGetSsmSessionListQuery:** List all sessions of a given SSM
-
-```
-Query
--------
-    dbName, ssmId
-
-Result
-------
-  Returns all sessions of corresponding SSM in given database
-```
+> Note: All functions are implemented as Spring Beans, so they can be instantiated with Dependency Injection mechanism

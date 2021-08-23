@@ -18,7 +18,7 @@ import ssm.tx.dsl.features.query.TxSsmSessionLogListQueryFunction
  * @title Entrypoints
  * @page
  * Synthesis and global objects of the API
- * @@title SSM-API/General
+ * @@title SSM-TX/General
  */
 expect interface SsmApiFinder {
 	fun txSsmListQueryFunction(): TxSsmListQueryFunction

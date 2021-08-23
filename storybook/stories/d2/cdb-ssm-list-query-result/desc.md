@@ -4,7 +4,7 @@
   
 <article>
 
-*ssmList* [`List<Ssm>`](/docs/chaincode-dsl-signing-state-machine--page#ssm) 
+*ssmList* [`List<Ssm>`](/docs/ssm-chaincode-signing-state-machine--page#ssm) 
 
 Retrieved SSMs
 

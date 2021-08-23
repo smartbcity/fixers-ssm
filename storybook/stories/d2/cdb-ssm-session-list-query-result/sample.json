@@ -1,5 +1,5 @@
 {
-  "sessions" : {
+  "sessions" : [ {
     "ssm" : "ProductLogistic",
     "session" : "eca7c042-ec37-489b-adb8-42c73ddcfb0b",
     "roles" : {
@@ -19,5 +19,5 @@
     },
     "current" : 2,
     "iteration" : 3
-  }
+  } ]
 }

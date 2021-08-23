@@ -4,7 +4,7 @@
   
 <article>
 
-*channel* [`TxChannel`](/docs/ssm-api-general--page#txchannel) 
+*channel* [`TxChannel`](/docs/ssm-tx-general--page#txchannel) 
 
 The channel this session was instantiated in
 
@@ -25,7 +25,7 @@ The state of an SSM session
 </article>
 <article>
 
-*transaction* [`Transaction?`](/docs/chaincode-dsl-blockchain-content--page#transaction) 
+*transaction* [`Transaction?`](/docs/ssm-chaincode-blockchain-content--page#transaction) 
 
 Transaction that initiated the state of the session
 

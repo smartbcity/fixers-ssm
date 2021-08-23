@@ -17,7 +17,7 @@ The state generated with the transaction
 
 *txId* `TransactionId` 
 
-Id of the [Transaction](/docs/chaincode-dsl-blockchain-content--page#transaction) the state is originated from
+Id of the [Transaction](/docs/ssm-chaincode-blockchain-content--page#transaction) the state is originated from
 
 </article>
 

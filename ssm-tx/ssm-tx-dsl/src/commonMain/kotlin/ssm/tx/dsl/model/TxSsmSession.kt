@@ -33,7 +33,7 @@ expect interface TxSsmSessionDTO {
  * @d2 model
  * @page
  * Represents an SSM session state with some metadata
- * @@title SSM-API/Session
+ * @@title SSM-TX/Session
  */
 @Serializable
 @JsExport

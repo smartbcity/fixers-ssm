@@ -13,7 +13,7 @@ import ssm.tx.dsl.config.TxSsmConfig
  * @page
  * The SDK provides an auto-configuration module for spring applications. \
  * The configuration is composed of two lists of [SSM Configurations][SsmConfigProperties] and [CouchDB Configurations][ssm.couchdb.autoconfiguration.SsmCouchdbProperties]
- * @@title SSM-API/Configuration
+ * @@title SSM-TX/Configuration
  * @@example {
  * 	ssm: {
  *		couchdb: {
@@ -25,18 +25,18 @@ import ssm.tx.dsl.config.TxSsmConfig
  *			}
  *		},
  *		chaincode: {
- *			smartcode-ssm: {
+ *			"smartcode-ssm": {
  *				baseUrl: "http://peer.sandbox.smartb.network:9000",
  *	 			channelId: "channel-smartb",
  *	 			chaincodeId: "ssm-smartb"
  *	 		}
- *		}
+ *		},
  * 		list: {
  *		 	ProductLogistic: {
  *			 	"1.0": {
  *				 	baseUrl: "http://peer.sandbox.smartb.network:9000",
  *				 	channel: "channel-smartb",
- *				 	chaincode: "smartcode-ssm",
+ *				 	chaincode: "smartcode-ssm"
  *				}
  *			}
  *		}
