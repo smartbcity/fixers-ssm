@@ -47,7 +47,7 @@ expect interface SsmSessionDTO: WithPrivate {
  * @page
  * While an [SSM][Ssm] purely describes the structure of a State Machine, a session represents its instantiation.
  * It defines which [agent][SsmAgent] is assigned to which role, and keeps track of every state transition it has undergone.
- * @@title Chaincode-DSL/Session
+ * @@title SSM-Chaincode/Session
  */
 @Serializable
 @JsExport

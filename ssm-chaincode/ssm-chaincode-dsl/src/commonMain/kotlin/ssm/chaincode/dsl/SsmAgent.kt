@@ -26,7 +26,7 @@ expect interface SsmAgentDTO {
  * There are two kind of agents:
  *  - **Users** are the agents who can trigger a transition in an SSM. In effect, they are the participants in the smart contract represented by the SSM.
  *  - **Admins** have the rights to add new users and state machines. They are declared only once, when the chaincode is instantiated.
- * @@title Chaincode-DSL/Agent
+ * @@title SSM-Chaincode/Agent
  */
 @Serializable
 @JsExport

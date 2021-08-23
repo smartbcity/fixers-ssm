@@ -28,7 +28,7 @@ expect interface TxSsmDTO {
  * @d2 model
  * @page
  * Represents an [SSM][Ssm] with some metadata
- * @@title SSM-API/SSM
+ * @@title SSM-TX/SSM
  */
 @Serializable
 @JsExport
