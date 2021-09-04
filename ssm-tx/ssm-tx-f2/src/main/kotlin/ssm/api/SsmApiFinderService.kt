@@ -61,18 +61,19 @@ class SsmApiFinderService(
 ): SsmApiFinder {
 
 	@Bean
-	override fun txSsmListQueryFunction(): TxSsmListQueryFunction = f2Function { _ ->
-		val commands = ssmConfigProperties.list.flatMap { (_, ssmConfigs) ->
-			ssmConfigs.map { (_, ssmConfig) ->
-				CdbSsmListQuery(
-					dbConfig = ssmConfig.couchdb,
-					dbName = ssmConfig.dbName
-				)
-			}
-		}
+	override fun txSsmListQueryFunction(): TxSsmListQueryFunction = f2Function {
+		val cdbConfigCommands = ssmConfigProperties.list.flatMap { (_, ssmConfigs) -> ssmConfigs.values }
+			.distinctBy { ssmConfig -> ssmConfig.couchdb to ssmConfig.dbName }
+			.map { ssmConfig -> CdbSsmListQuery(
+				dbConfig = ssmConfig.couchdb,
+				dbName = ssmConfig.dbName
+			) }
 
-		cdbSsmListQueryFunction(commands.asFlow()).toList()
+		val ssmNames = ssmConfigProperties.list.keys
+
+		cdbSsmListQueryFunction(cdbConfigCommands.asFlow()).toList()
 			.flatMap(CdbSsmListQueryResultDTO::ssmList)
+			.filter { ssm -> ssm.name in ssmNames }
 			.map(Ssm::toTxSsm)
 			.let(::TxSsmListQueryResult)
 	}
