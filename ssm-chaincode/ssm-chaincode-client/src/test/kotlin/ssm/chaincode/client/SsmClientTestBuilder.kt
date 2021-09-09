@@ -1,6 +1,5 @@
 package ssm.chaincode.client
 
-import ssm.chaincode.client.SsmClient
 import ssm.chaincode.client.SsmClientBuilder.Companion.builder
 import java.io.IOException
 

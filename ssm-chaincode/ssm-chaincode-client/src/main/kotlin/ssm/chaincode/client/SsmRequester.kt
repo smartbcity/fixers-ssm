@@ -21,14 +21,16 @@ class SsmRequester(
         val args = query.queryArgs(value)
         val request = coopRepository.command(QUERY,
             channelId,
-            chaincodeId, args.fcn, args.args)
+            chaincodeId, args.fcn, args.args
+        )
         logger.info("Query the blockchain in channel[{}] and ssm[{}] with fcn[{}] with args:{}",
             channelId,
-            chaincodeId, args.fcn, args.args)
+            chaincodeId, args.fcn, args.args
+        )
         return request.thenApply(jsonConverter.toCompletableObjects(clazz))
     }
 
-    fun <T> query(value: String, query: HasGet, clazz: Class<T>): CompletableFuture<T> {
+    fun <T> query(value: String, query: HasGet, clazz: Class<T>): CompletableFuture<T?> {
         val args = query.queryArgs(value)
         val request = coopRepository.command(QUERY,
             channelId,

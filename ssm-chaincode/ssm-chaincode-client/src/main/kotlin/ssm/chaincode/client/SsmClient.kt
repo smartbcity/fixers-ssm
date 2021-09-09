@@ -54,7 +54,7 @@ class SsmClient(private val ssmRequester: SsmRequester) {
         return ssmRequester.list(query, String::class.java)
     }
 
-    fun getAdmin(username: String): CompletableFuture<SsmAgent> {
+    fun getAdmin(username: String): CompletableFuture<SsmAgent?> {
         val query = AdminQuery()
         return ssmRequester.query(username, query, SsmAgent::class.java)
     }
@@ -64,7 +64,7 @@ class SsmClient(private val ssmRequester: SsmRequester) {
         return ssmRequester.list(query, String::class.java)
     }
 
-    fun getAgent(agentName: String): CompletableFuture<SsmAgent> {
+    fun getAgent(agentName: String): CompletableFuture<SsmAgent?> {
         val query = AgentQuery()
         return ssmRequester.query(agentName, query, SsmAgent::class.java)
     }
@@ -74,12 +74,12 @@ class SsmClient(private val ssmRequester: SsmRequester) {
         return ssmRequester.list(query, String::class.java)
     }
 
-    fun getSsm(name: String): CompletableFuture<Ssm> {
+    fun getSsm(name: String): CompletableFuture<Ssm?> {
         val query = SsmQuery()
         return ssmRequester.query(name, query, Ssm::class.java)
     }
 
-    fun getSession(sessionId: String): CompletableFuture<SsmSessionState> {
+    fun getSession(sessionId: String): CompletableFuture<SsmSessionState?> {
         val query = SessionQuery()
         return ssmRequester.query(sessionId, query, SsmSessionState::class.java)
     }
@@ -94,12 +94,12 @@ class SsmClient(private val ssmRequester: SsmRequester) {
         return ssmRequester.list(query, String::class.java)
     }
 
-    fun getTransaction(txId: String): CompletableFuture<Transaction> {
+    fun getTransaction(txId: String): CompletableFuture<Transaction?> {
         val query = TransactionQuery()
         return ssmRequester.query(txId, query, Transaction::class.java)
     }
 
-    fun getBlock(blockId: Long): CompletableFuture<Block> {
+    fun getBlock(blockId: Long): CompletableFuture<Block?> {
         val query = BlockQuery()
         return ssmRequester.query(blockId.toString(), query, Block::class.java)
     }

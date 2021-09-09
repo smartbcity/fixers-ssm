@@ -16,7 +16,9 @@ import ssm.chaincode.dsl.SsmContext
 import ssm.chaincode.dsl.SsmSession
 import ssm.chaincode.dsl.SsmSessionState
 import ssm.chaincode.dsl.SsmTransition
+import ssm.chaincode.dsl.blockchain.Block
 import ssm.chaincode.dsl.blockchain.BlockDTO
+import ssm.chaincode.dsl.blockchain.Transaction
 import ssm.chaincode.dsl.blockchain.TransactionDTO
 import ssm.sdk.sign.model.Signer
 import java.util.UUID
@@ -154,7 +156,7 @@ class SsmClientItTest {
 			ssmName)
 		val ssm = ssmReq.get()
 		Assertions.assertThat(ssm).isNotNull
-		Assertions.assertThat(ssm.name).isEqualTo(ssmName)
+		Assertions.assertThat(ssm?.name).isEqualTo(ssmName)
 	}
 
 	@Test
@@ -175,13 +177,13 @@ class SsmClientItTest {
 		val ses = client.getSession(
 			sessionName)
 		val sesReq = ses.get()
-		Assertions.assertThat(sesReq.current).isEqualTo(0)
-		Assertions.assertThat(sesReq.iteration).isEqualTo(0)
-		Assertions.assertThat(sesReq.origin).isNull()
-		Assertions.assertThat(sesReq.ssm).isEqualTo(ssmName)
-		Assertions.assertThat(sesReq.roles).isEqualTo(Companion.session.roles)
-		Assertions.assertThat(sesReq.session).isEqualTo(Companion.session.session)
-		Assertions.assertThat(sesReq.public).isEqualTo(Companion.session.public)
+		Assertions.assertThat(sesReq?.current).isEqualTo(0)
+		Assertions.assertThat(sesReq?.iteration).isEqualTo(0)
+		Assertions.assertThat(sesReq?.origin).isNull()
+		Assertions.assertThat(sesReq?.ssm).isEqualTo(ssmName)
+		Assertions.assertThat(sesReq?.roles).isEqualTo(Companion.session.roles)
+		Assertions.assertThat(sesReq?.session).isEqualTo(Companion.session.session)
+		Assertions.assertThat(sesReq?.public).isEqualTo(Companion.session.public)
 	}
 
 	@Test
@@ -216,7 +218,7 @@ class SsmClientItTest {
 		val sesReq = client.getSession(
 			sessionName)
 		val state = sesReq.get()
-		val expectedMessage = state.getPrivateMessage(signerUser1)
+		val expectedMessage = state?.getPrivateMessage(signerUser1)
 		Assertions.assertThat(expectedMessage).isEqualTo("Message to signer1")
 	}
 
@@ -232,10 +234,10 @@ class SsmClientItTest {
 	fun assertThatTransactionExists(trans: InvokeReturn) {
 		Assertions.assertThat(trans).isNotNull
 		Assertions.assertThat(trans.status).isEqualTo("SUCCESS")
-		val transaction: TransactionDTO = client.getTransaction(trans.transactionId).get()
+		val transaction: Transaction? = client.getTransaction(trans.transactionId).get()
 		Assertions.assertThat(transaction).isNotNull
-		Assertions.assertThat(transaction.blockId).isNotNull
-		val block: BlockDTO = client.getBlock(transaction.blockId).get()
+		Assertions.assertThat(transaction?.blockId).isNotNull
+		val block: Block? = client.getBlock(transaction!!.blockId).get()
 		Assertions.assertThat(block).isNotNull
 	}
 

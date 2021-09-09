@@ -9,19 +9,20 @@ spring:
 
 ssm:
   couchdb:
-    peer0_pr-commune:
-      url: http://peer1.pr-commune.smartb.network:5984
-      username: admin
-      password: smartb
+    sandbox_ssm:
+      url: http://localhost:5984
+      username: couchdb
+      password: couchdb
       serviceName: ssm-couchdb-unit
+  chaincode:
+    smartcode-ssm:
+      baseUrl: http://localhost:9090
   list:
-    account:
+    SSM_CarDealership-0a0b2f81-9a93-4f8b-b3a6-444d8e3ad1bc:
       v1_0:
-        baseUrl: http://peer1.pr-commune.smartb.network
-        channel: proudhon
-        chaincode: ssm
-        couchdb: peer0_pr-commune
-        dbName: proudhon_ssm
+        chaincode: smartcode-ssm
+        couchdb: sandbox_ssm
+        dbName: sandbox_ssm
 #    Delivery:
 #      v0_2:
 #        baseUrl: http://peer0.pr-commune.smartb.network
