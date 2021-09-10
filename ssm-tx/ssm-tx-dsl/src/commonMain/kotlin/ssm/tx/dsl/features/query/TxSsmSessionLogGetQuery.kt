@@ -1,13 +1,13 @@
 package ssm.tx.dsl.features.query
 
 import f2.dsl.fnc.F2Function
+import kotlin.js.JsExport
+import kotlin.js.JsName
 import kotlinx.serialization.Serializable
 import ssm.chaincode.dsl.blockchain.TransactionId
 import ssm.tx.dsl.model.TxSsmSessionId
 import ssm.tx.dsl.model.TxSsmSessionState
 import ssm.tx.dsl.model.TxSsmSessionStateDTO
-import kotlin.js.JsExport
-import kotlin.js.JsName
 
 /**
  * Retrieve the state of a session corresponding to a given transaction within the blockchain
@@ -18,20 +18,20 @@ import kotlin.js.JsName
  */
 typealias TxSsmSessionLogGetQueryFunction = F2Function<TxSsmSessionLogGetQueryDTO, TxSsmSessionLogGetQueryResultDTO>
 
-expect interface TxSsmSessionLogGetQueryDTO: TxQueryDTO {
+expect interface TxSsmSessionLogGetQueryDTO : TxQueryDTO {
 	/**
 	 * Identifier of the session to retrieve
 	 * @example [ssm.tx.dsl.model.TxSsmSession.id]
 	 */
-    val sessionId: TxSsmSessionId
+	val sessionId: TxSsmSessionId
 
 	/**
 	 * Identifier of the transaction to retrieve
 	 * @example [ssm.chaincode.dsl.blockchain.Transaction.transactionId]
 	 */
 	val txId: TransactionId
-    override val ssm: SsmName
-    override val bearerToken: String?
+	override val ssm: SsmName
+	override val bearerToken: String?
 }
 
 /**
@@ -46,10 +46,10 @@ class TxSsmSessionLogGetQuery(
 	override val sessionId: TxSsmSessionId,
 	override val txId: TransactionId,
 	override val ssm: SsmName,
-	override val bearerToken: String?
-): TxSsmSessionLogGetQueryDTO
+	override val bearerToken: String?,
+) : TxSsmSessionLogGetQueryDTO
 
-expect interface TxSsmSessionLogGetQueryResultDTO{
+expect interface TxSsmSessionLogGetQueryResultDTO {
 	/**
 	 * The retrieved session state and transaction
 	 */
@@ -65,5 +65,5 @@ expect interface TxSsmSessionLogGetQueryResultDTO{
 @JsExport
 @JsName("TxSsmSessionLogGetQueryResult")
 class TxSsmSessionLogGetQueryResult(
-	override val ssmSessionState: TxSsmSessionState?
-): TxSsmSessionLogGetQueryResultDTO
+	override val ssmSessionState: TxSsmSessionState?,
+) : TxSsmSessionLogGetQueryResultDTO

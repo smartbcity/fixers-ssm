@@ -1,10 +1,10 @@
 package ssm.chaincode.dsl
 
-import kotlinx.serialization.Serializable
 import kotlin.js.JsExport
 import kotlin.js.JsName
+import kotlinx.serialization.Serializable
 
-expect interface SsmContextDTO: WithPrivate {
+expect interface SsmContextDTO : WithPrivate {
 	/**
 	 * Described session
 	 * @example [SsmSession.session]
@@ -43,4 +43,4 @@ data class SsmContext(
 	override val public: String,
 	override val iteration: Int,
 	override val private: Map<String, String>? = null,
-): SsmContextDTO
+) : SsmContextDTO

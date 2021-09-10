@@ -15,5 +15,4 @@ class SsmListAdminQueryFunctionImpl {
 		val list = ssmClient.listAdmins().await()
 		SsmListAdminResult(list.toTypedArray())
 	}
-
 }

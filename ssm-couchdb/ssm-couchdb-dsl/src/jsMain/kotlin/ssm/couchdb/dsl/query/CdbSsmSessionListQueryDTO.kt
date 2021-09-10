@@ -8,7 +8,7 @@ import ssm.couchdb.dsl.CdbQueryDTO
 actual external interface CdbSsmSessionListQueryDTO : CdbQueryDTO {
 	actual val dbName: String
 	actual val ssm: String?
-	actual abstract override val dbConfig: String
+	actual override val dbConfig: String
 }
 
 @JsExport

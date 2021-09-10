@@ -1,9 +1,8 @@
 package ssm.couchdb.dsl
 
-import kotlinx.serialization.Serializable
 import kotlin.js.JsExport
 import kotlin.js.JsName
-
+import kotlinx.serialization.Serializable
 
 typealias DatabaseName = String
 
@@ -27,5 +26,5 @@ expect interface DatabaseDTO {
 @JsExport
 @JsName("Database")
 class Database(
-	override val name: DatabaseName
-): DatabaseDTO
+	override val name: DatabaseName,
+) : DatabaseDTO

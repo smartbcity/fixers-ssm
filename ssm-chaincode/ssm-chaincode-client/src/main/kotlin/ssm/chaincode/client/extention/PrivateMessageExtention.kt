@@ -1,6 +1,9 @@
 @file:JvmName("PrivateMessageUtils")
+
 package ssm.chaincode.client
 
+import java.security.PrivateKey
+import java.security.PublicKey
 import org.bouncycastle.crypto.CryptoException
 import ssm.chaincode.client.extention.getPubAsKey
 import ssm.chaincode.dsl.SsmAgent
@@ -10,8 +13,6 @@ import ssm.chaincode.dsl.SsmSessionState
 import ssm.chaincode.dsl.WithPrivate
 import ssm.sdk.sign.crypto.RSACipher
 import ssm.sdk.sign.model.Signer
-import java.security.PrivateKey
-import java.security.PublicKey
 
 @Throws(CryptoException::class)
 fun SsmContext.addPrivateMessage(value: String, agent: SsmAgent): SsmContext {
@@ -23,7 +24,6 @@ fun SsmContext.addPrivateMessage(value: String, name: String, publicKey: PublicK
 	val newMap = addPrivate(value, publicKey, name)
 	return this.copy(private = newMap)
 }
-
 
 @Throws(CryptoException::class)
 fun SsmSession.addPrivateMessage(value: String, agent: SsmAgent) {
@@ -49,11 +49,7 @@ fun SsmSessionState.addPrivateMessage(value: String, name: String, publicKey: Pu
 	return copy(private = newPrivate)
 }
 
-private fun WithPrivate.addPrivate(
-		value: String,
-		publicKey: PublicKey,
-		name: String,
-): Map<String, String> {
+private fun WithPrivate.addPrivate(value: String, publicKey: PublicKey, name: String): Map<String, String> {
 	val encrypted = RSACipher.encrypt(value.toByteArray(), publicKey)
 	return (private ?: hashMapOf()) + mapOf(name to encrypted)
 }
@@ -62,7 +58,6 @@ private fun WithPrivate.addPrivate(
 fun WithPrivate.getPrivateMessage(signer: Signer): String? {
 	return getPrivateMessage(signer.name, signer.pair.private)
 }
-
 
 @Throws(CryptoException::class)
 fun WithPrivate.getPrivateMessage(name: String, privateKey: PrivateKey): String? {

@@ -15,5 +15,4 @@ class SsmGetAdminFunctionImpl {
 		val sessionState = ssmClient.getAdmin(cmd.name).await()
 		SsmGetAdminResult(sessionState)
 	}
-
 }

@@ -2,12 +2,12 @@ package ssm.chaincode.dsl.query
 
 import f2.dsl.cqrs.Event
 import f2.dsl.fnc.F2Function
+import kotlin.js.JsExport
+import kotlin.js.JsName
 import kotlinx.serialization.Serializable
 import ssm.chaincode.dsl.Ssm
 import ssm.chaincode.dsl.SsmChaincodeProperties
 import ssm.chaincode.dsl.SsmCommandDTO
-import kotlin.js.JsExport
-import kotlin.js.JsName
 
 /**
  * Retrieves a list of the existing SSMs
@@ -29,7 +29,7 @@ typealias SsmListSsmQueryFunction = F2Function<SsmListSsmQuery, SsmListSsmResult
 class SsmListSsmQuery(
 	override val chaincode: SsmChaincodeProperties,
 	override val bearerToken: String? = null,
-): SsmCommandDTO
+) : SsmCommandDTO
 
 /**
  * @d2 event
@@ -44,5 +44,5 @@ class SsmListSsmResult(
 	 * Names of all known SSMs
 	 * @example ["ProductLogistic", "Delivery", "Mobility"]
 	 */
-	val values: Array<String>
-): Event
+	val values: Array<String>,
+) : Event

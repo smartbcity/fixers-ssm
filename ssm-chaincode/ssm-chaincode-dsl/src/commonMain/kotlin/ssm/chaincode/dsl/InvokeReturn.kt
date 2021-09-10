@@ -1,9 +1,9 @@
 package ssm.chaincode.dsl
 
-import kotlinx.serialization.Serializable
-import ssm.chaincode.dsl.blockchain.TransactionId
 import kotlin.js.JsExport
 import kotlin.js.JsName
+import kotlinx.serialization.Serializable
+import ssm.chaincode.dsl.blockchain.TransactionId
 
 expect interface InvokeReturnDTO {
 	val status: String
@@ -38,5 +38,5 @@ class InvokeReturn(
 	 * Identifier of the transaction
 	 * @example [ssm.chaincode.dsl.blockchain.Transaction.transactionId]
 	 */
-	val transactionId: TransactionId
+	val transactionId: TransactionId,
 )

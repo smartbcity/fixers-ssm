@@ -1,34 +1,34 @@
 package ssm.chaincode.dsl.blockchain
 
-import kotlinx.serialization.Serializable
 import kotlin.js.JsExport
 import kotlin.js.JsName
+import kotlinx.serialization.Serializable
 
 typealias BlockId = Long
 
 expect interface BlockDTO {
-    /**
-     * Identifier of the block
-     * @example 10
-     */
-    val blockId: BlockId
+	/**
+	 * Identifier of the block
+	 * @example 10
+	 */
+	val blockId: BlockId
 
-    /**
-     * Hash of the previous block within the blockchain
-     * @example "TODO"
-     */
-    val previousHash: ByteArray
+	/**
+	 * Hash of the previous block within the blockchain
+	 * @example "TODO"
+	 */
+	val previousHash: ByteArray
 
-    /**
-     * TODO
-     * @example "TODO"
-     */
-    val dataHash: ByteArray
+	/**
+	 * TODO
+	 * @example "TODO"
+	 */
+	val dataHash: ByteArray
 
-    /**
-     * Transactions within the block
-     */
-    val transactions: List<TransactionDTO>
+	/**
+	 * Transactions within the block
+	 */
+	val transactions: List<TransactionDTO>
 }
 
 /**
@@ -40,9 +40,8 @@ expect interface BlockDTO {
 @JsExport
 @JsName("Block")
 class Block(
-    override val blockId: BlockId,
-    override val previousHash: ByteArray,
-    override val dataHash: ByteArray,
-    override val transactions: List<Transaction>
-): BlockDTO
-
+	override val blockId: BlockId,
+	override val previousHash: ByteArray,
+	override val dataHash: ByteArray,
+	override val transactions: List<Transaction>,
+) : BlockDTO

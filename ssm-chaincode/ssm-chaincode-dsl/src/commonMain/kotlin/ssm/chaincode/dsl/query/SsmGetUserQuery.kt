@@ -2,12 +2,12 @@ package ssm.chaincode.dsl.query
 
 import f2.dsl.cqrs.Event
 import f2.dsl.fnc.F2Function
+import kotlin.js.JsExport
+import kotlin.js.JsName
 import kotlinx.serialization.Serializable
 import ssm.chaincode.dsl.SsmAgent
 import ssm.chaincode.dsl.SsmChaincodeProperties
 import ssm.chaincode.dsl.SsmCommandDTO
-import kotlin.js.JsExport
-import kotlin.js.JsName
 
 typealias SsmGetUserFunction = F2Function<SsmGetUserQuery, SsmGetUserResult>
 
@@ -17,12 +17,12 @@ typealias SsmGetUserFunction = F2Function<SsmGetUserQuery, SsmGetUserResult>
 class SsmGetUserQuery(
 	override val chaincode: SsmChaincodeProperties,
 	override val bearerToken: String? = null,
-	val name: String
-): SsmCommandDTO
+	val name: String,
+) : SsmCommandDTO
 
 @Serializable
 @JsExport
 @JsName("SsmGetUserResult")
 class SsmGetUserResult(
-	val user: SsmAgent?
-): Event
+	val user: SsmAgent?,
+) : Event

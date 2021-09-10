@@ -6,7 +6,7 @@ import ssm.tx.dsl.model.TxSsmSessionStateDTO
 
 @JsExport
 @JsName("TxSsmSessionLogGetQueryDTO")
-actual external interface TxSsmSessionLogGetQueryDTO: TxQueryDTO {
+actual external interface TxSsmSessionLogGetQueryDTO : TxQueryDTO {
 	actual val sessionId: TxSsmSessionId
 	actual val txId: TransactionId
 	actual override val ssm: SsmName

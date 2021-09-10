@@ -13,5 +13,4 @@ class SsmSessionPerformActionFunctionImpl {
 		val invoke = ssmClient.perform(cmd.signer, cmd.action, cmd.context).await()
 		SsmSessionPerformActionResult(invoke)
 	}
-
 }

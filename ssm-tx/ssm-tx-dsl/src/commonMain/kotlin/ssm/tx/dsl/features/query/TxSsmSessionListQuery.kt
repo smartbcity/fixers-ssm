@@ -1,11 +1,11 @@
 package ssm.tx.dsl.features.query
 
 import f2.dsl.fnc.F2Function
+import kotlin.js.JsExport
+import kotlin.js.JsName
 import kotlinx.serialization.Serializable
 import ssm.tx.dsl.model.TxSsmSession
 import ssm.tx.dsl.model.TxSsmSessionDTO
-import kotlin.js.JsExport
-import kotlin.js.JsName
 
 /**
  * Retrieve a list of all known sessions of a given SSM
@@ -16,7 +16,7 @@ import kotlin.js.JsName
  */
 typealias TxSsmSessionListQueryFunction = F2Function<TxSsmSessionListQueryDTO, TxSsmSessionListQueryResultDTO>
 
-expect interface TxSsmSessionListQueryDTO: TxQueryDTO
+expect interface TxSsmSessionListQueryDTO : TxQueryDTO
 
 /**
  * @d2 query
@@ -30,7 +30,6 @@ class TxSsmSessionListQuery(
 	override val ssm: String,
 	override val bearerToken: String?,
 ) : TxSsmSessionListQueryDTO
-
 
 expect interface TxSsmSessionListQueryResultDTO {
 	/**

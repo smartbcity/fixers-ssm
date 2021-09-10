@@ -57,17 +57,20 @@ class SsmApiFinderService(
 	private val ssmGetSessionQueryFunction: SsmGetSessionQueryFunction,
 	private val ssmGetSessionLogsQueryFunction: SsmGetSessionLogsQueryFunction,
 	private val ssmGetTransactionQueryFunction: SsmGetTransactionQueryFunction,
-	private val ssmConfigProperties: SsmConfigProperties
-): SsmApiFinder {
+	private val ssmConfigProperties: SsmConfigProperties,
+) : SsmApiFinder {
 
 	@Bean
 	override fun txSsmListQueryFunction(): TxSsmListQueryFunction = f2Function {
-		val cdbConfigCommands = ssmConfigProperties.list.flatMap { (_, ssmConfigs) -> ssmConfigs.values }
+		val cdbConfigCommands = ssmConfigProperties.list
+			.flatMap { (_, ssmConfigs) -> ssmConfigs.values }
 			.distinctBy { ssmConfig -> ssmConfig.couchdb to ssmConfig.dbName }
-			.map { ssmConfig -> CdbSsmListQuery(
-				dbConfig = ssmConfig.couchdb,
-				dbName = ssmConfig.dbName
-			) }
+			.map { ssmConfig ->
+				CdbSsmListQuery(
+					dbConfig = ssmConfig.couchdb,
+					dbName = ssmConfig.dbName
+				)
+			}
 
 		val ssmNames = ssmConfigProperties.list.keys
 
@@ -134,7 +137,6 @@ class SsmApiFinderService(
 		}
 	}
 
-
 	private fun getConfig(cmd: TxQueryDTO): TxSsmLocationProperties {
 		return ssmConfigProperties.list[cmd.ssm]?.entries?.first()?.value
 			?: throw IllegalArgumentException("Configuration of SSM [${cmd.ssm}] not found")
@@ -170,10 +172,13 @@ class SsmApiFinderService(
 			}.let {
 				TxSsmSessionLogGetQueryResult(it)
 			}
-
 	}
 
-	private suspend fun getSessionLogs(session: TxSsmSessionId, ssmConfig: TxSsmLocationProperties, bearerToken: String?): List<SsmSessionStateLog> {
+	private suspend fun getSessionLogs(
+		session: TxSsmSessionId,
+		ssmConfig: TxSsmLocationProperties,
+		bearerToken: String?,
+	): List<SsmSessionStateLog> {
 		val query = SsmGetSessionLogsQuery(
 			session = session,
 			chaincode = ssmConfig.toChaincodeProperties(),
@@ -188,7 +193,11 @@ class SsmApiFinderService(
 		}
 	}
 
-	private suspend fun getTransaction(id: TransactionId?, ssmConfig: TxSsmLocationProperties, bearerToken: String?): Transaction? {
+	private suspend fun getTransaction(
+		id: TransactionId?,
+		ssmConfig: TxSsmLocationProperties,
+		bearerToken: String?,
+	): Transaction? {
 		return id?.let {
 			val query = SsmGetTransactionQuery(
 				id = id,
@@ -199,7 +208,10 @@ class SsmApiFinderService(
 		}
 	}
 
-	private suspend fun SsmSessionState.toTxSession(ssmConfig: TxSsmLocationProperties, bearerToken: String?): TxSsmSession {
+	private suspend fun SsmSessionState.toTxSession(
+		ssmConfig: TxSsmLocationProperties,
+		bearerToken: String?,
+	): TxSsmSession {
 		val sessionLogs = getSessionLogs(session, ssmConfig, bearerToken)
 
 		val firstTransactionId = sessionLogs.minByOrNull { sessionLog -> sessionLog.state.iteration }?.txId

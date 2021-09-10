@@ -41,8 +41,8 @@ class SsmSessionPerformActionCommand(
 	/**
 	 * Information about the transition
 	 */
-	val context: SsmContext
-): SsmCommandDTO
+	val context: SsmContext,
+) : SsmCommandDTO
 
 /**
  * @d2 event
@@ -51,4 +51,4 @@ class SsmSessionPerformActionCommand(
  */
 class SsmSessionPerformActionResult(
 	val invokeReturn: InvokeReturn,
-): Event
+) : Event

@@ -1,8 +1,8 @@
 package ssm.chaincode.dsl
 
-import kotlinx.serialization.Serializable
 import kotlin.js.JsExport
 import kotlin.js.JsName
+import kotlinx.serialization.Serializable
 
 expect interface SsmAgentDTO {
 	/**
@@ -34,7 +34,7 @@ expect interface SsmAgentDTO {
 data class SsmAgent(
 	override val name: String,
 	override val pub: ByteArray,
-): SsmAgentDTO {
+) : SsmAgentDTO {
 	override fun equals(other: Any?): Boolean {
 		if (this === other) return true
 		if (other == null || this::class != other::class) return false

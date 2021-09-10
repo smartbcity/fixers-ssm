@@ -1,10 +1,10 @@
 package ssm.chaincode.dsl
 
-import kotlinx.serialization.Serializable
 import kotlin.js.JsExport
 import kotlin.js.JsName
+import kotlinx.serialization.Serializable
 
-expect interface SsmSessionDTO: WithPrivate {
+expect interface SsmSessionDTO : WithPrivate {
 	/**
 	 * Identifier of the instantiated [SSM][Ssm]
 	 * @example [Ssm.name]
@@ -58,5 +58,4 @@ open class SsmSession(
 	override val roles: Map<String, String>,
 	override val public: String,
 	override val private: Map<String, String>? = hashMapOf(),
-): SsmSessionDTO
-
+) : SsmSessionDTO

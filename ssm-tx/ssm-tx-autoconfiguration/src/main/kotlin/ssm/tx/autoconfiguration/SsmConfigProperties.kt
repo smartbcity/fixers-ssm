@@ -47,5 +47,5 @@ import ssm.tx.dsl.config.TxSsmConfig
 @ConstructorBinding
 class SsmConfigProperties(
 	val list: TxSsmConfig,
-	val chaincode: Map<String, SsmChaincodeProperties>
+	val chaincode: Map<String, SsmChaincodeProperties>,
 )

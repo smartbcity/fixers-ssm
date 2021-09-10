@@ -1,11 +1,11 @@
 package ssm.couchdb.dsl.query
 
 import f2.dsl.fnc.F2Function
+import kotlin.js.JsExport
+import kotlin.js.JsName
 import kotlinx.serialization.Serializable
 import ssm.chaincode.dsl.SsmSessionState
 import ssm.couchdb.dsl.CdbQueryDTO
-import kotlin.js.JsExport
-import kotlin.js.JsName
 
 /**
  * Retrieve the list of all known sessions of a given SSM
@@ -16,19 +16,19 @@ import kotlin.js.JsName
  */
 typealias CdbSsmSessionListQueryFunction = F2Function<CdbSsmSessionListQueryDTO, CdbSsmSessionListQueryResultDTO>
 
-expect interface CdbSsmSessionListQueryDTO: CdbQueryDTO{
-    /**
-     * Name of the database to query on
-     * @example [ssm.couchdb.dsl.Database.name]
-     */
-    val dbName: String
+expect interface CdbSsmSessionListQueryDTO : CdbQueryDTO {
+	/**
+	 * Name of the database to query on
+	 * @example [ssm.couchdb.dsl.Database.name]
+	 */
+	val dbName: String
 
-    /**
-     * Identifier of the SSM
-     * @example [ssm.chaincode.dsl.Ssm.name]
-     */
-    val ssm: String?
-    override val dbConfig: String
+	/**
+	 * Identifier of the SSM
+	 * @example [ssm.chaincode.dsl.Ssm.name]
+	 */
+	val ssm: String?
+	override val dbConfig: String
 }
 
 /**
@@ -40,16 +40,16 @@ expect interface CdbSsmSessionListQueryDTO: CdbQueryDTO{
 @JsExport
 @JsName("CdbSsmSessionListQuery")
 class CdbSsmSessionListQuery(
-    override val dbName: String,
-    override val ssm: String?,
-    override val dbConfig: String
-): CdbSsmSessionListQueryDTO
+	override val dbName: String,
+	override val ssm: String?,
+	override val dbConfig: String,
+) : CdbSsmSessionListQueryDTO
 
-expect interface CdbSsmSessionListQueryResultDTO{
-    /**
-     * Retrieved sessions
-     */
-    val sessions: Array<SsmSessionState>
+expect interface CdbSsmSessionListQueryResultDTO {
+	/**
+	 * Retrieved sessions
+	 */
+	val sessions: Array<SsmSessionState>
 }
 
 /**
@@ -61,5 +61,5 @@ expect interface CdbSsmSessionListQueryResultDTO{
 @JsExport
 @JsName("CdbSsmSessionListQueryResult")
 class CdbSsmSessionListQueryResult(
-    override val sessions: Array<SsmSessionState>
-): CdbSsmSessionListQueryResultDTO
+	override val sessions: Array<SsmSessionState>,
+) : CdbSsmSessionListQueryResultDTO

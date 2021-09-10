@@ -1,11 +1,11 @@
 package ssm.tx.dsl.features.query
 
 import f2.dsl.fnc.F2Function
+import kotlin.js.JsExport
+import kotlin.js.JsName
 import kotlinx.serialization.Serializable
 import ssm.tx.dsl.model.TxSsm
 import ssm.tx.dsl.model.TxSsmDTO
-import kotlin.js.JsExport
-import kotlin.js.JsName
 
 /**
  * Retrieves all known SSMs
@@ -26,14 +26,13 @@ expect interface TxSsmListQueryDTO
 @Serializable
 @JsExport
 @JsName("TxSsmListQuery")
-class TxSsmListQuery(
-): TxSsmListQueryDTO
+class TxSsmListQuery : TxSsmListQueryDTO
 
-expect interface TxSsmListQueryResultDTO{
-    /**
-     * List of all retrieved SSMs
-     */
-    val list: List<TxSsmDTO>
+expect interface TxSsmListQueryResultDTO {
+	/**
+	 * List of all retrieved SSMs
+	 */
+	val list: List<TxSsmDTO>
 }
 
 /**
@@ -45,5 +44,5 @@ expect interface TxSsmListQueryResultDTO{
 @JsExport
 @JsName("TxSsmListQueryResult")
 class TxSsmListQueryResult(
-    override val list: List<TxSsm>
-): TxSsmListQueryResultDTO
+	override val list: List<TxSsm>,
+) : TxSsmListQueryResultDTO

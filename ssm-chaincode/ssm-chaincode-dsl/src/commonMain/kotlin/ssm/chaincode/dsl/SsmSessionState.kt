@@ -1,10 +1,10 @@
 package ssm.chaincode.dsl
 
-import kotlinx.serialization.Serializable
 import kotlin.js.JsExport
 import kotlin.js.JsName
+import kotlinx.serialization.Serializable
 
-expect interface SsmSessionStateDTO: SsmSessionDTO, WithPrivate  {
+expect interface SsmSessionStateDTO : SsmSessionDTO, WithPrivate {
 	override val ssm: String?
 	override val session: String
 	override val roles: Map<String, String>?
@@ -48,4 +48,4 @@ data class SsmSessionState(
 	override val origin: SsmTransition?,
 	override val current: Int,
 	override val iteration: Int,
-): SsmSessionStateDTO
+) : SsmSessionStateDTO

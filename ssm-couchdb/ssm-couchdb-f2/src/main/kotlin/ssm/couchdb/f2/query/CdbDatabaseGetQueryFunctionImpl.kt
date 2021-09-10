@@ -10,7 +10,7 @@ import ssm.couchdb.f2.commons.CdbF2Function
 
 @Configuration
 class CdbDatabaseGetQueryFunctionImpl(
-	private val cbdf2: CdbF2Function
+	private val cbdf2: CdbF2Function,
 ) {
 
 	@Bean

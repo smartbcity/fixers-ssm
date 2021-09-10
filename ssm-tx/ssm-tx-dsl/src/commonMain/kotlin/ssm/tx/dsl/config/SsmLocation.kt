@@ -28,21 +28,21 @@ typealias TxSsmConfig = Map<SsmName, Map<SsmVersion, TxSsmLocationProperties>>
  * @parent [TxSsmConfig]
  */
 data class TxSsmLocationProperties(
-    /**
-     * Name of the chaincode configuration to use
-     * @example "smartcode-ssm"
-     */
-    val chaincode: String,
+	/**
+	 * Name of the chaincode configuration to use
+	 * @example "smartcode-ssm"
+	 */
+	val chaincode: String,
 
-    /**
-     * Name of the couchdb configuration to use
-     * @example "smartbase"
-     */
-    val couchdb: String,
+	/**
+	 * Name of the couchdb configuration to use
+	 * @example "smartbase"
+	 */
+	val couchdb: String,
 
-    /**
-     * Name of the database linked to the SSM
-     * @example "smartbase_ssm"
-     */
-    val dbName: String
+	/**
+	 * Name of the database linked to the SSM
+	 * @example "smartbase_ssm"
+	 */
+	val dbName: String,
 )

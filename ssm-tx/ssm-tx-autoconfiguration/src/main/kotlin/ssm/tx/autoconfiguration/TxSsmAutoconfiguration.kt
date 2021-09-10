@@ -5,6 +5,4 @@ import org.springframework.context.annotation.Configuration
 
 @EnableConfigurationProperties(SsmConfigProperties::class)
 @Configuration
-class TxSsmAutoconfiguration {
-
-}
+class TxSsmAutoconfiguration

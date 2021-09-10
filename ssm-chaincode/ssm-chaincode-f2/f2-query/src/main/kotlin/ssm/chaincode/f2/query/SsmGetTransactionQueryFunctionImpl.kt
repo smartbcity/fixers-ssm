@@ -10,10 +10,10 @@ import ssm.chaincode.f2.commons.ssmF2Function
 @Service
 class SsmGetTransactionQueryFunctionImpl {
 
-    @Bean
-    fun ssmGetTransactionQueryFunction(): SsmGetTransactionQueryFunction = ssmF2Function { cmd, ssmClient ->
-        ssmClient.getTransaction(cmd.id)
-            .await()
-            .let(::SsmGetTransactionQueryResult)
-    }
+	@Bean
+	fun ssmGetTransactionQueryFunction(): SsmGetTransactionQueryFunction = ssmF2Function { cmd, ssmClient ->
+		ssmClient.getTransaction(cmd.id)
+			.await()
+			.let(::SsmGetTransactionQueryResult)
+	}
 }

@@ -35,7 +35,7 @@ class SsmSessionStartCommand(
 	 * Admin signing the transaction
 	 */
 	val signerAdmin: SignerAdmin,
-): SsmCommandDTO
+) : SsmCommandDTO
 
 /**
  * @d2 event
@@ -43,5 +43,5 @@ class SsmSessionStartCommand(
  * @title Start Session: Response
  */
 class SsmSessionStartResult(
-	val invokeReturn: InvokeReturn
-): Event
+	val invokeReturn: InvokeReturn,
+) : Event

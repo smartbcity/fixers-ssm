@@ -1,6 +1,5 @@
 package ssm.chaincode.dsl
 
-import kotlinx.serialization.Serializable
 import ssm.chaincode.dsl.blockchain.TransactionId
 
 @JsExport

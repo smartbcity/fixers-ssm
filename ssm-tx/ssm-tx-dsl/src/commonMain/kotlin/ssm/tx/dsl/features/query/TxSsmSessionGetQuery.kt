@@ -1,11 +1,11 @@
 package ssm.tx.dsl.features.query
 
 import f2.dsl.fnc.F2Function
+import kotlin.js.JsExport
+import kotlin.js.JsName
 import kotlinx.serialization.Serializable
 import ssm.tx.dsl.model.TxSsmSession
 import ssm.tx.dsl.model.TxSsmSessionDTO
-import kotlin.js.JsExport
-import kotlin.js.JsName
 
 /**
  * Retrieves a given session
@@ -16,14 +16,14 @@ import kotlin.js.JsName
  */
 typealias TxSsmSessionGetQueryFunction = F2Function<TxSsmSessionGetQueryDTO, TxSsmSessionGetQueryResultDTO>
 
-expect interface TxSsmSessionGetQueryDTO: TxQueryDTO {
+expect interface TxSsmSessionGetQueryDTO : TxQueryDTO {
 	/**
 	 * Identifier of the session to retrieve
 	 * @example [TxSsmSession.id]
 	 */
-    val sessionId: String
-    override val ssm: SsmName
-    override val bearerToken: String?
+	val sessionId: String
+	override val ssm: SsmName
+	override val bearerToken: String?
 }
 
 /**
@@ -37,11 +37,10 @@ expect interface TxSsmSessionGetQueryDTO: TxQueryDTO {
 class TxSsmSessionGetQuery(
 	override val sessionId: String,
 	override val ssm: SsmName,
-	override val bearerToken: String?
-): TxSsmSessionGetQueryDTO
+	override val bearerToken: String?,
+) : TxSsmSessionGetQueryDTO
 
-
-expect interface TxSsmSessionGetQueryResultDTO{
+expect interface TxSsmSessionGetQueryResultDTO {
 	/**
 	 * The retrieved session if it exists
 	 */
@@ -58,4 +57,4 @@ expect interface TxSsmSessionGetQueryResultDTO{
 @JsName("TxSsmSessionGetQueryResult")
 class TxSsmSessionGetQueryResult(
 	override val session: TxSsmSession?,
-): TxSsmSessionGetQueryResultDTO
+) : TxSsmSessionGetQueryResultDTO

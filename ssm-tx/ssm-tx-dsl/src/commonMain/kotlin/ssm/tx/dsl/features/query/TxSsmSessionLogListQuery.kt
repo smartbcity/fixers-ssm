@@ -1,11 +1,11 @@
 package ssm.tx.dsl.features.query
 
 import f2.dsl.fnc.F2Function
+import kotlin.js.JsExport
+import kotlin.js.JsName
 import kotlinx.serialization.Serializable
 import ssm.tx.dsl.model.TxSsmSessionId
 import ssm.tx.dsl.model.TxSsmSessionState
-import kotlin.js.JsExport
-import kotlin.js.JsName
 
 /**
  * Retrieve all the logs of a given SSM session
@@ -39,7 +39,6 @@ class TxSsmSessionLogListQuery(
 	override val ssm: SsmName,
 	override val bearerToken: String?,
 ) : TxSsmSessionLogListQueryDTO
-
 
 expect interface TxSsmSessionLogListQueryResultDTO {
 	/**

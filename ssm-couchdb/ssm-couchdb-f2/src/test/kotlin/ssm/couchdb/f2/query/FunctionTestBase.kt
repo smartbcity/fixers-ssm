@@ -25,7 +25,7 @@ class FunctionTestBase {
 }
 
 @ConfigurationPropertiesScan
-@SpringBootApplication(scanBasePackages= ["ssm.couchdb"])
+@SpringBootApplication(scanBasePackages = ["ssm.couchdb"])
 class TestApplication {
 	@Bean
 	fun objectMapper(): ObjectMapper {

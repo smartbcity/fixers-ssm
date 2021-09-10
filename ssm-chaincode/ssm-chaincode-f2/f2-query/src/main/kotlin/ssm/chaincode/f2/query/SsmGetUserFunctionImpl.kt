@@ -15,5 +15,4 @@ class SsmGetUserFunctionImpl {
 		val sessionState = ssmClient.getAgent(cmd.name).await()
 		SsmGetUserResult(sessionState)
 	}
-
 }

@@ -4,7 +4,7 @@ import ssm.chaincode.dsl.blockchain.TransactionId
 import ssm.tx.dsl.model.TxSsmSessionId
 import ssm.tx.dsl.model.TxSsmSessionStateDTO
 
-actual interface TxSsmSessionLogGetQueryDTO: TxQueryDTO {
+actual interface TxSsmSessionLogGetQueryDTO : TxQueryDTO {
 	actual val sessionId: TxSsmSessionId
 	actual val txId: TransactionId
 	actual override val ssm: SsmName

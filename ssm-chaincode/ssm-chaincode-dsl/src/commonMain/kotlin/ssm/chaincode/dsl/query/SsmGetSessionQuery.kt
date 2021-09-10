@@ -2,12 +2,12 @@ package ssm.chaincode.dsl.query
 
 import f2.dsl.cqrs.Event
 import f2.dsl.fnc.F2Function
+import kotlin.js.JsExport
+import kotlin.js.JsName
 import kotlinx.serialization.Serializable
 import ssm.chaincode.dsl.SsmChaincodeProperties
 import ssm.chaincode.dsl.SsmCommandDTO
 import ssm.chaincode.dsl.SsmSessionState
-import kotlin.js.JsExport
-import kotlin.js.JsName
 
 /**
  * Retrieves the current state of a session
@@ -34,8 +34,8 @@ class SsmGetSessionQuery(
 	 * Identifier of the session to retrieve
 	 * @example [SsmSessionState.session]
 	 */
-	val name: String
-): SsmCommandDTO
+	val name: String,
+) : SsmCommandDTO
 
 /**
  * @d2 event
@@ -49,5 +49,5 @@ class SsmGetSessionResult(
 	/**
 	 * The current state of the session if it exists
 	 */
-	val session: SsmSessionState?
-): Event
+	val session: SsmSessionState?,
+) : Event

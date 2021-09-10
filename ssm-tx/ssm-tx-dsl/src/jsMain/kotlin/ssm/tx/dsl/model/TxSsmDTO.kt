@@ -2,7 +2,6 @@ package ssm.tx.dsl.model
 
 import ssm.chaincode.dsl.SsmDTO
 
-
 @JsExport
 @JsName("TxSsmDTO")
 actual external interface TxSsmDTO {

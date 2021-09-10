@@ -1,12 +1,13 @@
 @file:JvmName("SignerUtils")
-package ssm.chaincode.client
+
+package ssm.chaincode.client.extention
 
 import ssm.chaincode.dsl.SsmAgent
 import ssm.sdk.sign.model.Signer
 
 fun Signer.asAgent(): SsmAgent {
-    return SsmAgent(
-            this.name,
-            this.pair.public.encoded
-    )
+	return SsmAgent(
+		this.name,
+		this.pair.public.encoded
+	)
 }

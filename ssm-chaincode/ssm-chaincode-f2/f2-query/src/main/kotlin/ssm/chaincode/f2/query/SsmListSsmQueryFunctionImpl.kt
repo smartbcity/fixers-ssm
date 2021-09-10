@@ -15,5 +15,4 @@ class SsmListSsmQueryFunctionImpl {
 		val list = ssmClient.listSsm().await()
 		SsmListSsmResult(list.toTypedArray())
 	}
-
 }

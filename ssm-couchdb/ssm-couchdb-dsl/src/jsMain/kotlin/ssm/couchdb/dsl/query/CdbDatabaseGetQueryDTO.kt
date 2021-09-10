@@ -7,7 +7,7 @@ import ssm.couchdb.dsl.DatabaseDTO
 @JsName("CdbDatabaseGetQueryDTO")
 actual external interface CdbDatabaseGetQueryDTO : CdbQueryDTO {
 	actual val dbName: String
-	actual abstract override val dbConfig: String
+	actual override val dbConfig: String
 }
 
 @JsExport

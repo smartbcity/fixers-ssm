@@ -37,7 +37,7 @@ class SsmCouchDbClientBuilder {
 	}
 
 	private fun buildCloudant(auth: SsmCouchDbAuth): Cloudant {
-		val cloudantAuth = when(auth) {
+		val cloudantAuth = when (auth) {
 			is SsmCouchDbBasicAuth -> BasicAuthenticator.Builder()
 				.username(auth.username)
 				.password(auth.password)
@@ -55,5 +55,4 @@ class SsmCouchDbClientBuilder {
 		println("Server Version: ${serverInformation.version}")
 		return client
 	}
-
 }

@@ -13,5 +13,4 @@ class SsmSessionStartFunctionImpl {
 		val invoke = ssmClient.start(cmd.signerAdmin, cmd.session).await()
 		SsmSessionStartResult(invoke)
 	}
-
 }

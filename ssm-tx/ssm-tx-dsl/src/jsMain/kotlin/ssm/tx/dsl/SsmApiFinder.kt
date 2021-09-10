@@ -1,6 +1,11 @@
 package ssm.tx.dsl
 
-import ssm.tx.dsl.features.query.*
+import ssm.tx.dsl.features.query.TxSsmGetQueryFunction
+import ssm.tx.dsl.features.query.TxSsmListQueryFunction
+import ssm.tx.dsl.features.query.TxSsmSessionGetQueryFunction
+import ssm.tx.dsl.features.query.TxSsmSessionListQueryFunction
+import ssm.tx.dsl.features.query.TxSsmSessionLogGetQueryFunction
+import ssm.tx.dsl.features.query.TxSsmSessionLogListQueryFunction
 
 @JsExport
 @JsName("SsmApiFinder")

@@ -1,8 +1,8 @@
 package ssm.tx.dsl.model
 
-import kotlinx.serialization.Serializable
 import kotlin.js.JsExport
 import kotlin.js.JsName
+import kotlinx.serialization.Serializable
 
 typealias ChannelId = String
 
@@ -22,6 +22,6 @@ expect interface TxChannelDTO {
 @Serializable
 @JsExport
 @JsName("TxChannel")
-class TxChannel (
+class TxChannel(
 	override val id: ChannelId,
-): TxChannelDTO
+) : TxChannelDTO

@@ -1,8 +1,8 @@
 package ssm.chaincode.dsl
 
-import kotlinx.serialization.Serializable
 import kotlin.js.JsExport
 import kotlin.js.JsName
+import kotlinx.serialization.Serializable
 
 expect interface SsmGrantDTO {
 	val user: String
@@ -26,6 +26,6 @@ expect interface CreditDTO {
 @Serializable
 @JsExport
 @JsName("Credit")
-data class Credit (
-	override val amount: Int
-): CreditDTO
+data class Credit(
+	override val amount: Int,
+) : CreditDTO

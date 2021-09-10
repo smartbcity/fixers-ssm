@@ -9,12 +9,12 @@ import ssm.couchdb.f2.commons.CdbF2Function
 
 @Configuration
 class CdbSsmListQueryFunctionImpl(
-    private val cbdf2: CdbF2Function
+	private val cbdf2: CdbF2Function,
 ) {
 
-    @Bean
-    fun cdbSsmListQueryFunction(): CdbSsmListQueryFunction = cbdf2.function { cmd, cdbClient ->
-        cdbClient.fetchAllByDocType(cmd.dbName, DocType.Ssm)
-            .let(::CdbSsmListQueryResult)
-    }
+	@Bean
+	fun cdbSsmListQueryFunction(): CdbSsmListQueryFunction = cbdf2.function { cmd, cdbClient ->
+		cdbClient.fetchAllByDocType(cmd.dbName, DocType.Ssm)
+			.let(::CdbSsmListQueryResult)
+	}
 }

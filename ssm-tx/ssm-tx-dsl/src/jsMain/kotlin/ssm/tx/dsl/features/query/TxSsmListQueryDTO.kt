@@ -4,8 +4,7 @@ import ssm.tx.dsl.model.TxSsmDTO
 
 @JsExport
 @JsName("TxSsmListQueryDTO")
-actual external interface TxSsmListQueryDTO {
-}
+actual external interface TxSsmListQueryDTO
 
 @JsExport
 @JsName("TxSsmListQueryResultDTO")

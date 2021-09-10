@@ -1,8 +1,7 @@
 package ssm.sdk.json
 
-import okhttp3.ResponseBody
-import java.util.*
 import java.util.function.Function
+import okhttp3.ResponseBody
 
 interface JSONConverter {
 	fun <T> toCompletableObjects(clazz: Class<T>): Function<ResponseBody, List<T>>

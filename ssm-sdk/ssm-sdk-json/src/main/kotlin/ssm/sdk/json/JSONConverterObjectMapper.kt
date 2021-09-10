@@ -1,10 +1,10 @@
 package ssm.sdk.json
 
 import com.fasterxml.jackson.core.type.TypeReference
-import okhttp3.ResponseBody
 import java.io.IOException
 import java.util.concurrent.CompletionException
 import java.util.function.Function
+import okhttp3.ResponseBody
 
 class JSONConverterObjectMapper : JSONConverter {
 	override fun <T> toCompletableObjects(clazz: Class<T>): Function<ResponseBody, List<T>> {

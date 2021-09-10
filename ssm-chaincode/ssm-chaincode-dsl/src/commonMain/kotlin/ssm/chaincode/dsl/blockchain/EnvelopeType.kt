@@ -1,5 +1,5 @@
 package ssm.chaincode.dsl.blockchain
 
 enum class EnvelopeType {
-    TRANSACTION_ENVELOPE, ENVELOPE
+	TRANSACTION_ENVELOPE, ENVELOPE
 }

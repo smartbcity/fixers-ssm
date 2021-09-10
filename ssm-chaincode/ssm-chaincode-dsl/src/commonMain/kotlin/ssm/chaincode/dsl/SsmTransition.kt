@@ -1,8 +1,8 @@
 package ssm.chaincode.dsl
 
-import kotlinx.serialization.Serializable
 import kotlin.js.JsExport
 import kotlin.js.JsName
+import kotlinx.serialization.Serializable
 
 expect interface SsmTransitionDTO {
 	/**
@@ -42,4 +42,4 @@ data class SsmTransition(
 	override val to: Int,
 	override val role: String,
 	override val action: String,
-): SsmTransitionDTO
+) : SsmTransitionDTO

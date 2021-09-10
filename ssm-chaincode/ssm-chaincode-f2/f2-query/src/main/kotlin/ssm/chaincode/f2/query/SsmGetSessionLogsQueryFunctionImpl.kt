@@ -10,10 +10,10 @@ import ssm.chaincode.f2.commons.ssmF2Function
 @Configuration
 class SsmGetSessionLogsQueryFunctionImpl {
 
-    @Bean
-    fun ssmGetSessionLogsQueryFunction(): SsmGetSessionLogsQueryFunction = ssmF2Function { cmd, ssmClient ->
-        ssmClient.log(cmd.session)
-            .awaitInstances()
-            .let(::SsmGetSessionLogsQueryResult)
-    }
+	@Bean
+	fun ssmGetSessionLogsQueryFunction(): SsmGetSessionLogsQueryFunction = ssmF2Function { cmd, ssmClient ->
+		ssmClient.log(cmd.session)
+			.awaitInstances()
+			.let(::SsmGetSessionLogsQueryResult)
+	}
 }

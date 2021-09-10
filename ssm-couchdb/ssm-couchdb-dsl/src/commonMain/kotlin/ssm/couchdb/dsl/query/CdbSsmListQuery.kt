@@ -1,11 +1,11 @@
 package ssm.couchdb.dsl.query
 
 import f2.dsl.fnc.F2Function
+import kotlin.js.JsExport
+import kotlin.js.JsName
 import kotlinx.serialization.Serializable
 import ssm.chaincode.dsl.Ssm
 import ssm.couchdb.dsl.CdbQueryDTO
-import kotlin.js.JsExport
-import kotlin.js.JsName
 
 /**
  * Retrieve the list of all known SSMs
@@ -16,13 +16,13 @@ import kotlin.js.JsName
  */
 typealias CdbSsmListQueryFunction = F2Function<CdbSsmListQueryDTO, CdbSsmListQueryResultDTO>
 
-expect interface CdbSsmListQueryDTO: CdbQueryDTO {
-    /**
-     * Name of the database to query on
-     * @example [ssm.couchdb.dsl.Database.name]
-     */
-    val dbName: String
-    override val dbConfig: String
+expect interface CdbSsmListQueryDTO : CdbQueryDTO {
+	/**
+	 * Name of the database to query on
+	 * @example [ssm.couchdb.dsl.Database.name]
+	 */
+	val dbName: String
+	override val dbConfig: String
 }
 
 /**
@@ -34,15 +34,15 @@ expect interface CdbSsmListQueryDTO: CdbQueryDTO {
 @JsExport
 @JsName("CdbSsmListQuery")
 class CdbSsmListQuery(
-    override val dbName: String,
-    override val dbConfig: String,
-): CdbSsmListQueryDTO
+	override val dbName: String,
+	override val dbConfig: String,
+) : CdbSsmListQueryDTO
 
-expect interface CdbSsmListQueryResultDTO{
-    /**
-     * Retrieved SSMs
-     */
-    val ssmList: List<Ssm>
+expect interface CdbSsmListQueryResultDTO {
+	/**
+	 * Retrieved SSMs
+	 */
+	val ssmList: List<Ssm>
 }
 
 /**
@@ -54,5 +54,5 @@ expect interface CdbSsmListQueryResultDTO{
 @JsExport
 @JsName("CdbSsmListQueryResult")
 class CdbSsmListQueryResult(
-    override val ssmList: List<Ssm>
-): CdbSsmListQueryResultDTO
+	override val ssmList: List<Ssm>,
+) : CdbSsmListQueryResultDTO

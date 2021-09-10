@@ -5,8 +5,7 @@ import ssm.couchdb.dsl.DatabaseDTO
 
 @JsExport
 @JsName("CdbDatabaseListQueryDTO")
-actual external interface CdbDatabaseListQueryDTO : CdbQueryDTO {
-}
+actual external interface CdbDatabaseListQueryDTO : CdbQueryDTO
 
 @JsExport
 @JsName("CdbDatabaseListQueryResultDTO")

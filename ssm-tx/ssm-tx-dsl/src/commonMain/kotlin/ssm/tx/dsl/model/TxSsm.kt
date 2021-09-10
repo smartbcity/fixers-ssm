@@ -1,27 +1,27 @@
 package ssm.tx.dsl.model
 
+import kotlin.js.JsExport
+import kotlin.js.JsName
 import kotlinx.serialization.Serializable
 import ssm.chaincode.dsl.Ssm
 import ssm.chaincode.dsl.SsmDTO
-import kotlin.js.JsExport
-import kotlin.js.JsName
 
 expect interface TxSsmDTO {
-    /**
-     * Description of a state machine
-     */
-    val ssm: SsmDTO
+	/**
+	 * Description of a state machine
+	 */
+	val ssm: SsmDTO
 
-    /**
-     * Channel in which the SSM has been instantiated
-     */
-    val channel: TxChannelDTO
+	/**
+	 * Channel in which the SSM has been instantiated
+	 */
+	val channel: TxChannelDTO
 
-    /**
-     * Version of the SSM
-     * @example "1.0"
-     */
-    val version: SsmVersion
+	/**
+	 * Version of the SSM
+	 * @example "1.0"
+	 */
+	val version: SsmVersion
 }
 
 /**
@@ -36,7 +36,7 @@ expect interface TxSsmDTO {
 class TxSsm(
 	override val ssm: Ssm,
 	override val channel: TxChannel,
-	override val version: SsmVersion
-): TxSsmDTO
+	override val version: SsmVersion,
+) : TxSsmDTO
 
 typealias SsmVersion = String

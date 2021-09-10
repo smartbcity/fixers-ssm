@@ -10,28 +10,26 @@ import com.fasterxml.jackson.databind.ObjectMapper
 import com.fasterxml.jackson.module.kotlin.KotlinModule
 import java.io.IOException
 
-class JsonUtils {
+object JsonUtils {
 
-	companion object {
-		private val mapper: ObjectMapper = ObjectMapper()
-			.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false)
-			.setSerializationInclusion(JsonInclude.Include.NON_NULL)
-			.setVisibility(PropertyAccessor.FIELD, JsonAutoDetect.Visibility.ANY)
-			.registerModule(KotlinModule())
+	private val mapper: ObjectMapper = ObjectMapper()
+		.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false)
+		.setSerializationInclusion(JsonInclude.Include.NON_NULL)
+		.setVisibility(PropertyAccessor.FIELD, JsonAutoDetect.Visibility.ANY)
+		.registerModule(KotlinModule())
 
-		@Throws(JsonProcessingException::class)
-		fun <T> toJson(obj: T): String {
-			return mapper.writeValueAsString(obj)
-		}
+	@Throws(JsonProcessingException::class)
+	fun <T> toJson(obj: T): String {
+		return mapper.writeValueAsString(obj)
+	}
 
-		@Throws(IOException::class)
-		fun <T> toObject(value: String, clazz: Class<T>): T {
-			return mapper.readValue(value, clazz)
-		}
+	@Throws(IOException::class)
+	fun <T> toObject(value: String, clazz: Class<T>): T {
+		return mapper.readValue(value, clazz)
+	}
 
-		@Throws(IOException::class)
-		fun <T> toObject(value: String, clazz: TypeReference<T>): T {
-			return mapper.readValue(value, clazz)
-		}
+	@Throws(IOException::class)
+	fun <T> toObject(value: String, clazz: TypeReference<T>): T {
+		return mapper.readValue(value, clazz)
 	}
 }

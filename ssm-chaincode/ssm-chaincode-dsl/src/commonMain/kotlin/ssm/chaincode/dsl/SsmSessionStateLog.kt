@@ -1,9 +1,9 @@
 package ssm.chaincode.dsl
 
-import kotlinx.serialization.Serializable
-import ssm.chaincode.dsl.blockchain.TransactionId
 import kotlin.js.JsExport
 import kotlin.js.JsName
+import kotlinx.serialization.Serializable
+import ssm.chaincode.dsl.blockchain.TransactionId
 
 expect interface SsmSessionStateLogDTO {
 	/**
@@ -29,5 +29,5 @@ expect interface SsmSessionStateLogDTO {
 @JsName("SsmSessionStateLog")
 data class SsmSessionStateLog(
 	override val txId: TransactionId,
-	override val state: SsmSessionState
-): SsmSessionStateLogDTO
+	override val state: SsmSessionState,
+) : SsmSessionStateLogDTO

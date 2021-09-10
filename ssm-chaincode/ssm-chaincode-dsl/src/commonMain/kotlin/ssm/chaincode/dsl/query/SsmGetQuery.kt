@@ -2,12 +2,12 @@ package ssm.chaincode.dsl.query
 
 import f2.dsl.cqrs.Event
 import f2.dsl.fnc.F2Function
+import kotlin.js.JsExport
+import kotlin.js.JsName
 import kotlinx.serialization.Serializable
 import ssm.chaincode.dsl.Ssm
 import ssm.chaincode.dsl.SsmChaincodeProperties
 import ssm.chaincode.dsl.SsmCommandDTO
-import kotlin.js.JsExport
-import kotlin.js.JsName
 
 /**
  * Retrieves an SSM
@@ -34,8 +34,8 @@ class SsmGetQuery(
 	 * Identifier of the SSM to retrieve
 	 * @example [Ssm.name]
 	 */
-	val name: String
-): SsmCommandDTO
+	val name: String,
+) : SsmCommandDTO
 
 /**
  * @d2 event
@@ -49,5 +49,5 @@ class SsmGetResult(
 	/**
 	 * Retrieved SSM with the given name if it exists
 	 */
-	val ssm: Ssm?
-): Event
+	val ssm: Ssm?,
+) : Event

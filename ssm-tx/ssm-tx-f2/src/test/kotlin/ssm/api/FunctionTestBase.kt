@@ -16,5 +16,5 @@ class FunctionTestBase {
 	lateinit var catalog: FunctionCatalog
 }
 
-@SpringBootApplication(scanBasePackages= ["ssm.api"])
+@SpringBootApplication(scanBasePackages = ["ssm.api"])
 class TestApplication

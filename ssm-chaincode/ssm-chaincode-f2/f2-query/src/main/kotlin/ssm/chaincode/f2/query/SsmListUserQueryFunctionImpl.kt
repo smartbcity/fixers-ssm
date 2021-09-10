@@ -15,5 +15,4 @@ class SsmListUserQueryFunctionImpl {
 		val list = ssmClient.listAgent().await()
 		SsmListUserResult(list.toTypedArray())
 	}
-
 }

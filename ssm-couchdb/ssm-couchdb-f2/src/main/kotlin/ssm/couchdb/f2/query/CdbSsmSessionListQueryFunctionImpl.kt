@@ -10,17 +10,17 @@ import ssm.couchdb.f2.commons.CdbF2Function
 
 @Configuration
 class CdbSsmSessionListQueryFunctionImpl(
-    private val cbdf2: CdbF2Function
+	private val cbdf2: CdbF2Function,
 ) {
 
-    @Bean
-    fun cdbSsmSessionListQueryFunction(): CdbSsmSessionListQueryFunction = cbdf2.function { cmd, cdbClient ->
-        val filters = cmd.ssm?.let { ssm ->
-            mapOf(SsmSessionStateDTO::ssm.name to ssm)
-        } ?: emptyMap()
+	@Bean
+	fun cdbSsmSessionListQueryFunction(): CdbSsmSessionListQueryFunction = cbdf2.function { cmd, cdbClient ->
+		val filters = cmd.ssm?.let { ssm ->
+			mapOf(SsmSessionStateDTO::ssm.name to ssm)
+		} ?: emptyMap()
 
-        cdbClient.fetchAllByDocType(cmd.dbName, DocType.State, filters)
-            .toTypedArray()
-            .let(::CdbSsmSessionListQueryResult)
-    }
+		cdbClient.fetchAllByDocType(cmd.dbName, DocType.State, filters)
+			.toTypedArray()
+			.let(::CdbSsmSessionListQueryResult)
+	}
 }

@@ -25,7 +25,11 @@ class SsmCouchDbClient(
 		}
 	}
 
-	fun <T: Any> fetchAllByDocType(dbName: String, docType: DocType<T>, filters: Map<String, Any> = emptyMap()): List<T> {
+	fun <T : Any> fetchAllByDocType(
+		dbName: String,
+		docType: DocType<T>,
+		filters: Map<String, Any> = emptyMap(),
+	): List<T> {
 		val selector = mapOf(
 			"docType" to mapOf("\$eq" to docType.docType)
 		).plus(filters)
@@ -52,8 +56,7 @@ class SsmCouchDbClient(
 		return cloudant.getDatabaseInformation(query).execute().result
 	}
 
-
-	fun <T: Any> getCount(dbName: String, docType: DocType<T>): Int {
+	fun <T : Any> getCount(dbName: String, docType: DocType<T>): Int {
 		val query = PostViewOptions.Builder()
 			.db(dbName)
 			.ddoc(FABRIC_COUNTING_DDOC)
@@ -64,4 +67,3 @@ class SsmCouchDbClient(
 		return (cloudant.postView(query).execute().result.rows.first().value as Double).toInt()
 	}
 }
-

@@ -1,8 +1,8 @@
 package ssm.chaincode.dsl
 
-import kotlinx.serialization.Serializable
 import kotlin.js.JsExport
 import kotlin.js.JsName
+import kotlinx.serialization.Serializable
 
 typealias ChaincodeId = String
 
@@ -14,7 +14,7 @@ expect interface ChaincodeDTO {
 @Serializable
 @JsExport
 @JsName("Chaincode")
-data class Chaincode (
+data class Chaincode(
 	override val id: ChaincodeId,
 	override val channelId: ChannelId,
-): ChaincodeDTO
+) : ChaincodeDTO

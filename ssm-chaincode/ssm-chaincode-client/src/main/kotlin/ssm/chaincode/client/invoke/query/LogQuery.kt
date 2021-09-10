@@ -2,13 +2,11 @@ package ssm.chaincode.client.invoke.query
 
 class LogQuery : AbstractQuery(), HasGet {
 
-    companion object {
-        private const val GET_FUNCTION = "log"
-    }
+	companion object {
+		private const val GET_FUNCTION = "log"
+	}
 
-    override fun functionGetValue(): String {
-        return GET_FUNCTION
-    }
-
-
+	override fun functionGetValue(): String {
+		return GET_FUNCTION
+	}
 }

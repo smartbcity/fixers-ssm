@@ -1,5 +1,7 @@
 package ssm.chaincode.client
 
+import java.util.UUID
+import java.util.concurrent.CompletableFuture
 import org.assertj.core.api.Assertions
 import org.assertj.core.util.Lists
 import org.junit.jupiter.api.AfterEach
@@ -17,12 +19,8 @@ import ssm.chaincode.dsl.SsmSession
 import ssm.chaincode.dsl.SsmSessionState
 import ssm.chaincode.dsl.SsmTransition
 import ssm.chaincode.dsl.blockchain.Block
-import ssm.chaincode.dsl.blockchain.BlockDTO
 import ssm.chaincode.dsl.blockchain.Transaction
-import ssm.chaincode.dsl.blockchain.TransactionDTO
 import ssm.sdk.sign.model.Signer
-import java.util.UUID
-import java.util.concurrent.CompletableFuture
 
 @TestMethodOrder(OrderAnnotation::class)
 class SsmClientItTest {
