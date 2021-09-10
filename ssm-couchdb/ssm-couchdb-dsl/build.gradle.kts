@@ -1,10 +1,9 @@
 plugins {
-    kotlin("multiplatform")
-    id("lt.petuska.npm.publish")
+	id("city.smartb.fixers.gradle.kotlin.mpp")
+	id("city.smartb.fixers.gradle.publish")
+	id("lt.petuska.npm.publish")
 }
 
 dependencies {
-    commonMainApi(project(":ssm-chaincode:ssm-chaincode-dsl"))
+	commonMainApi(project(":ssm-chaincode:ssm-chaincode-dsl"))
 }
-
-apply(from = rootProject.file("gradle/publishing-mpp.gradle"))

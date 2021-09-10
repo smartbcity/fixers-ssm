@@ -7,12 +7,16 @@ pluginManagement {
 
 rootProject.name = "ssm"
 
+includeBuild("includedBuild/dependencies")
+includeBuild("includedBuild/gradleConfiguration")
+
 include(
 	"ssm-tx:ssm-tx-autoconfiguration",
 	"ssm-tx:ssm-tx-client",
 	"ssm-tx:ssm-tx-dsl",
 	"ssm-tx:ssm-tx-f2"
 )
+
 include(
 	"ssm-couchdb:ssm-couchdb-autoconfiguration",
 	"ssm-couchdb:ssm-couchdb-client",
@@ -31,7 +35,6 @@ include(
 	"ssm-sdk:ssm-sdk-sign",
 	"ssm-sdk:ssm-sdk-json"
 )
-
 
 include(
 	"ssm-chaincode:ssm-chaincode-f2:f2-commons",

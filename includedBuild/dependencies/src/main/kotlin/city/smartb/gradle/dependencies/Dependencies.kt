@@ -1,6 +1,10 @@
+package city.smartb.gradle.dependencies
+
 object PluginVersions {
 	const val kotlin = "1.5.30"
-	const val dokka = "1.4.30"
+	const val detekt = "1.18.1"
+	const val dokka = "1.4.32"
+	const val sonar = "3.3"
 	const val springBoot = "2.5.3"
 
 	const val npmPublish = "1.0.4"
@@ -8,26 +12,15 @@ object PluginVersions {
 }
 
 object Versions {
+
 	const val springBoot = PluginVersions.springBoot
 	const val springFramework = "5.3.4"
-
-	const val cloudant = "0.0.24"
-
-	const val bouncycastleVersion = "1.61"
-	const val okhttpVersion = "3.14.0"
-	const val retrofitVersion = "2.5.0"
-	const val jacksonKotlin = "2.10.2"
 
 	const val junit = "5.7.0"
 	const val assertj = "3.15.0"
 
-	const val slf4j = "1.7.30"
-
-
 	const val coroutines = "1.5.1"
 	const val kserialization = "1.1.0"
-	const val ktor = "1.6.1"
-	const val rsocket = "0.13.1"
 
 	const val f2 = "experimental-SNAPSHOT"
 	const val d2 = "0.1.1-SNAPSHOT"
@@ -41,7 +34,7 @@ object Dependencies {
 			"org.jetbrains.kotlinx:kotlinx-coroutines-reactive:${Versions.coroutines}",
 			"org.jetbrains.kotlinx:kotlinx-coroutines-jdk8:${Versions.coroutines}"
 		)
-		val junit = arrayOf(
+		val test = arrayOf(
 			"org.junit.jupiter:junit-jupiter:${Versions.junit}",
 			"org.junit.jupiter:junit-jupiter-api:${Versions.junit}",
 			"org.assertj:assertj-core:${Versions.assertj}"
@@ -52,9 +45,18 @@ object Dependencies {
 		val coroutines = arrayOf(
 			"org.jetbrains.kotlinx:kotlinx-coroutines-core:${Versions.coroutines}"
 		)
+		val test =  arrayOf(
+			"org.jetbrains.kotlin:kotlin-test-common:${PluginVersions.kotlin}",
+			"org.jetbrains.kotlin:kotlin-test-annotations-common:${PluginVersions.kotlin}"
+		)
 		val kserialization = arrayOf(
 			"org.jetbrains.kotlinx:kotlinx-serialization-core:${Versions.kserialization}",
 			"org.jetbrains.kotlinx:kotlinx-serialization-json:${Versions.kserialization}"
 		)
 	}
+}
+
+object D2 {
+	const val dokkaStorybook = "dokkaStorybook"
+	const  val dokkaStorybookPartial = "${dokkaStorybook}Partial"
 }

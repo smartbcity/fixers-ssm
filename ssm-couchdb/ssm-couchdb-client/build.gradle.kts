@@ -1,16 +1,15 @@
 plugins {
-    kotlin("jvm")
-    kotlin("plugin.spring")
+	id("city.smartb.fixers.gradle.kotlin.jvm")
+	id("city.smartb.fixers.gradle.publish")
+	kotlin("plugin.spring")
 }
 
 dependencies {
-    api(project(":ssm-couchdb:ssm-couchdb-dsl"))
-    api(project(":ssm-chaincode:ssm-chaincode-dsl"))
+	api(project(":ssm-couchdb:ssm-couchdb-dsl"))
+	api(project(":ssm-chaincode:ssm-chaincode-dsl"))
 
-    implementation(project(":ssm-sdk:ssm-sdk-json"))
+	implementation(project(":ssm-sdk:ssm-sdk-json"))
 
-    api("com.ibm.cloud:cloudant:${Versions.cloudant}")
+	api("com.ibm.cloud:cloudant:${Versions.cloudant}")
 
 }
-
-apply(from = rootProject.file("gradle/publishing.gradle"))
