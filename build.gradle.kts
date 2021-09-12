@@ -6,9 +6,9 @@ plugins {
 	id("lt.petuska.npm.publish") version PluginVersions.npmPublish apply false
 	id("com.moowork.node") version "1.2.0"
 
-	id("city.smartb.fixers.gradle.config")
-	id("city.smartb.fixers.gradle.sonar")
-	id("city.smartb.fixers.gradle.d2")
+	id("city.smartb.fixers.gradle.config") version PluginVersions.fixers
+	id("city.smartb.fixers.gradle.sonar") version PluginVersions.fixers
+	id("city.smartb.fixers.gradle.d2") version PluginVersions.fixers
 }
 
 allprojects {

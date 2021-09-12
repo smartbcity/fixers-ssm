@@ -13,13 +13,9 @@ internal class CdbSsmListQueryFunctionImplTest : FunctionTestBase() {
 	@Autowired
 	lateinit var cdbSsmListQueryFunction: CdbSsmListQueryFunction
 
-//	@Autowired
-//	lateinit var ssmCouchDbClient: SsmCouchDbClient
-
 	companion object {
 		const val DB_CONF = "sandbox_ssm"
 		const val DB_NAME = "sandbox_ssm"
-//		const val DB_NAME = "proudhon_ssm"
 	}
 
 	@Test

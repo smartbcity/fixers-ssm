@@ -35,5 +35,4 @@ class TestApplication {
 			.setVisibility(PropertyAccessor.FIELD, JsonAutoDetect.Visibility.ANY)
 			.registerModule(KotlinModule())
 	}
-
 }

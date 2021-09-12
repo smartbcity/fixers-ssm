@@ -19,7 +19,9 @@ import ssm.sdk.sign.utils.FileUtils
 
 object KeyPairReader {
 
-	const val BUFFER = 2048
+	private const val BUFFER = 2048
+	private const val ERROR_MESSAGE = "Private key can't be loaded"
+	private const val RSA_KEY = "RSA"
 
 	@Throws(CryptoException::class)
 	fun loadKeyPair(filename: String): KeyPair {
@@ -33,7 +35,7 @@ object KeyPairReader {
 		try {
 			val pem = getPemObject(filename)
 			val key = RSAPrivateKey.getInstance(pem.content)
-			val kf = KeyFactory.getInstance("RSA")
+			val kf = KeyFactory.getInstance(RSA_KEY)
 			val privSpec = RSAPrivateCrtKeySpec(key.modulus,
 				key.publicExponent,
 				key.privateExponent,
@@ -44,9 +46,9 @@ object KeyPairReader {
 				key.coefficient)
 			return kf.generatePrivate(privSpec)
 		} catch (e: GeneralSecurityException) {
-			throw CryptoException("Private key can't be loaded", e)
+			throw CryptoException(ERROR_MESSAGE, e)
 		} catch (e: IOException) {
-			throw CryptoException("Private key can't be loaded", e)
+			throw CryptoException(ERROR_MESSAGE, e)
 		}
 	}
 
@@ -61,23 +63,23 @@ object KeyPairReader {
 			val pem = getPemObject(fixedFileName)
 			val pubKeyBytes = pem.content
 			val pubSpec = X509EncodedKeySpec(pubKeyBytes)
-			val kf = KeyFactory.getInstance("RSA")
+			val kf = KeyFactory.getInstance(RSA_KEY)
 			return kf.generatePublic(pubSpec)
 		} catch (e: GeneralSecurityException) {
-			throw CryptoException("Public key can't be loaded", e)
+			throw CryptoException(ERROR_MESSAGE, e)
 		} catch (e: IOException) {
-			throw CryptoException("Public key can't be loaded", e)
+			throw CryptoException(ERROR_MESSAGE, e)
 		}
 	}
 
 	@Throws(CryptoException::class)
 	fun fromByteArray(pub: ByteArray?): PublicKey {
 		try {
-			return KeyFactory.getInstance("RSA").generatePublic(X509EncodedKeySpec(pub))
+			return KeyFactory.getInstance(RSA_KEY).generatePublic(X509EncodedKeySpec(pub))
 		} catch (e: InvalidKeySpecException) {
-			throw CryptoException("Public key can't be loaded", e)
+			throw CryptoException(ERROR_MESSAGE, e)
 		} catch (e: NoSuchAlgorithmException) {
-			throw CryptoException("Public key can't be loaded", e)
+			throw CryptoException(ERROR_MESSAGE, e)
 		}
 	}
 
@@ -85,11 +87,11 @@ object KeyPairReader {
 	fun generateRSAKey(): KeyPair {
 		try {
 
-			val kpg = KeyPairGenerator.getInstance("RSA")
+			val kpg = KeyPairGenerator.getInstance(RSA_KEY)
 			kpg.initialize(BUFFER)
 			return kpg.generateKeyPair()
 		} catch (e: NoSuchAlgorithmException) {
-			throw CryptoException("RSA key can't be generated", e)
+			throw CryptoException(ERROR_MESSAGE, e)
 		}
 	}
 

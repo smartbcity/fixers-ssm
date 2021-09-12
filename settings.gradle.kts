@@ -1,14 +1,11 @@
 pluginManagement {
 	repositories {
 		gradlePluginPortal()
-		mavenCentral()
+		maven { url = uri("https://oss.sonatype.org/content/repositories/snapshots") }
 	}
 }
 
 rootProject.name = "ssm"
-
-includeBuild("includedBuild/dependencies")
-includeBuild("includedBuild/gradleConfiguration")
 
 include(
 	"ssm-tx:ssm-tx-autoconfiguration",
