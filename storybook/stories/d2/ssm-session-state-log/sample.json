@@ -1,7 +1,6 @@
 {
   "txId" : "c7de3ab6-56e0-4e7d-8fa4-905823ed982e",
   "state" : {
-    "ssm" : "ProductLogistic",
     "session" : "eca7c042-ec37-489b-adb8-42c73ddcfb0b",
     "roles" : {
       "Provider" : "JohnDeuf",

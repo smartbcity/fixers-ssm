@@ -2,7 +2,6 @@
   "id" : "eca7c042-ec37-489b-adb8-42c73ddcfb0b",
   "state" : {
     "details" : {
-      "ssm" : "ProductLogistic",
       "session" : "eca7c042-ec37-489b-adb8-42c73ddcfb0b",
       "roles" : {
         "Provider" : "JohnDeuf",

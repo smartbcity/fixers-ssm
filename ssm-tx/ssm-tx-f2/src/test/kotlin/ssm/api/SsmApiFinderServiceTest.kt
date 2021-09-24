@@ -13,7 +13,7 @@ internal class SsmApiFinderServiceTest : FunctionTestBase() {
 	@Autowired
 	lateinit var txSsmListQueryFunction: TxSsmListQueryFunction
 
-	@Test
+//	@Test
 	fun txSsmListQueryFunction(): Unit = runBlocking {
 		val ssms = txSsmListQueryFunction.invoke(TxSsmListQuery())
 		Assertions.assertThat(ssms.list).isEmpty()

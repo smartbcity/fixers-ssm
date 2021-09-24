@@ -1,7 +1,6 @@
 {
   "list" : [ {
     "ssm" : {
-      "name" : "ProductLogistic",
       "transitions" : [ {
         "from" : 0,
         "to" : 1,

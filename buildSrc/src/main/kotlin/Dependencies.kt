@@ -19,6 +19,7 @@ object Versions {
 	const val jacksonKotlin = "2.10.2"
 
 	const val junit = "5.7.0"
+	const val junitPlateform = "1.8.1"
 	const val assertj = "3.15.0"
 
 	const val slf4j = "1.7.30"
@@ -27,10 +28,12 @@ object Versions {
 	const val coroutines = "1.5.1"
 	const val kserialization = "1.1.0"
 	const val ktor = "1.6.1"
-	const val rsocket = "0.13.1"
 
 	const val f2 = "experimental-SNAPSHOT"
 	const val d2 = "0.1.1-SNAPSHOT"
+
+
+	const val cucumber = "6.11.0"
 }
 
 object Dependencies {
@@ -44,6 +47,7 @@ object Dependencies {
 		val junit = arrayOf(
 			"org.junit.jupiter:junit-jupiter:${Versions.junit}",
 			"org.junit.jupiter:junit-jupiter-api:${Versions.junit}",
+			"org.junit.platform:junit-platform-suite:${Versions.junitPlateform}",
 			"org.assertj:assertj-core:${Versions.assertj}"
 		)
 	}

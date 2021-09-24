@@ -5,12 +5,11 @@ plugins {
 }
 
 dependencies {
-
-	implementation(project(":ssm-couchdb:ssm-couchdb-autoconfiguration"))
 	api(project(":ssm-couchdb:ssm-couchdb-dsl"))
+	implementation(project(":ssm-couchdb:ssm-couchdb-client"))
 
 	api("city.smartb.f2:f2-spring-boot-starter-function:${Versions.f2}")
-	testImplementation("org.springframework.boot:spring-boot-starter-test:${Versions.springBoot}") {
-		exclude(group = "org.junit.vintage", module = "junit-vintage-engine")
-	}
+
+	testImplementation(project(":ssm-test:ssm-test-cucumber"))
+	testImplementation("org.junit.platform:junit-platform-suite:${Versions.junitPlateform}")
 }

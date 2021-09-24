@@ -4,32 +4,30 @@ import f2.dsl.fnc.invoke
 import kotlinx.coroutines.runBlocking
 import org.assertj.core.api.Assertions
 import org.junit.jupiter.api.Test
-import org.springframework.beans.factory.annotation.Autowired
-import ssm.couchdb.dsl.query.CdbSsmListQuery
-import ssm.couchdb.dsl.query.CdbSsmListQueryFunction
+import ssm.couchdb.dsl.query.CouchdbSsmListQuery
+import ssm.couchdb.dsl.query.CouchdbSsmListQueryFunction
 
-internal class CdbSsmListQueryFunctionImplTest : FunctionTestBase() {
+internal class CouchdbSsmListQueryFunctionImplTest : FunctionTestBase() {
 
-	@Autowired
-	lateinit var cdbSsmListQueryFunction: CdbSsmListQueryFunction
-
-	companion object {
-		const val DB_CONF = "sandbox_ssm"
-		const val DB_NAME = "sandbox_ssm"
-	}
-
-	@Test
-	fun `must return cdbGetSsmListQueryFunction from catalog`() {
-		val fnc: Any = catalog.lookup("cdbSsmListQueryFunction")
-		Assertions.assertThat(fnc).isNotNull
-	}
-
+	var couchdbSsmListQueryFunctionImpl: CouchdbSsmListQueryFunction = queries.couchDbSsmListQueryFunction(
+		config = TestConfig.dbConfig,
+	)
+//	@Test
+//	fun `must return couchdbGetSsmListQueryFunction from catalog`() {
+//		val fnc: Any = catalog.lookup("couchdbSsmListQueryFunction")
+//		Assertions.assertThat(fnc).isNotNull
+//	}
 
 	@Test
 	fun `must return all ssm`(): Unit = runBlocking {
-		val command = CdbSsmListQuery(DB_NAME, DB_CONF)
-		val ssmList = cdbSsmListQueryFunction(command).ssmList
+		val command = CouchdbSsmListQuery(
+			pagination = null,
+			channelId = TestConfig.CHANNEL_ID,
+			chaincodeId = TestConfig.CHAINCODE_ID
+		)
+		val ssmList = couchdbSsmListQueryFunctionImpl(command)
 
-		Assertions.assertThat(ssmList).isNotEmpty
+		Assertions.assertThat(ssmList).isNotNull
+		Assertions.assertThat(ssmList.page.list).isNotNull
 	}
 }

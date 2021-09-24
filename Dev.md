@@ -419,7 +419,7 @@ Result
 
 #### Couchdb Queries
 
-* **CdbGetSsmListQuery:** List all SSM
+* **CouchdbGetSsmListQuery:** List all SSM
 
 ```
 Query
@@ -432,7 +432,7 @@ Result
 ```
 
 
-* **CdbGetSsmSessionListQuery:** List all sessions of a given SSM
+* **CouchdbGetSsmSessionListQuery:** List all sessions of a given SSM
 
 ```
 Query

@@ -4,12 +4,19 @@ import kotlin.js.JsExport
 import kotlin.js.JsName
 import kotlinx.serialization.Serializable
 
+/**
+ * The unique identifier of a ssm.
+ * @d2 model
+ * @example "ProductLogistic"
+ * @parent [SsmDTO]
+ */
+typealias SsmName = String
+
 expect interface SsmDTO {
 	/**
-	 * Unique identifier for the SSM.
-	 * @example "ProductLogistic"
+	 * The unique identifier of a ssm.
 	 */
-	val name: String
+	val name: SsmName
 
 	/**
 	 * The definition of the State Machine

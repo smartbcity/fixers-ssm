@@ -3,16 +3,16 @@ package ssm.api
 import f2.dsl.fnc.f2Function
 import f2.dsl.fnc.invoke
 import kotlinx.coroutines.flow.asFlow
+import kotlinx.coroutines.flow.filter
+import kotlinx.coroutines.flow.flatMapConcat
+import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.toList
-import org.springframework.boot.context.config.ConfigDataLocation
-import org.springframework.boot.context.config.ConfigDataLocationNotFoundException
 import org.springframework.context.annotation.Bean
 import org.springframework.stereotype.Service
 import ssm.api.model.toTxSession
 import ssm.api.model.toTxSsm
-import ssm.chaincode.dsl.Ssm
 import ssm.chaincode.dsl.SsmChaincodeProperties
-import ssm.chaincode.dsl.SsmSessionState
+import ssm.chaincode.dsl.SsmSessionStateDTO
 import ssm.chaincode.dsl.SsmSessionStateLog
 import ssm.chaincode.dsl.blockchain.Transaction
 import ssm.chaincode.dsl.blockchain.TransactionId
@@ -24,11 +24,10 @@ import ssm.chaincode.dsl.query.SsmGetSessionQuery
 import ssm.chaincode.dsl.query.SsmGetSessionQueryFunction
 import ssm.chaincode.dsl.query.SsmGetTransactionQuery
 import ssm.chaincode.dsl.query.SsmGetTransactionQueryFunction
-import ssm.couchdb.dsl.query.CdbSsmListQuery
-import ssm.couchdb.dsl.query.CdbSsmListQueryFunction
-import ssm.couchdb.dsl.query.CdbSsmListQueryResultDTO
-import ssm.couchdb.dsl.query.CdbSsmSessionListQuery
-import ssm.couchdb.dsl.query.CdbSsmSessionListQueryFunction
+import ssm.couchdb.dsl.query.CouchdbSsmListQuery
+import ssm.couchdb.dsl.query.CouchdbSsmSessionStateListQuery
+import ssm.couchdb.f2.query.CouchdbSsmListQueryFunctionImpl
+import ssm.couchdb.f2.query.CouchdbSsmSessionStateListQueryFunctionImpl
 import ssm.tx.autoconfiguration.SsmConfigProperties
 import ssm.tx.dsl.SsmApiFinder
 import ssm.tx.dsl.config.TxSsmLocationProperties
@@ -51,8 +50,8 @@ import ssm.tx.dsl.model.TxSsmSessionState
 
 @Service
 class SsmApiFinderService(
-	private val cdbSsmSessionListQueryFunction: CdbSsmSessionListQueryFunction,
-	private val cdbSsmListQueryFunction: CdbSsmListQueryFunction,
+//	private val couchdbSsmSessionListQueryFunction: CouchdbSsmSessionStateListQueryFunction,
+//	private val couchdbSsmListQueryFunction: CouchdbSsmListQueryFunction,
 	private val ssmGetQueryFunction: SsmGetQueryFunction,
 	private val ssmGetSessionQueryFunction: SsmGetSessionQueryFunction,
 	private val ssmGetSessionLogsQueryFunction: SsmGetSessionLogsQueryFunction,
@@ -62,23 +61,29 @@ class SsmApiFinderService(
 
 	@Bean
 	override fun txSsmListQueryFunction(): TxSsmListQueryFunction = f2Function {
-		val cdbConfigCommands = ssmConfigProperties.list
-			.flatMap { (_, ssmConfigs) -> ssmConfigs.values }
-			.distinctBy { ssmConfig -> ssmConfig.couchdb to ssmConfig.dbName }
-			.map { ssmConfig ->
-				CdbSsmListQuery(
-					dbConfig = ssmConfig.couchdb,
-					dbName = ssmConfig.dbName
-				)
-			}
-
 		val ssmNames = ssmConfigProperties.list.keys
-
-		cdbSsmListQueryFunction(cdbConfigCommands.asFlow()).toList()
-			.flatMap(CdbSsmListQueryResultDTO::ssmList)
-			.filter { ssm -> ssm.name in ssmNames }
-			.map(Ssm::toTxSsm)
-			.let(::TxSsmListQueryResult)
+		ssmConfigProperties.list
+			.flatMap { (_, ssmConfigs) -> ssmConfigs.values }
+			.distinctBy { ssmConfig -> ssmConfig.channelId to ssmConfig.chaincodeId }
+			.asFlow()
+			.flatMapConcat { config ->
+				CouchdbSsmListQueryFunctionImpl(config.couchdb)
+					.couchdbSsmListQueryFunction()
+					.invoke(
+						CouchdbSsmListQuery(
+							chaincodeId = config.chaincodeId,
+							channelId = config.channelId,
+							pagination = null
+						)
+					).page.list.asFlow()
+			}.filter { result ->
+				result.name in ssmNames
+			}.map { result ->
+				result.toTxSsm()
+			}.let {
+				val txSsmListQueryResult = TxSsmListQueryResult(it.toList())
+				txSsmListQueryResult
+			}
 	}
 
 	@Bean
@@ -100,14 +105,14 @@ class SsmApiFinderService(
 	@Bean
 	override fun txSsmSessionListQueryFunction(): TxSsmSessionListQueryFunction = f2Function { cmd ->
 		val config = getConfig(cmd)
-		val command = CdbSsmSessionListQuery(
-			dbConfig = config.couchdb,
-
-			dbName = config.dbName,
+		val query = CouchdbSsmSessionStateListQuery(
+			channelId = config.channelId,
+			chaincodeId = config.chaincodeId,
 			ssm = cmd.ssm
 		)
-		cdbSsmSessionListQueryFunction(command)
-			.sessions
+		CouchdbSsmSessionStateListQueryFunctionImpl(config.couchdb).couchdbSsmSessionStateListQueryFunction().invoke(
+			query
+		).page.list
 			.filter { sessionState -> sessionState.session.isNotBlank() }
 			.map { sessionState -> sessionState.toTxSession(config, cmd.bearerToken) }.let {
 				TxSsmSessionListQueryResult(it)
@@ -208,7 +213,7 @@ class SsmApiFinderService(
 		}
 	}
 
-	private suspend fun SsmSessionState.toTxSession(
+	private suspend fun SsmSessionStateDTO.toTxSession(
 		ssmConfig: TxSsmLocationProperties,
 		bearerToken: String?,
 	): TxSsmSession {
@@ -224,7 +229,8 @@ class SsmApiFinderService(
 	}
 
 	private fun TxSsmLocationProperties.toChaincodeProperties(): SsmChaincodeProperties {
-		return ssmConfigProperties.chaincode[chaincode]
-			?: throw ConfigDataLocationNotFoundException(ConfigDataLocation.of("ssm.chaincode.$chaincode"))
+		TODO()
+//		return ssmConfigProperties.chaincode[chaincode]
+//			?: throw ConfigDataLocationNotFoundException(ConfigDataLocation.of("ssm.chaincode.$chaincode"))
 	}
 }

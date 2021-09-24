@@ -1,5 +1,9 @@
 package ssm.tx.dsl.config
 
+import ssm.chaincode.dsl.ChaincodeId
+import ssm.chaincode.dsl.ChannelId
+import ssm.chaincode.dsl.Ssm
+import ssm.couchdb.dsl.config.CouchdbConfig
 import ssm.tx.dsl.features.query.SsmName
 import ssm.tx.dsl.model.SsmVersion
 
@@ -28,21 +32,13 @@ typealias TxSsmConfig = Map<SsmName, Map<SsmVersion, TxSsmLocationProperties>>
  * @parent [TxSsmConfig]
  */
 data class TxSsmLocationProperties(
+	val couchdb: CouchdbConfig,
 	/**
-	 * Name of the chaincode configuration to use
-	 * @example "smartcode-ssm"
+	 * The unique id of a chaincode.
 	 */
-	val chaincode: String,
-
+	val chaincodeId: ChaincodeId,
 	/**
-	 * Name of the couchdb configuration to use
-	 * @example "smartbase"
+	 * The unique id of a channel.
 	 */
-	val couchdb: String,
-
-	/**
-	 * Name of the database linked to the SSM
-	 * @example "smartbase_ssm"
-	 */
-	val dbName: String,
+	val channelId: ChannelId,
 )

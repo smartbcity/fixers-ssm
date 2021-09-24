@@ -6,7 +6,7 @@
 
 *name* `String` 
 
-Unique identifier for the SSM.
+The unique identifier of a ssm.
 
 </article>
 <article>

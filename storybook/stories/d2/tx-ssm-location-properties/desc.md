@@ -4,23 +4,21 @@
   
 <article>
 
-*chaincode* `String` 
+*chaincodeId* [`ChaincodeId`](/docs/ssm-chaincode-signing-state-machine--page#chaincodeid) 
 
-Name of the chaincode configuration to use
-
-</article>
-<article>
-
-*couchdb* `String` 
-
-Name of the couchdb configuration to use
+The unique id of a chaincode.
 
 </article>
 <article>
 
-*dbName* `String` 
+*channelId* [`ChannelId`](/docs/channelid--page#channelid) 
 
-Name of the database linked to the SSM
+The unique id of a channel.
+
+</article>
+<article>
+
+*couchdb* [`CouchdbConfig`](/docs/ssm-couchdb-general--page#configuration) 
 
 </article>
 

@@ -4,6 +4,12 @@ import kotlin.js.JsExport
 import kotlin.js.JsName
 import kotlinx.serialization.Serializable
 
+/**
+ * The unique id of a chaincode.
+ * @d2 model
+ * @example "ssm"
+ * @parent [Ssm]
+ */
 typealias ChaincodeId = String
 
 expect interface ChaincodeDTO {

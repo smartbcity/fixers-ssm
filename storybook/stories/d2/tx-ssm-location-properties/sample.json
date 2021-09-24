@@ -1,5 +1,10 @@
 {
-  "chaincode" : "smartcode-ssm",
-  "couchdb" : "smartbase",
-  "dbName" : "smartbase_ssm"
+  "couchdb" : {
+    "url" : "http://peer.sandbox.smartb.network:9000",
+    "username" : "admin",
+    "password" : "admin",
+    "serviceName" : "ssm-couchdb"
+  },
+  "chaincodeId" : "ssm",
+  "channelId" : "blanqui"
 }

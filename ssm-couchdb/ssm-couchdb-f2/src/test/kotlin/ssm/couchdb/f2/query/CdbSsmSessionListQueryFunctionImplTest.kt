@@ -4,37 +4,22 @@ import f2.dsl.fnc.invoke
 import kotlinx.coroutines.runBlocking
 import org.assertj.core.api.Assertions
 import org.junit.jupiter.api.Test
-import org.springframework.beans.factory.annotation.Autowired
-import ssm.couchdb.dsl.query.CdbSsmSessionListQuery
-import ssm.couchdb.dsl.query.CdbSsmSessionListQueryFunction
+import ssm.couchdb.dsl.query.CouchdbSsmSessionStateListQuery
+import ssm.couchdb.dsl.query.CouchdbSsmSessionStateListQueryFunction
 
-internal class CdbSsmSessionListQueryFunctionImplTest : FunctionTestBase() {
+internal class CouchdbSsmSessionListQueryFunctionImplTest : FunctionTestBase() {
 
-	@Autowired
-	lateinit var cdbSsmSessionListQueryFunction: CdbSsmSessionListQueryFunction
-
-//	@Autowired
-//	lateinit var ssmCouchDbClient: SsmCouchDbClient
-
-	companion object {
-		const val DB_CONF = "sandbox_ssm"
-		const val DB_NAME = "sandbox_ssm"
-	}
-
-	@Test
-	fun `must return cdbGetSsmSessionListQueryFunction from catalog`() {
-		val fnc: Any = catalog.lookup("cdbSsmSessionListQueryFunction")
-		Assertions.assertThat(fnc).isNotNull
-	}
-
+	var couchdbSsmSessionListQueryFunction: CouchdbSsmSessionStateListQueryFunction
+		= queries.couchDbSsmSessionStateListQueryFunction(TestConfig.dbConfig)
 
 	@Test
 	fun `must return all sessions`(): Unit = runBlocking {
-//		val expectedSsmSessionListSize = ssmCouchDbClient.getCount(DB_NAME, DocType.State)
-
-		val command = CdbSsmSessionListQuery(DB_NAME, null, DB_CONF)
-		val sessions = cdbSsmSessionListQueryFunction(command).sessions
-
-		Assertions.assertThat(sessions).isNotEmpty
+		val command = CouchdbSsmSessionStateListQuery(
+			channelId = TestConfig.CHANNEL_ID,
+			chaincodeId = TestConfig.CHAINCODE_ID,
+			ssm = null
+		)
+		val sessions = couchdbSsmSessionListQueryFunction(command).page.list
+		Assertions.assertThat(sessions).isNotNull
 	}
 }

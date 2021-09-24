@@ -14,7 +14,7 @@ import ssm.tx.dsl.model.TxSsmDTO
  * @order 20
  * @title List SSMs
  */
-typealias TxSsmListQueryFunction = F2Function<TxSsmListQueryDTO, TxSsmListQueryResultDTO>
+typealias TxSsmListQueryFunction = F2Function<TxSsmListQuery, TxSsmListQueryResult>
 
 expect interface TxSsmListQueryDTO
 

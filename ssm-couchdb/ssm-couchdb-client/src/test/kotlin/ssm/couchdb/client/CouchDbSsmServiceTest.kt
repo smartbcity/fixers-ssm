@@ -3,7 +3,7 @@ package ssm.couchdb.client
 import org.assertj.core.api.Assertions
 import org.junit.jupiter.api.Test
 import ssm.couchdb.client.builder.SsmCouchDbBasicAuth
-import ssm.couchdb.dsl.DocType
+import ssm.couchdb.dsl.model.DocType
 
 class CouchDbSsmServiceTest {
 

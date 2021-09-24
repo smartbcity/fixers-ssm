@@ -1,0 +1,6 @@
+{
+  "url" : "http://peer.sandbox.smartb.network:9000",
+  "username" : "admin",
+  "password" : "admin",
+  "serviceName" : "ssm-couchdb"
+}
