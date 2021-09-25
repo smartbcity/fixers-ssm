@@ -58,7 +58,7 @@ expect interface TransactionDTO {
 /**
  * @d2 model
  * @page
- * @@title SSM-Chaincode/Blockchain Content
+ * @@title SSM-CHAINCODE/Blockchain Content
  */
 class Transaction(
 	override val transactionId: TransactionId,

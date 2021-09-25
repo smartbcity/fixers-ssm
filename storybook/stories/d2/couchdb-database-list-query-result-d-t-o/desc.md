@@ -4,12 +4,12 @@
   
 <article>
 
-*page* [`PageDTO<DatabaseDTO>`](#database) 
+*page* [`PageDTO<DatabaseDTO>`](/docs/ssm-couchdb-models--page#database) 
 
 </article>
 <article>
 
-*page* [`PageDTO<DatabaseDTO>`](#database) 
+*page* [`PageDTO<DatabaseDTO>`](/docs/ssm-couchdb-models--page#database) 
 
 </article>
 <article>

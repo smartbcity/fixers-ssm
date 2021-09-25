@@ -1,6 +1,6 @@
 
 
-## Configuration  
+## CouchdbConfig  
 
 
 Properties need to connect to couchdb.

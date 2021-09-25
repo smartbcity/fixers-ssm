@@ -1,23 +1,10 @@
 package ssm.couchdb.dsl.config
 
-import ssm.couchdb.dsl.SsmCouchdbD2
-
 /**
  * Properties need to connect to couchdb.
  * @d2 model
- * @title Configuration
- * @order 20
- * @example {
- *  couchdb: {
- *      smartbase: {
- *			url: "http://peer.sandbox.smartb.network:9000",
- *			username: "admin",
- *			password: "admin",
- *			serviceName: "ssm-couchdb"
- *      }
- *  }
- * }
- * @parent [ssm.couchdb.dsl.SsmCouchdbD2]
+ * @title CouchdbConfig
+ * @parent [ssm.couchdb.dsl.SsmCouchdbD2Configuration]
  */
 data class CouchdbConfig(
 	/**

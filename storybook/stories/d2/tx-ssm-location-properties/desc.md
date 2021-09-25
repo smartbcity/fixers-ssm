@@ -18,7 +18,7 @@ The unique id of a channel.
 </article>
 <article>
 
-*couchdb* [`CouchdbConfig`](/docs/ssm-couchdb-general--page#configuration) 
+*couchdb* [`CouchdbConfig`](/docs/ssm-couchdb-configuration--page#couchdbconfig) 
 
 </article>
 

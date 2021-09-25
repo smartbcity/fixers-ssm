@@ -1,0 +1,20 @@
+import { CodeHighlighter, DescriptedCode } from '@smartb/archetypes-ui-documentation'
+import CouchdbConfigIndex from '../couchdb-config/index.mdx'
+import { Meta } from '@storybook/addon-docs/blocks'
+import SsmCouchdbD2ConfigurationDesc from './desc.md'
+import SsmCouchdbD2ConfigurationSample from './sample.json'
+
+<Meta title="SsmCouchdbD2Configuration" parameters={{ previewTabs: { canvas: { hidden: true } } }} />
+
+<DescriptedCode
+  leftElement={<SsmCouchdbD2ConfigurationDesc />}
+  rightElement={
+    <CodeHighlighter
+      object={SsmCouchdbD2ConfigurationSample}
+      language={"json"}
+      title={"Example"}
+    />
+  }
+/>
+
+<CouchdbConfigIndex />

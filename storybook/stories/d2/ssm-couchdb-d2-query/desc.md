@@ -1,4 +1,4 @@
 
 
-## Query function  
+## SsmCouchdbD2Query  
 

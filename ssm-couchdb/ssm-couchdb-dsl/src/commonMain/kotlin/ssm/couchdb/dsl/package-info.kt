@@ -9,21 +9,32 @@ import ssm.chaincode.dsl.SsmTransitionDTO
  * @page
  * Next to the blockchain, there may be a CouchDB database duplicating some data within the chain for query optimization purpose.
  * As it is a more classic database, queries take much less time to complete but the data lose the benefits of being in a blockchain.
- * @@title SSM-CouchDB/General
+ * @@title SSM-COUCHDB/General
  */
 interface SsmCouchdbD2
 
 /**
  * @d2 model
- * @title Models
- * @parent [SsmCouchdbD2]
+ * @page
+ * Configuration needed to connect to the database.
+ * @@title SSM-COUCHDB/Configuration
  */
-interface SsmCouchdbD2Model
+interface SsmCouchdbD2Configuration
 
 /**
  * @d2 model
- * @title Query function
- * @parent [SsmCouchdbD2]
+ * @page
+ * Test desctiotion config
+ * @@title SSM-COUCHDB/Models
+ */
+interface SsmCouchdbD2Model
+
+
+/**
+ * @d2 model
+ * @page
+ * Test desctiotion config
+ * @@title SSM-COUCHDB/Query functions
  */
 interface SsmCouchdbD2Query
 

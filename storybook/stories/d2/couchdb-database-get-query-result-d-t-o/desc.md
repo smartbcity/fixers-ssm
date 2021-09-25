@@ -4,7 +4,7 @@
   
 <article>
 
-*item* [`DatabaseDTO?`](#database) 
+*item* [`DatabaseDTO?`](/docs/ssm-couchdb-models--page#database) 
 
 The name of the database.
 

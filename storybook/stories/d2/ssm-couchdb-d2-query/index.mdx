@@ -1,12 +1,13 @@
 import { CodeHighlighter, DescriptedCode } from '@smartb/archetypes-ui-documentation'
 import CouchdbDatabaseGetQueryFunctionIndex from '../couchdb-database-get-query-function/index.mdx'
 import CouchdbDatabaseListQueryFunctionIndex from '../couchdb-database-list-query-function/index.mdx'
+import CouchdbSsmListQueryFunctionIndex from '../couchdb-ssm-list-query-function/index.mdx'
 import CouchdbSsmSessionStateListQueryFunctionIndex from '../couchdb-ssm-session-state-list-query-function/index.mdx'
 import { Meta } from '@storybook/addon-docs/blocks'
 import SsmCouchdbD2QueryDesc from './desc.md'
 import SsmCouchdbD2QuerySample from './sample.json'
 
-<Meta title="Query function" parameters={{ previewTabs: { canvas: { hidden: true } } }} />
+<Meta title="SsmCouchdbD2Query" parameters={{ previewTabs: { canvas: { hidden: true } } }} />
 
 <DescriptedCode
   leftElement={<SsmCouchdbD2QueryDesc />}
@@ -22,5 +23,7 @@ import SsmCouchdbD2QuerySample from './sample.json'
 <CouchdbDatabaseGetQueryFunctionIndex />
 
 <CouchdbSsmSessionStateListQueryFunctionIndex />
+
+<CouchdbSsmListQueryFunctionIndex />
 
 <CouchdbDatabaseListQueryFunctionIndex />

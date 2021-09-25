@@ -7,10 +7,10 @@ import ssm.couchdb.dsl.query.CouchdbSsmListQueryFunction
 import ssm.couchdb.dsl.query.CouchdbSsmSessionStateListQueryFunction
 
 /**
- * - fun couchdbDatabaseListQueryFunction(): [ssm.couchdb.dsl.query.CouchdbDatabaseListQueryFunction]
- * - fun couchDbDatabaseGetQueryFunction(): [ssm.couchdb.dsl.query.CouchdbDatabaseGetQueryFunction]
- * - fun couchDbSsmListQueryFunction(): [ssm.couchdb.dsl.query.CouchdbSsmListQueryFunction]
- * - fun couchDbSsmSessionStateListQueryFunction(): [ssm.couchdb.dsl.query.CouchdbSsmSessionStateListQueryFunction]
+ * - fun couchdbDatabaseListQueryFunction(config: CouchdbConfig): [ssm.couchdb.dsl.query.CouchdbDatabaseListQueryFunction]
+ * - fun couchDbDatabaseGetQueryFunction(config: CouchdbConfig): [ssm.couchdb.dsl.query.CouchdbDatabaseGetQueryFunction]
+ * - fun couchDbSsmListQueryFunction(config: CouchdbConfig): [ssm.couchdb.dsl.query.CouchdbSsmListQueryFunction]
+ * - fun couchDbSsmSessionStateListQueryFunction(config: CouchdbConfig): [ssm.couchdb.dsl.query.CouchdbSsmSessionStateListQueryFunction]
  * @d2 model
  * @title Query function
  * @parent [SsmCouchdbD2]
