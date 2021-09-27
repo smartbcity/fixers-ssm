@@ -10,10 +10,10 @@ import ssm.chaincode.dsl.config.SsmChaincodeConfig
 fun <T : SsmCommandDTO, R> ssmF2Function(
 	config: SsmChaincodeConfig, fnc: suspend (T, SsmClient) -> R
 ): F2Function<T, R> = f2Function { cmd ->
-	val config = SsmClientConfig(
+	val clientConfig = SsmClientConfig(
 		config.url,
 		cmd.bearerToken
 	)
-	val ssmClient = SsmClient.fromConfig(config)
+	val ssmClient = SsmClient.fromConfig(clientConfig)
 	fnc(cmd, ssmClient)
 }

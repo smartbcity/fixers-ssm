@@ -1,2 +1,2 @@
 org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
-ssm.couchdb.spring.autoconfig.SsmCouchdbAutoConfiguration
+ssm.couchdb.spring.autoconfigure.SsmCouchdbAutoConfiguration
