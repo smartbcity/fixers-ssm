@@ -8,6 +8,8 @@ plugins {
 dependencies {
 	api(project(":ssm-couchdb:ssm-couchdb-f2"))
 
+	api("city.smartb.f2:f2-spring-boot-starter-function:${Versions.f2}")
+
 	kapt("org.springframework.boot:spring-boot-configuration-processor:${Versions.springBoot}")
 
 	testImplementation(project(":ssm-test:ssm-test-cucumber"))

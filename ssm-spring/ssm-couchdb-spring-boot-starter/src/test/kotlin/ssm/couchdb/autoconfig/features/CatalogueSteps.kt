@@ -4,7 +4,7 @@ import io.cucumber.java8.En
 import org.assertj.core.api.Assertions.assertThat
 import org.springframework.boot.test.context.runner.ReactiveWebApplicationContextRunner
 import ssm.couchdb.autoconfig.context.ApplicationContextRunnerBuilder
-import ssm.couchdb.dsl.config.CouchdbConfig
+import ssm.couchdb.dsl.config.SsmCouchdbConfig
 
 
 class AppStepDef: En {
@@ -12,7 +12,7 @@ class AppStepDef: En {
 
 	init {
 		When("I get a valid spring application context") {
-			contextBuilder = ApplicationContextRunnerBuilder().buildContext(CouchdbConfig(
+			contextBuilder = ApplicationContextRunnerBuilder().buildContext(SsmCouchdbConfig(
 				url = "http://localhost:5000",
 				username = "couchdb",
 				password = "couchdb",

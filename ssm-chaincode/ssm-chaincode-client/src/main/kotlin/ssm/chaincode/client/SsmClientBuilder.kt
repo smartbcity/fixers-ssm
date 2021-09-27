@@ -54,8 +54,6 @@ class SsmClientBuilder(
 			return builder()
 				.withCoopRepository(coopRepository)
 				.withJSONConverter(converter)
-				.withChannelId(config.channelId)
-				.withSsmId(config.chaincodeId)
 		}
 	}
 }

@@ -6,14 +6,14 @@ import kotlinx.coroutines.flow.filter
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.toList
-import ssm.couchdb.dsl.config.CouchdbConfig
+import ssm.couchdb.dsl.config.SsmCouchdbConfig
 import ssm.couchdb.dsl.model.Database
 import ssm.couchdb.dsl.query.CouchdbDatabaseListQueryFunction
 import ssm.couchdb.dsl.query.CouchdbDatabaseListQueryResult
 import ssm.couchdb.f2.commons.CouchdbF2Function
 
 class CouchdbDatabaseListQueryFunctionImpl(
-	private val config: CouchdbConfig,
+	private val config: SsmCouchdbConfig,
 ) {
 
 	fun couchdbDatabaseListQueryFunction(): CouchdbDatabaseListQueryFunction =

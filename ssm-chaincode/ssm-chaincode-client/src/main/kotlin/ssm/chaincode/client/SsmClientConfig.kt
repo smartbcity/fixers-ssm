@@ -7,8 +7,6 @@ import ssm.sdk.sign.utils.FileUtils.getUrl
 
 class SsmClientConfig(
 	val baseUrl: String,
-	val channelId: String? = null,
-	val chaincodeId: String? = null,
 	val bearerToken: String? = null,
 ) {
 

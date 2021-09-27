@@ -16,7 +16,7 @@ expect interface TxSsmUserDTO {
 /**
  * Represents an [SSM Agent][SsmAgent]
  * @d2 model
- * @parent [ssm.tx.dsl.SsmApiFinder]
+ * @parent [ssm.tx.dsl.SsmApiQueryFunctions]
  */
 @Serializable
 @JsExport

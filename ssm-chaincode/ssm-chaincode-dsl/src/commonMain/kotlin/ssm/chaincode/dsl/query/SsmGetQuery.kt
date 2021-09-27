@@ -6,7 +6,7 @@ import kotlin.js.JsExport
 import kotlin.js.JsName
 import kotlinx.serialization.Serializable
 import ssm.chaincode.dsl.Ssm
-import ssm.chaincode.dsl.SsmChaincodeProperties
+import ssm.chaincode.dsl.SsmChaincodeConfig
 import ssm.chaincode.dsl.SsmCommandDTO
 
 /**
@@ -27,7 +27,6 @@ typealias SsmGetQueryFunction = F2Function<SsmGetQuery, SsmGetResult>
 @Serializable
 @JsName("SsmGetQuery")
 class SsmGetQuery(
-	override val chaincode: SsmChaincodeProperties,
 	override val bearerToken: String? = null,
 
 	/**

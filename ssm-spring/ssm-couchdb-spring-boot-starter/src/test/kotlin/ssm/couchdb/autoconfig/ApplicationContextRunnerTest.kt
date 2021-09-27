@@ -4,7 +4,7 @@ import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test
 import org.springframework.cloud.function.context.FunctionCatalog
 import ssm.couchdb.autoconfig.context.ApplicationContextRunnerBuilder
-import ssm.couchdb.dsl.config.CouchdbConfig
+import ssm.couchdb.dsl.config.SsmCouchdbConfig
 import ssm.couchdb.spring.autoconfig.SsmCouchdbAutoConfiguration
 import ssm.couchdb.spring.autoconfig.SsmCouchdbProperties
 
@@ -13,7 +13,7 @@ class ApplicationContextRunnerTest {
 
 	@Test
 	fun someTest() {
-		val config = CouchdbConfig(
+		val config = SsmCouchdbConfig(
 			url = "http://localhost:5000",
 			username = "couchdb",
 			password = "couchdb",

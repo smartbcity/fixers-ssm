@@ -2,18 +2,18 @@ package ssm.couchdb.autoconfig.context
 
 import org.springframework.boot.autoconfigure.AutoConfigurations
 import org.springframework.boot.test.context.runner.ReactiveWebApplicationContextRunner
-import ssm.couchdb.dsl.config.CouchdbConfig
+import ssm.couchdb.dsl.config.SsmCouchdbConfig
 
 
 class ApplicationContextRunnerBuilder {
 
-	fun buildContext(config: CouchdbConfig?): ReactiveWebApplicationContextRunner {
+	fun buildContext(config: SsmCouchdbConfig?): ReactiveWebApplicationContextRunner {
 		return ReactiveWebApplicationContextRunner()
 			.withConfiguration(AutoConfigurations.of(ApplicationContextBuilder.SimpleConfiguration::class.java))
 			.withCouchdbConfig(config)
 	}
 
-	fun ReactiveWebApplicationContextRunner.withCouchdbConfig(config: CouchdbConfig?): ReactiveWebApplicationContextRunner {
+	fun ReactiveWebApplicationContextRunner.withCouchdbConfig(config: SsmCouchdbConfig?): ReactiveWebApplicationContextRunner {
 		return config?.let {
 			withPropertyValues(
 				"ssm.couchdb.url=${config.url}",

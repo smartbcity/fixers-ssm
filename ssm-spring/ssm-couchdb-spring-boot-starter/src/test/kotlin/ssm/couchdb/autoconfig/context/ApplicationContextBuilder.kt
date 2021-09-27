@@ -4,19 +4,19 @@ import org.springframework.boot.autoconfigure.EnableAutoConfiguration
 import org.springframework.boot.builder.SpringApplicationBuilder
 import org.springframework.context.annotation.Configuration
 import org.springframework.context.support.GenericApplicationContext
-import ssm.couchdb.dsl.config.CouchdbConfig
+import ssm.couchdb.dsl.config.SsmCouchdbConfig
 
 
 class ApplicationContextBuilder {
 
-	fun create(types: Array<Class<*>>, profile: Array<String> = emptyArray(), config: CouchdbConfig?): GenericApplicationContext {
+	fun create(types: Array<Class<*>>, profile: Array<String> = emptyArray(), config: SsmCouchdbConfig?): GenericApplicationContext {
 		return SpringApplicationBuilder(*types)
 			.profiles(*profile)
 			.withCouchdbConfig(config)
 			.run() as GenericApplicationContext
 	}
 
-	fun SpringApplicationBuilder.withCouchdbConfig(config: CouchdbConfig?): SpringApplicationBuilder {
+	fun SpringApplicationBuilder.withCouchdbConfig(config: SsmCouchdbConfig?): SpringApplicationBuilder {
 		return config?.let {
 			properties(
 				"ssm.couchdb.url=${config.url}",

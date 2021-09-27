@@ -1,9 +1,9 @@
 package ssm.couchdb.f2.query
 
-import ssm.couchdb.dsl.config.CouchdbConfig
+import ssm.couchdb.dsl.config.SsmCouchdbConfig
 
 object TestConfig {
-	val dbConfig = CouchdbConfig(
+	val dbConfig = SsmCouchdbConfig(
 		url = "http://localhost:5984",
 		username = "couchdb",
 		password = "couchdb",

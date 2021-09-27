@@ -3,8 +3,7 @@ package ssm.tx.dsl.model
 import kotlin.js.JsExport
 import kotlin.js.JsName
 import kotlinx.serialization.Serializable
-
-typealias ChannelId = String
+import ssm.chaincode.dsl.ChannelId
 
 expect interface TxChannelDTO {
 	/**
@@ -17,7 +16,7 @@ expect interface TxChannelDTO {
 /**
  * Description of a channel
  * @d2 model
- * @parent [ssm.tx.dsl.SsmApiFinder]
+ * @parent [ssm.tx.dsl.SsmApiQueryFunctions]
  */
 @Serializable
 @JsExport

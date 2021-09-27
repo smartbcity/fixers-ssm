@@ -6,7 +6,7 @@ import kotlinx.coroutines.runBlocking
 import org.assertj.core.api.Assertions
 import ssm.chaincode.dsl.Chaincode
 import ssm.chaincode.dsl.Ssm
-import ssm.couchdb.dsl.config.CouchdbConfig
+import ssm.couchdb.dsl.config.SsmCouchdbConfig
 import ssm.couchdb.dsl.model.DatabaseDTO
 import ssm.couchdb.dsl.query.CouchdbDatabaseGetQuery
 import ssm.couchdb.dsl.query.CouchdbDatabaseListQuery
@@ -17,7 +17,7 @@ import ssm.couchdb.f2.query.TestConfig
 
 class DatabasesSteps : En {
 
-	private lateinit var config: CouchdbConfig
+	private lateinit var config: SsmCouchdbConfig
 	private var databases: List<DatabaseDTO> = emptyList()
 	private var ssms: List<Ssm> = emptyList()
 

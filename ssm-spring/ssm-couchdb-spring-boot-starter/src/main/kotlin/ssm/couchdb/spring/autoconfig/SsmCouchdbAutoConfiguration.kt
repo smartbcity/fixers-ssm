@@ -5,7 +5,7 @@ import org.springframework.boot.context.properties.EnableConfigurationProperties
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
 import ssm.couchdb.dsl.CouchDbSsmQueries
-import ssm.couchdb.dsl.config.CouchdbConfig
+import ssm.couchdb.dsl.config.SsmCouchdbConfig
 import ssm.couchdb.dsl.query.CouchdbDatabaseGetQueryFunction
 import ssm.couchdb.dsl.query.CouchdbDatabaseListQueryFunction
 import ssm.couchdb.dsl.query.CouchdbSsmListQueryFunction
@@ -22,25 +22,25 @@ class SsmCouchdbAutoConfiguration(
 	private val couchDbSsmQueriesImpl: CouchDbSsmQueriesImpl = CouchDbSsmQueriesImpl()
 
 	@Bean
-	fun couchdbConfig(): CouchdbConfig = ssmCouchdbProperties.couchdb
+	fun couchdbConfig(): SsmCouchdbConfig = ssmCouchdbProperties.couchdb
 
 	@Bean
-	override fun couchdbDatabaseListQueryFunction(config: CouchdbConfig): CouchdbDatabaseListQueryFunction {
+	override fun couchdbDatabaseListQueryFunction(config: SsmCouchdbConfig): CouchdbDatabaseListQueryFunction {
 		return couchDbSsmQueriesImpl.couchdbDatabaseListQueryFunction(config)
 	}
 
 	@Bean
-	override fun couchDbDatabaseGetQueryFunction(config: CouchdbConfig): CouchdbDatabaseGetQueryFunction {
+	override fun couchDbDatabaseGetQueryFunction(config: SsmCouchdbConfig): CouchdbDatabaseGetQueryFunction {
 		return couchDbSsmQueriesImpl.couchDbDatabaseGetQueryFunction(config)
 	}
 
 	@Bean
-	override fun couchDbSsmListQueryFunction(config: CouchdbConfig): CouchdbSsmListQueryFunction {
+	override fun couchDbSsmListQueryFunction(config: SsmCouchdbConfig): CouchdbSsmListQueryFunction {
 		return couchDbSsmQueriesImpl.couchDbSsmListQueryFunction(config)
 	}
 
 	@Bean
-	override fun couchDbSsmSessionStateListQueryFunction(config: CouchdbConfig): CouchdbSsmSessionStateListQueryFunction {
+	override fun couchDbSsmSessionStateListQueryFunction(config: SsmCouchdbConfig): CouchdbSsmSessionStateListQueryFunction {
 		return couchDbSsmQueriesImpl.couchDbSsmSessionStateListQueryFunction(config)
 	}
 }

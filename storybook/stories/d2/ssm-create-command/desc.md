@@ -18,7 +18,7 @@ Authentication token
 </article>
 <article>
 
-*chaincode* `SsmChaincodeProperties` 
+*chaincode* `SsmChaincodeConfig` 
 
 Chaincode to execute the command or query on
 

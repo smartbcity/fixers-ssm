@@ -26,8 +26,6 @@ object Versions {
 
 
 	const val coroutines = "1.5.1"
-	const val kserialization = "1.1.0"
-	const val ktor = "1.6.1"
 
 	const val f2 = "experimental-SNAPSHOT"
 	const val d2 = "0.1.1-SNAPSHOT"
@@ -37,13 +35,7 @@ object Versions {
 }
 
 object Dependencies {
-	object jvm {
-		val coroutines = arrayOf(
-			"org.jetbrains.kotlinx:kotlinx-coroutines-core:${Versions.coroutines}",
-			"org.jetbrains.kotlinx:kotlinx-coroutines-reactor:${Versions.coroutines}",
-			"org.jetbrains.kotlinx:kotlinx-coroutines-reactive:${Versions.coroutines}",
-			"org.jetbrains.kotlinx:kotlinx-coroutines-jdk8:${Versions.coroutines}"
-		)
+	object Jvm {
 		val junit = arrayOf(
 			"org.junit.jupiter:junit-jupiter:${Versions.junit}",
 			"org.junit.jupiter:junit-jupiter-api:${Versions.junit}",
@@ -52,13 +44,4 @@ object Dependencies {
 		)
 	}
 
-	object common {
-		val coroutines = arrayOf(
-			"org.jetbrains.kotlinx:kotlinx-coroutines-core:${Versions.coroutines}"
-		)
-		val kserialization = arrayOf(
-			"org.jetbrains.kotlinx:kotlinx-serialization-core:${Versions.kserialization}",
-			"org.jetbrains.kotlinx:kotlinx-serialization-json:${Versions.kserialization}"
-		)
-	}
 }

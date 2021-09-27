@@ -1,6 +1,6 @@
 package ssm.couchdb.dsl
 
-import ssm.couchdb.dsl.config.CouchdbConfig
+import ssm.couchdb.dsl.config.SsmCouchdbConfig
 import ssm.couchdb.dsl.query.CouchdbDatabaseGetQueryFunction
 import ssm.couchdb.dsl.query.CouchdbDatabaseListQueryFunction
 import ssm.couchdb.dsl.query.CouchdbSsmListQueryFunction
@@ -16,8 +16,8 @@ import ssm.couchdb.dsl.query.CouchdbSsmSessionStateListQueryFunction
  * @parent [SsmCouchdbD2]
  */
 interface CouchDbSsmQueries {
-	fun couchdbDatabaseListQueryFunction(config: CouchdbConfig): CouchdbDatabaseListQueryFunction
-	fun couchDbDatabaseGetQueryFunction(config: CouchdbConfig): CouchdbDatabaseGetQueryFunction
-	fun couchDbSsmListQueryFunction(config: CouchdbConfig): CouchdbSsmListQueryFunction
-	fun couchDbSsmSessionStateListQueryFunction(config: CouchdbConfig): CouchdbSsmSessionStateListQueryFunction
+	fun couchdbDatabaseListQueryFunction(config: SsmCouchdbConfig): CouchdbDatabaseListQueryFunction
+	fun couchDbDatabaseGetQueryFunction(config: SsmCouchdbConfig): CouchdbDatabaseGetQueryFunction
+	fun couchDbSsmListQueryFunction(config: SsmCouchdbConfig): CouchdbSsmListQueryFunction
+	fun couchDbSsmSessionStateListQueryFunction(config: SsmCouchdbConfig): CouchdbSsmSessionStateListQueryFunction
 }

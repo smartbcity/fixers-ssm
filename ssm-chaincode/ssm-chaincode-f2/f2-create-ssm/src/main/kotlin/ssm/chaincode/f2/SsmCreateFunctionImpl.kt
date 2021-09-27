@@ -1,14 +1,11 @@
 package ssm.chaincode.f2
 
-import org.springframework.context.annotation.Bean
-import org.springframework.context.annotation.Configuration
+import ssm.chaincode.dsl.SsmChaincodeConfig
 import ssm.chaincode.f2.commons.ssmF2Function
 
-@Configuration
 class SsmCreateFunctionImpl {
 
-	@Bean
-	fun ssmCreateFunction(): SsmCreateFunction = ssmF2Function { cmd, ssmClient ->
+	fun ssmCreateFunction(config: SsmChaincodeConfig): SsmCreateFunction = ssmF2Function(config) { cmd, ssmClient ->
 		val initializer = SsmInitializer(ssmClient, cmd.signerAdmin)
 		val invoke = initializer.init(cmd.agent, cmd.ssm)
 		SsmCreateResult(invoke)

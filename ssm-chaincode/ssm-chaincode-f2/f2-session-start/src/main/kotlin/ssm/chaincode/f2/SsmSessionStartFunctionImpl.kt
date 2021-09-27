@@ -1,15 +1,12 @@
 package ssm.chaincode.f2
 
 import kotlinx.coroutines.future.await
-import org.springframework.context.annotation.Bean
-import org.springframework.context.annotation.Configuration
+import ssm.chaincode.dsl.SsmChaincodeConfig
 import ssm.chaincode.f2.commons.ssmF2Function
 
-@Configuration
 class SsmSessionStartFunctionImpl {
 
-	@Bean
-	fun ssmSessionStartFunction(): SsmSessionStartFunction = ssmF2Function { cmd, ssmClient ->
+	fun ssmSessionStartFunction(config: SsmChaincodeConfig): SsmSessionStartFunction = ssmF2Function(config) { cmd, ssmClient ->
 		val invoke = ssmClient.start(cmd.signerAdmin, cmd.session).await()
 		SsmSessionStartResult(invoke)
 	}

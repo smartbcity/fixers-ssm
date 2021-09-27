@@ -5,7 +5,7 @@ import f2.dsl.fnc.F2Function
 import ssm.chaincode.dsl.InvokeReturn
 import ssm.chaincode.dsl.Ssm
 import ssm.chaincode.dsl.SsmAgent
-import ssm.chaincode.dsl.SsmChaincodeProperties
+import ssm.chaincode.dsl.SsmChaincodeConfig
 import ssm.chaincode.dsl.SsmCommandDTO
 import ssm.sdk.sign.model.SignerAdmin
 
@@ -37,7 +37,6 @@ class SsmCreateCommand(
 	 * Initial user of the SSM
 	 */
 	val agent: SsmAgent,
-	override val chaincode: SsmChaincodeProperties,
 	override val bearerToken: String?,
 ) : SsmCommandDTO
 

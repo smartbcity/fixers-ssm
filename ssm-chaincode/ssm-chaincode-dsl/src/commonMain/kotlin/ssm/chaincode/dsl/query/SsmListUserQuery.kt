@@ -5,7 +5,7 @@ import f2.dsl.fnc.F2Function
 import kotlin.js.JsExport
 import kotlin.js.JsName
 import kotlinx.serialization.Serializable
-import ssm.chaincode.dsl.SsmChaincodeProperties
+import ssm.chaincode.dsl.SsmChaincodeConfig
 import ssm.chaincode.dsl.SsmCommandDTO
 
 typealias SsmListUserQueryFunction = F2Function<SsmListUserQuery, SsmListUserResult>
@@ -14,7 +14,6 @@ typealias SsmListUserQueryFunction = F2Function<SsmListUserQuery, SsmListUserRes
 @JsExport
 @JsName("SsmListUserQuery")
 class SsmListUserQuery(
-	override val chaincode: SsmChaincodeProperties,
 	override val bearerToken: String? = null,
 ) : SsmCommandDTO
 

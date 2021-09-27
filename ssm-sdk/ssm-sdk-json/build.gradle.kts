@@ -4,7 +4,7 @@ plugins {
 }
 
 dependencies {
-	implementation("org.slf4j:slf4j-api:${Versions.slf4j}")
+//	implementation("org.slf4j:slf4j-api:${Versions.slf4j}")
 
 	implementation("org.bouncycastle:bcprov-jdk15on:${Versions.bouncycastleVersion}")
 	implementation("com.fasterxml.jackson.module:jackson-module-kotlin:${Versions.jacksonKotlin}")

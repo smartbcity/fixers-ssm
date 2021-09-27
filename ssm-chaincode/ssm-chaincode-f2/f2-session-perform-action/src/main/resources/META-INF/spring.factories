@@ -1,2 +1,0 @@
-org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
-ssm.chaincode.f2.SsmSessionPerformActionFunctionImpl
