@@ -1,7 +1,7 @@
 package ssm.api.model
 
-import ssm.chaincode.dsl.SsmSessionState
-import ssm.chaincode.dsl.SsmSessionStateDTO
+import ssm.chaincode.dsl.model.SsmSessionState
+import ssm.chaincode.dsl.model.SsmSessionStateDTO
 import ssm.chaincode.dsl.blockchain.Transaction
 import ssm.tx.dsl.model.TxChannel
 import ssm.tx.dsl.model.TxSsmSession

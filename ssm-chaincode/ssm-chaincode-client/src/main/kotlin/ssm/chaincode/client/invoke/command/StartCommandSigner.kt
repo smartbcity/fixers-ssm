@@ -1,6 +1,6 @@
 package ssm.chaincode.client.invoke.command
 
-import ssm.chaincode.dsl.SsmSession
+import ssm.chaincode.dsl.model.SsmSession
 import ssm.sdk.sign.model.Signer
 
 // {

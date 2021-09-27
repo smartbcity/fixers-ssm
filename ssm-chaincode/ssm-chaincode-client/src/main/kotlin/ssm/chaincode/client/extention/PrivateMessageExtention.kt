@@ -6,11 +6,11 @@ import java.security.PrivateKey
 import java.security.PublicKey
 import org.bouncycastle.crypto.CryptoException
 import ssm.chaincode.client.extention.getPubAsKey
-import ssm.chaincode.dsl.SsmAgent
-import ssm.chaincode.dsl.SsmContext
-import ssm.chaincode.dsl.SsmSession
-import ssm.chaincode.dsl.SsmSessionState
-import ssm.chaincode.dsl.WithPrivate
+import ssm.chaincode.dsl.model.SsmAgent
+import ssm.chaincode.dsl.model.SsmContext
+import ssm.chaincode.dsl.model.SsmSession
+import ssm.chaincode.dsl.model.SsmSessionState
+import ssm.chaincode.dsl.model.WithPrivate
 import ssm.sdk.sign.crypto.RSACipher
 import ssm.sdk.sign.model.Signer
 

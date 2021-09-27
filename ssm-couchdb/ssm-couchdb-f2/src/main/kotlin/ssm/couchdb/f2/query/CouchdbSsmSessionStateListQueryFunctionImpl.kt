@@ -1,7 +1,7 @@
 package ssm.couchdb.f2.query
 
 import f2.dsl.cqrs.page.Page
-import ssm.chaincode.dsl.SsmSessionStateDTO
+import ssm.chaincode.dsl.model.SsmSessionStateDTO
 import ssm.couchdb.dsl.config.SsmCouchdbConfig
 import ssm.couchdb.dsl.model.DocType
 import ssm.couchdb.dsl.query.CouchdbSsmSessionStateListQueryFunction

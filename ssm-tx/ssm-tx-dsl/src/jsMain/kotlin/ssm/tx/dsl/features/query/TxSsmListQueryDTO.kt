@@ -1,7 +1,7 @@
 package ssm.tx.dsl.features.query
 
-import ssm.chaincode.dsl.ChaincodeId
-import ssm.chaincode.dsl.ChannelId
+import ssm.chaincode.dsl.model.ChaincodeId
+import ssm.chaincode.dsl.model.ChannelId
 import ssm.tx.dsl.model.TxSsmDTO
 
 @JsExport

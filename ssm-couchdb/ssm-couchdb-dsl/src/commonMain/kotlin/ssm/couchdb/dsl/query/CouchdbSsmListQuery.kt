@@ -1,22 +1,18 @@
 package ssm.couchdb.dsl.query
 
-import f2.dsl.cqrs.Event
-import f2.dsl.cqrs.Query
 import f2.dsl.cqrs.page.OffsetPaginationDTO
 import f2.dsl.cqrs.page.Page
 import f2.dsl.cqrs.page.PageDTO
-import f2.dsl.cqrs.page.PageQuery
 import f2.dsl.cqrs.page.PageQueryDTO
-import f2.dsl.cqrs.page.PageQueryResult
 import f2.dsl.cqrs.page.PageQueryResultDTO
 import f2.dsl.fnc.F2Function
 import kotlin.js.JsExport
 import kotlin.js.JsName
 import kotlinx.serialization.Serializable
-import ssm.chaincode.dsl.ChaincodeId
-import ssm.chaincode.dsl.ChannelId
-import ssm.chaincode.dsl.Ssm
-import ssm.chaincode.dsl.SsmDTO
+import ssm.chaincode.dsl.model.ChaincodeId
+import ssm.chaincode.dsl.model.ChannelId
+import ssm.chaincode.dsl.model.Ssm
+import ssm.chaincode.dsl.model.SsmDTO
 
 /**
  * Retrieves the list of ssm stored in the database.

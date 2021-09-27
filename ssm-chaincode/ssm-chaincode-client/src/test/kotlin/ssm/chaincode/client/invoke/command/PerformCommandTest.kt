@@ -4,7 +4,7 @@ import java.util.function.Consumer
 import org.assertj.core.api.Assertions
 import org.junit.jupiter.api.Test
 import ssm.chaincode.client.extention.loadFromFile
-import ssm.chaincode.dsl.SsmContext
+import ssm.chaincode.dsl.model.SsmContext
 import ssm.sdk.sign.crypto.KeyPairReader.loadKeyPair
 import ssm.sdk.sign.model.Signer
 

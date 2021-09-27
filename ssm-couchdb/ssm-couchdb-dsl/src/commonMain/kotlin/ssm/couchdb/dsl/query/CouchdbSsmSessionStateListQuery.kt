@@ -10,11 +10,11 @@ import f2.dsl.fnc.F2Function
 import kotlin.js.JsExport
 import kotlin.js.JsName
 import kotlinx.serialization.Serializable
-import ssm.chaincode.dsl.ChaincodeId
-import ssm.chaincode.dsl.ChannelId
-import ssm.chaincode.dsl.SsmName
-import ssm.chaincode.dsl.SsmSessionState
-import ssm.chaincode.dsl.SsmSessionStateDTO
+import ssm.chaincode.dsl.model.ChaincodeId
+import ssm.chaincode.dsl.model.ChannelId
+import ssm.chaincode.dsl.model.SsmName
+import ssm.chaincode.dsl.model.SsmSessionState
+import ssm.chaincode.dsl.model.SsmSessionStateDTO
 
 /**
  * Retrieve the list of all known sessions of a given SSM

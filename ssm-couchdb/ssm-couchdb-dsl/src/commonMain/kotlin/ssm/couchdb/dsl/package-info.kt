@@ -1,7 +1,7 @@
 package ssm.couchdb.dsl
 
-import ssm.chaincode.dsl.SsmDTO
-import ssm.chaincode.dsl.SsmTransitionDTO
+import ssm.chaincode.dsl.model.SsmDTO
+import ssm.chaincode.dsl.model.SsmTransitionDTO
 
 /**
  * @title I DON'T WANT TITLE HERE

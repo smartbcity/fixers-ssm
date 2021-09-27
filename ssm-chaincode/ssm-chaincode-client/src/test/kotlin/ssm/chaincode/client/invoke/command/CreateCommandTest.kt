@@ -4,8 +4,8 @@ import java.util.function.Consumer
 import org.assertj.core.api.Assertions
 import org.assertj.core.util.Lists
 import org.junit.jupiter.api.Test
-import ssm.chaincode.dsl.Ssm
-import ssm.chaincode.dsl.SsmTransition
+import ssm.chaincode.dsl.model.Ssm
+import ssm.chaincode.dsl.model.SsmTransition
 import ssm.sdk.sign.crypto.KeyPairReader.loadKeyPair
 import ssm.sdk.sign.crypto.Sha256RSASigner.rsaSignAsB64
 import ssm.sdk.sign.model.Signer

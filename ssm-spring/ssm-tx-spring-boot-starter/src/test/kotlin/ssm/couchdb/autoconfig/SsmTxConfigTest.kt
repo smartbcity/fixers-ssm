@@ -1,6 +1,6 @@
 package ssm.couchdb.autoconfig
 
-import ssm.chaincode.dsl.SsmChaincodeConfig
+import ssm.chaincode.dsl.config.SsmChaincodeConfig
 import ssm.couchdb.dsl.config.SsmCouchdbConfig
 import ssm.tx.dsl.config.SsmTxConfig
 

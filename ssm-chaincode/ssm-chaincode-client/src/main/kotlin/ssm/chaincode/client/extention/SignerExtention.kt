@@ -2,7 +2,7 @@
 
 package ssm.chaincode.client.extention
 
-import ssm.chaincode.dsl.SsmAgent
+import ssm.chaincode.dsl.model.SsmAgent
 import ssm.sdk.sign.model.Signer
 
 fun Signer.asAgent(): SsmAgent {

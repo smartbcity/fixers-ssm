@@ -1,6 +1,6 @@
 package ssm.chaincode.f2
 
-import ssm.chaincode.dsl.SsmChaincodeConfig
+import ssm.chaincode.dsl.config.SsmChaincodeConfig
 import ssm.chaincode.f2.commons.ssmF2Function
 
 class SsmCreateFunctionImpl {

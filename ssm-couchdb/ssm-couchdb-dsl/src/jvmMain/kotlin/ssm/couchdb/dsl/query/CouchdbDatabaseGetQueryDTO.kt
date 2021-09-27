@@ -2,8 +2,8 @@ package ssm.couchdb.dsl.query
 
 import f2.dsl.cqrs.Event
 import f2.dsl.cqrs.Query
-import ssm.chaincode.dsl.ChaincodeId
-import ssm.chaincode.dsl.ChannelId
+import ssm.chaincode.dsl.model.ChaincodeId
+import ssm.chaincode.dsl.model.ChannelId
 import ssm.couchdb.dsl.model.DatabaseDTO
 
 actual interface CouchdbDatabaseGetQueryDTO : Query {

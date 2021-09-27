@@ -7,8 +7,8 @@ import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.toList
 import ssm.api.model.toTxSession
 import ssm.api.model.toTxSsm
-import ssm.chaincode.dsl.SsmSessionStateDTO
-import ssm.chaincode.dsl.SsmSessionStateLog
+import ssm.chaincode.dsl.model.SsmSessionStateDTO
+import ssm.chaincode.dsl.model.SsmSessionStateLog
 import ssm.chaincode.dsl.blockchain.Transaction
 import ssm.chaincode.dsl.blockchain.TransactionId
 import ssm.chaincode.dsl.query.SsmGetQuery

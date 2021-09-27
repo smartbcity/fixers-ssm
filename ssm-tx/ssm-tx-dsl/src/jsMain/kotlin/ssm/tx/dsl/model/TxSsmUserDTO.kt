@@ -1,6 +1,6 @@
 package ssm.tx.dsl.model
 
-import ssm.chaincode.dsl.SsmAgentDTO
+import ssm.chaincode.dsl.model.SsmAgentDTO
 
 @JsExport
 @JsName("TxSsmUserDTO")

@@ -5,8 +5,8 @@ import kotlin.js.JsExport
 import kotlin.js.JsName
 import kotlinx.serialization.Serializable
 import ssm.chaincode.dsl.SsmCommandDTO
-import ssm.chaincode.dsl.SsmSessionState
-import ssm.chaincode.dsl.SsmSessionStateLog
+import ssm.chaincode.dsl.model.SsmSessionState
+import ssm.chaincode.dsl.model.SsmSessionStateLog
 
 /**
  * Retrieves the logs of a session since its creation

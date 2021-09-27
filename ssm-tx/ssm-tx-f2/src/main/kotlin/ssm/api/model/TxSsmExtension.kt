@@ -1,6 +1,6 @@
 package ssm.api.model
 
-import ssm.chaincode.dsl.Ssm
+import ssm.chaincode.dsl.model.Ssm
 import ssm.tx.dsl.model.TxChannel
 import ssm.tx.dsl.model.TxSsm
 

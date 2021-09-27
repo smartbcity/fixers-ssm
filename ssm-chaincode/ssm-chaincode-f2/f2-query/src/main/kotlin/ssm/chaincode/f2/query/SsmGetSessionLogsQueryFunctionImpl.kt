@@ -1,6 +1,6 @@
 package ssm.chaincode.f2.query
 
-import ssm.chaincode.dsl.SsmChaincodeConfig
+import ssm.chaincode.dsl.config.SsmChaincodeConfig
 import ssm.chaincode.dsl.query.SsmGetSessionLogsQueryFunction
 import ssm.chaincode.dsl.query.SsmGetSessionLogsQueryResult
 import ssm.chaincode.f2.commons.awaitInstances

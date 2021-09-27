@@ -1,6 +1,6 @@
 package ssm.tx.dsl.model
 
-import ssm.chaincode.dsl.SsmDTO
+import ssm.chaincode.dsl.model.SsmDTO
 
 actual interface TxSsmDTO {
 	actual val ssm: SsmDTO

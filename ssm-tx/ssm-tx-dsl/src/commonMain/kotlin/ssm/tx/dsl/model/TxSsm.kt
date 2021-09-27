@@ -3,8 +3,8 @@ package ssm.tx.dsl.model
 import kotlin.js.JsExport
 import kotlin.js.JsName
 import kotlinx.serialization.Serializable
-import ssm.chaincode.dsl.Ssm
-import ssm.chaincode.dsl.SsmDTO
+import ssm.chaincode.dsl.model.Ssm
+import ssm.chaincode.dsl.model.SsmDTO
 
 expect interface TxSsmDTO {
 	/**

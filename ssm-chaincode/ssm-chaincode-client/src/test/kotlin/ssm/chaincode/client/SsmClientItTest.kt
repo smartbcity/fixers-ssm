@@ -11,13 +11,13 @@ import org.junit.jupiter.api.Order
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.TestMethodOrder
 import ssm.chaincode.client.extention.loadFromFile
-import ssm.chaincode.dsl.InvokeReturn
-import ssm.chaincode.dsl.Ssm
-import ssm.chaincode.dsl.SsmAgent
-import ssm.chaincode.dsl.SsmContext
-import ssm.chaincode.dsl.SsmSession
-import ssm.chaincode.dsl.SsmSessionState
-import ssm.chaincode.dsl.SsmTransition
+import ssm.chaincode.dsl.model.InvokeReturn
+import ssm.chaincode.dsl.model.Ssm
+import ssm.chaincode.dsl.model.SsmAgent
+import ssm.chaincode.dsl.model.SsmContext
+import ssm.chaincode.dsl.model.SsmSession
+import ssm.chaincode.dsl.model.SsmSessionState
+import ssm.chaincode.dsl.model.SsmTransition
 import ssm.chaincode.dsl.blockchain.Block
 import ssm.chaincode.dsl.blockchain.Transaction
 import ssm.sdk.sign.model.Signer
@@ -204,7 +204,7 @@ class SsmClientItTest {
 			sessionName)
 		val state = sesReq.get()
 		val stateExpected = SsmSessionState(ssmName,
-			sessionName, Companion.session.roles, "100 dollars 1978 Camaro", privateMessage, sell, 1, 1)
+			sessionName, session.roles, "100 dollars 1978 Camaro", privateMessage, sell, 1, 1)
 		Assertions.assertThat(state).isEqualTo(stateExpected)
 		val expectedMessage = stateExpected.getPrivateMessage(signerUser1)
 	}
@@ -247,7 +247,7 @@ class SsmClientItTest {
 			sessionName)
 		val state = sesReq.get()
 		val stateExcpected = SsmSessionState(ssmName,
-			sessionName, Companion.session.roles, "Deal !", emptyMap(), buy, 2, 2)
+			sessionName, session.roles, "Deal !", emptyMap(), buy, 2, 2)
 		Assertions.assertThat(state).isEqualTo(stateExcpected)
 	}
 

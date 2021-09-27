@@ -3,12 +3,9 @@ package ssm.couchdb.autoconfig
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test
 import org.springframework.cloud.function.context.FunctionCatalog
-import ssm.chaincode.dsl.SsmChaincodeConfig
-import ssm.couchdb.autoconfig.context.ApplicationContextRunnerBuilder
-import ssm.couchdb.dsl.config.SsmCouchdbConfig
+import ssm.chaincode.autoconfig.context.ApplicationContextRunnerBuilder
 import ssm.couchdb.spring.tx.SsmTxAutoConfiguration
 import ssm.couchdb.spring.tx.SsmTxProperties
-import ssm.tx.dsl.config.SsmTxConfig
 
 
 class TxApplicationContextRunnerTest {

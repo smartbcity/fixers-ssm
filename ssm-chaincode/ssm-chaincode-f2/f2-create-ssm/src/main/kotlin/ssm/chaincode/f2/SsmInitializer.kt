@@ -2,9 +2,9 @@ package ssm.chaincode.f2
 
 import kotlinx.coroutines.future.await
 import ssm.chaincode.client.SsmClient
-import ssm.chaincode.dsl.InvokeReturn
-import ssm.chaincode.dsl.Ssm
-import ssm.chaincode.dsl.SsmAgent
+import ssm.chaincode.dsl.model.InvokeReturn
+import ssm.chaincode.dsl.model.Ssm
+import ssm.chaincode.dsl.model.SsmAgent
 import ssm.chaincode.f2.commons.SsmException
 import ssm.sdk.sign.model.SignerAdmin
 

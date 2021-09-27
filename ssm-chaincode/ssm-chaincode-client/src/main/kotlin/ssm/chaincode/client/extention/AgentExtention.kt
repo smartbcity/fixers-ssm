@@ -4,7 +4,7 @@ package ssm.chaincode.client.extention
 
 import java.security.PublicKey
 import org.bouncycastle.crypto.CryptoException
-import ssm.chaincode.dsl.SsmAgent
+import ssm.chaincode.dsl.model.SsmAgent
 import ssm.sdk.sign.crypto.KeyPairReader
 
 @Throws(Exception::class)

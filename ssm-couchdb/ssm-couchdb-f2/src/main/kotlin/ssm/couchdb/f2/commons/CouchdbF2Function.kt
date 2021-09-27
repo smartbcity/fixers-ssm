@@ -2,8 +2,8 @@ package ssm.couchdb.f2.commons
 
 import f2.dsl.fnc.F2Function
 import f2.dsl.fnc.f2Function
-import ssm.chaincode.dsl.ChaincodeId
-import ssm.chaincode.dsl.ChannelId
+import ssm.chaincode.dsl.model.ChaincodeId
+import ssm.chaincode.dsl.model.ChannelId
 import ssm.couchdb.client.SsmCouchDbClient
 import ssm.couchdb.client.builder.SsmCouchDbBasicAuth
 import ssm.couchdb.dsl.config.SsmCouchdbConfig

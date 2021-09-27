@@ -3,7 +3,7 @@ package ssm.chaincode.client.invoke.command
 import java.util.function.Consumer
 import org.assertj.core.api.Assertions
 import org.junit.jupiter.api.Test
-import ssm.chaincode.dsl.SsmSession
+import ssm.chaincode.dsl.model.SsmSession
 import ssm.sdk.sign.crypto.Sha256RSASigner.rsaSignAsB64
 import ssm.sdk.sign.model.Signer.Companion.loadFromFile
 

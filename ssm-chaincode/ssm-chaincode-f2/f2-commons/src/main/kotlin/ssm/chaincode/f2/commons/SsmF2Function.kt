@@ -4,8 +4,8 @@ import f2.dsl.fnc.F2Function
 import f2.dsl.fnc.f2Function
 import ssm.chaincode.client.SsmClient
 import ssm.chaincode.client.SsmClientConfig
-import ssm.chaincode.dsl.SsmChaincodeConfig
 import ssm.chaincode.dsl.SsmCommandDTO
+import ssm.chaincode.dsl.config.SsmChaincodeConfig
 
 fun <T : SsmCommandDTO, R> ssmF2Function(
 	config: SsmChaincodeConfig, fnc: suspend (T, SsmClient) -> R

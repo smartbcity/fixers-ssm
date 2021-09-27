@@ -3,7 +3,7 @@ package ssm.tx.dsl.model
 import kotlin.js.JsExport
 import kotlin.js.JsName
 import kotlinx.serialization.Serializable
-import ssm.chaincode.dsl.ChannelId
+import ssm.chaincode.dsl.model.ChannelId
 
 expect interface TxChannelDTO {
 	/**

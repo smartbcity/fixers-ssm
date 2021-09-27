@@ -6,7 +6,7 @@ import kotlin.js.JsExport
 import kotlin.js.JsName
 import kotlinx.serialization.Serializable
 import ssm.chaincode.dsl.SsmCommandDTO
-import ssm.chaincode.dsl.SsmSessionState
+import ssm.chaincode.dsl.model.SsmSessionState
 
 /**
  * Retrieves the current state of a session

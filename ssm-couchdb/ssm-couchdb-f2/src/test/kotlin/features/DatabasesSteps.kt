@@ -4,8 +4,8 @@ import f2.dsl.fnc.invoke
 import io.cucumber.java8.En
 import kotlinx.coroutines.runBlocking
 import org.assertj.core.api.Assertions
-import ssm.chaincode.dsl.Chaincode
-import ssm.chaincode.dsl.Ssm
+import ssm.chaincode.dsl.model.Chaincode
+import ssm.chaincode.dsl.model.Ssm
 import ssm.couchdb.dsl.config.SsmCouchdbConfig
 import ssm.couchdb.dsl.model.DatabaseDTO
 import ssm.couchdb.dsl.query.CouchdbDatabaseGetQuery

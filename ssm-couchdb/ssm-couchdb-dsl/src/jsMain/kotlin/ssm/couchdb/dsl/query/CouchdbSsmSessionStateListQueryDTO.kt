@@ -1,15 +1,12 @@
 package ssm.couchdb.dsl.query
 
-import f2.dsl.cqrs.Query
-import f2.dsl.cqrs.page.Page
 import f2.dsl.cqrs.page.PageDTO
 import f2.dsl.cqrs.page.PageQueryDTO
-import f2.dsl.cqrs.page.PageQueryResult
 import f2.dsl.cqrs.page.PageQueryResultDTO
-import ssm.chaincode.dsl.ChaincodeId
-import ssm.chaincode.dsl.ChannelId
-import ssm.chaincode.dsl.SsmName
-import ssm.chaincode.dsl.SsmSessionStateDTO
+import ssm.chaincode.dsl.model.ChaincodeId
+import ssm.chaincode.dsl.model.ChannelId
+import ssm.chaincode.dsl.model.SsmName
+import ssm.chaincode.dsl.model.SsmSessionStateDTO
 
 @JsExport
 @JsName("CouchdbSsmSessionStateListQueryDTO")

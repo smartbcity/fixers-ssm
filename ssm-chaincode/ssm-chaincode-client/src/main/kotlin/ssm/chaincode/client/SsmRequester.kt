@@ -7,7 +7,7 @@ import ssm.chaincode.client.invoke.query.HasGet
 import ssm.chaincode.client.invoke.query.HasList
 import ssm.chaincode.client.repository.CommandArgs
 import ssm.chaincode.client.repository.CoopRepository
-import ssm.chaincode.dsl.InvokeReturn
+import ssm.chaincode.dsl.model.InvokeReturn
 import ssm.sdk.json.JSONConverter
 
 class SsmRequester(
