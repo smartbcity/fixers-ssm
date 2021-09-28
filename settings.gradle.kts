@@ -33,7 +33,8 @@ include(
 include(
 	"ssm-spring:ssm-chaincode-spring-boot-starter",
 	"ssm-spring:ssm-couchdb-spring-boot-starter",
-	"ssm-spring:ssm-tx-spring-boot-starter"
+	"ssm-spring:ssm-tx-spring-boot-starter",
+	"ssm-spring:ssm-create-ssm-spring-boot-starter"
 )
 
 include(
