@@ -5,7 +5,6 @@ import org.junit.jupiter.api.Test
 import org.springframework.cloud.function.context.FunctionCatalog
 import ssm.chaincode.spring.autoconfigure.context.ApplicationContextRunnerBuilder
 
-
 class SsmChaincodeApplicationContextRunnerTest {
 
 	@Test

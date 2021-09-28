@@ -55,7 +55,6 @@ tasks {
 		dependsOn("yarn_install")
 		args = listOf("storybook")
 	}
-
 }
 
 fixers {
