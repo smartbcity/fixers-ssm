@@ -3,8 +3,8 @@ package ssm.tx.spring.autoconfigure.features
 import io.cucumber.java8.En
 import org.assertj.core.api.Assertions.assertThat
 import org.springframework.boot.test.context.runner.ReactiveWebApplicationContextRunner
-import ssm.tx.spring.autoconfigure.SsmTxConfigTest
-import ssm.tx.spring.autoconfigure.context.ApplicationContextRunnerBuilder
+import ssm.test.cucumber.spring.ApplicationContextRunnerBuilder
+import ssm.tx.spring.autoconfigure.TestConfiguration
 
 
 class CatalogueSteps: En {
@@ -12,7 +12,7 @@ class CatalogueSteps: En {
 
 	init {
 		When("I get a valid spring application context") {
-			contextBuilder = ApplicationContextRunnerBuilder().buildContext(SsmTxConfigTest.localDockerCompose)
+			contextBuilder = ApplicationContextRunnerBuilder().buildContext(TestConfiguration.localDockerComposeParams)
 		}
 		Then("Instance of {string} is an injectable bean") { functionName: String ->
 			contextBuilder?.run { context ->
@@ -21,7 +21,7 @@ class CatalogueSteps: En {
 		}
 
 		When("I get an empty spring application context") {
-			contextBuilder = ApplicationContextRunnerBuilder().buildContext(null)
+			contextBuilder = ApplicationContextRunnerBuilder().buildContext()
 		}
 
 		Then("Instance of {string} is not injectable bean") { functionName: String ->

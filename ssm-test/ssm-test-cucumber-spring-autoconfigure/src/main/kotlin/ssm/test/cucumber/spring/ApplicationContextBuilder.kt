@@ -1,27 +1,27 @@
-package ssm.chaincode.spring.autoconfigure.context
+package ssm.test.cucumber.spring
 
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration
 import org.springframework.boot.builder.SpringApplicationBuilder
 import org.springframework.context.annotation.Configuration
 import org.springframework.context.support.GenericApplicationContext
-import ssm.chaincode.dsl.config.SsmChaincodeConfig
 
 
 class ApplicationContextBuilder {
 
-	fun create(types: Array<Class<*>>, profile: Array<String> = emptyArray(), config: SsmChaincodeConfig?): GenericApplicationContext {
+
+	fun create(types: Array<Class<*>>, profile: Array<String> = emptyArray(), config: Map<String, String>): GenericApplicationContext {
 		return SpringApplicationBuilder(*types)
 			.profiles(*profile)
 			.withCouchdbConfig(config)
 			.run() as GenericApplicationContext
 	}
 
-	private fun SpringApplicationBuilder.withCouchdbConfig(config: SsmChaincodeConfig?): SpringApplicationBuilder {
-		return config?.let {
-			properties(
-				"ssm.chaincode.url=${config.url}",
-			)
-		} ?: this
+	private fun SpringApplicationBuilder.withCouchdbConfig(config: Map<String, String>): SpringApplicationBuilder {
+		return properties(
+			*config.map { pair ->
+				"${pair.key}=${pair.value}"
+			}.toTypedArray()
+		)
 	}
 
 	@EnableAutoConfiguration

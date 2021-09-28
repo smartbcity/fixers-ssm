@@ -1,8 +1,0 @@
-package ssm.test.cucumber.spring
-
-import io.cucumber.spring.CucumberContextConfiguration
-import org.springframework.cloud.function.context.test.FunctionalSpringBootTest
-
-@CucumberContextConfiguration
-@FunctionalSpringBootTest
-class CucumberSpringConfiguration

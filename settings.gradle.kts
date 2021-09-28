@@ -38,7 +38,7 @@ include(
 
 include(
 	"ssm-test:ssm-test-cucumber",
-	"ssm-test:ssm-test-cucumber-spring"
+	"ssm-test:ssm-test-cucumber-spring-autoconfigure"
 )
 include(
 	"ssm-tx:ssm-tx-autoconfiguration",

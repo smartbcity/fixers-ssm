@@ -3,14 +3,15 @@ package ssm.chaincode.spring.autoconfigure
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test
 import org.springframework.cloud.function.context.FunctionCatalog
-import ssm.chaincode.spring.autoconfigure.context.ApplicationContextRunnerBuilder
+import ssm.test.cucumber.spring.ApplicationContextBuilder
+import ssm.test.cucumber.spring.ApplicationContextRunnerBuilder
 
 class SsmChaincodeApplicationContextRunnerTest {
 
 	@Test
-	fun someTest() {
+	fun `spring context runner must must start`() {
 		ApplicationContextRunnerBuilder()
-			.buildContext(SsmChaincodeConfigTest.localDockerCompose).run { context ->
+			.buildContext(SsmChaincodeConfigTest.localDockerComposeParams).run { context ->
 				assertThat(context).hasSingleBean(FunctionCatalog::class.java)
 				assertThat(context).hasSingleBean(SsmChaincodeProperties::class.java)
 				assertThat(context).hasBean(SsmChaincodeAutoConfiguration::ssmGetAdminFunction.name)
@@ -24,5 +25,15 @@ class SsmChaincodeApplicationContextRunnerTest {
 				assertThat(context).hasBean(SsmChaincodeAutoConfiguration::ssmListSsmQueryFunction.name)
 				assertThat(context).hasBean(SsmChaincodeAutoConfiguration::ssmListUserQueryFunction.name)
 			}
+	}
+
+	@Test
+	fun `spring context must must start`() {
+		val context = ApplicationContextBuilder().create(
+			types = arrayOf(ApplicationContextBuilder.SimpleConfiguration::class.java),
+			config = SsmChaincodeConfigTest.localDockerComposeParams
+		)
+		assertThat(context.getBean(SsmChaincodeAutoConfiguration::ssmChaincodeConfig.name)).isNotNull
+		assertThat(context.getBean(FunctionCatalog::class.java)).isNotNull
 	}
 }
