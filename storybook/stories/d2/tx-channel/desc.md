@@ -8,7 +8,7 @@ Description of a channel
   
 <article>
 
-*id* `ChannelId` 
+*id* [`ChannelId`](/docs/channelid--page#channelid) 
 
 Identifier
 

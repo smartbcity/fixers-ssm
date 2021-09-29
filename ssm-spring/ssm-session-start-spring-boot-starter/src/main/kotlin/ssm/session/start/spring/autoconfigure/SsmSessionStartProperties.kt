@@ -1,4 +1,4 @@
-package ssm.create.spring.autoconfigure
+package ssm.session.start.spring.autoconfigure
 
 import org.springframework.boot.context.properties.ConfigurationProperties
 import org.springframework.boot.context.properties.ConstructorBinding

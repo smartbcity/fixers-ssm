@@ -11,7 +11,7 @@ import ssm.chaincode.dsl.model.SsmSessionStateLog
 /**
  * Retrieves the logs of a session since its creation
  * @d2 function
- * @parent [ssm.chaincode.dsl.SsmSession]
+ * @parent [ssm.chaincode.dsl.model.SsmSession]
  * @title Get Session Logs
  * @order 20
  */

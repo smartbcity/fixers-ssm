@@ -10,7 +10,7 @@ import ssm.chaincode.dsl.SsmCommandDTO
 /**
  * Retrieves a list of the existing sessions
  * @d2 function
- * @parent [ssm.chaincode.dsl.SsmSession]
+ * @parent [ssm.chaincode.dsl.model.SsmSession]
  * @title List Sessions
  * @order 30
  */

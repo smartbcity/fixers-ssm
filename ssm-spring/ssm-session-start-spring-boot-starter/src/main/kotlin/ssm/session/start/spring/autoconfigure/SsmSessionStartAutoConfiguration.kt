@@ -7,7 +7,6 @@ import org.springframework.context.annotation.Configuration
 import ssm.chaincode.dsl.config.SsmChaincodeConfig
 import ssm.chaincode.f2.SsmSessionStartFunction
 import ssm.chaincode.f2.SsmSessionStartFunctionImpl
-import ssm.create.spring.autoconfigure.SsmSessionStartProperties
 
 @ConditionalOnProperty(prefix = "ssm.chaincode", name = ["url"])
 @EnableConfigurationProperties(SsmSessionStartProperties::class)

@@ -11,7 +11,7 @@ import ssm.chaincode.dsl.model.SsmSessionState
 /**
  * Retrieves the current state of a session
  * @d2 function
- * @parent [ssm.chaincode.dsl.SsmSession]
+ * @parent [ssm.chaincode.dsl.model.SsmSession]
  * @title Get Session
  * @order 10
  */

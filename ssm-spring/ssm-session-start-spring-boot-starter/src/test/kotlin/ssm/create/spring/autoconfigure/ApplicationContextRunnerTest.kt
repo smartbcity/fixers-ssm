@@ -4,6 +4,7 @@ import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test
 import org.springframework.cloud.function.context.FunctionCatalog
 import ssm.session.start.spring.autoconfigure.SsmSessionStartAutoConfiguration
+import ssm.session.start.spring.autoconfigure.SsmSessionStartProperties
 import ssm.test.cucumber.spring.ApplicationContextBuilder
 import ssm.test.cucumber.spring.ApplicationContextRunnerBuilder
 

@@ -33,10 +33,10 @@ include(
 include(
 	"ssm-spring:ssm-chaincode-spring-boot-starter",
 	"ssm-spring:ssm-couchdb-spring-boot-starter",
+	"ssm-spring:ssm-data-spring-boot-starter",
 	"ssm-spring:ssm-create-ssm-spring-boot-starter",
 	"ssm-spring:ssm-session-perform-action-spring-boot-starter",
 	"ssm-spring:ssm-session-start-spring-boot-starter",
-	"ssm-spring:ssm-tx-spring-boot-starter"
 )
 
 include(
@@ -44,8 +44,7 @@ include(
 	"ssm-test:ssm-test-cucumber-spring-autoconfigure"
 )
 include(
-	"ssm-tx:ssm-tx-autoconfiguration",
-	"ssm-tx:ssm-tx-client",
-	"ssm-tx:ssm-tx-dsl",
-	"ssm-tx:ssm-tx-f2"
+	"ssm-data:ssm-data-client",
+	"ssm-data:ssm-data-dsl",
+	"ssm-data:ssm-data-f2"
 )

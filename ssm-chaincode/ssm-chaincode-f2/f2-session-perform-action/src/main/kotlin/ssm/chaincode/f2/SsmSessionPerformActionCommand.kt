@@ -32,7 +32,7 @@ class SsmSessionPerformActionCommand(
 
 	/**
 	 * Transition to perform
-	 * @example [ssm.chaincode.dsl.SsmTransition.action]
+	 * @example [ssm.chaincode.dsl.model.SsmTransition.action]
 	 */
 	val action: String,
 

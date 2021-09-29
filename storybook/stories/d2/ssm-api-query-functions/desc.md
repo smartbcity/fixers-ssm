@@ -1,10 +1,10 @@
 
 
 ## Entrypoints  
- - fun txSsmListQueryFunction(config: SsmTxConfig): [TxSsmListQueryFunction](/docs/ssm-tx-ssm--page#list-ssms)
- - fun txSsmGetQueryFunction(config: SsmTxConfig): [TxSsmGetQueryFunction](/docs/ssm-tx-ssm--page#get-ssm)
- - fun txSsmSessionListQueryFunction(config: SsmTxConfig): [TxSsmSessionListQueryFunction](/docs/ssm-tx-session--page#list-sessions)
- - fun txSsmSessionGetQueryFunction(config: SsmTxConfig): [TxSsmSessionGetQueryFunction](/docs/ssm-tx-session--page#get-session)
- - fun txSsmSessionLogListQueryFunction(config: SsmTxConfig): [TxSsmSessionLogListQueryFunction](/docs/ssm-tx-session--page#list-session-logs)
- - fun txSsmSessionLogGetQueryFunction(config: SsmTxConfig): [TxSsmSessionLogGetQueryFunction](/docs/ssm-tx-session--page#get-session-log)
+ - fun dataSsmListQueryFunction(config: DataSsmConfig): [DataSsmListQueryFunction](/docs/ssm-tx-ssm--page#list-ssms)
+ - fun dataSsmGetQueryFunction(config: DataSsmConfig): [DataSsmGetQueryFunction](/docs/ssm-tx-ssm--page#get-ssm)
+ - fun dataSsmSessionListQueryFunction(config: DataSsmConfig): [DataSsmSessionListQueryFunction](/docs/ssm-tx-session--page#list-sessions)
+ - fun dataSsmSessionGetQueryFunction(config: DataSsmConfig): [DataSsmSessionGetQueryFunction](/docs/ssm-tx-session--page#get-session)
+ - fun dataSsmSessionLogListQueryFunction(config: DataSsmConfig): [DataSsmSessionLogListQueryFunction](/docs/ssm-tx-session--page#list-session-logs)
+ - fun dataSsmSessionLogGetQueryFunction(config: DataSsmConfig): [DataSsmSessionLogGetQueryFunction](/docs/ssm-tx-session--page#get-session-log)
 
