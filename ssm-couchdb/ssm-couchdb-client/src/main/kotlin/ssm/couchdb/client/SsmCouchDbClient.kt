@@ -1,12 +1,15 @@
 package ssm.couchdb.client
 
 import com.ibm.cloud.cloudant.v1.Cloudant
+import com.ibm.cloud.cloudant.v1.model.ChangesResult
 import com.ibm.cloud.cloudant.v1.model.DatabaseInformation
 import com.ibm.cloud.cloudant.v1.model.FindResult
 import com.ibm.cloud.cloudant.v1.model.GetDatabaseInformationOptions
+import com.ibm.cloud.cloudant.v1.model.PostChangesOptions
 import com.ibm.cloud.cloudant.v1.model.PostFindOptions
 import com.ibm.cloud.cloudant.v1.model.PostViewOptions
 import com.ibm.cloud.sdk.core.http.Response
+import java.io.InputStream
 import ssm.couchdb.client.builder.SsmCouchDbClientBuilder
 import ssm.couchdb.dsl.model.DocType
 import ssm.sdk.json.JSONConverter
@@ -54,6 +57,15 @@ class SsmCouchDbClient(
 	fun getDatabase(dbName: String): DatabaseInformation {
 		val query = GetDatabaseInformationOptions.Builder().db(dbName).build()
 		return cloudant.getDatabaseInformation(query).execute().result
+	}
+
+	fun getChanges(dbName: String, lastEventId: String, since: String): ChangesResult? {
+		val query = PostChangesOptions.Builder()
+			.db(dbName)
+			.lastEventId(lastEventId)
+			.since(since)
+			.build()
+		return cloudant.postChanges(query).execute().result
 	}
 
 	fun <T : Any> getCount(dbName: String, docType: DocType<T>): Int {

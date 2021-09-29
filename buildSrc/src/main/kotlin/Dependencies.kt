@@ -11,7 +11,7 @@ object Versions {
 	const val springBoot = PluginVersions.springBoot
 	const val springFramework = "5.3.4"
 
-	const val cloudant = "0.0.24"
+	const val cloudant = "0.0.28"
 
 	const val bouncycastleVersion = "1.61"
 	const val okhttpVersion = "3.14.0"
