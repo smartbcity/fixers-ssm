@@ -4,9 +4,9 @@ import java.util.UUID
 import org.assertj.core.api.Assertions
 import org.junit.jupiter.api.Test
 import ssm.chaincode.client.SsmClientItTest
-import ssm.chaincode.client.addPrivateMessage
+import ssm.chaincode.client.extention.addPrivateMessage
 import ssm.chaincode.client.extention.loadFromFile
-import ssm.chaincode.client.getPrivateMessage
+import ssm.chaincode.client.extention.getPrivateMessage
 import ssm.chaincode.dsl.model.SsmContext
 import ssm.sdk.sign.crypto.KeyPairReader.loadPrivateKey
 import ssm.sdk.sign.model.Signer

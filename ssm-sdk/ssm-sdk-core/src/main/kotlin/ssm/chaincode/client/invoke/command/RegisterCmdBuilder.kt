@@ -1,7 +1,8 @@
 package ssm.chaincode.client.invoke.command
 
+import ssm.chaincode.client.invoke.builder.cmd.CmdBuilder
+import ssm.chaincode.client.model.SsmCmdName
 import ssm.chaincode.dsl.model.SsmAgent
-import ssm.sdk.sign.model.Signer
 
 // {
 //    "name": "bob3",
@@ -17,9 +18,4 @@ import ssm.sdk.sign.model.Signer
 //  ]
 // }
 // echo "Usage: register <user> <signer>"
-class RegisterCommandSigner(signer: Signer?, agent: SsmAgent?) :
-	CommandSigner<SsmAgent?>(signer!!, COMMAND_NAME, agent) {
-	companion object {
-		private const val COMMAND_NAME = "register"
-	}
-}
+class RegisterCmdBuilder(agent: SsmAgent) : CmdBuilder<SsmAgent>(agent, SsmCmdName.REGISTER)

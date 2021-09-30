@@ -4,7 +4,10 @@ import java.security.KeyPair
 import java.util.Objects
 import ssm.sdk.sign.crypto.KeyPairReader
 
-open class Signer(val name: String, val pair: KeyPair) {
+
+typealias SignerName = String
+
+open class Signer(val name: SignerName, val pair: KeyPair) {
 
 	companion object {
 		@Throws(Exception::class)
@@ -14,7 +17,7 @@ open class Signer(val name: String, val pair: KeyPair) {
 		}
 
 		@Throws(Exception::class)
-		fun loadFromFile(name: String, filename: String?): Signer {
+		fun loadFromFile(name: SignerName, filename: String?): Signer {
 			val keypair = KeyPairReader.loadKeyPair(filename!!)
 			return Signer(name, keypair)
 		}

@@ -24,15 +24,15 @@ class SsmInitializer(
 	}
 
 	suspend fun initUser(user: SsmAgent): InvokeReturn? {
-		return createIfNotExist(user, { this.fetchUser(user.name) }, { this.createUser(it) })
+		return createIfNotExist(user, { this.fetchUser(user.name) }, { this.createUser(it)!! })
 	}
 
 	private suspend fun fetchSsm(name: String): Ssm? {
-		return ssmClient.getSsm(name).await()
+		return ssmClient.getSsm(name)
 	}
 
 	private suspend fun fetchUser(name: String): SsmAgent? {
-		return ssmClient.getAgent(name).await()
+		return ssmClient.getAgent(name)
 	}
 
 	private suspend fun <T> createIfNotExist(
@@ -49,15 +49,15 @@ class SsmInitializer(
 
 	private suspend fun createSsm(ssm: Ssm): InvokeReturn {
 		try {
-			return ssmClient.create(signerAdmin, ssm).await()
+			return ssmClient.create(signerAdmin, ssm)!!
 		} catch (e: Exception) {
 			throw SsmException(e)
 		}
 	}
 
-	private suspend fun createUser(agent: SsmAgent): InvokeReturn {
+	private suspend fun createUser(agent: SsmAgent): InvokeReturn? {
 		try {
-			return ssmClient.registerUser(signerAdmin, agent).await()
+			return ssmClient.registerUser(signerAdmin, agent)
 		} catch (e: Exception) {
 			throw SsmException(e)
 		}

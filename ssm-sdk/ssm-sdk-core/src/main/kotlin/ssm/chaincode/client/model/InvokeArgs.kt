@@ -1,4 +1,4 @@
-package ssm.chaincode.client.invoke.command
+package ssm.chaincode.client.model
 
 data class InvokeArgs(
 	val fcn: String,

@@ -4,6 +4,7 @@ import java.util.function.Consumer
 import org.assertj.core.api.Assertions
 import org.junit.jupiter.api.Test
 import ssm.chaincode.client.extention.loadFromFile
+import ssm.chaincode.client.model.buildArgs
 import ssm.sdk.sign.model.Signer
 
 class RegisterCommandTest {
@@ -12,7 +13,7 @@ class RegisterCommandTest {
 	fun test_execute() {
 		val signer = Signer.loadFromFile("adam", "command/adam")
 		val agent = loadFromFile("vivi", "command/vivi")
-		val (fcn, args) = RegisterCommandSigner(signer, agent).invoke()
+		val (fcn, args) = RegisterCmdBuilder(agent).invoke(signer).buildArgs()
 		args.forEach(Consumer { s: String? -> println(s) })
 		Assertions.assertThat(fcn).isEqualTo("register")
 		Assertions.assertThat(args)

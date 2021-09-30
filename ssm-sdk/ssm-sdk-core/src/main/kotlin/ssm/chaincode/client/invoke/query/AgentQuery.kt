@@ -1,12 +1,8 @@
 package ssm.chaincode.client.invoke.query
 
-class AgentQuery : AbstractQuery(), HasGet, HasList {
+import ssm.chaincode.client.invoke.builder.QueryBuilder
+import ssm.chaincode.client.invoke.builder.HasGet
+import ssm.chaincode.client.invoke.builder.HasList
+import ssm.chaincode.client.model.SsmQueryName
 
-	companion object {
-		const val GET_FUNCTION = "user"
-	}
-
-	override fun functionGetValue(): String {
-		return AgentQuery.GET_FUNCTION
-	}
-}
+class AgentQuery : QueryBuilder(SsmQueryName.USER), HasGet, HasList

@@ -4,6 +4,7 @@ import java.util.function.Consumer
 import org.assertj.core.api.Assertions
 import org.assertj.core.util.Lists
 import org.junit.jupiter.api.Test
+import ssm.chaincode.client.model.buildArgs
 import ssm.chaincode.dsl.model.Ssm
 import ssm.chaincode.dsl.model.SsmTransition
 import ssm.sdk.sign.crypto.KeyPairReader.loadKeyPair
@@ -36,7 +37,8 @@ class CreateCommandTest {
 		val sell = SsmTransition(0, 1, "Seller", "Sell")
 		val buy = SsmTransition(1, 2, "Buyer", "Buy")
 		val ssm = Ssm("dealership", Lists.newArrayList(sell, buy))
-		val (fcn, args) = CreateCommandSigner(signer, ssm).invoke()
+		val (fcn, args) = CreateCmdBuilder(ssm).invoke(signer).buildArgs()
+
 		args.forEach(Consumer { s: String? -> println(s) })
 		/**
 		 * {

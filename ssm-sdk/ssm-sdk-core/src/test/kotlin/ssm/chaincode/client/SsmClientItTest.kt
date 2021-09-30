@@ -2,6 +2,7 @@ package ssm.chaincode.client
 
 import java.util.UUID
 import java.util.concurrent.CompletableFuture
+import kotlinx.coroutines.runBlocking
 import org.assertj.core.api.Assertions
 import org.assertj.core.util.Lists
 import org.junit.jupiter.api.AfterEach
@@ -10,7 +11,11 @@ import org.junit.jupiter.api.MethodOrderer.OrderAnnotation
 import org.junit.jupiter.api.Order
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.TestMethodOrder
+import ssm.chaincode.client.extention.addPrivateMessage
+import ssm.chaincode.client.extention.getPrivateMessage
 import ssm.chaincode.client.extention.loadFromFile
+import ssm.chaincode.dsl.blockchain.Block
+import ssm.chaincode.dsl.blockchain.Transaction
 import ssm.chaincode.dsl.model.InvokeReturn
 import ssm.chaincode.dsl.model.Ssm
 import ssm.chaincode.dsl.model.SsmAgent
@@ -18,8 +23,6 @@ import ssm.chaincode.dsl.model.SsmContext
 import ssm.chaincode.dsl.model.SsmSession
 import ssm.chaincode.dsl.model.SsmSessionState
 import ssm.chaincode.dsl.model.SsmTransition
-import ssm.chaincode.dsl.blockchain.Block
-import ssm.chaincode.dsl.blockchain.Transaction
 import ssm.sdk.sign.model.Signer
 
 @TestMethodOrder(OrderAnnotation::class)
@@ -64,10 +67,13 @@ class SsmClientItTest {
 			client = SsmClientTestBuilder.build()
 			ssmName = "CarDealership-" + uuid
 			val roles = mapOf(
-				signerUser1.name to "Buyer", signerUser2.name to "Seller")
+				signerUser1.name to "Buyer", signerUser2.name to "Seller"
+			)
 			sessionName = "deal20181201-" + uuid
-			session = SsmSession(ssmName,
-				sessionName, roles, "Used car for 100 dollars.", emptyMap())
+			session = SsmSession(
+				ssmName,
+				sessionName, roles, "Used car for 100 dollars.", emptyMap()
+			)
 		}
 
 		private var privateMessage: Map<String, String>? = null
@@ -81,100 +87,96 @@ class SsmClientItTest {
 
 	@Order(5)
 	@Test
-	fun listAdmin(): Unit {
+	fun listAdmin() = runBlocking<Unit> {
 		val agentRet = client.listAdmins()
-		val agentFormClient = agentRet.get()
-		Assertions.assertThat(agentFormClient).contains(ADMIN_NAME)
+		Assertions.assertThat(agentRet).contains(ADMIN_NAME)
 	}
 
 	@Order(10)
 	@Test
-	fun adminUser() {
+	fun adminUser() = runBlocking<Unit> {
 		val agentRet = client.getAdmin(ADMIN_NAME)
-		val agentFormClient = agentRet.get()
+		val agentFormClient = agentRet
 		Assertions.assertThat(agentFormClient).isEqualTo(agentAdmin)
 	}
 
 	@Test
 	@Order(20)
-	fun registerUser1() {
-		val transactionEvent = client.registerUser(signerAdmin, Companion.agentUser1)
-		val trans = transactionEvent.get()
+	fun registerUser1(): Unit = runBlocking {
+		val transactionEvent = client.registerUser(signerAdmin, Companion.agentUser1)!!
+		val trans = transactionEvent
 		assertThatTransactionExists(trans)
 	}
 
 	@Order(30)
 	@Test
-	fun agentUser1(): Unit {
-		val agentRet = client.getAgent(
-			Companion.agentUser1.name)
-		val agentFormClient = agentRet.get()
-		Assertions.assertThat(agentFormClient).isEqualTo(Companion.agentUser1)
+	fun agentUser1() = runBlocking<Unit> {
+		val agentRet = client.getAgent(agentUser1.name)!!
+		Assertions.assertThat(agentRet).isEqualTo(Companion.agentUser1)
 	}
 
 	@Test
 	@Order(40)
-	fun registerUser2() {
+	fun registerUser2() = runBlocking<Unit> {
 		val transactionEvent = client.registerUser(signerAdmin, Companion.agentUser2)
-		val trans = transactionEvent.get()
-		assertThatTransactionExists(trans)
+		assertThatTransactionExists(transactionEvent!!)
 	}
 
 	@Order(50)
 	@Test
-	fun agentUser2() {
+	fun agentUser2() = runBlocking<Unit> {
 		val agentRet = client.getAgent(Companion.agentUser2.name)
-		val agentFormClient = agentRet.get()
-		Assertions.assertThat(agentFormClient).isEqualTo(Companion.agentUser2)
+		Assertions.assertThat(agentRet).isEqualTo(Companion.agentUser2)
 	}
 
 	@Test
 	@Order(55)
-	fun listAgent() {
+	fun listAgent() = runBlocking<Unit> {
 		val agentRet = client.listAgent()
-		val agentFormClient = agentRet.get()
-		Assertions.assertThat(agentFormClient).contains(Companion.agentUser1.name, Companion.agentUser2.name)
+		Assertions.assertThat(agentRet).contains(Companion.agentUser1.name, Companion.agentUser2.name)
 	}
 
 	@Test
 	@Order(60)
-	fun createSsm() {
+	fun createSsm() = runBlocking<Unit> {
 		val sell = SsmTransition(0, 1, "Seller", "Sell")
 		val buy = SsmTransition(1, 2, "Buyer", "Buy")
 		val ssm = Ssm(ssmName, Lists.newArrayList(sell, buy))
 		val transactionEvent = client.create(signerAdmin, ssm)
-		val trans = transactionEvent.get()
-		assertThatTransactionExists(trans)
+		assertThatTransactionExists(transactionEvent!!)
 	}
 
 	@Order(70)
 	@Test
-	fun ssm() {
+	fun ssm() = runBlocking<Unit> {
 		val ssmReq = client.getSsm(
-			ssmName)
-		val ssm = ssmReq.get()
-		Assertions.assertThat(ssm).isNotNull
-		Assertions.assertThat(ssm?.name).isEqualTo(ssmName)
+			ssmName
+		)
+		Assertions.assertThat(ssmReq).isNotNull
+		Assertions.assertThat(ssmReq!!.name).isEqualTo(ssmName)
 	}
 
 	@Test
 	@Order(80)
-	fun start() {
+	fun start() = runBlocking<Unit> {
 		val roles: Map<String, String> = mapOf(
-			agentUser1.name to "Buyer", agentUser2.name to "Seller")
-		val session = SsmSession(ssmName,
-			sessionName, roles, "Used car for 100 dollars.", emptyMap())
+			agentUser1.name to "Buyer", agentUser2.name to "Seller"
+		)
+		val session = SsmSession(
+			ssmName,
+			sessionName, roles, "Used car for 100 dollars.", emptyMap()
+		)
 		val transactionEvent = client.start(signerAdmin, session)
-		val trans = transactionEvent.get()
-		assertThatTransactionExists(trans)
+		assertThatTransactionExists(transactionEvent!!)
 	}
 
 	@Order(90)
 	@Test
-	fun session() {
+	fun session() = runBlocking<Unit> {
 		val ses = client.getSession(
-			sessionName)
-		val sesReq = ses.get()
+			sessionName
+		)
+		val sesReq = ses
 		Assertions.assertThat(sesReq?.current).isEqualTo(0)
 		Assertions.assertThat(sesReq?.iteration).isEqualTo(0)
 		Assertions.assertThat(sesReq?.origin).isNull()
@@ -186,94 +188,95 @@ class SsmClientItTest {
 
 	@Test
 	@Order(100)
-	fun performSell() {
+	fun performSell() = runBlocking<Unit> {
 		var context = SsmContext(sessionName, "100 dollars 1978 Camaro", 0, emptyMap())
-		context = context.addPrivateMessage("Message to signer1",
-			Companion.agentUser1)
+		context = context.addPrivateMessage(
+			"Message to signer1",
+			Companion.agentUser1
+		)
 		privateMessage = context.private
 		val transactionEvent = client.perform(signerUser2, "Sell", context)
-		val trans = transactionEvent.get()
-		assertThatTransactionExists(trans)
+		assertThatTransactionExists(transactionEvent!!)
 	}
 
 	@Order(110)
 	@Test
-	fun sessionAfterSell(): Unit {
+	fun sessionAfterSell() = runBlocking<Unit> {
 		val sell = SsmTransition(0, 1, "Seller", "Sell")
 		val sesReq = client.getSession(
-			sessionName)
-		val state = sesReq.get()
-		val stateExpected = SsmSessionState(ssmName,
-			sessionName, session.roles, "100 dollars 1978 Camaro", privateMessage, sell, 1, 1)
-		Assertions.assertThat(state).isEqualTo(stateExpected)
+			sessionName
+		)
+		val stateExpected = SsmSessionState(
+			ssmName,
+			sessionName, session.roles, "100 dollars 1978 Camaro", privateMessage, sell, 1, 1
+		)
+		Assertions.assertThat(sesReq).isEqualTo(stateExpected)
 		val expectedMessage = stateExpected.getPrivateMessage(signerUser1)
 	}
 
 	@Order(110)
 	@Test
-	fun sessionAfterSellShouldReturnEncryptMessage(): Unit {
-		val (from, to, role, action) = SsmTransition(0, 1, "Seller", "Sell")
-		val sesReq = client.getSession(
-			sessionName)
-		val state = sesReq.get()
+	fun sessionAfterSellShouldReturnEncryptMessage() = runBlocking<Unit> {
+//		val (from, to, role, action) = SsmTransition(0, 1, "Seller", "Sell")
+		val state = client.getSession(sessionName)
 		val expectedMessage = state?.getPrivateMessage(signerUser1)
 		Assertions.assertThat(expectedMessage).isEqualTo("Message to signer1")
 	}
 
 	@Test
 	@Order(120)
-	fun performBuy() {
+	fun performBuy() = runBlocking<Unit> {
 		val context = SsmContext(sessionName, "Deal !", 1, emptyMap())
-		val transactionEvent = client.perform(signerUser1, "Buy", context)
-		val trans = transactionEvent.get()
-		assertThatTransactionExists(trans)
+		val transactionEvent = client.perform(signerUser1, "Buy", context)!!
+		assertThatTransactionExists(transactionEvent)
 	}
 
-	fun assertThatTransactionExists(trans: InvokeReturn) {
+	suspend fun assertThatTransactionExists(trans: InvokeReturn) {
 		Assertions.assertThat(trans).isNotNull
 		Assertions.assertThat(trans.status).isEqualTo("SUCCESS")
-		val transaction: Transaction? = client.getTransaction(trans.transactionId).get()
+		val transaction: Transaction? = client.getTransaction(trans.transactionId)
 		Assertions.assertThat(transaction).isNotNull
 		Assertions.assertThat(transaction?.blockId).isNotNull
-		val block: Block? = client.getBlock(transaction!!.blockId).get()
+		val block: Block? = client.getBlock(transaction!!.blockId)
 		Assertions.assertThat(block).isNotNull
 	}
 
 	@Order(130)
 	@Test
-	fun sessionAfterBuy(): Unit {
+	fun sessionAfterBuy() = runBlocking<Unit> {
 		val buy = SsmTransition(1, 2, "Buyer", "Buy")
 		val sesReq = client.getSession(
-			sessionName)
-		val state = sesReq.get()
-		val stateExcpected = SsmSessionState(ssmName,
-			sessionName, session.roles, "Deal !", emptyMap(), buy, 2, 2)
+			sessionName
+		)
+		val state = sesReq
+		val stateExcpected = SsmSessionState(
+			ssmName,
+			sessionName, session.roles, "Deal !", emptyMap(), buy, 2, 2
+		)
 		Assertions.assertThat(state).isEqualTo(stateExcpected)
 	}
 
 	@Test
 	@Order(135)
 	@Throws(Exception::class)
-	fun logSession() {
+	fun logSession() = runBlocking<Unit> {
 		val sesReq = client.log(
-			sessionName)
-		val stateLog = sesReq.get()
-		Assertions.assertThat(stateLog.size).isEqualTo(3)
+			sessionName
+		)
+		Assertions.assertThat(sesReq.size).isEqualTo(3)
 	}
 
 	@Test
 	@Order(140)
-	fun listSsm() {
-		val agentRet: CompletableFuture<List<String>> = client.listSsm()
-		val agentFormClient = agentRet.get()
-		Assertions.assertThat(agentFormClient).contains(ssmName)
+	fun listSsm() = runBlocking<Unit> {
+		val agentRet = client.listSsm()
+		Assertions.assertThat(agentRet).contains(ssmName)
 	}
 
 	@Test
 	@Order(150)
-	private fun listSession() {
-		val agentRet: CompletableFuture<List<String>> = client.listSession()
-		val agentFormClient = agentRet.get()
-		Assertions.assertThat(agentFormClient).contains(sessionName)
+	private fun listSession() = runBlocking<Unit> {
+		val agentRet = client.listSession()
+		Assertions.assertThat(agentRet).contains(sessionName)
 	}
 }

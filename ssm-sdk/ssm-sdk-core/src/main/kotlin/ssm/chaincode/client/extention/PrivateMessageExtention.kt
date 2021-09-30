@@ -1,11 +1,10 @@
 @file:JvmName("PrivateMessageUtils")
 
-package ssm.chaincode.client
+package ssm.chaincode.client.extention
 
 import java.security.PrivateKey
 import java.security.PublicKey
 import org.bouncycastle.crypto.CryptoException
-import ssm.chaincode.client.extention.getPubAsKey
 import ssm.chaincode.dsl.model.SsmAgent
 import ssm.chaincode.dsl.model.SsmContext
 import ssm.chaincode.dsl.model.SsmSession

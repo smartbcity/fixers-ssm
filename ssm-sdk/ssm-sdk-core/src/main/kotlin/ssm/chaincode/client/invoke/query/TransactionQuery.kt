@@ -1,12 +1,7 @@
 package ssm.chaincode.client.invoke.query
 
-class TransactionQuery : AbstractQuery(), HasGet {
+import ssm.chaincode.client.invoke.builder.QueryBuilder
+import ssm.chaincode.client.invoke.builder.HasGet
+import ssm.chaincode.client.model.SsmQueryName
 
-	companion object {
-		private const val GET_FUNCTION = "transaction"
-	}
-
-	override fun functionGetValue(): String {
-		return GET_FUNCTION
-	}
-}
+class TransactionQuery : QueryBuilder(SsmQueryName.TRANSACTION), HasGet

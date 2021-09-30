@@ -1,7 +1,8 @@
 package ssm.chaincode.client.invoke.command
 
+import ssm.chaincode.client.invoke.builder.cmd.CmdBuilder
+import ssm.chaincode.client.model.SsmCmdName
 import ssm.chaincode.dsl.model.SsmContextDTO
-import ssm.sdk.sign.model.Signer
 
 // {
 //    "InvokeArgs": [
@@ -13,18 +14,5 @@ import ssm.sdk.sign.model.Signer
 //    ]
 // }
 //    echo "Usage: perform <action> <context> <signer>"
-class PerformCommandSigner(signer: Signer?, private val action: String, context: SsmContextDTO?) :
-	CommandSigner<SsmContextDTO?>(signer!!, COMMAND_NAME, context) {
-	@Throws(Exception::class)
-	override fun valueToSign(json: String): String {
-		return action + json
-	}
-
-	override fun buildArgs(command: String, json: String, signer: String, b64Signature: String): InvokeArgs {
-		return InvokeArgs(command, listOf(action, json, signer, b64Signature))
-	}
-
-	companion object {
-		private const val COMMAND_NAME = "perform"
-	}
-}
+class PerformCmdBuilder(performAction: String, context: SsmContextDTO) :
+	CmdBuilder<SsmContextDTO?>(context, SsmCmdName.PERFORM, performAction)

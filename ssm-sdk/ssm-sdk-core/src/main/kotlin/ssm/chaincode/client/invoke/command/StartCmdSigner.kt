@@ -1,7 +1,8 @@
 package ssm.chaincode.client.invoke.command
 
+import ssm.chaincode.client.invoke.builder.cmd.CmdBuilder
+import ssm.chaincode.client.model.SsmCmdName
 import ssm.chaincode.dsl.model.SsmSession
-import ssm.sdk.sign.model.Signer
 
 // {
 //    "InvokeArgs": [
@@ -21,9 +22,4 @@ import ssm.sdk.sign.model.Signer
 //    }
 // }
 // echo "Usage: start <session> <signer>"
-class StartCommandSigner(signer: Signer?, session: SsmSession?) :
-	CommandSigner<SsmSession?>(signer!!, COMMAND_NAME, session) {
-	companion object {
-		private const val COMMAND_NAME = "start"
-	}
-}
+class StartCmdSigner(session: SsmSession) : CmdBuilder<SsmSession>(session,  SsmCmdName.START)

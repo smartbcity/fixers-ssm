@@ -1,18 +1,19 @@
 package ssm.chaincode.client
 
 import java.io.IOException
-import ssm.chaincode.client.repository.CoopRepository
-import ssm.chaincode.client.repository.RepositoryFactory
+import ssm.chaincode.client.repository.KtorRepository
+//import ssm.chaincode.client.repository.CoopRepository
+//import ssm.chaincode.client.repository.RepositoryFactory
 import ssm.sdk.json.JSONConverter
 import ssm.sdk.json.JSONConverterObjectMapper
 
 class SsmClientBuilder(
-	private var coopRepository: CoopRepository? = null,
+	private var coopRepository: KtorRepository ? = null,
 	private var jsonConverter: JSONConverter? = null,
 	private var channelId: String? = null,
 	private var ssmId: String? = null,
 ) {
-	fun withCoopRepository(coopRepository: CoopRepository?): SsmClientBuilder {
+	fun withCoopRepository(coopRepository: KtorRepository?): SsmClientBuilder {
 		this.coopRepository = coopRepository
 		return this
 	}
@@ -48,8 +49,7 @@ class SsmClientBuilder(
 		}
 
 		fun builder(config: SsmClientConfig): SsmClientBuilder {
-			val factory = RepositoryFactory(config.baseUrl, config.bearerToken)
-			val coopRepository = factory.buildCoopRepository()
+			val coopRepository = KtorRepository(config.baseUrl, config.bearerToken)
 			val converter: JSONConverter = JSONConverterObjectMapper()
 			return builder()
 				.withCoopRepository(coopRepository)

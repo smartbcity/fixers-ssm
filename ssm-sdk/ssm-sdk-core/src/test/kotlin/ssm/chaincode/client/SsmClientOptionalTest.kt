@@ -1,54 +1,38 @@
 package ssm.chaincode.client
 
 import java.util.UUID
+import kotlinx.coroutines.runBlocking
 import org.assertj.core.api.Assertions
 import org.junit.jupiter.api.BeforeAll
 import org.junit.jupiter.api.Test
 
 class SsmClientOptionalTest {
-	@get:Throws(Exception::class)
-	@get:Test
-	val adminUser: Unit
-		get() {
-			val agentRet = client!!.getAdmin(UUID.randomUUID().toString())
-			val agentFormClient = agentRet.get()
-			Assertions.assertThat(agentFormClient).isNotNull
-		}
 
-	@get:Throws(Exception::class)
-	@get:Test
-	val agentUser2: Unit
-		get() {
-			val agentRet = client!!.getAgent(UUID.randomUUID().toString())
-			val agentFormClient = agentRet.get()
-			Assertions.assertThat(agentFormClient).isNotNull
-		}
+	private var client: SsmClient = SsmClientTestBuilder.build()
 
-	@get:Throws(Exception::class)
-	@get:Test
-	val ssm: Unit
-		get() {
-			val ssmReq = client!!.getSsm(UUID.randomUUID().toString())
-			val ssm = ssmReq.get()
-			Assertions.assertThat(ssm).isNotNull
-		}
 
-	@get:Throws(Exception::class)
-	@get:Test
-	val session: Unit
-		get() {
-			val ses = client!!.getSession(UUID.randomUUID().toString())
-			val sesReq = ses.get()
-			Assertions.assertThat(sesReq).isNotNull
-		}
-
-	companion object {
-		private var client: SsmClient? = null
-
-		@BeforeAll
-		@Throws(Exception::class)
-		fun init() {
-			client = SsmClientTestBuilder.build()
-		}
+	@Test
+	fun adminUser(): Unit = runBlocking {
+		val agentRet = client.getAdmin(UUID.randomUUID().toString())
+		Assertions.assertThat(agentRet).isNull()
 	}
+
+	@Test
+	fun agentUser2(): Unit = runBlocking {
+		val agentRet = client.getAgent(UUID.randomUUID().toString())
+		Assertions.assertThat(agentRet).isNull()
+	}
+
+	@Test
+	fun ssm(): Unit = runBlocking {
+		val ssmReq = client.getSsm(UUID.randomUUID().toString())
+		Assertions.assertThat(ssmReq).isNull()
+	}
+
+	@Test
+	fun session(): Unit = runBlocking {
+		val ses = client.getSession(UUID.randomUUID().toString())
+		Assertions.assertThat(ses).isNull()
+	}
+
 }

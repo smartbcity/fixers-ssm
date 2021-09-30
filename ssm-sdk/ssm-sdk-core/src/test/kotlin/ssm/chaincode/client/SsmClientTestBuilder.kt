@@ -11,7 +11,7 @@ object SsmClientTestBuilder {
 	}
 
 	private val configFileName: String
-		private get() {
+		get() {
 			val profile = System.getenv("PROFILES_ACTIVE")
 			println("////////////////////////////")
 			println(profile)

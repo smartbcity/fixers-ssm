@@ -1,12 +1,8 @@
 package ssm.chaincode.client.invoke.query
 
-class SsmQuery : AbstractQuery(), HasGet, HasList {
+import ssm.chaincode.client.invoke.builder.QueryBuilder
+import ssm.chaincode.client.invoke.builder.HasGet
+import ssm.chaincode.client.invoke.builder.HasList
+import ssm.chaincode.client.model.SsmQueryName
 
-	companion object {
-		private const val GET_FUNCTION = "ssm"
-	}
-
-	override fun functionGetValue(): String {
-		return GET_FUNCTION
-	}
-}
+class SsmQuery : QueryBuilder(SsmQueryName.SSM), HasGet, HasList

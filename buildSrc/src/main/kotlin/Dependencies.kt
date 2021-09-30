@@ -11,27 +11,21 @@ object Versions {
 	const val springBoot = PluginVersions.springBoot
 	const val springFramework = "5.3.4"
 
-	const val cloudant = "0.0.28"
-
-	const val bouncycastleVersion = "1.61"
-	const val okhttpVersion = "3.14.0"
-	const val retrofitVersion = "2.5.0"
-	const val jacksonKotlin = "2.10.2"
-
-	const val junit = "5.7.0"
-	const val junitPlateform = "1.8.1"
-	const val assertj = "3.15.0"
-
-	const val slf4j = "1.7.30"
-
-
+	const val ktor = "1.6.3"
 	const val coroutines = "1.5.1"
+
+	const val cloudant = "0.0.28"
+	const val bouncycastleVersion = "1.61"
+	const val jacksonKotlin = "2.10.2"
+	const val slf4j = "1.7.30"
 
 	const val f2 = "experimental-SNAPSHOT"
 	const val d2 = "0.1.1-SNAPSHOT"
 
-
 	const val cucumber = "6.11.0"
+	const val junit = "5.7.0"
+	const val junitPlateform = "1.8.1"
+	const val assertj = "3.15.0"
 }
 
 object Dependencies {
@@ -43,5 +37,4 @@ object Dependencies {
 			"org.assertj:assertj-core:${Versions.assertj}"
 		)
 	}
-
 }

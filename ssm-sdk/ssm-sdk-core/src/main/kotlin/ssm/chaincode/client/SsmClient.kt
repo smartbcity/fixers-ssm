@@ -1,11 +1,10 @@
 package ssm.chaincode.client
 
 import java.io.IOException
-import java.util.concurrent.CompletableFuture
-import ssm.chaincode.client.invoke.command.CreateCommandSigner
-import ssm.chaincode.client.invoke.command.PerformCommandSigner
-import ssm.chaincode.client.invoke.command.RegisterCommandSigner
-import ssm.chaincode.client.invoke.command.StartCommandSigner
+import ssm.chaincode.client.invoke.command.CreateCmdBuilder
+import ssm.chaincode.client.invoke.command.PerformCmdBuilder
+import ssm.chaincode.client.invoke.command.RegisterCmdBuilder
+import ssm.chaincode.client.invoke.command.StartCmdSigner
 import ssm.chaincode.client.invoke.query.AdminQuery
 import ssm.chaincode.client.invoke.query.AgentQuery
 import ssm.chaincode.client.invoke.query.BlockQuery
@@ -26,80 +25,84 @@ import ssm.sdk.sign.model.Signer
 
 class SsmClient(private val ssmRequester: SsmRequester) {
 	@Throws(Exception::class)
-	fun registerUser(signer: Signer?, agent: SsmAgent?): CompletableFuture<InvokeReturn> {
-		val cmd = RegisterCommandSigner(signer, agent)
-		return ssmRequester.invoke(cmd)
+	suspend fun registerUser(signer: Signer, agent: SsmAgent): InvokeReturn? {
+		val cmd = RegisterCmdBuilder(agent)
+		val cmdSigned = cmd.invoke(signer)
+		return ssmRequester.invoke(cmdSigned)
 	}
 
 	@Throws(Exception::class)
-	fun create(signer: Signer?, ssm: Ssm?): CompletableFuture<InvokeReturn> {
-		val cmd = CreateCommandSigner(signer, ssm)
-		return ssmRequester.invoke(cmd)
+	suspend fun create(signer: Signer, ssm: Ssm): InvokeReturn? {
+		val cmd = CreateCmdBuilder(ssm)
+		val cmdSigned = cmd.invoke(signer)
+		return ssmRequester.invoke(cmdSigned)
 	}
 
 	@Throws(Exception::class)
-	fun start(signer: Signer?, session: SsmSession?): CompletableFuture<InvokeReturn> {
-		val cmd = StartCommandSigner(signer, session)
-		return ssmRequester.invoke(cmd)
+	suspend fun start(signer: Signer, session: SsmSession): InvokeReturn? {
+		val cmd = StartCmdSigner(session)
+		val cmdSigned = cmd.invoke(signer)
+		return ssmRequester.invoke(cmdSigned)
 	}
 
 	@Throws(Exception::class)
-	fun perform(signer: Signer?, action: String, context: SsmContext?): CompletableFuture<InvokeReturn> {
-		val cmd = PerformCommandSigner(signer, action, context)
-		return ssmRequester.invoke(cmd)
+	suspend fun perform(signer: Signer, action: String, context: SsmContext): InvokeReturn? {
+		val cmd = PerformCmdBuilder(action, context)
+		val cmdSigned = cmd.invoke(signer)
+		return ssmRequester.invoke(cmdSigned)
 	}
 
-	fun listAdmins(): CompletableFuture<List<String>> {
+	suspend fun listAdmins(): List<String> {
 		val query = AdminQuery()
 		return ssmRequester.list(query, String::class.java)
 	}
 
-	fun getAdmin(username: String): CompletableFuture<SsmAgent?> {
+	suspend fun getAdmin(username: String): SsmAgent? {
 		val query = AdminQuery()
 		return ssmRequester.query(username, query, SsmAgent::class.java)
 	}
 
-	fun listAgent(): CompletableFuture<List<String>> {
+	suspend fun listAgent(): List<String> {
 		val query = AgentQuery()
 		return ssmRequester.list(query, String::class.java)
 	}
 
-	fun getAgent(agentName: String): CompletableFuture<SsmAgent?> {
+	suspend fun getAgent(agentName: String): SsmAgent? {
 		val query = AgentQuery()
 		return ssmRequester.query(agentName, query, SsmAgent::class.java)
 	}
 
-	fun listSsm(): CompletableFuture<List<String>> {
+	suspend fun listSsm(): List<String> {
 		val query = SsmQuery()
 		return ssmRequester.list(query, String::class.java)
 	}
 
-	fun getSsm(name: String): CompletableFuture<Ssm?> {
+	suspend fun getSsm(name: String): Ssm? {
 		val query = SsmQuery()
 		return ssmRequester.query(name, query, Ssm::class.java)
 	}
 
-	fun getSession(sessionId: String): CompletableFuture<SsmSessionState?> {
+	suspend fun getSession(sessionId: String): SsmSessionState? {
 		val query = SessionQuery()
 		return ssmRequester.query(sessionId, query, SsmSessionState::class.java)
 	}
 
-	fun log(sessionId: String): CompletableFuture<List<SsmSessionStateLog>> {
+	suspend fun log(sessionId: String): List<SsmSessionStateLog> {
 		val query = LogQuery()
 		return ssmRequester.log(sessionId, query, SsmSessionStateLog::class.java)
 	}
 
-	fun listSession(): CompletableFuture<List<String>> {
+	suspend fun listSession(): List<String> {
 		val query = SessionQuery()
 		return ssmRequester.list(query, String::class.java)
 	}
 
-	fun getTransaction(txId: String): CompletableFuture<Transaction?> {
+	suspend fun getTransaction(txId: String): Transaction? {
 		val query = TransactionQuery()
 		return ssmRequester.query(txId, query, Transaction::class.java)
 	}
 
-	fun getBlock(blockId: Long): CompletableFuture<Block?> {
+	suspend fun getBlock(blockId: Long): Block? {
 		val query = BlockQuery()
 		return ssmRequester.query(blockId.toString(), query, Block::class.java)
 	}

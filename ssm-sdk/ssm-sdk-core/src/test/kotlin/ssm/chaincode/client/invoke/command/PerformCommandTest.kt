@@ -3,7 +3,7 @@ package ssm.chaincode.client.invoke.command
 import java.util.function.Consumer
 import org.assertj.core.api.Assertions
 import org.junit.jupiter.api.Test
-import ssm.chaincode.client.extention.loadFromFile
+import ssm.chaincode.client.model.buildArgs
 import ssm.chaincode.dsl.model.SsmContext
 import ssm.sdk.sign.crypto.KeyPairReader.loadKeyPair
 import ssm.sdk.sign.model.Signer
@@ -17,7 +17,7 @@ class PerformCommandTest {
 
 //        "{\"session\":\"deal20181201\",\"public\":\"100 dollars 1978 Camaro\",\"iteration\":0}"
 		val context = SsmContext("deal20181201", "100 dollars 1978 Camaro", 0, null)
-		val (fcn, args) = PerformCommandSigner(signer, "Sell", context).invoke()
+		val (fcn, args) = PerformCmdBuilder("Sell", context).invoke(signer).buildArgs()
 		args.forEach(Consumer { s: String? -> println(s) })
 		Assertions.assertThat(fcn).isEqualTo("perform")
 		Assertions.assertThat(args)
@@ -35,11 +35,11 @@ class PerformCommandTest {
 	fun test_executeWithPrivateMessage() {
 		val adamPair = loadKeyPair("command/adam")
 		val signer = Signer("adam", adamPair)
-		val (name, pub) = loadFromFile("vivi", "command/adam")
+//		val (name, pub) = loadFromFile("vivi", "command/adam")
 
 //        "{\"session\":\"deal20181201\",\"public\":\"100 dollars 1978 Camaro\",\"iteration\":0}"
 		val context = SsmContext("deal20181201", "100 dollars 1978 Camaro", 0, mapOf("vivi" to "message"))
-		val (fcn, args) = PerformCommandSigner(signer, "Sell", context).invoke()
+		val (fcn, args) = PerformCmdBuilder("Sell", context).invoke(signer,).buildArgs()
 		args.forEach(Consumer { s: String? -> println(s) })
 		Assertions.assertThat(fcn).isEqualTo("perform")
 		Assertions.assertThat(args)
