@@ -3,7 +3,6 @@
 package ssm.chaincode.client.extention
 
 import java.security.PublicKey
-import org.bouncycastle.crypto.CryptoException
 import ssm.chaincode.dsl.model.SsmAgent
 import ssm.sdk.sign.crypto.KeyPairReader
 
@@ -19,7 +18,7 @@ fun loadFromFile(name: String, filename: String): SsmAgent {
 	return SsmAgent(name, pub.encoded)
 }
 
-@Throws(CryptoException::class)
+@Throws(Exception::class)
 fun SsmAgent.getPubAsKey(): PublicKey {
 	return KeyPairReader.fromByteArray(pub)
 }

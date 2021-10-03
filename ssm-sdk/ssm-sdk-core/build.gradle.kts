@@ -4,14 +4,10 @@ plugins {
 }
 
 dependencies {
+	api(project(":ssm-chaincode:ssm-chaincode-dsl"))
 	api(project(":ssm-sdk:ssm-sdk-sign"))
-	implementation(project(":ssm-chaincode:ssm-chaincode-dsl"))
-	implementation(project(":ssm-sdk:ssm-sdk-json"))
-	implementation("org.slf4j:slf4j-api:${Versions.slf4j}")
+	api(project(":ssm-sdk:ssm-sdk-json"))
 
-	implementation("org.bouncycastle:bcprov-jdk15on:${Versions.bouncycastleVersion}")
-
-	implementation("io.ktor:ktor-client-core:${Versions.ktor}")
-	implementation("io.ktor:ktor-client-cio:${Versions.ktor}")
-	implementation("io.ktor:ktor-client-jackson:${Versions.ktor}")
+	Dependencies.Jvm.slf4j(::implementation)
+	Dependencies.Jvm.ktorClient(::implementation)
 }

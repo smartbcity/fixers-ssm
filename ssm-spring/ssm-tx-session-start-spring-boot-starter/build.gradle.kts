@@ -7,7 +7,6 @@ plugins {
 
 dependencies {
 	api(project(":ssm-tx:ssm-tx-f2-session-start"))
-
 	api("city.smartb.f2:f2-spring-boot-starter-function:${Versions.f2}")
 
 	kapt("org.springframework.boot:spring-boot-configuration-processor:${Versions.springBoot}")

@@ -1,4 +1,4 @@
-package features
+package ssm.test.cucumber.steps
 
 import io.cucumber.junit.platform.engine.Constants
 import org.junit.platform.suite.api.ConfigurationParameter

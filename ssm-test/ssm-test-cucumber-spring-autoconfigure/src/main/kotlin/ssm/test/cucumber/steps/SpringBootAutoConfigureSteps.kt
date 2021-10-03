@@ -1,18 +1,24 @@
-package ssm.data.spring.autoconfigure.features
+package ssm.test.cucumber.steps
 
+import io.cucumber.datatable.DataTable
 import io.cucumber.java8.En
 import org.assertj.core.api.Assertions.assertThat
 import org.springframework.boot.test.context.runner.ReactiveWebApplicationContextRunner
-import ssm.test.cucumber.spring.ApplicationContextRunnerBuilder
-import ssm.data.spring.autoconfigure.TestConfiguration
+import ssm.test.spring.ApplicationContextRunnerBuilder
 
-
-class CatalogueSteps: En {
-	var contextBuilder: ReactiveWebApplicationContextRunner? = null
+open class SpringBootAutoConfigureSteps : En {
+	companion object {
+		var applicationParameters: Map<String, String> = emptyMap()
+		var contextBuilder: ReactiveWebApplicationContextRunner? = null
+	}
 
 	init {
-		When("I get a valid spring application context") {
-			contextBuilder = ApplicationContextRunnerBuilder().buildContext(TestConfiguration.localDockerComposeParams)
+		Given("The application parameters") { table: DataTable ->
+			applicationParameters = table.asMap<String, String>(String::class.java, String::class.java)
+		}
+		When("I build a valid spring application context") {
+			contextBuilder = ApplicationContextRunnerBuilder()
+				.buildContext(applicationParameters)
 		}
 		Then("Instance of {string} is an injectable bean") { functionName: String ->
 			contextBuilder?.run { context ->

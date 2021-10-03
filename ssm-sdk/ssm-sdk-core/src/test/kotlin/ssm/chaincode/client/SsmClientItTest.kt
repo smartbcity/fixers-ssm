@@ -1,7 +1,6 @@
 package ssm.chaincode.client
 
 import java.util.UUID
-import java.util.concurrent.CompletableFuture
 import kotlinx.coroutines.runBlocking
 import org.assertj.core.api.Assertions
 import org.assertj.core.util.Lists

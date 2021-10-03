@@ -3,8 +3,8 @@ package ssm.data.spring.autoconfigure
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test
 import org.springframework.cloud.function.context.FunctionCatalog
-import ssm.test.cucumber.spring.ApplicationContextBuilder
-import ssm.test.cucumber.spring.ApplicationContextRunnerBuilder
+import ssm.test.spring.ApplicationContextBuilder
+import ssm.test.spring.ApplicationContextRunnerBuilder
 
 class DataApplicationContextRunnerTest {
 

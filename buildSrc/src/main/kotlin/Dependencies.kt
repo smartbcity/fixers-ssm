@@ -1,3 +1,5 @@
+import org.gradle.api.artifacts.Dependency
+
 object PluginVersions {
 	const val kotlin = "1.5.30"
 	const val fixers = "experimental-SNAPSHOT"
@@ -30,11 +32,35 @@ object Versions {
 
 object Dependencies {
 	object Jvm {
-		val junit = arrayOf(
+		fun slf4j(scope: Scope) = scope.add(
+			"org.slf4j:slf4j-api:${Versions.slf4j}"
+		)
+
+		fun ktorClient(scope: Scope) = scope.add(
+			"io.ktor:ktor-client-core:${Versions.ktor}",
+			"io.ktor:ktor-client-cio:${Versions.ktor}",
+			"io.ktor:ktor-client-jackson:${Versions.ktor}"
+		)
+
+		fun junit(scope: Scope) = scope.add(
 			"org.junit.jupiter:junit-jupiter:${Versions.junit}",
 			"org.junit.jupiter:junit-jupiter-api:${Versions.junit}",
 			"org.junit.platform:junit-platform-suite:${Versions.junitPlateform}",
 			"org.assertj:assertj-core:${Versions.assertj}"
 		)
+
+		fun cucumber(scope: Scope) = scope.add(
+			"io.cucumber:cucumber-java8:${Versions.cucumber}",
+			"io.cucumber:cucumber-junit-platform-engine:${Versions.cucumber}",
+			"org.springframework.boot:spring-boot-starter-test:${Versions.springBoot}"
+		).also(::junit)
+
 	}
+}
+
+typealias Scope = (dependencyNotation: Any) -> Dependency?
+
+fun Scope.add(vararg deps: String): Scope {
+	deps.forEach { this(it) }
+	return this
 }

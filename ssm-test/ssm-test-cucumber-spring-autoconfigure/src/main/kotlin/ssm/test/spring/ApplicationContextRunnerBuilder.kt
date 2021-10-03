@@ -1,4 +1,4 @@
-package ssm.test.cucumber.spring
+package ssm.test.spring
 
 import org.springframework.boot.autoconfigure.AutoConfigurations
 import org.springframework.boot.test.context.runner.ReactiveWebApplicationContextRunner

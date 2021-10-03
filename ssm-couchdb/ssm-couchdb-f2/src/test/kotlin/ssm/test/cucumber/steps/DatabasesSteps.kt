@@ -1,4 +1,4 @@
-package features
+package ssm.test.cucumber.steps
 
 import f2.dsl.fnc.invoke
 import io.cucumber.java8.En

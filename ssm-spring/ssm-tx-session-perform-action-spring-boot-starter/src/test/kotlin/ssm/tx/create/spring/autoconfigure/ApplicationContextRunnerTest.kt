@@ -5,8 +5,8 @@ import org.junit.jupiter.api.Test
 import org.springframework.cloud.function.context.FunctionCatalog
 import ssm.tx.session.spring.autoconfigure.SsmSessionPerformActionAutoConfiguration
 import ssm.tx.session.spring.autoconfigure.SsmSessionPerformActionProperties
-import ssm.test.cucumber.spring.ApplicationContextBuilder
-import ssm.test.cucumber.spring.ApplicationContextRunnerBuilder
+import ssm.test.spring.ApplicationContextBuilder
+import ssm.test.spring.ApplicationContextRunnerBuilder
 
 class ApplicationContextRunnerTest {
 
