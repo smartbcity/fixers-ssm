@@ -3,6 +3,7 @@ package ssm.couchdb.spring.autoconfigure
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test
 import org.springframework.cloud.function.context.FunctionCatalog
+import ssm.couchdb.dsl.config.SsmCouchdbConfig
 import ssm.test.spring.ApplicationContextBuilder
 import ssm.test.spring.ApplicationContextRunnerBuilder
 
@@ -36,4 +37,20 @@ class SsmCouchdbApplicationContextRunnerTest {
 		assertThat(catalog).isNotNull
 	}
 
+
+	object SsmChaincodeConfigTest {
+		val localDockerCompose = SsmCouchdbConfig(
+			url = "http://localhost:5000",
+			username = "couchdb",
+			password = "couchdb",
+			serviceName = "ssm-couchdb-test"
+		)
+
+		val localDockerComposeParams = mapOf(
+			"ssm.couchdb.url" to localDockerCompose.url,
+			"ssm.couchdb.username" to localDockerCompose.username,
+			"ssm.couchdb.password" to localDockerCompose.password,
+			"ssm.couchdb.serviceName" to localDockerCompose.serviceName
+		)
+	}
 }

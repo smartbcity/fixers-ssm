@@ -1,5 +1,4 @@
 Feature:
-
   Scenario Outline: Inject couchdb function
     Given The application parameters
       | ssm.couchdb.url         | http://localhost:5000 |

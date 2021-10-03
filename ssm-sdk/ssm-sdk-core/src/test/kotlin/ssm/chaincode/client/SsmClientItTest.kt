@@ -101,8 +101,8 @@ class SsmClientItTest {
 
 	@Test
 	@Order(20)
-	fun registerUser1(): Unit = runBlocking {
-		val transactionEvent = client.registerUser(signerAdmin, Companion.agentUser1)!!
+	fun registerUser1() = runBlocking<Unit> {
+		val transactionEvent = client.registerUser(signerAdmin, agentUser1)!!
 		val trans = transactionEvent
 		assertThatTransactionExists(trans)
 	}
@@ -111,28 +111,28 @@ class SsmClientItTest {
 	@Test
 	fun agentUser1() = runBlocking<Unit> {
 		val agentRet = client.getAgent(agentUser1.name)!!
-		Assertions.assertThat(agentRet).isEqualTo(Companion.agentUser1)
+		Assertions.assertThat(agentRet).isEqualTo(agentUser1)
 	}
 
 	@Test
 	@Order(40)
 	fun registerUser2() = runBlocking<Unit> {
-		val transactionEvent = client.registerUser(signerAdmin, Companion.agentUser2)
+		val transactionEvent = client.registerUser(signerAdmin, agentUser2)
 		assertThatTransactionExists(transactionEvent!!)
 	}
 
 	@Order(50)
 	@Test
 	fun agentUser2() = runBlocking<Unit> {
-		val agentRet = client.getAgent(Companion.agentUser2.name)
-		Assertions.assertThat(agentRet).isEqualTo(Companion.agentUser2)
+		val agentRet = client.getAgent(agentUser2.name)
+		Assertions.assertThat(agentRet).isEqualTo(agentUser2)
 	}
 
 	@Test
 	@Order(55)
 	fun listAgent() = runBlocking<Unit> {
 		val agentRet = client.listAgent()
-		Assertions.assertThat(agentRet).contains(Companion.agentUser1.name, Companion.agentUser2.name)
+		Assertions.assertThat(agentRet).contains(agentUser1.name, agentUser2.name)
 	}
 
 	@Test
@@ -180,9 +180,9 @@ class SsmClientItTest {
 		Assertions.assertThat(sesReq?.iteration).isEqualTo(0)
 		Assertions.assertThat(sesReq?.origin).isNull()
 		Assertions.assertThat(sesReq?.ssm).isEqualTo(ssmName)
-		Assertions.assertThat(sesReq?.roles).isEqualTo(Companion.session.roles)
-		Assertions.assertThat(sesReq?.session).isEqualTo(Companion.session.session)
-		Assertions.assertThat(sesReq?.public).isEqualTo(Companion.session.public)
+		Assertions.assertThat(sesReq?.roles).isEqualTo(session.roles)
+		Assertions.assertThat(sesReq?.session).isEqualTo(session.session)
+		Assertions.assertThat(sesReq?.public).isEqualTo(session.public)
 	}
 
 	@Test
@@ -191,7 +191,7 @@ class SsmClientItTest {
 		var context = SsmContext(sessionName, "100 dollars 1978 Camaro", 0, emptyMap())
 		context = context.addPrivateMessage(
 			"Message to signer1",
-			Companion.agentUser1
+			agentUser1
 		)
 		privateMessage = context.private
 		val transactionEvent = client.perform(signerUser2, "Sell", context)

@@ -10,4 +10,6 @@ dependencies {
 
 	Dependencies.Jvm.slf4j(::implementation)
 	Dependencies.Jvm.ktorClient(::implementation)
+
+	Dependencies.Jvm.cucumber(::testImplementation)
 }

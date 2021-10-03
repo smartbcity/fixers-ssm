@@ -55,6 +55,6 @@ expect interface SsmDTO {
 @JsExport
 @JsName("Ssm")
 data class Ssm(
-	override val name: String,
+	override val name: SsmName,
 	override val transitions: List<SsmTransition>,
 ) : SsmDTO

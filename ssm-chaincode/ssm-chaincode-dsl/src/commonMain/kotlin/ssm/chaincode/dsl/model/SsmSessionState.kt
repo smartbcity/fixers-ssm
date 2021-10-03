@@ -4,9 +4,11 @@ import kotlin.js.JsExport
 import kotlin.js.JsName
 import kotlinx.serialization.Serializable
 
+typealias SessionName = String
+
 expect interface SsmSessionStateDTO : SsmSessionDTO, WithPrivate {
-	override val ssm: String?
-	override val session: String
+	override val ssm: SsmName?
+	override val session: SessionName
 	override val roles: Map<String, String>?
 	override val public: Any?
 	override val private: Map<String, String>?
@@ -40,8 +42,8 @@ expect interface SsmSessionStateDTO : SsmSessionDTO, WithPrivate {
 @JsExport
 @JsName("SsmSessionState")
 data class SsmSessionState(
-	override val ssm: String?,
-	override val session: String,
+	override val ssm: SsmName?,
+	override val session: SessionName,
 	override val roles: Map<String, String>?,
 	override val public: Any?,
 	override val private: Map<String, String>? = hashMapOf(),

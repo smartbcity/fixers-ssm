@@ -4,12 +4,14 @@ import kotlin.js.JsExport
 import kotlin.js.JsName
 import kotlinx.serialization.Serializable
 
+typealias SsmAgentName = String
+
 expect interface SsmAgentDTO {
 	/**
 	 * Identifier of the agent
 	 * @example "Adam"
 	 */
-	val name: String
+	val name: SsmAgentName
 
 	/**
 	 * Public key used when signing transactions
@@ -32,7 +34,7 @@ expect interface SsmAgentDTO {
 @JsExport
 @JsName("SsmAgent")
 data class SsmAgent(
-	override val name: String,
+	override val name: SsmAgentName,
 	override val pub: ByteArray,
 ) : SsmAgentDTO {
 	override fun equals(other: Any?): Boolean {

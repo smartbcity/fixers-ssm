@@ -14,7 +14,7 @@ open class SpringBootAutoConfigureSteps : En {
 
 	init {
 		Given("The application parameters") { table: DataTable ->
-			applicationParameters = table.asMap<String, String>(String::class.java, String::class.java)
+			applicationParameters = table.asMap(String::class.java, String::class.java)
 		}
 		When("I build a valid spring application context") {
 			contextBuilder = ApplicationContextRunnerBuilder()

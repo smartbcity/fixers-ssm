@@ -20,7 +20,12 @@ import ssm.chaincode.dsl.model.SsmSession
 import ssm.chaincode.dsl.model.SsmSessionState
 import ssm.chaincode.dsl.model.SsmSessionStateLog
 import ssm.chaincode.dsl.blockchain.Block
+import ssm.chaincode.dsl.blockchain.BlockId
 import ssm.chaincode.dsl.blockchain.Transaction
+import ssm.chaincode.dsl.blockchain.TransactionId
+import ssm.chaincode.dsl.model.SessionName
+import ssm.chaincode.dsl.model.SsmAgentName
+import ssm.chaincode.dsl.model.SsmName
 import ssm.sdk.sign.model.Signer
 
 class SsmClient(private val ssmRequester: SsmRequester) {
@@ -52,44 +57,44 @@ class SsmClient(private val ssmRequester: SsmRequester) {
 		return ssmRequester.invoke(cmdSigned)
 	}
 
-	suspend fun listAdmins(): List<String> {
+	suspend fun listAdmins(): List<SsmAgentName> {
 		val query = AdminQuery()
 		return ssmRequester.list(query, String::class.java)
 	}
 
-	suspend fun getAdmin(username: String): SsmAgent? {
+	suspend fun getAdmin(username: SsmAgentName): SsmAgent? {
 		val query = AdminQuery()
 		return ssmRequester.query(username, query, SsmAgent::class.java)
 	}
 
-	suspend fun listAgent(): List<String> {
+	suspend fun listAgent(): List<SsmAgentName> {
 		val query = AgentQuery()
 		return ssmRequester.list(query, String::class.java)
 	}
 
-	suspend fun getAgent(agentName: String): SsmAgent? {
+	suspend fun getAgent(agentName: SsmAgentName): SsmAgent? {
 		val query = AgentQuery()
 		return ssmRequester.query(agentName, query, SsmAgent::class.java)
 	}
 
-	suspend fun listSsm(): List<String> {
+	suspend fun listSsm(): List<SsmName> {
 		val query = SsmQuery()
 		return ssmRequester.list(query, String::class.java)
 	}
 
-	suspend fun getSsm(name: String): Ssm? {
+	suspend fun getSsm(name: SsmName): Ssm? {
 		val query = SsmQuery()
 		return ssmRequester.query(name, query, Ssm::class.java)
 	}
 
-	suspend fun getSession(sessionId: String): SsmSessionState? {
+	suspend fun getSession(sessionName: SessionName): SsmSessionState? {
 		val query = SessionQuery()
-		return ssmRequester.query(sessionId, query, SsmSessionState::class.java)
+		return ssmRequester.query(sessionName, query, SsmSessionState::class.java)
 	}
 
-	suspend fun log(sessionId: String): List<SsmSessionStateLog> {
+	suspend fun log(sessionName: SessionName): List<SsmSessionStateLog> {
 		val query = LogQuery()
-		return ssmRequester.log(sessionId, query, SsmSessionStateLog::class.java)
+		return ssmRequester.log(sessionName, query, SsmSessionStateLog::class.java)
 	}
 
 	suspend fun listSession(): List<String> {
@@ -97,12 +102,12 @@ class SsmClient(private val ssmRequester: SsmRequester) {
 		return ssmRequester.list(query, String::class.java)
 	}
 
-	suspend fun getTransaction(txId: String): Transaction? {
+	suspend fun getTransaction(txId: TransactionId): Transaction? {
 		val query = TransactionQuery()
 		return ssmRequester.query(txId, query, Transaction::class.java)
 	}
 
-	suspend fun getBlock(blockId: Long): Block? {
+	suspend fun getBlock(blockId: BlockId): Block? {
 		val query = BlockQuery()
 		return ssmRequester.query(blockId.toString(), query, Block::class.java)
 	}

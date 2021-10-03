@@ -3,6 +3,7 @@ package ssm.tx.spring.autoconfigure
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test
 import org.springframework.cloud.function.context.FunctionCatalog
+import ssm.chaincode.dsl.config.SsmChaincodeConfig
 import ssm.tx.session.start.spring.autoconfigure.SsmSessionStartAutoConfiguration
 import ssm.tx.session.start.spring.autoconfigure.SsmSessionStartProperties
 import ssm.test.spring.ApplicationContextBuilder
@@ -31,4 +32,15 @@ class ApplicationContextRunnerTest {
 		assertThat(context.getBean(SsmSessionStartAutoConfiguration::ssmSessionStartFunction.name)).isNotNull
 		assertThat(context.getBean(FunctionCatalog::class.java)).isNotNull
 	}
+
+	object SsmChaincodeConfigTest {
+		val localDockerCompose = SsmChaincodeConfig(
+			url = "http://localhost:9090"
+		)
+
+		val localDockerComposeParams = mapOf(
+			"ssm.chaincode.url" to localDockerCompose.url
+		)
+	}
+
 }
