@@ -22,7 +22,7 @@ class DataSsmAutoConfiguration : SsmApiQueryFunctions {
 	private val ssmApiQueryFunction: SsmApiQueryFunctions = SsmApiQueryFunctionImpl()
 
 	@Bean
-	fun ssmTxConfig(ssmTxProperties: DataSsmProperties): DataSsmConfig = ssmTxProperties.data
+	fun dataSsmConfig(dataSsmProperties: DataSsmProperties): DataSsmConfig = dataSsmProperties.data
 
 	@Bean
 	override fun dataSsmListQueryFunction(config: DataSsmConfig): DataSsmListQueryFunction {

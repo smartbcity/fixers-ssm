@@ -25,7 +25,10 @@ object TestConfiguration {
 		),
 		chaincode = SsmChaincodeConfig(
 			url = "http://localhost:9090"
-		)
+		),
+		channelId = "chaincode",
+		chaincodeId = "ssm",
+		ssmVersion = "1.0.0"
 	)
 
 	val localDockerComposeParams = mapOf(
@@ -33,6 +36,9 @@ object TestConfiguration {
 		"ssm.data.couchdb.url" to localDockerCompose.couchdb.url,
 		"ssm.data.couchdb.username" to localDockerCompose.couchdb.username,
 		"ssm.data.couchdb.password" to localDockerCompose.couchdb.password,
-		"ssm.data.couchdb.serviceName" to localDockerCompose.couchdb.serviceName
+		"ssm.data.couchdb.serviceName" to localDockerCompose.couchdb.serviceName,
+		"ssm.data.channelId" to localDockerCompose.channelId,
+		"ssm.data.chaincodeId" to localDockerCompose.chaincodeId,
+		"ssm.data.ssmVersion" to localDockerCompose.ssmVersion,
 	)
 }

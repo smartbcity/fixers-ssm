@@ -16,13 +16,13 @@ import ssm.data.dsl.model.DataSsmSessionState
  */
 typealias DataSsmSessionLogListQueryFunction = F2Function<DataSsmSessionLogListQueryDTO, DataSsmSessionLogListQueryResultDTO>
 
-expect interface DataSsmSessionLogListQueryDTO : ssm.data.dsl.features.query.DataQueryDTO {
+expect interface DataSsmSessionLogListQueryDTO : DataQueryDTO {
 	/**
 	 * Identifier of the session to retrieve
 	 * @example [ssm.data.dsl.model.DataSsmSession.id]
 	 */
 	val sessionId: DataSsmSessionId
-	override val ssm: ssm.data.dsl.features.query.SsmName
+	override val ssm: SsmName
 	override val bearerToken: String?
 }
 
@@ -36,7 +36,7 @@ expect interface DataSsmSessionLogListQueryDTO : ssm.data.dsl.features.query.Dat
 @JsName("DataSsmSessionLogListQuery")
 class DataSsmSessionLogListQuery(
 	override val sessionId: DataSsmSessionId,
-	override val ssm: ssm.data.dsl.features.query.SsmName,
+	override val ssm: SsmName,
 	override val bearerToken: String?,
 ) : DataSsmSessionLogListQueryDTO
 

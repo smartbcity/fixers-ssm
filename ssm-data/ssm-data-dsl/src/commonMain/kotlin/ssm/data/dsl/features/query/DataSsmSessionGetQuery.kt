@@ -16,13 +16,13 @@ import ssm.data.dsl.model.DataSsmSessionDTO
  */
 typealias DataSsmSessionGetQueryFunction = F2Function<DataSsmSessionGetQueryDTO, DataSsmSessionGetQueryResultDTO>
 
-expect interface DataSsmSessionGetQueryDTO : ssm.data.dsl.features.query.DataQueryDTO {
+expect interface DataSsmSessionGetQueryDTO : DataQueryDTO {
 	/**
 	 * Identifier of the session to retrieve
 	 * @example [DataSsmSession.id]
 	 */
 	val sessionId: String
-	override val ssm: ssm.data.dsl.features.query.SsmName
+	override val ssm: SsmName
 	override val bearerToken: String?
 }
 
@@ -36,7 +36,7 @@ expect interface DataSsmSessionGetQueryDTO : ssm.data.dsl.features.query.DataQue
 @JsName("DataSsmSessionGetQuery")
 class DataSsmSessionGetQuery(
 	override val sessionId: String,
-	override val ssm: ssm.data.dsl.features.query.SsmName,
+	override val ssm: SsmName,
 	override val bearerToken: String?,
 ) : DataSsmSessionGetQueryDTO
 

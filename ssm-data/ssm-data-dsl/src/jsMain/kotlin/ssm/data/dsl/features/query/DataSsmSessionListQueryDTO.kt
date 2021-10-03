@@ -6,10 +6,7 @@ import ssm.data.dsl.model.DataSsmSessionDTO
 
 @JsExport
 @JsName("DataSsmSessionListQueryDTO")
-actual external interface DataSsmSessionListQueryDTO : ssm.data.dsl.features.query.DataQueryDTO {
-	actual val channelId: ChannelId
-	actual val chaincodeId: ChaincodeId
-}
+actual external interface DataSsmSessionListQueryDTO : DataQueryDTO
 
 @JsExport
 @JsName("DataSsmSessionListQueryResultDTO")

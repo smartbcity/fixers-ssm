@@ -4,8 +4,6 @@ import f2.dsl.fnc.F2Function
 import kotlin.js.JsExport
 import kotlin.js.JsName
 import kotlinx.serialization.Serializable
-import ssm.chaincode.dsl.model.ChaincodeId
-import ssm.chaincode.dsl.model.ChannelId
 import ssm.data.dsl.model.DataSsm
 import ssm.data.dsl.model.DataSsmDTO
 
@@ -18,19 +16,7 @@ import ssm.data.dsl.model.DataSsmDTO
  */
 typealias DataSsmListQueryFunction = F2Function<DataSsmListQuery, DataSsmListQueryResult>
 
-expect interface DataSsmListQueryDTO {
-	/**
-	 * Identifier of the channel hosting the chaincode
-	 * @example "channel-smartb"
-	 */
-	val channelId: ChannelId
-
-	/**
-	 * Identifier of the chaincode
-	 * @example "ssmsmartb"
-	 */
-	val chaincodeId: ChaincodeId
-}
+expect interface DataSsmListQueryDTO
 
 /**
  * @d2 query
@@ -40,10 +26,7 @@ expect interface DataSsmListQueryDTO {
 @Serializable
 @JsExport
 @JsName("DataSsmListQuery")
-class DataSsmListQuery(
-	override val channelId: ChannelId,
-	override val chaincodeId: ChaincodeId
-	) : DataSsmListQueryDTO
+class DataSsmListQuery : DataSsmListQueryDTO
 
 expect interface DataSsmListQueryResultDTO {
 	/**

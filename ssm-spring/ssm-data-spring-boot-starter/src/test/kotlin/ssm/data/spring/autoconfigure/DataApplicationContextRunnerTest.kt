@@ -29,7 +29,7 @@ class DataApplicationContextRunnerTest {
 			types = arrayOf(ApplicationContextBuilder.SimpleConfiguration::class.java),
 			config = TestConfiguration.localDockerComposeParams
 		)
-		assertThat(context.getBean(DataSsmAutoConfiguration::ssmTxConfig.name)).isNotNull
+		assertThat(context.getBean(DataSsmAutoConfiguration::dataSsmConfig.name)).isNotNull
 		assertThat(context.getBean(FunctionCatalog::class.java)).isNotNull
 	}
 }

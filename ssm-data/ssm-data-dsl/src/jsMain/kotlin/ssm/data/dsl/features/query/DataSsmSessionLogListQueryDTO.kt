@@ -5,9 +5,9 @@ import ssm.data.dsl.model.DataSsmSessionState
 
 @JsExport
 @JsName("DataSsmSessionLogListQueryDTO")
-actual external interface DataSsmSessionLogListQueryDTO : ssm.data.dsl.features.query.DataQueryDTO {
+actual external interface DataSsmSessionLogListQueryDTO : DataQueryDTO {
 	actual val sessionId: DataSsmSessionId
-	actual override val ssm: ssm.data.dsl.features.query.SsmName
+	actual override val ssm: SsmName
 	actual override val bearerToken: String?
 }
 

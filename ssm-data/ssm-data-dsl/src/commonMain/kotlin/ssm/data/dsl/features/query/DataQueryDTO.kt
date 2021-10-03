@@ -5,7 +5,7 @@ expect interface DataQueryDTO {
 	 * Name of the SSM to query
 	 * @example [ssm.chaincode.dsl.model.Ssm.name]
 	 */
-	val ssm: ssm.data.dsl.features.query.SsmName
+	val ssm: SsmName
 
 	/**
 	 * Authentication token

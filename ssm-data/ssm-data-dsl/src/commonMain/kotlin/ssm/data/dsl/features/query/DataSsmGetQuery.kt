@@ -4,6 +4,7 @@ import f2.dsl.fnc.F2Function
 import kotlin.js.JsExport
 import kotlin.js.JsName
 import kotlinx.serialization.Serializable
+import ssm.chaincode.dsl.model.ChannelId
 import ssm.data.dsl.model.DataSsm
 
 /**
@@ -29,9 +30,10 @@ expect interface DataSsmGetQueryDTO : DataQueryDTO {
 @JsExport
 @JsName("DataSsmGetQuery")
 class DataSsmGetQuery(
-	override val ssm: ssm.data.dsl.features.query.SsmName,
+
+	override val ssm: SsmName,
 	override val bearerToken: String?,
-) : ssm.data.dsl.features.query.DataSsmGetQueryDTO
+) : DataSsmGetQueryDTO
 
 expect interface DataSsmGetQueryResultDTO {
 	/**
@@ -50,4 +52,4 @@ expect interface DataSsmGetQueryResultDTO {
 @JsName("DataSsmGetQueryResult")
 class DataSsmGetQueryResult(
 	override val ssm: DataSsm?,
-) : ssm.data.dsl.features.query.DataSsmGetQueryResultDTO
+) : DataSsmGetQueryResultDTO

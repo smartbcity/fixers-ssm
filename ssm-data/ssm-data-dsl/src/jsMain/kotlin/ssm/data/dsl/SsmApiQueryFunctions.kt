@@ -1,6 +1,7 @@
 package ssm.data.dsl
 
 import ssm.data.dsl.config.DataSsmConfig
+import ssm.data.dsl.features.query.DataSsmGetQueryFunction
 import ssm.data.dsl.features.query.DataSsmListQueryFunction
 import ssm.data.dsl.features.query.DataSsmSessionGetQueryFunction
 import ssm.data.dsl.features.query.DataSsmSessionListQueryFunction
@@ -14,7 +15,7 @@ actual external interface SsmApiQueryFunctions {
 	actual fun dataSsmListQueryFunction(config: DataSsmConfig): DataSsmListQueryFunction
 
 	@JsName("dataSsmGetQueryFunction")
-	actual fun dataSsmGetQueryFunction(config: DataSsmConfig): ssm.data.dsl.features.query.DataSsmGetQueryFunction
+	actual fun dataSsmGetQueryFunction(config: DataSsmConfig): DataSsmGetQueryFunction
 
 	@JsName("dataSsmSessionListQueryFunction")
 	actual fun dataSsmSessionListQueryFunction(config: DataSsmConfig): DataSsmSessionListQueryFunction

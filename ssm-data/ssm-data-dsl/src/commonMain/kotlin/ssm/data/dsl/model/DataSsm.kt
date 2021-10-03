@@ -21,7 +21,7 @@ expect interface DataSsmDTO {
 	 * Version of the SSM
 	 * @example "1.0"
 	 */
-	val version: SsmVersion
+	val version: SsmVersion?
 }
 
 /**
@@ -36,7 +36,7 @@ expect interface DataSsmDTO {
 class DataSsm(
 	override val ssm: Ssm,
 	override val channel: TxChannel,
-	override val version: SsmVersion,
+	override val version: SsmVersion?,
 ) : DataSsmDTO
 
 typealias SsmVersion = String

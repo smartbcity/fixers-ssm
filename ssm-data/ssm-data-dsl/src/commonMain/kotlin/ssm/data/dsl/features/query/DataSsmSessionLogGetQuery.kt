@@ -18,7 +18,7 @@ import ssm.data.dsl.model.DataSsmSessionStateDTO
  */
 typealias DataSsmSessionLogGetQueryFunction = F2Function<DataSsmSessionLogGetQueryDTO, DataSsmSessionLogGetQueryResultDTO>
 
-expect interface DataSsmSessionLogGetQueryDTO : ssm.data.dsl.features.query.DataQueryDTO {
+expect interface DataSsmSessionLogGetQueryDTO : DataQueryDTO {
 	/**
 	 * Identifier of the session to retrieve
 	 * @example [ssm.data.dsl.model.DataSsmSession.id]
@@ -30,7 +30,7 @@ expect interface DataSsmSessionLogGetQueryDTO : ssm.data.dsl.features.query.Data
 	 * @example [ssm.chaincode.dsl.blockchain.Transaction.transactionId]
 	 */
 	val txId: TransactionId
-	override val ssm: ssm.data.dsl.features.query.SsmName
+	override val ssm: SsmName
 	override val bearerToken: String?
 }
 
@@ -45,7 +45,7 @@ expect interface DataSsmSessionLogGetQueryDTO : ssm.data.dsl.features.query.Data
 class DataSsmSessionLogGetQuery(
 	override val sessionId: DataSsmSessionId,
 	override val txId: TransactionId,
-	override val ssm: ssm.data.dsl.features.query.SsmName,
+	override val ssm: SsmName,
 	override val bearerToken: String?,
 ) : DataSsmSessionLogGetQueryDTO
 
