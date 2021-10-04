@@ -16,7 +16,7 @@ include(
 )
 
 include(
-	"ssm-couchdb:ssm-couchdb-client",
+	"ssm-couchdb:ssm-couchdb-sdk",
 	"ssm-couchdb:ssm-couchdb-dsl",
 	"ssm-couchdb:ssm-couchdb-f2"
 )

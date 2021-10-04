@@ -6,6 +6,7 @@ import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
 import ssm.couchdb.dsl.CouchDbSsmQueries
 import ssm.couchdb.dsl.config.SsmCouchdbConfig
+import ssm.couchdb.dsl.query.CouchDbDatabaseGetChangesQueryFunction
 import ssm.couchdb.dsl.query.CouchdbDatabaseGetQueryFunction
 import ssm.couchdb.dsl.query.CouchdbDatabaseListQueryFunction
 import ssm.couchdb.dsl.query.CouchdbSsmListQueryFunction
@@ -23,6 +24,10 @@ class SsmCouchdbAutoConfiguration : CouchDbSsmQueries {
 	fun couchdbConfig(
 		ssmCouchdbProperties: SsmCouchdbProperties,
 	): SsmCouchdbConfig = ssmCouchdbProperties.couchdb
+
+	override fun couchDbDatabaseGetChangesQueryFunction(config: SsmCouchdbConfig): CouchDbDatabaseGetChangesQueryFunction {
+		return couchDbSsmQueriesImpl.couchDbDatabaseGetChangesQueryFunction(config)
+	}
 
 	@Bean
 	override fun couchdbDatabaseListQueryFunction(config: SsmCouchdbConfig): CouchdbDatabaseListQueryFunction {

@@ -2,16 +2,21 @@ package ssm.couchdb.f2
 
 import ssm.couchdb.dsl.CouchDbSsmQueries
 import ssm.couchdb.dsl.config.SsmCouchdbConfig
+import ssm.couchdb.dsl.query.CouchDbDatabaseGetChangesQueryFunction
 import ssm.couchdb.dsl.query.CouchdbDatabaseGetQueryFunction
 import ssm.couchdb.dsl.query.CouchdbDatabaseListQueryFunction
 import ssm.couchdb.dsl.query.CouchdbSsmListQueryFunction
 import ssm.couchdb.dsl.query.CouchdbSsmSessionStateListQueryFunction
+import ssm.couchdb.f2.query.CouchDbDatabaseGetChangesQueryFunctionImpl
 import ssm.couchdb.f2.query.CouchdbDatabaseGetQueryFunctionImpl
 import ssm.couchdb.f2.query.CouchdbDatabaseListQueryFunctionImpl
 import ssm.couchdb.f2.query.CouchdbSsmListQueryFunctionImpl
 import ssm.couchdb.f2.query.CouchdbSsmSessionStateListQueryFunctionImpl
 
 class CouchDbSsmQueriesImpl : CouchDbSsmQueries {
+	override fun couchDbDatabaseGetChangesQueryFunction(config: SsmCouchdbConfig): CouchDbDatabaseGetChangesQueryFunction {
+		return CouchDbDatabaseGetChangesQueryFunctionImpl(config).couchDbDatabaseGetChangesQueryFunction()
+	}
 
 	override fun couchdbDatabaseListQueryFunction(config: SsmCouchdbConfig): CouchdbDatabaseListQueryFunction {
 		return CouchdbDatabaseListQueryFunctionImpl(config).couchdbDatabaseListQueryFunction()

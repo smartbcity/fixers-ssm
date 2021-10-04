@@ -11,6 +11,8 @@ import com.ibm.cloud.cloudant.v1.model.PostViewOptions
 import com.ibm.cloud.sdk.core.http.Response
 import java.io.InputStream
 import ssm.couchdb.client.builder.SsmCouchDbClientBuilder
+import ssm.couchdb.dsl.model.ChangeEventId
+import ssm.couchdb.dsl.model.DatabaseName
 import ssm.couchdb.dsl.model.DocType
 import ssm.sdk.json.JSONConverter
 
@@ -59,11 +61,10 @@ class SsmCouchDbClient(
 		return cloudant.getDatabaseInformation(query).execute().result
 	}
 
-	fun getChanges(dbName: String, lastEventId: String, since: String): ChangesResult? {
+	fun getChanges(dbName: DatabaseName, lastEventId: ChangeEventId? = null): ChangesResult {
 		val query = PostChangesOptions.Builder()
 			.db(dbName)
 			.lastEventId(lastEventId)
-			.since(since)
 			.build()
 		return cloudant.postChanges(query).execute().result
 	}

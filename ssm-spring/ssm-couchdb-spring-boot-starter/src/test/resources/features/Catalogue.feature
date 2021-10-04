@@ -1,4 +1,5 @@
 Feature:
+
   Scenario Outline: Inject couchdb function
     Given The application parameters
       | ssm.couchdb.url         | http://localhost:5000 |
@@ -10,6 +11,7 @@ Feature:
 
     Examples:
       | functionName                            |
+      | couchDbSsmSessionStateListQueryFunction |
       | couchdbDatabaseListQueryFunction        |
       | couchDbDatabaseGetQueryFunction         |
       | couchDbSsmListQueryFunction             |
@@ -21,6 +23,7 @@ Feature:
 
     Examples:
       | functionName                            |
+      | couchDbSsmSessionStateListQueryFunction |
       | couchdbDatabaseListQueryFunction        |
       | couchDbDatabaseGetQueryFunction         |
       | couchDbSsmListQueryFunction             |
