@@ -13,8 +13,8 @@ class SsmInitializer(
 	private val signerAdmin: SignerAdmin,
 ) {
 
-	suspend fun init(agent: SsmAgent, ssm: Ssm): List<InvokeReturn> {
-		val retInitUser = initUser(agent)
+	suspend fun init(agent: SsmAgent?, ssm: Ssm): List<InvokeReturn> {
+		val retInitUser = agent?.let { initUser(it) }
 		val retInitSsm = initSsm(ssm)
 		return listOfNotNull(retInitUser, retInitSsm)
 	}

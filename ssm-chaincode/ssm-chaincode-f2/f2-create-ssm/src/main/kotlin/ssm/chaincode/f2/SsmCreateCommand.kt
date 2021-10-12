@@ -36,7 +36,7 @@ class SsmCreateCommand(
 	/**
 	 * Initial user of the SSM
 	 */
-	val agent: SsmAgent,
+	val agent: SsmAgent?,
 	override val chaincode: SsmChaincodeProperties,
 	override val bearerToken: String?,
 ) : SsmCommandDTO
