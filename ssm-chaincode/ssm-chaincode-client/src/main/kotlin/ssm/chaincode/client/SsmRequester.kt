@@ -1,6 +1,5 @@
 package ssm.chaincode.client
 
-import java.util.concurrent.CompletableFuture
 import org.slf4j.LoggerFactory
 import ssm.chaincode.client.invoke.command.CommandSigner
 import ssm.chaincode.client.invoke.query.HasGet
@@ -9,6 +8,7 @@ import ssm.chaincode.client.repository.CommandArgs
 import ssm.chaincode.client.repository.CoopRepository
 import ssm.chaincode.dsl.InvokeReturn
 import ssm.sdk.json.JSONConverter
+import java.util.concurrent.CompletableFuture
 
 class SsmRequester(
 	private val channelId: String?,
@@ -55,12 +55,22 @@ class SsmRequester(
 	@Throws(Exception::class)
 	operator fun <T> invoke(cmd: CommandSigner<T>): CompletableFuture<InvokeReturn> {
 		val invokeArgs = cmd.invoke()
+
 		logger.info("""
             Invoke the blockchain in channel[$channelId] 
             and ssm[$chaincodeId}] with command[${cmd.commandName}] 
             with args:$invokeArgs
         """.trimIndent())
-		return coopRepository.invoke(CommandArgs.from(INVOKE, invokeArgs, channelId, chaincodeId))
+
+		val commandArgs = CommandArgs(
+			cmd = INVOKE,
+			fcn = invokeArgs.fcn,
+			args = invokeArgs.args,
+			channelid = channelId,
+			chaincodeid = chaincodeId
+		)
+
+		return coopRepository.invoke(commandArgs)
 			.thenApply(jsonConverter.toCompletableObject(InvokeReturn::class.java))
 	}
 
