@@ -11,5 +11,5 @@ dependencies {
 	api("city.smartb.f2:f2-spring-boot-starter-function:${Versions.f2}")
 	kapt("org.springframework.boot:spring-boot-configuration-processor:${Versions.springBoot}")
 
-	testImplementation(project(":ssm-test:ssm-test-cucumber-spring-autoconfigure"))
+	testImplementation(project(":ssm-bdd:ssm-bdd-spring-autoconfigure"))
 }

@@ -27,7 +27,7 @@ object Versions {
 	const val cucumber = "6.11.0"
 	const val junit = "5.7.0"
 	const val junitPlateform = "1.8.1"
-	const val assertj = "3.15.0"
+	const val assertj = "3.21.0"
 }
 
 object Dependencies {

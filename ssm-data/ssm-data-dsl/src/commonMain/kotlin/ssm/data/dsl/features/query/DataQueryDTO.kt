@@ -1,15 +1,17 @@
 package ssm.data.dsl.features.query
 
+import ssm.chaincode.dsl.model.uri.SsmUri
+
 expect interface DataQueryDTO {
 	/**
-	 * Name of the SSM to query
+	 * Uri information to access a ssm
 	 * @example [ssm.chaincode.dsl.model.Ssm.name]
 	 */
-	val ssm: SsmName
+	val ssm: SsmUri
 
 	/**
 	 * Authentication token
-	 * @example [ssm.chaincode.dsl.SsmCommandDTO.bearerToken]
+	 * @example [ssm.chaincode.dsl.SsmQueryDTO.bearerToken]
 	 */
 	val bearerToken: String?
 }

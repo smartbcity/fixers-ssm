@@ -1,5 +1,5 @@
 Feature:
-  Scenario Outline: Inject couchdb function
+  Scenario Outline: Inject ssm queries function
     Given The application parameters
       | ssm.chaincode.url | http://localhost:9090 |
     When I build a valid spring application context
@@ -17,7 +17,7 @@ Feature:
       | ssmListSsmQueryFunction         |
       | ssmListUserQueryFunction        |
 
-  Scenario Outline: No inject couchdb function when config is not provided.
+  Scenario Outline: No inject ssm queries function when config is not provided.
     When I get an empty spring application context
     Then Instance of "<functionName>" is not injectable bean
 

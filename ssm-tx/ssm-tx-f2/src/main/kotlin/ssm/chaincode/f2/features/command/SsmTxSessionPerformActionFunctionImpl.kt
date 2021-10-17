@@ -1,0 +1,18 @@
+package ssm.chaincode.f2
+
+import ssm.chaincode.dsl.config.SsmChaincodeConfig
+import ssm.chaincode.f2.commons.ssmF2Function
+import ssm.sdk.sign.SignerProvider
+import ssm.tx.dsl.features.ssm.SsmTxSessionPerformActionFunction
+import ssm.tx.dsl.features.ssm.SsmSessionPerformActionResult
+
+class SsmTxSessionPerformActionFunctionImpl {
+
+	fun ssmTxSessionPerformActionFunction(
+		config: SsmChaincodeConfig,
+		signerProvider: SignerProvider
+	): SsmTxSessionPerformActionFunction = ssmF2Function(config) { cmd, ssmClient ->
+		val invoke = ssmClient.perform(signerProvider.get(), cmd.action, cmd.context)!!
+		SsmSessionPerformActionResult(invoke)
+	}
+}

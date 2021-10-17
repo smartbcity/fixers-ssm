@@ -5,7 +5,7 @@ import f2.dsl.fnc.F2Function
 import kotlin.js.JsExport
 import kotlin.js.JsName
 import kotlinx.serialization.Serializable
-import ssm.chaincode.dsl.SsmCommandDTO
+import ssm.chaincode.dsl.SsmQueryDTO
 import ssm.chaincode.dsl.model.SsmSessionState
 
 /**
@@ -33,7 +33,7 @@ class SsmGetSessionQuery(
 	 * @example [SsmSessionState.session]
 	 */
 	val name: String,
-) : SsmCommandDTO
+) : SsmQueryDTO
 
 /**
  * @d2 event

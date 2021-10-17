@@ -7,6 +7,14 @@ import ssm.chaincode.dsl.model.Ssm
 import ssm.chaincode.dsl.model.SsmSessionState
 import ssm.chaincode.dsl.model.SsmSessionStateDTO
 import ssm.chaincode.dsl.model.SsmSessionStateLog
+import ssm.chaincode.dsl.model.uri.ChaincodeUri
+import ssm.chaincode.dsl.model.uri.ChaincodeUriBurstDTO
+import ssm.chaincode.dsl.model.uri.DEFAULT_VERSION
+import ssm.chaincode.dsl.model.uri.SsmUri
+import ssm.chaincode.dsl.model.uri.SsmUriBurstDTO
+import ssm.chaincode.dsl.model.uri.burstChaincode
+import ssm.chaincode.dsl.model.uri.burstSsmUri
+import ssm.chaincode.dsl.model.uri.compact
 import ssm.chaincode.dsl.query.SsmGetSessionLogsQuery
 import ssm.chaincode.dsl.query.SsmGetTransactionQuery
 import ssm.chaincode.f2.query.SsmGetSessionLogsQueryFunctionImpl
@@ -18,41 +26,61 @@ import ssm.data.dsl.model.DataSsmSessionId
 import ssm.data.dsl.model.DataSsmSessionState
 import ssm.data.dsl.model.TxChannel
 
-
-fun Ssm.toDataSsm(config: DataSsmConfig): DataSsm {
+fun Ssm.toDataSsm(burst: ChaincodeUriBurstDTO): DataSsm {
 	return DataSsm(
 		ssm = this,
-		version = config.ssmVersion,
-		channel = TxChannel(config.channelId)
+		version = DEFAULT_VERSION,
+		channel = TxChannel(burst.channelId),
+		uri = burst.compact(this.name)
 	)
+}
+
+fun Ssm.toDataSsm(ssm: SsmUriBurstDTO): DataSsm {
+	return DataSsm(
+		ssm = this,
+		version = ssm.ssmVersion,
+		channel = TxChannel(ssm.channelId),
+		uri = ssm.compact()
+	)
+}
+
+fun Ssm.toDataSsm(ssm: SsmUri): DataSsm {
+	val values = ssm.burstSsmUri()!!
+	return toDataSsm(values)
 }
 
 suspend fun SsmSessionStateDTO.toDataSession(
 	config: DataSsmConfig,
+	ssm: SsmUri,
 	bearerToken: String?,
 ): DataSsmSession {
 	val sessionLogs = session.getSessionLogs(config, bearerToken)
 
-	val firstTransactionId = sessionLogs.minByOrNull { sessionLog -> sessionLog.state.iteration }?.txId
-	val lastTransactionId = sessionLogs.maxByOrNull { sessionLog -> sessionLog.state.iteration }?.txId
+	val transactions = sessionLogs.map { it.txId.getTransaction(config, bearerToken) }.filterNotNull()
+	val firstTransaction = transactions.minByOrNull { transaction ->
+		transaction.timestamp
+	}
+	val lastTransaction = transactions.maxByOrNull { transaction ->
+		transaction.timestamp
+	}
 
-	val firstTransaction = firstTransactionId.getTransaction(config, bearerToken)
-	val lastTransaction = lastTransactionId.getTransaction(config, bearerToken)
-
-	return this.toDataSession(config, firstTransaction, lastTransaction)
+	return this.toDataSession(ssm, firstTransaction, lastTransaction, transactions)
 }
 
 fun SsmSessionStateDTO.toDataSession(
-	config: DataSsmConfig,  firstTransaction: Transaction?, lastTransaction: Transaction?
+	ssm: SsmUri, firstTransaction: Transaction?, lastTransaction: Transaction?, transactions: List<Transaction>
 ): DataSsmSession {
+	val values = ssm.burstSsmUri()!!
 	return DataSsmSession(
+		ssmUri = ssm,
 		id = this.session,
 		state = DataSsmSessionState(
 			details = this as SsmSessionState,
 			transaction = lastTransaction
 		),
-		channel = TxChannel(config.channelId),
-		transaction = firstTransaction
+		channel = TxChannel(values.channelId),
+		transaction = firstTransaction,
+		transactions = transactions
 	)
 }
 

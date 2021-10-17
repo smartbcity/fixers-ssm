@@ -5,7 +5,7 @@ import f2.dsl.fnc.F2Function
 import kotlin.js.JsExport
 import kotlin.js.JsName
 import kotlinx.serialization.Serializable
-import ssm.chaincode.dsl.SsmCommandDTO
+import ssm.chaincode.dsl.SsmQueryDTO
 
 typealias SsmListAdminQueryFunction = F2Function<SsmListAdminQuery, SsmListAdminResult>
 
@@ -14,7 +14,7 @@ typealias SsmListAdminQueryFunction = F2Function<SsmListAdminQuery, SsmListAdmin
 @JsName("SsmListAdminQuery")
 class SsmListAdminQuery(
 	override val bearerToken: String? = null,
-) : SsmCommandDTO
+ ): SsmQueryDTO
 
 @Serializable
 @JsExport

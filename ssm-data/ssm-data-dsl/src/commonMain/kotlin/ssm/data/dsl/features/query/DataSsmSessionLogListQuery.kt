@@ -4,6 +4,7 @@ import f2.dsl.fnc.F2Function
 import kotlin.js.JsExport
 import kotlin.js.JsName
 import kotlinx.serialization.Serializable
+import ssm.chaincode.dsl.model.uri.SsmUri
 import ssm.data.dsl.model.DataSsmSessionId
 import ssm.data.dsl.model.DataSsmSessionState
 
@@ -22,7 +23,7 @@ expect interface DataSsmSessionLogListQueryDTO : DataQueryDTO {
 	 * @example [ssm.data.dsl.model.DataSsmSession.id]
 	 */
 	val sessionId: DataSsmSessionId
-	override val ssm: SsmName
+	override val ssm: SsmUri
 	override val bearerToken: String?
 }
 
@@ -36,7 +37,7 @@ expect interface DataSsmSessionLogListQueryDTO : DataQueryDTO {
 @JsName("DataSsmSessionLogListQuery")
 class DataSsmSessionLogListQuery(
 	override val sessionId: DataSsmSessionId,
-	override val ssm: SsmName,
+	override val ssm: SsmUri,
 	override val bearerToken: String?,
 ) : DataSsmSessionLogListQueryDTO
 

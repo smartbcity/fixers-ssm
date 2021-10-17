@@ -86,7 +86,6 @@ object KeyPairReader {
 	@Throws(CryptoException::class)
 	fun generateRSAKey(): KeyPair {
 		try {
-
 			val kpg = KeyPairGenerator.getInstance(RSA_KEY)
 			kpg.initialize(BUFFER)
 			return kpg.generateKeyPair()

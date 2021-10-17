@@ -4,6 +4,7 @@ import f2.dsl.fnc.F2Function
 import kotlin.js.JsExport
 import kotlin.js.JsName
 import kotlinx.serialization.Serializable
+import ssm.chaincode.dsl.model.uri.ChaincodeUri
 import ssm.data.dsl.model.DataSsm
 import ssm.data.dsl.model.DataSsmDTO
 
@@ -26,7 +27,10 @@ expect interface DataSsmListQueryDTO
 @Serializable
 @JsExport
 @JsName("DataSsmListQuery")
-class DataSsmListQuery : DataSsmListQueryDTO
+class DataSsmListQuery(
+	val bearerToken: String?,
+	val chaincodes: List<ChaincodeUri>
+) : DataSsmListQueryDTO
 
 expect interface DataSsmListQueryResultDTO {
 	/**

@@ -1,5 +1,6 @@
 package ssm.couchdb.f2.query
 
+import com.ibm.cloud.cloudant.v1.model.ChangesResultItem
 import ssm.couchdb.client.SsmCouchDbClient
 import ssm.couchdb.client.getDocType
 import ssm.couchdb.dsl.config.SsmCouchdbConfig
@@ -35,14 +36,25 @@ class CouchDbDatabaseGetChangesQueryFunctionImpl(
 			cmd.lastEventId
 		).let { result ->
 			CouchdbSsmDatabaseGetChangesQueryResult(
-				items = result.results.map { changesItem ->
+				items = result.results.filter {changesItem ->
+					changesItem.getDocType() == cmd.docType && !changesItem.parseId().isNullOrBlank()
+				}.map { changesItem ->
 					DatabaseChanges(
-						objectId = changesItem.id,
+						objectId = changesItem.parseId(),
 						docType = changesItem.getDocType(),
 						changeEventId = changesItem.seq
 					)
+				}.filter {
+					it.docType == cmd.docType
+				}.map {
+					println(it.objectId)
+					it
 				}
 			)
 		}
+	}
+
+	private fun ChangesResultItem.parseId(): String {
+		return id.substringAfter("_")
 	}
 }

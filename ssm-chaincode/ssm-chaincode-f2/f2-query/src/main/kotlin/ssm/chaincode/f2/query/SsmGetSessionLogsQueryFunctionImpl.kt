@@ -10,6 +10,12 @@ class SsmGetSessionLogsQueryFunctionImpl {
 	fun ssmGetSessionLogsQueryFunction(config: SsmChaincodeConfig): SsmGetSessionLogsQueryFunction =
 		ssmF2Function(config) { cmd, ssmClient ->
 			ssmClient.log(cmd.session)
-				.let(::SsmGetSessionLogsQueryResult)
+				.let {
+					SsmGetSessionLogsQueryResult(
+						ssmUri = "",
+						session = cmd.session,
+						logs = it
+					)
+				}
 		}
 }

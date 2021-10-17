@@ -2,18 +2,17 @@ package ssm.chaincode.f2.commons
 
 import f2.dsl.fnc.F2Function
 import f2.dsl.fnc.f2Function
-import ssm.chaincode.client.SsmClient
-import ssm.chaincode.client.SsmClientConfig
-import ssm.chaincode.dsl.SsmCommandDTO
 import ssm.chaincode.dsl.config.SsmChaincodeConfig
+import ssm.sdk.client.SsmClient
+import ssm.sdk.client.SsmClientConfig
 
-fun <T : SsmCommandDTO, R> ssmF2Function(
+fun <T, R> ssmF2Function(
 	config: SsmChaincodeConfig, fnc: suspend (T, SsmClient) -> R
 ): F2Function<T, R> = f2Function { cmd ->
-	val clientConfig = SsmClientConfig(
-		config.url,
-		cmd.bearerToken
-	)
-	val ssmClient = SsmClient.fromConfig(clientConfig)
-	fnc(cmd, ssmClient)
+	SsmClientConfig(config.url)
+		.let(SsmClient::fromConfig)
+		.let { ssmClient ->
+			fnc(cmd, ssmClient)
+		}
+
 }

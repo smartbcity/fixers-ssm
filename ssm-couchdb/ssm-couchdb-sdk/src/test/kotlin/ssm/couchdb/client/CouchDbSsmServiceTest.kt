@@ -7,7 +7,6 @@ import ssm.couchdb.dsl.model.DocType
 
 class CouchDbSsmServiceTest {
 
-
 	@Test
 	fun shouldReturnAdmin() {
 		val admin = DataTest.ssmCouchDbClient.fetchAllByDocType(DataTest.ssmName, DocType.Admin)
@@ -26,5 +25,4 @@ class CouchDbSsmServiceTest {
 		val ssms = DataTest.ssmCouchDbClient.fetchAllByDocType(DataTest.ssmName, DocType.Ssm)
 		Assertions.assertThat(ssms.size).isEqualTo(ssmCount)
 	}
-
 }

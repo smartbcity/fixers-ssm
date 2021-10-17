@@ -6,7 +6,8 @@ import kotlin.js.JsExport
 import kotlin.js.JsName
 import kotlinx.serialization.Serializable
 import ssm.chaincode.dsl.model.Ssm
-import ssm.chaincode.dsl.SsmCommandDTO
+import ssm.chaincode.dsl.SsmQueryDTO
+import ssm.chaincode.dsl.model.SsmName
 
 /**
  * Retrieves an SSM
@@ -27,13 +28,12 @@ typealias SsmGetQueryFunction = F2Function<SsmGetQuery, SsmGetResult>
 @JsName("SsmGetQuery")
 class SsmGetQuery(
 	override val bearerToken: String? = null,
-
 	/**
 	 * Identifier of the SSM to retrieve
 	 * @example [Ssm.name]
 	 */
-	val name: String,
-) : SsmCommandDTO
+	val name: SsmName,
+) : SsmQueryDTO
 
 /**
  * @d2 event

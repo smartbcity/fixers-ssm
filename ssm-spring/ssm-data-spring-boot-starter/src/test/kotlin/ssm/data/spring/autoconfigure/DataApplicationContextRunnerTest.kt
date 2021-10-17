@@ -1,5 +1,6 @@
 package ssm.data.spring.autoconfigure
 
+import kotlin.reflect.full.memberFunctions
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test
 import org.springframework.cloud.function.context.FunctionCatalog
@@ -15,9 +16,9 @@ class DataApplicationContextRunnerTest {
 	fun `spring context runner must must start`() {
 		ApplicationContextRunnerBuilder()
 			.buildContext(TestConfiguration.localDockerComposeParams).run { context ->
-			assertThat(context).hasSingleBean(FunctionCatalog::class.java)
-			assertThat(context).hasSingleBean(DataSsmProperties::class.java)
-			assertThat(context).hasBean(DataSsmAutoConfiguration::dataSsmListQueryFunction.name)
+				assertThat(context).hasSingleBean(FunctionCatalog::class.java)
+				assertThat(context).hasSingleBean(DataSsmProperties::class.java)
+				assertThat(context).hasBean(DataSsmAutoConfiguration::dataSsmListQueryFunction.name)
 				assertThat(context).hasBean(DataSsmAutoConfiguration::dataSsmGetQueryFunction.name)
 				assertThat(context).hasBean(DataSsmAutoConfiguration::dataSsmSessionListQueryFunction.name)
 				assertThat(context).hasBean(DataSsmAutoConfiguration::dataSsmSessionGetQueryFunction.name)
@@ -48,9 +49,6 @@ class DataApplicationContextRunnerTest {
 			chaincode = SsmChaincodeConfig(
 				url = "http://localhost:9090"
 			),
-			channelId = "chaincode",
-			chaincodeId = "ssm",
-			ssmVersion = "1.0.0"
 		)
 
 		val localDockerComposeParams = mapOf(
@@ -59,9 +57,6 @@ class DataApplicationContextRunnerTest {
 			"ssm.data.couchdb.username" to localDockerCompose.couchdb.username,
 			"ssm.data.couchdb.password" to localDockerCompose.couchdb.password,
 			"ssm.data.couchdb.serviceName" to localDockerCompose.couchdb.serviceName,
-			"ssm.data.channelId" to localDockerCompose.channelId,
-			"ssm.data.chaincodeId" to localDockerCompose.chaincodeId,
-			"ssm.data.ssmVersion" to localDockerCompose.ssmVersion,
 		)
 	}
 }

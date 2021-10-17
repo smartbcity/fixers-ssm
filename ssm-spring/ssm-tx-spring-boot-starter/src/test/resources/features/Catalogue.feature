@@ -1,22 +1,27 @@
 Feature:
-  Scenario Outline: Inject couchdb function
+
+  Scenario Outline: Inject ssm tx function
     Given The application parameters
-      | ssm.chaincode.url | http://localhost:9090 |
+      | ssm.chaincode.url     | http://localhost:9090  |
+      | ssm.signer.admin.name | ssm-admin              |
+      | ssm.signer.admin.key  | local/admin/ssm-admin |
+      | ssm.signer.user.name  | ssm-admin              |
+      | ssm.signer.user.key   | local/admin/ssm-admin |
     When I build a valid spring application context
     Then Instance of "<functionName>" is an injectable bean
 
     Examples:
-      | functionName                      |
-      | ssmSessionStartFunction           |
-      | ssmSessionPerformActionFunction   |
-      | ssmCreateFunction                 |
+      | functionName                    |
+      | ssmTxSessionStartFunction         |
+      | ssmTxSessionPerformActionFunction |
+      | ssmTxCreateFunction               |
 
-  Scenario Outline: No inject couchdb function when config is not provided.
+  Scenario Outline: No inject ssm tx function when config is not provided.
     When I get an empty spring application context
     Then Instance of "<functionName>" is not injectable bean
 
     Examples:
-      | functionName                      |
-      | ssmSessionStartFunction           |
-      | ssmSessionPerformActionFunction   |
-      | ssmCreateFunction                 |
+      | functionName                    |
+      | ssmTxSessionStartFunction         |
+      | ssmTxSessionPerformActionFunction |
+      | ssmTxCreateFunction               |

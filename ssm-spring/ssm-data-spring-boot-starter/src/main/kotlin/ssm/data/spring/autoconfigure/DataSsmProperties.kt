@@ -7,5 +7,5 @@ import ssm.data.dsl.config.DataSsmConfig
 @ConfigurationProperties(prefix = "ssm")
 @ConstructorBinding
 data class DataSsmProperties(
-	val data: DataSsmConfig
+	val data: DataSsmConfig,
 )

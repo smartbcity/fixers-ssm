@@ -4,9 +4,11 @@ import f2.dsl.fnc.F2Function
 import kotlin.js.JsExport
 import kotlin.js.JsName
 import kotlinx.serialization.Serializable
-import ssm.chaincode.dsl.SsmCommandDTO
+import ssm.chaincode.dsl.SsmQueryDTO
+import ssm.chaincode.dsl.model.SessionName
 import ssm.chaincode.dsl.model.SsmSessionState
 import ssm.chaincode.dsl.model.SsmSessionStateLog
+import ssm.chaincode.dsl.model.uri.SsmUri
 
 /**
  * Retrieves the logs of a session since its creation
@@ -30,9 +32,9 @@ class SsmGetSessionLogsQuery(
 	 * Identifier of the session to retrieve
 	 * @example [SsmSessionState.session]
 	 */
-	val session: String,
+	val session: SessionName,
 	override val bearerToken: String?,
-) : SsmCommandDTO
+) : SsmQueryDTO
 
 /**
  * @d2 event
@@ -43,6 +45,8 @@ class SsmGetSessionLogsQuery(
 @JsExport
 @JsName("SsmGetSessionLogsQueryResult")
 data class SsmGetSessionLogsQueryResult(
+	val ssmUri: SsmUri,
+	val session: SessionName,
 	/**
 	 * The logs of the session since its creation
 	 * @example [{

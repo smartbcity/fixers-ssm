@@ -12,4 +12,5 @@ dependencies {
 	Dependencies.Jvm.ktorClient(::implementation)
 
 	Dependencies.Jvm.cucumber(::testImplementation)
+	testImplementation(project(":ssm-bdd:ssm-bdd-sdk"))
 }

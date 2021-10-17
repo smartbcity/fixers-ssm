@@ -9,7 +9,6 @@ import com.ibm.cloud.cloudant.v1.model.PostChangesOptions
 import com.ibm.cloud.cloudant.v1.model.PostFindOptions
 import com.ibm.cloud.cloudant.v1.model.PostViewOptions
 import com.ibm.cloud.sdk.core.http.Response
-import java.io.InputStream
 import ssm.couchdb.client.builder.SsmCouchDbClientBuilder
 import ssm.couchdb.dsl.model.ChangeEventId
 import ssm.couchdb.dsl.model.DatabaseName
@@ -23,7 +22,7 @@ class SsmCouchDbClient(
 
 	companion object {
 		const val COUNTING_VIEW = "indexType"
-		const val FABRIC_COUNTING_DDOC = "indexTypeDoc"
+		const val FABRIC_COUNTING_DOC = "indexTypeDoc"
 
 		fun builder(): SsmCouchDbClientBuilder {
 			return SsmCouchDbClientBuilder()
@@ -52,6 +51,29 @@ class SsmCouchDbClient(
 		}
 	}
 
+	fun <T : Any> fetchOneByDocTypeAndName(
+		dbName: String,
+		docType: DocType<T>,
+		name: String,
+	): T? {
+		val selector = mapOf(
+			"docType" to mapOf("\$eq" to docType.docType),
+			"name" to name
+		)
+
+		val findOptions = PostFindOptions.Builder()
+			.db(dbName)
+			.selector(selector)
+			.limit(Long.MAX_VALUE)
+			.build()
+
+		val result: Response<FindResult> = cloudant.postFind(findOptions).execute()
+
+		return result.result.docs.firstOrNull()?.let { document ->
+			converter.toObject(docType.clazz.java).apply(document.toString())
+		}
+	}
+
 	fun getDatabases(): List<String> {
 		return cloudant.allDbs.execute().result
 	}
@@ -65,6 +87,7 @@ class SsmCouchDbClient(
 		val query = PostChangesOptions.Builder()
 			.db(dbName)
 			.lastEventId(lastEventId)
+			.includeDocs(true)
 			.build()
 		return cloudant.postChanges(query).execute().result
 	}
@@ -72,11 +95,11 @@ class SsmCouchDbClient(
 	fun <T : Any> getCount(dbName: String, docType: DocType<T>): Int {
 		val query = PostViewOptions.Builder()
 			.db(dbName)
-			.ddoc(FABRIC_COUNTING_DDOC)
+			.ddoc(FABRIC_COUNTING_DOC)
 			.view(COUNTING_VIEW)
 			.groupLevel(1)
 			.key(arrayOf(docType.docType))
 			.build()
-		return (cloudant.postView(query).execute().result.rows.first().value as Double).toInt()
+		return (cloudant.postView(query).execute().result.rows.firstOrNull()?.value as Double?)?.toInt() ?: 0
 	}
 }

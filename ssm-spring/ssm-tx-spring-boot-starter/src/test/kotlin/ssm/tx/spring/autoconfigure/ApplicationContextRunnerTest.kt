@@ -5,7 +5,7 @@ import org.junit.jupiter.api.Test
 import org.springframework.cloud.function.context.FunctionCatalog
 import ssm.chaincode.dsl.config.SsmChaincodeConfig
 import ssm.tx.session.start.spring.autoconfigure.SsmSessionStartAutoConfiguration
-import ssm.tx.session.start.spring.autoconfigure.SsmSessionStartProperties
+import ssm.tx.session.start.spring.autoconfigure.SsmTxSessionStartProperties
 import ssm.test.spring.ApplicationContextBuilder
 import ssm.test.spring.ApplicationContextRunnerBuilder
 
@@ -17,8 +17,8 @@ class ApplicationContextRunnerTest {
 		ApplicationContextRunnerBuilder()
 			.buildContext(SsmChaincodeConfigTest.localDockerComposeParams).run { context ->
 				assertThat(context).hasSingleBean(FunctionCatalog::class.java)
-				assertThat(context).hasSingleBean(SsmSessionStartProperties::class.java)
-				assertThat(context).hasBean(SsmSessionStartAutoConfiguration::ssmSessionStartFunction.name)
+				assertThat(context).hasSingleBean(SsmTxSessionStartProperties::class.java)
+				assertThat(context).hasBean(SsmSessionStartAutoConfiguration::ssmTxSessionStartFunction.name)
 			}
 	}
 
@@ -29,7 +29,7 @@ class ApplicationContextRunnerTest {
 			types = arrayOf(ApplicationContextBuilder.SimpleConfiguration::class.java),
 			config = SsmChaincodeConfigTest.localDockerComposeParams
 		)
-		assertThat(context.getBean(SsmSessionStartAutoConfiguration::ssmSessionStartFunction.name)).isNotNull
+		assertThat(context.getBean(SsmSessionStartAutoConfiguration::ssmTxSessionStartFunction.name)).isNotNull
 		assertThat(context.getBean(FunctionCatalog::class.java)).isNotNull
 	}
 
@@ -39,7 +39,11 @@ class ApplicationContextRunnerTest {
 		)
 
 		val localDockerComposeParams = mapOf(
-			"ssm.chaincode.url" to localDockerCompose.url
+			"ssm.chaincode.url" to localDockerCompose.url,
+			"ssm.signer.admin.name" to "ssm-admin",
+			"ssm.signer.admin.key" to "local/admin/ssm-admin",
+			"ssm.signer.user.name" to "ssm-admin",
+			"ssm.signer.user.key" to "local/admin/ssm-admin"
 		)
 	}
 

@@ -31,24 +31,29 @@ include(
 	"ssm-spring:ssm-chaincode-spring-boot-starter",
 	"ssm-spring:ssm-couchdb-spring-boot-starter",
 	"ssm-spring:ssm-data-spring-boot-starter",
-	"ssm-spring:ssm-tx-create-ssm-spring-boot-starter",
-	"ssm-spring:ssm-tx-session-perform-action-spring-boot-starter",
-	"ssm-spring:ssm-tx-session-start-spring-boot-starter",
 	"ssm-spring:ssm-tx-spring-boot-starter",
+	"ssm-spring:ssm-tx-spring-boot-starter:ssm-tx-create-ssm-spring-boot-starter",
+	"ssm-spring:ssm-tx-spring-boot-starter:ssm-tx-session-perform-action-spring-boot-starter",
+	"ssm-spring:ssm-tx-spring-boot-starter:ssm-tx-session-start-spring-boot-starter",
 )
 
 include(
-	"ssm-test:ssm-test-cucumber",
-	"ssm-test:ssm-test-cucumber-spring-autoconfigure"
+	"ssm-bdd:ssm-bdd-chaincode",
+	"ssm-bdd:ssm-bdd-couchdb",
+	"ssm-bdd:ssm-bdd-config",
+	"ssm-bdd:ssm-bdd-sdk",
+	"ssm-bdd:ssm-bdd-spring-autoconfigure",
+	"ssm-bdd:ssm-bdd-tx"
 )
+
 include(
 	"ssm-data:ssm-data-client",
 	"ssm-data:ssm-data-dsl",
-	"ssm-data:ssm-data-f2"
+	"ssm-data:ssm-data-f2",
+	"ssm-data:ssm-data-sync"
 )
 
 include(
-	"ssm-tx:ssm-tx-f2-create-ssm",
-	"ssm-tx:ssm-tx-f2-session-perform-action",
-	"ssm-tx:ssm-tx-f2-session-start",
+	"ssm-tx:ssm-tx-dsl",
+	"ssm-tx:ssm-tx-f2",
 )

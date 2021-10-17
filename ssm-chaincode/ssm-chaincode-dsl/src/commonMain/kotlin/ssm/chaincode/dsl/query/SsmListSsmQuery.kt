@@ -6,7 +6,7 @@ import kotlin.js.JsExport
 import kotlin.js.JsName
 import kotlinx.serialization.Serializable
 import ssm.chaincode.dsl.model.Ssm
-import ssm.chaincode.dsl.SsmCommandDTO
+import ssm.chaincode.dsl.SsmQueryDTO
 
 /**
  * Retrieves a list of the existing SSMs
@@ -27,7 +27,7 @@ typealias SsmListSsmQueryFunction = F2Function<SsmListSsmQuery, SsmListSsmResult
 @JsName("SsmListSsmQuery")
 class SsmListSsmQuery(
 	override val bearerToken: String? = null,
-) : SsmCommandDTO
+) : SsmQueryDTO
 
 /**
  * @d2 event

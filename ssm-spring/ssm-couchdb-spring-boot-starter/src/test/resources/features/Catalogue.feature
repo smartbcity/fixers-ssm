@@ -14,6 +14,7 @@ Feature:
       | couchDbSsmSessionStateListQueryFunction |
       | couchdbDatabaseListQueryFunction        |
       | couchDbDatabaseGetQueryFunction         |
+      | couchdbSsmGetQueryFunction              |
       | couchDbSsmListQueryFunction             |
       | couchDbSsmSessionStateListQueryFunction |
 
@@ -26,5 +27,6 @@ Feature:
       | couchDbSsmSessionStateListQueryFunction |
       | couchdbDatabaseListQueryFunction        |
       | couchDbDatabaseGetQueryFunction         |
+      | couchdbSsmGetQueryFunction              |
       | couchDbSsmListQueryFunction             |
       | couchDbSsmSessionStateListQueryFunction |

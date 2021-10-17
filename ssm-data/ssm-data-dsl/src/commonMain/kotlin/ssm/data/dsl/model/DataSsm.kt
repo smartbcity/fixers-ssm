@@ -5,8 +5,11 @@ import kotlin.js.JsName
 import kotlinx.serialization.Serializable
 import ssm.chaincode.dsl.model.Ssm
 import ssm.chaincode.dsl.model.SsmDTO
+import ssm.chaincode.dsl.model.uri.SsmUri
+import ssm.chaincode.dsl.model.uri.SsmVersion
 
 expect interface DataSsmDTO {
+	val uri: SsmUri
 	/**
 	 * Description of a state machine
 	 */
@@ -34,9 +37,8 @@ expect interface DataSsmDTO {
 @JsExport
 @JsName("DataSsm")
 class DataSsm(
+	override val uri: SsmUri,
 	override val ssm: Ssm,
 	override val channel: TxChannel,
 	override val version: SsmVersion?,
 ) : DataSsmDTO
-
-typealias SsmVersion = String

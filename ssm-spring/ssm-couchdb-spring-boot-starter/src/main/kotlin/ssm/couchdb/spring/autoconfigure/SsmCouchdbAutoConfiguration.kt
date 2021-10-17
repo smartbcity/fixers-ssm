@@ -9,6 +9,7 @@ import ssm.couchdb.dsl.config.SsmCouchdbConfig
 import ssm.couchdb.dsl.query.CouchDbDatabaseGetChangesQueryFunction
 import ssm.couchdb.dsl.query.CouchdbDatabaseGetQueryFunction
 import ssm.couchdb.dsl.query.CouchdbDatabaseListQueryFunction
+import ssm.couchdb.dsl.query.CouchdbSsmGetQueryFunction
 import ssm.couchdb.dsl.query.CouchdbSsmListQueryFunction
 import ssm.couchdb.dsl.query.CouchdbSsmSessionStateListQueryFunction
 import ssm.couchdb.f2.CouchDbSsmQueriesImpl
@@ -37,6 +38,11 @@ class SsmCouchdbAutoConfiguration : CouchDbSsmQueries {
 	@Bean
 	override fun couchDbDatabaseGetQueryFunction(config: SsmCouchdbConfig): CouchdbDatabaseGetQueryFunction {
 		return couchDbSsmQueriesImpl.couchDbDatabaseGetQueryFunction(config)
+	}
+
+	@Bean
+	override fun couchdbSsmGetQueryFunction(config: SsmCouchdbConfig): CouchdbSsmGetQueryFunction {
+		return couchDbSsmQueriesImpl.couchdbSsmGetQueryFunction(config)
 	}
 
 	@Bean

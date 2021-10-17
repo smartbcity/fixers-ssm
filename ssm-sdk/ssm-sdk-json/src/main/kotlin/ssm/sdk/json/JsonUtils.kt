@@ -12,7 +12,7 @@ import java.io.IOException
 
 object JsonUtils {
 
-	private val mapper: ObjectMapper = ObjectMapper()
+	val mapper: ObjectMapper = ObjectMapper()
 		.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false)
 		.setSerializationInclusion(JsonInclude.Include.NON_NULL)
 		.setVisibility(PropertyAccessor.FIELD, JsonAutoDetect.Visibility.ANY)

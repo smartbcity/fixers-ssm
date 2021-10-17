@@ -38,7 +38,7 @@ expect interface CouchdbDatabaseGetChangesQueryDTO : Query {
 	/**
 	 * Filter result by doctype
 	 */
-	val docType: DocType<Any>
+	val docType: DocType<*>
 	/**
 	 * Filter to start the results from the the ID of the last events received by the server on a previous connection
 	 */
@@ -63,7 +63,7 @@ expect interface CouchdbDatabaseGetChangesQueryResultDTO : Event {
 class CouchdbDatabaseGetChangesQuery(
 	override val channelId: ChannelId,
 	override val chaincodeId: ChaincodeId,
-	override val docType: DocType<Any>,
+	override val docType: DocType<*>,
 	override val lastEventId: ChangeEventId?,
 ) : CouchdbDatabaseGetChangesQueryDTO
 

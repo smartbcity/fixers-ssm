@@ -7,6 +7,6 @@ dependencies {
 	api(project(":ssm-couchdb:ssm-couchdb-dsl"))
 	implementation(project(":ssm-couchdb:ssm-couchdb-sdk"))
 
-	testImplementation(project(":ssm-test:ssm-test-cucumber"))
+	testImplementation(project(":ssm-bdd:ssm-bdd-couchdb"))
 	testImplementation("org.junit.platform:junit-platform-suite:${Versions.junitPlateform}")
 }

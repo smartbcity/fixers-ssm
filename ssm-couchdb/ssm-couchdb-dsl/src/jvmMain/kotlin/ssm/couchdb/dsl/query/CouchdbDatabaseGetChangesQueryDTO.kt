@@ -12,7 +12,7 @@ import ssm.couchdb.dsl.model.DocType
 actual interface CouchdbDatabaseGetChangesQueryDTO : Query {
 	actual val channelId: ChannelId
 	actual val chaincodeId: ChaincodeId
-	actual val docType: DocType<Any>
+	actual val docType: DocType<*>
 	actual val lastEventId: ChangeEventId?
 }
 
