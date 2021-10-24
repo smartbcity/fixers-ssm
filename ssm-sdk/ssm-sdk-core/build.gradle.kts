@@ -11,6 +11,5 @@ dependencies {
 	Dependencies.Jvm.slf4j(::implementation)
 	Dependencies.Jvm.ktorClient(::implementation)
 
-	Dependencies.Jvm.cucumber(::testImplementation)
-	testImplementation(project(":ssm-bdd:ssm-bdd-sdk"))
+	testImplementation(project(":ssm-sdk:ssm-sdk-bdd"))
 }

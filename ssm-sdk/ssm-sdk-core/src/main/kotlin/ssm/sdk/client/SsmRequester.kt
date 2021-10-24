@@ -67,7 +67,13 @@ class SsmRequester(
             and ssm[$chaincodeId}] with command[${invokeArgs.fcn}] 
             with args:$invokeArgs
         """.trimIndent())
-		return coopRepository.invokeCommand(CommandArgs.from(INVOKE, invokeArgs, channelId, chaincodeId))
+		return coopRepository.invokeCommand(CommandArgs(
+			cmd = INVOKE,
+			fcn = invokeArgs.fcn,
+			args = invokeArgs.args,
+			channelId= channelId,
+			chaincodeId = chaincodeId,
+		))
 			.let { jsonConverter.toCompletableObject(InvokeReturn::class.java).apply(it) }
 	}
 

@@ -69,7 +69,7 @@ class SsmClient(private val ssmRequester: SsmRequester) {
 		return ssmRequester.query(username, query, SsmAgent::class.java)
 	}
 
-	suspend fun listAgent(): List<SsmAgentName> {
+	suspend fun listUsers(): List<SsmAgentName> {
 		val query = AgentQuery()
 		return ssmRequester.list(query, String::class.java)
 	}

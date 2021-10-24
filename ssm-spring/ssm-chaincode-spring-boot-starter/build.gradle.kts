@@ -6,7 +6,7 @@ plugins {
 }
 
 dependencies {
-	api(project(":ssm-chaincode:ssm-chaincode-f2:f2-query"))
+	api(project(":ssm-chaincode:ssm-chaincode-f2"))
 
 	api("city.smartb.f2:f2-spring-boot-starter-function:${Versions.f2}")
 

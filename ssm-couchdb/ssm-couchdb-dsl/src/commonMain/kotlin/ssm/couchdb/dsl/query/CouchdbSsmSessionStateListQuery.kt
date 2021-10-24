@@ -15,6 +15,8 @@ import ssm.chaincode.dsl.model.ChannelId
 import ssm.chaincode.dsl.model.SsmName
 import ssm.chaincode.dsl.model.SsmSessionState
 import ssm.chaincode.dsl.model.SsmSessionStateDTO
+import ssm.chaincode.dsl.model.uri.ChaincodeUri
+import ssm.chaincode.dsl.model.uri.SsmUri
 
 /**
  * Retrieve the list of all known sessions of a given SSM
@@ -27,13 +29,9 @@ typealias CouchdbSsmSessionStateListQueryFunction = F2Function<CouchdbSsmSession
 
 expect interface CouchdbSsmSessionStateListQueryDTO : PageQueryDTO {
 	/**
-	 * The unique id of a channel.
+	 * The unique uri of a channel.
 	 */
-	val channelId: ChannelId
-	/**
-	 * The unique id of a chaincode.
-	 */
-	val chaincodeId: ChaincodeId
+	val chaincodeUri: ChaincodeUri
 	/**
 	 * The unique identifier of a ssm.
 	 */
@@ -56,10 +54,9 @@ expect interface CouchdbSsmSessionStateListQueryResultDTO : PageQueryResultDTO<S
 @JsExport
 @JsName("CouchdbSsmSessionStateListQuery")
 class CouchdbSsmSessionStateListQuery(
-	override val channelId: ChannelId,
-	override val chaincodeId: ChaincodeId,
-	override val ssm: SsmName?,
-	override val pagination: OffsetPagination? = null,
+	override val pagination: OffsetPaginationDTO? = null,
+	override val chaincodeUri: ChaincodeUri,
+	override val ssm: SsmName? = null
 ) : CouchdbSsmSessionStateListQueryDTO
 
 /**

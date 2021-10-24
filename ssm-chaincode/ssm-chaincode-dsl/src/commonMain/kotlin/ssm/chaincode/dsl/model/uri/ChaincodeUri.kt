@@ -6,10 +6,21 @@ import ssm.chaincode.dsl.model.ChaincodeId
 import ssm.chaincode.dsl.model.ChannelId
 import ssm.chaincode.dsl.model.SsmName
 
-private const val WITH_PEER = 3
-private const val WITHOUT_PEER = 2
+private const val WITH_PEER = 4
+private const val WITHOUT_PEER = 3
 
 typealias ChaincodeUri = String
+
+fun ChaincodeUri.toSsmUri(ssmName: SsmName) {
+	this.burstChaincode()!!.let {
+		SsmUriBurst(
+			peerId = it.peerId,
+			channelId = it.channelId,
+			chaincodeId = it.chaincodeId,
+			ssmName = ssmName
+		).compact()
+	}
+}
 
 fun ChaincodeUriBurstDTO.compact(): ChaincodeUri {
 	return peerId?.let {
@@ -22,9 +33,7 @@ fun ChaincodeUriBurstDTO.compact(ssmName: SsmName): SsmUri {
 	} ?: "chaincode:$channelId:$chaincodeId:${ssmName}"
 }
 
-fun Flow<ChaincodeUri>.burst(): Flow<ChaincodeUriBurstDTO?> = map { uri ->
-	uri.burstChaincode()
-}
+
 
 fun ChaincodeUri.burstChaincode(): ChaincodeUriBurstDTO? {
 	val part = split(":")

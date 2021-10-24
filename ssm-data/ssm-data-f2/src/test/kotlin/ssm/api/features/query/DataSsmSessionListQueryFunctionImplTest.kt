@@ -4,11 +4,12 @@ import f2.dsl.fnc.invoke
 import kotlinx.coroutines.runBlocking
 import org.assertj.core.api.Assertions
 import org.junit.jupiter.api.Test
+import ssm.data.bdd.TestConfig
 import ssm.data.dsl.features.query.DataSsmSessionListQuery
 
 internal class DataSsmSessionListQueryFunctionImplTest {
 	private val function = DataSsmSessionListQueryFunctionImpl(
-		TestConfig.proudhon()
+		TestConfig.proudhon
 	).dataSsmSessionListQueryFunction()
 
 	@Test

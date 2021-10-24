@@ -6,6 +6,7 @@ import kotlin.js.JsExport
 import kotlin.js.JsName
 import kotlinx.serialization.Serializable
 import ssm.chaincode.dsl.SsmQueryDTO
+import ssm.chaincode.dsl.model.SessionName
 import ssm.chaincode.dsl.model.SsmSessionState
 
 /**
@@ -32,7 +33,7 @@ class SsmGetSessionQuery(
 	 * Identifier of the session to retrieve
 	 * @example [SsmSessionState.session]
 	 */
-	val name: String,
+	val sessionName: SessionName,
 ) : SsmQueryDTO
 
 /**

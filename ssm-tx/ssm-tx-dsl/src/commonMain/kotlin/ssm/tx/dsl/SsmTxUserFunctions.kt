@@ -1,11 +1,11 @@
 package ssm.tx.dsl
 
 import ssm.chaincode.dsl.config.SsmChaincodeConfig
-import ssm.tx.dsl.features.user.SsmUserRegisterFunction
-import ssm.tx.dsl.features.user.SsmUserGrantFunction
+import ssm.tx.dsl.features.ssm.SsmTxSessionPerformActionFunction
+import ssm.tx.dsl.features.user.SsmTxUserGrantFunction
 
 /**
- * - fun ssmUserGrantFunction(config: DataSsmConfig): [SsmUserGrantFunction]
+ * - fun ssmUserGrantFunction(config: DataSsmConfig): [SsmTxUserGrantFunction]
  * - fun dataSsmListQueryFunction(config: DataSsmConfig): [DataSsmListQueryFunction]
  * @d2 model
  * @title Entrypoints
@@ -14,6 +14,5 @@ import ssm.tx.dsl.features.user.SsmUserGrantFunction
  * @@title SSM-TX/General
  */
 interface SsmTxUserFunctions {
-	fun ssmUserGrantFunction(config: SsmChaincodeConfig): SsmUserGrantFunction
-	fun ssmUserRegisterFunction(config: SsmChaincodeConfig): SsmUserRegisterFunction
+	fun ssmTxSessionPerformActionFunction(config: SsmChaincodeConfig): SsmTxSessionPerformActionFunction
 }

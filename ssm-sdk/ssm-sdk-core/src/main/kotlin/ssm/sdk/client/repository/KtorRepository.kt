@@ -11,6 +11,8 @@ import io.ktor.client.request.post
 import io.ktor.client.request.parameter
 import io.ktor.http.contentType
 import io.ktor.http.ContentType
+import ssm.chaincode.dsl.model.ChaincodeId
+import ssm.chaincode.dsl.model.ChannelId
 
 
 class KtorRepository(
@@ -28,8 +30,8 @@ class KtorRepository(
 
 	suspend fun invokeCommand(
 		cmd: String,
-		channelId: String?,
-		chaincodeId: String?,
+		channelId: ChannelId?,
+		chaincodeId: ChaincodeId?,
 		fcn: String,
 		args: List<String>,
 	): String {
@@ -42,7 +44,7 @@ class KtorRepository(
 		}
 	}
 
-	suspend fun getBlock(blockId: Long, channelId: String?): String {
+	suspend fun getBlock(blockId: Long, channelId: ChannelId?): String {
 		return client.get(baseUrl) {
 			channelId?.let { parameter("channelId", channelId) }
 			url {
@@ -51,7 +53,7 @@ class KtorRepository(
 		}
 	}
 
-	suspend fun getTransaction(txId: String, channelId: String?): String {
+	suspend fun getTransaction(txId: String, channelId: ChannelId?): String {
 		return client.get(baseUrl) {
 			channelId?.let { parameter("channelId", channelId) }
 			url {

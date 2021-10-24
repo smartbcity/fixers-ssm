@@ -28,7 +28,7 @@ expect interface DataSsmListQueryDTO
 @JsExport
 @JsName("DataSsmListQuery")
 class DataSsmListQuery(
-	val bearerToken: String?,
+	val bearerToken: String? = null,
 	val chaincodes: List<ChaincodeUri>
 ) : DataSsmListQueryDTO
 

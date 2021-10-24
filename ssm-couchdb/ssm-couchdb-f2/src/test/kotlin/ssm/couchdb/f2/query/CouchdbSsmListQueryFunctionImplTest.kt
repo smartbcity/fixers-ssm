@@ -4,19 +4,16 @@ import f2.dsl.fnc.invoke
 import kotlinx.coroutines.runBlocking
 import org.assertj.core.api.Assertions
 import org.junit.jupiter.api.Test
+import ssm.bdd.couchdb.TestConfig
 import ssm.couchdb.dsl.query.CouchdbSsmListQuery
 import ssm.couchdb.dsl.query.CouchdbSsmListQueryFunction
 
 internal class CouchdbSsmListQueryFunctionImplTest : FunctionTestBase() {
 
-	var couchdbSsmListQueryFunctionImpl: CouchdbSsmListQueryFunction = queries.couchDbSsmListQueryFunction(
+	var couchdbSsmListQueryFunctionImpl: CouchdbSsmListQueryFunction = queries.couchdbSsmListQueryFunction(
 		config = TestConfig.dbConfig,
 	)
-//	@Test
-//	fun `must return couchdbGetSsmListQueryFunction from catalog`() {
-//		val fnc: Any = catalog.lookup("couchdbSsmListQueryFunction")
-//		Assertions.assertThat(fnc).isNotNull
-//	}
+
 
 	@Test
 	fun `must return all ssm`(): Unit = runBlocking {

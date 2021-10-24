@@ -5,5 +5,8 @@ plugins {
 
 dependencies {
 	api(project(":ssm-chaincode:ssm-chaincode-dsl"))
-	api("city.smartb.f2:f2-dsl-function:${Versions.f2}")
+	implementation(project(":ssm-sdk:ssm-sdk-core"))
+
+	testImplementation(project(":ssm-chaincode:ssm-chaincode-bdd"))
+	testImplementation(project(":ssm-tx:ssm-tx-bdd"))
 }

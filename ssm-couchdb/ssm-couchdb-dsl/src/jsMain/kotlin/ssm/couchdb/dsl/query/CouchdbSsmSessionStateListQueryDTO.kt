@@ -7,20 +7,18 @@ import ssm.chaincode.dsl.model.ChaincodeId
 import ssm.chaincode.dsl.model.ChannelId
 import ssm.chaincode.dsl.model.SsmName
 import ssm.chaincode.dsl.model.SsmSessionStateDTO
+import ssm.chaincode.dsl.model.uri.ChaincodeUri
+import ssm.chaincode.dsl.model.uri.SsmUri
 
 @JsExport
 @JsName("CouchdbSsmSessionStateListQueryDTO")
 actual external interface CouchdbSsmSessionStateListQueryDTO : PageQueryDTO {
-	actual val channelId: ChannelId
-	actual val chaincodeId: ChaincodeId
+	actual val chaincodeUri: ChaincodeUri
 	actual val ssm: SsmName?
 }
 
 @JsExport
 @JsName("CouchdbSsmSessionStateListQueryResultDTO")
 actual external interface CouchdbSsmSessionStateListQueryResultDTO : PageQueryResultDTO<SsmSessionStateDTO> {
-	/**
-	 * Retrieved sessions
-	 */
 	actual override val page: PageDTO<SsmSessionStateDTO>
 }

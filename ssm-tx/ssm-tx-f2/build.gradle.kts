@@ -6,6 +6,5 @@ plugins {
 dependencies {
 	api(project(":ssm-tx:ssm-tx-dsl"))
 
-	implementation(project(":ssm-chaincode:ssm-chaincode-f2:f2-commons"))
 	implementation(project(":ssm-sdk:ssm-sdk-core"))
 }

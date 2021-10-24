@@ -6,12 +6,12 @@ import ssm.api.extentions.toDataSsm
 import ssm.chaincode.dsl.model.uri.burstSsmUri
 import ssm.chaincode.dsl.query.SsmGetQuery
 import ssm.chaincode.f2.query.SsmGetQueryFunctionImpl
-import ssm.data.dsl.config.DataSsmConfig
+import ssm.data.dsl.config.SsmDataConfig
 import ssm.data.dsl.features.query.DataSsmGetQueryFunction
 import ssm.data.dsl.features.query.DataSsmGetQueryResult
 
 class DataSsmGetQueryFunctionImpl(
-	config: DataSsmConfig
+	config: SsmDataConfig
 ) {
 	private val function = SsmGetQueryFunctionImpl().ssmGetQueryFunction(config.chaincode)
 

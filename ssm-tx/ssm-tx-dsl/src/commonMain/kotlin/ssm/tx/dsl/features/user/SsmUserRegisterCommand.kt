@@ -13,11 +13,11 @@ import ssm.tx.dsl.features.SsmCommandDTO
  * @parent [Ssm]
  * @title Register User
  */
-typealias SsmUserRegisterFunction = F2Function<SsmUserRegisterCommand, SsmUserRegisteredResult>
+typealias SsmTxUserRegisterFunction = F2Function<SsmUserRegisterCommand, SsmUserRegisteredResult>
 
 /**
  * @d2 command
- * @parent [SsmUserRegisterFunction]
+ * @parent [SsmTxUserRegisterFunction]
  * @title Register User: Parameters
  */
 class SsmUserRegisterCommand(

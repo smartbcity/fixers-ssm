@@ -10,7 +10,6 @@ import org.junit.jupiter.api.MethodOrderer.OrderAnnotation
 import org.junit.jupiter.api.Order
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.TestMethodOrder
-import ssm.bdd.sdk.SsmClientTestBuilder
 import ssm.sdk.client.extention.addPrivateMessage
 import ssm.sdk.client.extention.getPrivateMessage
 import ssm.sdk.client.extention.loadFromFile
@@ -133,7 +132,7 @@ class SsmClientItTest {
 	@Test
 	@Order(55)
 	fun listAgent() = runBlocking<Unit> {
-		val agentRet = client.listAgent()
+		val agentRet = client.listUsers()
 		Assertions.assertThat(agentRet).contains(agentUser1.name, agentUser2.name)
 	}
 
@@ -212,7 +211,6 @@ class SsmClientItTest {
 			sessionName, session.roles, "100 dollars 1978 Camaro", privateMessage, sell, 1, 1
 		)
 		Assertions.assertThat(sesReq).isEqualTo(stateExpected)
-		val expectedMessage = stateExpected.getPrivateMessage(signerUser1)
 	}
 
 	@Order(110)

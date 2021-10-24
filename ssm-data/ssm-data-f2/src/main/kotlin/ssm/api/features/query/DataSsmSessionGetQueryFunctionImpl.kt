@@ -6,12 +6,12 @@ import ssm.api.extentions.toDataSession
 import ssm.chaincode.dsl.query.SsmGetSessionQuery
 import ssm.chaincode.dsl.query.SsmGetSessionQueryFunction
 import ssm.chaincode.f2.query.SsmGetSessionQueryFunctionImpl
-import ssm.data.dsl.config.DataSsmConfig
+import ssm.data.dsl.config.SsmDataConfig
 import ssm.data.dsl.features.query.DataSsmSessionGetQueryFunction
 import ssm.data.dsl.features.query.DataSsmSessionGetQueryResult
 
 class DataSsmSessionGetQueryFunctionImpl(
-	private val config: DataSsmConfig,
+	private val config: SsmDataConfig,
 	private val ssmGetSessionQueryFunction: SsmGetSessionQueryFunction
 	= SsmGetSessionQueryFunctionImpl().ssmGetSessionQueryFunction(config.chaincode)
 ) {
@@ -20,7 +20,7 @@ class DataSsmSessionGetQueryFunctionImpl(
 			try {
 				ssmGetSessionQueryFunction.invoke(
 					SsmGetSessionQuery(
-						name = query.sessionId,
+						sessionName = query.sessionName,
 //						bearerToken = query.bearerToken
 					)
 				)

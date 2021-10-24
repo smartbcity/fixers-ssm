@@ -4,6 +4,9 @@ import kotlin.js.JsExport
 import kotlin.js.JsName
 import kotlinx.serialization.Serializable
 
+typealias SsmAction = String
+typealias SsmRole = String
+
 expect interface SsmTransitionDTO {
 	/**
 	 * Origin of the transition
@@ -21,13 +24,13 @@ expect interface SsmTransitionDTO {
 	 * Role of the [agent][SsmAgent] allowed to trigger the transition
 	 * @example "Seller"
 	 */
-	val role: String
+	val role: SsmRole
 
 	/**
 	 * Trigger of the transition
 	 * @example "Sell"
 	 */
-	val action: String
+	val action: SsmAction
 }
 
 /**
@@ -40,6 +43,6 @@ expect interface SsmTransitionDTO {
 data class SsmTransition(
 	override val from: Int,
 	override val to: Int,
-	override val role: String,
-	override val action: String,
+	override val role: SsmRole,
+	override val action: SsmAction,
 ) : SsmTransitionDTO

@@ -11,12 +11,16 @@ Feature:
 
     Examples:
       | functionName                            |
-      | couchDbSsmSessionStateListQueryFunction |
+      | couchdbSsmSessionStateListQueryFunction |
       | couchdbDatabaseListQueryFunction        |
-      | couchDbDatabaseGetQueryFunction         |
+      | couchdbDatabaseGetQueryFunction         |
       | couchdbSsmGetQueryFunction              |
-      | couchDbSsmListQueryFunction             |
-      | couchDbSsmSessionStateListQueryFunction |
+      | couchdbSsmListQueryFunction             |
+      | couchdbSsmSessionStateListQueryFunction |
+      | couchdbChaincodeListQueryFunction       |
+      | couchdbAdminListQueryFunction           |
+      | couchdbUserListQueryFunction            |
+      | couchdbSsmSessionStateGetQueryFunction  |
 
   Scenario Outline: No inject couchdb function when config is not provided.
     When I get an empty spring application context
@@ -30,3 +34,7 @@ Feature:
       | couchdbSsmGetQueryFunction              |
       | couchDbSsmListQueryFunction             |
       | couchDbSsmSessionStateListQueryFunction |
+      | couchdbChaincodeListQueryFunction       |
+      | couchdbAdminListQueryFunction           |
+      | couchDbUserListQueryFunction            |
+      | couchdbSsmSessionStateGetQueryFunction  |

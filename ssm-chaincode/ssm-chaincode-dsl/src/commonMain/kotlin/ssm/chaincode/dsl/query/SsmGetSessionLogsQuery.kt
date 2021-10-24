@@ -32,8 +32,8 @@ class SsmGetSessionLogsQuery(
 	 * Identifier of the session to retrieve
 	 * @example [SsmSessionState.session]
 	 */
-	val session: SessionName,
-	override val bearerToken: String?,
+	val sessionName: SessionName,
+	override val bearerToken: String? = null,
 ) : SsmQueryDTO
 
 /**
@@ -46,7 +46,7 @@ class SsmGetSessionLogsQuery(
 @JsName("SsmGetSessionLogsQueryResult")
 data class SsmGetSessionLogsQueryResult(
 	val ssmUri: SsmUri,
-	val session: SessionName,
+	val sessionName: SessionName,
 	/**
 	 * The logs of the session since its creation
 	 * @example [{

@@ -1,12 +1,11 @@
 package ssm.data.spring.autoconfigure
 
-import kotlin.reflect.full.memberFunctions
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test
 import org.springframework.cloud.function.context.FunctionCatalog
 import ssm.chaincode.dsl.config.SsmChaincodeConfig
 import ssm.couchdb.dsl.config.SsmCouchdbConfig
-import ssm.data.dsl.config.DataSsmConfig
+import ssm.data.dsl.config.SsmDataConfig
 import ssm.test.spring.ApplicationContextBuilder
 import ssm.test.spring.ApplicationContextRunnerBuilder
 
@@ -39,7 +38,7 @@ class DataApplicationContextRunnerTest {
 
 
 	object TestConfiguration {
-		private val localDockerCompose = DataSsmConfig(
+		private val localDockerCompose = SsmDataConfig(
 			couchdb = SsmCouchdbConfig(
 				url = "http://localhost:5000",
 				username = "couchdb",

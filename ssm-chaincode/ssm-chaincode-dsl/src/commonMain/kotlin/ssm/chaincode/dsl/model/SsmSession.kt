@@ -53,8 +53,8 @@ expect interface SsmSessionDTO : WithPrivate {
 @JsExport
 @JsName("SsmSession")
 open class SsmSession(
-	override val ssm: String,
-	override val session: String,
+	override val ssm: SsmName,
+	override val session: SessionName,
 	override val roles: Map<String, String>,
 	override val public: String,
 	override val private: Map<String, String>? = hashMapOf(),

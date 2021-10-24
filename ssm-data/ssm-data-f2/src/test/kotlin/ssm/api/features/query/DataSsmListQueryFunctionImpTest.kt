@@ -5,12 +5,13 @@ import kotlinx.coroutines.runBlocking
 import org.assertj.core.api.Assertions
 import org.junit.jupiter.api.Disabled
 import org.junit.jupiter.api.Test
+import ssm.data.bdd.TestConfig
 import ssm.data.dsl.features.query.DataSsmListQuery
 
 class DataSsmListQueryFunctionImpTest {
 
 	private val function = DataSsmListQueryFunctionImp(
-		TestConfig.proudhon()
+		TestConfig.proudhon
 	).dataSsmListQueryFunction()
 
 

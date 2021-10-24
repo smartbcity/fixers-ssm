@@ -11,18 +11,16 @@ import kotlinx.coroutines.flow.toList
 import ssm.api.extentions.toDataSsm
 import ssm.chaincode.dsl.model.uri.ChaincodeUriBurstDTO
 import ssm.chaincode.dsl.model.uri.burstChaincode
-import ssm.couchdb.dsl.query.CouchdbSsmGetQueryFunction
 import ssm.couchdb.dsl.query.CouchdbSsmListQuery
 import ssm.couchdb.dsl.query.CouchdbSsmListQueryFunction
-import ssm.couchdb.f2.query.CouchdbSsmGetQueryFunctionImpl
 import ssm.couchdb.f2.query.CouchdbSsmListQueryFunctionImpl
-import ssm.data.dsl.config.DataSsmConfig
+import ssm.data.dsl.config.SsmDataConfig
 import ssm.data.dsl.features.query.DataSsmListQueryFunction
 import ssm.data.dsl.features.query.DataSsmListQueryResult
 import ssm.data.dsl.model.DataSsm
 
 class DataSsmListQueryFunctionImp(
-	private val config: DataSsmConfig,
+	private val config: SsmDataConfig,
 	private val couchdbSsmListQueryFunction: CouchdbSsmListQueryFunction =
 		CouchdbSsmListQueryFunctionImpl(config.couchdb).couchdbSsmListQueryFunction(),
 ) {

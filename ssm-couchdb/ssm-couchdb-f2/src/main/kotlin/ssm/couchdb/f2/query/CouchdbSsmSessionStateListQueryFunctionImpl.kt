@@ -2,6 +2,7 @@ package ssm.couchdb.f2.query
 
 import f2.dsl.cqrs.page.Page
 import ssm.chaincode.dsl.model.SsmSessionStateDTO
+import ssm.chaincode.dsl.model.uri.burstChaincode
 import ssm.couchdb.dsl.config.SsmCouchdbConfig
 import ssm.couchdb.dsl.model.DocType
 import ssm.couchdb.dsl.query.CouchdbSsmSessionStateListQueryFunction
@@ -18,8 +19,11 @@ class CouchdbSsmSessionStateListQueryFunctionImpl(
 			val filters = cmd.ssm?.let { ssm ->
 				mapOf(SsmSessionStateDTO::ssm.name to ssm)
 			} ?: emptyMap()
-			couchdbClient.fetchAllByDocType(chainCodeDbName(cmd.channelId, cmd.chaincodeId), DocType.State, filters)
-				.let { list ->
+			couchdbClient.fetchAllByDocType(
+				chainCodeDbName(
+					cmd.chaincodeUri.burstChaincode()!!.channelId, cmd.chaincodeUri.burstChaincode()!!.chaincodeId
+				), DocType.State, filters
+			).let { list ->
 					CouchdbSsmSessionStateListQueryResult(
 						page = Page(
 							list = list,

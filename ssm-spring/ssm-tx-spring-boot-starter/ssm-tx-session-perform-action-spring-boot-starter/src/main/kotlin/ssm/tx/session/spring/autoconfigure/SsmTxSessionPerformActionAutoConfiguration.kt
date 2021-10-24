@@ -6,7 +6,7 @@ import org.springframework.boot.context.properties.EnableConfigurationProperties
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
 import ssm.chaincode.dsl.config.SsmChaincodeConfig
-import ssm.chaincode.f2.SsmTxSessionPerformActionFunctionImpl
+import ssm.chaincode.f2.features.command.SsmTxSessionPerformActionFunctionImpl
 import ssm.sdk.sign.SignerProvider
 import ssm.sdk.sign.SignerProviderData
 import ssm.sdk.sign.config.signer

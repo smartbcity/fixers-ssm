@@ -3,6 +3,6 @@ plugins {
 }
 
 dependencies {
-//	api("ssm-bdd:ssm-bdd-cucumber")
+	api(project(":ssm-sdk:ssm-sdk-core"))
 	Dependencies.Jvm.cucumber(::api)
 }

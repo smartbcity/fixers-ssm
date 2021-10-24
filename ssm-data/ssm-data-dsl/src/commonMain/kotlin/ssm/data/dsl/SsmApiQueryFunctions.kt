@@ -1,6 +1,6 @@
 package ssm.data.dsl
 
-import ssm.data.dsl.config.DataSsmConfig
+import ssm.data.dsl.config.SsmDataConfig
 import ssm.data.dsl.features.query.DataSsmGetQueryFunction
 import ssm.data.dsl.features.query.DataSsmListQueryFunction
 import ssm.data.dsl.features.query.DataSsmSessionGetQueryFunction
@@ -22,10 +22,10 @@ import ssm.data.dsl.features.query.DataSsmSessionLogListQueryFunction
  * @@title SSM-TX/General
  */
 expect interface SsmApiQueryFunctions {
-	fun dataSsmListQueryFunction(config: DataSsmConfig): DataSsmListQueryFunction
-	fun dataSsmGetQueryFunction(config: DataSsmConfig): DataSsmGetQueryFunction
-	fun dataSsmSessionListQueryFunction(config: DataSsmConfig): DataSsmSessionListQueryFunction
-	fun dataSsmSessionGetQueryFunction(config: DataSsmConfig): DataSsmSessionGetQueryFunction
-	fun dataSsmSessionLogListQueryFunction(config: DataSsmConfig): DataSsmSessionLogListQueryFunction
-	fun dataSsmSessionLogGetQueryFunction(config: DataSsmConfig): DataSsmSessionLogGetQueryFunction
+	fun dataSsmListQueryFunction(config: SsmDataConfig): DataSsmListQueryFunction
+	fun dataSsmGetQueryFunction(config: SsmDataConfig): DataSsmGetQueryFunction
+	fun dataSsmSessionListQueryFunction(config: SsmDataConfig): DataSsmSessionListQueryFunction
+	fun dataSsmSessionGetQueryFunction(config: SsmDataConfig): DataSsmSessionGetQueryFunction
+	fun dataSsmSessionLogListQueryFunction(config: SsmDataConfig): DataSsmSessionLogListQueryFunction
+	fun dataSsmSessionLogGetQueryFunction(config: SsmDataConfig): DataSsmSessionLogGetQueryFunction
 }

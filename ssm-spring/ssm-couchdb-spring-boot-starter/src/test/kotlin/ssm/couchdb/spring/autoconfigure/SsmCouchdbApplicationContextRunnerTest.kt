@@ -20,9 +20,9 @@ class SsmCouchdbApplicationContextRunnerTest {
 				assertThat(context).hasSingleBean(FunctionCatalog::class.java)
 				assertThat(context).hasSingleBean(SsmCouchdbProperties::class.java)
 				assertThat(context).hasBean(SsmCouchdbAutoConfiguration::couchdbDatabaseListQueryFunction.name)
-				assertThat(context).hasBean(SsmCouchdbAutoConfiguration::couchDbDatabaseGetQueryFunction.name)
-				assertThat(context).hasBean(SsmCouchdbAutoConfiguration::couchDbSsmListQueryFunction.name)
-				assertThat(context).hasBean(SsmCouchdbAutoConfiguration::couchDbSsmSessionStateListQueryFunction.name)
+				assertThat(context).hasBean(SsmCouchdbAutoConfiguration::couchdbDatabaseGetQueryFunction.name)
+				assertThat(context).hasBean(SsmCouchdbAutoConfiguration::couchdbSsmListQueryFunction.name)
+				assertThat(context).hasBean(SsmCouchdbAutoConfiguration::couchdbSsmSessionStateListQueryFunction.name)
 			}
 	}
 

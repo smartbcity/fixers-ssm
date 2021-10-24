@@ -13,11 +13,11 @@ import ssm.tx.dsl.features.SsmCommandDTO
  * @parent [Ssm]
  * @title Grant User
  */
-typealias SsmUserGrantFunction = F2Function<SsmUserGrantCommand, SsmUserGrantedResult>
+typealias SsmTxUserGrantFunction = F2Function<SsmUserGrantCommand, SsmUserGrantedResult>
 
 /**
  * @d2 command
- * @parent [SsmUserGrantFunction]
+ * @parent [SsmTxUserGrantFunction]
  * @title Grant User: Parameters
  */
 class SsmUserGrantCommand(

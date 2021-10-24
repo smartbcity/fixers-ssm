@@ -1,5 +1,6 @@
 package ssm.data.dsl.features.query
 
+import f2.dsl.cqrs.Event
 import f2.dsl.fnc.F2Function
 import kotlin.js.JsExport
 import kotlin.js.JsName
@@ -23,7 +24,7 @@ expect interface DataSsmSessionGetQueryDTO : DataQueryDTO {
 	 * Identifier of the session to retrieve
 	 * @example [DataSsmSession.id]
 	 */
-	val sessionId: SessionName
+	val sessionName: SessionName
 	override val ssm: SsmUri
 	override val bearerToken: String?
 }
@@ -37,16 +38,16 @@ expect interface DataSsmSessionGetQueryDTO : DataQueryDTO {
 @JsExport
 @JsName("DataSsmSessionGetQuery")
 class DataSsmSessionGetQuery(
-	override val sessionId: SessionName,
+	override val sessionName: SessionName,
 	override val ssm: SsmUri,
-	override val bearerToken: String?,
+	override val bearerToken: String? = null,
 ) : DataSsmSessionGetQueryDTO
 
-expect interface DataSsmSessionGetQueryResultDTO {
+expect interface DataSsmSessionGetQueryResultDTO: Event {
 	/**
 	 * The retrieved session if it exists
 	 */
-	val session: DataSsmSessionDTO?
+	val item: DataSsmSessionDTO?
 }
 
 /**
@@ -58,5 +59,5 @@ expect interface DataSsmSessionGetQueryResultDTO {
 @JsExport
 @JsName("DataSsmSessionGetQueryResult")
 class DataSsmSessionGetQueryResult(
-	override val session: DataSsmSession?,
+	override val item: DataSsmSession?,
 ) : DataSsmSessionGetQueryResultDTO

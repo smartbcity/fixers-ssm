@@ -7,19 +7,17 @@ import ssm.chaincode.dsl.model.Ssm
 import ssm.chaincode.dsl.model.SsmSessionState
 import ssm.chaincode.dsl.model.SsmSessionStateDTO
 import ssm.chaincode.dsl.model.SsmSessionStateLog
-import ssm.chaincode.dsl.model.uri.ChaincodeUri
 import ssm.chaincode.dsl.model.uri.ChaincodeUriBurstDTO
 import ssm.chaincode.dsl.model.uri.DEFAULT_VERSION
 import ssm.chaincode.dsl.model.uri.SsmUri
 import ssm.chaincode.dsl.model.uri.SsmUriBurstDTO
-import ssm.chaincode.dsl.model.uri.burstChaincode
 import ssm.chaincode.dsl.model.uri.burstSsmUri
 import ssm.chaincode.dsl.model.uri.compact
 import ssm.chaincode.dsl.query.SsmGetSessionLogsQuery
 import ssm.chaincode.dsl.query.SsmGetTransactionQuery
 import ssm.chaincode.f2.query.SsmGetSessionLogsQueryFunctionImpl
 import ssm.chaincode.f2.query.SsmGetTransactionQueryFunctionImpl
-import ssm.data.dsl.config.DataSsmConfig
+import ssm.data.dsl.config.SsmDataConfig
 import ssm.data.dsl.model.DataSsm
 import ssm.data.dsl.model.DataSsmSession
 import ssm.data.dsl.model.DataSsmSessionId
@@ -50,7 +48,7 @@ fun Ssm.toDataSsm(ssm: SsmUri): DataSsm {
 }
 
 suspend fun SsmSessionStateDTO.toDataSession(
-	config: DataSsmConfig,
+	config: SsmDataConfig,
 	ssm: SsmUri,
 	bearerToken: String?,
 ): DataSsmSession {
@@ -85,11 +83,11 @@ fun SsmSessionStateDTO.toDataSession(
 }
 
 suspend fun DataSsmSessionId.getSessionLogs(
-	config: DataSsmConfig,
+	config: SsmDataConfig,
 	bearerToken: String?,
 ): List<SsmSessionStateLog> {
 	val query = SsmGetSessionLogsQuery(
-		session = this,
+		sessionName = this,
 		bearerToken = bearerToken
 	)
 	return try {
@@ -101,7 +99,7 @@ suspend fun DataSsmSessionId.getSessionLogs(
 }
 
 suspend fun TransactionId?.getTransaction(
-	config: DataSsmConfig,
+	config: SsmDataConfig,
 	bearerToken: String?,
 ): Transaction? {
 	return this?.let {

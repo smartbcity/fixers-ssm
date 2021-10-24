@@ -1,22 +1,22 @@
-package ssm.chaincode.f2
+package ssm.chaincode.f2.features.command
 
 import ssm.chaincode.dsl.config.SsmChaincodeConfig
 import ssm.chaincode.dsl.model.InvokeReturn
 import ssm.chaincode.dsl.model.Ssm
 import ssm.chaincode.dsl.model.SsmAgent
-import ssm.chaincode.f2.commons.SsmException
-import ssm.chaincode.f2.commons.ssmF2Function
+import ssm.chaincode.f2.utils.SsmException
+import ssm.chaincode.f2.utils.ssmF2Function
 import ssm.sdk.client.SsmClient
 import ssm.sdk.sign.SignerAdminProvider
 import ssm.sdk.sign.model.SignerAdmin
-import ssm.tx.dsl.features.ssm.SsmInitializeFunction
+import ssm.tx.dsl.features.ssm.SsmTxInitializeFunction
 import ssm.tx.dsl.features.ssm.SsmInitializedResult
 
 class SsmInitializeFunctionImpl {
 
 	fun ssmInitializeFunction(
 		config: SsmChaincodeConfig, signerAdminProvider: SignerAdminProvider
-	): SsmInitializeFunction = ssmF2Function(config) { cmd, ssmClient ->
+	): SsmTxInitializeFunction = ssmF2Function(config) { cmd, ssmClient ->
 		val signer = signerAdminProvider.get()
 		val retInitUser = initUser(cmd.agent, ssmClient, signer)
 		val retInitSsm = initSsm(cmd.ssm, ssmClient, signer)

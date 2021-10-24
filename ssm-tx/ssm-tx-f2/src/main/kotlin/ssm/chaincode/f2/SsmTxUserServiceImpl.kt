@@ -1,18 +1,20 @@
 package ssm.chaincode.f2
 
 import ssm.chaincode.dsl.config.SsmChaincodeConfig
+import ssm.chaincode.f2.features.command.SsmTxSessionPerformActionFunctionImpl
+import ssm.sdk.sign.SignerProvider
 import ssm.tx.dsl.SsmTxUserFunctions
-import ssm.tx.dsl.features.user.SsmUserGrantFunction
-import ssm.tx.dsl.features.user.SsmUserRegisterFunction
+import ssm.tx.dsl.features.ssm.SsmTxSessionPerformActionFunction
 
-class SsmTxServiceImpl : SsmTxUserFunctions {
+class SsmTxUserServiceImpl(
+	private val ssmTxSessionPerformActionFunction: SsmTxSessionPerformActionFunctionImpl =
+		SsmTxSessionPerformActionFunctionImpl(),
+	private val signerProvider: SignerProvider
+) : SsmTxUserFunctions {
 
-	override fun ssmUserGrantFunction(config: SsmChaincodeConfig): SsmUserGrantFunction {
-		TODO("Not yet implemented")
-	}
 
-	override fun ssmUserRegisterFunction(config: SsmChaincodeConfig): SsmUserRegisterFunction {
-		TODO("Not yet implemented")
+	override fun ssmTxSessionPerformActionFunction(config: SsmChaincodeConfig): SsmTxSessionPerformActionFunction {
+		return ssmTxSessionPerformActionFunction.ssmTxSessionPerformActionFunction(config, signerProvider)
 	}
 
 }

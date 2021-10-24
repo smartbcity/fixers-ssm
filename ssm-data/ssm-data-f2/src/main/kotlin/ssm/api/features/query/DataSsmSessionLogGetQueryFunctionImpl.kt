@@ -3,13 +3,13 @@ package ssm.api.features.query
 import f2.dsl.fnc.f2Function
 import ssm.api.extentions.getSessionLogs
 import ssm.api.extentions.getTransaction
-import ssm.data.dsl.config.DataSsmConfig
+import ssm.data.dsl.config.SsmDataConfig
 import ssm.data.dsl.features.query.DataSsmSessionLogGetQueryFunction
 import ssm.data.dsl.features.query.DataSsmSessionLogGetQueryResult
 import ssm.data.dsl.model.DataSsmSessionState
 
 class DataSsmSessionLogGetQueryFunctionImpl(
-	private val config: DataSsmConfig
+	private val config: SsmDataConfig
 ) {
 	fun dataSsmSessionLogGetQueryFunction(): DataSsmSessionLogGetQueryFunction =
 		f2Function { cmd ->

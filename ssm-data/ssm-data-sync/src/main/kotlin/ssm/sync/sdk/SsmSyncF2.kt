@@ -6,10 +6,8 @@ import f2.dsl.fnc.invoke
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.asFlow
 import kotlinx.coroutines.flow.filterNotNull
-import kotlinx.coroutines.flow.flatMapMerge
 import kotlinx.coroutines.flow.map
 import ssm.chaincode.dsl.model.uri.ChaincodeUriBurstDTO
-import ssm.chaincode.dsl.model.uri.burst
 import ssm.chaincode.dsl.model.uri.burstChaincode
 import ssm.chaincode.dsl.query.SsmGetSessionLogsQuery
 import ssm.chaincode.dsl.query.SsmGetSessionLogsQueryFunction
@@ -17,18 +15,18 @@ import ssm.chaincode.dsl.query.SsmGetSessionLogsQueryResult
 import ssm.chaincode.f2.query.SsmGetSessionLogsQueryFunctionImpl
 import ssm.couchdb.dsl.model.DatabaseChangesDTO
 import ssm.couchdb.dsl.model.DocType
-import ssm.couchdb.dsl.query.CouchDbDatabaseGetChangesQueryFunction
+import ssm.couchdb.dsl.query.CouchdbDatabaseGetChangesQueryFunction
 import ssm.couchdb.dsl.query.CouchdbDatabaseGetChangesQuery
 import ssm.couchdb.f2.query.CouchDbDatabaseGetChangesQueryFunctionImpl
-import ssm.data.dsl.config.DataSsmConfig
+import ssm.data.dsl.config.SsmDataConfig
 
 class SsmSyncF2(
-	private val config: DataSsmConfig,
+	private val config: SsmDataConfig,
 	private val chaincodeQueryFunctions: SsmGetSessionLogsQueryFunction =
 		SsmGetSessionLogsQueryFunctionImpl().ssmGetSessionLogsQueryFunction(config.chaincode),
 
 
-	private val couchDbDatabaseGetChangesQueryFunction: CouchDbDatabaseGetChangesQueryFunction =
+	private val couchDbDatabaseGetChangesQueryFunction: CouchdbDatabaseGetChangesQueryFunction =
 		CouchDbDatabaseGetChangesQueryFunctionImpl(config.couchdb).couchDbDatabaseGetChangesQueryFunction()
 ) {
 
@@ -59,7 +57,7 @@ class SsmSyncF2(
 		try {
 			chaincodeQueryFunctions.invoke(
 				SsmGetSessionLogsQuery(
-					session = changes.objectId,
+					sessionName = changes.objectId,
 					bearerToken = null
 				)
 			).also {

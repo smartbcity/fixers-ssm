@@ -4,5 +4,5 @@ plugins {
 }
 
 dependencies {
-	implementation("com.fasterxml.jackson.module:jackson-module-kotlin:${Versions.jacksonKotlin}")
+	api("com.fasterxml.jackson.module:jackson-module-kotlin:${Versions.jacksonKotlin}")
 }

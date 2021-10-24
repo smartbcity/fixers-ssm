@@ -13,11 +13,11 @@ import ssm.tx.dsl.features.SsmCommandDTO
  * @parent [Ssm]
  * @title Initialize SSM
  */
-typealias SsmInitializeFunction = F2Function<SsmInitializeCommand, SsmInitializedResult>
+typealias SsmTxInitializeFunction = F2Function<SsmInitializeCommand, SsmInitializedResult>
 
 /**
  * @d2 command
- * @parent [SsmInitializeFunction]
+ * @parent [SsmTxInitializeFunction]
  * @title Initialize SSM: Parameters
  */
 class SsmInitializeCommand(
@@ -34,7 +34,7 @@ class SsmInitializeCommand(
 
 /**
  * @d2 event
- * @parent [SsmInitializeFunction]
+ * @parent [SsmTxInitializeFunction]
  * @title Initialize SSM: Response
  */
 class SsmInitializedResult(

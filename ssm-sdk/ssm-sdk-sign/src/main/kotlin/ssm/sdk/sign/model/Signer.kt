@@ -21,6 +21,12 @@ open class Signer(val name: SignerName, val pair: KeyPair) {
 			val keypair = KeyPairReader.loadKeyPair(filename!!)
 			return Signer(name, keypair)
 		}
+
+		@Throws(Exception::class)
+		fun generate(name: SignerName): Signer {
+			val keypair = KeyPairReader.generateRSAKey()
+			return Signer(name, keypair)
+		}
 	}
 
 	override fun equals(other: Any?): Boolean {
