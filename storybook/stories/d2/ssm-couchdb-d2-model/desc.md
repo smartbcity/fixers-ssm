@@ -1,4 +1,0 @@
-
-
-## SsmCouchdbD2Model  
-

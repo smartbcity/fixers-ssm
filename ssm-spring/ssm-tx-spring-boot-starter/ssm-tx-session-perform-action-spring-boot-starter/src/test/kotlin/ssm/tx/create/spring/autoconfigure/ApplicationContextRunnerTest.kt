@@ -3,11 +3,11 @@ package ssm.tx.create.spring.autoconfigure
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test
 import org.springframework.cloud.function.context.FunctionCatalog
+import ssm.bdd.spring.autoconfigure.ApplicationContextBuilder
 import ssm.chaincode.dsl.config.SsmChaincodeConfig
 import ssm.tx.session.spring.autoconfigure.SsmTxSessionPerformActionAutoConfiguration
 import ssm.tx.session.spring.autoconfigure.SsmTxSessionPerformActionProperties
-import ssm.test.spring.ApplicationContextBuilder
-import ssm.test.spring.ApplicationContextRunnerBuilder
+import ssm.bdd.spring.autoconfigure.ApplicationContextRunnerBuilder
 
 class ApplicationContextRunnerTest {
 
@@ -31,8 +31,6 @@ class ApplicationContextRunnerTest {
 		assertThat(context.getBean(SsmTxSessionPerformActionAutoConfiguration::ssmTxSessionPerformActionFunction.name)).isNotNull
 		assertThat(context.getBean(FunctionCatalog::class.java)).isNotNull
 	}
-
-
 }
 
 

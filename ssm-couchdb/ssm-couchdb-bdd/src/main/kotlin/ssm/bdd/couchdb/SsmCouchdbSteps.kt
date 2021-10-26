@@ -1,8 +1,8 @@
 package ssm.bdd.couchdb
 
-import SsmQueryStep
 import f2.dsl.fnc.invoke
 import io.cucumber.java8.En
+import ssm.bdd.config.SsmQueryStep
 import ssm.chaincode.dsl.model.SessionName
 import ssm.chaincode.dsl.model.SsmName
 import ssm.chaincode.dsl.model.SsmSessionStateDTO

@@ -40,7 +40,8 @@ include(
 
 include(
 	"ssm-bdd:ssm-bdd-config",
-	"ssm-bdd:ssm-bdd-spring-autoconfigure",
+	"ssm-bdd:ssm-bdd-features",
+	"ssm-bdd:ssm-bdd-spring-autoconfigure"
 )
 
 include(
@@ -54,5 +55,5 @@ include(
 include(
 	"ssm-tx:ssm-tx-bdd",
 	"ssm-tx:ssm-tx-dsl",
-	"ssm-tx:ssm-tx-f2",
+	"ssm-tx:ssm-tx-f2"
 )

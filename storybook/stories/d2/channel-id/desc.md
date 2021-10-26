@@ -1,8 +1,0 @@
-
-
-# ChannelId  
-
-
-The unique id of a channel.
-
-

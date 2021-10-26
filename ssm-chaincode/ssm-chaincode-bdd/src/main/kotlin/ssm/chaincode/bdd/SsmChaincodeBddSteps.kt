@@ -1,9 +1,9 @@
 package ssm.chaincode.bdd
 
-import SsmQueryStep
 import f2.dsl.fnc.invoke
 import io.cucumber.java8.En
 import kotlinx.coroutines.runBlocking
+import ssm.bdd.config.SsmQueryStep
 import ssm.chaincode.dsl.model.SsmSessionState
 import ssm.chaincode.dsl.model.SsmSessionStateLog
 import ssm.chaincode.dsl.query.SsmGetSessionLogsQuery

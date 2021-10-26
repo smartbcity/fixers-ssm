@@ -1,6 +1,6 @@
 package ssm.tx.bdd
 
-import SsmCommandStep
+import ssm.bdd.config.SsmCommandStep
 import f2.dsl.fnc.invoke
 import io.cucumber.java8.En
 import ssm.chaincode.dsl.config.SsmChaincodeConfig
@@ -8,7 +8,6 @@ import ssm.chaincode.dsl.model.Ssm
 import ssm.chaincode.dsl.model.SsmAgent
 import ssm.chaincode.dsl.model.SsmSession
 import ssm.chaincode.f2.SsmTxAdminServiceImpl
-import ssm.sdk.client.extention.asAgent
 import ssm.sdk.sign.SignerAdminProvider
 import ssm.sdk.sign.model.Signer
 import ssm.sdk.sign.model.SignerAdmin
@@ -60,10 +59,7 @@ class SsmTxSteps : SsmCommandStep(), En {
 		))
 	}
 
-	override fun loadSignerAdmin(adminName: SignerName, filename: String?): SignerAdmin {
-		return SignerAdmin.loadFromFile(adminName, filename)
-	}
-	override fun loadSigner(userName: SignerName, filename: String): Signer {
+	override suspend fun loadSigner(userName: SignerName, filename: String): Signer {
 		return Signer.loadFromFile(userName, filename)
 	}
 }

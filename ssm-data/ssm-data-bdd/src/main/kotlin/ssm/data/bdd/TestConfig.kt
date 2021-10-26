@@ -9,8 +9,8 @@ object TestConfig {
 	val local = SsmDataConfig(
 		couchdb = SsmCouchdbConfig(
 			url = "http://localhost:5984",
-			username = "admin",
-			password = "admin",
+			username = "couchdb",
+			password = "couchdb",
 			serviceName = "ssm-data-unit"
 		),
 		chaincode = SsmChaincodeConfig(

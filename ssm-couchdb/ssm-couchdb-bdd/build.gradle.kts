@@ -4,5 +4,5 @@ plugins {
 
 dependencies {
 	implementation(project(":ssm-couchdb:ssm-couchdb-f2"))
-	api(project(":ssm-bdd:ssm-bdd-config"))
+	api(project(":ssm-bdd:ssm-bdd-features"))
 }

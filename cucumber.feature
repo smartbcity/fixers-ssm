@@ -54,6 +54,7 @@
     Given configuration for ssm chaincode with uri "ssm:sandbox:ssm" # TX ???? FOR WHAT
 
 # TX; SDK
+    Given An admin                                                             # TX; SDK
     Given The admin "ADMIN_NAME"                                                             # TX; SDK
     Given The admin "ADMIN_NAME" with key "local/admin/ssm-admin"                            # TX; SDK
     Given The user "USER_NAME" with key "local/user/bob"                                     # TX; SDK

@@ -3,11 +3,11 @@ package ssm.tx.spring.autoconfigure
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test
 import org.springframework.cloud.function.context.FunctionCatalog
+import ssm.bdd.spring.autoconfigure.ApplicationContextBuilder
 import ssm.chaincode.dsl.config.SsmChaincodeConfig
 import ssm.tx.session.start.spring.autoconfigure.SsmSessionStartAutoConfiguration
 import ssm.tx.session.start.spring.autoconfigure.SsmTxSessionStartProperties
-import ssm.test.spring.ApplicationContextBuilder
-import ssm.test.spring.ApplicationContextRunnerBuilder
+import ssm.bdd.spring.autoconfigure.ApplicationContextRunnerBuilder
 
 
 class ApplicationContextRunnerTest {

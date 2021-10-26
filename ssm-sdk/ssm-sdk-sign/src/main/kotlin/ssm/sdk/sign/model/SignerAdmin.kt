@@ -15,7 +15,7 @@ class SignerAdmin(name: String, pair: KeyPair) : Signer(name, pair) {
 
 		@Throws(Exception::class)
 		fun loadFromFile(name: String, filename: String?): SignerAdmin {
-			val keypair = KeyPairReader.loadKeyPair(filename!!)
+			val keypair = KeyPairReader.loadKeyPair(filename ?: name)
 			return SignerAdmin(name, keypair)
 		}
 	}

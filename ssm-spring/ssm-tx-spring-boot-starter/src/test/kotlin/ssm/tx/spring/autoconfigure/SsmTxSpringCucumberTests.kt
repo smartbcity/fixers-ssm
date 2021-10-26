@@ -10,5 +10,5 @@ import ssm.chaincode.dsl.config.SsmChaincodeConfig
 @Suite
 @IncludeEngines("cucumber")
 @SelectClasspathResource("features")
-@ConfigurationParameter(key = GLUE_PROPERTY_NAME, value = "ssm.test.cucumber.steps")
+@ConfigurationParameter(key = GLUE_PROPERTY_NAME, value = "ssm")
 class SsmTxSpringCucumberTests

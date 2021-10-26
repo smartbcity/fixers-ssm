@@ -1,9 +1,9 @@
 package ssm.data.bdd
 
-import SsmQueryStep
 import f2.dsl.fnc.invoke
 import io.cucumber.java8.En
 import ssm.api.DataSsmQueryFunctionImpl
+import ssm.bdd.config.SsmQueryStep
 import ssm.chaincode.dsl.model.SessionName
 import ssm.chaincode.dsl.model.SsmName
 import ssm.chaincode.dsl.model.SsmSessionStateDTO
@@ -35,12 +35,9 @@ class SsmCouchdbSteps : SsmQueryStep(), En {
 			).item!!.state.details
 	}
 
-	override suspend fun logSession(sessionName: String) = emptyList<SsmSessionStateLog>()
-//		runBlocking {
-//		couchDbSsmQueriesFunctions.ssmGetSessionLogsQueryFunction(bag.config)
-//			.invoke(SsmGetSessionLogsQuery(sessionName = sessionName))
-//			.logs
-//	}
+	override suspend fun logSession(sessionName: String): List<SsmSessionStateLog> {
+		return bag.client.log(sessionName)
+	}
 
 	override suspend fun listSessions(): List<SessionName> {
 		couchdbSsmQueriesFunctionImpl.couchdbAdminListQueryFunction(config = ssmDataConfig.couchdb).invoke(
