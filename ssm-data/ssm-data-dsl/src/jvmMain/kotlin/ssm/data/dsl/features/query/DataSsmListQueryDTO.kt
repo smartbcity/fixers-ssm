@@ -5,5 +5,5 @@ import ssm.data.dsl.model.DataSsmDTO
 actual interface DataSsmListQueryDTO
 
 actual interface DataSsmListQueryResultDTO {
-	actual val list: List<DataSsmDTO>
+	actual val items: List<DataSsmDTO>
 }

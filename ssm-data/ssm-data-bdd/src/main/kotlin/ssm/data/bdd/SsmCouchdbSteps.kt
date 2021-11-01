@@ -47,7 +47,7 @@ class SsmCouchdbSteps : SsmQueryStep(), En {
 		return dataSsmQueryFunctionImpl.dataSsmSessionListQueryFunction(ssmDataConfig)
 			.invoke(DataSsmSessionListQuery(
 				ssm = bag.ssmUri
-			)).list.map { it.state.details.session }
+			)).items.map { it.state.details.session }
 	}
 
 	override suspend fun listSsm(): List<SsmName> {
@@ -56,7 +56,7 @@ class SsmCouchdbSteps : SsmQueryStep(), En {
 				DataSsmListQuery(
 					chaincodes = listOf(bag.chaincodeUri)
 				)
-			).list.map { it.ssm.name }
+			).items.map { it.ssm.name }
 	}
 
 	override suspend fun listUsers(): List<String> {

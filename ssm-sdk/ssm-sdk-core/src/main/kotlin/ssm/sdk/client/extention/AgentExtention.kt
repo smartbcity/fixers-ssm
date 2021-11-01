@@ -3,22 +3,22 @@
 package ssm.sdk.client.extention
 
 import java.security.PublicKey
-import ssm.chaincode.dsl.model.SsmAgent
+import ssm.chaincode.dsl.model.Agent
 import ssm.sdk.sign.crypto.KeyPairReader
 
 @Throws(Exception::class)
-fun loadFromFile(name: String): SsmAgent {
+fun loadFromFile(name: String): Agent {
 	val pub = KeyPairReader.loadPublicKey(name)
-	return SsmAgent(name, pub.encoded)
+	return Agent(name, pub.encoded)
 }
 
 @Throws(Exception::class)
-fun loadFromFile(name: String, filename: String): SsmAgent {
+fun loadFromFile(name: String, filename: String): Agent {
 	val pub = KeyPairReader.loadPublicKey(filename)
-	return SsmAgent(name, pub.encoded)
+	return Agent(name, pub.encoded)
 }
 
 @Throws(Exception::class)
-fun SsmAgent.getPubAsKey(): PublicKey {
+fun Agent.getPubAsKey(): PublicKey {
 	return KeyPairReader.fromByteArray(pub)
 }

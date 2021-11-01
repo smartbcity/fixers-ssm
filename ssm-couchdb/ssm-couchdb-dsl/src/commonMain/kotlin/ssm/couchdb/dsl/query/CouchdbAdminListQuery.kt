@@ -6,9 +6,7 @@ import f2.dsl.fnc.F2Function
 import kotlin.js.JsExport
 import kotlin.js.JsName
 import kotlinx.serialization.Serializable
-import ssm.chaincode.dsl.model.ChaincodeId
-import ssm.chaincode.dsl.model.ChannelId
-import ssm.chaincode.dsl.model.SsmAgent
+import ssm.chaincode.dsl.model.Agent
 import ssm.chaincode.dsl.model.SsmAgentDTO
 import ssm.chaincode.dsl.model.uri.ChaincodeUri
 
@@ -55,5 +53,5 @@ class CouchdbAdminListQuery(
 @JsExport
 @JsName("CouchdbAdminListQueryResult")
 class CouchdbAdminListQueryResult(
-	override val items: List<SsmAgent>,
+	override val items: List<Agent>,
 ) : CouchdbAdminListQueryResultDTO

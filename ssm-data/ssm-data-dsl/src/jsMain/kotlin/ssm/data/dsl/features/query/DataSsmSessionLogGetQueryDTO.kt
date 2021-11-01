@@ -11,11 +11,10 @@ actual external interface DataSsmSessionLogGetQueryDTO : DataQueryDTO {
 	actual val sessionId: DataSsmSessionId
 	actual val txId: TransactionId
 	actual override val ssm: SsmUri
-	actual override val bearerToken: String?
 }
 
 @JsExport
 @JsName("DataSsmSessionLogGetQueryResultDTO")
 actual external interface DataSsmSessionLogGetQueryResultDTO {
-	actual val ssmSessionState: DataSsmSessionStateDTO?
+	actual val item: DataSsmSessionStateDTO?
 }

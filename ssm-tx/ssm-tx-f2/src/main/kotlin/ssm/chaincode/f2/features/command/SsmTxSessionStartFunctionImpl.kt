@@ -12,7 +12,10 @@ class SsmTxSessionStartFunctionImpl {
 		config: SsmChaincodeConfig,
 		signerAdminProvider: SignerAdminProvider
 	): SsmTxSessionStartFunction = ssmF2Function(config) { cmd, ssmClient ->
-		val invoke = ssmClient.start(signerAdminProvider.get(), cmd.session)!!
-		SsmSessionStartResult(invoke)
+		ssmClient.start(signerAdminProvider.get(), cmd.session)!!.let { result ->
+			SsmSessionStartResult(
+				transactionId = result.transactionId,
+			)
+		}
 	}
 }

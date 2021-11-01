@@ -9,11 +9,10 @@ import ssm.data.dsl.model.DataSsmSessionState
 actual external interface DataSsmSessionLogListQueryDTO : DataQueryDTO {
 	actual val sessionId: DataSsmSessionId
 	actual override val ssm: SsmUri
-	actual override val bearerToken: String?
 }
 
 @JsExport
 @JsName("DataSsmSessionLogListQueryResultDTO")
 actual external interface DataSsmSessionLogListQueryResultDTO {
-	actual val list: List<DataSsmSessionState>
+	actual val items: List<DataSsmSessionState>
 }

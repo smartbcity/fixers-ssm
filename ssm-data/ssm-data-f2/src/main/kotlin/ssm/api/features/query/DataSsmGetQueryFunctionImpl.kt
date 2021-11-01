@@ -21,7 +21,7 @@ class DataSsmGetQueryFunctionImpl(
 			name = burst.ssmName,
 //			bearerToken = query.bearerToken
 		))
-			.ssm
+			.item
 			?.toDataSsm(query.ssm)
 			.let(::DataSsmGetQueryResult)
 	}

@@ -8,7 +8,7 @@ import kotlinx.serialization.Serializable
  * The unique id of a chaincode.
  * @d2 model
  * @example "ssm"
- * @parent [Ssm]
+ * @parent [ssm.chaincode.dsl.SsmChaincodeD2Model]
  */
 typealias ChaincodeId = String
 

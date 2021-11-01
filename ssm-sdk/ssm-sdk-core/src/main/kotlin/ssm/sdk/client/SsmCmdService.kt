@@ -7,11 +7,11 @@ import ssm.sdk.client.model.SsmCmd
 import ssm.sdk.client.model.SsmCmdSigned
 import ssm.sdk.client.model.SsmCmdSignerSha256RSASigner
 import ssm.sdk.client.command.StartCmdSigner
-import ssm.chaincode.dsl.model.InvokeReturn
 import ssm.chaincode.dsl.model.Ssm
-import ssm.chaincode.dsl.model.SsmAgent
+import ssm.chaincode.dsl.model.Agent
 import ssm.chaincode.dsl.model.SsmContext
 import ssm.chaincode.dsl.model.SsmSession
+import ssm.sdk.client.model.InvokeReturn
 import ssm.sdk.sign.model.Signer
 
 class SsmCmdService(
@@ -19,7 +19,7 @@ class SsmCmdService(
 	private val ssmCmdSigner: SsmCmdSignerSha256RSASigner
 ) {
 
-	fun registerUser(agent: SsmAgent): SsmCmd {
+	fun registerUser(agent: Agent): SsmCmd {
 		val cmd = RegisterCmdBuilder(agent)
 		return cmd.commandToSign()
 	}

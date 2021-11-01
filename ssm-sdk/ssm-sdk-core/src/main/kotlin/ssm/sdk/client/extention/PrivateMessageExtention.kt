@@ -4,7 +4,7 @@ package ssm.sdk.client.extention
 
 import java.security.PrivateKey
 import java.security.PublicKey
-import ssm.chaincode.dsl.model.SsmAgent
+import ssm.chaincode.dsl.model.Agent
 import ssm.chaincode.dsl.model.SsmContext
 import ssm.chaincode.dsl.model.SsmSession
 import ssm.chaincode.dsl.model.SsmSessionState
@@ -13,7 +13,7 @@ import ssm.sdk.sign.crypto.RSACipher
 import ssm.sdk.sign.model.Signer
 
 @Throws(Exception::class)
-fun SsmContext.addPrivateMessage(value: String, agent: SsmAgent): SsmContext {
+fun SsmContext.addPrivateMessage(value: String, agent: Agent): SsmContext {
 	return addPrivateMessage(value, agent.name, agent.getPubAsKey())
 }
 
@@ -24,7 +24,7 @@ fun SsmContext.addPrivateMessage(value: String, name: String, publicKey: PublicK
 }
 
 @Throws(Exception::class)
-fun SsmSession.addPrivateMessage(value: String, agent: SsmAgent) {
+fun SsmSession.addPrivateMessage(value: String, agent: Agent) {
 	addPrivateMessage(value, agent.name, agent.getPubAsKey())
 }
 
@@ -37,7 +37,7 @@ fun SsmSession.addPrivateMessage(value: String, name: String, publicKey: PublicK
 }
 
 @Throws(Exception::class)
-fun SsmSessionState.addPrivateMessage(value: String, agent: SsmAgent) {
+fun SsmSessionState.addPrivateMessage(value: String, agent: Agent) {
 	addPrivateMessage(value, agent.name, agent.getPubAsKey())
 }
 

@@ -8,7 +8,8 @@ import ssm.chaincode.dsl.config.SsmChaincodeConfig
 import ssm.chaincode.dsl.model.SessionName
 import ssm.chaincode.dsl.model.Ssm
 import ssm.chaincode.dsl.model.SsmAction
-import ssm.chaincode.dsl.model.SsmAgent
+import ssm.chaincode.dsl.model.Agent
+import ssm.chaincode.dsl.model.AgentName
 import ssm.chaincode.dsl.model.SsmContext
 import ssm.chaincode.dsl.model.SsmName
 import ssm.chaincode.dsl.model.SsmSession
@@ -136,34 +137,62 @@ abstract class SsmCommandStep {
 				createSsm(bag.ssms[contextSsm]!!)
 			}
 		}
-		When("I start a session {string} for {string}") { sessionName: SessionName, ssmName: SsmName ->
+		When("I start a session {string} for {string}") { sessionName: SessionName, ssmName: SsmName, table: DataTable ->
 			runBlocking {
 				val contextSsm = ssmName.contextualize(bag)
 				val session = SsmSession(
 					ssm = contextSsm,
 					session = sessionName.contextualize(bag),
-					roles = emptyMap(),
+					roles = table.asStartSessionRole(),
 					public = "",
-					private = emptyMap()
+					private = null
 				)
 				startSession(session)
 			}
 		}
-		When("I perform action {string}[{int}] for {string} with {string}")
-		{ actionName: SsmAction, iteration: Int, sessionName: SessionName, userName: String ->
+		When("I perform actions")
+		{ table: DataTable ->
 			runBlocking {
-				val contextUser = userName.contextualize(bag)
-				val signer = bag.userSigners[contextUser]!!
-				val context = SsmContext(
-					session = sessionName.contextualize(bag),
-					public = "public",
-					iteration = iteration,
-
+				table.asPerformAction().forEach { perform ->
+					val contextUser = perform.userName
+					val signer = bag.userSigners[contextUser]!!
+					val context = SsmContext(
+						session = perform.sessionName,
+						public = perform.public,
+						iteration = perform.iteration,
+						private = emptyMap()
 					)
-				bag.client.perform(signer, actionName, context)
+					bag.client.perform(signer, perform.action, context)
+				}
 			}
 		}
 	}
+
+	private fun DataTable.asStartSessionRole(): Map<String, AgentName> {
+		return asMaps().associate { columns ->
+			columns["userName"]!!.contextualize(bag) to columns["role"]!!
+		}
+	}
+
+	private fun DataTable.asPerformAction(): List<PerformAction> {
+		return asMaps().map { columns ->
+			PerformAction(
+				sessionName = columns[PerformAction::sessionName.name]!!.contextualize(bag),
+				userName = columns[PerformAction::userName.name]!!.contextualize(bag),
+				action = columns[PerformAction::action.name]!!,
+				iteration = columns[PerformAction::iteration.name]?.toInt()!!,
+				public = columns[PerformAction::public.name]!!,
+				)
+		}
+	}
+
+	data class PerformAction(
+		val action: SsmAction,
+		val iteration: Int,
+		val sessionName: String,
+		val userName: AgentName,
+		val public: String
+	)
 
 	fun DataTable.asTransitions(): List<SsmTransition> {
 		return asMaps().map { columns ->
@@ -172,8 +201,7 @@ abstract class SsmCommandStep {
 				to = columns[SsmTransition::to.name]?.toInt()!!,
 				role = columns[SsmTransition::role.name]!!,
 				action = columns[SsmTransition::action.name]!!,
-
-				)
+			)
 		}
 	}
 
@@ -186,7 +214,7 @@ abstract class SsmCommandStep {
 
 	protected abstract suspend fun createSsm(ssm: Ssm)
 
-	protected abstract suspend fun registerUser(ssmAgent: SsmAgent)
+	protected abstract suspend fun registerUser(ssmAgent: Agent)
 
 	protected suspend fun loadSignerAdmin(adminName: SignerName? = null, filename: String? = null): SignerAdmin {
 		return when {

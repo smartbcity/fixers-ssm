@@ -9,5 +9,5 @@ actual external interface DataSsmListQueryDTO
 @JsExport
 @JsName("DataSsmListQueryResultDTO")
 actual external interface DataSsmListQueryResultDTO {
-	actual val list: List<DataSsmDTO>
+	actual val items: List<DataSsmDTO>
 }

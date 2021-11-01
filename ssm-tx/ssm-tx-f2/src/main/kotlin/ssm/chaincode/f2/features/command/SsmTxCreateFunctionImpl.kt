@@ -16,7 +16,9 @@ class SsmTxCreateFunctionImpl {
 		try {
 			val adminSigner = signerProvider.get()
 			ssmClient.create(adminSigner, cmd.ssm).let {
-				SsmCreateResult(listOf(it!!))
+				SsmCreateResult(
+					transactionId = it!!.transactionId,
+				)
 			}
 		} catch (e: Exception) {
 			throw SsmException(e)

@@ -58,7 +58,6 @@ class SsmSyncF2(
 			chaincodeQueryFunctions.invoke(
 				SsmGetSessionLogsQuery(
 					sessionName = changes.objectId,
-					bearerToken = null
 				)
 			).also {
 				println(it.logs)

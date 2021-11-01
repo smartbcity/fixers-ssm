@@ -14,10 +14,10 @@ class DataSsmSessionLogListQueryFunctionImpl(
 
 	fun dataSsmSessionLogListQueryFunction(): DataSsmSessionLogListQueryFunction =
 		f2Function { cmd ->
-			val logs = cmd.sessionId.getSessionLogs(config, cmd.bearerToken)
+			val logs = cmd.sessionId.getSessionLogs(config)
 
 			logs.map { log ->
-				val transaction = log.txId.getTransaction(config, cmd.bearerToken)
+				val transaction = log.txId.getTransaction(config)
 				DataSsmSessionState(
 					details = log.state,
 					transaction = transaction

@@ -1,16 +1,15 @@
 package ssm.tx.dsl.features.user
 
-import f2.dsl.cqrs.Event
 import f2.dsl.fnc.F2Function
-import ssm.chaincode.dsl.model.InvokeReturn
-import ssm.chaincode.dsl.model.Ssm
-import ssm.chaincode.dsl.model.SsmAgent
+import ssm.chaincode.dsl.blockchain.TransactionId
+import ssm.chaincode.dsl.model.Agent
 import ssm.tx.dsl.features.SsmCommandDTO
+import ssm.tx.dsl.features.SsmCommandResultDTO
 
 /**
  * Grant user
  * @d2 function
- * @parent [Ssm]
+ * @parent [ssm.tx.dsl.SsmTxD2Command]
  * @title Grant User
  */
 typealias SsmTxUserGrantFunction = F2Function<SsmUserGrantCommand, SsmUserGrantedResult>
@@ -24,14 +23,14 @@ class SsmUserGrantCommand(
 	/**
 	 * Initial user of the SSM
 	 */
-	val agent: SsmAgent,
+	val agent: Agent,
 ) : SsmCommandDTO
 
 /**
  * @d2 event
- * @parent [SsmUserGrantedResult]
+ * @parent [SsmTxUserGrantFunction]
  * @title Grant User: Response
  */
 class SsmUserGrantedResult(
-	val invokeReturn: InvokeReturn,
-) : Event
+	override val transactionId: TransactionId,
+) : SsmCommandResultDTO

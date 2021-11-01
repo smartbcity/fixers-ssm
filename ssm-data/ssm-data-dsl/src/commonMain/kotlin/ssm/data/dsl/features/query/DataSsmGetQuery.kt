@@ -10,7 +10,7 @@ import ssm.data.dsl.model.DataSsm
 /**
  * Retrieves a given SSM
  * @d2 function
- * @parent [DataSsm]
+ * @parent [ssm.data.dsl.SsmDataD2Query]
  * @order 10
  * @title Get SSM
  */
@@ -18,7 +18,6 @@ typealias DataSsmGetQueryFunction = F2Function<DataSsmGetQueryDTO, DataSsmGetQue
 
 expect interface DataSsmGetQueryDTO : DataQueryDTO {
 	override val ssm: SsmUri
-	override val bearerToken: String?
 }
 
 /**
@@ -31,14 +30,13 @@ expect interface DataSsmGetQueryDTO : DataQueryDTO {
 @JsName("DataSsmGetQuery")
 class DataSsmGetQuery(
 	override val ssm: SsmUri,
-	override val bearerToken: String?,
 ) : DataSsmGetQueryDTO
 
 expect interface DataSsmGetQueryResultDTO {
 	/**
 	 * The retrieved SSM if it exists
 	 */
-	val ssm: DataSsm?
+	val item: DataSsm?
 }
 
 /**
@@ -50,5 +48,5 @@ expect interface DataSsmGetQueryResultDTO {
 @JsExport
 @JsName("DataSsmGetQueryResult")
 class DataSsmGetQueryResult(
-	override val ssm: DataSsm?,
+	override val item: DataSsm?,
 ) : DataSsmGetQueryResultDTO

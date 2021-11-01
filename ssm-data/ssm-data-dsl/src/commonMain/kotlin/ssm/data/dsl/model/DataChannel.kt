@@ -16,11 +16,11 @@ expect interface DataChannelDTO {
 /**
  * Description of a channel
  * @d2 model
- * @parent [ssm.data.dsl.SsmApiQueryFunctions]
+ * @parent [ssm.data.dsl.SsmDataD2Model]
  */
 @Serializable
 @JsExport
-@JsName("TxChannel")
-class TxChannel(
+@JsName("DataChannel")
+class DataChannel(
 	override val id: ChannelId,
 ) : DataChannelDTO

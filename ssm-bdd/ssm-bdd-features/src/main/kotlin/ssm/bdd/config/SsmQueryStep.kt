@@ -7,7 +7,9 @@ import kotlinx.coroutines.runBlocking
 import org.assertj.core.api.Assertions
 import ssm.chaincode.dsl.config.SsmChaincodeConfig
 import ssm.chaincode.dsl.model.SessionName
+import ssm.chaincode.dsl.model.SsmAction
 import ssm.chaincode.dsl.model.SsmName
+import ssm.chaincode.dsl.model.SsmRole
 import ssm.chaincode.dsl.model.SsmSessionState
 import ssm.chaincode.dsl.model.SsmSessionStateDTO
 import ssm.chaincode.dsl.model.SsmSessionStateLog
@@ -59,7 +61,7 @@ abstract class SsmQueryStep {
 			runBlocking {
 				Assertions.assertThat(
 					listUsers()
-				).contains(userName)
+				).contains(userName.contextualize(bag))
 			}
 		}
 		Then("Ssm {string} is in the list") { ssmName: SsmName ->
@@ -126,16 +128,19 @@ abstract class SsmQueryStep {
 			}
 		}
 
-		Then("The session {string} have logs") { sessionName: SessionName, table: DataTable ->
+		Then("The session {string} for {string} have logs") { sessionName: SessionName, ssmName: SsmName, table: DataTable ->
 			runBlocking {
-				val logs = logSession(sessionName.contextualize(bag))
+				val logs = logSession(sessionName.contextualize(bag)).sortedBy { it.state.iteration }
 				table.asCucumberSessionLog().forEachIndexed { index, clog ->
 					val log = logs[index]
-					Assertions.assertThat(log.state.origin).isEqualTo(clog.origin)
+					Assertions.assertThat(log.state.origin?.action).isEqualTo(clog.originAction)
+					Assertions.assertThat(log.state.origin?.from).isEqualTo(clog.originFrom)
+					Assertions.assertThat(log.state.origin?.to).isEqualTo(clog.originTo)
+					Assertions.assertThat(log.state.origin?.role).isEqualTo(clog.originRole)
 					Assertions.assertThat(log.state.current).isEqualTo(clog.current)
 					Assertions.assertThat(log.state.iteration).isEqualTo(clog.iteration)
-					Assertions.assertThat(log.state.ssm).isEqualTo(clog.ssm.contextualize(bag))
-					Assertions.assertThat(log.state.session).isEqualTo(clog.sessionName.contextualize(bag))
+					Assertions.assertThat(log.state.ssm).isEqualTo(ssmName.contextualize(bag))
+					Assertions.assertThat(log.state.session).isEqualTo(sessionName.contextualize(bag))
 				}
 			}
 		}
@@ -146,9 +151,10 @@ abstract class SsmQueryStep {
 			CucumberSessionLog(
 				current = columns[CucumberSessionLog::current.name]?.toInt()!!,
 				iteration = columns[CucumberSessionLog::iteration.name]?.toInt()!!,
-				origin = columns[CucumberSessionLog::origin.name]?.toInt(),
-				ssm = columns[CucumberSessionLog::ssm.name]!!,
-				sessionName = columns[CucumberSessionLog::sessionName.name]!!,
+				originAction = columns[CucumberSessionLog::originAction.name],
+				originFrom = columns[CucumberSessionLog::originFrom.name]?.toInt(),
+				originTo = columns[CucumberSessionLog::originTo.name]?.toInt(),
+				originRole = columns[CucumberSessionLog::originRole.name],
 			)
 		}
 	}
@@ -169,7 +175,8 @@ abstract class SsmQueryStep {
 class CucumberSessionLog(
 	val current: Int,
 	val iteration: Int,
-	val origin: Int?,
-	val ssm: SsmName,
-	val sessionName: SessionName
+	val originAction: SsmAction?,
+	val originFrom: Int?,
+	val originTo: Int?,
+	val originRole: SsmRole?,
 )

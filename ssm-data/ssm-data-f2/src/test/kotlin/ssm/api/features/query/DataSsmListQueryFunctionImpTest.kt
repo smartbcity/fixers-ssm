@@ -18,7 +18,7 @@ class DataSsmListQueryFunctionImpTest {
 	@Disabled
 	@Test
 	fun `must return result`() = runBlocking<Unit> {
-		val response = function.invoke(DataSsmListQuery(bearerToken = null, emptyList()))
-		Assertions.assertThat(response.list).hasSize(2)
+		val response = function.invoke(DataSsmListQuery(emptyList()))
+		Assertions.assertThat(response.items).hasSize(2)
 	}
 }

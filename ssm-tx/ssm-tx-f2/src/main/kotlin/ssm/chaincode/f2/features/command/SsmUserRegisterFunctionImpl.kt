@@ -14,8 +14,10 @@ class SsmUserRegisterFunctionImpl {
 		signerAdminProvider: SignerAdminProvider
 	): SsmTxUserRegisterFunction = ssmF2Function(config) { cmd, ssmClient ->
 		try {
-			ssmClient.registerUser(signerAdminProvider.get(), cmd.agent)!!.let {
-				SsmUserRegisteredResult(it)
+			ssmClient.registerUser(signerAdminProvider.get(), cmd.agent)!!.let {	result ->
+				SsmUserRegisteredResult(
+					transactionId = result.transactionId
+				)
 			}
 		} catch (e: Exception) {
 			throw SsmException(e)

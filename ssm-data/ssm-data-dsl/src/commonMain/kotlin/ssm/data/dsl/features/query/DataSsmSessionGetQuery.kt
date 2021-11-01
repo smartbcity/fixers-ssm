@@ -13,7 +13,7 @@ import ssm.data.dsl.model.DataSsmSessionDTO
 /**
  * Retrieves a given session
  * @d2 function
- * @parent [DataSsmSession]
+ * @parent [ssm.data.dsl.SsmDataD2Query]
  * @order 10
  * @title Get Session
  */
@@ -26,7 +26,6 @@ expect interface DataSsmSessionGetQueryDTO : DataQueryDTO {
 	 */
 	val sessionName: SessionName
 	override val ssm: SsmUri
-	override val bearerToken: String?
 }
 
 /**
@@ -40,7 +39,6 @@ expect interface DataSsmSessionGetQueryDTO : DataQueryDTO {
 class DataSsmSessionGetQuery(
 	override val sessionName: SessionName,
 	override val ssm: SsmUri,
-	override val bearerToken: String? = null,
 ) : DataSsmSessionGetQueryDTO
 
 expect interface DataSsmSessionGetQueryResultDTO: Event {

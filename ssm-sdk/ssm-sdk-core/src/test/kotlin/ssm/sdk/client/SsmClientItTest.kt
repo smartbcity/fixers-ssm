@@ -15,13 +15,13 @@ import ssm.sdk.client.extention.getPrivateMessage
 import ssm.sdk.client.extention.loadFromFile
 import ssm.chaincode.dsl.blockchain.Block
 import ssm.chaincode.dsl.blockchain.Transaction
-import ssm.chaincode.dsl.model.InvokeReturn
+import ssm.chaincode.dsl.model.Agent
 import ssm.chaincode.dsl.model.Ssm
-import ssm.chaincode.dsl.model.SsmAgent
 import ssm.chaincode.dsl.model.SsmContext
 import ssm.chaincode.dsl.model.SsmSession
 import ssm.chaincode.dsl.model.SsmSessionState
 import ssm.chaincode.dsl.model.SsmTransition
+import ssm.sdk.client.model.InvokeReturn
 import ssm.sdk.sign.model.Signer
 import ssm.sdk.sign.model.SignerAdmin
 
@@ -46,9 +46,9 @@ class SsmClientItTest {
 		private lateinit var signerAdmin: SignerAdmin
 		private lateinit var signerUser1: Signer
 		private lateinit var signerUser2: Signer
-		private lateinit var agentAdmin: SsmAgent
-		private lateinit var agentUser1: SsmAgent
-		private lateinit var agentUser2: SsmAgent
+		private lateinit var agentAdmin: Agent
+		private lateinit var agentUser1: Agent
+		private lateinit var agentUser2: Agent
 		private lateinit var client: SsmClient
 		private lateinit var ssmName: String
 		private lateinit var sessionName: String

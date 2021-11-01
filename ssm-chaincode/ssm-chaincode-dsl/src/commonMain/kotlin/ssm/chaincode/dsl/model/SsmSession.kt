@@ -44,10 +44,10 @@ expect interface SsmSessionDTO : WithPrivate {
 
 /**
  * @d2 model
- * @page
+ * @parent [ssm.chaincode.dsl.SsmChaincodeD2Model]
+ * @title SSM-CHAINCODE/Session
  * While an [SSM][Ssm] purely describes the structure of a State Machine, a session represents its instantiation.
- * It defines which [agent][SsmAgent] is assigned to which role, and keeps track of every state transition it has undergone.
- * @@title SSM-CHAINCODE/Session
+ * It defines which [agent][Agent] is assigned to which role, and keeps track of every state transition it has undergone.
  */
 @Serializable
 @JsExport

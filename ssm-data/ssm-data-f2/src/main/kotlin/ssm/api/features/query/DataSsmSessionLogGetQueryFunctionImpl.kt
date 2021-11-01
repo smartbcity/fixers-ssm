@@ -13,8 +13,8 @@ class DataSsmSessionLogGetQueryFunctionImpl(
 ) {
 	fun dataSsmSessionLogGetQueryFunction(): DataSsmSessionLogGetQueryFunction =
 		f2Function { cmd ->
-			val logs = cmd.sessionId.getSessionLogs(config, cmd.bearerToken)
-			val transaction = cmd.txId.getTransaction(config, cmd.bearerToken)
+			val logs = cmd.sessionId.getSessionLogs(config)
+			val transaction = cmd.txId.getTransaction(config)
 			logs.firstOrNull { log -> log.txId == cmd.txId }
 				?.let { sessionState ->
 					DataSsmSessionState(

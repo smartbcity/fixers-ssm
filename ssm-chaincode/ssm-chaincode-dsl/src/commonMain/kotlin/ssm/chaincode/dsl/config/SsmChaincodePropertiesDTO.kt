@@ -1,5 +1,11 @@
 package ssm.chaincode.dsl.config
 
+/**
+ * The configuration needed for
+ * @d2 model
+ * @example "ssm"
+ * @parent [ssm.chaincode.dsl.SsmChaincodeD2Model]
+ */
 expect interface SsmChaincodePropertiesDTO {
 	/**
 	 * URL of the peer hosting the chaincode

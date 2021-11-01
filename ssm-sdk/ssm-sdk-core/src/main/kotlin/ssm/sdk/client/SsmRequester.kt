@@ -4,11 +4,11 @@ import com.fasterxml.jackson.core.type.TypeReference
 import org.slf4j.LoggerFactory
 import ssm.sdk.client.invoke.builder.HasGet
 import ssm.sdk.client.invoke.builder.HasList
+import ssm.sdk.client.model.InvokeReturn
 import ssm.sdk.client.model.SsmCmdSigned
 import ssm.sdk.client.model.buildArgs
 import ssm.sdk.client.repository.CommandArgs
 import ssm.sdk.client.repository.KtorRepository
-import ssm.chaincode.dsl.model.InvokeReturn
 import ssm.sdk.json.JSONConverter
 import ssm.sdk.json.JsonUtils
 

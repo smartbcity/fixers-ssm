@@ -3,7 +3,7 @@ package ssm.bdd.config
 import io.cucumber.java8.Scenario
 import java.util.UUID
 import ssm.chaincode.dsl.model.Ssm
-import ssm.chaincode.dsl.model.SsmAgentName
+import ssm.chaincode.dsl.model.AgentName
 import ssm.chaincode.dsl.model.SsmName
 import ssm.chaincode.dsl.model.uri.ChaincodeUri
 import ssm.chaincode.dsl.model.uri.SsmUri
@@ -45,8 +45,8 @@ class SsmCucumberBag(
 	var ssms: MutableMap<SsmName, Ssm> = mutableMapOf()
 
 	// SsmChaincodeBddSteps
-	var adminsName: List<SsmAgentName> = emptyList()
-	var usersName: List<SsmAgentName> = emptyList()
+	var adminsName: List<AgentName> = emptyList()
+	var usersName: List<AgentName> = emptyList()
 	var ssmsName: List<SsmName> = emptyList()
 	var sessions: List<String> = emptyList()
 

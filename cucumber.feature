@@ -80,7 +80,8 @@
       | USER_NAME   | ROLE_NAME_1 |
       | USER_NAME_2 | ROLE_NAME_2 |
       | USER_NAME_3 | ROLE_NAME_2 |
-    When I perform action "ACTION_NAME"["ITERATION_NUMBER"] for "SESSION_NAME" with "USER_NAME"    # TX; SDK
+    When I perform actions
+      | action | iteration | sessionName | userName | public        |
 
 # chaincode;couchdb; SDK
     When I get the list of user                                                              # data;chaincode;couchdb; SDK

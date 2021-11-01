@@ -8,12 +8,4 @@ expect interface DataQueryDTO {
 	 * @example [ssm.chaincode.dsl.model.Ssm.name]
 	 */
 	val ssm: SsmUri
-
-	/**
-	 * Authentication token
-	 * @example [ssm.chaincode.dsl.SsmQueryDTO.bearerToken]
-	 */
-	val bearerToken: String?
 }
-
-typealias SsmName = String

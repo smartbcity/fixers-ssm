@@ -5,5 +5,5 @@ import ssm.data.dsl.model.DataSsmSessionDTO
 actual interface DataSsmSessionListQueryDTO : DataQueryDTO
 
 actual interface DataSsmSessionListQueryResultDTO {
-	actual val list: List<DataSsmSessionDTO>
+	actual val items: List<DataSsmSessionDTO>
 }

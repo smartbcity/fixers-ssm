@@ -1,0 +1,17 @@
+import { CodeHighlighter, DescriptedCode } from '@smartb/archetypes-ui-documentation'
+import { Meta } from '@storybook/addon-docs/blocks'
+import SsmListUserQueryDesc from './desc.md'
+import SsmListUserQueryVisualJson from './visualJson.json'
+
+<Meta title="List Users: Parameters" parameters={{ previewTabs: { canvas: { hidden: true } } }} />
+
+<DescriptedCode
+  leftElement={<SsmListUserQueryDesc />}
+  rightElement={
+    <CodeHighlighter
+      object={SsmListUserQueryVisualJson}
+      language={"json"}
+      title={"Example"}
+    />
+  }
+/>

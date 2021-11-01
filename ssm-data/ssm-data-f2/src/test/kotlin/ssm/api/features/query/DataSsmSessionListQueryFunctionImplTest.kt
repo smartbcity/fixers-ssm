@@ -17,6 +17,6 @@ internal class DataSsmSessionListQueryFunctionImplTest {
 		val result = function.invoke(DataSsmSessionListQuery(
 			ssm = "ssm:peer0:proudhon:ssm:Delivery",
 		))
-		Assertions.assertThat(result.list).isNotEmpty
+		Assertions.assertThat(result.items).isNotEmpty
 	}
 }

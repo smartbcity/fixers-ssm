@@ -13,7 +13,7 @@ import ssm.chaincode.dsl.model.uri.SsmUri
 /**
  * Retrieves the logs of a session since its creation
  * @d2 function
- * @parent [ssm.chaincode.dsl.model.SsmSession]
+ * @parent [ssm.chaincode.dsl.SsmChaincodeD2Query]
  * @title Get Session Logs
  * @order 20
  */
@@ -33,7 +33,6 @@ class SsmGetSessionLogsQuery(
 	 * @example [SsmSessionState.session]
 	 */
 	val sessionName: SessionName,
-	override val bearerToken: String? = null,
 ) : SsmQueryDTO
 
 /**

@@ -11,7 +11,7 @@ import ssm.data.dsl.model.DataSsmDTO
 /**
  * Retrieves all known SSMs
  * @d2 function
- * @parent [DataSsm]
+ * @parent [ssm.data.dsl.SsmDataD2Query]
  * @order 20
  * @title List SSMs
  */
@@ -28,7 +28,6 @@ expect interface DataSsmListQueryDTO
 @JsExport
 @JsName("DataSsmListQuery")
 class DataSsmListQuery(
-	val bearerToken: String? = null,
 	val chaincodes: List<ChaincodeUri>
 ) : DataSsmListQueryDTO
 
@@ -36,7 +35,7 @@ expect interface DataSsmListQueryResultDTO {
 	/**
 	 * List of all retrieved SSMs
 	 */
-	val list: List<DataSsmDTO>
+	val items: List<DataSsmDTO>
 }
 
 /**
@@ -48,5 +47,5 @@ expect interface DataSsmListQueryResultDTO {
 @JsExport
 @JsName("DataSsmListQueryResult")
 class DataSsmListQueryResult(
-	override val list: List<DataSsm>,
+	override val items: List<DataSsm>,
 ) : DataSsmListQueryResultDTO

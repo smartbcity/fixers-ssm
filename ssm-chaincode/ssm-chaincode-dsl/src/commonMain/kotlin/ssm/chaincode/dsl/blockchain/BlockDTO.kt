@@ -34,7 +34,7 @@ expect interface BlockDTO {
 /**
  * Block of transactions stored within the blockchain
  * @d2 model
- * @parent [Transaction]
+ * @parent [ssm.chaincode.dsl.SsmChaincodeD2Model]
  */
 @Serializable
 @JsExport

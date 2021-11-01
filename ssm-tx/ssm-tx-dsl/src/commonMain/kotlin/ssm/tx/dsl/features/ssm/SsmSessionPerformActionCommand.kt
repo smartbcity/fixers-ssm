@@ -1,16 +1,15 @@
 package ssm.tx.dsl.features.ssm
 
-import f2.dsl.cqrs.Event
 import f2.dsl.fnc.F2Function
-import ssm.chaincode.dsl.model.InvokeReturn
+import ssm.chaincode.dsl.blockchain.TransactionId
 import ssm.chaincode.dsl.model.SsmContext
-import ssm.chaincode.dsl.model.SsmSession
 import ssm.tx.dsl.features.SsmCommandDTO
+import ssm.tx.dsl.features.SsmCommandResultDTO
 
 /**
  * Performs a state transition for a given session
  * @d2 function
- * @parent [SsmSession]
+ * @parent [ssm.tx.dsl.SsmTxD2Command]
  * @title Perform Transition
  * @order 50
  */
@@ -40,5 +39,5 @@ class SsmSessionPerformActionCommand(
  * @title Perform Transition: Response
  */
 class SsmSessionPerformActionResult(
-	val invokeReturn: InvokeReturn,
-) : Event
+	override val transactionId: TransactionId
+) : SsmCommandResultDTO

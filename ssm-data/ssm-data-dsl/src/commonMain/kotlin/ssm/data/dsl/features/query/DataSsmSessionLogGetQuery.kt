@@ -32,7 +32,6 @@ expect interface DataSsmSessionLogGetQueryDTO : DataQueryDTO {
 	 */
 	val txId: TransactionId
 	override val ssm: SsmUri
-	override val bearerToken: String?
 }
 
 /**
@@ -47,14 +46,13 @@ class DataSsmSessionLogGetQuery(
 	override val sessionId: DataSsmSessionId,
 	override val txId: TransactionId,
 	override val ssm: SsmUri,
-	override val bearerToken: String?,
 ) : DataSsmSessionLogGetQueryDTO
 
 expect interface DataSsmSessionLogGetQueryResultDTO {
 	/**
 	 * The retrieved session state and transaction
 	 */
-	val ssmSessionState: DataSsmSessionStateDTO?
+	val item: DataSsmSessionStateDTO?
 }
 
 /**
@@ -66,5 +64,5 @@ expect interface DataSsmSessionLogGetQueryResultDTO {
 @JsExport
 @JsName("DataSsmSessionLogGetQueryResult")
 class DataSsmSessionLogGetQueryResult(
-	override val ssmSessionState: DataSsmSessionState?,
+	override val item: DataSsmSessionState?,
 ) : DataSsmSessionLogGetQueryResultDTO

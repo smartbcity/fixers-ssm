@@ -29,7 +29,7 @@ class DataSsmSessionListQueryFunctionImpl(private val config: SsmDataConfig) {
 		).page.list
 			.filter { sessionState -> sessionState.session.isNotBlank() }
 			.map { sessionState ->
-				sessionState.toDataSession(config, query.ssm, query.bearerToken)
+				sessionState.toDataSession(config, query.ssm)
 			}.let {
 				DataSsmSessionListQueryResult(it)
 			}

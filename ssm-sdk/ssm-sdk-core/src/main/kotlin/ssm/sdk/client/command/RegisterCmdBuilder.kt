@@ -2,7 +2,7 @@ package ssm.sdk.client.command
 
 import ssm.sdk.client.invoke.builder.cmd.CmdBuilder
 import ssm.sdk.client.model.SsmCmdName
-import ssm.chaincode.dsl.model.SsmAgent
+import ssm.chaincode.dsl.model.Agent
 
 // {
 //    "name": "bob3",
@@ -18,4 +18,4 @@ import ssm.chaincode.dsl.model.SsmAgent
 //  ]
 // }
 // echo "Usage: register <user> <signer>"
-class RegisterCmdBuilder(agent: SsmAgent) : CmdBuilder<SsmAgent>(agent, SsmCmdName.REGISTER)
+class RegisterCmdBuilder(agent: Agent) : CmdBuilder<Agent>(agent, SsmCmdName.REGISTER)

@@ -12,7 +12,8 @@ class SsmTxSessionPerformActionFunctionImpl {
 		config: SsmChaincodeConfig,
 		signerProvider: SignerProvider
 	): SsmTxSessionPerformActionFunction = ssmF2Function(config) { cmd, ssmClient ->
-		val invoke = ssmClient.perform(signerProvider.get(), cmd.action, cmd.context)!!
-		SsmSessionPerformActionResult(invoke)
+		ssmClient.perform(signerProvider.get(), cmd.action, cmd.context)!!.let { result ->
+			SsmSessionPerformActionResult(result.transactionId)
+		}
 	}
 }

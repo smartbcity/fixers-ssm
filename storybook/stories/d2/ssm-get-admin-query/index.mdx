@@ -1,0 +1,17 @@
+import { CodeHighlighter, DescriptedCode } from '@smartb/archetypes-ui-documentation'
+import { Meta } from '@storybook/addon-docs/blocks'
+import SsmGetAdminQueryDesc from './desc.md'
+import SsmGetAdminQueryVisualJson from './visualJson.json'
+
+<Meta title="Get Admin: Parameters" parameters={{ previewTabs: { canvas: { hidden: true } } }} />
+
+<DescriptedCode
+  leftElement={<SsmGetAdminQueryDesc />}
+  rightElement={
+    <CodeHighlighter
+      object={SsmGetAdminQueryVisualJson}
+      language={"json"}
+      title={"Example"}
+    />
+  }
+/>

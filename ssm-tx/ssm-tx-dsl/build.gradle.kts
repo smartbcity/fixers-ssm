@@ -4,8 +4,5 @@ plugins {
 }
 
 dependencies {
-//	commonMainApi(project(":ssm-sdk:ssm-sdk-sign"))
-
-	commonMainApi(project(":ssm-couchdb:ssm-couchdb-dsl"))
 	commonMainApi(project(":ssm-chaincode:ssm-chaincode-dsl"))
 }

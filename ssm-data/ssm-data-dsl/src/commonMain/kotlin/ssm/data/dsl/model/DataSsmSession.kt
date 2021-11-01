@@ -39,9 +39,8 @@ expect interface DataSsmSessionDTO {
 
 /**
  * @d2 model
- * @page
- * Represents an SSM session state with some metadata
- * @@title SSM-TX/Session
+ * @parent [ssm.data.dsl.SsmDataD2Model]
+ * Represents an SSM session with metadata
  */
 @Serializable
 @JsExport
@@ -49,7 +48,7 @@ expect interface DataSsmSessionDTO {
 class DataSsmSession(
 	override val id: DataSsmSessionId,
 	override val state: DataSsmSessionState,
-	override val channel: TxChannel,
+	override val channel: DataChannel,
 	override val transaction: Transaction?,
 	override val ssmUri: SsmUri,
 	override val transactions: List<TransactionDTO>,

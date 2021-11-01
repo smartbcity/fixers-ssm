@@ -1,0 +1,17 @@
+import { CodeHighlighter, DescriptedCode } from '@smartb/archetypes-ui-documentation'
+import DataSsmSessionGetQueryResultDesc from './desc.md'
+import DataSsmSessionGetQueryResultVisualJson from './visualJson.json'
+import { Meta } from '@storybook/addon-docs/blocks'
+
+<Meta title="Get Session: Result" parameters={{ previewTabs: { canvas: { hidden: true } } }} />
+
+<DescriptedCode
+  leftElement={<DataSsmSessionGetQueryResultDesc />}
+  rightElement={
+    <CodeHighlighter
+      object={DataSsmSessionGetQueryResultVisualJson}
+      language={"json"}
+      title={"Example"}
+    />
+  }
+/>

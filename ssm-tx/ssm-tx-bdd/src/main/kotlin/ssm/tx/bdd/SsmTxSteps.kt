@@ -5,7 +5,7 @@ import f2.dsl.fnc.invoke
 import io.cucumber.java8.En
 import ssm.chaincode.dsl.config.SsmChaincodeConfig
 import ssm.chaincode.dsl.model.Ssm
-import ssm.chaincode.dsl.model.SsmAgent
+import ssm.chaincode.dsl.model.Agent
 import ssm.chaincode.dsl.model.SsmSession
 import ssm.chaincode.f2.SsmTxAdminServiceImpl
 import ssm.sdk.sign.SignerAdminProvider
@@ -33,8 +33,6 @@ class SsmTxSteps : SsmCommandStep(), En {
 
 	}
 
-
-
 	override suspend fun startSession(session: SsmSession) {
 		ssmTxAdminServiceImpl.ssmTxSessionStartFunction(SsmChaincodeConfig(
 			bag.config.baseUrl
@@ -51,7 +49,7 @@ class SsmTxSteps : SsmCommandStep(), En {
 		))
 	}
 
-	override suspend fun registerUser(ssmAgent: SsmAgent) {
+	override suspend fun registerUser(ssmAgent: Agent) {
 		ssmTxAdminServiceImpl.ssmTxUserRegisterFunction(SsmChaincodeConfig(
 			bag.config.baseUrl
 		)).invoke(SsmUserRegisterCommand(

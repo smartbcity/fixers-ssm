@@ -2,7 +2,6 @@ package ssm.couchdb.dsl.query
 
 import f2.dsl.cqrs.Event
 import f2.dsl.cqrs.Query
-import ssm.chaincode.dsl.model.SsmAgent
 import ssm.chaincode.dsl.model.SsmAgentDTO
 import ssm.chaincode.dsl.model.uri.ChaincodeUri
 

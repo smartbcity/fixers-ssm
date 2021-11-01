@@ -5,13 +5,10 @@ import ssm.tx.dsl.features.ssm.SsmTxSessionPerformActionFunction
 import ssm.tx.dsl.features.user.SsmTxUserGrantFunction
 
 /**
- * - fun ssmUserGrantFunction(config: DataSsmConfig): [SsmTxUserGrantFunction]
- * - fun dataSsmListQueryFunction(config: DataSsmConfig): [DataSsmListQueryFunction]
+ * - fun ssmTxSessionPerformActionFunction(config: SsmChaincodeConfig): [SsmTxSessionPerformActionFunction]
  * @d2 model
- * @title Entrypoints
- * @page
- * Synthesis and global objects of the API
- * @@title SSM-TX/General
+ * @title User Agent command
+ * @parent [ssm.tx.dsl.SsmTxD2]
  */
 interface SsmTxUserFunctions {
 	fun ssmTxSessionPerformActionFunction(config: SsmChaincodeConfig): SsmTxSessionPerformActionFunction

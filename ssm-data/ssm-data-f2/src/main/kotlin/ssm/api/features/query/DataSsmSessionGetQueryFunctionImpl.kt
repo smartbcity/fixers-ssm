@@ -21,10 +21,9 @@ class DataSsmSessionGetQueryFunctionImpl(
 				ssmGetSessionQueryFunction.invoke(
 					SsmGetSessionQuery(
 						sessionName = query.sessionName,
-//						bearerToken = query.bearerToken
 					)
 				)
-					.session?.toDataSession(config, query.ssm, query.bearerToken)
+					.item?.toDataSession(config, query.ssm)
 					.let { DataSsmSessionGetQueryResult(it) }
 			} catch (e: Exception) {
 				e.printStackTrace()

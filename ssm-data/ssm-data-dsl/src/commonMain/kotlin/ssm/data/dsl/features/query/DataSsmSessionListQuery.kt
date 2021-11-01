@@ -11,7 +11,7 @@ import ssm.data.dsl.model.DataSsmSessionDTO
 /**
  * Retrieve a list of all known sessions of a given SSM
  * @d2 function
- * @parent [DataSsmSession]
+ * @parent [ssm.data.dsl.SsmDataD2Query]
  * @order 20
  * @title List Sessions
  */
@@ -29,14 +29,13 @@ expect interface DataSsmSessionListQueryDTO : DataQueryDTO
 @JsName("DataSsmSessionListQuery")
 class DataSsmSessionListQuery(
 	override val ssm: SsmUri,
-	override val bearerToken: String? = null,
 ) : DataSsmSessionListQueryDTO
 
 expect interface DataSsmSessionListQueryResultDTO {
 	/**
 	 * List of all the retrieved sessions
 	 */
-	val list: List<DataSsmSessionDTO>
+	val items: List<DataSsmSessionDTO>
 }
 
 /**
@@ -48,5 +47,5 @@ expect interface DataSsmSessionListQueryResultDTO {
 @JsExport
 @JsName("DataSsmSessionListQueryResult")
 class DataSsmSessionListQueryResult(
-	override val list: List<DataSsmSession>,
+	override val items: List<DataSsmSession>,
 ) : DataSsmSessionListQueryResultDTO

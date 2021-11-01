@@ -8,7 +8,7 @@ import ssm.couchdb.dsl.config.SsmCouchdbConfig
 /**
  * @d2 model
  * @title SSM Configuration
- * @parent [ssm.data.dsl.SsmApiQueryFunctions]
+ * @parent [ssm.data.dsl.SsmDataD2]
  */
 data class SsmDataConfig(
 	/**

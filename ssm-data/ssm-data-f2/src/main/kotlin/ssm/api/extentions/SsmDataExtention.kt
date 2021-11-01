@@ -22,13 +22,13 @@ import ssm.data.dsl.model.DataSsm
 import ssm.data.dsl.model.DataSsmSession
 import ssm.data.dsl.model.DataSsmSessionId
 import ssm.data.dsl.model.DataSsmSessionState
-import ssm.data.dsl.model.TxChannel
+import ssm.data.dsl.model.DataChannel
 
 fun Ssm.toDataSsm(burst: ChaincodeUriBurstDTO): DataSsm {
 	return DataSsm(
 		ssm = this,
 		version = DEFAULT_VERSION,
-		channel = TxChannel(burst.channelId),
+		channel = DataChannel(burst.channelId),
 		uri = burst.compact(this.name)
 	)
 }
@@ -37,7 +37,7 @@ fun Ssm.toDataSsm(ssm: SsmUriBurstDTO): DataSsm {
 	return DataSsm(
 		ssm = this,
 		version = ssm.ssmVersion,
-		channel = TxChannel(ssm.channelId),
+		channel = DataChannel(ssm.channelId),
 		uri = ssm.compact()
 	)
 }
@@ -50,11 +50,10 @@ fun Ssm.toDataSsm(ssm: SsmUri): DataSsm {
 suspend fun SsmSessionStateDTO.toDataSession(
 	config: SsmDataConfig,
 	ssm: SsmUri,
-	bearerToken: String?,
 ): DataSsmSession {
-	val sessionLogs = session.getSessionLogs(config, bearerToken)
+	val sessionLogs = session.getSessionLogs(config)
 
-	val transactions = sessionLogs.map { it.txId.getTransaction(config, bearerToken) }.filterNotNull()
+	val transactions = sessionLogs.map { it.txId.getTransaction(config) }.filterNotNull()
 	val firstTransaction = transactions.minByOrNull { transaction ->
 		transaction.timestamp
 	}
@@ -76,7 +75,7 @@ fun SsmSessionStateDTO.toDataSession(
 			details = this as SsmSessionState,
 			transaction = lastTransaction
 		),
-		channel = TxChannel(values.channelId),
+		channel = DataChannel(values.channelId),
 		transaction = firstTransaction,
 		transactions = transactions
 	)
@@ -84,11 +83,9 @@ fun SsmSessionStateDTO.toDataSession(
 
 suspend fun DataSsmSessionId.getSessionLogs(
 	config: SsmDataConfig,
-	bearerToken: String?,
 ): List<SsmSessionStateLog> {
 	val query = SsmGetSessionLogsQuery(
 		sessionName = this,
-		bearerToken = bearerToken
 	)
 	return try {
 		SsmGetSessionLogsQueryFunctionImpl().ssmGetSessionLogsQueryFunction(config.chaincode).invoke(query).logs
@@ -100,14 +97,12 @@ suspend fun DataSsmSessionId.getSessionLogs(
 
 suspend fun TransactionId?.getTransaction(
 	config: SsmDataConfig,
-	bearerToken: String?,
 ): Transaction? {
 	return this?.let {
 		val query = SsmGetTransactionQuery(
 			id = this,
-			bearerToken = bearerToken
 		)
 		SsmGetTransactionQueryFunctionImpl().ssmGetTransactionQueryFunction(config.chaincode)
-			.invoke(query).transaction
+			.invoke(query).item
 	}
 }

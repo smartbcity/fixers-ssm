@@ -11,7 +11,7 @@ import ssm.data.dsl.model.DataSsmSessionState
 /**
  * Retrieve all the logs of a given SSM session
  * @d2 function
- * @parent [ssm.data.dsl.model.DataSsmSession]
+ * @parent [ssm.data.dsl.SsmDataD2Query]
  * @order 40
  * @title List Session Logs
  */
@@ -20,11 +20,10 @@ typealias DataSsmSessionLogListQueryFunction = F2Function<DataSsmSessionLogListQ
 expect interface DataSsmSessionLogListQueryDTO : DataQueryDTO {
 	/**
 	 * Identifier of the session to retrieve
-	 * @example [ssm.data.dsl.model.DataSsmSession.id]
+	 * @example "DataSsmSessionId"
 	 */
 	val sessionId: DataSsmSessionId
 	override val ssm: SsmUri
-	override val bearerToken: String?
 }
 
 /**
@@ -38,14 +37,13 @@ expect interface DataSsmSessionLogListQueryDTO : DataQueryDTO {
 class DataSsmSessionLogListQuery(
 	override val sessionId: DataSsmSessionId,
 	override val ssm: SsmUri,
-	override val bearerToken: String?,
 ) : DataSsmSessionLogListQueryDTO
 
 expect interface DataSsmSessionLogListQueryResultDTO {
 	/**
 	 * All retrieved logs of the given session
 	 */
-	val list: List<DataSsmSessionState>
+	val items: List<DataSsmSessionState>
 }
 
 /**
@@ -57,5 +55,5 @@ expect interface DataSsmSessionLogListQueryResultDTO {
 @JsExport
 @JsName("SsmSessionLogListQueryResult")
 class DataSsmSessionLogListQueryResult(
-	override val list: List<DataSsmSessionState>,
+	override val items: List<DataSsmSessionState>,
 ) : DataSsmSessionLogListQueryResultDTO

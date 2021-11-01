@@ -21,7 +21,7 @@ expect interface SsmTransitionDTO {
 	val to: Int
 
 	/**
-	 * Role of the [agent][SsmAgent] allowed to trigger the transition
+	 * Role of the [agent][Agent] allowed to trigger the transition
 	 * @example "Seller"
 	 */
 	val role: SsmRole
@@ -35,7 +35,7 @@ expect interface SsmTransitionDTO {
 
 /**
  * @D2 model
- * @parent [Ssm]
+ * @parent [ssm.chaincode.dsl.SsmChaincodeD2Model]
  */
 @Serializable
 @JsExport

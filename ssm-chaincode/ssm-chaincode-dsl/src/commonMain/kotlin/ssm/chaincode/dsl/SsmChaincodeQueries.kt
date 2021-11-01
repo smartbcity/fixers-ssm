@@ -25,7 +25,7 @@ import ssm.chaincode.dsl.query.SsmListUserQueryFunction
  * - fun ssmListUserQueryFunction(config: SsmChaincodeConfig): [ssm.chaincode.dsl.query.SsmListUserQueryFunction]
  * @d2 model
  * @title Query function
- * @parent [SsmCouchdbD2]
+ * @parent [ssm.chaincode.dsl.SsmChaincodeD2]
  */
 interface SsmChaincodeQueries {
 	fun ssmGetAdminFunction(config: SsmChaincodeConfig): SsmGetAdminFunction

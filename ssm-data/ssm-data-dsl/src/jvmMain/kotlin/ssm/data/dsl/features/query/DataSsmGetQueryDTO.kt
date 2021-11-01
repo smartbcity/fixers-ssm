@@ -5,9 +5,8 @@ import ssm.data.dsl.model.DataSsm
 
 actual interface DataSsmGetQueryDTO : DataQueryDTO {
 	actual override val ssm: SsmUri
-	actual override val bearerToken: String?
 }
 
 actual interface DataSsmGetQueryResultDTO {
-	actual val ssm: DataSsm?
+	actual val item: DataSsm?
 }

@@ -3,7 +3,7 @@ package ssm.sdk.bdd.tx
 import io.cucumber.java8.En
 import ssm.bdd.config.SsmCommandStep
 import ssm.chaincode.dsl.model.Ssm
-import ssm.chaincode.dsl.model.SsmAgent
+import ssm.chaincode.dsl.model.Agent
 import ssm.chaincode.dsl.model.SsmSession
 import ssm.sdk.sign.model.Signer
 import ssm.sdk.sign.model.SignerName
@@ -22,7 +22,7 @@ class SsmSdkTxSteps : SsmCommandStep(), En {
 		bag.client.create(bag.adminSigner, ssm)
 	}
 
-	override suspend fun registerUser(ssmAgent: SsmAgent) {
+	override suspend fun registerUser(ssmAgent: Agent) {
 		bag.client.registerUser(bag.adminSigner, ssmAgent)
 	}
 

@@ -29,9 +29,9 @@ expect interface DataSsmDTO {
 
 /**
  * @d2 model
- * @page
- * Represents an [SSM][Ssm] with some metadata
- * @@title SSM-TX/SSM
+ * @parent [ssm.data.dsl.SsmDataD2Model]
+ * Represents an [SSM][Ssm] with metadata
+ * title DataSSM
  */
 @Serializable
 @JsExport
@@ -39,6 +39,6 @@ expect interface DataSsmDTO {
 class DataSsm(
 	override val uri: SsmUri,
 	override val ssm: Ssm,
-	override val channel: TxChannel,
+	override val channel: DataChannel,
 	override val version: SsmVersion?,
 ) : DataSsmDTO

@@ -11,5 +11,5 @@ actual external interface DataSsmSessionListQueryDTO : DataQueryDTO
 @JsExport
 @JsName("DataSsmSessionListQueryResultDTO")
 actual external interface DataSsmSessionListQueryResultDTO {
-	actual val list: List<DataSsmSessionDTO>
+	actual val items: List<DataSsmSessionDTO>
 }

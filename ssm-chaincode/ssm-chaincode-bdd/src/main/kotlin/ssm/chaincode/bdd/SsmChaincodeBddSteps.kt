@@ -24,7 +24,7 @@ class SsmChaincodeBddSteps : SsmQueryStep(), En {
 	override suspend fun getSession(sessionName: String): SsmSessionState? {
 		return ssmChaincodeQueryFunctions.ssmGetSessionQueryFunction(config)
 			.invoke(SsmGetSessionQuery(sessionName = sessionName))
-			.session
+			.item
 	}
 
 	override suspend fun logSession(sessionName: String): List<SsmSessionStateLog> {
@@ -36,24 +36,24 @@ class SsmChaincodeBddSteps : SsmQueryStep(), En {
 	override suspend fun listSessions(): List<String> {
 		return ssmChaincodeQueryFunctions.ssmListSessionQueryFunction(config)
 			.invoke(SsmListSessionQuery())
-			.values.toList()
+			.items.toList()
 	}
 
 	override suspend fun listSsm(): List<String> {
 		return ssmChaincodeQueryFunctions.ssmListSsmQueryFunction(config)
 			.invoke(SsmListSsmQuery())
-			.values.toList()
+			.items.toList()
 	}
 
 	override suspend fun listUsers() = runBlocking {
 		ssmChaincodeQueryFunctions.ssmListUserQueryFunction(config)
 			.invoke(SsmListUserQuery())
-			.values.toList()
+			.items.toList()
 	}
 
 	override suspend fun listAdmins() = runBlocking {
 		ssmChaincodeQueryFunctions.ssmListAdminQueryFunction(config)
 			.invoke(SsmListAdminQuery())
-			.values.toList()
+			.items.toList()
 	}
 }

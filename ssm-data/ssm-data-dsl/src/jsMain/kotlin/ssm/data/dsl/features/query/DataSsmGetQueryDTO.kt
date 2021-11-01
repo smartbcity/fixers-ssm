@@ -7,11 +7,10 @@ import ssm.data.dsl.model.DataSsm
 @JsName("DataSsmGetQueryDTO")
 actual external interface DataSsmGetQueryDTO : DataQueryDTO {
 	actual override val ssm: SsmUri
-	actual override val bearerToken: String?
 }
 
 @JsExport
 @JsName("DataSsmGetQueryResultDTO")
 actual external interface DataSsmGetQueryResultDTO {
-	actual val ssm: DataSsm?
+	actual val item: DataSsm?
 }

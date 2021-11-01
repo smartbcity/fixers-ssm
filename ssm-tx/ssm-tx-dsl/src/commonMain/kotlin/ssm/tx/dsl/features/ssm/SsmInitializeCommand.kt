@@ -2,15 +2,16 @@ package ssm.tx.dsl.features.ssm
 
 import f2.dsl.cqrs.Event
 import f2.dsl.fnc.F2Function
-import ssm.chaincode.dsl.model.InvokeReturn
+import ssm.chaincode.dsl.blockchain.TransactionId
+import ssm.chaincode.dsl.model.Agent
 import ssm.chaincode.dsl.model.Ssm
-import ssm.chaincode.dsl.model.SsmAgent
 import ssm.tx.dsl.features.SsmCommandDTO
+import ssm.tx.dsl.features.SsmCommandResult
 
 /**
  * Initializes an SSM
  * @d2 function
- * @parent [Ssm]
+ * @parent [ssm.tx.dsl.SsmTxD2Command]
  * @title Initialize SSM
  */
 typealias SsmTxInitializeFunction = F2Function<SsmInitializeCommand, SsmInitializedResult>
@@ -29,7 +30,7 @@ class SsmInitializeCommand(
 	/**
 	 * Initial user of the SSM
 	 */
-	val agent: SsmAgent,
+	val agent: Agent,
 ) : SsmCommandDTO
 
 /**
@@ -38,5 +39,5 @@ class SsmInitializeCommand(
  * @title Initialize SSM: Response
  */
 class SsmInitializedResult(
-	val invokeReturn: List<InvokeReturn>,
+	val results: List<TransactionId>
 ) : Event

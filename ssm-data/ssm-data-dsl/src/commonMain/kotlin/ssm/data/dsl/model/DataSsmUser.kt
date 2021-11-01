@@ -3,7 +3,7 @@ package ssm.data.dsl.model
 import kotlin.js.JsExport
 import kotlin.js.JsName
 import kotlinx.serialization.Serializable
-import ssm.chaincode.dsl.model.SsmAgent
+import ssm.chaincode.dsl.model.Agent
 import ssm.chaincode.dsl.model.SsmAgentDTO
 
 expect interface DataSsmUserDTO {
@@ -14,13 +14,14 @@ expect interface DataSsmUserDTO {
 }
 
 /**
- * Represents an [SSM Agent][SsmAgent]
+ * Represents an [SSM Agent][Agent] with metadata
  * @d2 model
- * @parent [ssm.data.dsl.SsmApiQueryFunctions]
+ * @parent [ssm.data.dsl.SsmDataD2Model]
+ *
  */
 @Serializable
 @JsExport
 @JsName("DataSsmUser")
 class DataSsmUser(
-	override val agent: SsmAgent,
+	override val agent: Agent,
 ) : DataSsmUserDTO

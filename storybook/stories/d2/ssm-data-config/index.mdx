@@ -1,0 +1,17 @@
+import { CodeHighlighter, DescriptedCode } from '@smartb/archetypes-ui-documentation'
+import { Meta } from '@storybook/addon-docs/blocks'
+import SsmDataConfigDesc from './desc.md'
+import SsmDataConfigVisualJson from './visualJson.json'
+
+<Meta title="SSM Configuration" parameters={{ previewTabs: { canvas: { hidden: true } } }} />
+
+<DescriptedCode
+  leftElement={<SsmDataConfigDesc />}
+  rightElement={
+    <CodeHighlighter
+      object={SsmDataConfigVisualJson}
+      language={"json"}
+      title={"Example"}
+    />
+  }
+/>

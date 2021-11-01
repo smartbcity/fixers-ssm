@@ -14,7 +14,6 @@ object Versions {
 	const val springFramework = "5.3.4"
 
 	const val ktor = "1.6.3"
-	const val coroutines = "1.5.1"
 
 	const val cloudant = "0.0.28"
 	const val bouncycastleVersion = "1.61"
@@ -22,7 +21,6 @@ object Versions {
 	const val slf4j = "1.7.30"
 
 	const val f2 = "experimental-SNAPSHOT"
-	const val d2 = "0.1.1-SNAPSHOT"
 
 	const val cucumber = "6.11.0"
 	const val junit = "5.7.0"

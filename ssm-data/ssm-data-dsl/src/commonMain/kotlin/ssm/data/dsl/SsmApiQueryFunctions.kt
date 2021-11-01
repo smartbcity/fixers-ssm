@@ -17,9 +17,8 @@ import ssm.data.dsl.features.query.DataSsmSessionLogListQueryFunction
  * - fun dataSsmSessionLogGetQueryFunction(config: DataSsmConfig): [DataSsmSessionLogGetQueryFunction]
  * @d2 model
  * @title Entrypoints
- * @page
- * Synthesis and global objects of the API
- * @@title SSM-TX/General
+ * @parent [ssm.data.dsl.SsmDataD2]
+ * @title Synthesis and global objects of the API
  */
 expect interface SsmApiQueryFunctions {
 	fun dataSsmListQueryFunction(config: SsmDataConfig): DataSsmListQueryFunction
