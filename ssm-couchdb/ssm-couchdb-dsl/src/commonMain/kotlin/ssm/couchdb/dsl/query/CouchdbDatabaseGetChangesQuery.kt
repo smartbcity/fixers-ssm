@@ -8,6 +8,8 @@ import kotlin.js.JsName
 import kotlinx.serialization.Serializable
 import ssm.chaincode.dsl.model.ChaincodeId
 import ssm.chaincode.dsl.model.ChannelId
+import ssm.chaincode.dsl.model.SessionName
+import ssm.chaincode.dsl.model.SsmName
 import ssm.couchdb.dsl.model.ChangeEventId
 import ssm.couchdb.dsl.model.DatabaseChanges
 import ssm.couchdb.dsl.model.DatabaseChangesDTO
@@ -36,9 +38,17 @@ expect interface CouchdbDatabaseGetChangesQueryDTO : Query {
 	 */
 	val chaincodeId: ChaincodeId
 	/**
+	 * The name of a ssm.
+	 */
+	val ssmName: SsmName?
+	/**
+	 * The name of a session.
+	 */
+	val sessionName: SessionName?
+	/**
 	 * Filter result by doctype
 	 */
-	val docType: DocType<*>
+	val docType: DocType<*>?
 	/**
 	 * Filter to start the results from the the ID of the last events received by the server on a previous connection
 	 */
@@ -55,6 +65,7 @@ expect interface CouchdbDatabaseGetChangesQueryResultDTO : Event {
 	 * The name of the database.
 	 */
 	val items: List<DatabaseChangesDTO>
+	val lastEventId: ChangeEventId?
 }
 
 @Serializable
@@ -63,8 +74,10 @@ expect interface CouchdbDatabaseGetChangesQueryResultDTO : Event {
 class CouchdbDatabaseGetChangesQuery(
 	override val channelId: ChannelId,
 	override val chaincodeId: ChaincodeId,
-	override val docType: DocType<*>,
+	override val docType: DocType<*>?,
 	override val lastEventId: ChangeEventId?,
+	override val ssmName: SsmName?,
+	override val sessionName: SessionName?,
 ) : CouchdbDatabaseGetChangesQueryDTO
 
 @Serializable
@@ -72,4 +85,5 @@ class CouchdbDatabaseGetChangesQuery(
 @JsName("CouchdbDatabaseGetChangesQueryResult")
 class CouchdbDatabaseGetChangesQueryResult(
 	override val items: List<DatabaseChanges>,
+	override val lastEventId: ChangeEventId?,
 ) : CouchdbDatabaseGetChangesQueryResultDTO

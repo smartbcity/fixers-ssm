@@ -1,13 +1,7 @@
 package ssm.sdk.client.model
 
+import ssm.sdk.client.invoke.command.SsmCmdName
 import ssm.sdk.sign.model.SignerName
-
-enum class SsmCmdName(val value: String) {
-	START("start"),
-	CREATE("create"),
-	PERFORM("perform"),
-	REGISTER("register")
-}
 
 data class SsmCmd(
 	val json: String,

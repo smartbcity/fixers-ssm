@@ -5,15 +5,16 @@ import kotlinx.coroutines.runBlocking
 import org.assertj.core.api.Assertions
 import org.junit.jupiter.api.Disabled
 import org.junit.jupiter.api.Test
+import ssm.api.DataSsmQueryFunctionImpl
 import ssm.data.bdd.TestConfig
 import ssm.data.dsl.features.query.DataSsmListQuery
 
 class DataSsmListQueryFunctionImpTest {
+	private val dataSsmQueryFunction = DataSsmQueryFunctionImpl(
+		TestConfig.proudhon,
+	)
 
-	private val function = DataSsmListQueryFunctionImp(
-		TestConfig.proudhon
-	).dataSsmListQueryFunction()
-
+	private val function = dataSsmQueryFunction.dataSsmListQueryFunction()
 
 	@Disabled
 	@Test

@@ -4,12 +4,17 @@
   
 <article>
 
-*sessionName* `SessionName` 
+*chaincodeUri* `<ERROR CLASS>` 
 
 </article>
 <article>
 
-*ssmUri* `SsmUri` 
+*sessionName* `<ERROR CLASS>` 
+
+</article>
+<article>
+
+*ssmName* `<ERROR CLASS>?` 
 
 </article>
 

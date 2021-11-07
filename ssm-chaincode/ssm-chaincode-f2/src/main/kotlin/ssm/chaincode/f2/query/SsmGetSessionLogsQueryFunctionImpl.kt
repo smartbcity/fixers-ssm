@@ -1,21 +1,24 @@
 package ssm.chaincode.f2.query
 
-import ssm.chaincode.dsl.config.SsmChaincodeConfig
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.map
+import ssm.chaincode.dsl.query.SsmGetSessionLogsQuery
 import ssm.chaincode.dsl.query.SsmGetSessionLogsQueryFunction
 import ssm.chaincode.dsl.query.SsmGetSessionLogsQueryResult
-import ssm.chaincode.f2.query.commons.ssmF2Function
+import ssm.sdk.core.SsmQueryService
 
-class SsmGetSessionLogsQueryFunctionImpl {
+class SsmGetSessionLogsQueryFunctionImpl(
+	private val queryService: SsmQueryService
+): SsmGetSessionLogsQueryFunction  {
 
-	fun ssmGetSessionLogsQueryFunction(config: SsmChaincodeConfig): SsmGetSessionLogsQueryFunction =
-		ssmF2Function(config) { cmd, ssmClient ->
-			ssmClient.log(cmd.sessionName)
-				.let {
-					SsmGetSessionLogsQueryResult(
-						ssmUri = "",
-						sessionName = cmd.sessionName,
-						logs = it
-					)
-				}
-		}
+	override suspend fun invoke(msg: Flow<SsmGetSessionLogsQuery>): Flow<SsmGetSessionLogsQueryResult> = msg.map { payload ->
+		queryService.log(payload.sessionName)
+			.let {
+				SsmGetSessionLogsQueryResult(
+					ssmUri = "TODO()",
+					sessionName = payload.sessionName,
+					logs = it
+				)
+			}
+	}
 }

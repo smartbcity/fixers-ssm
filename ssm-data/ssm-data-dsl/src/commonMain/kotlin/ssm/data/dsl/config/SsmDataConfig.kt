@@ -1,8 +1,6 @@
 package ssm.data.dsl.config
 
 import ssm.chaincode.dsl.config.SsmChaincodeConfig
-import ssm.chaincode.dsl.model.uri.ChaincodeUri
-import ssm.chaincode.dsl.model.uri.SsmUri
 import ssm.couchdb.dsl.config.SsmCouchdbConfig
 
 /**

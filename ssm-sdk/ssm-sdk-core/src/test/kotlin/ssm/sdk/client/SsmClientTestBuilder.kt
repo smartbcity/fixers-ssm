@@ -1,19 +1,16 @@
 package ssm.sdk.client
 
 import java.io.IOException
-import java.util.UUID
-import ssm.sdk.client.SsmClientBuilder.Companion.builder
+import ssm.sdk.core.SsmServiceFactory
 
 object SsmClientTestBuilder {
 
-	private val uuid = UUID.randomUUID().toString()
-	private const val NETWORK = "bclan-it/"
-
+//	private val uuid = UUID.randomUUID().toString()
+//	private const val NETWORK = "bclan-it/"
 
 	@Throws(IOException::class)
-	fun build(): SsmClient {
-		val configFileName = configFileName
-		return builder(configFileName).withChannelId("sandbox").withSsmId("ssm").build()
+	fun build(): SsmServiceFactory {
+		return SsmServiceFactory.builder(configFileName).withChannelId("sandbox").withSsmId("ssm")
 	}
 
 	private val configFileName: String

@@ -4,7 +4,7 @@
   
 <article>
 
-*ssm* `SsmUri` 
+*ssm* `<ERROR CLASS>` 
 
 Uri information to access a ssm
 

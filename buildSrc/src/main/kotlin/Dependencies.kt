@@ -1,7 +1,7 @@
 import org.gradle.api.artifacts.Dependency
 
 object PluginVersions {
-	const val kotlin = "1.5.30"
+	const val kotlin = "1.6.0-RC2"
 	const val fixers = "experimental-SNAPSHOT"
 
 	const val springBoot = "2.5.3"

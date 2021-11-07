@@ -3,13 +3,13 @@ package ssm.sdk.client.domain
 import java.util.UUID
 import org.assertj.core.api.Assertions
 import org.junit.jupiter.api.Test
+import ssm.chaincode.dsl.model.SsmContext
 import ssm.sdk.client.SsmClientItTest
 import ssm.sdk.client.extention.addPrivateMessage
-import ssm.sdk.client.extention.loadFromFile
 import ssm.sdk.client.extention.getPrivateMessage
-import ssm.chaincode.dsl.model.SsmContext
+import ssm.sdk.client.extention.loadFromFile
 import ssm.sdk.sign.crypto.KeyPairReader.loadPrivateKey
-import ssm.sdk.sign.model.Signer
+import ssm.sdk.sign.model.SignerUser
 
 internal class HasPrivateMessageTest {
 	@Test
@@ -42,7 +42,7 @@ internal class HasPrivateMessageTest {
 		var context = SsmContext(sessionName, "100 dollars 1978 Camaro", 0, HashMap())
 		val agent = loadFromFile(SsmClientItTest.USER1_NAME, SsmClientItTest.USER1_FILENAME)
 		context = context.addPrivateMessage("Value to encrypt", agent)
-		val signerUser1 = Signer.loadFromFile(SsmClientItTest.USER1_NAME, SsmClientItTest.USER1_FILENAME)
+		val signerUser1 = SignerUser.loadFromFile(SsmClientItTest.USER1_NAME, SsmClientItTest.USER1_FILENAME)
 		val `val` = context.getPrivateMessage(signerUser1)
 		Assertions.assertThat(`val`).isNotEmpty.isEqualTo("Value to encrypt")
 	}

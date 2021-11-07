@@ -1,14 +1,17 @@
 package ssm.chaincode.f2.query
 
-import ssm.chaincode.dsl.config.SsmChaincodeConfig
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.map
+import ssm.chaincode.dsl.query.SsmGetQuery
 import ssm.chaincode.dsl.query.SsmGetQueryFunction
 import ssm.chaincode.dsl.query.SsmGetResult
-import ssm.chaincode.f2.query.commons.ssmF2Function
+import ssm.sdk.core.SsmQueryService
 
-class SsmGetQueryFunctionImpl {
+class SsmGetQueryFunctionImpl(
+	private val queryService: SsmQueryService
+) : SsmGetQueryFunction {
 
-	fun ssmGetQueryFunction(config: SsmChaincodeConfig): SsmGetQueryFunction = ssmF2Function(config) { cmd, ssmClient ->
-		val ssm = ssmClient.getSsm(cmd.name)
-		SsmGetResult(ssm)
+	override suspend fun invoke(msg: Flow<SsmGetQuery>): Flow<SsmGetResult> = msg.map { payload ->
+		queryService.getSsm(payload.name).let(::SsmGetResult)
 	}
 }

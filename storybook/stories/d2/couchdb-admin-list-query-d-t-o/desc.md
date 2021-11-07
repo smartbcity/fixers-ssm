@@ -4,7 +4,7 @@
   
 <article>
 
-*chaincodeUri* `ChaincodeUri` 
+*chaincodeUri* `<ERROR CLASS>` 
 
 The unique id of a chaincode.
 

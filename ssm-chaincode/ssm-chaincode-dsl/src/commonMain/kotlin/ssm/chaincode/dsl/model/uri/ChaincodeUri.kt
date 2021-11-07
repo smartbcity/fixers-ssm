@@ -1,7 +1,5 @@
 package ssm.chaincode.dsl.model.uri
 
-import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.map
 import ssm.chaincode.dsl.model.ChaincodeId
 import ssm.chaincode.dsl.model.ChannelId
 import ssm.chaincode.dsl.model.SsmName
@@ -11,15 +9,17 @@ private const val WITHOUT_PEER = 3
 
 typealias ChaincodeUri = String
 
-fun ChaincodeUri.toSsmUri(ssmName: SsmName) {
-	this.burstChaincode()!!.let {
-		SsmUriBurst(
-			peerId = it.peerId,
-			channelId = it.channelId,
-			chaincodeId = it.chaincodeId,
-			ssmName = ssmName
-		).compact()
-	}
+fun ChaincodeUri.toSsmUri(ssmName: SsmName): SsmUri {
+	return this.burstChaincode()!!.toSsmUri(ssmName)
+}
+
+fun ChaincodeUriBurstDTO.toSsmUri(ssmName: SsmName): SsmUri {
+	return SsmUriBurst(
+		peerId = peerId,
+		channelId = channelId,
+		chaincodeId = chaincodeId,
+		ssmName = ssmName
+	).compact()
 }
 
 fun ChaincodeUriBurstDTO.compact(): ChaincodeUri {

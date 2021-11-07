@@ -1,28 +1,30 @@
 package ssm.api.features.query
 
-import f2.dsl.fnc.f2Function
-import f2.dsl.fnc.invoke
+import f2.dsl.fnc.invokeWith
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.map
 import ssm.api.extentions.toDataSsm
 import ssm.chaincode.dsl.model.uri.burstSsmUri
 import ssm.chaincode.dsl.query.SsmGetQuery
-import ssm.chaincode.f2.query.SsmGetQueryFunctionImpl
-import ssm.data.dsl.config.SsmDataConfig
+import ssm.chaincode.dsl.query.SsmGetQueryFunction
+import ssm.data.dsl.features.query.DataSsmGetQueryDTO
 import ssm.data.dsl.features.query.DataSsmGetQueryFunction
 import ssm.data.dsl.features.query.DataSsmGetQueryResult
+import ssm.data.dsl.features.query.DataSsmGetQueryResultDTO
 
 class DataSsmGetQueryFunctionImpl(
-	config: SsmDataConfig
-) {
-	private val function = SsmGetQueryFunctionImpl().ssmGetQueryFunction(config.chaincode)
+	private val ssmGetQueryFunction: SsmGetQueryFunction
+) : DataSsmGetQueryFunction {
 
-	fun dataSsmGetQueryFunction(): DataSsmGetQueryFunction = f2Function { query ->
-		val burst = query.ssm.burstSsmUri()!!
-		function.invoke(SsmGetQuery(
-			name = burst.ssmName,
-//			bearerToken = query.bearerToken
-		))
-			.item
-			?.toDataSsm(query.ssm)
-			.let(::DataSsmGetQueryResult)
-	}
+	override suspend fun invoke(msg: Flow<DataSsmGetQueryDTO>): Flow<DataSsmGetQueryResultDTO> =
+		msg.map { payload ->
+			val burst = payload.ssm.burstSsmUri()!!
+			SsmGetQuery(
+				name = burst.ssmName,
+			).invokeWith(ssmGetQueryFunction)
+				.item
+				?.toDataSsm(payload.ssm)
+				.let(::DataSsmGetQueryResult)
+
+		}
 }

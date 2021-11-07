@@ -12,7 +12,7 @@ class SsmTxSessionPerformActionFunctionImpl {
 		config: SsmChaincodeConfig,
 		signerProvider: SignerProvider
 	): SsmTxSessionPerformActionFunction = ssmF2Function(config) { cmd, ssmClient ->
-		ssmClient.perform(signerProvider.get(), cmd.action, cmd.context)!!.let { result ->
+		ssmClient.sendPerform(signerProvider.get(), cmd.action, cmd.context)!!.let { result ->
 			SsmSessionPerformActionResult(result.transactionId)
 		}
 	}

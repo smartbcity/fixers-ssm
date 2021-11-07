@@ -1,6 +1,8 @@
 package ssm.couchdb.f2
 
-import ssm.couchdb.dsl.CouchDbSsmQueries
+import ssm.couchdb.client.SsmCouchdbClient
+import ssm.couchdb.client.builder.SsmCouchDbBasicAuth
+import ssm.couchdb.dsl.SsmCouchDbQueries
 import ssm.couchdb.dsl.config.SsmCouchdbConfig
 import ssm.couchdb.dsl.query.CouchdbAdminListQueryFunction
 import ssm.couchdb.dsl.query.CouchdbChaincodeListQueryFunction
@@ -23,46 +25,58 @@ import ssm.couchdb.f2.query.CouchdbSsmSessionStateGetQueryFunctionImpl
 import ssm.couchdb.f2.query.CouchdbSsmSessionStateListQueryFunctionImpl
 import ssm.couchdb.f2.query.CouchdbUserListQueryFunctionImpl
 
-class CouchdbSsmQueriesFunctionImpl : CouchDbSsmQueries {
-	override fun couchdbDatabaseGetChangesQueryFunction(config: SsmCouchdbConfig): CouchdbDatabaseGetChangesQueryFunction {
-		return CouchDbDatabaseGetChangesQueryFunctionImpl(config).couchDbDatabaseGetChangesQueryFunction()
+class CouchdbSsmQueriesFunctionImpl(
+	config: SsmCouchdbConfig
+) : SsmCouchDbQueries {
+
+	private val couchdbClient = SsmCouchdbClient.builder()
+		.withUrl(config.url)
+		.withName(config.serviceName)
+		.withAuth(
+			SsmCouchDbBasicAuth(
+				username = config.username,
+				password = config.password,
+			)
+		).build()
+
+	override fun couchdbDatabaseGetChangesQueryFunction(): CouchdbDatabaseGetChangesQueryFunction {
+		return CouchDbDatabaseGetChangesQueryFunctionImpl(couchdbClient)
 	}
 
-	override fun couchdbDatabaseListQueryFunction(config: SsmCouchdbConfig): CouchdbDatabaseListQueryFunction {
-		return CouchdbDatabaseListQueryFunctionImpl(config).couchdbDatabaseListQueryFunction()
+	override fun couchdbDatabaseListQueryFunction(): CouchdbDatabaseListQueryFunction {
+		return CouchdbDatabaseListQueryFunctionImpl(couchdbClient)
 	}
 
-	override fun couchdbDatabaseGetQueryFunction(config: SsmCouchdbConfig): CouchdbDatabaseGetQueryFunction {
-		return CouchdbDatabaseGetQueryFunctionImpl(config).couchdbDatabaseGetQueryFunction()
+	override fun couchdbDatabaseGetQueryFunction(): CouchdbDatabaseGetQueryFunction {
+		return CouchdbDatabaseGetQueryFunctionImpl(couchdbClient)
 	}
 
-	override fun couchdbChaincodeListQueryFunction(config: SsmCouchdbConfig): CouchdbChaincodeListQueryFunction {
-		return CouchdbChaincodeListQueryFunctionImpl(config).couchdbChaincodeListQueryFunction()
+	override fun couchdbChaincodeListQueryFunction(): CouchdbChaincodeListQueryFunction {
+		return CouchdbChaincodeListQueryFunctionImpl(couchdbClient)
 	}
 
-	override fun couchdbAdminListQueryFunction(config: SsmCouchdbConfig): CouchdbAdminListQueryFunction {
-		return CouchdbAdminListQueryFunctionImpl(config).couchdbAdminListQueryFunction()
+	override fun couchdbAdminListQueryFunction(): CouchdbAdminListQueryFunction {
+		return CouchdbAdminListQueryFunctionImpl(couchdbClient)
 	}
 
-	override fun couchdbUserListQueryFunction(config: SsmCouchdbConfig): CouchdbUserListQueryFunction {
-		return CouchdbUserListQueryFunctionImpl(config).couchdbUserListQueryFunction()
+	override fun couchdbUserListQueryFunction(): CouchdbUserListQueryFunction {
+		return CouchdbUserListQueryFunctionImpl(couchdbClient)
 	}
 
-	override fun couchdbSsmGetQueryFunction(config: SsmCouchdbConfig): CouchdbSsmGetQueryFunction {
-		return CouchdbSsmGetQueryFunctionImpl(config).couchdbSsmGetQueryFunction()
+	override fun couchdbSsmGetQueryFunction(): CouchdbSsmGetQueryFunction {
+		return CouchdbSsmGetQueryFunctionImpl(couchdbClient)
 	}
 
-	override fun couchdbSsmListQueryFunction(config: SsmCouchdbConfig): CouchdbSsmListQueryFunction {
-		return CouchdbSsmListQueryFunctionImpl(config).couchdbSsmListQueryFunction()
+	override fun couchdbSsmListQueryFunction(): CouchdbSsmListQueryFunction {
+		return CouchdbSsmListQueryFunctionImpl(couchdbClient)
 	}
 
-	override fun couchdbSsmSessionStateListQueryFunction(config: SsmCouchdbConfig): CouchdbSsmSessionStateListQueryFunction {
-		return CouchdbSsmSessionStateListQueryFunctionImpl(config).couchdbSsmSessionStateListQueryFunction()
+	override fun couchdbSsmSessionStateListQueryFunction(): CouchdbSsmSessionStateListQueryFunction {
+		return CouchdbSsmSessionStateListQueryFunctionImpl(couchdbClient)
 	}
 
 
-	override fun couchdbSsmSessionStateGetQueryFunction(config: SsmCouchdbConfig): CouchdbSsmSessionStateGetQueryFunction {
-		return CouchdbSsmSessionStateGetQueryFunctionImpl(config).couchdbSsmSessionStateGetQueryFunction()
+	override fun couchdbSsmSessionStateGetQueryFunction(): CouchdbSsmSessionStateGetQueryFunction {
+		return CouchdbSsmSessionStateGetQueryFunctionImpl(couchdbClient)
 	}
-
 }

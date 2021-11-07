@@ -3,8 +3,10 @@ package ssm.sdk.sign.model
 import java.security.KeyPair
 import ssm.sdk.sign.crypto.KeyPairReader
 
-class SignerAdmin(name: String, pair: KeyPair) : Signer(name, pair) {
-	constructor(signer: Signer) : this(signer.name, signer.pair)
+class SignerAdmin(
+	override val name: SignerName,
+	override val pair: KeyPair
+) : Signer {
 
 	companion object {
 		@Throws(Exception::class)

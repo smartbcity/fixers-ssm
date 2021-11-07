@@ -1,7 +1,5 @@
 package ssm.data.dsl.features.query
 
-import ssm.chaincode.dsl.model.ChaincodeId
-import ssm.chaincode.dsl.model.ChannelId
 import ssm.data.dsl.model.DataSsmSessionDTO
 
 @JsExport

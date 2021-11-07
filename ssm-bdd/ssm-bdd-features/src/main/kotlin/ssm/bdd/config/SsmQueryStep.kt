@@ -78,10 +78,10 @@ abstract class SsmQueryStep {
 				).contains(sessionName.contextualize(bag))
 			}
 		}
-		Then("Session {string} have current state origin {string} current {string} iteration {string}")
-		{ sessionName: String, origin: String, current: String, iteration: String ->
+		Then("Session {string} for {string} have current state origin {string} current {string} iteration {string}")
+		{ sessionName: SessionName, ssmName: SsmName,origin: String, current: String, iteration: String ->
 			runBlocking {
-				Assertions.assertThat(getSession(sessionName)).hasFieldOrProperty(SsmSessionState::origin.name)
+				Assertions.assertThat(getSession(ssmName, sessionName)).hasFieldOrProperty(SsmSessionState::origin.name)
 					.isEqualTo(origin)
 					.hasFieldOrProperty(SsmSessionState::current.name).isEqualTo(current)
 					.hasFieldOrProperty(SsmSessionState::iteration.name).isEqualTo(iteration)
@@ -159,7 +159,7 @@ abstract class SsmQueryStep {
 		}
 	}
 
-	protected abstract suspend fun getSession(sessionName: SessionName): SsmSessionStateDTO?
+	protected abstract suspend fun getSession(ssmName: SsmName, sessionName: SessionName): SsmSessionStateDTO?
 
 	protected abstract suspend fun logSession(sessionName: SessionName): List<SsmSessionStateLog>
 

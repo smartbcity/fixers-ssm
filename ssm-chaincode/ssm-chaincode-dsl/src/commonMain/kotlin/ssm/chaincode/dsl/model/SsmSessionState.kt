@@ -12,7 +12,6 @@ expect interface SsmSessionStateDTO : SsmSessionDTO, WithPrivate {
 	override val roles: Map<String, String>?
 	override val public: Any?
 	override val private: Map<String, String>?
-
 	/**
 	 * Transition that lead to the current state
 	 */

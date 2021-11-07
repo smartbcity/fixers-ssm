@@ -1,14 +1,16 @@
 package ssm.chaincode.f2.query
 
-import ssm.chaincode.dsl.config.SsmChaincodeConfig
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.map
 import ssm.chaincode.dsl.query.SsmGetAdminFunction
+import ssm.chaincode.dsl.query.SsmGetAdminQuery
 import ssm.chaincode.dsl.query.SsmGetAdminResult
-import ssm.chaincode.f2.query.commons.ssmF2Function
+import ssm.sdk.core.SsmQueryService
 
-class SsmGetAdminFunctionImpl {
+class SsmGetAdminFunctionImpl(private val queryService: SsmQueryService) : SsmGetAdminFunction {
 
-	fun ssmGetAdminFunction(config: SsmChaincodeConfig): SsmGetAdminFunction = ssmF2Function(config) { cmd, ssmClient ->
-		val sessionState = ssmClient.getAdmin(cmd.name)
+	override suspend fun invoke(msg: Flow<SsmGetAdminQuery>): Flow<SsmGetAdminResult> = msg.map { payload ->
+		val sessionState = queryService.getAdmin(payload.name)
 		SsmGetAdminResult(sessionState)
 	}
 }

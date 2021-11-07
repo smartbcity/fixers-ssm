@@ -7,8 +7,9 @@ import kotlin.js.JsExport
 import kotlin.js.JsName
 import kotlinx.serialization.Serializable
 import ssm.chaincode.dsl.model.SessionName
+import ssm.chaincode.dsl.model.SsmName
 import ssm.chaincode.dsl.model.SsmSessionStateDTO
-import ssm.chaincode.dsl.model.uri.SsmUri
+import ssm.chaincode.dsl.model.uri.ChaincodeUri
 
 /**
  * Retrieve the list of all known sessions of a given SSM
@@ -20,7 +21,8 @@ import ssm.chaincode.dsl.model.uri.SsmUri
 typealias CouchdbSsmSessionStateGetQueryFunction = F2Function<CouchdbSsmSessionStateGetQueryDTO, CouchdbSsmSessionStateGetQueryResultDTO>
 
 expect interface CouchdbSsmSessionStateGetQueryDTO : Query {
-	val ssmUri: SsmUri
+	val chaincodeUri: ChaincodeUri
+	val ssmName: SsmName?
 	val sessionName: SessionName
 }
 
@@ -40,7 +42,9 @@ expect interface CouchdbSsmSessionStateGetQueryResultDTO : Event {
 @JsExport
 @JsName("CouchdbSsmSessionStateGetQuery")
 class CouchdbSsmSessionStateGetQuery(
-	override val ssmUri: SsmUri, override val sessionName: SessionName
+	override val chaincodeUri: ChaincodeUri,
+	override val ssmName: SsmName?,
+	override val sessionName: SessionName,
 ) : CouchdbSsmSessionStateGetQueryDTO
 
 /**

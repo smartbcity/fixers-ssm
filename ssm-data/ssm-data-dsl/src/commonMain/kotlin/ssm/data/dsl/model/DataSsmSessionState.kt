@@ -3,10 +3,10 @@ package ssm.data.dsl.model
 import kotlin.js.JsExport
 import kotlin.js.JsName
 import kotlinx.serialization.Serializable
-import ssm.chaincode.dsl.model.SsmSessionState
-import ssm.chaincode.dsl.model.SsmSessionStateDTO
 import ssm.chaincode.dsl.blockchain.Transaction
 import ssm.chaincode.dsl.blockchain.TransactionDTO
+import ssm.chaincode.dsl.model.SsmSessionState
+import ssm.chaincode.dsl.model.SsmSessionStateDTO
 
 expect interface DataSsmSessionStateDTO {
 	/**

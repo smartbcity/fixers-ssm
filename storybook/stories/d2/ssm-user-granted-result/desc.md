@@ -4,7 +4,7 @@
   
 <article>
 
-*transactionId* `TransactionId` 
+*transactionId* `<ERROR CLASS>` 
 
 Identifier of the transaction
 

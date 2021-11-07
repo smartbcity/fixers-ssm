@@ -64,7 +64,6 @@ services:
     depends_on:
       - coop-rest-java
 
-
 networks:
   bclannet-it:
     name: bclannet-it

@@ -1,14 +1,20 @@
 package ssm.chaincode.f2.query
 
-import ssm.chaincode.dsl.config.SsmChaincodeConfig
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.map
+import ssm.chaincode.dsl.query.SsmListUserQuery
 import ssm.chaincode.dsl.query.SsmListUserQueryFunction
 import ssm.chaincode.dsl.query.SsmListUserResult
-import ssm.chaincode.f2.query.commons.ssmF2Function
+import ssm.sdk.core.SsmQueryService
 
-class SsmListUserQueryFunctionImpl {
+class SsmListUserQueryFunctionImpl(
+	private val queryService: SsmQueryService
+): SsmListUserQueryFunction {
 
-	fun ssmListUserQueryFunction(config: SsmChaincodeConfig): SsmListUserQueryFunction = ssmF2Function(config) { _, ssmClient ->
-		val list = ssmClient.listUsers()
-		SsmListUserResult(list.toTypedArray())
+
+	override suspend fun invoke(msg: Flow<SsmListUserQuery>): Flow<SsmListUserResult> = msg.map { payload ->
+		queryService.listUsers().let { items ->
+			SsmListUserResult(items.toTypedArray())
+		}
 	}
 }

@@ -1,6 +1,6 @@
 package ssm.couchdb.client.test
 
-import ssm.couchdb.client.SsmCouchDbClient
+import ssm.couchdb.client.SsmCouchdbClient
 import ssm.couchdb.client.builder.SsmCouchDbBasicAuth
 
 object DataTest {
@@ -10,7 +10,7 @@ object DataTest {
 	private val password = "couchdb"
 	private val serviceUrl = "http://localhost:5984"
 
-	var ssmCouchDbClient: SsmCouchDbClient = SsmCouchDbClient.builder()
+	var ssmCouchDbClient: SsmCouchdbClient = SsmCouchdbClient.builder()
 		.withUrl(serviceUrl)
 		.withName("Ssm Sdk Unit Test")
 		.withAuth(

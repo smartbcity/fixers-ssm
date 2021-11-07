@@ -4,7 +4,7 @@
   
 <article>
 
-*chaincodes* `List<ChaincodeUri>` 
+*chaincodes* `List<<ERROR CLASS>>` 
 
 </article>
 

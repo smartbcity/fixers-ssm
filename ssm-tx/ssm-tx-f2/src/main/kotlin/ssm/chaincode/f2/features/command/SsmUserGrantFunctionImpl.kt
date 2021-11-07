@@ -13,7 +13,7 @@ class SsmUserGrantFunctionImpl {
 		config: SsmChaincodeConfig, signerAdminProvider: SignerAdminProvider
 	): SsmTxUserGrantFunction = ssmF2Function(config) { cmd, ssmClient ->
 		try {
-			ssmClient.registerUser(signerAdminProvider.get(), cmd.agent)!!.let { result ->
+			ssmClient.sendRegisterUser(signerAdminProvider.get(), cmd.agent)!!.let { result ->
 				SsmUserGrantedResult(
 					transactionId = result.transactionId,
 				)

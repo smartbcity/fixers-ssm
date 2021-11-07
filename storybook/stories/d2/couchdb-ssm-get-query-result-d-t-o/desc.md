@@ -9,7 +9,7 @@
 </article>
 <article>
 
-*uri* `SsmUri` 
+*uri* `<ERROR CLASS>` 
 
 </article>
 

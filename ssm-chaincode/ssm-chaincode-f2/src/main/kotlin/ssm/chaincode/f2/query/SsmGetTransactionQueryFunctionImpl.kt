@@ -1,14 +1,19 @@
 package ssm.chaincode.f2.query
 
-import ssm.chaincode.dsl.config.SsmChaincodeConfig
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.map
+import ssm.chaincode.dsl.query.SsmGetTransactionQuery
 import ssm.chaincode.dsl.query.SsmGetTransactionQueryFunction
 import ssm.chaincode.dsl.query.SsmGetTransactionQueryResult
-import ssm.chaincode.f2.query.commons.ssmF2Function
+import ssm.sdk.core.SsmQueryService
 
-class SsmGetTransactionQueryFunctionImpl {
+class SsmGetTransactionQueryFunctionImpl(
+	private val queryService: SsmQueryService
+) : SsmGetTransactionQueryFunction {
 
-	fun ssmGetTransactionQueryFunction(config: SsmChaincodeConfig): SsmGetTransactionQueryFunction = ssmF2Function(config) { cmd, ssmClient ->
-		ssmClient.getTransaction(cmd.id)
-			.let(::SsmGetTransactionQueryResult)
-	}
+	override suspend fun invoke(msg: Flow<SsmGetTransactionQuery>): Flow<SsmGetTransactionQueryResult> =
+		msg.map { payload ->
+			queryService.getTransaction(payload.id)
+				.let(::SsmGetTransactionQueryResult)
+		}
 }

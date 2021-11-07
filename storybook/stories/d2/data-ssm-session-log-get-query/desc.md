@@ -4,21 +4,21 @@
   
 <article>
 
-*sessionId* `DataSsmSessionId` 
+*sessionName* `<ERROR CLASS>` 
 
 Identifier of the session to retrieve
 
 </article>
 <article>
 
-*ssm* `SsmUri` 
+*ssm* `<ERROR CLASS>` 
 
 Uri information to access a ssm
 
 </article>
 <article>
 
-*txId* `TransactionId` 
+*txId* `<ERROR CLASS>` 
 
 Identifier of the transaction to retrieve
 

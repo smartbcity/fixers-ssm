@@ -5,6 +5,7 @@ import kotlin.js.JsName
 import kotlinx.serialization.Serializable
 import ssm.chaincode.dsl.blockchain.Transaction
 import ssm.chaincode.dsl.blockchain.TransactionDTO
+import ssm.chaincode.dsl.model.SessionName
 import ssm.chaincode.dsl.model.uri.SsmUri
 
 expect interface DataSsmSessionDTO {
@@ -18,7 +19,7 @@ expect interface DataSsmSessionDTO {
 	 * Identifier of the session
 	 * @example [ssm.chaincode.dsl.model.SsmSession.session]
 	 */
-	val id: DataSsmSessionId
+	val sessionName: SessionName
 
 	/**
 	 * The state of an SSM session
@@ -46,12 +47,10 @@ expect interface DataSsmSessionDTO {
 @JsExport
 @JsName("DataSsmSession")
 class DataSsmSession(
-	override val id: DataSsmSessionId,
+	override val sessionName: SessionName,
 	override val state: DataSsmSessionState,
 	override val channel: DataChannel,
 	override val transaction: Transaction?,
 	override val ssmUri: SsmUri,
 	override val transactions: List<TransactionDTO>,
 ) : DataSsmSessionDTO
-
-typealias DataSsmSessionId = String

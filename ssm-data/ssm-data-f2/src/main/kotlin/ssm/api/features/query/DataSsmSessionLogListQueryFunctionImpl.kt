@@ -1,23 +1,28 @@
 package ssm.api.features.query
 
-import f2.dsl.fnc.f2Function
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.map
 import ssm.api.extentions.getSessionLogs
 import ssm.api.extentions.getTransaction
-import ssm.data.dsl.config.SsmDataConfig
+import ssm.chaincode.dsl.query.SsmGetSessionLogsQueryFunction
+import ssm.chaincode.dsl.query.SsmGetTransactionQueryFunction
+import ssm.data.dsl.features.query.DataSsmSessionLogListQueryDTO
 import ssm.data.dsl.features.query.DataSsmSessionLogListQueryFunction
 import ssm.data.dsl.features.query.DataSsmSessionLogListQueryResult
+import ssm.data.dsl.features.query.DataSsmSessionLogListQueryResultDTO
 import ssm.data.dsl.model.DataSsmSessionState
 
 class DataSsmSessionLogListQueryFunctionImpl(
-	private val config: SsmDataConfig
-) {
+	private val ssmGetSessionLogsQueryFunction: SsmGetSessionLogsQueryFunction,
+	private val ssmGetTransactionQueryFunction: SsmGetTransactionQueryFunction,
+) : DataSsmSessionLogListQueryFunction {
 
-	fun dataSsmSessionLogListQueryFunction(): DataSsmSessionLogListQueryFunction =
-		f2Function { cmd ->
-			val logs = cmd.sessionId.getSessionLogs(config)
+	override suspend fun invoke(msg: Flow<DataSsmSessionLogListQueryDTO>): Flow<DataSsmSessionLogListQueryResultDTO> =
+		msg.map { payload ->
+			val logs = payload.sessionName.getSessionLogs(ssmGetSessionLogsQueryFunction)
 
 			logs.map { log ->
-				val transaction = log.txId.getTransaction(config)
+				val transaction = log.txId.getTransaction(ssmGetTransactionQueryFunction)
 				DataSsmSessionState(
 					details = log.state,
 					transaction = transaction

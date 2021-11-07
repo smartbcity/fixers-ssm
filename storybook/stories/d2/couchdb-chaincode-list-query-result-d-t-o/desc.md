@@ -4,7 +4,7 @@
   
 <article>
 
-*items* `List<ChaincodeUri>` 
+*items* `List<<ERROR CLASS>>` 
 
 The name of the database.
 

@@ -1,23 +1,25 @@
 {
   "logs" : [ {
-    "txId" : "aa4659ab-6f4e-457c-8c75-ced489871a65",
+    "txId" : "c7de3ab6-56e0-4e7d-8fa4-905823ed982e",
     "state" : {
-      "ssm" : "ProductLogistic",
       "session" : "eca7c042-ec37-489b-adb8-42c73ddcfb0b",
       "roles" : {
         "Provider" : "JohnDeuf",
         "Seller" : "BenEfficiere",
         "Buyer" : "JeanneAlyztou"
       },
-      "public" : "",
-      "origin" : {
-        "from" : 0,
-        "to" : 1,
-        "role" : "Provider",
-        "action" : "Build"
+      "public" : "The seller is a scam",
+      "private" : {
+        "cake" : "lie"
       },
-      "current" : 1,
-      "iteration" : 1
+      "origin" : {
+        "from" : 1,
+        "to" : 2,
+        "role" : "Seller",
+        "action" : "Sell"
+      },
+      "current" : 2,
+      "iteration" : 3
     }
   } ]
 }

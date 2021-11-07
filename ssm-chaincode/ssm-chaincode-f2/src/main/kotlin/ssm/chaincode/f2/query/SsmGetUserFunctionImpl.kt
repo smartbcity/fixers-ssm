@@ -1,14 +1,19 @@
 package ssm.chaincode.f2.query
 
-import ssm.chaincode.dsl.config.SsmChaincodeConfig
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.map
 import ssm.chaincode.dsl.query.SsmGetUserFunction
+import ssm.chaincode.dsl.query.SsmGetUserQuery
 import ssm.chaincode.dsl.query.SsmGetUserResult
-import ssm.chaincode.f2.query.commons.ssmF2Function
+import ssm.sdk.core.SsmQueryService
 
-class SsmGetUserFunctionImpl {
+class SsmGetUserFunctionImpl(
+	private val queryService: SsmQueryService
+): SsmGetUserFunction {
 
-	fun ssmGetUserFunction(config: SsmChaincodeConfig): SsmGetUserFunction = ssmF2Function(config) { cmd, ssmClient ->
-		val sessionState = ssmClient.getAgent(cmd.name)
-		SsmGetUserResult(sessionState)
+	override suspend fun invoke(msg: Flow<SsmGetUserQuery>): Flow<SsmGetUserResult> = msg.map { payload ->
+		queryService.getAgent(payload.name).let { items ->
+			SsmGetUserResult(items)
+		}
 	}
 }

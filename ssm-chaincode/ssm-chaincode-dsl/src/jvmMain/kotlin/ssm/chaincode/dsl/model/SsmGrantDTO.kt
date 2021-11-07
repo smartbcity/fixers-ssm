@@ -1,7 +1,5 @@
 package ssm.chaincode.dsl.model
 
-import ssm.chaincode.dsl.model.CreditDTO
-
 actual interface SsmGrantDTO {
 	actual val user: String
 	actual val iteration: Int

@@ -4,14 +4,14 @@
   
 <article>
 
-*chaincodeId* [`ChaincodeId`](/docs/ssm-chaincode-models--page#chaincodeid) 
+*chaincodeId* `<ERROR CLASS>` 
 
 The unique id of a chaincode.
 
 </article>
 <article>
 
-*channelId* [`ChannelId`](/docs/channelid--page#channelid) 
+*channelId* `<ERROR CLASS>` 
 
 The unique id of a channel.
 

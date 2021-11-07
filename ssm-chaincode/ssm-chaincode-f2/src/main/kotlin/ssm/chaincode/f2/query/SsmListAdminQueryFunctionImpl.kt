@@ -1,14 +1,20 @@
 package ssm.chaincode.f2.query
 
-import ssm.chaincode.dsl.config.SsmChaincodeConfig
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.map
+import ssm.chaincode.dsl.query.SsmListAdminQuery
 import ssm.chaincode.dsl.query.SsmListAdminQueryFunction
 import ssm.chaincode.dsl.query.SsmListAdminResult
-import ssm.chaincode.f2.query.commons.ssmF2Function
+import ssm.sdk.core.SsmQueryService
 
-class SsmListAdminQueryFunctionImpl {
+class SsmListAdminQueryFunctionImpl(
+	private val queryService: SsmQueryService
+) : SsmListAdminQueryFunction {
 
-	fun ssmListAdminQueryFunction(config: SsmChaincodeConfig): SsmListAdminQueryFunction = ssmF2Function(config) { _, ssmClient ->
-		val list = ssmClient.listAdmins()
-		SsmListAdminResult(list.toTypedArray())
+	override suspend fun invoke(msg: Flow<SsmListAdminQuery>): Flow<SsmListAdminResult> = msg.map { payload ->
+		queryService.listAdmins().let { items ->
+			SsmListAdminResult(items.toTypedArray())
+		}
+
 	}
 }

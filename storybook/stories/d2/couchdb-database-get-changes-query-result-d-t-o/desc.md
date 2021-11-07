@@ -9,4 +9,9 @@
 The name of the database.
 
 </article>
+<article>
+
+*lastEventId* `ChangeEventId?` 
+
+</article>
 

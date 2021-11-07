@@ -1,7 +1,5 @@
 package ssm.chaincode.dsl.model
 
-import ssm.chaincode.dsl.model.WithPrivate
-
 @JsExport
 @JsName("SsmSessionDTO")
 actual external interface SsmSessionDTO : WithPrivate {

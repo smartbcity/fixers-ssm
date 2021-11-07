@@ -5,8 +5,8 @@ import kotlin.js.JsExport
 import kotlin.js.JsName
 import kotlinx.serialization.Serializable
 import ssm.chaincode.dsl.SsmItemResultDTO
-import ssm.chaincode.dsl.model.Agent
 import ssm.chaincode.dsl.SsmQueryDTO
+import ssm.chaincode.dsl.model.Agent
 import ssm.chaincode.dsl.model.AgentName
 
 /**

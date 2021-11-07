@@ -4,7 +4,7 @@
   
 <article>
 
-*chaincodeUri* `ChaincodeUri` 
+*chaincodeUri* `<ERROR CLASS>` 
 
 The unique uri of a channel.
 
@@ -16,7 +16,7 @@ The unique uri of a channel.
 </article>
 <article>
 
-*ssm* [`SsmName?`](/docs/ssm-chaincode-models--page#ssmname) 
+*ssm* `<ERROR CLASS>?` 
 
 The unique identifier of a ssm.
 

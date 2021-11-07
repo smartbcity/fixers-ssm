@@ -22,7 +22,7 @@ typealias DataSsmSessionGetQueryFunction = F2Function<DataSsmSessionGetQueryDTO,
 expect interface DataSsmSessionGetQueryDTO : DataQueryDTO {
 	/**
 	 * Identifier of the session to retrieve
-	 * @example [DataSsmSession.id]
+	 * @example [DataSsmSession.sessionName]
 	 */
 	val sessionName: SessionName
 	override val ssm: SsmUri

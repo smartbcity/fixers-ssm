@@ -6,6 +6,12 @@ import ssm.api.features.query.DataSsmSessionGetQueryFunctionImpl
 import ssm.api.features.query.DataSsmSessionListQueryFunctionImpl
 import ssm.api.features.query.DataSsmSessionLogGetQueryFunctionImpl
 import ssm.api.features.query.DataSsmSessionLogListQueryFunctionImpl
+import ssm.api.features.query.internal.DataSsmSessionConvertFunctionImpl
+import ssm.chaincode.dsl.SsmChaincodeQueries
+import ssm.chaincode.f2.ChaincodeSsmQueriesImpl
+import ssm.couchdb.dsl.SsmCouchDbQueries
+import ssm.couchdb.f2.CouchdbSsmQueriesFunctionImpl
+import ssm.data.dsl.SsmApiQueryFunctions
 import ssm.data.dsl.config.SsmDataConfig
 import ssm.data.dsl.features.query.DataSsmGetQueryFunction
 import ssm.data.dsl.features.query.DataSsmListQueryFunction
@@ -14,26 +20,47 @@ import ssm.data.dsl.features.query.DataSsmSessionListQueryFunction
 import ssm.data.dsl.features.query.DataSsmSessionLogGetQueryFunction
 import ssm.data.dsl.features.query.DataSsmSessionLogListQueryFunction
 
-class DataSsmQueryFunctionImpl : ssm.data.dsl.SsmApiQueryFunctions {
+class DataSsmQueryFunctionImpl(
+	private val config: SsmDataConfig,
+	private val ssmChaincodeQueries: SsmChaincodeQueries = ChaincodeSsmQueriesImpl(config.chaincode),
+	private val couchDbSsmQueries: SsmCouchDbQueries = CouchdbSsmQueriesFunctionImpl(config.couchdb)
+) : SsmApiQueryFunctions {
 
-	override fun dataSsmListQueryFunction(config: SsmDataConfig): DataSsmListQueryFunction =
-		DataSsmListQueryFunctionImp(config).dataSsmListQueryFunction()
+	override fun dataSsmListQueryFunction(): DataSsmListQueryFunction =
+		DataSsmListQueryFunctionImp(couchdbSsmListQueryFunction = couchDbSsmQueries.couchdbSsmListQueryFunction())
 
-	override fun dataSsmGetQueryFunction(config: SsmDataConfig): DataSsmGetQueryFunction =
-		DataSsmGetQueryFunctionImpl(config).dataSsmGetQueryFunction()
+	override fun dataSsmGetQueryFunction(): DataSsmGetQueryFunction =
+		DataSsmGetQueryFunctionImpl(
+			ssmGetQueryFunction = ssmChaincodeQueries.ssmGetQueryFunction()
+		)
 
-	override fun dataSsmSessionListQueryFunction(config: SsmDataConfig): DataSsmSessionListQueryFunction =
-		DataSsmSessionListQueryFunctionImpl(config).dataSsmSessionListQueryFunction()
+	override fun dataSsmSessionListQueryFunction(): DataSsmSessionListQueryFunction =
+		DataSsmSessionListQueryFunctionImpl(
+			dataSsmSessionConvertFunctionImpl = dataSsmSessionConvertFunctionImpl(),
+			couchdbSsmSessionStateListQueryFunction = couchDbSsmQueries.couchdbSsmSessionStateListQueryFunction()
+		)
 
-	override fun dataSsmSessionGetQueryFunction(config: SsmDataConfig): DataSsmSessionGetQueryFunction =
-		DataSsmSessionGetQueryFunctionImpl(config).dataSsmSessionGetQueryFunction()
+	override fun dataSsmSessionGetQueryFunction(): DataSsmSessionGetQueryFunction =
+		DataSsmSessionGetQueryFunctionImpl(
+			ssmGetSessionQueryFunction = ssmChaincodeQueries.ssmGetSessionQueryFunction(),
+			dataSsmSessionConvertFunctionImpl = dataSsmSessionConvertFunctionImpl(),
+		)
 
-	override fun dataSsmSessionLogListQueryFunction(config: SsmDataConfig): DataSsmSessionLogListQueryFunction =
-		DataSsmSessionLogListQueryFunctionImpl(config).dataSsmSessionLogListQueryFunction()
+	override fun dataSsmSessionLogListQueryFunction(): DataSsmSessionLogListQueryFunction =
+		DataSsmSessionLogListQueryFunctionImpl(
+			ssmGetSessionLogsQueryFunction = ssmChaincodeQueries.ssmGetSessionLogsQueryFunction(),
+			ssmGetTransactionQueryFunction = ssmChaincodeQueries.ssmGetTransactionQueryFunction()
+		)
 
-	override fun dataSsmSessionLogGetQueryFunction(config: SsmDataConfig): DataSsmSessionLogGetQueryFunction =
-		DataSsmSessionLogGetQueryFunctionImpl(config).dataSsmSessionLogGetQueryFunction()
+	override fun dataSsmSessionLogGetQueryFunction(): DataSsmSessionLogGetQueryFunction =
+		DataSsmSessionLogGetQueryFunctionImpl(
+			ssmGetSessionLogsQueryFunction = ssmChaincodeQueries.ssmGetSessionLogsQueryFunction(),
+			ssmGetTransactionQueryFunction = ssmChaincodeQueries.ssmGetTransactionQueryFunction()
+		)
 
-
-
+	private fun dataSsmSessionConvertFunctionImpl(): DataSsmSessionConvertFunctionImpl =
+		DataSsmSessionConvertFunctionImpl(
+			ssmGetSessionLogsQueryFunction = ssmChaincodeQueries.ssmGetSessionLogsQueryFunction(),
+			ssmGetTransactionQueryFunction = ssmChaincodeQueries.ssmGetTransactionQueryFunction()
+		)
 }

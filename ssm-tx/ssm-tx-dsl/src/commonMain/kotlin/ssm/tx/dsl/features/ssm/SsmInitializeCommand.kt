@@ -6,7 +6,6 @@ import ssm.chaincode.dsl.blockchain.TransactionId
 import ssm.chaincode.dsl.model.Agent
 import ssm.chaincode.dsl.model.Ssm
 import ssm.tx.dsl.features.SsmCommandDTO
-import ssm.tx.dsl.features.SsmCommandResult
 
 /**
  * Initializes an SSM

@@ -1,7 +1,7 @@
 package ssm.sdk.client.invoke.builder
 
+import ssm.sdk.client.invoke.query.SsmQueryName
 import ssm.sdk.client.model.InvokeArgs
-import ssm.sdk.client.model.SsmQueryName
 
 interface HasQueryName {
 	val queryName: SsmQueryName

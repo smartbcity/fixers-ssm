@@ -1,9 +1,5 @@
 package ssm.chaincode.dsl.model
 
-import ssm.chaincode.dsl.model.SsmSessionDTO
-import ssm.chaincode.dsl.model.SsmTransitionDTO
-import ssm.chaincode.dsl.model.WithPrivate
-
 @JsExport
 @JsName("SsmSessionStateDTO")
 actual external interface SsmSessionStateDTO : SsmSessionDTO, WithPrivate {

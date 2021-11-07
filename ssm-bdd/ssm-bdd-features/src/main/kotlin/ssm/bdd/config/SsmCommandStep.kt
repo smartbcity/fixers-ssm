@@ -5,20 +5,20 @@ import io.cucumber.java8.En
 import io.cucumber.java8.Scenario
 import kotlinx.coroutines.runBlocking
 import ssm.chaincode.dsl.config.SsmChaincodeConfig
+import ssm.chaincode.dsl.model.Agent
+import ssm.chaincode.dsl.model.AgentName
 import ssm.chaincode.dsl.model.SessionName
 import ssm.chaincode.dsl.model.Ssm
 import ssm.chaincode.dsl.model.SsmAction
-import ssm.chaincode.dsl.model.Agent
-import ssm.chaincode.dsl.model.AgentName
 import ssm.chaincode.dsl.model.SsmContext
 import ssm.chaincode.dsl.model.SsmName
 import ssm.chaincode.dsl.model.SsmSession
 import ssm.chaincode.dsl.model.SsmTransition
+import ssm.sdk.client.extention.SsmJsonReader
 import ssm.sdk.client.extention.asAgent
-import ssm.sdk.client.utils.SsmJsonReader
-import ssm.sdk.sign.model.Signer
 import ssm.sdk.sign.model.SignerAdmin
 import ssm.sdk.sign.model.SignerName
+import ssm.sdk.sign.model.SignerUser
 
 abstract class SsmCommandStep {
 
@@ -27,18 +27,18 @@ abstract class SsmCommandStep {
 
 	@Suppress("LongMethod")
 	fun En.prepareSteps() {
-		DataTableType { table: DataTable ->
-			val rows: List<Map<String?, String?>> = table.asMaps()
-			rows.map { columns ->
-				SsmTransition(
-					from = columns[SsmTransition::from.name]?.toInt()!!,
-					to = columns[SsmTransition::to.name]?.toInt()!!,
-					role = columns[SsmTransition::role.name]!!,
-					action = columns[SsmTransition::action.name]!!,
-
-					)
-			}
-		}
+//		DataTableType { table: DataTable ->
+//			val rows: List<Map<String?, String?>> = table.asMaps()
+//			rows.map { columns ->
+//				SsmTransition(
+//					from = columns[SsmTransition::from.name]?.toInt()!!,
+//					to = columns[SsmTransition::to.name]?.toInt()!!,
+//					role = columns[SsmTransition::role.name]!!,
+//					action = columns[SsmTransition::action.name]!!,
+//
+//					)
+//			}
+//		}
 
 		Before { scenario: Scenario ->
 			bag = SsmCucumberBag.init(scenario)
@@ -71,7 +71,7 @@ abstract class SsmCommandStep {
 
 		Given("A new user {string}") { userName: SignerName ->
 			val contextUser = userName.contextualize(bag)
-			bag.userSigners[contextUser] = Signer.generate(contextUser)
+			bag.userSigners[contextUser] = SignerUser.generate(contextUser)
 			runBlocking {
 				registerUser(bag.userSigners[contextUser]!!.asAgent())
 			}
@@ -162,7 +162,7 @@ abstract class SsmCommandStep {
 						iteration = perform.iteration,
 						private = emptyMap()
 					)
-					bag.client.perform(signer, perform.action, context)
+					bag.clientTx.sendPerform(signer, perform.action, context)
 				}
 			}
 		}
@@ -206,8 +206,8 @@ abstract class SsmCommandStep {
 	}
 
 
-	protected fun createUser(signerName: SignerName): Signer {
-		return Signer.generate(signerName)
+	protected fun createUser(signerName: SignerName): SignerUser {
+		return SignerUser.generate(signerName)
 	}
 
 	protected abstract suspend fun startSession(session: SsmSession)
@@ -231,5 +231,5 @@ abstract class SsmCommandStep {
 
 	}
 
-	protected abstract suspend fun loadSigner(userName: SignerName, filename: String): Signer
+	protected abstract suspend fun loadSigner(userName: SignerName, filename: String): SignerUser
 }

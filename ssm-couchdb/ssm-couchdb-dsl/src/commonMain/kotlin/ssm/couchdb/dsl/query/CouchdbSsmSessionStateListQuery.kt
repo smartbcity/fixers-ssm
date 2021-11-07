@@ -1,6 +1,5 @@
 package ssm.couchdb.dsl.query
 
-import f2.dsl.cqrs.page.OffsetPagination
 import f2.dsl.cqrs.page.OffsetPaginationDTO
 import f2.dsl.cqrs.page.Page
 import f2.dsl.cqrs.page.PageDTO
@@ -10,13 +9,10 @@ import f2.dsl.fnc.F2Function
 import kotlin.js.JsExport
 import kotlin.js.JsName
 import kotlinx.serialization.Serializable
-import ssm.chaincode.dsl.model.ChaincodeId
-import ssm.chaincode.dsl.model.ChannelId
 import ssm.chaincode.dsl.model.SsmName
 import ssm.chaincode.dsl.model.SsmSessionState
 import ssm.chaincode.dsl.model.SsmSessionStateDTO
 import ssm.chaincode.dsl.model.uri.ChaincodeUri
-import ssm.chaincode.dsl.model.uri.SsmUri
 
 /**
  * Retrieve the list of all known sessions of a given SSM

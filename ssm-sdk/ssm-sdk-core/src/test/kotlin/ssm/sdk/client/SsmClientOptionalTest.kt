@@ -7,7 +7,7 @@ import org.junit.jupiter.api.Test
 
 class SsmClientOptionalTest {
 
-	private var client: SsmClient = SsmClientTestBuilder.build()
+	private var client = SsmClientTestBuilder.build().buildQueryService()
 
 
 	@Test
@@ -33,5 +33,4 @@ class SsmClientOptionalTest {
 		val ses = client.getSession(UUID.randomUUID().toString())
 		Assertions.assertThat(ses).isNull()
 	}
-
 }

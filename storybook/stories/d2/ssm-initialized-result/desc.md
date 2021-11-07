@@ -4,7 +4,7 @@
   
 <article>
 
-*results* `List<TransactionId>` 
+*results* `List<<ERROR CLASS>>` 
 
 </article>
 

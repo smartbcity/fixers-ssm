@@ -5,8 +5,8 @@ import kotlin.js.JsExport
 import kotlin.js.JsName
 import kotlinx.serialization.Serializable
 import ssm.chaincode.dsl.blockchain.TransactionId
+import ssm.chaincode.dsl.model.SessionName
 import ssm.chaincode.dsl.model.uri.SsmUri
-import ssm.data.dsl.model.DataSsmSessionId
 import ssm.data.dsl.model.DataSsmSessionState
 import ssm.data.dsl.model.DataSsmSessionStateDTO
 
@@ -22,9 +22,9 @@ typealias DataSsmSessionLogGetQueryFunction = F2Function<DataSsmSessionLogGetQue
 expect interface DataSsmSessionLogGetQueryDTO : DataQueryDTO {
 	/**
 	 * Identifier of the session to retrieve
-	 * @example [ssm.data.dsl.model.DataSsmSession.id]
+	 * @example [ssm.data.dsl.model.DataSsmSession.sessionName]
 	 */
-	val sessionId: DataSsmSessionId
+	val sessionName: SessionName
 
 	/**
 	 * Identifier of the transaction to retrieve
@@ -43,7 +43,7 @@ expect interface DataSsmSessionLogGetQueryDTO : DataQueryDTO {
 @JsExport
 @JsName("DataSsmSessionLogGetQuery")
 class DataSsmSessionLogGetQuery(
-	override val sessionId: DataSsmSessionId,
+	override val sessionName: SessionName,
 	override val txId: TransactionId,
 	override val ssm: SsmUri,
 ) : DataSsmSessionLogGetQueryDTO

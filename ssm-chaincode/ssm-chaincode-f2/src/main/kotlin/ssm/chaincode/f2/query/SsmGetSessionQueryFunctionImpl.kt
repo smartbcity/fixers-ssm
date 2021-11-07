@@ -1,14 +1,17 @@
 package ssm.chaincode.f2.query
 
-import ssm.chaincode.dsl.config.SsmChaincodeConfig
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.map
+import ssm.chaincode.dsl.query.SsmGetSessionQuery
 import ssm.chaincode.dsl.query.SsmGetSessionQueryFunction
 import ssm.chaincode.dsl.query.SsmGetSessionResult
-import ssm.chaincode.f2.query.commons.ssmF2Function
+import ssm.sdk.core.SsmQueryService
 
-class SsmGetSessionQueryFunctionImpl {
+class SsmGetSessionQueryFunctionImpl(
+	private val queryService: SsmQueryService
+): SsmGetSessionQueryFunction {
 
-	fun ssmGetSessionQueryFunction(config: SsmChaincodeConfig): SsmGetSessionQueryFunction = ssmF2Function(config) { cmd, ssmClient ->
-		val sessionState = ssmClient.getSession(cmd.sessionName)
-		SsmGetSessionResult(sessionState)
+	override suspend fun invoke(msg: Flow<SsmGetSessionQuery>): Flow<SsmGetSessionResult> = msg.map { payload ->
+		queryService.getSession(payload.sessionName).let(::SsmGetSessionResult)
 	}
 }

@@ -8,7 +8,7 @@ Response of the API after a command has been executed
   
 <article>
 
-*transactionId* `TransactionId` 
+*transactionId* `<ERROR CLASS>` 
 
 Identifier of the transaction
 

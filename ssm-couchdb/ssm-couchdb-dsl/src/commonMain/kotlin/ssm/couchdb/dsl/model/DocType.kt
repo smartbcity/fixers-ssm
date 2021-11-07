@@ -2,13 +2,14 @@ package ssm.couchdb.dsl.model
 
 import kotlin.reflect.KClass
 import kotlinx.serialization.Serializable
-import ssm.chaincode.dsl.model.ChaincodeId
 import ssm.chaincode.dsl.model.Agent
+import ssm.chaincode.dsl.model.ChaincodeId
 import ssm.chaincode.dsl.model.SsmGrant
 import ssm.chaincode.dsl.model.SsmSessionState
 
+typealias DocTypeName = String
 sealed class DocType<T : Any>(
-	val docType: String,
+	val name: DocTypeName,
 	val clazz: KClass<T>,
 ) {
 	object Admin : DocType<Agent>("admin", Agent::class)

@@ -2,19 +2,18 @@ package ssm.bdd.config
 
 import io.cucumber.java8.Scenario
 import java.util.UUID
-import ssm.chaincode.dsl.model.Ssm
 import ssm.chaincode.dsl.model.AgentName
+import ssm.chaincode.dsl.model.Ssm
 import ssm.chaincode.dsl.model.SsmName
 import ssm.chaincode.dsl.model.uri.ChaincodeUri
-import ssm.chaincode.dsl.model.uri.SsmUri
-import ssm.sdk.client.SsmClientBuilder
-import ssm.sdk.client.SsmClientConfig
-import ssm.sdk.sign.model.Signer
+import ssm.sdk.client.SsmSdkConfig
+import ssm.sdk.core.SsmServiceFactory
 import ssm.sdk.sign.model.SignerAdmin
 import ssm.sdk.sign.model.SignerName
+import ssm.sdk.sign.model.SignerUser
 
 class SsmCucumberBag(
-	val config: SsmClientConfig
+	val config: SsmSdkConfig
 ) {
 
 	companion object {
@@ -22,7 +21,7 @@ class SsmCucumberBag(
 
 		fun init(scenario: Scenario): SsmCucumberBag {
 			if (!cucumbers.containsKey(scenario.id)) {
-				cucumbers[scenario.id] = SsmCucumberBag(SsmClientConfig("http://localhost:9090")).apply {
+				cucumbers[scenario.id] = SsmCucumberBag(SsmSdkConfig("http://localhost:9090")).apply {
 					uuid = UUID.randomUUID().toString()
 				}
 			}
@@ -33,15 +32,16 @@ class SsmCucumberBag(
 
 	lateinit var uuid: String
 
-	val client = SsmClientBuilder.builder(config).withChannelId("sandbox").withSsmId("ssm").build()
+	val clientTx = SsmServiceFactory.builder(config).withChannelId("sandbox").withSsmId("ssm").buildTxService()
+	val clientQuery = SsmServiceFactory.builder(config).withChannelId("sandbox").withSsmId("ssm").buildQueryService()
 
 	// URI
-	lateinit var ssmUri: SsmUri
+//	lateinit var ssmUri: SsmUri
 	val chaincodeUri: ChaincodeUri = "chaincode:sandbox:ssm"
 
 	//	SsmSdkTxSteps
 	lateinit var adminSigner: SignerAdmin
-	var userSigners: MutableMap<SignerName, Signer> = mutableMapOf()
+	var userSigners: MutableMap<SignerName, SignerUser> = mutableMapOf()
 	var ssms: MutableMap<SsmName, Ssm> = mutableMapOf()
 
 	// SsmChaincodeBddSteps

@@ -1,28 +1,30 @@
 package ssm.couchdb.f2.query
 
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.map
 import ssm.chaincode.dsl.model.uri.SsmUriBurst
 import ssm.chaincode.dsl.model.uri.compact
-import ssm.couchdb.dsl.config.SsmCouchdbConfig
+import ssm.couchdb.client.SsmCouchdbClient
 import ssm.couchdb.dsl.model.DocType
+import ssm.couchdb.dsl.query.CouchdbSsmGetQuery
 import ssm.couchdb.dsl.query.CouchdbSsmGetQueryFunction
 import ssm.couchdb.dsl.query.CouchdbSsmGetQueryResult
-import ssm.couchdb.f2.commons.CouchdbF2Function
 import ssm.couchdb.f2.commons.chainCodeDbName
 
 class CouchdbSsmGetQueryFunctionImpl(
-	private val config: SsmCouchdbConfig,
-) {
+	private val couchdbClient: SsmCouchdbClient,
+) : CouchdbSsmGetQueryFunction {
 
-	fun couchdbSsmGetQueryFunction(): CouchdbSsmGetQueryFunction = CouchdbF2Function.function(config) { query, couchdbClient ->
+	override suspend fun invoke(msg: Flow<CouchdbSsmGetQuery>): Flow<CouchdbSsmGetQueryResult> = msg.map { payload ->
 		couchdbClient
-			.fetchOneByDocTypeAndName(chainCodeDbName(query.channelId, query.chaincodeId), DocType.Ssm, query.ssmName)
+			.fetchOneByDocTypeAndName(chainCodeDbName(payload.channelId, payload.chaincodeId), DocType.Ssm, payload.ssmName)
 			.let{ item ->
 				CouchdbSsmGetQueryResult(
 					item = item,
 					uri = SsmUriBurst(
-						channelId = query.channelId,
-						chaincodeId = query.chaincodeId,
-						ssmName = query.ssmName,
+						channelId = payload.channelId,
+						chaincodeId = payload.chaincodeId,
+						ssmName = payload.ssmName,
 					).compact()
 				)
 			}

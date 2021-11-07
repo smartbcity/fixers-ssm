@@ -10,9 +10,6 @@ import org.junit.jupiter.api.MethodOrderer.OrderAnnotation
 import org.junit.jupiter.api.Order
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.TestMethodOrder
-import ssm.sdk.client.extention.addPrivateMessage
-import ssm.sdk.client.extention.getPrivateMessage
-import ssm.sdk.client.extention.loadFromFile
 import ssm.chaincode.dsl.blockchain.Block
 import ssm.chaincode.dsl.blockchain.Transaction
 import ssm.chaincode.dsl.model.Agent
@@ -21,9 +18,15 @@ import ssm.chaincode.dsl.model.SsmContext
 import ssm.chaincode.dsl.model.SsmSession
 import ssm.chaincode.dsl.model.SsmSessionState
 import ssm.chaincode.dsl.model.SsmTransition
+import ssm.sdk.client.extention.addPrivateMessage
+import ssm.sdk.client.extention.getPrivateMessage
+import ssm.sdk.client.extention.loadFromFile
 import ssm.sdk.client.model.InvokeReturn
+import ssm.sdk.core.SsmQueryService
+import ssm.sdk.core.SsmTxService
 import ssm.sdk.sign.model.Signer
 import ssm.sdk.sign.model.SignerAdmin
+import ssm.sdk.sign.model.SignerUser
 
 @TestMethodOrder(OrderAnnotation::class)
 class SsmClientItTest {
@@ -49,7 +52,8 @@ class SsmClientItTest {
 		private lateinit var agentAdmin: Agent
 		private lateinit var agentUser1: Agent
 		private lateinit var agentUser2: Agent
-		private lateinit var client: SsmClient
+		private lateinit var query: SsmQueryService
+		private lateinit var tx: SsmTxService
 		private lateinit var ssmName: String
 		private lateinit var sessionName: String
 		private lateinit var session: SsmSession
@@ -59,12 +63,13 @@ class SsmClientItTest {
 		@Throws(Exception::class)
 		fun init() {
 			signerAdmin = SignerAdmin.loadFromFile(ADMIN_NAME, NETWORK + ADMIN_NAME)
-			signerUser1 = Signer.loadFromFile(USER1_NAME, USER1_FILENAME)
-			signerUser2 = Signer.loadFromFile(USER2_NAME, USER2_FILENAME)
+			signerUser1 = SignerUser.loadFromFile(USER1_NAME, USER1_FILENAME)
+			signerUser2 = SignerUser.loadFromFile(USER2_NAME, USER2_FILENAME)
 			agentAdmin = loadFromFile(ADMIN_NAME, NETWORK + ADMIN_NAME)
 			agentUser1 = loadFromFile(signerUser1.name, USER1_FILENAME)
 			agentUser2 = loadFromFile(signerUser2.name, USER2_FILENAME)
-			client = SsmClientTestBuilder.build()
+			query = SsmClientTestBuilder.build().buildQueryService()
+			tx = SsmClientTestBuilder.build().buildTxService()
 			ssmName = "CarDealership-" + uuid
 			val roles = mapOf(
 				signerUser1.name to "Buyer", signerUser2.name to "Seller"
@@ -88,14 +93,14 @@ class SsmClientItTest {
 	@Order(5)
 	@Test
 	fun listAdmin() = runBlocking<Unit> {
-		val agentRet = client.listAdmins()
+		val agentRet = query.listAdmins()
 		Assertions.assertThat(agentRet).contains(ADMIN_NAME)
 	}
 
 	@Order(10)
 	@Test
 	fun adminUser() = runBlocking<Unit> {
-		val agentRet = client.getAdmin(ADMIN_NAME)
+		val agentRet = query.getAdmin(ADMIN_NAME)
 		val agentFormClient = agentRet
 		Assertions.assertThat(agentFormClient).isEqualTo(agentAdmin)
 	}
@@ -103,7 +108,7 @@ class SsmClientItTest {
 	@Test
 	@Order(20)
 	fun registerUser1() = runBlocking<Unit> {
-		val transactionEvent = client.registerUser(signerAdmin, agentUser1)!!
+		val transactionEvent = tx.sendRegisterUser(signerAdmin, agentUser1)!!
 		val trans = transactionEvent
 		assertThatTransactionExists(trans)
 	}
@@ -111,28 +116,28 @@ class SsmClientItTest {
 	@Order(30)
 	@Test
 	fun agentUser1() = runBlocking<Unit> {
-		val agentRet = client.getAgent(agentUser1.name)!!
+		val agentRet = query.getAgent(agentUser1.name)!!
 		Assertions.assertThat(agentRet).isEqualTo(agentUser1)
 	}
 
 	@Test
 	@Order(40)
 	fun registerUser2() = runBlocking<Unit> {
-		val transactionEvent = client.registerUser(signerAdmin, agentUser2)
+		val transactionEvent = tx.sendRegisterUser(signerAdmin, agentUser2)
 		assertThatTransactionExists(transactionEvent!!)
 	}
 
 	@Order(50)
 	@Test
 	fun agentUser2() = runBlocking<Unit> {
-		val agentRet = client.getAgent(agentUser2.name)
+		val agentRet = query.getAgent(agentUser2.name)
 		Assertions.assertThat(agentRet).isEqualTo(agentUser2)
 	}
 
 	@Test
 	@Order(55)
 	fun listAgent() = runBlocking<Unit> {
-		val agentRet = client.listUsers()
+		val agentRet = query.listUsers()
 		Assertions.assertThat(agentRet).contains(agentUser1.name, agentUser2.name)
 	}
 
@@ -142,14 +147,14 @@ class SsmClientItTest {
 		val sell = SsmTransition(0, 1, "Seller", "Sell")
 		val buy = SsmTransition(1, 2, "Buyer", "Buy")
 		val ssm = Ssm(ssmName, Lists.newArrayList(sell, buy))
-		val transactionEvent = client.create(signerAdmin, ssm)
+		val transactionEvent = tx.sendCreate(signerAdmin, ssm)
 		assertThatTransactionExists(transactionEvent!!)
 	}
 
 	@Order(70)
 	@Test
 	fun ssm() = runBlocking<Unit> {
-		val ssmReq = client.getSsm(
+		val ssmReq = query.getSsm(
 			ssmName
 		)
 		Assertions.assertThat(ssmReq).isNotNull
@@ -166,14 +171,14 @@ class SsmClientItTest {
 			ssmName,
 			sessionName, roles, "Used car for 100 dollars.", emptyMap()
 		)
-		val transactionEvent = client.start(signerAdmin, session)
+		val transactionEvent = tx.sendStart(signerAdmin, session)
 		assertThatTransactionExists(transactionEvent!!)
 	}
 
 	@Order(90)
 	@Test
 	fun session() = runBlocking<Unit> {
-		val ses = client.getSession(
+		val ses = query.getSession(
 			sessionName
 		)
 		val sesReq = ses
@@ -195,7 +200,7 @@ class SsmClientItTest {
 			agentUser1
 		)
 		privateMessage = context.private
-		val transactionEvent = client.perform(signerUser2, "Sell", context)
+		val transactionEvent = tx.sendPerform(signerUser2, "Sell", context)
 		assertThatTransactionExists(transactionEvent!!)
 	}
 
@@ -203,7 +208,7 @@ class SsmClientItTest {
 	@Test
 	fun sessionAfterSell() = runBlocking<Unit> {
 		val sell = SsmTransition(0, 1, "Seller", "Sell")
-		val sesReq = client.getSession(
+		val sesReq = query.getSession(
 			sessionName
 		)
 		val stateExpected = SsmSessionState(
@@ -217,7 +222,7 @@ class SsmClientItTest {
 	@Test
 	fun sessionAfterSellShouldReturnEncryptMessage() = runBlocking<Unit> {
 //		val (from, to, role, action) = SsmTransition(0, 1, "Seller", "Sell")
-		val state = client.getSession(sessionName)
+		val state = query.getSession(sessionName)
 		val expectedMessage = state?.getPrivateMessage(signerUser1)
 		Assertions.assertThat(expectedMessage).isEqualTo("Message to signer1")
 	}
@@ -226,17 +231,17 @@ class SsmClientItTest {
 	@Order(120)
 	fun performBuy() = runBlocking<Unit> {
 		val context = SsmContext(sessionName, "Deal !", 1, emptyMap())
-		val transactionEvent = client.perform(signerUser1, "Buy", context)!!
+		val transactionEvent = tx.sendPerform(signerUser1, "Buy", context)!!
 		assertThatTransactionExists(transactionEvent)
 	}
 
 	suspend fun assertThatTransactionExists(trans: InvokeReturn) {
 		Assertions.assertThat(trans).isNotNull
 		Assertions.assertThat(trans.status).isEqualTo("SUCCESS")
-		val transaction: Transaction? = client.getTransaction(trans.transactionId)
+		val transaction: Transaction? = query.getTransaction(trans.transactionId)
 		Assertions.assertThat(transaction).isNotNull
 		Assertions.assertThat(transaction?.blockId).isNotNull
-		val block: Block? = client.getBlock(transaction!!.blockId)
+		val block: Block? = query.getBlock(transaction!!.blockId)
 		Assertions.assertThat(block).isNotNull
 	}
 
@@ -244,7 +249,7 @@ class SsmClientItTest {
 	@Test
 	fun sessionAfterBuy() = runBlocking<Unit> {
 		val buy = SsmTransition(1, 2, "Buyer", "Buy")
-		val sesReq = client.getSession(
+		val sesReq = query.getSession(
 			sessionName
 		)
 		val state = sesReq
@@ -259,7 +264,7 @@ class SsmClientItTest {
 	@Order(135)
 	@Throws(Exception::class)
 	fun logSession() = runBlocking<Unit> {
-		val sesReq = client.log(
+		val sesReq = query.log(
 			sessionName
 		)
 		Assertions.assertThat(sesReq.size).isEqualTo(3)
@@ -268,14 +273,14 @@ class SsmClientItTest {
 	@Test
 	@Order(140)
 	fun listSsm() = runBlocking<Unit> {
-		val agentRet = client.listSsm()
+		val agentRet = query.listSsm()
 		Assertions.assertThat(agentRet).contains(ssmName)
 	}
 
 	@Test
 	@Order(150)
 	private fun listSession() = runBlocking<Unit> {
-		val agentRet = client.listSession()
+		val agentRet = query.listSession()
 		Assertions.assertThat(agentRet).contains(sessionName)
 	}
 }

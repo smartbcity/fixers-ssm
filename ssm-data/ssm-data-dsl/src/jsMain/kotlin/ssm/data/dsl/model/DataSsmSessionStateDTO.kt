@@ -1,7 +1,7 @@
 package ssm.data.dsl.model
 
-import ssm.chaincode.dsl.model.SsmSessionStateDTO
 import ssm.chaincode.dsl.blockchain.TransactionDTO
+import ssm.chaincode.dsl.model.SsmSessionStateDTO
 
 @JsExport
 @JsName("DataSsmSessionStateDTO")

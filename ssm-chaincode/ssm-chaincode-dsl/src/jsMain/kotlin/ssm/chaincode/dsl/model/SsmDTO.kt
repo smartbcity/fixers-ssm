@@ -1,7 +1,5 @@
 package ssm.chaincode.dsl.model
 
-import ssm.chaincode.dsl.model.SsmTransitionDTO
-
 @JsExport
 @JsName("SsmDTO")
 actual external interface SsmDTO {

@@ -3,14 +3,18 @@ package ssm.chaincode.f2.utils
 import f2.dsl.fnc.F2Function
 import f2.dsl.fnc.f2Function
 import ssm.chaincode.dsl.config.SsmChaincodeConfig
-import ssm.sdk.client.SsmClient
-import ssm.sdk.client.SsmClientConfig
+import ssm.sdk.client.SsmSdkConfig
+import ssm.sdk.core.SsmServiceFactory
+import ssm.sdk.core.SsmTxService
 
 fun <T, R> ssmF2Function(
-	config: SsmChaincodeConfig, fnc: suspend (T, SsmClient) -> R
+	config: SsmChaincodeConfig, fnc: suspend (T, SsmTxService) -> R
 ): F2Function<T, R> = f2Function { cmd ->
-	SsmClientConfig(config.url)
-		.let(SsmClient::fromConfig)
+	SsmServiceFactory
+		.builder(
+			SsmSdkConfig(config.url)
+		)
+		.buildTxService()
 		.let { ssmClient ->
 			fnc(cmd, ssmClient)
 		}

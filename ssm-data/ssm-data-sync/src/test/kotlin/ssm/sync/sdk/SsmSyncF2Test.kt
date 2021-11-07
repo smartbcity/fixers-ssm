@@ -1,23 +1,20 @@
 package ssm.sync.sdk
 
-import f2.dsl.fnc.invoke
-import kotlinx.coroutines.flow.collect
+import f2.dsl.fnc.invokeWith
 import kotlinx.coroutines.runBlocking
 import org.assertj.core.api.Assertions
 import org.junit.jupiter.api.Test
 import ssm.data.bdd.TestConfig
 
 internal class SsmSyncF2Test {
-
-	private val syncSsmCommandFunction = SsmSyncF2(TestConfig.proudhon).syncSsmCommandFunction()
+	private val syncSsmCommandFunction = SsmSyncF2Builder.build(TestConfig.local)
 
 	@Test
 	fun syncSsmCommandFunction() = runBlocking<Unit> {
-		val test = syncSsmCommandFunction.invoke(SyncSsmCommand(
+		val items = SyncSsmCommand(
 			lastEventId = null,
-			chaincode = ""
-		))
-
-		Assertions.assertThat(test).isNotNull
+			chaincodeUri =  "chaincode:sandbox:ssm"
+		).invokeWith(syncSsmCommandFunction).items
+		Assertions.assertThat(items).isNotNull
 	}
 }

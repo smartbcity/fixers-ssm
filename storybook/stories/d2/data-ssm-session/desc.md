@@ -11,14 +11,14 @@ The channel this session was instantiated in
 </article>
 <article>
 
-*id* `DataSsmSessionId` 
+*sessionName* `<ERROR CLASS>` 
 
 Identifier of the session
 
 </article>
 <article>
 
-*ssmUri* `SsmUri` 
+*ssmUri* `<ERROR CLASS>` 
 
 uri of the the ssm
 

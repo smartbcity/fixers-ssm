@@ -18,12 +18,12 @@ Description of a state machine
 </article>
 <article>
 
-*uri* `SsmUri` 
+*uri* `<ERROR CLASS>` 
 
 </article>
 <article>
 
-*version* `SsmVersion?` 
+*version* `<ERROR CLASS>?` 
 
 Version of the SSM
 
