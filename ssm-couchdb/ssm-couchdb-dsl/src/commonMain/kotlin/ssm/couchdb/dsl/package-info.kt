@@ -11,7 +11,7 @@ import ssm.chaincode.dsl.model.SsmTransitionDTO
  * As it is a more classic database, queries take much less time to complete but the data lose the benefits of being in a blockchain.
  * @@title SSM-COUCHDB/General
  */
-interface SsmCouchdbD2
+interface CouchdbSsmD2
 
 /**
  * @d2 model
@@ -19,7 +19,7 @@ interface SsmCouchdbD2
  * Configuration needed to connect to the database.
  * @@title SSM-COUCHDB/Configuration
  */
-interface SsmCouchdbD2Configuration
+interface CouchdbSsmD2Configuration
 
 /**
  * @d2 model
@@ -27,7 +27,7 @@ interface SsmCouchdbD2Configuration
  * Test desctiotion config
  * @@title SSM-COUCHDB/Models
  */
-interface SsmCouchdbD2Model
+interface CouchdbSsmD2Model
 
 
 /**
@@ -36,12 +36,12 @@ interface SsmCouchdbD2Model
  * Test desctiotion config
  * @@title SSM-COUCHDB/Query functions
  */
-interface SsmCouchdbD2Query
+interface CouchdbSsmD2Query
 
 /**
  * @d2 model
  * @title Ssm
- * @parent [SsmCouchdbD2Model]
+ * @parent [CouchdbSsmD2Model]
  */
 internal interface Ssm: SsmDTO {
 	override val name: String

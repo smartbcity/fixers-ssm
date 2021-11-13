@@ -4,7 +4,7 @@ import com.ibm.cloud.cloudant.v1.model.ChangesResult
 import com.ibm.cloud.cloudant.v1.model.ChangesResultItem
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
-import ssm.couchdb.client.SsmCouchdbClient
+import ssm.couchdb.client.CouchdbSsmClient
 import ssm.couchdb.client.getDocType
 import ssm.couchdb.dsl.model.DatabaseChanges
 import ssm.couchdb.dsl.query.CouchdbDatabaseGetChangesQueryDTO
@@ -14,7 +14,7 @@ import ssm.couchdb.dsl.query.CouchdbDatabaseGetChangesQueryResultDTO
 import ssm.couchdb.f2.commons.chainCodeDbName
 
 class CouchDbDatabaseGetChangesQueryFunctionImpl(
-	private val couchdbClient: SsmCouchdbClient,
+	private val couchdbClient: CouchdbSsmClient,
 ) : CouchdbDatabaseGetChangesQueryFunction {
 
 	override suspend fun invoke(msg: Flow<CouchdbDatabaseGetChangesQueryDTO>):
@@ -30,7 +30,7 @@ class CouchDbDatabaseGetChangesQueryFunctionImpl(
 	}
 
 	private fun getChanges(
-		couchdbClient: SsmCouchdbClient,
+		couchdbClient: CouchdbSsmClient,
 		payload: CouchdbDatabaseGetChangesQueryDTO
 	): CouchdbDatabaseGetChangesQueryResultDTO {
 		return couchdbClient.getChanges(

@@ -10,5 +10,5 @@ import ssm.tx.bdd.TxSteps
 @Suite
 @IncludeEngines("cucumber")
 @SelectClasspathResource("features/sync")
-@ConfigurationParameter(key = Constants.GLUE_PROPERTY_NAME, value = "${SsmCouchdbSteps.GLUE},${TxSteps.GLUE}")
+@ConfigurationParameter(key = Constants.GLUE_PROPERTY_NAME, value = "${CouchdbSsmSteps.GLUE},${TxSteps.GLUE}")
 class SyncCucumberTest

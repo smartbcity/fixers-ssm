@@ -16,7 +16,7 @@ expect interface DataSsmUserDTO {
 /**
  * Represents an [SSM Agent][Agent] with metadata
  * @d2 model
- * @parent [ssm.data.dsl.SsmDataD2Model]
+ * @parent [ssm.data.dsl.DataSsmD2Model]
  *
  */
 @Serializable

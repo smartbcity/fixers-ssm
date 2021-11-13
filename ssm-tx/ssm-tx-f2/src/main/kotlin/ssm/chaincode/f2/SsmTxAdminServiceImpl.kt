@@ -1,6 +1,6 @@
 package ssm.chaincode.f2
 
-import ssm.chaincode.dsl.config.SsmChaincodeConfig
+import ssm.chaincode.dsl.config.ChaincodeSsmConfig
 import ssm.chaincode.f2.features.command.SsmInitializeFunctionImpl
 import ssm.chaincode.f2.features.command.SsmTxCreateFunctionImpl
 import ssm.chaincode.f2.features.command.SsmTxSessionStartFunctionImpl
@@ -22,24 +22,24 @@ class SsmTxAdminServiceImpl(
 	private val ssmTxSessionStartFunction: SsmTxSessionStartFunctionImpl = SsmTxSessionStartFunctionImpl(),
 ) : SsmTxAdminFunctions {
 
-	override fun ssmTxUserGrantFunction(config: SsmChaincodeConfig): SsmTxUserGrantFunction {
+	override fun ssmTxUserGrantFunction(config: ChaincodeSsmConfig): SsmTxUserGrantFunction {
 		return ssmUserGrantFunction.ssmUserGrantFunction(config, signerAdminProvider)
 	}
 
-	override fun ssmTxUserRegisterFunction(config: SsmChaincodeConfig): SsmTxUserRegisterFunction {
+	override fun ssmTxUserRegisterFunction(config: ChaincodeSsmConfig): SsmTxUserRegisterFunction {
 		return ssmUserRegisterFunction.ssmUserRegisterFunction(config, signerAdminProvider)
 	}
 
 
-	override fun ssmTxCreateFunction(config: SsmChaincodeConfig): SsmTxCreateFunction {
+	override fun ssmTxCreateFunction(config: ChaincodeSsmConfig): SsmTxCreateFunction {
 		return ssmTxCreateFunction.ssmTxCreateFunction(config, signerAdminProvider)
 	}
 
-	override fun ssmTxInitializeFunction(config: SsmChaincodeConfig): SsmTxInitializeFunction {
+	override fun ssmTxInitializeFunction(config: ChaincodeSsmConfig): SsmTxInitializeFunction {
 		return SsmInitializeFunctionImpl(config, signerAdminProvider).ssmInitializeFunction()
 	}
 
-	override fun ssmTxSessionStartFunction(config: SsmChaincodeConfig): SsmTxSessionStartFunction {
+	override fun ssmTxSessionStartFunction(config: ChaincodeSsmConfig): SsmTxSessionStartFunction {
 		return ssmTxSessionStartFunction.ssmTxSessionStartFunction(config, signerAdminProvider)
 	}
 

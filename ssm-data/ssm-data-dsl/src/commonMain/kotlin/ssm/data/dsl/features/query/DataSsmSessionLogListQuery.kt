@@ -11,7 +11,7 @@ import ssm.data.dsl.model.DataSsmSessionState
 /**
  * Retrieve all the logs of a given SSM session
  * @d2 function
- * @parent [ssm.data.dsl.SsmDataD2Query]
+ * @parent [ssm.data.dsl.DataSsmD2Query]
  * @order 40
  * @title List Session Logs
  */

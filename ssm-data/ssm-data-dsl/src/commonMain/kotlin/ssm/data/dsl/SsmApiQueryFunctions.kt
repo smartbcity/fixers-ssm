@@ -16,7 +16,7 @@ import ssm.data.dsl.features.query.DataSsmSessionLogListQueryFunction
  * - fun dataSsmSessionLogGetQueryFunction(): [DataSsmSessionLogGetQueryFunction]
  * @d2 model
  * @title Entrypoints
- * @parent [ssm.data.dsl.SsmDataD2]
+ * @parent [ssm.data.dsl.DataSsmD2]
  * @title Synthesis and global objects of the API
  */
 expect interface SsmApiQueryFunctions {

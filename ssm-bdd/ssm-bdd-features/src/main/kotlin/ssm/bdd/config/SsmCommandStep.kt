@@ -4,7 +4,7 @@ import io.cucumber.datatable.DataTable
 import io.cucumber.java8.En
 import io.cucumber.java8.Scenario
 import kotlinx.coroutines.runBlocking
-import ssm.chaincode.dsl.config.SsmChaincodeConfig
+import ssm.chaincode.dsl.config.ChaincodeSsmConfig
 import ssm.chaincode.dsl.model.Agent
 import ssm.chaincode.dsl.model.AgentName
 import ssm.chaincode.dsl.model.SessionName
@@ -23,7 +23,7 @@ import ssm.sdk.sign.model.SignerUser
 abstract class SsmCommandStep {
 
 	lateinit var bag: SsmCucumberBag
-	lateinit var config: SsmChaincodeConfig
+	lateinit var config: ChaincodeSsmConfig
 
 	@Suppress("LongMethod")
 	fun En.prepareSteps() {

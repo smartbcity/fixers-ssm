@@ -22,7 +22,7 @@ expect interface DataSsmSessionStateDTO {
 
 /**
  * @d2 model
- * @parent [ssm.data.dsl.SsmDataD2Model]
+ * @parent [ssm.data.dsl.DataSsmD2Model]
  * Represents an SSM session state with metadata
  */
 @Serializable

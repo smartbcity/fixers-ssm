@@ -18,7 +18,6 @@ include(
 	"ssm-chaincode:ssm-chaincode-dsl",
 	"ssm-chaincode:ssm-chaincode-f2",
 	"ssm-chaincode:ssm-chaincode-f2-client",
-	"ssm-chaincode:ssm-chaincode-spring-boot-starter",
 )
 
 include(
@@ -26,7 +25,6 @@ include(
 	"ssm-couchdb:ssm-couchdb-sdk",
 	"ssm-couchdb:ssm-couchdb-dsl",
 	"ssm-couchdb:ssm-couchdb-f2",
-	"ssm-couchdb:ssm-couchdb-spring-boot-starter",
 )
 
 include(
@@ -35,7 +33,6 @@ include(
 	"ssm-data:ssm-data-dsl",
 	"ssm-data:ssm-data-f2",
 	"ssm-data:ssm-data-sync",
-	"ssm-data:ssm-data-spring-boot-starter"
 )
 
 include(
@@ -46,11 +43,21 @@ include(
 )
 
 include(
+	"ssm-spring:ssm-chaincode-spring-boot-starter",
+	"ssm-spring:ssm-couchdb-spring-boot-starter",
+	"ssm-spring:ssm-data-spring-boot-starter",
+	"ssm-spring:ssm-tx-spring-boot-starter",
+	"ssm-spring:ssm-tx-spring-boot-starter:ssm-tx-create-ssm-spring-boot-starter",
+	"ssm-spring:ssm-tx-spring-boot-starter:ssm-tx-session-perform-action-spring-boot-starter",
+	"ssm-spring:ssm-tx-spring-boot-starter:ssm-tx-session-start-spring-boot-starter"
+)
+
+include(
+	"sample:ssm-full",
+)
+
+include(
 	"ssm-tx:ssm-tx-bdd",
 	"ssm-tx:ssm-tx-dsl",
 	"ssm-tx:ssm-tx-f2",
-	"ssm-tx:ssm-tx-spring-boot-starter",
-	"ssm-tx:ssm-tx-spring-boot-starter:ssm-tx-create-ssm-spring-boot-starter",
-	"ssm-tx:ssm-tx-spring-boot-starter:ssm-tx-session-perform-action-spring-boot-starter",
-	"ssm-tx:ssm-tx-spring-boot-starter:ssm-tx-session-start-spring-boot-starter",
 )

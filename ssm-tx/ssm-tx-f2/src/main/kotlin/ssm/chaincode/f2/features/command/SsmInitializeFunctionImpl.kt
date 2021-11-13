@@ -1,7 +1,7 @@
 package ssm.chaincode.f2.features.command
 
 import f2.dsl.fnc.f2Function
-import ssm.chaincode.dsl.config.SsmChaincodeConfig
+import ssm.chaincode.dsl.config.ChaincodeSsmConfig
 import ssm.chaincode.dsl.model.Agent
 import ssm.chaincode.dsl.model.Ssm
 import ssm.chaincode.f2.utils.SsmException
@@ -12,7 +12,7 @@ import ssm.tx.dsl.features.ssm.SsmInitializedResult
 import ssm.tx.dsl.features.ssm.SsmTxInitializeFunction
 
 class SsmInitializeFunctionImpl(
-	config: SsmChaincodeConfig,
+	config: ChaincodeSsmConfig,
 	private val signerAdminProvider: SignerAdminProvider
 ) {
 

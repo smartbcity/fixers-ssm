@@ -19,7 +19,7 @@ import ssm.couchdb.dsl.model.DocType
  * @title Retrieves all changes on a database
  * @d2 function
  * @order 20
- * @parent [ssm.couchdb.dsl.SsmCouchdbD2Query]
+ * @parent [ssm.couchdb.dsl.CouchdbSsmD2Query]
  */
 typealias CouchdbDatabaseGetChangesQueryFunction = F2Function<CouchdbDatabaseGetChangesQueryDTO, CouchdbDatabaseGetChangesQueryResultDTO>
 

@@ -11,7 +11,7 @@ import ssm.data.dsl.model.DataSsmDTO
 /**
  * Retrieves all known SSMs
  * @d2 function
- * @parent [ssm.data.dsl.SsmDataD2Query]
+ * @parent [ssm.data.dsl.DataSsmD2Query]
  * @order 20
  * @title List SSMs
  */

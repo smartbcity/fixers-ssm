@@ -2,7 +2,7 @@ package ssm.couchdb.f2.query
 
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
-import ssm.couchdb.client.SsmCouchdbClient
+import ssm.couchdb.client.CouchdbSsmClient
 import ssm.couchdb.dsl.model.DocType
 import ssm.couchdb.dsl.query.CouchdbAdminListQueryDTO
 import ssm.couchdb.dsl.query.CouchdbAdminListQueryFunction
@@ -11,7 +11,7 @@ import ssm.couchdb.dsl.query.CouchdbAdminListQueryResultDTO
 import ssm.couchdb.f2.commons.chainCodeDbName
 
 class CouchdbAdminListQueryFunctionImpl(
-	private val couchdbClient: SsmCouchdbClient,
+	private val couchdbClient: CouchdbSsmClient,
 ) : CouchdbAdminListQueryFunction {
 
 	override suspend fun invoke(msg: Flow<CouchdbAdminListQueryDTO>): Flow<CouchdbAdminListQueryResultDTO> = msg.map { payload ->

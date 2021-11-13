@@ -11,7 +11,7 @@ import ssm.data.dsl.model.DataSsmSessionDTO
 /**
  * Retrieve a list of all known sessions of a given SSM
  * @d2 function
- * @parent [ssm.data.dsl.SsmDataD2Query]
+ * @parent [ssm.data.dsl.DataSsmD2Query]
  * @order 20
  * @title List Sessions
  */

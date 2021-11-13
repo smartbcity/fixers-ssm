@@ -15,7 +15,7 @@ import ssm.couchdb.dsl.model.DatabaseDTO
  * @title Retrieves an information about a database.
  * @d2 function
  * @order 20
- * @parent [ssm.couchdb.dsl.SsmCouchdbD2Query]
+ * @parent [ssm.couchdb.dsl.CouchdbSsmD2Query]
  */
 typealias CouchdbDatabaseGetQueryFunction = F2Function<CouchdbDatabaseGetQueryDTO, CouchdbDatabaseGetQueryResultDTO>
 
@@ -58,7 +58,7 @@ class CouchdbDatabaseGetQuery(
 
 @Serializable
 @JsExport
-@JsName("CouchdbSsmDatabaseGetQueryResult")
-class CouchdbSsmDatabaseGetQueryResult(
+@JsName("CouchdbDatabaseGetQueryResult")
+class CouchdbDatabaseGetQueryResult(
 	override val item: Database?,
 ) : CouchdbDatabaseGetQueryResultDTO

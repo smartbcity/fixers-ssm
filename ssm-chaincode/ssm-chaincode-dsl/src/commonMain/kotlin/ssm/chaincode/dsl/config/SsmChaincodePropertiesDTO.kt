@@ -14,6 +14,6 @@ expect interface SsmChaincodePropertiesDTO {
 	val url: String
 }
 
-class SsmChaincodeConfig(
+class ChaincodeSsmConfig(
 	override val url: String,
 ) : SsmChaincodePropertiesDTO

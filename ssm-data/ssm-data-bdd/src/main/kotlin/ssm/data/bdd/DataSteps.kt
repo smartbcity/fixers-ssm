@@ -13,7 +13,7 @@ import ssm.chaincode.f2.ChaincodeSsmQueriesImpl
 import ssm.couchdb.dsl.query.CouchdbAdminListQuery
 import ssm.couchdb.dsl.query.CouchdbUserListQuery
 import ssm.couchdb.f2.CouchdbSsmQueriesFunctionImpl
-import ssm.data.dsl.config.SsmDataConfig
+import ssm.data.dsl.config.DataSsmConfig
 import ssm.data.dsl.features.query.DataSsmListQuery
 import ssm.data.dsl.features.query.DataSsmSessionGetQuery
 import ssm.data.dsl.features.query.DataSsmSessionListQuery
@@ -24,7 +24,7 @@ class DataSteps : SsmQueryStep(), En {
 		const val GLUE = "ssm.data.bdd"
 	}
 
-	val ssmDataConfig: SsmDataConfig = TestConfig.local
+	val ssmDataConfig: DataSsmConfig = TestConfig.local
 	val dataSsmQueryFunctionImpl =
 		DataSsmQueryFunctionImpl(ssmDataConfig, ChaincodeSsmQueriesImpl(ssmDataConfig.chaincode))
 	val couchdbSsmQueriesFunctionImpl = CouchdbSsmQueriesFunctionImpl(ssmDataConfig.couchdb)

@@ -4,7 +4,7 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
 import ssm.chaincode.dsl.model.SsmSessionStateDTO
 import ssm.chaincode.dsl.model.uri.burstChaincode
-import ssm.couchdb.client.SsmCouchdbClient
+import ssm.couchdb.client.CouchdbSsmClient
 import ssm.couchdb.dsl.model.DocType
 import ssm.couchdb.dsl.query.CouchdbSsmSessionStateGetQueryDTO
 import ssm.couchdb.dsl.query.CouchdbSsmSessionStateGetQueryFunction
@@ -13,7 +13,7 @@ import ssm.couchdb.dsl.query.CouchdbSsmSessionStateGetQueryResultDTO
 import ssm.couchdb.f2.commons.chainCodeDbName
 
 class CouchdbSsmSessionStateGetQueryFunctionImpl(
-	private val couchdbClient: SsmCouchdbClient,
+	private val couchdbClient: CouchdbSsmClient,
 ) : CouchdbSsmSessionStateGetQueryFunction {
 
 	override suspend fun invoke(msg: Flow<CouchdbSsmSessionStateGetQueryDTO>):

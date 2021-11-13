@@ -8,7 +8,7 @@ import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.toList
 import ssm.chaincode.dsl.model.uri.ChaincodeUriBurst
 import ssm.chaincode.dsl.model.uri.compact
-import ssm.couchdb.client.SsmCouchdbClient
+import ssm.couchdb.client.CouchdbSsmClient
 import ssm.couchdb.dsl.model.DocType
 import ssm.couchdb.dsl.query.CouchdbChaincodeListQueryDTO
 import ssm.couchdb.dsl.query.CouchdbChaincodeListQueryFunction
@@ -16,7 +16,7 @@ import ssm.couchdb.dsl.query.CouchdbChaincodeListQueryResult
 import ssm.couchdb.dsl.query.CouchdbChaincodeListQueryResultDTO
 
 class CouchdbChaincodeListQueryFunctionImpl(
-	private val couchdbClient: SsmCouchdbClient,
+	private val couchdbClient: CouchdbSsmClient,
 ) : CouchdbChaincodeListQueryFunction {
 	companion object {
 		const val DB_LSCC = "_lscc"

@@ -18,7 +18,7 @@ import ssm.couchdb.dsl.model.DatabaseDTO
  * @title Retrieves the list of databases.
  * @d2 query
  * @order 10
- * @parent [ssm.couchdb.dsl.SsmCouchdbD2Query]
+ * @parent [ssm.couchdb.dsl.CouchdbSsmD2Query]
  */
 typealias CouchdbDatabaseListQueryFunction = F2Function<CouchdbDatabaseListQueryDTO, CouchdbDatabaseListQueryResultDTO>
 

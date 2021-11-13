@@ -13,7 +13,7 @@ import ssm.data.dsl.model.DataSsmSessionDTO
 /**
  * Retrieves a given session
  * @d2 function
- * @parent [ssm.data.dsl.SsmDataD2Query]
+ * @parent [ssm.data.dsl.DataSsmD2Query]
  * @order 10
  * @title Get Session
  */

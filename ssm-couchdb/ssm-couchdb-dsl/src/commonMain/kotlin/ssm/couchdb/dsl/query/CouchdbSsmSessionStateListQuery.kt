@@ -17,7 +17,7 @@ import ssm.chaincode.dsl.model.uri.ChaincodeUri
 /**
  * Retrieve the list of all known sessions of a given SSM
  * @d2 function
- * @parent [ssm.couchdb.dsl.SsmCouchdbD2Query]
+ * @parent [ssm.couchdb.dsl.CouchdbSsmD2Query]
  * @order 40
  * @title List Sessions
  */

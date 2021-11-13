@@ -5,23 +5,23 @@ package ssm.data.dsl
  * @title SSM-DATA/General
  * @order 10
  */
-interface SsmDataD2
+interface DataSsmD2
 
 /**
  * Test description config
  * @d2 page
- * @parent [SsmDataD2]
+ * @parent [DataSsmD2]
  * @title SSM-DATA/Model
  * @order 20
  */
-interface SsmDataD2Model
+interface DataSsmD2Model
 
 /**
  * Test description config
  * @d2 page
- * @parent [SsmDataD2]
+ * @parent [DataSsmD2]
  * @title SSM-DATA/Query functions
  * @order 30
  */
-interface SsmDataD2Query
+interface DataSsmD2Query
 

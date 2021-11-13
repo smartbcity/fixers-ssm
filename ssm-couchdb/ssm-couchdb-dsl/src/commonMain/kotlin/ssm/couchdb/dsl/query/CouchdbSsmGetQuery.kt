@@ -17,7 +17,7 @@ import ssm.chaincode.dsl.model.uri.SsmUri
  * Retrieves a ssm stored in the database.
  * @title Get SSM
  * @d2 function
- * @parent [ssm.couchdb.dsl.SsmCouchdbD2Query]
+ * @parent [ssm.couchdb.dsl.CouchdbSsmD2Query]
  *
  */
 typealias CouchdbSsmGetQueryFunction = F2Function<CouchdbSsmGetQuery, CouchdbSsmGetQueryResult>

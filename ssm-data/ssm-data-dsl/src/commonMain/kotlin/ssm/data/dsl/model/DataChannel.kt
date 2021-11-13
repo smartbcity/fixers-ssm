@@ -16,7 +16,7 @@ expect interface DataChannelDTO {
 /**
  * Description of a channel
  * @d2 model
- * @parent [ssm.data.dsl.SsmDataD2Model]
+ * @parent [ssm.data.dsl.DataSsmD2Model]
  */
 @Serializable
 @JsExport

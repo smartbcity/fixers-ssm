@@ -6,7 +6,7 @@ import kotlinx.coroutines.flow.asFlow
 import kotlinx.coroutines.flow.filter
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.toList
-import ssm.couchdb.client.SsmCouchdbClient
+import ssm.couchdb.client.CouchdbSsmClient
 import ssm.couchdb.dsl.model.Database
 import ssm.couchdb.dsl.query.CouchdbDatabaseListQueryDTO
 import ssm.couchdb.dsl.query.CouchdbDatabaseListQueryFunction
@@ -14,7 +14,7 @@ import ssm.couchdb.dsl.query.CouchdbDatabaseListQueryResult
 import ssm.couchdb.dsl.query.CouchdbDatabaseListQueryResultDTO
 
 class CouchdbDatabaseListQueryFunctionImpl(
-	private val couchdbClient: SsmCouchdbClient,
+	private val couchdbClient: CouchdbSsmClient,
 ) : CouchdbDatabaseListQueryFunction {
 
 	override suspend fun invoke(msg: Flow<CouchdbDatabaseListQueryDTO>): Flow<CouchdbDatabaseListQueryResultDTO> = msg.map { payload ->

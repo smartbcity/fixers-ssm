@@ -10,7 +10,7 @@ import ssm.data.dsl.model.DataSsm
 /**
  * Retrieves a given SSM
  * @d2 function
- * @parent [ssm.data.dsl.SsmDataD2Query]
+ * @parent [ssm.data.dsl.DataSsmD2Query]
  * @order 10
  * @title Get SSM
  */

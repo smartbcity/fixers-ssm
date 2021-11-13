@@ -14,7 +14,7 @@ import ssm.chaincode.dsl.model.uri.ChaincodeUri
  * @title Fetch all admins
  * @d2 function
  * @order 20
- * @parent [ssm.couchdb.dsl.SsmCouchdbD2Query]
+ * @parent [ssm.couchdb.dsl.CouchdbSsmD2Query]
  */
 typealias CouchdbAdminListQueryFunction = F2Function<CouchdbAdminListQueryDTO, CouchdbAdminListQueryResultDTO>
 

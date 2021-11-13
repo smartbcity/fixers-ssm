@@ -20,7 +20,7 @@ import ssm.couchdb.dsl.query.CouchdbUserListQueryFunction
  * - fun couchDbSsmSessionStateListQueryFunction(): [ssm.couchdb.dsl.query.CouchdbSsmSessionStateListQueryFunction]
  * @d2 model
  * @title Query function
- * @parent [SsmCouchdbD2]
+ * @parent [CouchdbSsmD2]
  */
 interface SsmCouchDbQueries {
 	fun couchdbDatabaseGetChangesQueryFunction(): CouchdbDatabaseGetChangesQueryFunction

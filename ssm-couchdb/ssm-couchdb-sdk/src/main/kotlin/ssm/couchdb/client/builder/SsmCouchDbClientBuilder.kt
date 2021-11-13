@@ -2,7 +2,7 @@ package ssm.couchdb.client.builder
 
 import com.ibm.cloud.cloudant.v1.Cloudant
 import com.ibm.cloud.sdk.core.security.BasicAuthenticator
-import ssm.couchdb.client.SsmCouchdbClient
+import ssm.couchdb.client.CouchdbSsmClient
 import ssm.sdk.json.JSONConverter
 import ssm.sdk.json.JSONConverterObjectMapper
 
@@ -29,11 +29,11 @@ class SsmCouchDbClientBuilder {
 		this.auth = auth
 	}
 
-	fun build(): SsmCouchdbClient {
+	fun build(): CouchdbSsmClient {
 		val converter = requireNotNull(this.jsonConverter)
 		val auth = requireNotNull(this.auth)
 		val cloudant = buildCloudant(auth)
-		return SsmCouchdbClient(cloudant, converter)
+		return CouchdbSsmClient(cloudant, converter)
 	}
 
 	private fun buildCloudant(auth: SsmCouchDbAuth): Cloudant {

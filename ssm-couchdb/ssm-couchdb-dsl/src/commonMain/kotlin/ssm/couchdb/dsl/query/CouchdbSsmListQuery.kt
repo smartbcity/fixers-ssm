@@ -18,7 +18,7 @@ import ssm.chaincode.dsl.model.SsmDTO
  * Retrieves the list of ssm stored in the database.
  * @title List SSMs
  * @d2 function
- * @parent [ssm.couchdb.dsl.SsmCouchdbD2Query]
+ * @parent [ssm.couchdb.dsl.CouchdbSsmD2Query]
  *
  */
 typealias CouchdbSsmListQueryFunction = F2Function<CouchdbSsmListQuery, CouchdbSsmListQueryResult>

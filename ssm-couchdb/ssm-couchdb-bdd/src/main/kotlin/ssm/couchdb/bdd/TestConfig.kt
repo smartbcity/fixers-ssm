@@ -1,9 +1,9 @@
 package ssm.couchdb.bdd
 
-import ssm.couchdb.dsl.config.SsmCouchdbConfig
+import ssm.couchdb.dsl.config.CouchdbSsmConfig
 
 object TestConfig {
-	val dbConfig = SsmCouchdbConfig(
+	val dbConfig = CouchdbSsmConfig(
 		url = "http://localhost:5984",
 		username = "couchdb",
 		password = "couchdb",

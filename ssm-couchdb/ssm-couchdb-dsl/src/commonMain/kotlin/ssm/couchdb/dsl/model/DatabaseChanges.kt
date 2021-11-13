@@ -11,7 +11,7 @@ typealias ChangeEventId = String
  * TODO Use SHOUlD NOT BE H2 BU H3
  * @d2 query
  * @title Database
- * @parent [ssm.couchdb.dsl.SsmCouchdbD2Model]
+ * @parent [ssm.couchdb.dsl.CouchdbSsmD2Model]
  */
 expect interface DatabaseChangesDTO {
 	val changeEventId: ChangeEventId
