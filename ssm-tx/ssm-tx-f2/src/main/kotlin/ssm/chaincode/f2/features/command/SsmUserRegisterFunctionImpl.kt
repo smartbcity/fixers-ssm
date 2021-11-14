@@ -1,20 +1,21 @@
 package ssm.chaincode.f2.features.command
 
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.map
 import ssm.chaincode.dsl.config.ChaincodeSsmConfig
 import ssm.chaincode.f2.utils.SsmException
-import ssm.chaincode.f2.utils.ssmF2Function
-import ssm.sdk.sign.SignerAdminProvider
+import ssm.sdk.core.SsmTxService
 import ssm.tx.dsl.features.user.SsmTxUserRegisterFunction
+import ssm.tx.dsl.features.user.SsmUserRegisterCommand
 import ssm.tx.dsl.features.user.SsmUserRegisteredResult
 
-class SsmUserRegisterFunctionImpl {
+class SsmUserRegisterFunctionImpl(
+	private val ssmTxService: SsmTxService
+): SsmTxUserRegisterFunction {
 
-	fun ssmUserRegisterFunction(
-		config: ChaincodeSsmConfig,
-		signerAdminProvider: SignerAdminProvider
-	): SsmTxUserRegisterFunction = ssmF2Function(config) { cmd, ssmClient ->
+	override suspend fun invoke(msg: Flow<SsmUserRegisterCommand>): Flow<SsmUserRegisteredResult> = msg.map { payload ->
 		try {
-			ssmClient.sendRegisterUser(signerAdminProvider.get(), cmd.agent)!!.let { result ->
+			ssmTxService.sendRegisterUser(payload.agent, payload.signerName)!!.let { result ->
 				SsmUserRegisteredResult(
 					transactionId = result.transactionId
 				)
@@ -22,6 +23,5 @@ class SsmUserRegisterFunctionImpl {
 		} catch (e: Exception) {
 			throw SsmException(e)
 		}
-
 	}
 }

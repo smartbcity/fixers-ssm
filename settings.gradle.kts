@@ -37,9 +37,11 @@ include(
 
 include(
 	"ssm-sdk:ssm-sdk-bdd",
+	"ssm-sdk:ssm-sdk-dsl",
 	"ssm-sdk:ssm-sdk-core",
+	"ssm-sdk:ssm-sdk-json",
 	"ssm-sdk:ssm-sdk-sign",
-	"ssm-sdk:ssm-sdk-json"
+	"ssm-sdk:ssm-sdk-sign-rsa-key",
 )
 
 include(
@@ -47,6 +49,7 @@ include(
 	"ssm-spring:ssm-couchdb-spring-boot-starter",
 	"ssm-spring:ssm-data-spring-boot-starter",
 	"ssm-spring:ssm-tx-spring-boot-starter",
+	"ssm-spring:ssm-tx-spring-boot-starter:ssm-tx-config-spring-boot-starter",
 	"ssm-spring:ssm-tx-spring-boot-starter:ssm-tx-create-ssm-spring-boot-starter",
 	"ssm-spring:ssm-tx-spring-boot-starter:ssm-tx-session-perform-action-spring-boot-starter",
 	"ssm-spring:ssm-tx-spring-boot-starter:ssm-tx-session-start-spring-boot-starter"

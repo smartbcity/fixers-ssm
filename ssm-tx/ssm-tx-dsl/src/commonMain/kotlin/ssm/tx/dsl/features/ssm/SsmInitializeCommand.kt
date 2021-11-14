@@ -4,6 +4,7 @@ import f2.dsl.cqrs.Event
 import f2.dsl.fnc.F2Function
 import ssm.chaincode.dsl.blockchain.TransactionId
 import ssm.chaincode.dsl.model.Agent
+import ssm.chaincode.dsl.model.AgentName
 import ssm.chaincode.dsl.model.Ssm
 import ssm.tx.dsl.features.SsmCommandDTO
 
@@ -21,6 +22,10 @@ typealias SsmTxInitializeFunction = F2Function<SsmInitializeCommand, SsmInitiali
  * @title Initialize SSM: Parameters
  */
 class SsmInitializeCommand(
+	/**
+	 * The name of the signer
+	 */
+	val signerName: AgentName,
 	/**
 	 * Description of the SSM to create
 	 */

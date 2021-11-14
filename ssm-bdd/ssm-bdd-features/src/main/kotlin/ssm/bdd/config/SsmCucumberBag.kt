@@ -6,10 +6,11 @@ import ssm.chaincode.dsl.model.AgentName
 import ssm.chaincode.dsl.model.Ssm
 import ssm.chaincode.dsl.model.SsmName
 import ssm.chaincode.dsl.model.uri.ChaincodeUri
-import ssm.sdk.client.SsmSdkConfig
+import ssm.sdk.core.SsmSdkConfig
 import ssm.sdk.core.SsmServiceFactory
+import ssm.sdk.sign.SsmCmdSignerSha256RSASigner
+import ssm.sdk.sign.model.Signer
 import ssm.sdk.sign.model.SignerAdmin
-import ssm.sdk.sign.model.SignerName
 import ssm.sdk.sign.model.SignerUser
 
 class SsmCucumberBag(
@@ -32,8 +33,17 @@ class SsmCucumberBag(
 
 	lateinit var uuid: String
 
-	val clientTx = SsmServiceFactory.builder(config).withChannelId("sandbox").withSsmId("ssm").buildTxService()
-	val clientQuery = SsmServiceFactory.builder(config).withChannelId("sandbox").withSsmId("ssm").buildQueryService()
+	val clientQuery = SsmServiceFactory
+		.builder(config)
+		.withChannelId("sandbox")
+		.withSsmId("ssm")
+		.buildQueryService()
+
+	fun clientTx(signer: Signer) = SsmServiceFactory
+		.builder(config)
+		.withChannelId("sandbox")
+		.withSsmId("ssm")
+		.buildTxService(SsmCmdSignerSha256RSASigner(signer))
 
 	// URI
 //	lateinit var ssmUri: SsmUri
@@ -41,7 +51,7 @@ class SsmCucumberBag(
 
 	//	SsmSdkTxSteps
 	lateinit var adminSigner: SignerAdmin
-	var userSigners: MutableMap<SignerName, SignerUser> = mutableMapOf()
+	var userSigners: MutableMap<AgentName, SignerUser> = mutableMapOf()
 	var ssms: MutableMap<SsmName, Ssm> = mutableMapOf()
 
 	// SsmChaincodeBddSteps

@@ -6,8 +6,8 @@ import org.springframework.cloud.function.context.FunctionCatalog
 import ssm.bdd.spring.autoconfigure.ApplicationContextBuilder
 import ssm.bdd.spring.autoconfigure.ApplicationContextRunnerBuilder
 import ssm.chaincode.dsl.config.ChaincodeSsmConfig
+import ssm.tx.config.spring.autoconfigure.SsmTxProperties
 import ssm.tx.session.spring.autoconfigure.SsmTxSessionPerformActionAutoConfiguration
-import ssm.tx.session.spring.autoconfigure.SsmTxSessionPerformActionProperties
 
 class ApplicationContextRunnerTest {
 
@@ -16,7 +16,7 @@ class ApplicationContextRunnerTest {
 		ApplicationContextRunnerBuilder()
 			.buildContext(SsmChaincodeConfigTest.localDockerComposeParams).run { context ->
 				assertThat(context).hasSingleBean(FunctionCatalog::class.java)
-				assertThat(context).hasSingleBean(SsmTxSessionPerformActionProperties::class.java)
+				assertThat(context).hasSingleBean(SsmTxProperties::class.java)
 				assertThat(context).hasBean(SsmTxSessionPerformActionAutoConfiguration::ssmTxSessionPerformActionFunction.name)
 			}
 	}

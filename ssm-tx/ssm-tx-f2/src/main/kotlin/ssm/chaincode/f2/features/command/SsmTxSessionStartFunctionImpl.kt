@@ -1,18 +1,18 @@
 package ssm.chaincode.f2.features.command
 
-import ssm.chaincode.dsl.config.ChaincodeSsmConfig
-import ssm.chaincode.f2.utils.ssmF2Function
-import ssm.sdk.sign.SignerAdminProvider
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.map
+import ssm.sdk.core.SsmTxService
+import ssm.tx.dsl.features.ssm.SsmSessionStartCommand
 import ssm.tx.dsl.features.ssm.SsmSessionStartResult
 import ssm.tx.dsl.features.ssm.SsmTxSessionStartFunction
 
-class SsmTxSessionStartFunctionImpl {
+class SsmTxSessionStartFunctionImpl(
+	private val ssmTxService: SsmTxService
+): SsmTxSessionStartFunction {
 
-	fun ssmTxSessionStartFunction(
-		config: ChaincodeSsmConfig,
-		signerAdminProvider: SignerAdminProvider
-	): SsmTxSessionStartFunction = ssmF2Function(config) { cmd, ssmClient ->
-		ssmClient.sendStart(signerAdminProvider.get(), cmd.session)!!.let { result ->
+	override suspend fun invoke(msg: Flow<SsmSessionStartCommand>): Flow<SsmSessionStartResult> = msg.map { payload ->
+		ssmTxService.sendStart(payload.session, payload.signerName)!!.let { result ->
 			SsmSessionStartResult(
 				transactionId = result.transactionId,
 			)

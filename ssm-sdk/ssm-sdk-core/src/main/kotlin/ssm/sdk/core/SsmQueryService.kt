@@ -12,14 +12,14 @@ import ssm.chaincode.dsl.model.Ssm
 import ssm.chaincode.dsl.model.SsmName
 import ssm.chaincode.dsl.model.SsmSessionState
 import ssm.chaincode.dsl.model.SsmSessionStateLog
-import ssm.sdk.client.SsmRequester
-import ssm.sdk.client.invoke.query.AdminQuery
-import ssm.sdk.client.invoke.query.AgentQuery
-import ssm.sdk.client.invoke.query.BlockQuery
-import ssm.sdk.client.invoke.query.LogQuery
-import ssm.sdk.client.invoke.query.SessionQuery
-import ssm.sdk.client.invoke.query.SsmQuery
-import ssm.sdk.client.invoke.query.TransactionQuery
+import ssm.sdk.core.ktor.SsmRequester
+import ssm.sdk.core.invoke.query.AdminQuery
+import ssm.sdk.core.invoke.query.AgentQuery
+import ssm.sdk.core.invoke.query.BlockQuery
+import ssm.sdk.core.invoke.query.LogQuery
+import ssm.sdk.core.invoke.query.SessionQuery
+import ssm.sdk.core.invoke.query.SsmQuery
+import ssm.sdk.core.invoke.query.TransactionQuery
 
 class SsmQueryService(private val ssmRequester: SsmRequester) {
 	suspend fun listAdmins(): List<AgentName> {

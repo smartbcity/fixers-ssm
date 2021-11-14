@@ -18,12 +18,13 @@ import ssm.chaincode.dsl.model.SsmContext
 import ssm.chaincode.dsl.model.SsmSession
 import ssm.chaincode.dsl.model.SsmSessionState
 import ssm.chaincode.dsl.model.SsmTransition
-import ssm.sdk.client.extention.addPrivateMessage
-import ssm.sdk.client.extention.getPrivateMessage
-import ssm.sdk.client.extention.loadFromFile
-import ssm.sdk.client.model.InvokeReturn
 import ssm.sdk.core.SsmQueryService
 import ssm.sdk.core.SsmTxService
+import ssm.sdk.dsl.InvokeReturn
+import ssm.sdk.sign.SsmCmdSignerSha256RSASigner
+import ssm.sdk.sign.extention.addPrivateMessage
+import ssm.sdk.sign.extention.getPrivateMessage
+import ssm.sdk.sign.extention.loadFromFile
 import ssm.sdk.sign.model.Signer
 import ssm.sdk.sign.model.SignerAdmin
 import ssm.sdk.sign.model.SignerUser
@@ -40,41 +41,41 @@ class SsmClientItTest {
 		const val USER1_FILENAME = NETWORK + "bob"
 		const val USER2_FILENAME = NETWORK + "sam"
 
-		//    private static final String NETWORK = "bc1/";
-		//    private static final String ADMIN_NAME = "adrien";
-		//    private static final String USER1_NAME = "chuck";
-		//    private static final String USER2_NAME = "sarah";
-		//    private static final String USER1_FILENAME = NETWORK+"chuck";
-		//    private static final String USER2_FILENAME = NETWORK+"sarah";
-		private lateinit var signerAdmin: SignerAdmin
-		private lateinit var signerUser1: Signer
-		private lateinit var signerUser2: Signer
-		private lateinit var agentAdmin: Agent
-		private lateinit var agentUser1: Agent
-		private lateinit var agentUser2: Agent
+
+
 		private lateinit var query: SsmQueryService
 		private lateinit var tx: SsmTxService
 		private lateinit var ssmName: String
 		private lateinit var sessionName: String
 		private lateinit var session: SsmSession
 
+
+		private var signerAdmin: SignerAdmin = SignerAdmin.loadFromFile(ADMIN_NAME, NETWORK + ADMIN_NAME)
+		private var signerUser1: Signer = SignerUser.loadFromFile(USER1_NAME, USER1_FILENAME)
+		private var signerUser2: Signer = SignerUser.loadFromFile(USER2_NAME, USER2_FILENAME)
+
+		val signer = SsmCmdSignerSha256RSASigner(
+			SignerAdmin.loadFromFile(ADMIN_NAME, NETWORK + ADMIN_NAME),
+			SignerUser.loadFromFile(USER1_NAME, USER1_FILENAME),
+			SignerUser.loadFromFile(USER2_NAME, USER2_FILENAME)
+		)
+
+		private var agentAdmin: Agent = loadFromFile(ADMIN_NAME, NETWORK + ADMIN_NAME)
+		private var agentUser1: Agent = loadFromFile(signerUser1.name, USER1_FILENAME)
+		private var agentUser2: Agent = loadFromFile(signerUser2.name, USER2_FILENAME)
+
+
 		@BeforeAll
 		@JvmStatic
 		@Throws(Exception::class)
 		fun init() {
-			signerAdmin = SignerAdmin.loadFromFile(ADMIN_NAME, NETWORK + ADMIN_NAME)
-			signerUser1 = SignerUser.loadFromFile(USER1_NAME, USER1_FILENAME)
-			signerUser2 = SignerUser.loadFromFile(USER2_NAME, USER2_FILENAME)
-			agentAdmin = loadFromFile(ADMIN_NAME, NETWORK + ADMIN_NAME)
-			agentUser1 = loadFromFile(signerUser1.name, USER1_FILENAME)
-			agentUser2 = loadFromFile(signerUser2.name, USER2_FILENAME)
 			query = SsmClientTestBuilder.build().buildQueryService()
-			tx = SsmClientTestBuilder.build().buildTxService()
-			ssmName = "CarDealership-" + uuid
+			tx = SsmClientTestBuilder.build().buildTxService(signer)
+			ssmName = "CarDealership-$uuid"
 			val roles = mapOf(
 				signerUser1.name to "Buyer", signerUser2.name to "Seller"
 			)
-			sessionName = "deal20181201-" + uuid
+			sessionName = "deal20181201-$uuid"
 			session = SsmSession(
 				ssmName,
 				sessionName, roles, "Used car for 100 dollars.", emptyMap()
@@ -108,7 +109,7 @@ class SsmClientItTest {
 	@Test
 	@Order(20)
 	fun registerUser1() = runBlocking<Unit> {
-		val transactionEvent = tx.sendRegisterUser(signerAdmin, agentUser1)!!
+		val transactionEvent = tx.sendRegisterUser(agentUser1, signerAdmin.name)!!
 		val trans = transactionEvent
 		assertThatTransactionExists(trans)
 	}
@@ -123,7 +124,7 @@ class SsmClientItTest {
 	@Test
 	@Order(40)
 	fun registerUser2() = runBlocking<Unit> {
-		val transactionEvent = tx.sendRegisterUser(signerAdmin, agentUser2)
+		val transactionEvent = tx.sendRegisterUser(agentUser2, signerAdmin.name)
 		assertThatTransactionExists(transactionEvent!!)
 	}
 
@@ -147,7 +148,7 @@ class SsmClientItTest {
 		val sell = SsmTransition(0, 1, "Seller", "Sell")
 		val buy = SsmTransition(1, 2, "Buyer", "Buy")
 		val ssm = Ssm(ssmName, Lists.newArrayList(sell, buy))
-		val transactionEvent = tx.sendCreate(signerAdmin, ssm)
+		val transactionEvent = tx.sendCreate(ssm, signerAdmin.name)
 		assertThatTransactionExists(transactionEvent!!)
 	}
 
@@ -171,7 +172,7 @@ class SsmClientItTest {
 			ssmName,
 			sessionName, roles, "Used car for 100 dollars.", emptyMap()
 		)
-		val transactionEvent = tx.sendStart(signerAdmin, session)
+		val transactionEvent = tx.sendStart(session, signerAdmin.name)
 		assertThatTransactionExists(transactionEvent!!)
 	}
 
@@ -200,7 +201,7 @@ class SsmClientItTest {
 			agentUser1
 		)
 		privateMessage = context.private
-		val transactionEvent = tx.sendPerform(signerUser2, "Sell", context)
+		val transactionEvent = tx.sendPerform("Sell", context, signerUser2.name)
 		assertThatTransactionExists(transactionEvent!!)
 	}
 
@@ -231,7 +232,7 @@ class SsmClientItTest {
 	@Order(120)
 	fun performBuy() = runBlocking<Unit> {
 		val context = SsmContext(sessionName, "Deal !", 1, emptyMap())
-		val transactionEvent = tx.sendPerform(signerUser1, "Buy", context)!!
+		val transactionEvent = tx.sendPerform("Buy", context, signerUser1.name)!!
 		assertThatTransactionExists(transactionEvent)
 	}
 

@@ -1,44 +1,41 @@
 package ssm.chaincode.f2.features.command
 
-import f2.dsl.fnc.f2Function
-import ssm.chaincode.dsl.config.ChaincodeSsmConfig
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.map
 import ssm.chaincode.dsl.model.Agent
+import ssm.chaincode.dsl.model.AgentName
 import ssm.chaincode.dsl.model.Ssm
 import ssm.chaincode.f2.utils.SsmException
-import ssm.sdk.client.model.InvokeReturn
-import ssm.sdk.core.SsmServiceFactory
-import ssm.sdk.sign.SignerAdminProvider
+import ssm.sdk.core.SsmQueryService
+import ssm.sdk.core.SsmTxService
+import ssm.sdk.dsl.InvokeReturn
+import ssm.tx.dsl.features.ssm.SsmInitializeCommand
 import ssm.tx.dsl.features.ssm.SsmInitializedResult
 import ssm.tx.dsl.features.ssm.SsmTxInitializeFunction
 
 class SsmInitializeFunctionImpl(
-	config: ChaincodeSsmConfig,
-	private val signerAdminProvider: SignerAdminProvider
-) {
+	private val txService: SsmTxService,
+	private val queryService: SsmQueryService,
+): SsmTxInitializeFunction {
 
-	private val txService = SsmServiceFactory.builder(config.url).buildTxService()
-	private val queryService = SsmServiceFactory.builder(config.url).buildQueryService()
-
-	fun ssmInitializeFunction(
-
-	): SsmTxInitializeFunction = f2Function { cmd ->
-		val retInitUser = initUser(cmd.agent)
-		val retInitSsm = initSsm(cmd.ssm)
+	override suspend fun invoke(msg: Flow<SsmInitializeCommand>): Flow<SsmInitializedResult> = msg.map { payload ->
+		val retInitUser = initUser(payload.agent, payload.signerName)
+		val retInitSsm = initSsm(payload.ssm, payload.signerName)
 		val invoke = listOfNotNull(retInitUser, retInitSsm)
 		SsmInitializedResult(
 			results = invoke.map { it.transactionId }
 		)
 	}
 
-	private suspend fun initSsm(ssm: Ssm): InvokeReturn? {
-		return createIfNotExist(ssm, { queryService.getSsm(ssm.name) }, { this.createSsm(it) })
+	private suspend fun initSsm(ssm: Ssm, signerName: AgentName): InvokeReturn? {
+		return createIfNotExist(ssm, { queryService.getSsm(ssm.name) }, { this.createSsm(it, signerName) })
 	}
 
-	private suspend fun initUser(user: Agent): InvokeReturn? {
+	private suspend fun initUser(user: Agent, signerName: AgentName): InvokeReturn? {
 		return createIfNotExist(
 			user,
 			{ queryService.getAgent(user.name) },
-			{ this.createUser(it)!! })
+			{ this.createUser(it, signerName)!! })
 	}
 
 	private suspend fun <T> createIfNotExist(
@@ -53,17 +50,17 @@ class SsmInitializeFunctionImpl(
 		}
 	}
 
-	private suspend fun createSsm(ssm: Ssm): InvokeReturn {
+	private suspend fun createSsm(ssm: Ssm, signerName: AgentName): InvokeReturn {
 		try {
-			return txService.sendCreate(signerAdminProvider.get(), ssm)!!
+			return txService.sendCreate(ssm, signerName)!!
 		} catch (e: Exception) {
 			throw SsmException(e)
 		}
 	}
 
-	private suspend fun createUser(agent: Agent): InvokeReturn? {
+	private suspend fun createUser(agent: Agent, signerName: AgentName): InvokeReturn? {
 		try {
-			return txService.sendRegisterUser(signerAdminProvider.get(), agent)
+			return txService.sendRegisterUser(agent, signerName)
 		} catch (e: Exception) {
 			throw SsmException(e)
 		}

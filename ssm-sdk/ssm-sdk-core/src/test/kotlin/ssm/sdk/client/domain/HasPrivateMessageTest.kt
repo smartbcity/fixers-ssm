@@ -5,10 +5,10 @@ import org.assertj.core.api.Assertions
 import org.junit.jupiter.api.Test
 import ssm.chaincode.dsl.model.SsmContext
 import ssm.sdk.client.SsmClientItTest
-import ssm.sdk.client.extention.addPrivateMessage
-import ssm.sdk.client.extention.getPrivateMessage
-import ssm.sdk.client.extention.loadFromFile
 import ssm.sdk.sign.crypto.KeyPairReader.loadPrivateKey
+import ssm.sdk.sign.extention.addPrivateMessage
+import ssm.sdk.sign.extention.getPrivateMessage
+import ssm.sdk.sign.extention.loadFromFile
 import ssm.sdk.sign.model.SignerUser
 
 internal class HasPrivateMessageTest {

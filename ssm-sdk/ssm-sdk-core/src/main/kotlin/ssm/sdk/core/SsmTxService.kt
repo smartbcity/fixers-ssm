@@ -1,20 +1,19 @@
 package ssm.sdk.core
 
 import ssm.chaincode.dsl.model.Agent
+import ssm.chaincode.dsl.model.AgentName
 import ssm.chaincode.dsl.model.Ssm
 import ssm.chaincode.dsl.model.SsmContext
 import ssm.chaincode.dsl.model.SsmSession
-import ssm.sdk.client.SsmRequester
-import ssm.sdk.client.invoke.command.CreateCmd
-import ssm.sdk.client.invoke.command.PerformCmd
-import ssm.sdk.client.invoke.command.RegisterCmd
-import ssm.sdk.client.invoke.command.StartCmd
-import ssm.sdk.client.model.InvokeReturn
-import ssm.sdk.client.model.SsmCmd
-import ssm.sdk.client.model.SsmCmdSigned
-import ssm.sdk.client.model.SsmCmdSigner
-import ssm.sdk.sign.model.Signer
-import ssm.sdk.sign.model.SignerAdmin
+import ssm.sdk.core.ktor.SsmRequester
+import ssm.sdk.core.invoke.command.CreateCmd
+import ssm.sdk.core.invoke.command.PerformCmd
+import ssm.sdk.core.invoke.command.RegisterCmd
+import ssm.sdk.core.invoke.command.StartCmd
+import ssm.sdk.dsl.InvokeReturn
+import ssm.sdk.dsl.SsmCmd
+import ssm.sdk.dsl.SsmCmdSigned
+import ssm.sdk.sign.SsmCmdSigner
 
 class SsmTxService(
 	private val ssmRequester: SsmRequester,
@@ -42,40 +41,40 @@ class SsmTxService(
 	}
 
 
-	suspend fun sendRegisterUser(signer: SignerAdmin, agent: Agent): InvokeReturn? {
-		return signAndSend(signer) {
+	suspend fun sendRegisterUser(agent: Agent, signerName: AgentName): InvokeReturn? {
+		return signAndSend(signerName) {
 			registerUser(agent)
 		}
 	}
 
-	suspend fun sendCreate(signer: SignerAdmin, ssm: Ssm): InvokeReturn? {
-		return signAndSend(signer) {
+	suspend fun sendCreate(ssm: Ssm, signerName: AgentName): InvokeReturn? {
+		return signAndSend(signerName) {
 			create(ssm)
 		}
 	}
 
-	suspend fun sendStart(signer: SignerAdmin, session: SsmSession): InvokeReturn? {
-		return signAndSend(signer) {
+	suspend fun sendStart(session: SsmSession, signerName: AgentName): InvokeReturn? {
+		return signAndSend(signerName) {
 			start(session)
 		}
 	}
 
-	suspend fun sendPerform(signer: Signer, action: String, context: SsmContext): InvokeReturn? {
-		return signAndSend(signer) {
+	suspend fun sendPerform(action: String, context: SsmContext, signerName: AgentName): InvokeReturn? {
+		return signAndSend(signerName) {
 			perform(action, context)
 		}
 	}
 
-	suspend fun signAndSend(signer: Signer, build: () -> SsmCmd): InvokeReturn? {
+	suspend fun signAndSend(signerName: AgentName, build: () -> SsmCmd): InvokeReturn? {
 		return build().let {
-			sign(it, signer)
+			sign(it, signerName)
 		}.let {
 			send(it)
 		}
 	}
 
-	fun sign(command: SsmCmd, signer: Signer): SsmCmdSigned {
-		return ssmCmdSigner.sign(command, signer)
+	fun sign(command: SsmCmd, signerName: AgentName): SsmCmdSigned {
+		return ssmCmdSigner.sign(command, signerName)
 	}
 
 	suspend fun send(ssmCommandSigned: SsmCmdSigned): InvokeReturn? {

@@ -22,7 +22,7 @@ import ssm.chaincode.f2.query.SsmListAdminQueryFunctionImpl
 import ssm.chaincode.f2.query.SsmListSessionQueryFunctionImpl
 import ssm.chaincode.f2.query.SsmListSsmQueryFunctionImpl
 import ssm.chaincode.f2.query.SsmListUserQueryFunctionImpl
-import ssm.sdk.client.SsmSdkConfig
+import ssm.sdk.core.SsmSdkConfig
 import ssm.sdk.core.SsmQueryService
 import ssm.sdk.core.SsmServiceFactory
 

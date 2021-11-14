@@ -9,10 +9,11 @@ import com.fasterxml.jackson.databind.DeserializationFeature
 import com.fasterxml.jackson.databind.ObjectMapper
 import com.fasterxml.jackson.module.kotlin.KotlinModule
 import java.io.IOException
+import java.io.Reader
 
 object JsonUtils {
 
-	val mapper: ObjectMapper = ObjectMapper()
+	private val mapper: ObjectMapper = ObjectMapper()
 		.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false)
 		.setSerializationInclusion(JsonInclude.Include.NON_NULL)
 		.setVisibility(PropertyAccessor.FIELD, JsonAutoDetect.Visibility.ANY)
@@ -25,6 +26,11 @@ object JsonUtils {
 
 	@Throws(IOException::class)
 	fun <T> toObject(value: String, clazz: Class<T>): T {
+		return mapper.readValue(value, clazz)
+	}
+
+	@Throws(IOException::class)
+	fun <T> toObject(value: Reader, clazz: Class<T>): T {
 		return mapper.readValue(value, clazz)
 	}
 

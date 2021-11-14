@@ -1,23 +1,22 @@
 package ssm.chaincode.f2.features.command
 
-import ssm.chaincode.dsl.config.ChaincodeSsmConfig
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.map
 import ssm.chaincode.f2.utils.SsmException
-import ssm.chaincode.f2.utils.ssmF2Function
-import ssm.sdk.sign.SignerAdminProvider
+import ssm.sdk.core.SsmTxService
+import ssm.tx.dsl.features.ssm.SsmCreateCommand
 import ssm.tx.dsl.features.ssm.SsmCreateResult
 import ssm.tx.dsl.features.ssm.SsmTxCreateFunction
 
-class SsmTxCreateFunctionImpl {
+class SsmTxCreateFunctionImpl(
+	private val ssmTxService: SsmTxService
+): SsmTxCreateFunction {
 
-	fun ssmTxCreateFunction(
-		config: ChaincodeSsmConfig,
-		signerProvider: SignerAdminProvider
-	): SsmTxCreateFunction = ssmF2Function(config) { cmd, ssmClient ->
+	override suspend fun invoke(msg: Flow<SsmCreateCommand>): Flow<SsmCreateResult> = msg.map { payload ->
 		try {
-			val adminSigner = signerProvider.get()
-			ssmClient.sendCreate(adminSigner, cmd.ssm).let {
+			ssmTxService.sendCreate(payload.ssm, payload.signerName).let { invokeReturn ->
 				SsmCreateResult(
-					transactionId = it!!.transactionId,
+					transactionId = invokeReturn!!.transactionId,
 				)
 			}
 		} catch (e: Exception) {

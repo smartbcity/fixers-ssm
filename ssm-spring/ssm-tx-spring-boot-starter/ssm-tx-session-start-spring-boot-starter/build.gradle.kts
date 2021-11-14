@@ -7,8 +7,7 @@ plugins {
 
 dependencies {
 	api(project(":ssm-tx:ssm-tx-f2"))
-
-	api(project(":ssm-sdk:ssm-sdk-sign"))
+	api(project(":ssm-spring:ssm-tx-spring-boot-starter:ssm-tx-config-spring-boot-starter"))
 
 	api("city.smartb.f2:f2-spring-boot-starter-function:${Versions.f2}")
 

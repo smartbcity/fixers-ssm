@@ -8,21 +8,21 @@ import ssm.tx.dsl.features.user.SsmTxUserGrantFunction
 import ssm.tx.dsl.features.user.SsmTxUserRegisterFunction
 
 /**
- * - fun ssmTxUserGrantFunction(config: SsmChaincodeConfig): [SsmTxUserGrantFunction]
- * - fun ssmTxUserRegisterFunction(config: SsmChaincodeConfig): [SsmTxUserRegisterFunction]
+ * - fun ssmTxUserGrantFunction(): [SsmTxUserGrantFunction]
+ * - fun ssmTxUserRegisterFunction(): [SsmTxUserRegisterFunction]
  *
- * - fun ssmTxCreateFunction(config: SsmChaincodeConfig): [SsmTxCreateFunction]
- * - fun ssmTxInitializeFunction(config: SsmChaincodeConfig): [SsmTxInitializeFunction]
- * - fun ssmTxSessionStartFunction(config: SsmChaincodeConfig): [SsmTxSessionStartFunction]
+ * - fun ssmTxCreateFunction(): [SsmTxCreateFunction]
+ * - fun ssmTxInitializeFunction(): [SsmTxInitializeFunction]
+ * - fun ssmTxSessionStartFunction(): [SsmTxSessionStartFunction]
  * @d2 model
  * @title Admin Agent command
  * @parent [ssm.tx.dsl.SsmTxD2]
  */
 interface SsmTxAdminFunctions {
-	fun ssmTxUserGrantFunction(config: ChaincodeSsmConfig): SsmTxUserGrantFunction
-	fun ssmTxUserRegisterFunction(config: ChaincodeSsmConfig): SsmTxUserRegisterFunction
+	fun ssmTxUserGrantFunction(): SsmTxUserGrantFunction
+	fun ssmTxUserRegisterFunction(): SsmTxUserRegisterFunction
 
-	fun ssmTxCreateFunction(config: ChaincodeSsmConfig): SsmTxCreateFunction
-	fun ssmTxInitializeFunction(config: ChaincodeSsmConfig): SsmTxInitializeFunction
-	fun ssmTxSessionStartFunction(config: ChaincodeSsmConfig): SsmTxSessionStartFunction
+	fun ssmTxCreateFunction(): SsmTxCreateFunction
+	fun ssmTxInitializeFunction(): SsmTxInitializeFunction
+	fun ssmTxSessionStartFunction(): SsmTxSessionStartFunction
 }

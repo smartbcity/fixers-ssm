@@ -1,19 +1,20 @@
 package ssm.chaincode.f2.features.command
 
-import ssm.chaincode.dsl.config.ChaincodeSsmConfig
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.map
 import ssm.chaincode.f2.utils.SsmException
-import ssm.chaincode.f2.utils.ssmF2Function
-import ssm.sdk.sign.SignerAdminProvider
+import ssm.sdk.core.SsmTxService
 import ssm.tx.dsl.features.user.SsmTxUserGrantFunction
+import ssm.tx.dsl.features.user.SsmUserGrantCommand
 import ssm.tx.dsl.features.user.SsmUserGrantedResult
 
-class SsmUserGrantFunctionImpl {
+class SsmUserGrantFunctionImpl(
+	private val ssmTxService: SsmTxService
+): SsmTxUserGrantFunction {
 
-	fun ssmUserGrantFunction(
-		config: ChaincodeSsmConfig, signerAdminProvider: SignerAdminProvider
-	): SsmTxUserGrantFunction = ssmF2Function(config) { cmd, ssmClient ->
+	override suspend fun invoke(msg: Flow<SsmUserGrantCommand>): Flow<SsmUserGrantedResult> = msg.map { payload ->
 		try {
-			ssmClient.sendRegisterUser(signerAdminProvider.get(), cmd.agent)!!.let { result ->
+			ssmTxService.sendRegisterUser(payload.agent, payload.signerName)!!.let { result ->
 				SsmUserGrantedResult(
 					transactionId = result.transactionId,
 				)

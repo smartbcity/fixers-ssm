@@ -6,6 +6,7 @@ import org.springframework.cloud.function.context.FunctionCatalog
 import ssm.bdd.spring.autoconfigure.ApplicationContextBuilder
 import ssm.bdd.spring.autoconfigure.ApplicationContextRunnerBuilder
 import ssm.chaincode.dsl.config.ChaincodeSsmConfig
+import ssm.tx.config.spring.autoconfigure.SsmTxProperties
 
 
 class ApplicationContextRunnerTest {
@@ -15,8 +16,8 @@ class ApplicationContextRunnerTest {
 		ApplicationContextRunnerBuilder()
 			.buildContext(SsmChaincodeConfigTest.localDockerComposeParams).run { context ->
 				assertThat(context).hasSingleBean(FunctionCatalog::class.java)
-				assertThat(context).hasSingleBean(SsmTxCreateProperties::class.java)
-				assertThat(context).hasBean(SsmTxF2CreateAutoConfiguration::ssmTxCreateFunction.name)
+				assertThat(context).hasSingleBean(SsmTxProperties::class.java)
+				assertThat(context).hasBean(SsmTxCreateAutoConfiguration::ssmTxCreateFunction.name)
 			}
 	}
 
@@ -27,7 +28,7 @@ class ApplicationContextRunnerTest {
 			types = arrayOf(ApplicationContextBuilder.SimpleConfiguration::class.java),
 			config = SsmChaincodeConfigTest.localDockerComposeParams
 		)
-		assertThat(context.getBean(SsmTxF2CreateAutoConfiguration::ssmTxCreateFunction.name)).isNotNull
+		assertThat(context.getBean(SsmTxCreateAutoConfiguration::ssmTxCreateFunction.name)).isNotNull
 		assertThat(context.getBean(FunctionCatalog::class.java)).isNotNull
 	}
 

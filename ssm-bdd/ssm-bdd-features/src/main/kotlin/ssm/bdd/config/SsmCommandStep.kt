@@ -14,10 +14,9 @@ import ssm.chaincode.dsl.model.SsmContext
 import ssm.chaincode.dsl.model.SsmName
 import ssm.chaincode.dsl.model.SsmSession
 import ssm.chaincode.dsl.model.SsmTransition
-import ssm.sdk.client.extention.SsmJsonReader
-import ssm.sdk.client.extention.asAgent
+import ssm.sdk.core.extention.SsmJsonReader
+import ssm.sdk.sign.extention.asAgent
 import ssm.sdk.sign.model.SignerAdmin
-import ssm.sdk.sign.model.SignerName
 import ssm.sdk.sign.model.SignerUser
 
 abstract class SsmCommandStep {
@@ -27,19 +26,6 @@ abstract class SsmCommandStep {
 
 	@Suppress("LongMethod")
 	fun En.prepareSteps() {
-//		DataTableType { table: DataTable ->
-//			val rows: List<Map<String?, String?>> = table.asMaps()
-//			rows.map { columns ->
-//				SsmTransition(
-//					from = columns[SsmTransition::from.name]?.toInt()!!,
-//					to = columns[SsmTransition::to.name]?.toInt()!!,
-//					role = columns[SsmTransition::role.name]!!,
-//					action = columns[SsmTransition::action.name]!!,
-//
-//					)
-//			}
-//		}
-
 		Before { scenario: Scenario ->
 			bag = SsmCucumberBag.init(scenario)
 		}
@@ -50,26 +36,26 @@ abstract class SsmCommandStep {
 			}
 		}
 
-		Given("The admin {string}") { adminName: SignerName ->
+		Given("The admin {string}") { adminName: AgentName ->
 
 			runBlocking {
 				bag.adminSigner = loadSignerAdmin(adminName)
 			}
 		}
 
-		Given("The admin {string} with key {string}") { adminName: SignerName, key: String ->
+		Given("The admin {string} with key {string}") { adminName: AgentName, key: String ->
 			runBlocking {
 				bag.adminSigner = loadSignerAdmin(adminName, key)
 			}
 		}
 
-		Given("The user {string} with key {string}") { userName: SignerName, key: String ->
+		Given("The user {string} with key {string}") { userName: AgentName, key: String ->
 			runBlocking {
 				bag.userSigners[userName] = loadSigner(userName, key)
 			}
 		}
 
-		Given("A new user {string}") { userName: SignerName ->
+		Given("A new user {string}") { userName: AgentName ->
 			val contextUser = userName.contextualize(bag)
 			bag.userSigners[contextUser] = SignerUser.generate(contextUser)
 			runBlocking {
@@ -162,7 +148,7 @@ abstract class SsmCommandStep {
 						iteration = perform.iteration,
 						private = emptyMap()
 					)
-					bag.clientTx.sendPerform(signer, perform.action, context)
+					bag.clientTx(signer).sendPerform(perform.action, context, signer.name)
 				}
 			}
 		}
@@ -206,17 +192,17 @@ abstract class SsmCommandStep {
 	}
 
 
-	protected fun createUser(signerName: SignerName): SignerUser {
-		return SignerUser.generate(signerName)
+	protected fun createUser(agentName: AgentName): SignerUser {
+		return SignerUser.generate(agentName)
 	}
 
 	protected abstract suspend fun startSession(session: SsmSession)
 
 	protected abstract suspend fun createSsm(ssm: Ssm)
 
-	protected abstract suspend fun registerUser(ssmAgent: Agent)
+	protected abstract suspend fun registerUser(agent: Agent)
 
-	protected suspend fun loadSignerAdmin(adminName: SignerName? = null, filename: String? = null): SignerAdmin {
+	protected suspend fun loadSignerAdmin(adminName: AgentName? = null, filename: String? = null): SignerAdmin {
 		return when {
 			adminName != null -> {
 				SignerAdmin.loadFromFile("ssm-admin", filename)
@@ -231,5 +217,5 @@ abstract class SsmCommandStep {
 
 	}
 
-	protected abstract suspend fun loadSigner(userName: SignerName, filename: String): SignerUser
+	protected abstract suspend fun loadSigner(userName: AgentName, filename: String): SignerUser
 }

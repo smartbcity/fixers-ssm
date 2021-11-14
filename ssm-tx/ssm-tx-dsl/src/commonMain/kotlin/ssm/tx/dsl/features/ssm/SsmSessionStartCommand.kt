@@ -2,6 +2,7 @@ package ssm.tx.dsl.features.ssm
 
 import f2.dsl.fnc.F2Function
 import ssm.chaincode.dsl.blockchain.TransactionId
+import ssm.chaincode.dsl.model.AgentName
 import ssm.chaincode.dsl.model.SsmSession
 import ssm.tx.dsl.features.SsmCommandDTO
 import ssm.tx.dsl.features.SsmCommandResultDTO
@@ -21,6 +22,10 @@ typealias SsmTxSessionStartFunction = F2Function<SsmSessionStartCommand, SsmSess
  * @title Start Session: Parameters
  */
 class SsmSessionStartCommand(
+	/**
+	 * The name of the signer
+	 */
+	val signerName: AgentName,
 	/**
 	 * Session to start
 	 */

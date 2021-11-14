@@ -2,6 +2,7 @@ package ssm.tx.dsl.features.ssm
 
 import f2.dsl.fnc.F2Function
 import ssm.chaincode.dsl.blockchain.TransactionId
+import ssm.chaincode.dsl.model.AgentName
 import ssm.chaincode.dsl.model.SsmContext
 import ssm.tx.dsl.features.SsmCommandDTO
 import ssm.tx.dsl.features.SsmCommandResultDTO
@@ -21,6 +22,10 @@ typealias SsmTxSessionPerformActionFunction = F2Function<SsmSessionPerformAction
  * @title Perform Transition: Parameters
  */
 class SsmSessionPerformActionCommand(
+	/**
+	 * The name of the signer
+	 */
+	val signerName: AgentName,
 	/**
 	 * Transition to perform
 	 * @example [ssm.chaincode.dsl.model.SsmTransition.action]
