@@ -10,7 +10,7 @@ Feature:
 
     Examples:
       | functionName        |
-      | ssmTxCreateFunction |
+      | ssmTxInitFunction |
 
   Scenario Outline: No inject ssmTxCreateFunction function when config is not provided.
     When I get an empty spring application context
