@@ -17,7 +17,6 @@ ssm:
 s2:
   storming:
     enable: false
-  ssm:
-    chaincode: "ssm:sandbox:ssm"
 
-#debug: true
+
+debug: true

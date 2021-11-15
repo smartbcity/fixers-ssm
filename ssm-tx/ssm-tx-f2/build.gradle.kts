@@ -8,4 +8,5 @@ dependencies {
 
 	api(project(":ssm-sdk:ssm-sdk-sign"))
 	api(project(":ssm-sdk:ssm-sdk-core"))
+
 }

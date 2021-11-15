@@ -1,5 +1,6 @@
 package ssm.sdk.core
 
+import org.slf4j.LoggerFactory
 import ssm.chaincode.dsl.model.Agent
 import ssm.chaincode.dsl.model.AgentName
 import ssm.chaincode.dsl.model.Ssm
@@ -19,6 +20,7 @@ class SsmTxService(
 	private val ssmRequester: SsmRequester,
 	private val ssmCmdSigner: SsmCmdSigner
 ) {
+	private val logger = LoggerFactory.getLogger(SsmTxService::class.java)
 
 	fun registerUser(agent: Agent): SsmCmd {
 		val cmd = RegisterCmd(agent)
@@ -42,24 +44,28 @@ class SsmTxService(
 
 
 	suspend fun sendRegisterUser(agent: Agent, signerName: AgentName): InvokeReturn? {
+		logger.info("Register user[${agent.name}] with signer[$signerName]")
 		return signAndSend(signerName) {
 			registerUser(agent)
 		}
 	}
 
 	suspend fun sendCreate(ssm: Ssm, signerName: AgentName): InvokeReturn? {
+		logger.info("Create ssm[${ssm.name}] with signer[$signerName]")
 		return signAndSend(signerName) {
 			create(ssm)
 		}
 	}
 
 	suspend fun sendStart(session: SsmSession, signerName: AgentName): InvokeReturn? {
+		logger.info("Start session[${session.session}] ssm[${session.ssm}] with signer[$signerName]")
 		return signAndSend(signerName) {
 			start(session)
 		}
 	}
 
 	suspend fun sendPerform(action: String, context: SsmContext, signerName: AgentName): InvokeReturn? {
+		logger.info("Perform action[${action}] session[${context.session}] with signer[$signerName]")
 		return signAndSend(signerName) {
 			perform(action, context)
 		}

@@ -7,6 +7,7 @@ import org.springframework.boot.context.properties.EnableConfigurationProperties
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
 import ssm.chaincode.dsl.config.ChaincodeSsmConfig
+import ssm.sdk.core.SsmQueryService
 import ssm.sdk.core.SsmSdkConfig
 import ssm.sdk.core.SsmServiceFactory
 import ssm.sdk.core.SsmTxService
@@ -39,5 +40,14 @@ class SsmTxAutoConfiguration {
 		return SsmServiceFactory.builder(
 			SsmSdkConfig(chaincodeSsmConfig.url)
 		).buildTxService(ssmCmdSigner)
+	}
+
+	@Bean
+	@ConditionalOnBean(value = [ChaincodeSsmConfig::class])
+	@ConditionalOnMissingBean(SsmQueryService::class)
+	fun ssmQueryService(chaincodeSsmConfig: ChaincodeSsmConfig): SsmQueryService {
+		return SsmServiceFactory.builder(
+			SsmSdkConfig(chaincodeSsmConfig.url)
+		).buildQueryService()
 	}
 }

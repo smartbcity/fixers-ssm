@@ -9,20 +9,20 @@ import ssm.chaincode.f2.utils.SsmException
 import ssm.sdk.core.SsmQueryService
 import ssm.sdk.core.SsmTxService
 import ssm.sdk.dsl.InvokeReturn
-import ssm.tx.dsl.features.ssm.SsmInitializeCommand
-import ssm.tx.dsl.features.ssm.SsmInitializedResult
-import ssm.tx.dsl.features.ssm.SsmTxInitializeFunction
+import ssm.tx.dsl.features.ssm.SsmInitCommand
+import ssm.tx.dsl.features.ssm.SsmInitdResult
+import ssm.tx.dsl.features.ssm.SsmTxInitFunction
 
-class SsmInitializeFunctionImpl(
+class SsmTxInitFunctionImpl(
 	private val txService: SsmTxService,
 	private val queryService: SsmQueryService,
-): SsmTxInitializeFunction {
+): SsmTxInitFunction {
 
-	override suspend fun invoke(msg: Flow<SsmInitializeCommand>): Flow<SsmInitializedResult> = msg.map { payload ->
+	override suspend fun invoke(msg: Flow<SsmInitCommand>): Flow<SsmInitdResult> = msg.map { payload ->
 		val retInitUser = initUser(payload.agent, payload.signerName)
 		val retInitSsm = initSsm(payload.ssm, payload.signerName)
 		val invoke = listOfNotNull(retInitUser, retInitSsm)
-		SsmInitializedResult(
+		SsmInitdResult(
 			results = invoke.map { it.transactionId }
 		)
 	}

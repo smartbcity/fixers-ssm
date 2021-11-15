@@ -51,12 +51,14 @@ include(
 	"ssm-spring:ssm-tx-spring-boot-starter",
 	"ssm-spring:ssm-tx-spring-boot-starter:ssm-tx-config-spring-boot-starter",
 	"ssm-spring:ssm-tx-spring-boot-starter:ssm-tx-create-ssm-spring-boot-starter",
+	"ssm-spring:ssm-tx-spring-boot-starter:ssm-tx-init-ssm-spring-boot-starter",
 	"ssm-spring:ssm-tx-spring-boot-starter:ssm-tx-session-perform-action-spring-boot-starter",
 	"ssm-spring:ssm-tx-spring-boot-starter:ssm-tx-session-start-spring-boot-starter"
 )
 
 include(
 	"sample:ssm-full",
+	"sample:ssm-full-ext",
 )
 
 include(

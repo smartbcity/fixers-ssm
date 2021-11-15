@@ -12,6 +12,7 @@ dependencies {
 
 	Dependencies.Jvm.slf4j(::implementation)
 	Dependencies.Jvm.ktorClient(::implementation)
+	Dependencies.Jvm.slf4j(::implementation)
 
 	testImplementation(project(":ssm-sdk:ssm-sdk-bdd"))
 }

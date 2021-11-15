@@ -14,14 +14,14 @@ import ssm.tx.dsl.features.SsmCommandDTO
  * @parent [ssm.tx.dsl.SsmTxD2Command]
  * @title Initialize SSM
  */
-typealias SsmTxInitializeFunction = F2Function<SsmInitializeCommand, SsmInitializedResult>
+typealias SsmTxInitFunction = F2Function<SsmInitCommand, SsmInitdResult>
 
 /**
  * @d2 command
- * @parent [SsmTxInitializeFunction]
+ * @parent [SsmTxInitFunction]
  * @title Initialize SSM: Parameters
  */
-class SsmInitializeCommand(
+class SsmInitCommand(
 	/**
 	 * The name of the signer
 	 */
@@ -39,9 +39,9 @@ class SsmInitializeCommand(
 
 /**
  * @d2 event
- * @parent [SsmTxInitializeFunction]
+ * @parent [SsmTxInitFunction]
  * @title Initialize SSM: Response
  */
-class SsmInitializedResult(
+class SsmInitdResult(
 	val results: List<TransactionId>
 ) : Event
