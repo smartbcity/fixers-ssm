@@ -1,12 +1,12 @@
 
 
-#### List Sessions: Result  
+### List Sessions: Result  
   
 <article>
 
-*values* `Array<String>` 
+*items* `Array<SessionName>` 
 
-Names of all known sessions
+Names of all sessions
 
 </article>
 

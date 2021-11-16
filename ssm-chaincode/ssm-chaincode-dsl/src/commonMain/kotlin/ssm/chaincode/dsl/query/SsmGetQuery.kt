@@ -1,18 +1,18 @@
 package ssm.chaincode.dsl.query
 
-import f2.dsl.cqrs.Event
 import f2.dsl.fnc.F2Function
 import kotlin.js.JsExport
 import kotlin.js.JsName
 import kotlinx.serialization.Serializable
-import ssm.chaincode.dsl.Ssm
-import ssm.chaincode.dsl.SsmChaincodeProperties
-import ssm.chaincode.dsl.SsmCommandDTO
+import ssm.chaincode.dsl.SsmItemResultDTO
+import ssm.chaincode.dsl.SsmQueryDTO
+import ssm.chaincode.dsl.model.Ssm
+import ssm.chaincode.dsl.model.SsmName
 
 /**
- * Retrieves an SSM
+ * Retrieves a SSM
  * @d2 function
- * @parent [Ssm]
+ * @parent [ssm.chaincode.dsl.SsmChaincodeD2Query]
  * @title Get SSM
  * @order 10
  */
@@ -27,15 +27,12 @@ typealias SsmGetQueryFunction = F2Function<SsmGetQuery, SsmGetResult>
 @Serializable
 @JsName("SsmGetQuery")
 class SsmGetQuery(
-	override val chaincode: SsmChaincodeProperties,
-	override val bearerToken: String? = null,
-
 	/**
 	 * Identifier of the SSM to retrieve
 	 * @example [Ssm.name]
 	 */
-	val name: String,
-) : SsmCommandDTO
+	val name: SsmName,
+) : SsmQueryDTO
 
 /**
  * @d2 event
@@ -47,7 +44,7 @@ class SsmGetQuery(
 @JsName("SsmGetResult")
 class SsmGetResult(
 	/**
-	 * Retrieved SSM with the given name if it exists
+	 * The ssm found
 	 */
-	val ssm: Ssm?,
-) : Event
+	override val item: Ssm?,
+) : SsmItemResultDTO<Ssm>

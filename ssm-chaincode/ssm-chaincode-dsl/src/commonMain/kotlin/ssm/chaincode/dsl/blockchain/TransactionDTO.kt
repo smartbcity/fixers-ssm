@@ -1,5 +1,8 @@
 package ssm.chaincode.dsl.blockchain
 
+import kotlin.js.JsExport
+import kotlin.js.JsName
+
 expect interface TransactionDTO {
 	/**
 	 * Identifier of the transaction
@@ -57,9 +60,11 @@ expect interface TransactionDTO {
 
 /**
  * @d2 model
- * @page
- * @@title SSM-Chaincode/Blockchain Content
+ * @parent [ssm.chaincode.dsl.SsmChaincodeD2Model]
+ * @title SSM-CHAINCODE/Blockchain Content
  */
+@JsName("Transaction")
+@JsExport
 class Transaction(
 	override val transactionId: TransactionId,
 	override val blockId: Long,

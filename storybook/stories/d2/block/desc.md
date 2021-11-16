@@ -29,7 +29,7 @@ Hash of the previous block within the blockchain
 </article>
 <article>
 
-*transactions* [`List<Transaction>`](#transaction) 
+*transactions* [`List<Transaction>`](#ssm-chaincode-blockchain-content) 
 
 Transactions within the block
 

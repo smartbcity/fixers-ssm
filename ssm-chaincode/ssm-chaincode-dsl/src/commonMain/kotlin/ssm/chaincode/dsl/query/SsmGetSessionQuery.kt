@@ -1,18 +1,18 @@
 package ssm.chaincode.dsl.query
 
-import f2.dsl.cqrs.Event
 import f2.dsl.fnc.F2Function
 import kotlin.js.JsExport
 import kotlin.js.JsName
 import kotlinx.serialization.Serializable
-import ssm.chaincode.dsl.SsmChaincodeProperties
-import ssm.chaincode.dsl.SsmCommandDTO
-import ssm.chaincode.dsl.SsmSessionState
+import ssm.chaincode.dsl.SsmItemResultDTO
+import ssm.chaincode.dsl.SsmQueryDTO
+import ssm.chaincode.dsl.model.SessionName
+import ssm.chaincode.dsl.model.SsmSessionState
 
 /**
  * Retrieves the current state of a session
  * @d2 function
- * @parent [ssm.chaincode.dsl.SsmSession]
+ * @parent [ssm.chaincode.dsl.SsmChaincodeD2Query]
  * @title Get Session
  * @order 10
  */
@@ -27,15 +27,12 @@ typealias SsmGetSessionQueryFunction = F2Function<SsmGetSessionQuery, SsmGetSess
 @JsExport
 @JsName("SsmGetSessionQuery")
 class SsmGetSessionQuery(
-	override val chaincode: SsmChaincodeProperties,
-	override val bearerToken: String? = null,
-
 	/**
 	 * Identifier of the session to retrieve
 	 * @example [SsmSessionState.session]
 	 */
-	val name: String,
-) : SsmCommandDTO
+	val sessionName: SessionName,
+) : SsmQueryDTO
 
 /**
  * @d2 event
@@ -49,5 +46,5 @@ class SsmGetSessionResult(
 	/**
 	 * The current state of the session if it exists
 	 */
-	val session: SsmSessionState?,
-) : Event
+	override val item: SsmSessionState?,
+) : SsmItemResultDTO<SsmSessionState>

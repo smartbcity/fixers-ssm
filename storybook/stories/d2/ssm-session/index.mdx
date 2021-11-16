@@ -1,41 +1,26 @@
 import { CodeHighlighter, DescriptedCode } from '@smartb/archetypes-ui-documentation'
 import { Meta } from '@storybook/addon-docs/blocks'
 import SsmContextIndex from '../ssm-context/index.mdx'
-import SsmGetSessionLogsQueryFunctionIndex from '../ssm-get-session-logs-query-function/index.mdx'
-import SsmGetSessionQueryFunctionIndex from '../ssm-get-session-query-function/index.mdx'
-import SsmListSessionQueryFunctionIndex from '../ssm-list-session-query-function/index.mdx'
 import SsmSessionDesc from './desc.md'
-import SsmSessionPerformActionFunctionIndex from '../ssm-session-perform-action-function/index.mdx'
-import SsmSessionSample from './sample.json'
-import SsmSessionStartFunctionIndex from '../ssm-session-start-function/index.mdx'
 import SsmSessionStateIndex from '../ssm-session-state/index.mdx'
 import SsmSessionStateLogIndex from '../ssm-session-state-log/index.mdx'
+import SsmSessionVisualJson from './visualJson.json'
 
-<Meta title="SsmSession" parameters={{ previewTabs: { canvas: { hidden: true } } }} />
+<Meta title="SSM-CHAINCODE/Session While an  purely describes the structure of a State Machine, a session represents its instantiation. It defines which  is assigned to which role, and keeps track of every state transition it has undergone." parameters={{ previewTabs: { canvas: { hidden: true } } }} />
 
 <DescriptedCode
   leftElement={<SsmSessionDesc />}
   rightElement={
     <CodeHighlighter
-      object={SsmSessionSample}
+      object={SsmSessionVisualJson}
       language={"json"}
       title={"Example"}
     />
   }
 />
 
+<SsmContextIndex />
+
 <SsmSessionStateIndex />
 
 <SsmSessionStateLogIndex />
-
-<SsmContextIndex />
-
-<SsmGetSessionQueryFunctionIndex />
-
-<SsmGetSessionLogsQueryFunctionIndex />
-
-<SsmListSessionQueryFunctionIndex />
-
-<SsmSessionStartFunctionIndex />
-
-<SsmSessionPerformActionFunctionIndex />

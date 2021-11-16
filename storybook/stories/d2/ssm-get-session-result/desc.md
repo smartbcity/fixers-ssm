@@ -1,10 +1,10 @@
 
 
-#### Get Session: Result  
+### Get Session: Result  
   
 <article>
 
-*session* [`SsmSessionState?`](#ssmsessionstate) 
+*item* [`SsmSessionState?`](/docs/ssm-chaincode-models--page#ssmsessionstate) 
 
 The current state of the session if it exists
 

@@ -1,10 +1,10 @@
 
 
-#### List SSMs: Result  
+### List SSMs: Result  
   
 <article>
 
-*values* `Array<String>` 
+*items* [`Array<SsmName>`](/docs/ssm-chaincode-models--page#ssmname) 
 
 Names of all known SSMs
 

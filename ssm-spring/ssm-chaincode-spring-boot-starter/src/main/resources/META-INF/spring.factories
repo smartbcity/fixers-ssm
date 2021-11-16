@@ -1,0 +1,3 @@
+org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
+ssm.chaincode.spring.autoconfigure.SsmChaincodeAutoConfiguration,\
+ssm.chaincode.spring.autoconfigure.SsmChaincodeF2AutoConfiguration

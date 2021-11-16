@@ -1,12 +1,12 @@
 
 
-## Ssm  
+## Signing State Machine  
   
 <article>
 
-*name* `String` 
+*name* [`SsmName`](#ssmname) 
 
-Unique identifier for the SSM.
+The unique identifier of a ssm.
 
 </article>
 <article>

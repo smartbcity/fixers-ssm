@@ -3,6 +3,6 @@
 ### List Sessions  
 
 
-Retrieves a list of the existing sessions
+Retrieves all existing sessions
 
 

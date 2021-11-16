@@ -3,32 +3,23 @@ package ssm.sdk.json
 import com.fasterxml.jackson.core.type.TypeReference
 import java.io.IOException
 import java.util.concurrent.CompletionException
-import java.util.function.Function
-import okhttp3.ResponseBody
 
 class JSONConverterObjectMapper : JSONConverter {
-	override fun <T> toCompletableObjects(clazz: Class<T>): Function<ResponseBody, List<T>> {
+	override fun <T> toCompletableObjects(clazz: Class<T>, value: String): List<T> {
 		val type: TypeReference<List<T>> = object : TypeReference<List<T>>() {}
-		return Function { value: ResponseBody ->
-			val response = getString(value)
-			try {
-				JsonUtils.toObject(response, type)
-			} catch (e: IOException) {
-				throw CompletionException("Error parsing response: $response", e)
-			}
+		return try {
+			JsonUtils.toObject(value, type)
+		} catch (e: IOException) {
+			throw CompletionException("Error parsing response: $value", e)
 		}
 	}
 
-	override fun <T> toCompletableObject(clazz: Class<T>): Function<ResponseBody, T?> {
-		return Function { value: ResponseBody ->
-			getString(value)
-		}.andThen { response ->
-			toObject(clazz).apply(response)
-		}
+	override fun <T> toCompletableObject(clazz: Class<T>, value: String): T? {
+		return toObject(clazz, value)
 	}
 
-	override fun <T> toObject(clazz: Class<T>): Function<String, T?> = Function<String, T?> { value: String ->
-		try {
+	override fun <T> toObject(clazz: Class<T>, value: String): T?  {
+		return try {
 			if (value.isBlank()) {
 				null
 			} else {
@@ -36,15 +27,6 @@ class JSONConverterObjectMapper : JSONConverter {
 			}
 		} catch (e: IOException) {
 			throw CompletionException("Error parsing response: $value", e)
-		}
-	}
-
-	@Throws(CompletionException::class)
-	private fun getString(value: ResponseBody): String {
-		return try {
-			value.string()
-		} catch (e: IOException) {
-			throw CompletionException("Error reading response", e)
 		}
 	}
 }

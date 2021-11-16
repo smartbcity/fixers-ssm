@@ -1,24 +1,10 @@
 
 
-#### Get Session: Parameters  
+### Get Session: Parameters  
   
 <article>
 
-*bearerToken* `String?` 
-
-Authentication token
-
-</article>
-<article>
-
-*chaincode* `SsmChaincodeProperties` 
-
-Chaincode to execute the command or query on
-
-</article>
-<article>
-
-*name* `String` 
+*sessionName* `SessionName` 
 
 Identifier of the session to retrieve
 

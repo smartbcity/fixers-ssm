@@ -1,24 +1,10 @@
 
 
-#### Get SSM: Parameters  
+### Get SSM: Parameters  
   
 <article>
 
-*bearerToken* `String?` 
-
-Authentication token
-
-</article>
-<article>
-
-*chaincode* `SsmChaincodeProperties` 
-
-Chaincode to execute the command or query on
-
-</article>
-<article>
-
-*name* `String` 
+*name* [`SsmName`](/docs/ssm-chaincode-models--page#ssmname) 
 
 Identifier of the SSM to retrieve
 

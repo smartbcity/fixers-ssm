@@ -1,7 +1,7 @@
 import { CodeHighlighter, DescriptedCode } from '@smartb/archetypes-ui-documentation'
 import { Meta } from '@storybook/addon-docs/blocks'
 import SsmGetSessionQueryDesc from './desc.md'
-import SsmGetSessionQuerySample from './sample.json'
+import SsmGetSessionQueryVisualJson from './visualJson.json'
 
 <Meta title="Get Session: Parameters" parameters={{ previewTabs: { canvas: { hidden: true } } }} />
 
@@ -9,7 +9,7 @@ import SsmGetSessionQuerySample from './sample.json'
   leftElement={<SsmGetSessionQueryDesc />}
   rightElement={
     <CodeHighlighter
-      object={SsmGetSessionQuerySample}
+      object={SsmGetSessionQueryVisualJson}
       language={"json"}
       title={"Example"}
     />

@@ -1,10 +1,12 @@
 
 
-#### Create SSM: Response  
+## Create SSM: Response  
   
 <article>
 
-*invokeReturn* [`List<InvokeReturn>`](/docs/ssm-chaincode-invokereturn--page#invokereturn) 
+*transactionId* `<ERROR CLASS>` 
+
+Identifier of the transaction
 
 </article>
 

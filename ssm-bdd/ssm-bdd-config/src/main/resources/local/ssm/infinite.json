@@ -1,0 +1,11 @@
+{
+  "name": "Infinite",
+  "transitions": [
+    {
+      "from": 0,
+      "to": 0,
+      "role": "Stepper",
+      "action": "Step"
+    }
+  ]
+}

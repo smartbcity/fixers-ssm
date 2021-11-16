@@ -55,14 +55,13 @@ tasks {
 		dependsOn("yarn_install")
 		args = listOf("storybook")
 	}
-
 }
 
 fixers {
 	bundle {
-		id = "ssm-tx"
-		name = "Ssm Tx"
-		description = "Wrapper around SSM"
+		id = "ssm-data"
+		name = "Ssm Data"
+		description = "Aggregate all ssm data source to optimize request"
 		url = "https://gitlab.smartb.city/fixers/ssm"
 	}
 }

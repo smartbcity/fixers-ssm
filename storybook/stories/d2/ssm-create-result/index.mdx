@@ -1,7 +1,7 @@
 import { CodeHighlighter, DescriptedCode } from '@smartb/archetypes-ui-documentation'
 import { Meta } from '@storybook/addon-docs/blocks'
 import SsmCreateResultDesc from './desc.md'
-import SsmCreateResultSample from './sample.json'
+import SsmCreateResultVisualJson from './visualJson.json'
 
 <Meta title="Create SSM: Response" parameters={{ previewTabs: { canvas: { hidden: true } } }} />
 
@@ -9,7 +9,7 @@ import SsmCreateResultSample from './sample.json'
   leftElement={<SsmCreateResultDesc />}
   rightElement={
     <CodeHighlighter
-      object={SsmCreateResultSample}
+      object={SsmCreateResultVisualJson}
       language={"json"}
       title={"Example"}
     />

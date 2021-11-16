@@ -4,7 +4,7 @@
   
 <article>
 
-*action* `String` 
+*action* `SsmAction` 
 
 Trigger of the transition
 
@@ -18,9 +18,9 @@ Origin of the transition
 </article>
 <article>
 
-*role* `String` 
+*role* `SsmRole` 
 
-Role of the [agent](/docs/ssm-chaincode-agent--page#ssmagent) allowed to trigger the transition
+Role of the [agent](#ssm-chaincode-agent) allowed to trigger the transition
 
 </article>
 <article>

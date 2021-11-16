@@ -1,5 +1,0 @@
-{
-  "chaincode" : "smartcode-ssm",
-  "couchdb" : "smartbase",
-  "dbName" : "smartbase_ssm"
-}

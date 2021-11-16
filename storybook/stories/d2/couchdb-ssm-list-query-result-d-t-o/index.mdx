@@ -1,0 +1,17 @@
+import { CodeHighlighter, DescriptedCode } from '@smartb/archetypes-ui-documentation'
+import CouchdbSsmListQueryResultDTODesc from './desc.md'
+import CouchdbSsmListQueryResultDTOVisualJson from './visualJson.json'
+import { Meta } from '@storybook/addon-docs/blocks'
+
+<Meta title="Result" parameters={{ previewTabs: { canvas: { hidden: true } } }} />
+
+<DescriptedCode
+  leftElement={<CouchdbSsmListQueryResultDTODesc />}
+  rightElement={
+    <CodeHighlighter
+      object={CouchdbSsmListQueryResultDTOVisualJson}
+      language={"json"}
+      title={"Example"}
+    />
+  }
+/>

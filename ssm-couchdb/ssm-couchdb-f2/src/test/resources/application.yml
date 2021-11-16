@@ -1,8 +1,0 @@
-ssm:
-  couchdb:
-    sandbox_ssm:
-      url: http://localhost:5984
-      username: couchdb
-      password: couchdb
-      serviceName: ssm-couchdb-unit
-

@@ -1,12 +1,12 @@
 
 
-#### Get SSM: Result  
+### Get SSM: Result  
   
 <article>
 
-*ssm* [`Ssm?`](#ssm) 
+*item* [`Ssm?`](/docs/ssm-chaincode-models--page#signing-state-machine) 
 
-Retrieved SSM with the given name if it exists
+The ssm found
 
 </article>
 

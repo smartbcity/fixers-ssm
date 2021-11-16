@@ -1,10 +1,12 @@
 
 
-#### Perform Transition: Response  
+## Perform Transition: Response  
   
 <article>
 
-*invokeReturn* [`InvokeReturn`](/docs/ssm-chaincode-invokereturn--page#invokereturn) 
+*transactionId* `<ERROR CLASS>` 
+
+Identifier of the transaction
 
 </article>
 

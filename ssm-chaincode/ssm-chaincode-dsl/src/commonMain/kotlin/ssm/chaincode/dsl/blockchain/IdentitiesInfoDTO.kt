@@ -20,7 +20,7 @@ expect interface IdentitiesInfoDTO {
 
 /**
  * @d2 model
- * @parent [Transaction]
+ * @parent [ssm.chaincode.dsl.SsmChaincodeD2Model]
  */
 @Serializable
 @JsExport

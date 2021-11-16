@@ -1,6 +1,6 @@
 
 
-#### Perform Transition: Parameters  
+## Perform Transition: Parameters  
   
 <article>
 
@@ -11,30 +11,9 @@ Transition to perform
 </article>
 <article>
 
-*bearerToken* `String?` 
-
-Authentication token
-
-</article>
-<article>
-
-*chaincode* `SsmChaincodeProperties` 
-
-Chaincode to execute the command or query on
-
-</article>
-<article>
-
-*context* [`SsmContext`](#ssmcontext) 
+*context* [`SsmContext`](/docs/ssm-chaincode-models--page#ssmcontext) 
 
 Information about the transition
-
-</article>
-<article>
-
-*signer* `Signer` 
-
-Signer of the transaction
 
 </article>
 

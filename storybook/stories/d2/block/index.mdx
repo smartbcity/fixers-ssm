@@ -1,5 +1,5 @@
 import BlockDesc from './desc.md'
-import BlockSample from './sample.json'
+import BlockVisualJson from './visualJson.json'
 import { CodeHighlighter, DescriptedCode } from '@smartb/archetypes-ui-documentation'
 import { Meta } from '@storybook/addon-docs/blocks'
 
@@ -9,7 +9,7 @@ import { Meta } from '@storybook/addon-docs/blocks'
   leftElement={<BlockDesc />}
   rightElement={
     <CodeHighlighter
-      object={BlockSample}
+      object={BlockVisualJson}
       language={"json"}
       title={"Example"}
     />

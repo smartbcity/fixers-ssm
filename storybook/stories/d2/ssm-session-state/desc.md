@@ -22,7 +22,7 @@ Number of iterations the session has undergone before attaining the current stat
 </article>
 <article>
 
-*origin* [`SsmTransition?`](/docs/ssm-chaincode-signing-state-machine--page#ssmtransition) 
+*origin* [`SsmTransition?`](#ssmtransition) 
 
 Transition that lead to the current state
 
@@ -50,16 +50,16 @@ Associate each role defined in the SSM to an agent
 </article>
 <article>
 
-*session* `String` 
+*session* `SessionName` 
 
 Identifier of the session
 
 </article>
 <article>
 
-*ssm* `String?` 
+*ssm* [`SsmName?`](#ssmname) 
 
-Identifier of the instantiated [SSM](/docs/ssm-chaincode-signing-state-machine--page#ssm)
+Identifier of the instantiated [SSM](#signing-state-machine)
 
 </article>
 

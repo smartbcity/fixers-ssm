@@ -1,7 +1,7 @@
 import { CodeHighlighter, DescriptedCode } from '@smartb/archetypes-ui-documentation'
 import { Meta } from '@storybook/addon-docs/blocks'
 import SsmGetSessionResultDesc from './desc.md'
-import SsmGetSessionResultSample from './sample.json'
+import SsmGetSessionResultVisualJson from './visualJson.json'
 
 <Meta title="Get Session: Result" parameters={{ previewTabs: { canvas: { hidden: true } } }} />
 
@@ -9,7 +9,7 @@ import SsmGetSessionResultSample from './sample.json'
   leftElement={<SsmGetSessionResultDesc />}
   rightElement={
     <CodeHighlighter
-      object={SsmGetSessionResultSample}
+      object={SsmGetSessionResultVisualJson}
       language={"json"}
       title={"Example"}
     />

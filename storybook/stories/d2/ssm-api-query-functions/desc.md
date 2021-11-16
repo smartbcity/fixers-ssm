@@ -1,0 +1,10 @@
+
+
+## Entrypoints  
+ - fun dataSsmListQueryFunction(): [DataSsmListQueryFunction](#list-ssms)
+ - fun dataSsmGetQueryFunction(): [DataSsmGetQueryFunction](#get-ssm)
+ - fun dataSsmSessionListQueryFunction(): [DataSsmSessionListQueryFunction](#list-sessions)
+ - fun dataSsmSessionGetQueryFunction(): [DataSsmSessionGetQueryFunction](#get-session)
+ - fun dataSsmSessionLogListQueryFunction(): [DataSsmSessionLogListQueryFunction](#list-session-logs)
+ - fun dataSsmSessionLogGetQueryFunction(): [DataSsmSessionLogGetQueryFunction](#get-session-log)
+

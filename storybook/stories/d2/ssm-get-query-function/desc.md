@@ -3,6 +3,6 @@
 ### Get SSM  
 
 
-Retrieves an SSM
+Retrieves a SSM
 
 

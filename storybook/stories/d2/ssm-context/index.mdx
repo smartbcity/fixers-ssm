@@ -1,7 +1,7 @@
 import { CodeHighlighter, DescriptedCode } from '@smartb/archetypes-ui-documentation'
 import { Meta } from '@storybook/addon-docs/blocks'
 import SsmContextDesc from './desc.md'
-import SsmContextSample from './sample.json'
+import SsmContextVisualJson from './visualJson.json'
 
 <Meta title="SsmContext" parameters={{ previewTabs: { canvas: { hidden: true } } }} />
 
@@ -9,7 +9,7 @@ import SsmContextSample from './sample.json'
   leftElement={<SsmContextDesc />}
   rightElement={
     <CodeHighlighter
-      object={SsmContextSample}
+      object={SsmContextVisualJson}
       language={"json"}
       title={"Example"}
     />

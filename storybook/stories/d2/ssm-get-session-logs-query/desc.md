@@ -1,24 +1,10 @@
 
 
-#### Get Session Logs: Parameters  
+### Get Session Logs: Parameters  
   
 <article>
 
-*bearerToken* `String?` 
-
-Authentication token
-
-</article>
-<article>
-
-*chaincode* `SsmChaincodeProperties` 
-
-Chaincode to execute the command or query on
-
-</article>
-<article>
-
-*session* `String` 
+*sessionName* `SessionName` 
 
 Identifier of the session to retrieve
 

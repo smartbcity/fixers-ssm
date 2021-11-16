@@ -1,38 +1,10 @@
 
 
-#### Create SSM: Parameters  
+## Create SSM: Parameters  
   
 <article>
 
-*agent* [`SsmAgent`](/docs/ssm-chaincode-agent--page#ssmagent) 
-
-Initial user of the SSM
-
-</article>
-<article>
-
-*bearerToken* `String?` 
-
-Authentication token
-
-</article>
-<article>
-
-*chaincode* `SsmChaincodeProperties` 
-
-Chaincode to execute the command or query on
-
-</article>
-<article>
-
-*signerAdmin* `SignerAdmin` 
-
-Admin signing the transaction
-
-</article>
-<article>
-
-*ssm* [`Ssm`](#ssm) 
+*ssm* [`Ssm`](/docs/ssm-chaincode-models--page#signing-state-machine) 
 
 Description of the SSM to create
 

@@ -1,5 +1,7 @@
+import org.gradle.api.artifacts.Dependency
+
 object PluginVersions {
-	const val kotlin = "1.5.30"
+	const val kotlin = "1.6.0"
 	const val fixers = "experimental-SNAPSHOT"
 
 	const val springBoot = "2.5.3"
@@ -11,50 +13,52 @@ object Versions {
 	const val springBoot = PluginVersions.springBoot
 	const val springFramework = "5.3.4"
 
-	const val cloudant = "0.0.24"
+	const val ktor = "1.6.3"
 
+	const val cloudant = "0.0.28"
 	const val bouncycastleVersion = "1.61"
-	const val okhttpVersion = "3.14.0"
-	const val retrofitVersion = "2.5.0"
-	const val jacksonKotlin = "2.10.2"
-
-	const val junit = "5.7.0"
-	const val assertj = "3.15.0"
-
+	const val jacksonKotlin = "2.13.0"
 	const val slf4j = "1.7.30"
 
-
-	const val coroutines = "1.5.1"
-	const val kserialization = "1.1.0"
-	const val ktor = "1.6.1"
-	const val rsocket = "0.13.1"
-
 	const val f2 = "experimental-SNAPSHOT"
-	const val d2 = "0.1.1-SNAPSHOT"
+
+	const val cucumber = "6.11.0"
+	const val junit = "5.7.0"
+	const val junitPlateform = "1.8.1"
+	const val assertj = "3.21.0"
 }
 
 object Dependencies {
-	object jvm {
-		val coroutines = arrayOf(
-			"org.jetbrains.kotlinx:kotlinx-coroutines-core:${Versions.coroutines}",
-			"org.jetbrains.kotlinx:kotlinx-coroutines-reactor:${Versions.coroutines}",
-			"org.jetbrains.kotlinx:kotlinx-coroutines-reactive:${Versions.coroutines}",
-			"org.jetbrains.kotlinx:kotlinx-coroutines-jdk8:${Versions.coroutines}"
+	object Jvm {
+		fun slf4j(scope: Scope) = scope.add(
+			"org.slf4j:slf4j-api:${Versions.slf4j}"
 		)
-		val junit = arrayOf(
+
+		fun ktorClient(scope: Scope) = scope.add(
+			"io.ktor:ktor-client-core:${Versions.ktor}",
+			"io.ktor:ktor-client-cio:${Versions.ktor}",
+			"io.ktor:ktor-client-jackson:${Versions.ktor}"
+		)
+
+		fun junit(scope: Scope) = scope.add(
 			"org.junit.jupiter:junit-jupiter:${Versions.junit}",
 			"org.junit.jupiter:junit-jupiter-api:${Versions.junit}",
+			"org.junit.platform:junit-platform-suite:${Versions.junitPlateform}",
 			"org.assertj:assertj-core:${Versions.assertj}"
 		)
-	}
 
-	object common {
-		val coroutines = arrayOf(
-			"org.jetbrains.kotlinx:kotlinx-coroutines-core:${Versions.coroutines}"
-		)
-		val kserialization = arrayOf(
-			"org.jetbrains.kotlinx:kotlinx-serialization-core:${Versions.kserialization}",
-			"org.jetbrains.kotlinx:kotlinx-serialization-json:${Versions.kserialization}"
-		)
+		fun cucumber(scope: Scope) = scope.add(
+			"io.cucumber:cucumber-java8:${Versions.cucumber}",
+			"io.cucumber:cucumber-junit-platform-engine:${Versions.cucumber}",
+			"org.springframework.boot:spring-boot-starter-test:${Versions.springBoot}"
+		).also(::junit)
+
 	}
+}
+
+typealias Scope = (dependencyNotation: Any) -> Dependency?
+
+fun Scope.add(vararg deps: String): Scope {
+	deps.forEach { this(it) }
+	return this
 }
