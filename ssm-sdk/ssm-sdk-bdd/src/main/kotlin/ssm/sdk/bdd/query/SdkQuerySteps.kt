@@ -6,6 +6,7 @@ import ssm.chaincode.dsl.model.SessionName
 import ssm.chaincode.dsl.model.SsmName
 import ssm.chaincode.dsl.model.SsmSessionState
 import ssm.chaincode.dsl.model.SsmSessionStateLog
+import ssm.chaincode.dsl.model.uri.SsmUri
 
 class SdkQuerySteps : SsmQueryStep(), En {
 	companion object {
@@ -16,15 +17,15 @@ class SdkQuerySteps : SsmQueryStep(), En {
 		prepareSteps()
 	}
 
-	override suspend fun getSession(ssmName: SsmName, sessionName: SessionName): SsmSessionState? {
+	override suspend fun getSession(ssmName: SsmUri, sessionName: SessionName): SsmSessionState? {
 		return bag.clientQuery.getSession(sessionName)
 	}
 
-	override suspend fun logSession(sessionName: SessionName): List<SsmSessionStateLog> {
+	override suspend fun logSession(ssmName: SsmUri, sessionName: SessionName): List<SsmSessionStateLog> {
 		return bag.clientQuery.log(sessionName)
 	}
 
-	override suspend fun listSessions(): List<SessionName> {
+	override suspend fun listSessions(ssmUri: SsmUri): List<SessionName> {
 		return bag.clientQuery.listSession()
 	}
 

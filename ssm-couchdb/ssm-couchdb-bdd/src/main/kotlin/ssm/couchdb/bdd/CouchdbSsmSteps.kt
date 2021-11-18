@@ -13,7 +13,7 @@ import ssm.chaincode.dsl.model.SsmName
 import ssm.chaincode.dsl.model.SsmSessionStateDTO
 import ssm.chaincode.dsl.model.SsmSessionStateLog
 import ssm.chaincode.dsl.model.uri.ChaincodeUri
-import ssm.chaincode.dsl.model.uri.burstChaincode
+import ssm.chaincode.dsl.model.uri.SsmUri
 import ssm.couchdb.dsl.model.DocTypeName
 import ssm.couchdb.dsl.query.CouchdbAdminListQuery
 import ssm.couchdb.dsl.query.CouchdbDatabaseGetChangesQuery
@@ -81,10 +81,9 @@ class CouchdbSsmSteps : SsmQueryStep(), En {
 		ssmName: SsmName,
 		sessionName: SessionName
 	): CouchdbDatabaseGetChangesQueryResultDTO {
-		val uri = chaincodeUri.burstChaincode()!!
 		return CouchdbDatabaseGetChangesQuery(
-			channelId = uri.channelId,
-			chaincodeId = uri.chaincodeId,
+			channelId = chaincodeUri.channelId,
+			chaincodeId = chaincodeUri.chaincodeId,
 			ssmName = ssmName,
 			sessionName = sessionName,
 			docType = null,
@@ -92,20 +91,20 @@ class CouchdbSsmSteps : SsmQueryStep(), En {
 		).invokeWith(couchdbSsmQueriesFunctions.couchdbDatabaseGetChangesQueryFunction())
 	}
 
-	override suspend fun getSession(ssmName: SsmName, sessionName: SessionName): SsmSessionStateDTO {
+	override suspend fun getSession(ssmUri: SsmUri, sessionName: SessionName): SsmSessionStateDTO {
 		return CouchdbSsmSessionStateGetQuery(
 			chaincodeUri = bag.chaincodeUri,
-			ssmName = ssmName,
+			ssmName = ssmUri.ssmName,
 			sessionName = sessionName
 		).invokeWith(couchdbSsmQueriesFunctions.couchdbSsmSessionStateGetQueryFunction())
 			.item
 	}
 
-	override suspend fun logSession(sessionName: String): List<SsmSessionStateLog> {
+	override suspend fun logSession(ssmName: SsmUri, sessionName: SessionName): List<SsmSessionStateLog> {
 		return bag.clientQuery.log(sessionName)
 	}
 
-	override suspend fun listSessions(): List<SessionName> {
+	override suspend fun listSessions(ssmUri: SsmUri): List<SessionName> {
 		return CouchdbSsmSessionStateListQuery(chaincodeUri = bag.chaincodeUri)
 			.invokeWith(couchdbSsmQueriesFunctions.couchdbSsmSessionStateListQueryFunction())
 			.page.list
@@ -113,11 +112,10 @@ class CouchdbSsmSteps : SsmQueryStep(), En {
 	}
 
 	override suspend fun listSsm(): List<SsmName> {
-		val uri = bag.chaincodeUri.burstChaincode()!!
 		return CouchdbSsmListQuery(
 			pagination = null,
-			channelId = uri.channelId,
-			chaincodeId = uri.chaincodeId
+			channelId = bag.chaincodeUri.channelId,
+			chaincodeId = bag.chaincodeUri.chaincodeId
 		).invokeWith(couchdbSsmQueriesFunctions.couchdbSsmListQueryFunction())
 			.page.list
 			.map { it.name }

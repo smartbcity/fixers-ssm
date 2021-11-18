@@ -13,6 +13,8 @@ import ssm.chaincode.dsl.model.SsmRole
 import ssm.chaincode.dsl.model.SsmSessionState
 import ssm.chaincode.dsl.model.SsmSessionStateDTO
 import ssm.chaincode.dsl.model.SsmSessionStateLog
+import ssm.chaincode.dsl.model.uri.SsmUri
+import ssm.chaincode.dsl.model.uri.toSsmUri
 
 abstract class SsmQueryStep {
 
@@ -45,9 +47,9 @@ abstract class SsmQueryStep {
 				bag.ssmsName = listSsm()
 			}
 		}
-		When("I get the list of session") {
+		When("I get the list of session of {string}") { ssmName: SsmName ->
 			runBlocking {
-				bag.sessions = listSessions()
+				bag.sessions = listSessions(bag.chaincodeUri.toSsmUri(ssmName))
 			}
 		}
 		Then("Admin {string} is in the list") { adminName: String ->
@@ -71,17 +73,17 @@ abstract class SsmQueryStep {
 				).contains(ssmName.contextualize(bag))
 			}
 		}
-		Then("Session {string} is in the list") { sessionName: SessionName ->
+		Then("Session {string} of {string} is in the list") {  sessionName: SessionName, ssmName: SsmName ->
 			runBlocking {
 				Assertions.assertThat(
-					listSessions()
+					listSessions(bag.chaincodeUri.toSsmUri(ssmName))
 				).contains(sessionName.contextualize(bag))
 			}
 		}
 		Then("Session {string} for {string} have current state origin {string} current {string} iteration {string}")
 		{ sessionName: SessionName, ssmName: SsmName,origin: String, current: String, iteration: String ->
 			runBlocking {
-				Assertions.assertThat(getSession(ssmName, sessionName)).hasFieldOrProperty(SsmSessionState::origin.name)
+				Assertions.assertThat(getSession(bag.chaincodeUri.toSsmUri(ssmName), sessionName)).hasFieldOrProperty(SsmSessionState::origin.name)
 					.isEqualTo(origin)
 					.hasFieldOrProperty(SsmSessionState::current.name).isEqualTo(current)
 					.hasFieldOrProperty(SsmSessionState::iteration.name).isEqualTo(iteration)
@@ -110,27 +112,27 @@ abstract class SsmQueryStep {
 			}
 		}
 
-		Then("The action {string} has been performed for session {string}")
-		{ actionName: String, sessionName: SessionName ->
+		Then("The action {string} has been performed for session {string} of {string}")
+		{ actionName: String, sessionName: SessionName, ssmName: SsmName ->
 			runBlocking {
 				Assertions.assertThat(
-					logSession(sessionName).mapNotNull { it.state.origin }.map { it.action }
+					logSession(bag.chaincodeUri.toSsmUri(ssmName), sessionName).mapNotNull { it.state.origin }.map { it.action }
 				).contains(actionName)
 			}
 		}
 
-		Then("The session {string} have log with {string} entries")
-		{ sessionName: SessionName, nbEntries: String ->
+		Then("The session {string} of {string} have log with {string} entries")
+		{ sessionName: SessionName, ssmName: SsmName, nbEntries: String ->
 			runBlocking {
 				Assertions.assertThat(
-					logSession(sessionName.contextualize(bag))
+					logSession(bag.chaincodeUri.toSsmUri(ssmName), sessionName.contextualize(bag))
 				).hasSize(nbEntries.toInt())
 			}
 		}
 
 		Then("The session {string} for {string} have logs") { sessionName: SessionName, ssmName: SsmName, table: DataTable ->
 			runBlocking {
-				val logs = logSession(sessionName.contextualize(bag)).sortedBy { it.state.iteration }
+				val logs = logSession(bag.chaincodeUri.toSsmUri(ssmName), sessionName.contextualize(bag)).sortedBy { it.state.iteration }
 				table.asCucumberSessionLog().forEachIndexed { index, clog ->
 					val log = logs[index]
 					Assertions.assertThat(log.state.origin?.action).isEqualTo(clog.originAction)
@@ -159,11 +161,11 @@ abstract class SsmQueryStep {
 		}
 	}
 
-	protected abstract suspend fun getSession(ssmName: SsmName, sessionName: SessionName): SsmSessionStateDTO?
+	protected abstract suspend fun getSession(ssmName: SsmUri, sessionName: SessionName): SsmSessionStateDTO?
 
-	protected abstract suspend fun logSession(sessionName: SessionName): List<SsmSessionStateLog>
+	protected abstract suspend fun logSession(ssmUri: SsmUri, sessionName: SessionName): List<SsmSessionStateLog>
 
-	protected abstract suspend fun listSessions(): List<SessionName>
+	protected abstract suspend fun listSessions(ssmUri: SsmUri): List<SessionName>
 
 	protected abstract suspend fun listSsm(): List<SsmName>
 

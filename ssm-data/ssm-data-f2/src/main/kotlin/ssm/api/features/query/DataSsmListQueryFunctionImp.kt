@@ -8,8 +8,7 @@ import kotlinx.coroutines.flow.flatMapConcat
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.toList
 import ssm.api.extentions.toDataSsm
-import ssm.chaincode.dsl.model.uri.ChaincodeUriBurstDTO
-import ssm.chaincode.dsl.model.uri.burstChaincode
+import ssm.chaincode.dsl.model.uri.ChaincodeUri
 import ssm.couchdb.dsl.query.CouchdbSsmListQuery
 import ssm.couchdb.dsl.query.CouchdbSsmListQueryFunction
 import ssm.data.dsl.features.query.DataSsmListQuery
@@ -21,7 +20,7 @@ class DataSsmListQueryFunctionImp(
 	private val couchdbSsmListQueryFunction: CouchdbSsmListQueryFunction
 ): DataSsmListQueryFunction {
 
-	private suspend fun CouchdbSsmListQuery.queryEachChannel(chaincode: ChaincodeUriBurstDTO): Flow<DataSsm> =
+	private suspend fun CouchdbSsmListQuery.queryEachChannel(chaincode: ChaincodeUri): Flow<DataSsm> =
 		invokeWith(couchdbSsmListQueryFunction)
 			.let { result ->
 				result.page.list.asFlow().map {
@@ -34,12 +33,11 @@ class DataSsmListQueryFunctionImp(
 			payload.chaincodes
 				.asFlow()
 				.flatMapConcat { chaincodeUri ->
-					val chaincode = chaincodeUri.burstChaincode()!!
 					CouchdbSsmListQuery(
-						chaincodeId = chaincode.chaincodeId,
-						channelId = chaincode.channelId,
+						chaincodeId = chaincodeUri.chaincodeId,
+						channelId = chaincodeUri.channelId,
 						pagination = null
-					).queryEachChannel(chaincode)
+					).queryEachChannel(chaincodeUri)
 				}.let {
 					DataSsmListQueryResult(it.toList())
 				}

@@ -6,8 +6,8 @@ import kotlinx.coroutines.flow.filter
 import kotlinx.coroutines.flow.flatMapMerge
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.toList
-import ssm.chaincode.dsl.model.uri.ChaincodeUriBurst
-import ssm.chaincode.dsl.model.uri.compact
+import ssm.chaincode.dsl.model.uri.ChaincodeUri
+import ssm.chaincode.dsl.model.uri.from
 import ssm.couchdb.client.CouchdbSsmClient
 import ssm.couchdb.dsl.model.DocType
 import ssm.couchdb.dsl.query.CouchdbChaincodeListQueryDTO
@@ -32,10 +32,10 @@ class CouchdbChaincodeListQueryFunctionImpl(
 				couchdbClient.fetchAllByDocType(dbName, DocType.Chaincode).map { lscc ->
 					lscc._id
 				}.map { chaincodeId ->
-					ChaincodeUriBurst(
+					ChaincodeUri.from(
 						channelId = channelId,
 						chaincodeId = chaincodeId
-					).compact()
+					)
 				}.asFlow()
 			}.toList()
 			.let {

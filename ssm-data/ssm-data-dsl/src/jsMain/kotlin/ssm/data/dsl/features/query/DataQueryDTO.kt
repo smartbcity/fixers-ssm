@@ -5,5 +5,5 @@ import ssm.chaincode.dsl.model.uri.SsmUri
 @JsExport
 @JsName("DataQueryDTO")
 actual external interface DataQueryDTO {
-	actual val ssm: SsmUri
+	actual val ssmUri: SsmUri
 }

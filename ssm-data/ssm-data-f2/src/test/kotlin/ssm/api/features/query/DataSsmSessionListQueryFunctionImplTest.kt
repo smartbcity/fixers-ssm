@@ -5,6 +5,7 @@ import kotlinx.coroutines.runBlocking
 import org.assertj.core.api.Assertions
 import org.junit.jupiter.api.Test
 import ssm.api.DataSsmQueryFunctionImpl
+import ssm.chaincode.dsl.model.uri.SsmUri
 import ssm.data.bdd.TestConfig
 import ssm.data.dsl.features.query.DataSsmSessionListQuery
 import ssm.data.dsl.features.query.DataSsmSessionListQueryFunction
@@ -20,7 +21,7 @@ internal class DataSsmSessionListQueryFunctionImplTest {
 	@Test
 	fun `test exception`() = runBlocking<Unit> {
 		val result = DataSsmSessionListQuery(
-			ssm = "ssm:peer0:proudhon:ssm:Delivery",
+			ssmUri = SsmUri("ssm:proudhon:ssm:Delivery"),
 		).invokeWith(function)
 		Assertions.assertThat(result.items).isNotEmpty
 	}

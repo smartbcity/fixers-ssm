@@ -6,9 +6,8 @@ import kotlinx.coroutines.flow.map
 import ssm.api.features.query.internal.DataSsmSessionConvertFunctionImpl
 import ssm.api.features.query.internal.DataSsmSessionConvertQuery
 import ssm.chaincode.dsl.model.SsmSessionState
-import ssm.chaincode.dsl.model.uri.ChaincodeUriBurst
-import ssm.chaincode.dsl.model.uri.burstSsmUri
-import ssm.chaincode.dsl.model.uri.compact
+import ssm.chaincode.dsl.model.uri.ChaincodeUri
+import ssm.chaincode.dsl.model.uri.from
 import ssm.couchdb.dsl.query.CouchdbSsmSessionStateListQuery
 import ssm.couchdb.dsl.query.CouchdbSsmSessionStateListQueryFunction
 import ssm.data.dsl.features.query.DataSsmSessionListQueryDTO
@@ -23,13 +22,12 @@ class DataSsmSessionListQueryFunctionImpl(
 
 	override suspend fun invoke(msg: Flow<DataSsmSessionListQueryDTO>): Flow<DataSsmSessionListQueryResultDTO> =
 		msg.map { payload ->
-			val burst = payload.ssm.burstSsmUri()!!
 			CouchdbSsmSessionStateListQuery(
-				chaincodeUri = ChaincodeUriBurst(
-					channelId = burst.channelId,
-					chaincodeId = burst.chaincodeId,
-				).compact(),
-				ssm = burst.ssmName,
+				chaincodeUri = ChaincodeUri.from(
+					channelId = payload.ssmUri.channelId,
+					chaincodeId = payload.ssmUri.chaincodeId,
+				),
+				ssm = payload.ssmUri.ssmName,
 				pagination = null
 			).invokeWith(couchdbSsmSessionStateListQueryFunction)
 				.page.list
@@ -37,7 +35,7 @@ class DataSsmSessionListQueryFunctionImpl(
 				.map { sessionState ->
 					DataSsmSessionConvertQuery(
 						sessionState = sessionState as SsmSessionState,
-						ssmUri = payload.ssm
+						ssmUri = payload.ssmUri
 					).invokeWith(dataSsmSessionConvertFunctionImpl)
 				}.let {
 					DataSsmSessionListQueryResult(it)

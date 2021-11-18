@@ -4,10 +4,8 @@ import f2.dsl.fnc.invokeWith
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
 import ssm.chaincode.dsl.model.SessionName
-import ssm.chaincode.dsl.model.uri.ChaincodeUriBurstDTO
+import ssm.chaincode.dsl.model.uri.ChaincodeUri
 import ssm.chaincode.dsl.model.uri.SsmUri
-import ssm.chaincode.dsl.model.uri.burstChaincode
-import ssm.chaincode.dsl.model.uri.compact
 import ssm.chaincode.dsl.model.uri.toSsmUri
 import ssm.couchdb.dsl.model.DatabaseChangesDTO
 import ssm.couchdb.dsl.model.DocType
@@ -30,9 +28,8 @@ class SyncSsmF2Impl(
 
 	override suspend fun invoke(msg: Flow<SyncSsmCommand>): Flow<SyncSsmCommandResult> =
 		msg.map { payload ->
-			val burst = payload.chaincodeUri.burstChaincode()!!
-			val result = burst.queryCouchdbDatabaseGetChanges(payload)
-			result.items.applySsmSessionChanges(burst).fold()
+			val result = payload.chaincodeUri.queryCouchdbDatabaseGetChanges(payload)
+			result.items.applySsmSessionChanges(payload.chaincodeUri).fold()
 				.toResult()
 				.let {
 					SyncSsmCommandResult(
@@ -43,7 +40,6 @@ class SyncSsmF2Impl(
 
 		}
 
-
 	private suspend fun List<SsmSyncChanges>?.toResult() = this?.map { changes ->
 		changes.sessions.map { name ->
 			toResult(changes.ssm, name)
@@ -53,7 +49,7 @@ class SyncSsmF2Impl(
 	private suspend fun toResult(uri: SsmUri, name: SessionName): SsmSessionSyncResult {
 		return DataSsmSessionLogListQuery(
 			sessionName = name,
-			ssm = uri
+			ssmUri = uri
 		).invokeWith(dataSsmSessionLogListQueryFunction).let { result ->
 			SsmSessionSyncResult(
 				ssm = uri,
@@ -63,7 +59,7 @@ class SyncSsmF2Impl(
 		}
 	}
 
-	private suspend fun ChaincodeUriBurstDTO.queryCouchdbDatabaseGetChanges(
+	private suspend fun ChaincodeUri.queryCouchdbDatabaseGetChanges(
 		cmd: SyncSsmCommand,
 	): CouchdbDatabaseGetChangesQueryResultDTO = CouchdbDatabaseGetChangesQuery(
 		chaincodeId = chaincodeId,
@@ -77,7 +73,7 @@ class SyncSsmF2Impl(
 	)
 
 	private suspend fun List<DatabaseChangesDTO>.applySsmSessionChanges(
-		uri: ChaincodeUriBurstDTO
+		uri: ChaincodeUri
 	): List<SsmSyncChanges> = mapNotNull { change ->
 		when (change.docType) {
 			is DocType.Ssm -> fetchSsm(uri, change)
@@ -86,9 +82,9 @@ class SyncSsmF2Impl(
 		}
 	}
 
-	private suspend fun fetchSession(uri: ChaincodeUriBurstDTO, change: DatabaseChangesDTO): SsmSyncChanges {
+	private suspend fun fetchSession(uri: ChaincodeUri, change: DatabaseChangesDTO): SsmSyncChanges {
 		return CouchdbSsmSessionStateGetQuery(
-			chaincodeUri = uri.compact(),
+			chaincodeUri = uri,
 			sessionName = change.objectId,
 			ssmName = null
 		)
@@ -101,16 +97,15 @@ class SyncSsmF2Impl(
 			}
 	}
 
-	private suspend fun fetchSsm(uri: ChaincodeUriBurstDTO, change: DatabaseChangesDTO): SsmSyncChanges {
+	private suspend fun fetchSsm(uri: ChaincodeUri, change: DatabaseChangesDTO): SsmSyncChanges {
 		return DataSsmGetQuery(
-			ssm = uri.toSsmUri(change.objectId)
+			ssmUri = uri.toSsmUri(change.objectId)
 		).invokeWith(dataSsmGetQueryFunction).item!!.let { ssm ->
 			SsmSyncChanges(
 				ssm.uri
 			)
 		}
 	}
-
 
 	private fun List<SsmSyncChanges>.fold() = groupBy({ it.ssm }, { it.sessions })
 		.toList()

@@ -31,7 +31,7 @@ expect interface DataSsmSessionLogGetQueryDTO : DataQueryDTO {
 	 * @example [ssm.chaincode.dsl.blockchain.Transaction.transactionId]
 	 */
 	val txId: TransactionId
-	override val ssm: SsmUri
+	override val ssmUri: SsmUri
 }
 
 /**
@@ -45,7 +45,7 @@ expect interface DataSsmSessionLogGetQueryDTO : DataQueryDTO {
 class DataSsmSessionLogGetQuery(
 	override val sessionName: SessionName,
 	override val txId: TransactionId,
-	override val ssm: SsmUri,
+	override val ssmUri: SsmUri,
 ) : DataSsmSessionLogGetQueryDTO
 
 expect interface DataSsmSessionLogGetQueryResultDTO {

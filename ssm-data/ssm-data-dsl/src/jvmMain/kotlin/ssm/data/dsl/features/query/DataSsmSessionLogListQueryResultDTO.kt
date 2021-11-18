@@ -6,7 +6,7 @@ import ssm.data.dsl.model.DataSsmSessionState
 
 actual interface DataSsmSessionLogListQueryDTO : DataQueryDTO {
 	actual val sessionName: SessionName
-	actual override val ssm: SsmUri
+	actual override val ssmUri: SsmUri
 }
 
 actual interface DataSsmSessionLogListQueryResultDTO {

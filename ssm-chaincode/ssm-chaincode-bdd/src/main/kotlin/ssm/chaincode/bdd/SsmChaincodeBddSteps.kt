@@ -8,6 +8,7 @@ import ssm.bdd.config.SsmQueryStep
 import ssm.chaincode.dsl.model.SsmName
 import ssm.chaincode.dsl.model.SsmSessionState
 import ssm.chaincode.dsl.model.SsmSessionStateLog
+import ssm.chaincode.dsl.model.uri.SsmUri
 import ssm.chaincode.dsl.query.SsmGetSessionLogsQuery
 import ssm.chaincode.dsl.query.SsmGetSessionQuery
 import ssm.chaincode.dsl.query.SsmListAdminQuery
@@ -29,19 +30,19 @@ class SsmChaincodeBddSteps : SsmQueryStep(), En {
 	}
 	lateinit var ssmChaincodeQueryFunctions: ChaincodeSsmQueriesImpl
 
-	override suspend fun getSession(ssmName: SsmName, sessionName: String): SsmSessionState? {
+	override suspend fun getSession(ssmName: SsmUri, sessionName: String): SsmSessionState? {
 		return ssmChaincodeQueryFunctions.ssmGetSessionQueryFunction()
 			.invoke(SsmGetSessionQuery(sessionName = sessionName))
 			.item
 	}
 
-	override suspend fun logSession(sessionName: String): List<SsmSessionStateLog> {
+	override suspend fun logSession(ssmUri: SsmUri, sessionName: String): List<SsmSessionStateLog> {
 		return ssmChaincodeQueryFunctions.ssmGetSessionLogsQueryFunction()
-			.invoke(SsmGetSessionLogsQuery(sessionName = sessionName))
+			.invoke(SsmGetSessionLogsQuery(ssmUri = ssmUri, sessionName = sessionName))
 			.logs
 	}
 
-	override suspend fun listSessions(): List<String> {
+	override suspend fun listSessions(ssmUri: SsmUri): List<String> {
 		return ssmChaincodeQueryFunctions.ssmListSessionQueryFunction()
 			.invoke(SsmListSessionQuery())
 			.items.toList()

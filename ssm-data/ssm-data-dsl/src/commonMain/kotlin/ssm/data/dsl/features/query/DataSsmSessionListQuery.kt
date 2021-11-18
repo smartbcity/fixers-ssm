@@ -28,7 +28,7 @@ expect interface DataSsmSessionListQueryDTO : DataQueryDTO
 @JsExport
 @JsName("DataSsmSessionListQuery")
 class DataSsmSessionListQuery(
-	override val ssm: SsmUri,
+	override val ssmUri: SsmUri,
 ) : DataSsmSessionListQueryDTO
 
 expect interface DataSsmSessionListQueryResultDTO {

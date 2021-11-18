@@ -6,7 +6,7 @@ import ssm.data.dsl.model.DataSsm
 @JsExport
 @JsName("DataSsmGetQueryDTO")
 actual external interface DataSsmGetQueryDTO : DataQueryDTO {
-	actual override val ssm: SsmUri
+	actual override val ssmUri: SsmUri
 }
 
 @JsExport

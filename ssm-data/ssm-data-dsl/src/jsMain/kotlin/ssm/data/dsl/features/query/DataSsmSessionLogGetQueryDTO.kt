@@ -10,7 +10,7 @@ import ssm.data.dsl.model.DataSsmSessionStateDTO
 actual external interface DataSsmSessionLogGetQueryDTO : DataQueryDTO {
 	actual val sessionName: SessionName
 	actual val txId: TransactionId
-	actual override val ssm: SsmUri
+	actual override val ssmUri: SsmUri
 }
 
 @JsExport

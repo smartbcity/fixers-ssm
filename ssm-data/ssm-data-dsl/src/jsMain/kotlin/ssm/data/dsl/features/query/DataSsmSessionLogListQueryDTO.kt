@@ -8,7 +8,7 @@ import ssm.data.dsl.model.DataSsmSessionState
 @JsName("DataSsmSessionLogListQueryDTO")
 actual external interface DataSsmSessionLogListQueryDTO : DataQueryDTO {
 	actual val sessionName: SessionName
-	actual override val ssm: SsmUri
+	actual override val ssmUri: SsmUri
 }
 
 @JsExport

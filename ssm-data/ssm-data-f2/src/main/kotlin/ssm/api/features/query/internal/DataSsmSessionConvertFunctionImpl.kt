@@ -8,7 +8,6 @@ import ssm.api.extentions.getTransaction
 import ssm.chaincode.dsl.blockchain.Transaction
 import ssm.chaincode.dsl.model.SsmSessionState
 import ssm.chaincode.dsl.model.uri.SsmUri
-import ssm.chaincode.dsl.model.uri.burstSsmUri
 import ssm.chaincode.dsl.query.SsmGetSessionLogsQueryFunction
 import ssm.chaincode.dsl.query.SsmGetTransactionQueryFunction
 import ssm.data.dsl.model.DataChannel
@@ -18,11 +17,12 @@ import ssm.data.dsl.model.DataSsmSessionState
 class DataSsmSessionConvertFunctionImpl(
 	private val ssmGetSessionLogsQueryFunction: SsmGetSessionLogsQueryFunction,
 	private val ssmGetTransactionQueryFunction: SsmGetTransactionQueryFunction
-): F2Function<DataSsmSessionConvertQuery, DataSsmSession> {
+) : F2Function<DataSsmSessionConvertQuery, DataSsmSession> {
 
 	override suspend fun invoke(msg: Flow<DataSsmSessionConvertQuery>): Flow<DataSsmSession> =
 		msg.map { payload ->
-			val sessionLogs = payload.sessionState.session.getSessionLogs(ssmGetSessionLogsQueryFunction)
+			val sessionLogs =
+				payload.sessionState.session.getSessionLogs(payload.ssmUri, ssmGetSessionLogsQueryFunction)
 			val transactions = sessionLogs.mapNotNull { it.txId.getTransaction(ssmGetTransactionQueryFunction) }
 			val firstTransaction = transactions.minByOrNull { transaction ->
 				transaction.timestamp
@@ -36,7 +36,6 @@ class DataSsmSessionConvertFunctionImpl(
 	fun DataSsmSessionConvertQuery.toDataSession(
 		ssmUri: SsmUri, firstTransaction: Transaction?, lastTransaction: Transaction?, transactions: List<Transaction>
 	): DataSsmSession {
-		val values = ssmUri.burstSsmUri()!!
 		return DataSsmSession(
 			ssmUri = ssmUri,
 			sessionName = this.sessionState.session,
@@ -44,7 +43,7 @@ class DataSsmSessionConvertFunctionImpl(
 				details = this.sessionState,
 				transaction = lastTransaction
 			),
-			channel = DataChannel(values.channelId),
+			channel = DataChannel(ssmUri.channelId),
 			transaction = firstTransaction,
 			transactions = transactions
 		)

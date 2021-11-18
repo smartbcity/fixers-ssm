@@ -23,7 +23,7 @@ expect interface DataSsmSessionLogListQueryDTO : DataQueryDTO {
 	 * @example "DataSsmSessionId"
 	 */
 	val sessionName: SessionName
-	override val ssm: SsmUri
+	override val ssmUri: SsmUri
 }
 
 /**
@@ -36,7 +36,7 @@ expect interface DataSsmSessionLogListQueryDTO : DataQueryDTO {
 @JsName("DataSsmSessionLogListQuery")
 class DataSsmSessionLogListQuery(
 	override val sessionName: SessionName,
-	override val ssm: SsmUri,
+	override val ssmUri: SsmUri,
 ) : DataSsmSessionLogListQueryDTO
 
 expect interface DataSsmSessionLogListQueryResultDTO {

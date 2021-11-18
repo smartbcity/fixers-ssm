@@ -8,7 +8,7 @@ import ssm.chaincode.dsl.model.SessionName
 import ssm.chaincode.dsl.model.SsmName
 import ssm.chaincode.dsl.model.SsmSessionStateDTO
 import ssm.chaincode.dsl.model.SsmSessionStateLog
-import ssm.chaincode.dsl.model.uri.toSsmUri
+import ssm.chaincode.dsl.model.uri.SsmUri
 import ssm.chaincode.f2.ChaincodeSsmQueriesImpl
 import ssm.couchdb.dsl.query.CouchdbAdminListQuery
 import ssm.couchdb.dsl.query.CouchdbUserListQuery
@@ -33,22 +33,22 @@ class DataSteps : SsmQueryStep(), En {
 		prepareSteps()
 	}
 
-	override suspend fun getSession(ssmName: SsmName, sessionName: String): SsmSessionStateDTO {
+	override suspend fun getSession(ssmUri: SsmUri, sessionName: String): SsmSessionStateDTO {
 
 		return DataSsmSessionGetQuery(
 			sessionName = sessionName,
-			ssm = bag.chaincodeUri.toSsmUri(ssmName),
+			ssmUri = ssmUri,
 		).invokeWith(dataSsmQueryFunctionImpl.dataSsmSessionGetQueryFunction())
 			.item!!.state.details
 	}
 
-	override suspend fun logSession(sessionName: SessionName): List<SsmSessionStateLog> {
+	override suspend fun logSession(ssmUri: SsmUri, sessionName: SessionName): List<SsmSessionStateLog> {
 		return bag.clientQuery.log(sessionName)
 	}
 
-	override suspend fun listSessions(): List<SessionName> {
+	override suspend fun listSessions(ssmUri: SsmUri): List<SessionName> {
 		return DataSsmSessionListQuery(
-			ssm = TODO("bag.ssmUri")
+			ssmUri = ssmUri
 		).invokeWith(dataSsmQueryFunctionImpl.dataSsmSessionListQueryFunction())
 			.items.map { it.state.details.session }
 	}

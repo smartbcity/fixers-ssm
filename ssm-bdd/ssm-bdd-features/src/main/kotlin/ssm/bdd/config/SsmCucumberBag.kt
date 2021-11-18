@@ -47,7 +47,7 @@ class SsmCucumberBag(
 
 	// URI
 //	lateinit var ssmUri: SsmUri
-	val chaincodeUri: ChaincodeUri = "chaincode:sandbox:ssm"
+	val chaincodeUri: ChaincodeUri = ChaincodeUri("chaincode:sandbox:ssm")
 
 	//	SsmSdkTxSteps
 	lateinit var adminSigner: SignerAdmin

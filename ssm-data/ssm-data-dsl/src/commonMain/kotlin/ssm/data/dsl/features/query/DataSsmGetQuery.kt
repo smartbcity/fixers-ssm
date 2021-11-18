@@ -17,7 +17,7 @@ import ssm.data.dsl.model.DataSsm
 typealias DataSsmGetQueryFunction = F2Function<DataSsmGetQueryDTO, DataSsmGetQueryResultDTO>
 
 expect interface DataSsmGetQueryDTO : DataQueryDTO {
-	override val ssm: SsmUri
+	override val ssmUri: SsmUri
 }
 
 /**
@@ -29,7 +29,7 @@ expect interface DataSsmGetQueryDTO : DataQueryDTO {
 @JsExport
 @JsName("DataSsmGetQuery")
 class DataSsmGetQuery(
-	override val ssm: SsmUri,
+	override val ssmUri: SsmUri,
 ) : DataSsmGetQueryDTO
 
 expect interface DataSsmGetQueryResultDTO {

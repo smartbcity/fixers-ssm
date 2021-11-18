@@ -29,6 +29,11 @@ typealias SsmGetSessionLogsQueryFunction = F2Function<SsmGetSessionLogsQuery, Ss
 @JsName("SsmGetSessionLogsQuery")
 class SsmGetSessionLogsQuery(
 	/**
+	 * The uri of the ssm
+	 * @example "ssm:sandbox:ssm1:session1"
+	 */
+	val ssmUri: SsmUri,
+	/**
 	 * Identifier of the session to retrieve
 	 * @example [SsmSessionState.session]
 	 */

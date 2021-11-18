@@ -5,7 +5,7 @@ import ssm.chaincode.dsl.model.uri.SsmUri
 expect interface DataQueryDTO {
 	/**
 	 * Uri information to access a ssm
-	 * @example [ssm.chaincode.dsl.model.Ssm.name]
+	 * @example "ssm:channel:chaincode:ssmName"
 	 */
-	val ssm: SsmUri
+	val ssmUri: SsmUri
 }

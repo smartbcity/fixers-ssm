@@ -25,7 +25,7 @@ expect interface DataSsmSessionGetQueryDTO : DataQueryDTO {
 	 * @example [DataSsmSession.sessionName]
 	 */
 	val sessionName: SessionName
-	override val ssm: SsmUri
+	override val ssmUri: SsmUri
 }
 
 /**
@@ -38,7 +38,7 @@ expect interface DataSsmSessionGetQueryDTO : DataQueryDTO {
 @JsName("DataSsmSessionGetQuery")
 class DataSsmSessionGetQuery(
 	override val sessionName: SessionName,
-	override val ssm: SsmUri,
+	override val ssmUri: SsmUri,
 ) : DataSsmSessionGetQueryDTO
 
 expect interface DataSsmSessionGetQueryResultDTO: Event {

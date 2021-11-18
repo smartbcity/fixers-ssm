@@ -26,7 +26,7 @@ class DataSsmSessionGetQueryFunctionImpl(
 					.item?.let { sessionState ->
 						DataSsmSessionConvertQuery(
 							sessionState = sessionState,
-							ssmUri = payload.ssm
+							ssmUri = payload.ssmUri
 						).invokeWith(dataSsmSessionConvertFunctionImpl)
 					}.let {
 						DataSsmSessionGetQueryResult(it)

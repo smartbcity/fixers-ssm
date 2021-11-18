@@ -2,8 +2,8 @@ package ssm.couchdb.f2.query
 
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
-import ssm.chaincode.dsl.model.uri.SsmUriBurst
-import ssm.chaincode.dsl.model.uri.compact
+import ssm.chaincode.dsl.model.uri.SsmUri
+import ssm.chaincode.dsl.model.uri.from
 import ssm.couchdb.client.CouchdbSsmClient
 import ssm.couchdb.dsl.model.DocType
 import ssm.couchdb.dsl.query.CouchdbSsmGetQuery
@@ -21,11 +21,11 @@ class CouchdbSsmGetQueryFunctionImpl(
 			.let{ item ->
 				CouchdbSsmGetQueryResult(
 					item = item,
-					uri = SsmUriBurst(
+					uri = SsmUri.from(
 						channelId = payload.channelId,
 						chaincodeId = payload.chaincodeId,
 						ssmName = payload.ssmName,
-					).compact()
+					)
 				)
 			}
 	}

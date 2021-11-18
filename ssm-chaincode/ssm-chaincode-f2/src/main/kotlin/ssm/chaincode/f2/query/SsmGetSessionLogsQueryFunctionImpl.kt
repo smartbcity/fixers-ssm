@@ -15,7 +15,7 @@ class SsmGetSessionLogsQueryFunctionImpl(
 		queryService.log(payload.sessionName)
 			.let {
 				SsmGetSessionLogsQueryResult(
-					ssmUri = "TODO()",
+					ssmUri = payload.ssmUri,
 					sessionName = payload.sessionName,
 					logs = it
 				)

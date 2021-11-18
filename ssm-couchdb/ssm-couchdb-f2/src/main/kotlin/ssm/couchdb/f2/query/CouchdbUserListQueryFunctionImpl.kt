@@ -2,7 +2,6 @@ package ssm.couchdb.f2.query
 
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
-import ssm.chaincode.dsl.model.uri.burstChaincode
 import ssm.couchdb.client.CouchdbSsmClient
 import ssm.couchdb.dsl.model.DocType
 import ssm.couchdb.dsl.query.CouchdbUserListQueryDTO
@@ -17,8 +16,7 @@ class CouchdbUserListQueryFunctionImpl(
 
 	override suspend fun invoke(msg: Flow<CouchdbUserListQueryDTO>): Flow<CouchdbUserListQueryResultDTO> =
 		msg.map { payload ->
-			val chaincode = payload.chaincodeUri.burstChaincode()!!
-			val dbName = chainCodeDbName(chaincode.channelId, chaincode.chaincodeId)
+			val dbName = chainCodeDbName(payload.chaincodeUri.channelId, payload.chaincodeUri.chaincodeId)
 			couchdbClient.fetchAllByDocType(dbName, DocType.User)
 				.let {
 					CouchdbUserListQueryResult(it)
