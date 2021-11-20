@@ -2,9 +2,9 @@ package ssm.sdk.core.ktor
 
 import io.ktor.client.HttpClient
 import io.ktor.client.engine.cio.CIO
-import io.ktor.client.features.defaultRequest
 import io.ktor.client.features.json.JacksonSerializer
 import io.ktor.client.features.json.JsonFeature
+import io.ktor.client.request.HttpRequestBuilder
 import io.ktor.client.request.get
 import io.ktor.client.request.header
 import io.ktor.client.request.parameter
@@ -13,11 +13,13 @@ import io.ktor.http.ContentType
 import io.ktor.http.contentType
 import ssm.chaincode.dsl.model.ChaincodeId
 import ssm.chaincode.dsl.model.ChannelId
+import ssm.sdk.core.auth.AuthCredentials
+import ssm.sdk.core.auth.BearerTokenAuthCredentials
 
 
 class KtorRepository(
 	private val baseUrl: String,
-	private val bearerToken: String?
+	private val authCredentials: AuthCredentials?,
 ) {
 	companion object {
 		const val CMD_PROPS = "cmd"
@@ -31,9 +33,7 @@ class KtorRepository(
 		install(JsonFeature) {
 			serializer = JacksonSerializer()
 		}
-		defaultRequest {
-			header("Authorization", bearerToken)
-		}
+
 	}
 
 	suspend fun query(
@@ -44,6 +44,8 @@ class KtorRepository(
 		chaincodeId: ChaincodeId?,
 	): String {
 		return client.get(baseUrl) {
+			addAuth()
+
 			parameter(CMD_PROPS, cmd)
 			channelId?.let { parameter(CHANNEL_ID_PROPS, channelId) }
 			chaincodeId?.let { parameter(CHAINCODE_ID_PROPS, chaincodeId) }
@@ -54,6 +56,8 @@ class KtorRepository(
 
 	suspend fun getBlock(blockId: Long, channelId: ChannelId?): String {
 		return client.get(baseUrl) {
+			addAuth()
+
 			channelId?.let { parameter("channelId", channelId) }
 			url {
 				path("blocks", blockId.toString())
@@ -63,6 +67,8 @@ class KtorRepository(
 
 	suspend fun getTransaction(txId: String, channelId: ChannelId?): String {
 		return client.get(baseUrl) {
+			addAuth()
+
 			channelId?.let { parameter("channelId", channelId) }
 			url {
 				path("transactions", txId)
@@ -78,6 +84,8 @@ class KtorRepository(
 		chaincodeId: ChaincodeId?,
 	): String {
 		return client.post(baseUrl) {
+			addAuth()
+
 			contentType(ContentType.Application.Json)
 			body = mapOf(
 				CMD_PROPS to cmd,
@@ -88,6 +96,13 @@ class KtorRepository(
 			)
 		}
 	}
+
+	private fun HttpRequestBuilder.addAuth() {
+		when(authCredentials) {
+			is BearerTokenAuthCredentials -> header("Authorization", "Bearer ${authCredentials.getBearerToken()}")
+		}
+	}
+
 }
 
 

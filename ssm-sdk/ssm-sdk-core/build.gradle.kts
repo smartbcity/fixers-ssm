@@ -1,3 +1,5 @@
+import city.smartb.gradle.dependencies.FixersDependencies
+
 plugins {
 	id("city.smartb.fixers.gradle.kotlin.jvm")
 	id("city.smartb.fixers.gradle.publish")
@@ -10,9 +12,7 @@ dependencies {
 	api(project(":ssm-sdk:ssm-sdk-sign"))
 	api(project(":ssm-sdk:ssm-sdk-sign-rsa-key"))
 
-	Dependencies.Jvm.slf4j(::implementation)
-	Dependencies.Jvm.ktorClient(::implementation)
-	Dependencies.Jvm.slf4j(::implementation)
+	FixersDependencies.Jvm.Kotlin.ktorClient(::implementation)
 
 	testImplementation(project(":ssm-sdk:ssm-sdk-bdd"))
 }

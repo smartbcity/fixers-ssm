@@ -1,3 +1,5 @@
+import city.smartb.gradle.dependencies.FixersDependencies
+
 plugins {
 	id("city.smartb.fixers.gradle.kotlin.jvm")
 }
@@ -10,5 +12,5 @@ dependencies {
 	api(project(":ssm-sdk:ssm-sdk-core"))
 	implementation("com.fasterxml.jackson.module:jackson-module-kotlin:${Versions.jacksonKotlin}")
 
-	Dependencies.Jvm.cucumber(::api)
+	FixersDependencies.Jvm.Test.cucumber(::api)
 }

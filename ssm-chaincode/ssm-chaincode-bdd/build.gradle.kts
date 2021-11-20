@@ -1,3 +1,5 @@
+import city.smartb.gradle.dependencies.FixersDependencies
+
 plugins {
 	id("city.smartb.fixers.gradle.kotlin.jvm")
 }
@@ -5,5 +7,5 @@ plugins {
 dependencies {
 	api(project(":ssm-chaincode:ssm-chaincode-f2"))
 	api(project(":ssm-sdk:ssm-sdk-bdd"))
-	Dependencies.Jvm.cucumber(::api)
+	FixersDependencies.Jvm.Test.cucumber(::api)
 }
