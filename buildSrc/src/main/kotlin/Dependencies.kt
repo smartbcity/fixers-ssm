@@ -3,7 +3,6 @@ import city.smartb.gradle.dependencies.FixersPluginVersions
 object PluginVersions {
 	const val fixers = FixersPluginVersions.fixers
 	const val kotlin = FixersPluginVersions.kotlin
-	const val springBoot = FixersPluginVersions.springBoot
 	const val npmPublish = FixersPluginVersions.npmPublish
 }
 
