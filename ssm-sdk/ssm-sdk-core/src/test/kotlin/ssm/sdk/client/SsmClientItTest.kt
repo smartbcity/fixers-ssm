@@ -60,9 +60,9 @@ class SsmClientItTest {
 			SignerUser.loadFromFile(USER2_NAME, USER2_FILENAME)
 		)
 
-		private var agentAdmin: Agent = loadFromFile(ADMIN_NAME, NETWORK + ADMIN_NAME)
-		private var agentUser1: Agent = loadFromFile(signerUser1.name, USER1_FILENAME)
-		private var agentUser2: Agent = loadFromFile(signerUser2.name, USER2_FILENAME)
+		private var agentAdmin: Agent = Agent.loadFromFile(ADMIN_NAME, NETWORK + ADMIN_NAME)
+		private var agentUser1: Agent = Agent.loadFromFile(signerUser1.name, USER1_FILENAME)
+		private var agentUser2: Agent = Agent.loadFromFile(signerUser2.name, USER2_FILENAME)
 
 
 		@BeforeAll

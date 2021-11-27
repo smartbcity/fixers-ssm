@@ -3,6 +3,7 @@ package ssm.sdk.client.domain
 import java.util.UUID
 import org.assertj.core.api.Assertions
 import org.junit.jupiter.api.Test
+import ssm.chaincode.dsl.model.Agent
 import ssm.chaincode.dsl.model.SsmContext
 import ssm.sdk.client.SsmClientItTest
 import ssm.sdk.sign.crypto.KeyPairReader.loadPrivateKey
@@ -17,7 +18,7 @@ internal class HasPrivateMessageTest {
 	fun shouldEncryptMessage() {
 		val sessionName = "deal20181201-" + UUID.randomUUID().toString()
 		var context = SsmContext(sessionName, "100 dollars 1978 Camaro", 0, HashMap())
-		val agent = loadFromFile(SsmClientItTest.USER1_NAME, SsmClientItTest.USER1_FILENAME)
+		val agent = Agent.loadFromFile(SsmClientItTest.USER1_NAME, SsmClientItTest.USER1_FILENAME)
 		context = context.addPrivateMessage("Value to encrypt", agent)
 		val `val` = context.private!![agent.name]
 		Assertions.assertThat(`val`).isNotEmpty.isNotEqualTo("Value to encrypt")
@@ -28,7 +29,7 @@ internal class HasPrivateMessageTest {
 	fun shouldDecryptMessage() {
 		val sessionName = "deal20181201-" + UUID.randomUUID().toString()
 		var context = SsmContext(sessionName, "100 dollars 1978 Camaro", 0, HashMap())
-		val agent = loadFromFile(SsmClientItTest.USER1_NAME, SsmClientItTest.USER1_FILENAME)
+		val agent = Agent.loadFromFile(SsmClientItTest.USER1_NAME, SsmClientItTest.USER1_FILENAME)
 		context = context.addPrivateMessage("Value to encrypt", agent)
 		val privKey = loadPrivateKey(SsmClientItTest.USER1_FILENAME)
 		val `val` = context.getPrivateMessage(SsmClientItTest.USER1_NAME, privKey)
@@ -40,7 +41,7 @@ internal class HasPrivateMessageTest {
 	fun shouldDecryptMessageWithSigner() {
 		val sessionName = "deal20181201-" + UUID.randomUUID().toString()
 		var context = SsmContext(sessionName, "100 dollars 1978 Camaro", 0, HashMap())
-		val agent = loadFromFile(SsmClientItTest.USER1_NAME, SsmClientItTest.USER1_FILENAME)
+		val agent = Agent.loadFromFile(SsmClientItTest.USER1_NAME, SsmClientItTest.USER1_FILENAME)
 		context = context.addPrivateMessage("Value to encrypt", agent)
 		val signerUser1 = SignerUser.loadFromFile(SsmClientItTest.USER1_NAME, SsmClientItTest.USER1_FILENAME)
 		val `val` = context.getPrivateMessage(signerUser1)

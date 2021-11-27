@@ -3,6 +3,7 @@ package ssm.sdk.core.invoke.command
 import java.util.function.Consumer
 import org.assertj.core.api.Assertions
 import org.junit.jupiter.api.Test
+import ssm.chaincode.dsl.model.Agent
 import ssm.sdk.dsl.buildArgs
 import ssm.sdk.sign.SsmCmdSignerSha256RSASigner
 import ssm.sdk.sign.extention.loadFromFile
@@ -12,7 +13,7 @@ class RegisterCommandTest {
 	@Test
 	@Throws(Exception::class)
 	fun test_execute() {
-		val agent = loadFromFile("vivi", "command/vivi")
+		val agent = Agent.loadFromFile("vivi", "command/vivi")
 		val signerUser = SignerUser.loadFromFile("adam", "command/adam")
 		val signer = SsmCmdSignerSha256RSASigner(
 			signerUser

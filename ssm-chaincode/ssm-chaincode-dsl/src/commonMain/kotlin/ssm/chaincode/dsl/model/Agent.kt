@@ -37,6 +37,7 @@ data class Agent(
 	override val name: AgentName,
 	override val pub: ByteArray,
 ) : SsmAgentDTO {
+
 	override fun equals(other: Any?): Boolean {
 		if (this === other) return true
 		if (other == null || this::class != other::class) return false
@@ -54,4 +55,5 @@ data class Agent(
 		result = 31 * result + pub.contentHashCode()
 		return result
 	}
+	companion object
 }
