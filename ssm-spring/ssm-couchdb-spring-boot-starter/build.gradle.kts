@@ -10,7 +10,7 @@ plugins {
 dependencies {
 	api(project(":ssm-couchdb:ssm-couchdb-f2"))
 
-	api("city.smartb.f2:f2-spring-boot-starter-function:${FixersVersions.f2}")
+	api("city.smartb.f2:f2-spring-boot-starter-function:${Versions.f2}")
 
 	kapt("org.springframework.boot:spring-boot-configuration-processor:${FixersVersions.Spring.boot}")
 

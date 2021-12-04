@@ -12,7 +12,7 @@ dependencies {
 
 	api(project(":ssm-spring:ssm-tx-spring-boot-starter:ssm-tx-config-spring-boot-starter"))
 
-	api("city.smartb.f2:f2-spring-boot-starter-function:${FixersVersions.f2}")
+	api("city.smartb.f2:f2-spring-boot-starter-function:${Versions.f2}")
 
 	kapt("org.springframework.boot:spring-boot-configuration-processor:${FixersVersions.Spring.boot}")
 
