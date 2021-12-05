@@ -1,5 +1,6 @@
 package ssm.data.dsl
 
+import ssm.data.dsl.features.query.DataChaincodeListQueryFunction
 import ssm.data.dsl.features.query.DataSsmGetQueryFunction
 import ssm.data.dsl.features.query.DataSsmListQueryFunction
 import ssm.data.dsl.features.query.DataSsmSessionGetQueryFunction
@@ -10,6 +11,9 @@ import ssm.data.dsl.features.query.DataSsmSessionLogListQueryFunction
 @JsExport
 @JsName("SsmApiFinder")
 actual external interface SsmApiQueryFunctions {
+	@JsName("dataChaincodeListQueryFunction")
+	actual fun dataChaincodeListQueryFunction(): DataChaincodeListQueryFunction
+
 	@JsName("dataSsmListQueryFunction")
 	actual fun dataSsmListQueryFunction(): DataSsmListQueryFunction
 

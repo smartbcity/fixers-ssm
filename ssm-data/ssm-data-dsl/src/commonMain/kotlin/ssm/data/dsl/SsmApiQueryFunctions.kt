@@ -1,5 +1,7 @@
 package ssm.data.dsl
 
+import ssm.data.dsl.features.query.DataChaincodeListQuery
+import ssm.data.dsl.features.query.DataChaincodeListQueryFunction
 import ssm.data.dsl.features.query.DataSsmGetQueryFunction
 import ssm.data.dsl.features.query.DataSsmListQueryFunction
 import ssm.data.dsl.features.query.DataSsmSessionGetQueryFunction
@@ -8,6 +10,7 @@ import ssm.data.dsl.features.query.DataSsmSessionLogGetQueryFunction
 import ssm.data.dsl.features.query.DataSsmSessionLogListQueryFunction
 
 /**
+ * - fun dataChaincodeListQueryFunction(): [DataChaincodeListQueryFunction]
  * - fun dataSsmListQueryFunction(): [DataSsmListQueryFunction]
  * - fun dataSsmGetQueryFunction(): [DataSsmGetQueryFunction]
  * - fun dataSsmSessionListQueryFunction(): [DataSsmSessionListQueryFunction]
@@ -20,6 +23,7 @@ import ssm.data.dsl.features.query.DataSsmSessionLogListQueryFunction
  * @title Synthesis and global objects of the API
  */
 expect interface SsmApiQueryFunctions {
+	fun dataChaincodeListQueryFunction(): DataChaincodeListQueryFunction
 	fun dataSsmListQueryFunction(): DataSsmListQueryFunction
 	fun dataSsmGetQueryFunction(): DataSsmGetQueryFunction
 	fun dataSsmSessionListQueryFunction(): DataSsmSessionListQueryFunction

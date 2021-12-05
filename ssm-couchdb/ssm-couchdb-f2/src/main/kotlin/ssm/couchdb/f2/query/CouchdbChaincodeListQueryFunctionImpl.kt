@@ -29,8 +29,8 @@ class CouchdbChaincodeListQueryFunctionImpl(
 			.filter { it.contains(DB_LSCC) }
 			.flatMapMerge { dbName ->
 				val channelId = dbName.removeSuffix(DB_LSCC)
-				couchdbClient.fetchAllByDocType(dbName, DocType.Chaincode).map { lscc ->
-					lscc._id
+				couchdbClient.fetchAll(dbName).map { document ->
+					document.id
 				}.map { chaincodeId ->
 					ChaincodeUri.from(
 						channelId = channelId,

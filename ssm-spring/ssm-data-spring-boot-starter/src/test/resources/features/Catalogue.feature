@@ -2,16 +2,17 @@ Feature:
 
   Scenario Outline: Inject data ssm function
     Given The application parameters
-      | ssm.chaincode.url          | http://localhost:9090  |
-      | ssm.couchdb.url            | http://localhost:5984  |
-      | ssm.couchdb.username       | couchdb                |
-      | ssm.couchdb.password       | couchdb                |
-      | ssm.couchdb.serviceName    | ssm-couchdb-test       |
+      | ssm.chaincode.url       | http://localhost:9090 |
+      | ssm.couchdb.url         | http://localhost:5984 |
+      | ssm.couchdb.username    | couchdb               |
+      | ssm.couchdb.password    | couchdb               |
+      | ssm.couchdb.serviceName | ssm-couchdb-test      |
     When I build a valid spring application context
     Then Instance of "<functionName>" is an injectable bean
 
     Examples:
       | functionName                       |
+      | dataChaincodeListQueryFunction     |
       | dataSsmListQueryFunction           |
       | dataSsmGetQueryFunction            |
       | dataSsmSessionListQueryFunction    |
@@ -25,6 +26,7 @@ Feature:
 
     Examples:
       | functionName                       |
+      | dataChaincodeListQueryFunction     |
       | dataSsmListQueryFunction           |
       | dataSsmGetQueryFunction            |
       | dataSsmSessionListQueryFunction    |

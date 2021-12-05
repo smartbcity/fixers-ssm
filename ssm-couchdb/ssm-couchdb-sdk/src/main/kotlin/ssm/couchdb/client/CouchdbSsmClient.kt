@@ -3,6 +3,7 @@ package ssm.couchdb.client
 import com.ibm.cloud.cloudant.v1.Cloudant
 import com.ibm.cloud.cloudant.v1.model.ChangesResult
 import com.ibm.cloud.cloudant.v1.model.DatabaseInformation
+import com.ibm.cloud.cloudant.v1.model.Document
 import com.ibm.cloud.cloudant.v1.model.FindResult
 import com.ibm.cloud.cloudant.v1.model.GetDatabaseInformationOptions
 import com.ibm.cloud.cloudant.v1.model.PostChangesOptions
@@ -49,6 +50,20 @@ class CouchdbSsmClient(
 		return result.result.docs.mapNotNull { document ->
 			converter.toObject(docType.clazz.java, document.toString())
 		}
+	}
+
+	fun fetchAll(
+		dbName: String,
+	): List<Document> {
+		val findOptions = PostFindOptions.Builder()
+			.db(dbName)
+			.selector(emptyMap())
+			.limit(Long.MAX_VALUE)
+			.build()
+
+		val result: Response<FindResult> = cloudant.postFind(findOptions).execute()
+
+		return result.result.docs
 	}
 
 	fun <T : Any> fetchOneByDocTypeAndName(
