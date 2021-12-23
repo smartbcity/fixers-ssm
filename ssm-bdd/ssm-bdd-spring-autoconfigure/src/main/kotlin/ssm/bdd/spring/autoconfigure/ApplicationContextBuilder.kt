@@ -8,15 +8,14 @@ import org.springframework.context.support.GenericApplicationContext
 
 class ApplicationContextBuilder {
 
-
 	fun create(types: Array<Class<*>>, profile: Array<String> = emptyArray(), config: Map<String, String>): GenericApplicationContext {
 		return SpringApplicationBuilder(*types)
 			.profiles(*profile)
-			.withCouchdbConfig(config)
+			.withConfig(config)
 			.run() as GenericApplicationContext
 	}
 
-	private fun SpringApplicationBuilder.withCouchdbConfig(config: Map<String, String>): SpringApplicationBuilder {
+	private fun SpringApplicationBuilder.withConfig(config: Map<String, String>): SpringApplicationBuilder {
 		return properties(
 			*config.map { pair ->
 				"${pair.key}=${pair.value}"

@@ -24,7 +24,6 @@ class ChaincodeUri(val uri: String) {
 
 }
 
-
 fun ChaincodeUri.toSsmUri(ssmName: SsmName): SsmUri {
 	return SsmUri.from(channelId, chaincodeId, ssmName)
 }
