@@ -34,8 +34,7 @@ class DataSteps : SsmQueryStep(), En {
 		prepareSteps()
 	}
 
-	override suspend fun getSession(ssmUri: SsmUri, sessionName: String): SsmSessionStateDTO {
-
+	override suspend fun getSession(ssmUri: SsmUri, sessionName: SessionName): SsmSessionStateDTO {
 		return DataSsmSessionGetQuery(
 			sessionName = sessionName,
 			ssmUri = ssmUri,

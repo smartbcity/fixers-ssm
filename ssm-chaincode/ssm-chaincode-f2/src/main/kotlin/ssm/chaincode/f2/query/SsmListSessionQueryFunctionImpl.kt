@@ -11,7 +11,7 @@ class SsmListSessionQueryFunctionImpl(
 	private val queryService: SsmQueryService
 ) : SsmListSessionQueryFunction {
 
-	override suspend fun invoke(msg: Flow<SsmListSessionQuery>): Flow<SsmListSessionResult> = msg.map { payload ->
+	override suspend fun invoke(msg: Flow<SsmListSessionQuery>): Flow<SsmListSessionResult> = msg.map { _ ->
 		val list = queryService.listSession()
 		SsmListSessionResult(list.toTypedArray())
 	}

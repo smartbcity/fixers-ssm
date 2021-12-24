@@ -30,8 +30,7 @@ class CouchdbSsmSteps : SsmQueryStep(), En {
 	companion object {
 		const val GLUE = "ssm.sync.sdk"
 	}
-
-
+	
 	var lastChanges: SyncSsmCommandResult? = null
 
 	val couchdbSsmQueriesFunctions = CouchdbSsmQueriesFunctionImpl(

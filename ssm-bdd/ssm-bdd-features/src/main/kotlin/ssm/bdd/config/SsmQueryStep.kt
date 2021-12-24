@@ -161,7 +161,7 @@ abstract class SsmQueryStep {
 		}
 	}
 
-	protected abstract suspend fun getSession(ssmName: SsmUri, sessionName: SessionName): SsmSessionStateDTO?
+	protected abstract suspend fun getSession(ssmUri: SsmUri, sessionName: SessionName): SsmSessionStateDTO?
 
 	protected abstract suspend fun logSession(ssmUri: SsmUri, sessionName: SessionName): List<SsmSessionStateLog>
 

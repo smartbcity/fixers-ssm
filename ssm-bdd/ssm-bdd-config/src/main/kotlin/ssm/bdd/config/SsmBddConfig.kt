@@ -7,14 +7,70 @@ import ssm.data.dsl.config.DataSsmConfig
 
 object SsmBddConfig {
 
+	object Commune {
+		object Chaincode {
+			const val url = "http://peer0.pr-commune.smartb.network"
+			const val chaincodeUri = "chaincode:sandbox:ssm"
+		}
+		object Couchdb {
+			const val url = "http://peer0.pr-commune.smartb.network:5984"
+			const val username = "COMMUNE_COUCHDB_USERNAME"
+			const val password = "COMMUNE_COUCHDB_PASSWORD"
+		}
+		const val ssmAgent = "COMMUNE_SSM_AGENT"
+	}
+
+	object Local {
+		object Chaincode {
+			const val url = "http://localhost:9090"
+			const val chaincodeUri = "chaincode:sandbox:ssm"
+		}
+		object Couchdb {
+			const val url = "http://localhost:5984"
+			const val username = "couchdb"
+			const val password = "couchdb"
+		}
+
+		const val ssmAgent = "local/admin/ssm-admin"
+	}
+
+	fun String.orIfGitlab(value: String): String {
+		return if (System.getenv("SPRING_PROFILES_ACTIVE") == "gitlab") {
+			println("//////////////////////////////////////////////")
+			println("//////////////////////////////////////////////")
+			println("//////////////////////////////////////////////")
+			value
+		} else {
+			println("**********************************************")
+			println("**********************************************")
+			println("**********************************************")
+			this
+		}
+	}
+
+	fun String.orIfGitlabEnv(value: String): String {
+		return if (getEnv("SPRING_PROFILES_ACTIVE") == "gitlab") {
+			println("//////////////////////////////////////////////")
+			println("//////////////////////////////////////////////")
+			println("//////////////////////////////////////////////")
+			getEnv(value)
+		} else {
+			this
+		}
+	}
+
 	object Chaincode {
 		val url: String
 			get() {
-				return "http://localhost:9090"
+				return Local.Chaincode.url
+					.orIfGitlab(Commune.Chaincode.url)
 			}
 		val chaincodeUri: ChaincodeUri
 			get() {
-				return ChaincodeUri("chaincode:sandbox:ssm")
+				return ChaincodeUri(
+					Local.Chaincode.chaincodeUri
+						.orIfGitlab(Commune.Chaincode.chaincodeUri)
+				)
 			}
 		val config: ChaincodeSsmConfig
 			get() {
@@ -32,15 +88,19 @@ object SsmBddConfig {
 	object Couchdb {
 		val url: String
 			get() {
-				return "http://localhost:5984"
+				return Local.Couchdb.url
+					.orIfGitlab(Commune.Couchdb.url)
 			}
 		val username: String
 			get() {
-				return "couchdb"
+				return Local.Couchdb.username.orIfGitlab(
+					getEnv(Commune.Couchdb.username)
+				)
 			}
 		val password: String
 			get() {
-				return "couchdb"
+				return Local.Couchdb.password
+					.orIfGitlabEnv(Commune.Couchdb.password)
 			}
 
 		val config: CouchdbSsmConfig
@@ -54,14 +114,24 @@ object SsmBddConfig {
 			}
 	}
 
-	object Key{
+	private fun getEnv(value: String): String {
+		val value = System.getenv(value)
+		return if (value != null) {
+			value
+		} else {
+			println("Env parameter[$value] is null")
+			""
+		}
+	}
+
+	object Key {
 		val admin: Pair<String, String>
 			get() {
-				return "ssm-admin" to "local/admin/ssm-admin"
+				return "ssm-admin" to "local/admin/ssm-admin".orIfGitlabEnv(Commune.ssmAgent)
 			}
 		val user: Pair<String, String>
 			get() {
-				return "ssm-admin" to "local/admin/ssm-admin"
+				return "ssm-admin" to "local/admin/ssm-admin".orIfGitlabEnv(Commune.ssmAgent)
 			}
 	}
 }
