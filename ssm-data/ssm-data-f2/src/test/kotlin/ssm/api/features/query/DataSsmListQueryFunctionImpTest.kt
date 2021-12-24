@@ -6,12 +6,12 @@ import org.assertj.core.api.Assertions
 import org.junit.jupiter.api.Disabled
 import org.junit.jupiter.api.Test
 import ssm.api.DataSsmQueryFunctionImpl
-import ssm.data.bdd.TestConfig
+import ssm.bdd.config.SsmBddConfig
 import ssm.data.dsl.features.query.DataSsmListQuery
 
 class DataSsmListQueryFunctionImpTest {
 	private val dataSsmQueryFunction = DataSsmQueryFunctionImpl(
-		TestConfig.proudhon,
+		SsmBddConfig.Data.config,
 	)
 
 	private val function = dataSsmQueryFunction.dataSsmListQueryFunction()

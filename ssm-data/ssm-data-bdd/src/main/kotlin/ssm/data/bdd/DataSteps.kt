@@ -3,6 +3,7 @@ package ssm.data.bdd
 import f2.dsl.fnc.invokeWith
 import io.cucumber.java8.En
 import ssm.api.DataSsmQueryFunctionImpl
+import ssm.bdd.config.SsmBddConfig
 import ssm.bdd.config.SsmQueryStep
 import ssm.chaincode.dsl.model.SessionName
 import ssm.chaincode.dsl.model.SsmName
@@ -24,7 +25,7 @@ class DataSteps : SsmQueryStep(), En {
 		const val GLUE = "ssm.data.bdd"
 	}
 
-	val ssmDataConfig: DataSsmConfig = TestConfig.local
+	val ssmDataConfig: DataSsmConfig = SsmBddConfig.Data.config
 	val dataSsmQueryFunctionImpl =
 		DataSsmQueryFunctionImpl(ssmDataConfig, ChaincodeSsmQueriesImpl(ssmDataConfig.chaincode))
 	val couchdbSsmQueriesFunctionImpl = CouchdbSsmQueriesFunctionImpl(ssmDataConfig.couchdb)

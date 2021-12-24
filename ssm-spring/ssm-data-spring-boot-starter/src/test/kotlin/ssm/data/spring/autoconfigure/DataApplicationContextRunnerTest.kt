@@ -3,10 +3,9 @@ package ssm.data.spring.autoconfigure
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test
 import org.springframework.cloud.function.context.FunctionCatalog
+import ssm.bdd.config.SsmBddConfig
 import ssm.bdd.spring.autoconfigure.ApplicationContextBuilder
 import ssm.bdd.spring.autoconfigure.ApplicationContextRunnerBuilder
-import ssm.chaincode.dsl.config.ChaincodeSsmConfig
-import ssm.couchdb.dsl.config.CouchdbSsmConfig
 import ssm.data.dsl.SsmApiQueryFunctions
 import ssm.data.dsl.config.DataSsmConfig
 
@@ -41,15 +40,8 @@ class DataApplicationContextRunnerTest {
 
 	object TestConfiguration {
 		private val localDockerCompose = DataSsmConfig(
-			couchdb = CouchdbSsmConfig(
-				url = "http://localhost:5984",
-				username = "couchdb",
-				password = "couchdb",
-				serviceName = "ssm-couchdb-test"
-			),
-			chaincode = ChaincodeSsmConfig(
-				url = "http://localhost:9090"
-			),
+			couchdb = SsmBddConfig.Couchdb.config,
+			chaincode = SsmBddConfig.Chaincode.config
 		)
 
 		val localDockerComposeParams = mapOf(

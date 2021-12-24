@@ -5,9 +5,8 @@ import org.junit.jupiter.api.Test
 import org.springframework.cloud.function.context.FunctionCatalog
 import ssm.bdd.spring.autoconfigure.ApplicationContextBuilder
 import ssm.bdd.spring.autoconfigure.ApplicationContextRunnerBuilder
-import ssm.chaincode.dsl.config.ChaincodeSsmConfig
+import ssm.bdd.config.SsmBddConfig
 import ssm.tx.config.spring.autoconfigure.SsmTxProperties
-import ssm.tx.init.spring.autoconfigure.SsmTxInitAutoConfiguration
 
 
 class ApplicationContextRunnerTest {
@@ -35,14 +34,12 @@ class ApplicationContextRunnerTest {
 
 
 	object SsmChaincodeConfigTest {
-		val localDockerCompose = ChaincodeSsmConfig(
-			url = "http://localhost:9090"
-		)
+		val localDockerCompose = SsmBddConfig.Chaincode
 
 		val localDockerComposeParams = mapOf(
 			"ssm.chaincode.url" to localDockerCompose.url,
-			"ssm.signer.admin.name" to "ssm-admin",
-			"ssm.signer.admin.key" to "local/admin/ssm-admin"
+			"ssm.signer.admin.name" to SsmBddConfig.Key.admin.first,
+			"ssm.signer.admin.key" to SsmBddConfig.Key.admin.second,
 		)
 	}
 }

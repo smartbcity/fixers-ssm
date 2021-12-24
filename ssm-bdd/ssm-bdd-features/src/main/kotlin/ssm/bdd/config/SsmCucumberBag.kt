@@ -22,13 +22,12 @@ class SsmCucumberBag(
 
 		fun init(scenario: Scenario): SsmCucumberBag {
 			if (!cucumbers.containsKey(scenario.id)) {
-				cucumbers[scenario.id] = SsmCucumberBag(SsmSdkConfig("http://localhost:9090")).apply {
+				cucumbers[scenario.id] = SsmCucumberBag(SsmSdkConfig(SsmBddConfig.Chaincode.url)).apply {
 					uuid = UUID.randomUUID().toString()
 				}
 			}
 			return cucumbers[scenario.id]!!
 		}
-
 	}
 
 	lateinit var uuid: String
@@ -59,8 +58,6 @@ class SsmCucumberBag(
 	var usersName: List<AgentName> = emptyList()
 	var ssmsName: List<SsmName> = emptyList()
 	var sessions: List<String> = emptyList()
-
-
 }
 
 fun String.contextualize(bag: SsmCucumberBag) = "$this-${bag.uuid}"

@@ -4,11 +4,11 @@ import f2.dsl.fnc.invokeWith
 import kotlinx.coroutines.runBlocking
 import org.assertj.core.api.Assertions
 import org.junit.jupiter.api.Test
+import ssm.bdd.config.SsmBddConfig
 import ssm.chaincode.dsl.model.uri.ChaincodeUri
-import ssm.data.bdd.TestConfig
 
 internal class SsmSyncF2Test {
-	private val syncSsmCommandFunction = SsmSyncF2Builder.build(TestConfig.local)
+	private val syncSsmCommandFunction = SsmSyncF2Builder.build(SsmBddConfig.Data.config)
 
 	@Test
 	fun syncSsmCommandFunction() = runBlocking<Unit> {

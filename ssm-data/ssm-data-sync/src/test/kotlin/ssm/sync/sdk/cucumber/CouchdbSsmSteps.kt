@@ -5,6 +5,7 @@ import io.cucumber.datatable.DataTable
 import io.cucumber.java8.En
 import kotlinx.coroutines.runBlocking
 import org.assertj.core.api.Assertions
+import ssm.bdd.config.SsmBddConfig
 import ssm.bdd.config.SsmQueryStep
 import ssm.bdd.config.contextualize
 import ssm.chaincode.dsl.model.SessionName
@@ -20,7 +21,6 @@ import ssm.couchdb.dsl.query.CouchdbSsmSessionStateGetQuery
 import ssm.couchdb.dsl.query.CouchdbSsmSessionStateListQuery
 import ssm.couchdb.dsl.query.CouchdbUserListQuery
 import ssm.couchdb.f2.CouchdbSsmQueriesFunctionImpl
-import ssm.data.bdd.TestConfig
 import ssm.sync.sdk.SsmSyncF2Builder
 import ssm.sync.sdk.SyncSsmCommand
 import ssm.sync.sdk.SyncSsmCommandResult
@@ -35,10 +35,10 @@ class CouchdbSsmSteps : SsmQueryStep(), En {
 	var lastChanges: SyncSsmCommandResult? = null
 
 	val couchdbSsmQueriesFunctions = CouchdbSsmQueriesFunctionImpl(
-		TestConfig.local.couchdb
+		SsmBddConfig.Couchdb.config
 	)
 
-	private val ssmSyncF2 = SsmSyncF2Builder.build(TestConfig.local)
+	private val ssmSyncF2 = SsmSyncF2Builder.build(SsmBddConfig.Data.config)
 
 	init {
 		prepareSteps()
