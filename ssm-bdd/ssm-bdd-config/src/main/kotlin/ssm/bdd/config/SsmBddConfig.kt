@@ -18,6 +18,7 @@ object SsmBddConfig {
 			const val password = "COMMUNE_COUCHDB_PASSWORD"
 		}
 		const val ssmAgent = "COMMUNE_SSM_AGENT"
+		const val ssmAgentKey = "COMMUNE_SSM_AGENT_KEY"
 	}
 
 	object Local {
@@ -31,7 +32,7 @@ object SsmBddConfig {
 			const val password = "couchdb"
 		}
 
-		const val ssmAgent = "local/admin/ssm-admin"
+//		const val ssmAgent = "local/admin/ssm-admin"
 	}
 
 	fun String.orIfGitlab(value: String): String {
@@ -115,9 +116,9 @@ object SsmBddConfig {
 	}
 
 	private fun getEnv(value: String): String {
-		val value = System.getenv(value)
-		return if (value != null) {
-			value
+		val envValue = System.getenv(value)
+		return if (envValue != null) {
+			envValue
 		} else {
 			println("Env parameter[$value] is null")
 			""
@@ -127,11 +128,11 @@ object SsmBddConfig {
 	object Key {
 		val admin: Pair<String, String>
 			get() {
-				return "ssm-admin" to "local/admin/ssm-admin".orIfGitlabEnv(Commune.ssmAgent)
+				return "ssm-admin".orIfGitlabEnv(Commune.ssmAgent) to "local/admin/ssm-admin".orIfGitlabEnv(Commune.ssmAgentKey)
 			}
 		val user: Pair<String, String>
 			get() {
-				return "ssm-admin" to "local/admin/ssm-admin".orIfGitlabEnv(Commune.ssmAgent)
+				return "ssm-admin".orIfGitlabEnv(Commune.ssmAgent) to "local/admin/ssm-admin".orIfGitlabEnv(Commune.ssmAgentKey)
 			}
 	}
 }
