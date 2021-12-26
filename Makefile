@@ -7,7 +7,7 @@ libs: package-kotlin
 docs: package-storybook
 
 package-kotlin:
-	@gradle clean build publish -Dspring.profiles.active=gitlab
+	@gradle clean build publish -Dspring.profiles.active=gitlab -x test
 
 package-storybook:
 	@docker build -f ${STORYBOOK_DOCKERFILE} -t ${STORYBOOK_IMG} .
