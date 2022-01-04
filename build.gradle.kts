@@ -8,20 +8,30 @@ plugins {
 
 	id("city.smartb.fixers.gradle.config") version PluginVersions.fixers
 	id("city.smartb.fixers.gradle.sonar") version PluginVersions.fixers
-	id("city.smartb.fixers.gradle.d2") version PluginVersions.fixers
+//	id("city.smartb.fixers.gradle.d2") version PluginVersions.fixers
 }
 
 allprojects {
 	group = "city.smartb.ssm"
-	version = System.getenv("VERSION") ?: "latest"
+	version = System.getenv("VERSION") ?: "experimental-SNAPSHOT"
 	repositories {
 		mavenCentral()
-		mavenLocal()
+		maven { url = uri("https://oss.sonatype.org/service/local/repositories/releases/content") }
 		maven { url = uri("https://oss.sonatype.org/content/repositories/snapshots") }
 	}
 }
 
 subprojects {
+	plugins.withType(city.smartb.fixers.gradle.config.ConfigPlugin::class.java).whenPluginAdded {
+		fixers {
+			bundle {
+				id = "ssm-data"
+				name = "Ssm Data"
+				description = "Aggregate all ssm data source to optimize request"
+				url = "https://gitlab.smartb.city/fixers/ssm"
+			}
+		}
+	}
 	plugins.withType(lt.petuska.npm.publish.NpmPublishPlugin::class.java).whenPluginAdded {
 		the<lt.petuska.npm.publish.dsl.NpmPublishExtension>().apply {
 			organization = "smartb"
@@ -54,14 +64,5 @@ tasks {
 	create<com.moowork.gradle.node.yarn.YarnTask>("storybook") {
 		dependsOn("yarn_install")
 		args = listOf("storybook")
-	}
-}
-
-fixers {
-	bundle {
-		id = "ssm-data"
-		name = "Ssm Data"
-		description = "Aggregate all ssm data source to optimize request"
-		url = "https://gitlab.smartb.city/fixers/ssm"
 	}
 }
