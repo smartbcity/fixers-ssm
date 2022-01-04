@@ -9,7 +9,7 @@ rootProject.name = "ssm"
 
 include(
 	"ssm-tx:ssm-tx-autoconfiguration",
-	"ssm-tx:ssm-tx-client",
+//	"ssm-tx:ssm-tx-client",
 	"ssm-tx:ssm-tx-dsl",
 	"ssm-tx:ssm-tx-f2"
 )
@@ -25,7 +25,7 @@ include(
 	"ssm-chaincode:ssm-chaincode-client",
 	"ssm-chaincode:ssm-chaincode-dsl",
 	"ssm-chaincode:ssm-chaincode-f2",
-	"ssm-chaincode:ssm-chaincode-f2-client"
+//	"ssm-chaincode:ssm-chaincode-f2-client"
 )
 
 include(

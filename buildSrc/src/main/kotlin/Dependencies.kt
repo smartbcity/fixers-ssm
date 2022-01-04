@@ -1,15 +1,15 @@
 object PluginVersions {
-	const val kotlin = "1.5.30"
-	const val fixers = "experimental-SNAPSHOT"
+	const val kotlin = "1.5.32"
+	const val fixers = "0.1.0-SNAPSHOT"
 
-	const val springBoot = "2.5.3"
+	const val springBoot = "2.3.4.RELEASE"
 
 	const val npmPublish = "1.0.4"
 }
 
 object Versions {
 	const val springBoot = PluginVersions.springBoot
-	const val springFramework = "5.3.4"
+	const val springFramework = "5.2.9.RELEASE"
 
 	const val cloudant = "0.0.24"
 
@@ -24,12 +24,12 @@ object Versions {
 	const val slf4j = "1.7.30"
 
 
-	const val coroutines = "1.5.1"
-	const val kserialization = "1.1.0"
-	const val ktor = "1.6.1"
+	const val coroutines = "1.4.2"
+	const val kserialization = "1.0.0"
+	const val ktor = "1.4.1"
 	const val rsocket = "0.13.1"
 
-	const val f2 = "experimental-SNAPSHOT"
+	const val f2 = "0.1.0-SNAPSHOT"
 	const val d2 = "0.1.1-SNAPSHOT"
 }
 
