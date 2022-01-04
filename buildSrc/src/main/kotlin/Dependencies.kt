@@ -1,6 +1,6 @@
 object PluginVersions {
 	const val kotlin = "1.5.32"
-	const val fixers = "0.1.0-SNAPSHOT"
+	const val fixers = "0.1.1"
 
 	const val springBoot = "2.3.4.RELEASE"
 
@@ -29,8 +29,8 @@ object Versions {
 	const val ktor = "1.4.1"
 	const val rsocket = "0.13.1"
 
-	const val f2 = "0.1.0-SNAPSHOT"
-	const val d2 = "0.1.1-SNAPSHOT"
+	const val f2 = "0.1.0"
+//	const val d2 = "0.1.1-SNAPSHOT"
 }
 
 object Dependencies {

@@ -18,10 +18,21 @@ allprojects {
 		mavenCentral()
 		mavenLocal()
 		maven { url = uri("https://oss.sonatype.org/content/repositories/snapshots") }
+		maven { url = uri("https://oss.sonatype.org/service/local/repositories/releases/content") }
 	}
 }
 
 subprojects {
+	plugins.withType(city.smartb.fixers.gradle.config.ConfigPlugin::class.java).whenPluginAdded {
+		fixers {
+			bundle {
+				id = "ssm"
+				name = "SSM "
+				description = "SSM Sdk"
+				url = "https://gitlab.smartb.city/fixers/ssm"
+			}
+		}
+	}
 	plugins.withType(lt.petuska.npm.publish.NpmPublishPlugin::class.java).whenPluginAdded {
 		the<lt.petuska.npm.publish.dsl.NpmPublishExtension>().apply {
 			organization = "smartb"
