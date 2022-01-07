@@ -8,7 +8,7 @@ plugins {
 
 	id("city.smartb.fixers.gradle.config") version PluginVersions.fixers
 	id("city.smartb.fixers.gradle.sonar") version PluginVersions.fixers
-//	id("city.smartb.fixers.gradle.d2") version PluginVersions.fixers
+	id("city.smartb.fixers.gradle.d2") version PluginVersions.fixers
 }
 
 allprojects {
@@ -17,7 +17,6 @@ allprojects {
 	repositories {
 		mavenCentral()
 		maven { url = uri("https://oss.sonatype.org/service/local/repositories/releases/content") }
-		maven { url = uri("https://oss.sonatype.org/content/repositories/snapshots") }
 	}
 }
 
@@ -29,6 +28,9 @@ subprojects {
 				name = "Ssm Data"
 				description = "Aggregate all ssm data source to optimize request"
 				url = "https://gitlab.smartb.city/fixers/ssm"
+			}
+			d2 {
+				outputDirectory = file("docs/stories/d2")
 			}
 		}
 	}
