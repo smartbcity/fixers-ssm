@@ -4,6 +4,7 @@ import f2.dsl.fnc.invokeWith
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
 import ssm.api.extentions.toDataSsm
+import ssm.chaincode.dsl.model.uri.burst
 import ssm.chaincode.dsl.query.SsmGetQuery
 import ssm.chaincode.dsl.query.SsmGetQueryFunction
 import ssm.data.dsl.features.query.DataSsmGetQueryDTO
@@ -18,10 +19,10 @@ class DataSsmGetQueryFunctionImpl(
 	override suspend fun invoke(msg: Flow<DataSsmGetQueryDTO>): Flow<DataSsmGetQueryResultDTO> =
 		msg.map { payload ->
 			SsmGetQuery(
-				name = payload.ssmUri.ssmName,
+				name = payload.ssmUri.burst().ssmName,
 			).invokeWith(ssmGetQueryFunction)
 				.item
-				?.toDataSsm(payload.ssmUri)
+				?.toDataSsm(payload.ssmUri.burst())
 				.let(::DataSsmGetQueryResult)
 
 		}

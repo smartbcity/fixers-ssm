@@ -10,6 +10,7 @@ import ssm.chaincode.dsl.model.SessionName
 import ssm.chaincode.dsl.model.SsmName
 import ssm.chaincode.dsl.model.SsmSessionStateDTO
 import ssm.chaincode.dsl.model.uri.ChaincodeUri
+import ssm.chaincode.dsl.model.uri.ChaincodeUriDTO
 
 /**
  * Retrieve the list of all known sessions of a given SSM
@@ -21,7 +22,7 @@ import ssm.chaincode.dsl.model.uri.ChaincodeUri
 typealias CouchdbSsmSessionStateGetQueryFunction = F2Function<CouchdbSsmSessionStateGetQueryDTO, CouchdbSsmSessionStateGetQueryResultDTO>
 
 expect interface CouchdbSsmSessionStateGetQueryDTO : Query {
-	val chaincodeUri: ChaincodeUri
+	val chaincodeUri: ChaincodeUriDTO
 	val ssmName: SsmName?
 	val sessionName: SessionName
 }

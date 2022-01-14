@@ -2,7 +2,7 @@ package ssm.data.dsl.features.query
 
 import ssm.chaincode.dsl.blockchain.TransactionId
 import ssm.chaincode.dsl.model.SessionName
-import ssm.chaincode.dsl.model.uri.SsmUri
+import ssm.chaincode.dsl.model.uri.SsmUriDTO
 import ssm.data.dsl.model.DataSsmSessionStateDTO
 
 @JsExport
@@ -10,7 +10,7 @@ import ssm.data.dsl.model.DataSsmSessionStateDTO
 actual external interface DataSsmSessionLogGetQueryDTO : DataQueryDTO {
 	actual val sessionName: SessionName
 	actual val txId: TransactionId
-	actual override val ssmUri: SsmUri
+	actual override val ssmUri: SsmUriDTO
 }
 
 @JsExport

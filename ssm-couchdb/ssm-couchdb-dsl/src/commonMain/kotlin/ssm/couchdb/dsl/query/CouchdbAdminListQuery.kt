@@ -9,6 +9,7 @@ import kotlinx.serialization.Serializable
 import ssm.chaincode.dsl.model.Agent
 import ssm.chaincode.dsl.model.SsmAgentDTO
 import ssm.chaincode.dsl.model.uri.ChaincodeUri
+import ssm.chaincode.dsl.model.uri.ChaincodeUriDTO
 
 /**
  * @title Fetch all admins
@@ -27,7 +28,7 @@ expect interface CouchdbAdminListQueryDTO : Query {
 	/**
 	 * The unique id of a chaincode.
 	 */
-	val chaincodeUri: ChaincodeUri
+	val chaincodeUri: ChaincodeUriDTO
 }
 
 /**

@@ -7,6 +7,7 @@ import ssm.api.features.query.internal.DataSsmSessionConvertFunctionImpl
 import ssm.api.features.query.internal.DataSsmSessionConvertQuery
 import ssm.chaincode.dsl.model.SsmSessionState
 import ssm.chaincode.dsl.model.uri.ChaincodeUri
+import ssm.chaincode.dsl.model.uri.burst
 import ssm.chaincode.dsl.model.uri.from
 import ssm.couchdb.dsl.query.CouchdbSsmSessionStateListQuery
 import ssm.couchdb.dsl.query.CouchdbSsmSessionStateListQueryFunction
@@ -24,10 +25,10 @@ class DataSsmSessionListQueryFunctionImpl(
 		msg.map { payload ->
 			CouchdbSsmSessionStateListQuery(
 				chaincodeUri = ChaincodeUri.from(
-					channelId = payload.ssmUri.channelId,
-					chaincodeId = payload.ssmUri.chaincodeId,
+					channelId = payload.ssmUri.burst().channelId,
+					chaincodeId = payload.ssmUri.burst().chaincodeId,
 				),
-				ssm = payload.ssmUri.ssmName,
+				ssm = payload.ssmUri.burst().ssmName,
 				pagination = null
 			).invokeWith(couchdbSsmSessionStateListQueryFunction)
 				.page.list
@@ -35,7 +36,7 @@ class DataSsmSessionListQueryFunctionImpl(
 				.map { sessionState ->
 					DataSsmSessionConvertQuery(
 						sessionState = sessionState as SsmSessionState,
-						ssmUri = payload.ssmUri
+						ssmUri = payload.ssmUri.burst()
 					).invokeWith(dataSsmSessionConvertFunctionImpl)
 				}.let {
 					DataSsmSessionListQueryResult(it)

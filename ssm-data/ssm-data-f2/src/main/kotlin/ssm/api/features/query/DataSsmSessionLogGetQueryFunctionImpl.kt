@@ -4,6 +4,7 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
 import ssm.api.extentions.getSessionLogs
 import ssm.api.extentions.getTransaction
+import ssm.chaincode.dsl.model.uri.burst
 import ssm.chaincode.dsl.query.SsmGetSessionLogsQueryFunction
 import ssm.chaincode.dsl.query.SsmGetTransactionQueryFunction
 import ssm.data.dsl.features.query.DataSsmSessionLogGetQueryDTO
@@ -20,7 +21,7 @@ class DataSsmSessionLogGetQueryFunctionImpl(
 	override suspend fun invoke(msg: Flow<DataSsmSessionLogGetQueryDTO>): Flow<DataSsmSessionLogGetQueryResultDTO> =
 		msg.map { payload ->
 			val logs = payload.sessionName.getSessionLogs(
-				payload.ssmUri,
+				payload.ssmUri.burst(),
 				ssmGetSessionLogsQueryFunction
 			)
 			val transaction = payload.txId.getTransaction(

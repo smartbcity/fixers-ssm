@@ -7,6 +7,7 @@ import kotlin.js.JsName
 import kotlinx.serialization.Serializable
 import ssm.chaincode.dsl.model.SessionName
 import ssm.chaincode.dsl.model.uri.SsmUri
+import ssm.chaincode.dsl.model.uri.SsmUriDTO
 import ssm.data.dsl.model.DataSsmSession
 import ssm.data.dsl.model.DataSsmSessionDTO
 
@@ -25,7 +26,7 @@ expect interface DataSsmSessionGetQueryDTO : DataQueryDTO {
 	 * @example [DataSsmSession.sessionName]
 	 */
 	val sessionName: SessionName
-	override val ssmUri: SsmUri
+	override val ssmUri: SsmUriDTO
 }
 
 /**

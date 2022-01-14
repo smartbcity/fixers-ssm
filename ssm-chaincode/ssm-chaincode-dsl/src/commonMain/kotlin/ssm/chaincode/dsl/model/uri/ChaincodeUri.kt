@@ -4,7 +4,13 @@ import ssm.chaincode.dsl.model.ChaincodeId
 import ssm.chaincode.dsl.model.ChannelId
 import ssm.chaincode.dsl.model.SsmName
 
-class ChaincodeUri(val uri: String) {
+expect interface ChaincodeUriDTO {
+	val uri: String
+}
+
+fun ChaincodeUriDTO.burst() = ChaincodeUri(uri)
+
+class ChaincodeUri(override val uri: String): ChaincodeUriDTO {
 
 	companion object {
 		const val PARTS = 3
@@ -24,8 +30,8 @@ class ChaincodeUri(val uri: String) {
 
 }
 
-fun ChaincodeUri.toSsmUri(ssmName: SsmName): SsmUri {
-	return SsmUri.from(channelId, chaincodeId, ssmName)
+fun ChaincodeUriDTO.toSsmUri(ssmName: SsmName): SsmUri {
+	return SsmUri.from(burst().channelId, burst().chaincodeId, ssmName)
 }
 
 fun ChaincodeUri.Companion.from(channelId: ChannelId, chaincodeId: ChaincodeId): ChaincodeUri {

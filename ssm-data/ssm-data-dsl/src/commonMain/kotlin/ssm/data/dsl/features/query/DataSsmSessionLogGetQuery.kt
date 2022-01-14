@@ -7,6 +7,7 @@ import kotlinx.serialization.Serializable
 import ssm.chaincode.dsl.blockchain.TransactionId
 import ssm.chaincode.dsl.model.SessionName
 import ssm.chaincode.dsl.model.uri.SsmUri
+import ssm.chaincode.dsl.model.uri.SsmUriDTO
 import ssm.data.dsl.model.DataSsmSessionState
 import ssm.data.dsl.model.DataSsmSessionStateDTO
 
@@ -31,7 +32,7 @@ expect interface DataSsmSessionLogGetQueryDTO : DataQueryDTO {
 	 * @example [ssm.chaincode.dsl.blockchain.Transaction.transactionId]
 	 */
 	val txId: TransactionId
-	override val ssmUri: SsmUri
+	override val ssmUri: SsmUriDTO
 }
 
 /**

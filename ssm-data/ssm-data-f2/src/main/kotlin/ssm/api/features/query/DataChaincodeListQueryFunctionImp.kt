@@ -10,6 +10,7 @@ import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.toList
 import ssm.api.extentions.toDataSsm
 import ssm.chaincode.dsl.model.uri.ChaincodeUri
+import ssm.chaincode.dsl.model.uri.burst
 import ssm.couchdb.dsl.query.CouchdbChaincodeListQuery
 import ssm.couchdb.dsl.query.CouchdbChaincodeListQueryFunction
 import ssm.couchdb.dsl.query.CouchdbSsmListQuery
@@ -29,7 +30,7 @@ class DataChaincodeListQueryFunctionImp(
 	override suspend fun invoke(msg: Flow<DataChaincodeListQuery>): Flow<DataChaincodeListQueryResult> =
 		msg.map {
 			couchdbChaincodeListQueryFunction.invoke(CouchdbChaincodeListQuery()).let {
-				DataChaincodeListQueryResult(it.items)
+				DataChaincodeListQueryResult(it.items.map {it.burst()})
 			}
 		}
 }

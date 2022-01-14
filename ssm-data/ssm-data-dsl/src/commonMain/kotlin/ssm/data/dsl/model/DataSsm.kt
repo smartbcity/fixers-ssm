@@ -6,10 +6,11 @@ import kotlinx.serialization.Serializable
 import ssm.chaincode.dsl.model.Ssm
 import ssm.chaincode.dsl.model.SsmDTO
 import ssm.chaincode.dsl.model.uri.SsmUri
+import ssm.chaincode.dsl.model.uri.SsmUriDTO
 import ssm.chaincode.dsl.model.uri.SsmVersion
 
 expect interface DataSsmDTO {
-	val uri: SsmUri
+	val uri: SsmUriDTO
 	/**
 	 * Description of a state machine
 	 */

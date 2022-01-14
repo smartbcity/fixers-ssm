@@ -6,11 +6,12 @@ import f2.dsl.cqrs.page.PageQueryResultDTO
 import ssm.chaincode.dsl.model.SsmName
 import ssm.chaincode.dsl.model.SsmSessionStateDTO
 import ssm.chaincode.dsl.model.uri.ChaincodeUri
+import ssm.chaincode.dsl.model.uri.ChaincodeUriDTO
 
 @JsExport
 @JsName("CouchdbSsmSessionStateListQueryDTO")
 actual external interface CouchdbSsmSessionStateListQueryDTO : PageQueryDTO {
-	actual val chaincodeUri: ChaincodeUri
+	actual val chaincodeUri: ChaincodeUriDTO
 	actual val ssm: SsmName?
 }
 

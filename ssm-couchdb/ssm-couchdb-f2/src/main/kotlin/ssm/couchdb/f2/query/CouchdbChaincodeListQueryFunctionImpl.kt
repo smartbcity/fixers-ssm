@@ -9,7 +9,6 @@ import kotlinx.coroutines.flow.toList
 import ssm.chaincode.dsl.model.uri.ChaincodeUri
 import ssm.chaincode.dsl.model.uri.from
 import ssm.couchdb.client.CouchdbSsmClient
-import ssm.couchdb.dsl.model.DocType
 import ssm.couchdb.dsl.query.CouchdbChaincodeListQueryDTO
 import ssm.couchdb.dsl.query.CouchdbChaincodeListQueryFunction
 import ssm.couchdb.dsl.query.CouchdbChaincodeListQueryResult

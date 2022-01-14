@@ -7,6 +7,7 @@ import kotlin.js.JsExport
 import kotlin.js.JsName
 import kotlinx.serialization.Serializable
 import ssm.chaincode.dsl.model.uri.ChaincodeUri
+import ssm.chaincode.dsl.model.uri.ChaincodeUriDTO
 
 /**
  * @title Fetch all chaincodes
@@ -32,7 +33,7 @@ expect interface CouchdbChaincodeListQueryResultDTO : Event {
 	/**
 	 * The name of the database.
 	 */
-	val items: List<ChaincodeUri>
+	val items: List<ChaincodeUriDTO>
 }
 
 @Serializable

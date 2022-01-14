@@ -5,6 +5,7 @@ import kotlin.js.JsExport
 import kotlin.js.JsName
 import kotlinx.serialization.Serializable
 import ssm.chaincode.dsl.model.uri.SsmUri
+import ssm.chaincode.dsl.model.uri.SsmUriDTO
 import ssm.data.dsl.model.DataSsm
 
 /**
@@ -17,7 +18,7 @@ import ssm.data.dsl.model.DataSsm
 typealias DataSsmGetQueryFunction = F2Function<DataSsmGetQueryDTO, DataSsmGetQueryResultDTO>
 
 expect interface DataSsmGetQueryDTO : DataQueryDTO {
-	override val ssmUri: SsmUri
+	override val ssmUri: SsmUriDTO
 }
 
 /**

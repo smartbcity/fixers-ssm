@@ -10,9 +10,16 @@ typealias SsmVersion = String
 
 const val DEFAULT_VERSION = "1.0.0"
 
+@JsName("SsmUriDTO")
+expect interface SsmUriDTO {
+	val uri: String
+}
+
+fun SsmUriDTO.burst() = SsmUri(uri)
+
 @JsExport
 @JsName("SsmUri")
-class SsmUri(val uri: String) {
+data class SsmUri(override val uri: String): SsmUriDTO {
 
 	companion object {
 		const val PARTS = 4

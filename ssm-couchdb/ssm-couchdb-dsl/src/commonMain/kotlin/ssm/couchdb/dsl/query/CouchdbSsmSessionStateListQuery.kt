@@ -13,6 +13,7 @@ import ssm.chaincode.dsl.model.SsmName
 import ssm.chaincode.dsl.model.SsmSessionState
 import ssm.chaincode.dsl.model.SsmSessionStateDTO
 import ssm.chaincode.dsl.model.uri.ChaincodeUri
+import ssm.chaincode.dsl.model.uri.ChaincodeUriDTO
 
 /**
  * Retrieve the list of all known sessions of a given SSM
@@ -27,7 +28,7 @@ expect interface CouchdbSsmSessionStateListQueryDTO : PageQueryDTO {
 	/**
 	 * The unique uri of a channel.
 	 */
-	val chaincodeUri: ChaincodeUri
+	val chaincodeUri: ChaincodeUriDTO
 	/**
 	 * The unique identifier of a ssm.
 	 */
