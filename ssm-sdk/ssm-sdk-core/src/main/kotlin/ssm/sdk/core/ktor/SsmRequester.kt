@@ -21,17 +21,15 @@ class SsmRequester(
 
 	suspend fun <T> log(value: String, query: HasGet, clazz: TypeReference<List<T>>): List<T> {
 		val args = query.queryArgs(value)
+		logger.info(
+			"Query[$QUERY] the blockchain in channel[${channelId}] and ssm[${chaincodeId}] with fcn[${args.fcn}] with args:${args.args}",
+		)
 		val request = coopRepository.query(
 			cmd = QUERY,
 			fcn = args.fcn,
 			args = args.args,
 			channelId = channelId,
 			chaincodeId = chaincodeId,
-		)
-		logger.info(
-			"Query the blockchain in channel[{}] and ssm[{}] with fcn[{}] with args:{}",
-			channelId,
-			chaincodeId, args.fcn, args.args
 		)
 		return request.let {
 			JsonUtils.toObject(it, clazz)

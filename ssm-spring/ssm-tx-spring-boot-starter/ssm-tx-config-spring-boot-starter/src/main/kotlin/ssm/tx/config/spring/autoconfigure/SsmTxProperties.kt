@@ -11,12 +11,10 @@ data class SsmTxProperties(
 	val chaincode: ChaincodeSsmConfig?,
 	val signer: SignerFileConfig?,
 ) {
-
 	class SignerFileConfig(
 		val admin: SignerAgentFileConfig?,
 		val user: SignerAgentFileConfig?,
 	)
-
 	class SignerAgentFileConfig(
 		val name: String,
 		val key: String,

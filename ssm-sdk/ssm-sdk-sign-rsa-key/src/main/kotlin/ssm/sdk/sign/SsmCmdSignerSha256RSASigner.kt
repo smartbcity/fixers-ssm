@@ -11,7 +11,7 @@ import ssm.sdk.sign.model.Signer
 open class SsmCmdSignerSha256RSASigner(vararg signer: Signer): SsmCmdSigner {
 	private val signers = signer.associateBy { it.name }
 	override fun sign(ssmCommand: SsmCmd, agentName: AgentName): SsmCmdSigned {
-		val signer = signers[agentName] ?: throw SsmSignException("Invalid agent name: ${agentName}")
+		val signer = signers[agentName] ?: throw SsmSignException("Invalid agent name: $agentName")
 		val signature = Sha256RSASigner.rsaSign(ssmCommand.valueToSign, signer.pair.private)
 		return SsmCmdSigned(
 			cmd = ssmCommand,
