@@ -36,7 +36,7 @@ class SsmCouchDbClientBuilder {
 		return CouchdbSsmClient(cloudant, converter)
 	}
 
-	private fun buildCloudant(auth: SsmCouchDbAuth): Cloudant {
+	private fun buildCloudant(auth: SsmCouchDbAuth): CloudantFixed {
 		val cloudantAuth = when (auth) {
 			is SsmCouchDbBasicAuth -> BasicAuthenticator.Builder()
 				.username(auth.username)
@@ -44,7 +44,7 @@ class SsmCouchDbClientBuilder {
 				.build()
 		}
 
-		val client = Cloudant(name, cloudantAuth).apply {
+		val client = CloudantFixed(name, cloudantAuth).apply {
 			serviceUrl = url
 		}
 

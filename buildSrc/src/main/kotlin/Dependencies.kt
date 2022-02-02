@@ -8,7 +8,7 @@ object PluginVersions {
 
 object Versions {
 	const val springFramework = "5.3.14"
-	const val cloudant = "0.0.28"
+	const val cloudant = "0.0.34"
 	const val bouncycastleVersion = "1.61"
 	const val jacksonKotlin = "2.13.0"
 	const val f2 = "experimental-SNAPSHOT"

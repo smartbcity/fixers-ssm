@@ -19,7 +19,7 @@ class CloudantFixed(
 	authenticator: Authenticator
 ) : Cloudant(serviceName, authenticator) {
 
-	override fun postChanges(postChangesOptions: PostChangesOptions): ServiceCall<ChangesResult?>? {
+	override fun postChanges(postChangesOptions: PostChangesOptions): ServiceCall<ChangesResult> {
 		Validator.notNull(
 			postChangesOptions,
 			"postChangesOptions cannot be null"

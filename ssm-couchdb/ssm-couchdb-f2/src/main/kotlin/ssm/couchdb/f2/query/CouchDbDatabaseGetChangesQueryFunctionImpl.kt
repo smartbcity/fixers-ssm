@@ -35,7 +35,7 @@ class CouchDbDatabaseGetChangesQueryFunctionImpl(
 	): CouchdbDatabaseGetChangesQueryResultDTO {
 		return couchdbClient.getChanges(
 			chainCodeDbName(payload.channelId, payload.chaincodeId),
-			payload.lastEventId
+			payload.lastEventId,
 		).let { result ->
 			transformResult(result, payload)
 		}

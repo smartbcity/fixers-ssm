@@ -1,6 +1,5 @@
 package ssm.couchdb.client
 
-import com.ibm.cloud.cloudant.v1.Cloudant
 import com.ibm.cloud.cloudant.v1.model.ChangesResult
 import com.ibm.cloud.cloudant.v1.model.DatabaseInformation
 import com.ibm.cloud.cloudant.v1.model.Document
@@ -10,6 +9,7 @@ import com.ibm.cloud.cloudant.v1.model.PostChangesOptions
 import com.ibm.cloud.cloudant.v1.model.PostFindOptions
 import com.ibm.cloud.cloudant.v1.model.PostViewOptions
 import com.ibm.cloud.sdk.core.http.Response
+import ssm.couchdb.client.builder.CloudantFixed
 import ssm.couchdb.client.builder.SsmCouchDbClientBuilder
 import ssm.couchdb.dsl.model.ChangeEventId
 import ssm.couchdb.dsl.model.DatabaseName
@@ -17,7 +17,7 @@ import ssm.couchdb.dsl.model.DocType
 import ssm.sdk.json.JSONConverter
 
 class CouchdbSsmClient(
-	val cloudant: Cloudant,
+	val cloudant: CloudantFixed,
 	private val converter: JSONConverter,
 ) {
 
