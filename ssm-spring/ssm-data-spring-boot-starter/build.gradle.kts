@@ -9,6 +9,7 @@ plugins {
 
 dependencies {
 	api(project(":ssm-data:ssm-data-f2"))
+	api(project(":ssm-data:ssm-data-sync"))
 
 	api("city.smartb.f2:f2-spring-boot-starter-function:${Versions.f2}")
 	kapt("org.springframework.boot:spring-boot-configuration-processor:${FixersVersions.Spring.boot}")

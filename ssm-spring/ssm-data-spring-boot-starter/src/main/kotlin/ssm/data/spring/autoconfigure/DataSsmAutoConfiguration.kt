@@ -21,6 +21,8 @@ import ssm.data.dsl.features.query.DataSsmSessionGetQueryFunction
 import ssm.data.dsl.features.query.DataSsmSessionListQueryFunction
 import ssm.data.dsl.features.query.DataSsmSessionLogGetQueryFunction
 import ssm.data.dsl.features.query.DataSsmSessionLogListQueryFunction
+import ssm.sync.sdk.SsmSyncF2Builder
+import ssm.sync.sdk.SyncSsmCommandFunction
 
 
 @EnableConfigurationProperties(DataSsmProperties::class)
@@ -112,5 +114,11 @@ class DataSsmF2AutoConfiguration(
 	override fun dataSsmSessionLogGetQueryFunction(): DataSsmSessionLogGetQueryFunction {
 		logger.debug("Configuration of ${DataSsmF2AutoConfiguration::dataSsmSessionLogGetQueryFunction.name}...")
 		return ssmApiQueryFunctions.dataSsmSessionLogGetQueryFunction()
+	}
+
+	@Bean
+	fun syncSsmCommandFunction(config: DataSsmConfig): SyncSsmCommandFunction {
+		logger.debug("Configuration of ${DataSsmF2AutoConfiguration::syncSsmCommandFunction.name}...")
+		return SsmSyncF2Builder.build(config)
 	}
 }
