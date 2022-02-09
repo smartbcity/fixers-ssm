@@ -33,13 +33,14 @@ class CouchDbDatabaseGetChangesQueryFunctionImpl(
 		}
 	}
 
-	private fun getChanges(
+	private suspend fun getChanges(
 		couchdbClient: CouchdbSsmClient,
 		payload: CouchdbDatabaseGetChangesQueryDTO
 	): CouchdbDatabaseGetChangesQueryResultDTO {
 		logger.info("GetChanges for ${payload.channelId}:${payload.chaincodeId}:${payload.ssmName}:${payload.sessionName}")
+		val dbName = chainCodeDbName(payload.channelId, payload.chaincodeId)
 		return couchdbClient.getSsmChanges(
-			dbName = chainCodeDbName(payload.channelId, payload.chaincodeId),
+			dbName = dbName,
 			lastEventId = payload.lastEventId,
 			limit = payload.limit,
 			ssmName = payload.ssmName,

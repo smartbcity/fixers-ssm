@@ -13,6 +13,9 @@ import com.ibm.cloud.cloudant.v1.model.PostViewOptions
 import com.ibm.cloud.cloudant.v1.model.PutDesignDocumentOptions
 import com.ibm.cloud.sdk.core.http.Response
 import com.ibm.cloud.sdk.core.service.exception.NotFoundException
+import kotlin.coroutines.resume
+import kotlin.coroutines.suspendCoroutine
+import kotlinx.coroutines.coroutineScope
 import ssm.chaincode.dsl.model.SessionName
 import ssm.chaincode.dsl.model.SsmName
 import ssm.couchdb.client.builder.CloudantFixed
@@ -120,14 +123,14 @@ class CouchdbSsmClient(
 		return cloudant.getDatabaseInformation(query).execute().result
 	}
 
-	fun getSsmChanges(
+	suspend fun getSsmChanges(
 		dbName: DatabaseName,
 		ssmName: SsmName,
 		sessionName: SessionName?,
 		lastEventId: ChangeEventId? = null,
 		limit: Long? = null
 	): ChangesResult {
-		designSsmChangesFilter(dbName)
+		installSsmChangesFilter(dbName)
 		val query = PostChangesOptions.Builder()
 			.db(dbName)
 			.lastEventId(lastEventId)
@@ -143,7 +146,7 @@ class CouchdbSsmClient(
 		}
 	}
 
-	fun designSsmChangesFilter(dbName: DatabaseName) {
+	suspend fun installSsmChangesFilter(dbName: DatabaseName) = suspendCoroutine<Boolean> { continuation ->
 		try {
 			cloudant.getDesignDocument(
 				GetDesignDocumentOptions.Builder()
@@ -151,6 +154,7 @@ class CouchdbSsmClient(
 					.ddoc("filters")
 					.build()
 			).execute().result
+			continuation.resume(false)
 		} catch (e: NotFoundException) {
 			val stateSsmNameFilter = PutDesignDocumentOptions.Builder()
 				.db(dbName)
@@ -163,7 +167,9 @@ class CouchdbSsmClient(
 					).build()
 				).build()
 
-			cloudant.putDesignDocument(stateSsmNameFilter).execute()
+			cloudant.putDesignDocument(stateSsmNameFilter).reactiveRequest().doAfterSuccess {
+				continuation.resume(true)
+			}.subscribe()
 		}
 	}
 
