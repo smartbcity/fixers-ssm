@@ -1,6 +1,6 @@
 Feature:
 
-  Scenario: As a developer, I want to get changes
+  Scenario: As a developper, I want to sync a ssm session
     Given An admin
     And A new user "Looper"
     And A new user "Engineer"
@@ -20,6 +20,5 @@ Feature:
       | Exit   | 3         | loop-ssm-session | Engineer | No more loop  |
     Then Changes for session "loop-ssm-session" for "loop-ssm" is
       | docType | objectId         |
-      | ssm     | loop-ssm         |
       | state   | loop-ssm-session |
     Then Changes for session "loop-ssm-session" for "loop-ssm" is empty

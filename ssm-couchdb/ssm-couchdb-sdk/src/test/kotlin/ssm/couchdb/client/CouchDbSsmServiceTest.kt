@@ -9,20 +9,20 @@ class CouchDbSsmServiceTest {
 
 	@Test
 	fun shouldReturnAdmin() {
-		val admin = DataTest.ssmCouchDbClient.fetchAllByDocType(DataTest.ssmName, DocType.Admin)
+		val admin = DataTest.ssmCouchDbClient.fetchAllByDocType(DataTest.dbSsmName, DocType.Admin)
 		Assertions.assertThat(admin).isNotNull
 	}
 
 	@Test
 	fun shouldReturnSsmCount() {
-		val ssms = DataTest.ssmCouchDbClient.fetchAllByDocType(DataTest.ssmName, DocType.Ssm)
+		val ssms = DataTest.ssmCouchDbClient.fetchAllByDocType(DataTest.dbSsmName, DocType.Ssm)
 		Assertions.assertThat(ssms).isNotNull
 	}
 
 	@Test
 	fun shouldReturnSsm() {
-		val ssmCount = DataTest.ssmCouchDbClient.getCount(DataTest.ssmName, DocType.Ssm)
-		val ssms = DataTest.ssmCouchDbClient.fetchAllByDocType(DataTest.ssmName, DocType.Ssm)
+		val ssmCount = DataTest.ssmCouchDbClient.getCount(DataTest.dbSsmName, DocType.Ssm)
+		val ssms = DataTest.ssmCouchDbClient.fetchAllByDocType(DataTest.dbSsmName, DocType.Ssm)
 		Assertions.assertThat(ssms.size).isEqualTo(ssmCount)
 	}
 }

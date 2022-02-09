@@ -7,5 +7,7 @@ dependencies {
 	api(project(":ssm-couchdb:ssm-couchdb-dsl"))
 	implementation(project(":ssm-couchdb:ssm-couchdb-sdk"))
 
+	Dependencies.slf4j(::implementation)
+
 	testImplementation(project(":ssm-couchdb:ssm-couchdb-bdd"))
 }

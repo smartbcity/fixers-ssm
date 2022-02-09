@@ -62,6 +62,19 @@ class CouchdbSsmSteps : SsmQueryStep(), En {
 
 			}
 		}
+		Then("Changes for {string} is") { ssmName: SsmName, dataTable: DataTable ->
+			runBlocking {
+				lastChanges = getChanges(bag.chaincodeUri, ssmName.contextualize(bag))
+				Assertions.assertThat(dataTable.asCucumberChanges().size).isEqualTo(lastChanges!!.items.size)
+			}
+		}
+		Then("Changes for {string} is empty") { ssmName: SsmName ->
+			runBlocking {
+				lastChanges = getChanges(bag.chaincodeUri, ssmName.contextualize(bag))
+				Assertions.assertThat(lastChanges?.items ?: emptyList()).isEmpty()
+
+			}
+		}
 	}
 
 	fun DataTable.asCucumberChanges(): List<CucumberChanges> {
@@ -76,13 +89,14 @@ class CouchdbSsmSteps : SsmQueryStep(), En {
 	suspend fun getChanges(
 		chaincodeUri: ChaincodeUri,
 		ssmName: SsmName,
-		sessionName: SessionName
+		sessionName: SessionName? = null
 	): SyncSsmCommandResult {
 		return SyncSsmCommand(
 			lastEventId = lastChanges?.lastEventId,
 			chaincodeUri = chaincodeUri,
 			ssmName = ssmName,
-			sessionName = sessionName
+			sessionName = sessionName,
+			limit = 20
 		).invokeWith(ssmSyncF2)
 	}
 

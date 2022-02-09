@@ -12,6 +12,8 @@ import com.ibm.cloud.sdk.core.security.Authenticator
 import com.ibm.cloud.sdk.core.util.GsonSingleton
 import com.ibm.cloud.sdk.core.util.ResponseConverterUtils
 import com.ibm.cloud.sdk.core.util.Validator
+import ssm.chaincode.dsl.model.SessionName
+import ssm.chaincode.dsl.model.SsmName
 
 @Suppress("LongMethod", "ComplexMethod")
 class CloudantFixed(
@@ -19,14 +21,14 @@ class CloudantFixed(
 	authenticator: Authenticator
 ) : Cloudant(serviceName, authenticator) {
 
-	override fun postChanges(postChangesOptions: PostChangesOptions): ServiceCall<ChangesResult> {
+	fun postChanges(postChangesOptions: PostChangesOptions, ssm: SsmName?, session: SessionName?): ServiceCall<ChangesResult> {
 		Validator.notNull(
 			postChangesOptions,
 			"postChangesOptions cannot be null"
 		)
 		val pathParamsMap: MutableMap<String, String> = HashMap()
 		pathParamsMap["db"] = postChangesOptions.db()
-		val builder = RequestBuilder.post(
+		val builder = RequestBuilder.get(
 			RequestBuilder.resolveRequestUrl(
 				serviceUrl, "/{db}/_changes", pathParamsMap
 			)
@@ -94,7 +96,14 @@ class CloudantFixed(
 		if (postChangesOptions.selector() != null) {
 			contentJson.add("selector", GsonSingleton.getGson().toJsonTree(postChangesOptions.selector()))
 		}
-		builder.bodyJson(contentJson)
+		ssm?.let {
+			builder.query("ssm", ssm)
+		}
+		session?.let {
+			builder.query("session", session)
+		}
+
+//		builder.bodyJson(contentJson)
 		val responseConverter =
 			ResponseConverterUtils.getValue<ChangesResult>(object : TypeToken<ChangesResult?>() {}.type)
 		return createServiceCall(builder.build(), responseConverter)

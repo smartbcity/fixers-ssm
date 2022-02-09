@@ -13,7 +13,6 @@ import ssm.chaincode.dsl.model.SsmName
 import ssm.couchdb.dsl.model.ChangeEventId
 import ssm.couchdb.dsl.model.DatabaseChanges
 import ssm.couchdb.dsl.model.DatabaseChangesDTO
-import ssm.couchdb.dsl.model.DocType
 
 /**
  * @title Retrieves all changes on a database
@@ -40,19 +39,19 @@ expect interface CouchdbDatabaseGetChangesQueryDTO : Query {
 	/**
 	 * The name of a ssm.
 	 */
-	val ssmName: SsmName?
+	val ssmName: SsmName
 	/**
 	 * The name of a session.
 	 */
 	val sessionName: SessionName?
 	/**
-	 * Filter result by doctype
-	 */
-	val docType: DocType<*>?
-	/**
 	 * Filter to start the results from the the ID of the last events received by the server on a previous connection
 	 */
 	val lastEventId: ChangeEventId?
+	/**
+	 * Filter to start the results from the the ID of the last events received by the server on a previous connection
+	 */
+	val limit: Long?
 }
 
 /**
@@ -74,10 +73,10 @@ expect interface CouchdbDatabaseGetChangesQueryResultDTO : Event {
 class CouchdbDatabaseGetChangesQuery(
 	override val channelId: ChannelId,
 	override val chaincodeId: ChaincodeId,
-	override val docType: DocType<*>?,
 	override val lastEventId: ChangeEventId?,
-	override val ssmName: SsmName?,
+	override val ssmName: SsmName,
 	override val sessionName: SessionName?,
+	override val limit: Long?,
 ) : CouchdbDatabaseGetChangesQueryDTO
 
 @Serializable

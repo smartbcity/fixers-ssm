@@ -15,10 +15,10 @@ import ssm.couchdb.dsl.model.DocType
 actual external interface CouchdbDatabaseGetChangesQueryDTO : Query {
 	actual val channelId: ChannelId
 	actual val chaincodeId: ChaincodeId
-	actual val ssmName: SsmName?
+	actual val ssmName: SsmName
 	actual val sessionName: SessionName?
-	actual val docType: DocType<*>?
 	actual val lastEventId: ChangeEventId?
+	actual val limit: Long?
 }
 
 @JsExport

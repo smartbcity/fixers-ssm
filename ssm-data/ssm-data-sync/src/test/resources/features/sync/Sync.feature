@@ -1,6 +1,6 @@
 Feature:
 
-  Scenario: As a developper, I want to sync
+  Scenario: As a developper, I want to sync a ssm
     Given An admin
     And A new user "Looper"
     And A new user "Engineer"
@@ -18,7 +18,7 @@ Feature:
       | Loop   | 1         | loop-ssm-session | Looper   | An other loop |
       | Loop   | 2         | loop-ssm-session | Looper   | An other loop |
       | Exit   | 3         | loop-ssm-session | Engineer | No more loop  |
-    Then Changes for session "loop-ssm-session" for "loop-ssm" is
+    Then Changes for "loop-ssm" is
       | docType | objectId         |
       | state   | loop-ssm-session |
-    Then Changes for session "loop-ssm-session" for "loop-ssm" is empty
+    Then Changes for "loop-ssm" is empty

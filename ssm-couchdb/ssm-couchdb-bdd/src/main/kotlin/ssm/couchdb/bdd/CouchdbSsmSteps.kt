@@ -46,7 +46,6 @@ class CouchdbSsmSteps : SsmQueryStep(), En {
 		}
 		Then("Changes for session {string} for {string} is") { sessionName: SessionName, ssmName: SsmName, dataTable: DataTable ->
 			runBlocking {
-
 				delay(timeMillis = 1500)
 				lastChanges = getChanges(bag.chaincodeUri, ssmName.contextualize(bag), sessionName.contextualize(bag))
 				Assertions.assertThat(dataTable.asCucumberChanges().size).isEqualTo(lastChanges?.items?.size ?: 0.0)
@@ -79,15 +78,15 @@ class CouchdbSsmSteps : SsmQueryStep(), En {
 	suspend fun getChanges(
 		chaincodeUri: ChaincodeUri,
 		ssmName: SsmName,
-		sessionName: SessionName
+		sessionName: SessionName,
 	): CouchdbDatabaseGetChangesQueryResultDTO {
 		return CouchdbDatabaseGetChangesQuery(
 			channelId = chaincodeUri.channelId,
 			chaincodeId = chaincodeUri.chaincodeId,
+			lastEventId = lastChanges?.lastEventId,
 			ssmName = ssmName,
 			sessionName = sessionName,
-			docType = null,
-			lastEventId = lastChanges?.lastEventId
+			limit = 20
 		).invokeWith(couchdbSsmQueriesFunctions.couchdbDatabaseGetChangesQueryFunction())
 	}
 

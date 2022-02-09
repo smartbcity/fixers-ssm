@@ -4,7 +4,8 @@ import ssm.couchdb.client.CouchdbSsmClient
 import ssm.couchdb.client.builder.SsmCouchDbBasicAuth
 
 object DataTest {
-	val ssmName = "sandbox_ssm"
+	val dbSsmName = "sandbox_ssm"
+	val ssmName = "ssm"
 
 	private val username = "couchdb"
 	private val password = "couchdb"

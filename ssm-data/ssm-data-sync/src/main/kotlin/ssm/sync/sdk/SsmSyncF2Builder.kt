@@ -6,10 +6,10 @@ import ssm.data.dsl.config.DataSsmConfig
 
 
 object SsmSyncF2Builder {
-	fun build(dataConfig: DataSsmConfig): SyncSsmF2Impl {
+	fun build(dataConfig: DataSsmConfig): SyncSsmCommandFunctionImpl {
 		val couchDbDatabaseGetChangesQueryFunction = CouchdbSsmQueriesFunctionImpl(dataConfig.couchdb)
 		val dataSsmQueryFunctionImpl = DataSsmQueryFunctionImpl(dataConfig)
-		return SyncSsmF2Impl(
+		return SyncSsmCommandFunctionImpl(
 			dataSsmGetQueryFunction = dataSsmQueryFunctionImpl.dataSsmGetQueryFunction(),
 			dataSsmSessionLogListQueryFunction = dataSsmQueryFunctionImpl.dataSsmSessionLogListQueryFunction(),
 			couchdbSsmSessionStateGetQueryFunction = couchDbDatabaseGetChangesQueryFunction.couchdbSsmSessionStateGetQueryFunction(),

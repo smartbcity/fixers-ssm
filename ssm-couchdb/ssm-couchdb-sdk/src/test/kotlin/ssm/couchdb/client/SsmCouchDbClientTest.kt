@@ -17,7 +17,7 @@ internal class SsmCouchDbClientTest {
 
 	@Test
 	fun `explore ssmCouchDb getChanges return type`() {
-		val allChanges = DataTest.ssmCouchDbClient.getChanges(DataTest.ssmName)
+		val allChanges = DataTest.ssmCouchDbClient.getSsmChanges(DataTest.dbSsmName, ssmName = DataTest.ssmName, sessionName = null)
 		allChanges.results.forEach { item ->
 			println("//////////////////////")
 			println("seq: ${item.seq}")

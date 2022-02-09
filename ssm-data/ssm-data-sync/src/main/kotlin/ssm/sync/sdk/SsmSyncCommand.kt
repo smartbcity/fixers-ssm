@@ -12,6 +12,7 @@ typealias SyncSsmCommandFunction = F2Function<SyncSsmCommand, SyncSsmCommandResu
 
 interface SyncSsmCommandDTO {
 	val lastEventId: ChangeEventId?
+	val limit: Long?
 	val chaincodeUri: ChaincodeUri
 	val ssmName: SsmName?
 	val sessionName: SessionName?
@@ -25,8 +26,9 @@ interface SyncSsmCommandResultDTO {
 class SyncSsmCommand(
 	override val lastEventId: ChangeEventId?,
 	override val chaincodeUri: ChaincodeUri,
-	override val ssmName: SsmName? = null,
+	override val ssmName: SsmName,
 	override val sessionName: SessionName? = null,
+	override val limit: Long? = null,
 ) : SyncSsmCommandDTO
 
 data class SyncSsmCommandResult(

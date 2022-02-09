@@ -19,7 +19,7 @@ import ssm.data.dsl.features.query.DataSsmGetQueryFunction
 import ssm.data.dsl.features.query.DataSsmSessionLogListQuery
 import ssm.data.dsl.features.query.DataSsmSessionLogListQueryFunction
 
-class SyncSsmF2Impl(
+class SyncSsmCommandFunctionImpl(
 	private val dataSsmGetQueryFunction: DataSsmGetQueryFunction,
 	private val dataSsmSessionLogListQueryFunction: DataSsmSessionLogListQueryFunction,
 	private val couchdbSsmSessionStateGetQueryFunction: CouchdbSsmSessionStateGetQueryFunction,
@@ -28,7 +28,7 @@ class SyncSsmF2Impl(
 
 	override suspend fun invoke(msg: Flow<SyncSsmCommand>): Flow<SyncSsmCommandResult> =
 		msg.map { payload ->
-			val result = payload.chaincodeUri.queryCouchdbDatabaseGetChanges(payload)
+			val result = payload.queryCouchdbDatabaseGetChanges()
 			result.items.applySsmSessionChanges(payload.chaincodeUri).fold()
 				.toResult()
 				.let {
@@ -37,7 +37,6 @@ class SyncSsmF2Impl(
 						items = it
 					)
 				}
-
 		}
 
 	private suspend fun List<SsmSyncChanges>?.toResult() = this?.map { changes ->
@@ -59,15 +58,14 @@ class SyncSsmF2Impl(
 		}
 	}
 
-	private suspend fun ChaincodeUri.queryCouchdbDatabaseGetChanges(
-		cmd: SyncSsmCommand,
-	): CouchdbDatabaseGetChangesQueryResultDTO = CouchdbDatabaseGetChangesQuery(
-		chaincodeId = chaincodeId,
-		channelId = channelId,
-		docType = DocType.State,
-		lastEventId = cmd.lastEventId,
-		ssmName = cmd.ssmName,
-		sessionName = cmd.sessionName
+	private suspend fun SyncSsmCommand.queryCouchdbDatabaseGetChanges()
+	: CouchdbDatabaseGetChangesQueryResultDTO = CouchdbDatabaseGetChangesQuery(
+		chaincodeId = chaincodeUri.chaincodeId,
+		channelId = chaincodeUri.channelId,
+		lastEventId = lastEventId,
+		ssmName = ssmName,
+		sessionName = sessionName,
+		limit = limit
 	).invokeWith(
 			couchdbDatabaseGetChangesQueryFunction
 	)
