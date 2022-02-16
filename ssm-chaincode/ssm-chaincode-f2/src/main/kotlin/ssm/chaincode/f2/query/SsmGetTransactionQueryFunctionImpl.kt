@@ -13,7 +13,7 @@ class SsmGetTransactionQueryFunctionImpl(
 
 	override suspend fun invoke(msg: Flow<SsmGetTransactionQuery>): Flow<SsmGetTransactionQueryResult> =
 		msg.map { payload ->
-			queryService.getTransaction(payload.id)
+			queryService.getTransaction(payload.chaincodeUri, payload.id)
 				.let(::SsmGetTransactionQueryResult)
 		}
 }

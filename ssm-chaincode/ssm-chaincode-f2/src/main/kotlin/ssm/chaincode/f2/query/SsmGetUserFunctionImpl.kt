@@ -12,7 +12,7 @@ class SsmGetUserFunctionImpl(
 ): SsmGetUserFunction {
 
 	override suspend fun invoke(msg: Flow<SsmGetUserQuery>): Flow<SsmGetUserResult> = msg.map { payload ->
-		queryService.getAgent(payload.name).let { items ->
+		queryService.getAgent(payload.chaincodeUri, payload.name).let { items ->
 			SsmGetUserResult(items)
 		}
 	}

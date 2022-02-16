@@ -99,8 +99,8 @@ class CouchdbSsmSteps : SsmQueryStep(), En {
 			.item
 	}
 
-	override suspend fun logSession(ssmName: SsmUri, sessionName: SessionName): List<SsmSessionStateLog> {
-		return bag.clientQuery.log(sessionName)
+	override suspend fun logSession(ssmUri: SsmUri, sessionName: SessionName): List<SsmSessionStateLog> {
+		return bag.clientQuery.log(ssmUri.chaincodeUri, sessionName)
 	}
 
 	override suspend fun listSessions(ssmUri: SsmUri): List<SessionName> {

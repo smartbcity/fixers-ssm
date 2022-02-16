@@ -5,6 +5,7 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
 import ssm.api.features.query.internal.DataSsmSessionConvertFunctionImpl
 import ssm.api.features.query.internal.DataSsmSessionConvertQuery
+import ssm.chaincode.dsl.model.uri.asChaincodeUri
 import ssm.chaincode.dsl.model.uri.burst
 import ssm.chaincode.dsl.query.SsmGetSessionQuery
 import ssm.chaincode.dsl.query.SsmGetSessionQueryFunction
@@ -22,6 +23,7 @@ class DataSsmSessionGetQueryFunctionImpl(
 		msg.map { payload ->
 			try {
 				SsmGetSessionQuery(
+					chaincodeUri = payload.ssmUri.asChaincodeUri(),
 					sessionName = payload.sessionName,
 				).invokeWith(ssmGetSessionQueryFunction)
 					.item?.let { sessionState ->

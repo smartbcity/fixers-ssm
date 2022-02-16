@@ -8,6 +8,7 @@ import ssm.chaincode.dsl.SsmItemResultDTO
 import ssm.chaincode.dsl.SsmQueryDTO
 import ssm.chaincode.dsl.blockchain.Transaction
 import ssm.chaincode.dsl.blockchain.TransactionId
+import ssm.chaincode.dsl.model.uri.ChaincodeUri
 
 /**
  * Retrieves an Transaction
@@ -26,6 +27,7 @@ typealias SsmGetTransactionQueryFunction = F2Function<SsmGetTransactionQuery, Ss
 @JsExport
 @JsName("SsmGetTransactionQuery")
 data class SsmGetTransactionQuery(
+	override val chaincodeUri: ChaincodeUri,
 	val id: TransactionId,
 ) : SsmQueryDTO
 

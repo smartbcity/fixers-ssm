@@ -5,6 +5,8 @@ import kotlinx.coroutines.flow.map
 import ssm.chaincode.dsl.model.Agent
 import ssm.chaincode.dsl.model.AgentName
 import ssm.chaincode.dsl.model.Ssm
+import ssm.chaincode.dsl.model.uri.ChaincodeUri
+import ssm.chaincode.dsl.model.uri.burst
 import ssm.chaincode.f2.utils.SsmException
 import ssm.sdk.core.SsmQueryService
 import ssm.sdk.core.SsmTxService
@@ -19,23 +21,23 @@ class SsmTxInitFunctionImpl(
 ): SsmTxInitFunction {
 
 	override suspend fun invoke(msg: Flow<SsmInitCommand>): Flow<SsmInitdResult> = msg.map { payload ->
-		val retInitUser = initUser(payload.agent, payload.signerName)
-		val retInitSsm = initSsm(payload.ssm, payload.signerName)
+		val retInitUser = initUser(payload.chaincodeUri.burst(), payload.agent, payload.signerName)
+		val retInitSsm = initSsm(payload.chaincodeUri.burst(), payload.ssm, payload.signerName)
 		val invoke = listOfNotNull(retInitUser, retInitSsm)
 		SsmInitdResult(
 			results = invoke.map { it.transactionId }
 		)
 	}
 
-	private suspend fun initSsm(ssm: Ssm, signerName: AgentName): InvokeReturn? {
-		return createIfNotExist(ssm, { queryService.getSsm(ssm.name) }, { this.createSsm(it, signerName) })
+	private suspend fun initSsm(chaincodeUri: ChaincodeUri, ssm: Ssm, signerName: AgentName): InvokeReturn? {
+		return createIfNotExist(ssm, { queryService.getSsm(chaincodeUri, ssm.name) }, { this.createSsm(chaincodeUri, it, signerName) })
 	}
 
-	private suspend fun initUser(user: Agent, signerName: AgentName): InvokeReturn? {
+	private suspend fun initUser(chaincodeUri: ChaincodeUri, user: Agent, signerName: AgentName): InvokeReturn? {
 		return createIfNotExist(
 			user,
-			{ queryService.getAgent(user.name) },
-			{ this.createUser(it, signerName)!! })
+			{ queryService.getAgent(chaincodeUri, user.name) },
+			{ this.createUser(chaincodeUri, it, signerName)!! })
 	}
 
 	private suspend fun <T> createIfNotExist(
@@ -50,17 +52,17 @@ class SsmTxInitFunctionImpl(
 		}
 	}
 
-	private suspend fun createSsm(ssm: Ssm, signerName: AgentName): InvokeReturn {
+	private suspend fun createSsm(chaincodeUri: ChaincodeUri, ssm: Ssm, signerName: AgentName): InvokeReturn {
 		try {
-			return txService.sendCreate(ssm, signerName)!!
+			return txService.sendCreate(chaincodeUri, ssm, signerName)!!
 		} catch (e: Exception) {
 			throw SsmException(e)
 		}
 	}
 
-	private suspend fun createUser(agent: Agent, signerName: AgentName): InvokeReturn? {
+	private suspend fun createUser(chaincodeUri: ChaincodeUri, agent: Agent, signerName: AgentName): InvokeReturn? {
 		try {
-			return txService.sendRegisterUser(agent, signerName)
+			return txService.sendRegisterUser(chaincodeUri, agent, signerName)
 		} catch (e: Exception) {
 			throw SsmException(e)
 		}

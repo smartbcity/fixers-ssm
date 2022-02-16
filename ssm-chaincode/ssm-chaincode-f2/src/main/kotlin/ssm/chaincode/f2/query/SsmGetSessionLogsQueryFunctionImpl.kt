@@ -12,12 +12,12 @@ class SsmGetSessionLogsQueryFunctionImpl(
 ): SsmGetSessionLogsQueryFunction  {
 
 	override suspend fun invoke(msg: Flow<SsmGetSessionLogsQuery>): Flow<SsmGetSessionLogsQueryResult> = msg.map { payload ->
-		queryService.log(payload.sessionName)
-			.let {
+		queryService.log(payload.chaincodeUri, payload.sessionName)
+			.let { logs ->
 				SsmGetSessionLogsQueryResult(
-					ssmUri = payload.ssmUri,
+					ssmName = payload.ssmName,
 					sessionName = payload.sessionName,
-					logs = it
+					logs = logs
 				)
 			}
 	}

@@ -8,6 +8,7 @@ import ssm.chaincode.dsl.SsmItemResultDTO
 import ssm.chaincode.dsl.SsmQueryDTO
 import ssm.chaincode.dsl.model.Ssm
 import ssm.chaincode.dsl.model.SsmName
+import ssm.chaincode.dsl.model.uri.ChaincodeUri
 
 /**
  * Retrieves a SSM
@@ -27,6 +28,7 @@ typealias SsmGetQueryFunction = F2Function<SsmGetQuery, SsmGetResult>
 @Serializable
 @JsName("SsmGetQuery")
 class SsmGetQuery(
+	override val chaincodeUri: ChaincodeUri,
 	/**
 	 * Identifier of the SSM to retrieve
 	 * @example [Ssm.name]

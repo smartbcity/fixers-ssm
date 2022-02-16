@@ -41,8 +41,9 @@ suspend fun SessionName.getSessionLogs(
 ): List<SsmSessionStateLog> {
 	return try {
 		SsmGetSessionLogsQuery(
+			chaincodeUri = ssmUri.chaincodeUri,
 			sessionName = this,
-			ssmUri = ssmUri
+			ssmName = ssmUri.ssmName
 		).invokeWith(ssmGetSessionLogsQueryFunction).logs
 	} catch (e: Exception) {
 		e.printStackTrace()
@@ -52,9 +53,11 @@ suspend fun SessionName.getSessionLogs(
 
 suspend fun TransactionId?.getTransaction(
 	ssmGetTransactionQueryFunction: SsmGetTransactionQueryFunction,
+	chaincodeUri: ChaincodeUri
 ): Transaction? {
 	return this?.let { transactionId ->
 		SsmGetTransactionQuery(
+			chaincodeUri = chaincodeUri,
 			id = transactionId,
 		).invokeWith(ssmGetTransactionQueryFunction).item
 	}

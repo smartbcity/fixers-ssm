@@ -11,8 +11,8 @@ class SsmListSsmQueryFunctionImpl(
 	private val queryService: SsmQueryService
 ): SsmListSsmQueryFunction {
 
-	override suspend fun invoke(msg: Flow<SsmListSsmQuery>): Flow<SsmListSsmResult> = msg.map { _ ->
-		queryService.listSsm().let { items ->
+	override suspend fun invoke(msg: Flow<SsmListSsmQuery>): Flow<SsmListSsmResult> = msg.map { payload ->
+		queryService.listSsm(payload.chaincodeUri).let { items ->
 			SsmListSsmResult(items.toTypedArray())
 		}
 	}

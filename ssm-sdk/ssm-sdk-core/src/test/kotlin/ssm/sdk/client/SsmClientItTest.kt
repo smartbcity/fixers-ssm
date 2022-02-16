@@ -18,6 +18,7 @@ import ssm.chaincode.dsl.model.SsmContext
 import ssm.chaincode.dsl.model.SsmSession
 import ssm.chaincode.dsl.model.SsmSessionState
 import ssm.chaincode.dsl.model.SsmTransition
+import ssm.chaincode.dsl.model.uri.ChaincodeUri
 import ssm.sdk.core.SsmQueryService
 import ssm.sdk.core.SsmTxService
 import ssm.sdk.dsl.InvokeReturn
@@ -34,6 +35,7 @@ class SsmClientItTest {
 
 	companion object {
 		private val uuid = UUID.randomUUID().toString()
+		private val chaincodeUri = ChaincodeUri("chaincode:sandbox:ssm")
 		private const val NETWORK = "bclan-it/"
 		const val ADMIN_NAME = "ssm-admin"
 		val USER1_NAME = "bob" + "-" + uuid
@@ -94,14 +96,14 @@ class SsmClientItTest {
 	@Order(5)
 	@Test
 	fun listAdmin() = runBlocking<Unit> {
-		val agentRet = query.listAdmins()
+		val agentRet = query.listAdmins(chaincodeUri)
 		Assertions.assertThat(agentRet).contains(ADMIN_NAME)
 	}
 
 	@Order(10)
 	@Test
 	fun adminUser() = runBlocking<Unit> {
-		val agentRet = query.getAdmin(ADMIN_NAME)
+		val agentRet = query.getAdmin(chaincodeUri, ADMIN_NAME)
 		val agentFormClient = agentRet
 		Assertions.assertThat(agentFormClient).isEqualTo(agentAdmin)
 	}
@@ -109,7 +111,7 @@ class SsmClientItTest {
 	@Test
 	@Order(20)
 	fun registerUser1() = runBlocking<Unit> {
-		val transactionEvent = tx.sendRegisterUser(agentUser1, signerAdmin.name)!!
+		val transactionEvent = tx.sendRegisterUser(chaincodeUri, agentUser1, signerAdmin.name)!!
 		val trans = transactionEvent
 		assertThatTransactionExists(trans)
 	}
@@ -117,28 +119,28 @@ class SsmClientItTest {
 	@Order(30)
 	@Test
 	fun agentUser1() = runBlocking<Unit> {
-		val agentRet = query.getAgent(agentUser1.name)!!
+		val agentRet = query.getAgent(chaincodeUri, agentUser1.name)!!
 		Assertions.assertThat(agentRet).isEqualTo(agentUser1)
 	}
 
 	@Test
 	@Order(40)
 	fun registerUser2() = runBlocking<Unit> {
-		val transactionEvent = tx.sendRegisterUser(agentUser2, signerAdmin.name)
+		val transactionEvent = tx.sendRegisterUser(chaincodeUri, agentUser2, signerAdmin.name)
 		assertThatTransactionExists(transactionEvent!!)
 	}
 
 	@Order(50)
 	@Test
 	fun agentUser2() = runBlocking<Unit> {
-		val agentRet = query.getAgent(agentUser2.name)
+		val agentRet = query.getAgent(chaincodeUri, agentUser2.name)
 		Assertions.assertThat(agentRet).isEqualTo(agentUser2)
 	}
 
 	@Test
 	@Order(55)
 	fun listAgent() = runBlocking<Unit> {
-		val agentRet = query.listUsers()
+		val agentRet = query.listUsers(chaincodeUri)
 		Assertions.assertThat(agentRet).contains(agentUser1.name, agentUser2.name)
 	}
 
@@ -148,7 +150,7 @@ class SsmClientItTest {
 		val sell = SsmTransition(0, 1, "Seller", "Sell")
 		val buy = SsmTransition(1, 2, "Buyer", "Buy")
 		val ssm = Ssm(ssmName, Lists.newArrayList(sell, buy))
-		val transactionEvent = tx.sendCreate(ssm, signerAdmin.name)
+		val transactionEvent = tx.sendCreate(chaincodeUri, ssm, signerAdmin.name)
 		assertThatTransactionExists(transactionEvent!!)
 	}
 
@@ -156,6 +158,7 @@ class SsmClientItTest {
 	@Test
 	fun ssm() = runBlocking<Unit> {
 		val ssmReq = query.getSsm(
+			chaincodeUri,
 			ssmName
 		)
 		Assertions.assertThat(ssmReq).isNotNull
@@ -172,7 +175,7 @@ class SsmClientItTest {
 			ssmName,
 			sessionName, roles, "Used car for 100 dollars.", emptyMap()
 		)
-		val transactionEvent = tx.sendStart(session, signerAdmin.name)
+		val transactionEvent = tx.sendStart(chaincodeUri, session, signerAdmin.name)
 		assertThatTransactionExists(transactionEvent!!)
 	}
 
@@ -180,6 +183,7 @@ class SsmClientItTest {
 	@Test
 	fun session() = runBlocking<Unit> {
 		val ses = query.getSession(
+			chaincodeUri,
 			sessionName
 		)
 		val sesReq = ses
@@ -201,7 +205,7 @@ class SsmClientItTest {
 			agentUser1
 		)
 		privateMessage = context.private
-		val transactionEvent = tx.sendPerform("Sell", context, signerUser2.name)
+		val transactionEvent = tx.sendPerform(chaincodeUri,"Sell", context, signerUser2.name)
 		assertThatTransactionExists(transactionEvent!!)
 	}
 
@@ -210,6 +214,7 @@ class SsmClientItTest {
 	fun sessionAfterSell() = runBlocking<Unit> {
 		val sell = SsmTransition(0, 1, "Seller", "Sell")
 		val sesReq = query.getSession(
+			chaincodeUri,
 			sessionName
 		)
 		val stateExpected = SsmSessionState(
@@ -223,7 +228,7 @@ class SsmClientItTest {
 	@Test
 	fun sessionAfterSellShouldReturnEncryptMessage() = runBlocking<Unit> {
 //		val (from, to, role, action) = SsmTransition(0, 1, "Seller", "Sell")
-		val state = query.getSession(sessionName)
+		val state = query.getSession(chaincodeUri, sessionName)
 		val expectedMessage = state?.getPrivateMessage(signerUser1)
 		Assertions.assertThat(expectedMessage).isEqualTo("Message to signer1")
 	}
@@ -232,17 +237,17 @@ class SsmClientItTest {
 	@Order(120)
 	fun performBuy() = runBlocking<Unit> {
 		val context = SsmContext(sessionName, "Deal !", 1, emptyMap())
-		val transactionEvent = tx.sendPerform("Buy", context, signerUser1.name)!!
+		val transactionEvent = tx.sendPerform(chaincodeUri,"Buy", context, signerUser1.name)!!
 		assertThatTransactionExists(transactionEvent)
 	}
 
 	suspend fun assertThatTransactionExists(trans: InvokeReturn) {
 		Assertions.assertThat(trans).isNotNull
 		Assertions.assertThat(trans.status).isEqualTo("SUCCESS")
-		val transaction: Transaction? = query.getTransaction(trans.transactionId)
+		val transaction: Transaction? = query.getTransaction(chaincodeUri, trans.transactionId)
 		Assertions.assertThat(transaction).isNotNull
 		Assertions.assertThat(transaction?.blockId).isNotNull
-		val block: Block? = query.getBlock(transaction!!.blockId)
+		val block: Block? = query.getBlock(chaincodeUri, transaction!!.blockId)
 		Assertions.assertThat(block).isNotNull
 	}
 
@@ -251,6 +256,7 @@ class SsmClientItTest {
 	fun sessionAfterBuy() = runBlocking<Unit> {
 		val buy = SsmTransition(1, 2, "Buyer", "Buy")
 		val sesReq = query.getSession(
+			chaincodeUri,
 			sessionName
 		)
 		val state = sesReq
@@ -266,6 +272,7 @@ class SsmClientItTest {
 	@Throws(Exception::class)
 	fun logSession() = runBlocking<Unit> {
 		val sesReq = query.log(
+			chaincodeUri,
 			sessionName
 		)
 		Assertions.assertThat(sesReq.size).isEqualTo(3)
@@ -274,14 +281,14 @@ class SsmClientItTest {
 	@Test
 	@Order(140)
 	fun listSsm() = runBlocking<Unit> {
-		val agentRet = query.listSsm()
+		val agentRet = query.listSsm(chaincodeUri)
 		Assertions.assertThat(agentRet).contains(ssmName)
 	}
 
 	@Test
 	@Order(150)
 	private fun listSession() = runBlocking<Unit> {
-		val agentRet = query.listSession()
+		val agentRet = query.listSession(chaincodeUri)
 		Assertions.assertThat(agentRet).contains(sessionName)
 	}
 }

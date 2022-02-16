@@ -2,6 +2,7 @@ package ssm.chaincode.dsl.model.uri
 
 import kotlin.js.JsExport
 import kotlin.js.JsName
+import kotlinx.serialization.Transient
 import ssm.chaincode.dsl.model.ChaincodeId
 import ssm.chaincode.dsl.model.ChannelId
 import ssm.chaincode.dsl.model.SsmName
@@ -16,6 +17,7 @@ expect interface SsmUriDTO {
 }
 
 fun SsmUriDTO.burst() = SsmUri(uri)
+fun SsmUriDTO.asChaincodeUri() = SsmUri(uri).chaincodeUri
 
 @JsExport
 @JsName("SsmUri")
@@ -33,14 +35,21 @@ data class SsmUri(override val uri: String): SsmUriDTO {
 		require(burst.first() == PREFIX)
 	}
 
+	@Transient
 	val channelId
 		get() = burst[1]
+	@Transient
 	val chaincodeId
 		get() = burst[2]
+	@Transient
 	val ssmName
 		get() = burst.get(index = 3)
+	@Transient
 	val ssmVersion
 		get() = DEFAULT_VERSION
+	@Transient
+	val chaincodeUri
+		get() = ChaincodeUri.from(channelId, chaincodeId)
 
 }
 

@@ -11,8 +11,8 @@ class SsmListAdminQueryFunctionImpl(
 	private val queryService: SsmQueryService
 ) : SsmListAdminQueryFunction {
 
-	override suspend fun invoke(msg: Flow<SsmListAdminQuery>): Flow<SsmListAdminResult> = msg.map { _ ->
-		queryService.listAdmins().let { items ->
+	override suspend fun invoke(msg: Flow<SsmListAdminQuery>): Flow<SsmListAdminResult> = msg.map { payload ->
+		queryService.listAdmins(payload.chaincodeUri).let { items ->
 			SsmListAdminResult(items.toTypedArray())
 		}
 

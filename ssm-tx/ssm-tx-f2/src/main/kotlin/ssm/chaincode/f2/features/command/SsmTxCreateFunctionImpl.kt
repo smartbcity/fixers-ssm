@@ -2,6 +2,7 @@ package ssm.chaincode.f2.features.command
 
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
+import ssm.chaincode.dsl.model.uri.burst
 import ssm.chaincode.f2.utils.SsmException
 import ssm.sdk.core.SsmTxService
 import ssm.tx.dsl.features.ssm.SsmCreateCommand
@@ -14,7 +15,7 @@ class SsmTxCreateFunctionImpl(
 
 	override suspend fun invoke(msg: Flow<SsmCreateCommand>): Flow<SsmCreateResult> = msg.map { payload ->
 		try {
-			ssmTxService.sendCreate(payload.ssm, payload.signerName).let { invokeReturn ->
+			ssmTxService.sendCreate(payload.chaincodeUri.burst(), payload.ssm, payload.signerName).let { invokeReturn ->
 				SsmCreateResult(
 					transactionId = invokeReturn!!.transactionId,
 				)

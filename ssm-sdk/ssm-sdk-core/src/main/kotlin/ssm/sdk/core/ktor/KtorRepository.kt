@@ -23,8 +23,8 @@ class KtorRepository(
 ) {
 	companion object {
 		const val CMD_PROPS = "cmd"
-		const val CHANNEL_ID_PROPS = "channelId"
-		const val CHAINCODE_ID_PROPS = "chaincodeId"
+		const val CHANNEL_ID_PROPS = "channelid"
+		const val CHAINCODE_ID_PROPS = "chaincodeid"
 		const val FCN_PROPS = "fcn"
 		const val ARGS_PROPS = "args"
 	}

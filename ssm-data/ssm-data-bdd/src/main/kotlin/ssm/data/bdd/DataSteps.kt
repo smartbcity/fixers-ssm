@@ -43,7 +43,7 @@ class DataSteps : SsmQueryStep(), En {
 	}
 
 	override suspend fun logSession(ssmUri: SsmUri, sessionName: SessionName): List<SsmSessionStateLog> {
-		return bag.clientQuery.log(sessionName)
+		return bag.clientQuery.log(ssmUri.chaincodeUri, sessionName)
 	}
 
 	override suspend fun listSessions(ssmUri: SsmUri): List<SessionName> {

@@ -7,6 +7,7 @@ import kotlinx.serialization.Serializable
 import ssm.chaincode.dsl.SsmItemsResultDTO
 import ssm.chaincode.dsl.SsmQueryDTO
 import ssm.chaincode.dsl.model.SessionName
+import ssm.chaincode.dsl.model.uri.ChaincodeUri
 
 /**
  * Retrieves all existing sessions
@@ -25,7 +26,9 @@ typealias SsmListSessionQueryFunction = F2Function<SsmListSessionQuery, SsmListS
 @Serializable
 @JsExport
 @JsName("SsmListSessionQuery")
-class SsmListSessionQuery: SsmQueryDTO
+class SsmListSessionQuery(
+	override val chaincodeUri: ChaincodeUri,
+): SsmQueryDTO
 
 /**
  * @d2 event

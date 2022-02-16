@@ -3,6 +3,7 @@ package ssm.chaincode.f2.features.command
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
 import ssm.chaincode.dsl.config.ChaincodeSsmConfig
+import ssm.chaincode.dsl.model.uri.burst
 import ssm.chaincode.f2.utils.SsmException
 import ssm.sdk.core.SsmTxService
 import ssm.tx.dsl.features.user.SsmTxUserRegisterFunction
@@ -15,7 +16,7 @@ class SsmUserRegisterFunctionImpl(
 
 	override suspend fun invoke(msg: Flow<SsmUserRegisterCommand>): Flow<SsmUserRegisteredResult> = msg.map { payload ->
 		try {
-			ssmTxService.sendRegisterUser(payload.agent, payload.signerName)!!.let { result ->
+			ssmTxService.sendRegisterUser(payload.chaincodeUri.burst(), payload.agent, payload.signerName)!!.let { result ->
 				SsmUserRegisteredResult(
 					transactionId = result.transactionId
 				)

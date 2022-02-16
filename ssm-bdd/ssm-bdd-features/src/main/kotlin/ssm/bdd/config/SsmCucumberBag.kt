@@ -34,18 +34,12 @@ class SsmCucumberBag(
 
 	val clientQuery = SsmServiceFactory
 		.builder(config)
-		.withChannelId("sandbox")
-		.withSsmId("ssm")
 		.buildQueryService()
 
 	fun clientTx(signer: Signer) = SsmServiceFactory
 		.builder(config)
-		.withChannelId("sandbox")
-		.withSsmId("ssm")
 		.buildTxService(SsmCmdSignerSha256RSASigner(signer))
 
-	// URI
-//	lateinit var ssmUri: SsmUri
 	val chaincodeUri: ChaincodeUri = ChaincodeUri("chaincode:sandbox:ssm")
 
 	//	SsmSdkTxSteps

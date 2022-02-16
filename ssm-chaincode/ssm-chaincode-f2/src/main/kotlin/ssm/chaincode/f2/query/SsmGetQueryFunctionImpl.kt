@@ -12,6 +12,6 @@ class SsmGetQueryFunctionImpl(
 ) : SsmGetQueryFunction {
 
 	override suspend fun invoke(msg: Flow<SsmGetQuery>): Flow<SsmGetResult> = msg.map { payload ->
-		queryService.getSsm(payload.name).let(::SsmGetResult)
+		queryService.getSsm(payload.chaincodeUri, payload.name).let(::SsmGetResult)
 	}
 }

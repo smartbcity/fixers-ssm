@@ -3,7 +3,7 @@ import city.smartb.gradle.dependencies.Scope
 import city.smartb.gradle.dependencies.add
 
 object PluginVersions {
-	const val fixers = "0.3.1"
+	const val fixers = "experimental-SNAPSHOT"
 	const val kotlin = FixersPluginVersions.kotlin
 	const val npmPublish = FixersPluginVersions.npmPublish
 }

@@ -4,6 +4,7 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
 import ssm.api.extentions.getSessionLogs
 import ssm.api.extentions.getTransaction
+import ssm.chaincode.dsl.model.uri.asChaincodeUri
 import ssm.chaincode.dsl.model.uri.burst
 import ssm.chaincode.dsl.query.SsmGetSessionLogsQueryFunction
 import ssm.chaincode.dsl.query.SsmGetTransactionQueryFunction
@@ -25,7 +26,8 @@ class DataSsmSessionLogGetQueryFunctionImpl(
 				ssmGetSessionLogsQueryFunction
 			)
 			val transaction = payload.txId.getTransaction(
-				ssmGetTransactionQueryFunction
+				ssmGetTransactionQueryFunction,
+				chaincodeUri = payload.ssmUri.asChaincodeUri(),
 			)
 			logs.firstOrNull { log -> log.txId == payload.txId }
 				?.let { sessionState ->

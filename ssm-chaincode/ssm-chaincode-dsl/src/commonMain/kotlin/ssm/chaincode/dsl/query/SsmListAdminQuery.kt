@@ -7,6 +7,7 @@ import kotlinx.serialization.Serializable
 import ssm.chaincode.dsl.SsmItemsResultDTO
 import ssm.chaincode.dsl.SsmQueryDTO
 import ssm.chaincode.dsl.model.AgentName
+import ssm.chaincode.dsl.model.uri.ChaincodeUri
 
 /**
  * Retrieves all admins
@@ -25,7 +26,9 @@ typealias SsmListAdminQueryFunction = F2Function<SsmListAdminQuery, SsmListAdmin
 @Serializable
 @JsExport
 @JsName("SsmListAdminQuery")
-class SsmListAdminQuery : SsmQueryDTO
+class SsmListAdminQuery(
+	override val chaincodeUri: ChaincodeUri
+) : SsmQueryDTO
 
 /**
  * @d2 event

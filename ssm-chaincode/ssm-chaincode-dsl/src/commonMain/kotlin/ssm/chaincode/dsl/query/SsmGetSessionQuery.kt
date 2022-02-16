@@ -8,6 +8,7 @@ import ssm.chaincode.dsl.SsmItemResultDTO
 import ssm.chaincode.dsl.SsmQueryDTO
 import ssm.chaincode.dsl.model.SessionName
 import ssm.chaincode.dsl.model.SsmSessionState
+import ssm.chaincode.dsl.model.uri.ChaincodeUri
 
 /**
  * Retrieves the current state of a session
@@ -27,6 +28,7 @@ typealias SsmGetSessionQueryFunction = F2Function<SsmGetSessionQuery, SsmGetSess
 @JsExport
 @JsName("SsmGetSessionQuery")
 class SsmGetSessionQuery(
+	override val chaincodeUri: ChaincodeUri,
 	/**
 	 * Identifier of the session to retrieve
 	 * @example [SsmSessionState.session]

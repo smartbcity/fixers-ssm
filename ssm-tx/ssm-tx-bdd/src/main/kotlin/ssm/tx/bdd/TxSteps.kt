@@ -27,6 +27,7 @@ class TxSteps : SsmCommandStep(), En {
 	override suspend fun startSession(session: SsmSession) {
 		getSsmTxAdminServiceImpl().ssmTxSessionStartFunction().invoke(
 			SsmSessionStartCommand(
+				chaincodeUri = bag.chaincodeUri,
 				signerName = bag.adminSigner.name,
 				session
 			)
@@ -36,6 +37,7 @@ class TxSteps : SsmCommandStep(), En {
 	override suspend fun createSsm(ssm: Ssm) {
 		getSsmTxAdminServiceImpl().ssmTxCreateFunction().invoke(
 			SsmCreateCommand(
+				chaincodeUri = bag.chaincodeUri,
 				signerName = bag.adminSigner.name,
 				ssm = ssm
 			)
@@ -45,6 +47,7 @@ class TxSteps : SsmCommandStep(), En {
 	override suspend fun registerUser(agent: Agent) {
 		getSsmTxAdminServiceImpl().ssmTxUserRegisterFunction().invoke(
 			SsmUserRegisterCommand(
+				chaincodeUri = bag.chaincodeUri,
 				signerName = bag.adminSigner.name,
 				agent
 			)

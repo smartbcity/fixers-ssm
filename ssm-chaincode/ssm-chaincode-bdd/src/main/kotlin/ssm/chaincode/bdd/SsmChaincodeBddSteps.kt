@@ -5,7 +5,6 @@ import io.cucumber.java8.En
 import io.cucumber.java8.Scenario
 import kotlinx.coroutines.runBlocking
 import ssm.bdd.config.SsmQueryStep
-import ssm.chaincode.dsl.model.SsmName
 import ssm.chaincode.dsl.model.SsmSessionState
 import ssm.chaincode.dsl.model.SsmSessionStateLog
 import ssm.chaincode.dsl.model.uri.SsmUri
@@ -30,39 +29,43 @@ class SsmChaincodeBddSteps : SsmQueryStep(), En {
 	}
 	lateinit var ssmChaincodeQueryFunctions: ChaincodeSsmQueriesImpl
 
-	override suspend fun getSession(ssmName: SsmUri, sessionName: String): SsmSessionState? {
+	override suspend fun getSession(ssmUri: SsmUri, sessionName: String): SsmSessionState? {
 		return ssmChaincodeQueryFunctions.ssmGetSessionQueryFunction()
-			.invoke(SsmGetSessionQuery(sessionName = sessionName))
+			.invoke(SsmGetSessionQuery(chaincodeUri = ssmUri.chaincodeUri, sessionName = sessionName))
 			.item
 	}
 
 	override suspend fun logSession(ssmUri: SsmUri, sessionName: String): List<SsmSessionStateLog> {
 		return ssmChaincodeQueryFunctions.ssmGetSessionLogsQueryFunction()
-			.invoke(SsmGetSessionLogsQuery(ssmUri = ssmUri, sessionName = sessionName))
+			.invoke(SsmGetSessionLogsQuery(
+				chaincodeUri = ssmUri.chaincodeUri,
+				ssmName = ssmUri.ssmName,
+				sessionName = sessionName)
+			)
 			.logs
 	}
 
 	override suspend fun listSessions(ssmUri: SsmUri): List<String> {
 		return ssmChaincodeQueryFunctions.ssmListSessionQueryFunction()
-			.invoke(SsmListSessionQuery())
+			.invoke(SsmListSessionQuery(bag.chaincodeUri))
 			.items.toList()
 	}
 
 	override suspend fun listSsm(): List<String> {
 		return ssmChaincodeQueryFunctions.ssmListSsmQueryFunction()
-			.invoke(SsmListSsmQuery())
+			.invoke(SsmListSsmQuery(bag.chaincodeUri))
 			.items.toList()
 	}
 
 	override suspend fun listUsers() = runBlocking {
 		ssmChaincodeQueryFunctions.ssmListUserQueryFunction()
-			.invoke(SsmListUserQuery())
+			.invoke(SsmListUserQuery(bag.chaincodeUri))
 			.items.toList()
 	}
 
 	override suspend fun listAdmins() = runBlocking {
 		ssmChaincodeQueryFunctions.ssmListAdminQueryFunction()
-			.invoke(SsmListAdminQuery())
+			.invoke(SsmListAdminQuery(bag.chaincodeUri))
 			.items.toList()
 	}
 }

@@ -18,15 +18,15 @@ class SdkTxSteps : SsmCommandStep(), En {
 	}
 
 	override suspend fun startSession(session: SsmSession) {
-		bag.clientTx(bag.adminSigner).sendStart(session, bag.adminSigner.name)
+		bag.clientTx(bag.adminSigner).sendStart(bag.chaincodeUri, session, bag.adminSigner.name)
 	}
 
 	override suspend fun createSsm(ssm: Ssm) {
-		bag.clientTx(bag.adminSigner).sendCreate(ssm, bag.adminSigner.name)
+		bag.clientTx(bag.adminSigner).sendCreate(bag.chaincodeUri, ssm, bag.adminSigner.name)
 	}
 
 	override suspend fun registerUser(agent: Agent) {
-		bag.clientTx(bag.adminSigner).sendRegisterUser(agent, bag.adminSigner.name)
+		bag.clientTx(bag.adminSigner).sendRegisterUser(bag.chaincodeUri, agent, bag.adminSigner.name)
 	}
 
 	override suspend fun loadSigner(agentName: AgentName, filename: String): SignerUser {

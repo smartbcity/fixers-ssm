@@ -7,6 +7,7 @@ import kotlinx.serialization.Serializable
 import ssm.chaincode.dsl.SsmItemResultDTO
 import ssm.chaincode.dsl.SsmQueryDTO
 import ssm.chaincode.dsl.model.Agent
+import ssm.chaincode.dsl.model.uri.ChaincodeUri
 
 /**
  * Retrieves an admin
@@ -26,6 +27,7 @@ typealias SsmGetUserFunction = F2Function<SsmGetUserQuery, SsmGetUserResult>
 @JsExport
 @JsName("SsmGetUserQuery")
 class SsmGetUserQuery(
+	override val chaincodeUri: ChaincodeUri,
 	/**
 	 * The name of the user.
 	 * @example ["Chuck"]

@@ -12,7 +12,7 @@ import ssm.chaincode.dsl.model.Ssm
 import ssm.chaincode.dsl.model.SsmName
 import ssm.chaincode.dsl.model.SsmSessionState
 import ssm.chaincode.dsl.model.SsmSessionStateLog
-import ssm.sdk.core.ktor.SsmRequester
+import ssm.chaincode.dsl.model.uri.ChaincodeUri
 import ssm.sdk.core.invoke.query.AdminQuery
 import ssm.sdk.core.invoke.query.AgentQuery
 import ssm.sdk.core.invoke.query.BlockQuery
@@ -20,60 +20,61 @@ import ssm.sdk.core.invoke.query.LogQuery
 import ssm.sdk.core.invoke.query.SessionQuery
 import ssm.sdk.core.invoke.query.SsmQuery
 import ssm.sdk.core.invoke.query.TransactionQuery
+import ssm.sdk.core.ktor.SsmRequester
 
 class SsmQueryService(private val ssmRequester: SsmRequester) {
-	suspend fun listAdmins(): List<AgentName> {
+	suspend fun listAdmins(chaincodeUri: ChaincodeUri): List<AgentName> {
 		val query = AdminQuery()
-		return ssmRequester.list(query, String::class.java)
+		return ssmRequester.list(chaincodeUri, query, String::class.java)
 	}
 
-	suspend fun getAdmin(username: AgentName): Agent? {
+	suspend fun getAdmin(chaincodeUri: ChaincodeUri, username: AgentName): Agent? {
 		val query = AdminQuery()
-		return ssmRequester.query(username, query, Agent::class.java)
+		return ssmRequester.query(chaincodeUri, username, query, Agent::class.java)
 	}
 
-	suspend fun listUsers(): List<AgentName> {
+	suspend fun listUsers(chaincodeUri: ChaincodeUri): List<AgentName> {
 		val query = AgentQuery()
-		return ssmRequester.list(query, String::class.java)
+		return ssmRequester.list(chaincodeUri, query, String::class.java)
 	}
 
-	suspend fun getAgent(agentName: AgentName): Agent? {
+	suspend fun getAgent(chaincodeUri: ChaincodeUri, agentName: AgentName): Agent? {
 		val query = AgentQuery()
-		return ssmRequester.query(agentName, query, Agent::class.java)
+		return ssmRequester.query(chaincodeUri, agentName, query, Agent::class.java)
 	}
 
-	suspend fun listSsm(): List<SsmName> {
+	suspend fun listSsm(chaincodeUri: ChaincodeUri): List<SsmName> {
 		val query = SsmQuery()
-		return ssmRequester.list(query, String::class.java)
+		return ssmRequester.list(chaincodeUri, query, String::class.java)
 	}
 
-	suspend fun getSsm(name: SsmName): Ssm? {
+	suspend fun getSsm(chaincodeUri: ChaincodeUri, name: SsmName): Ssm? {
 		val query = SsmQuery()
-		return ssmRequester.query(name, query, Ssm::class.java)
+		return ssmRequester.query(chaincodeUri, name, query, Ssm::class.java)
 	}
 
-	suspend fun getSession(sessionName: SessionName): SsmSessionState? {
+	suspend fun getSession(chaincodeUri: ChaincodeUri,sessionName: SessionName): SsmSessionState? {
 		val query = SessionQuery()
-		return ssmRequester.query(sessionName, query, SsmSessionState::class.java)
+		return ssmRequester.query(chaincodeUri, sessionName, query, SsmSessionState::class.java)
 	}
 
-	suspend fun log(sessionName: SessionName): List<SsmSessionStateLog> {
+	suspend fun log(chaincodeUri: ChaincodeUri, sessionName: SessionName): List<SsmSessionStateLog> {
 		val query = LogQuery()
-		return ssmRequester.log(sessionName, query, object : TypeReference<List<SsmSessionStateLog>>() {})
+		return ssmRequester.log(chaincodeUri, sessionName, query, object : TypeReference<List<SsmSessionStateLog>>() {})
 	}
 
-	suspend fun listSession(): List<String> {
+	suspend fun listSession(chaincodeUri: ChaincodeUri): List<String> {
 		val query = SessionQuery()
-		return ssmRequester.list(query, String::class.java)
+		return ssmRequester.list(chaincodeUri, query, String::class.java)
 	}
 
-	suspend fun getTransaction(txId: TransactionId): Transaction? {
+	suspend fun getTransaction(chaincodeUri: ChaincodeUri, txId: TransactionId): Transaction? {
 		val query = TransactionQuery()
-		return ssmRequester.query(txId, query, Transaction::class.java)
+		return ssmRequester.query(chaincodeUri, txId, query, Transaction::class.java)
 	}
 
-	suspend fun getBlock(blockId: BlockId): Block? {
+	suspend fun getBlock(chaincodeUri: ChaincodeUri, blockId: BlockId): Block? {
 		val query = BlockQuery()
-		return ssmRequester.query(blockId.toString(), query, Block::class.java)
+		return ssmRequester.query(chaincodeUri, blockId.toString(), query, Block::class.java)
 	}
 }

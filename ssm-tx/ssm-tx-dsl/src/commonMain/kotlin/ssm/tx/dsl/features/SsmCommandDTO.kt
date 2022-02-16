@@ -6,8 +6,15 @@ import kotlin.js.JsExport
 import kotlin.js.JsName
 import kotlinx.serialization.Serializable
 import ssm.chaincode.dsl.blockchain.TransactionId
+import ssm.chaincode.dsl.model.uri.ChaincodeUri
+import ssm.chaincode.dsl.model.uri.ChaincodeUriDTO
 
-interface SsmCommandDTO : Command
+interface SsmCommandDTO : Command {
+	/**
+	 * The uri of a chaincode.
+	 */
+	val chaincodeUri: ChaincodeUriDTO
+}
 
 
 interface SsmCommandResultDTO : Event {

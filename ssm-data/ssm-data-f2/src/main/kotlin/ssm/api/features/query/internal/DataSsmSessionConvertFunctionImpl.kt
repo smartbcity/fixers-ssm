@@ -8,6 +8,7 @@ import ssm.api.extentions.getTransaction
 import ssm.chaincode.dsl.blockchain.Transaction
 import ssm.chaincode.dsl.model.SsmSessionState
 import ssm.chaincode.dsl.model.uri.SsmUri
+import ssm.chaincode.dsl.model.uri.asChaincodeUri
 import ssm.chaincode.dsl.query.SsmGetSessionLogsQueryFunction
 import ssm.chaincode.dsl.query.SsmGetTransactionQueryFunction
 import ssm.data.dsl.model.DataChannel
@@ -23,7 +24,9 @@ class DataSsmSessionConvertFunctionImpl(
 		msg.map { payload ->
 			val sessionLogs =
 				payload.sessionState.session.getSessionLogs(payload.ssmUri, ssmGetSessionLogsQueryFunction)
-			val transactions = sessionLogs.mapNotNull { it.txId.getTransaction(ssmGetTransactionQueryFunction) }
+			val transactions = sessionLogs.mapNotNull { it.txId.getTransaction(ssmGetTransactionQueryFunction,
+				chaincodeUri = payload.ssmUri.asChaincodeUri()
+			) }
 			val firstTransaction = transactions.minByOrNull { transaction ->
 				transaction.timestamp
 			}

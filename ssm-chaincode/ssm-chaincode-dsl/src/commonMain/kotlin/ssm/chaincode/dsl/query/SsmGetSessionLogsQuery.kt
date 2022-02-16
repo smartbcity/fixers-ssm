@@ -6,8 +6,10 @@ import kotlin.js.JsName
 import kotlinx.serialization.Serializable
 import ssm.chaincode.dsl.SsmQueryDTO
 import ssm.chaincode.dsl.model.SessionName
+import ssm.chaincode.dsl.model.SsmName
 import ssm.chaincode.dsl.model.SsmSessionState
 import ssm.chaincode.dsl.model.SsmSessionStateLog
+import ssm.chaincode.dsl.model.uri.ChaincodeUri
 import ssm.chaincode.dsl.model.uri.SsmUri
 
 /**
@@ -28,11 +30,12 @@ typealias SsmGetSessionLogsQueryFunction = F2Function<SsmGetSessionLogsQuery, Ss
 @JsExport
 @JsName("SsmGetSessionLogsQuery")
 class SsmGetSessionLogsQuery(
+	override val chaincodeUri: ChaincodeUri,
 	/**
-	 * The uri of the ssm
-	 * @example "ssm:sandbox:ssm1:session1"
+	 * The name of the ssm
+	 * @example "ssm"
 	 */
-	val ssmUri: SsmUri,
+	val ssmName: SsmName,
 	/**
 	 * Identifier of the session to retrieve
 	 * @example [SsmSessionState.session]
@@ -49,7 +52,7 @@ class SsmGetSessionLogsQuery(
 @JsExport
 @JsName("SsmGetSessionLogsQueryResult")
 data class SsmGetSessionLogsQueryResult(
-	val ssmUri: SsmUri,
+	val ssmName: SsmName,
 	val sessionName: SessionName,
 	val logs: List<SsmSessionStateLog>,
 )

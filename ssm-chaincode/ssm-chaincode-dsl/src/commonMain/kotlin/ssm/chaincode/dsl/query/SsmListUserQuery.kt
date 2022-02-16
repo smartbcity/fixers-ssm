@@ -7,6 +7,7 @@ import kotlinx.serialization.Serializable
 import ssm.chaincode.dsl.SsmItemsResultDTO
 import ssm.chaincode.dsl.SsmQueryDTO
 import ssm.chaincode.dsl.model.AgentName
+import ssm.chaincode.dsl.model.uri.ChaincodeUri
 
 /**
  * Retrieves all users
@@ -25,7 +26,9 @@ typealias SsmListUserQueryFunction = F2Function<SsmListUserQuery, SsmListUserRes
 @Serializable
 @JsExport
 @JsName("SsmListUserQuery")
-class SsmListUserQuery : SsmQueryDTO
+class SsmListUserQuery(
+	override val chaincodeUri: ChaincodeUri
+) : SsmQueryDTO
 
 /**
  * @d2 event

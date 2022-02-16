@@ -17,27 +17,27 @@ class SdkQuerySteps : SsmQueryStep(), En {
 		prepareSteps()
 	}
 
-	override suspend fun getSession(ssmName: SsmUri, sessionName: SessionName): SsmSessionState? {
-		return bag.clientQuery.getSession(sessionName)
+	override suspend fun getSession(ssmUri: SsmUri, sessionName: SessionName): SsmSessionState? {
+		return bag.clientQuery.getSession(ssmUri.chaincodeUri, sessionName)
 	}
 
-	override suspend fun logSession(ssmName: SsmUri, sessionName: SessionName): List<SsmSessionStateLog> {
-		return bag.clientQuery.log(sessionName)
+	override suspend fun logSession(ssmUri: SsmUri, sessionName: SessionName): List<SsmSessionStateLog> {
+		return bag.clientQuery.log(ssmUri.chaincodeUri, sessionName)
 	}
 
 	override suspend fun listSessions(ssmUri: SsmUri): List<SessionName> {
-		return bag.clientQuery.listSession()
+		return bag.clientQuery.listSession(ssmUri.chaincodeUri)
 	}
 
 	override suspend fun listSsm(): List<SsmName> {
-		return bag.clientQuery.listSsm()
+		return bag.clientQuery.listSsm(bag.chaincodeUri)
 	}
 
 	override suspend fun listUsers(): List<String> {
-		return bag.clientQuery.listUsers()
+		return bag.clientQuery.listUsers(bag.chaincodeUri)
 	}
 
 	override suspend fun listAdmins(): List<String> {
-		return bag.clientQuery.listAdmins()
+		return bag.clientQuery.listAdmins(bag.chaincodeUri)
 	}
 }

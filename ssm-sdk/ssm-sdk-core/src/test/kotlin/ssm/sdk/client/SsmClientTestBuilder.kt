@@ -10,7 +10,7 @@ object SsmClientTestBuilder {
 
 	@Throws(IOException::class)
 	fun build(): SsmServiceFactory {
-		return SsmServiceFactory.builder(configFileName).withChannelId("sandbox").withSsmId("ssm")
+		return SsmServiceFactory.builder(configFileName)
 	}
 
 	private val configFileName: String

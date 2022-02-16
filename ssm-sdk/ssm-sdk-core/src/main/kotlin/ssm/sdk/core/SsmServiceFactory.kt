@@ -11,27 +11,15 @@ import ssm.sdk.sign.SsmCmdSigner
 class SsmServiceFactory(
 	private var coopRepository: KtorRepository,
 	private var jsonConverter: JSONConverter,
-	private var channelId: String? = null,
-	private var ssmId: String? = null,
 ) {
 
-	fun withChannelId(channelId: String?): SsmServiceFactory {
-		this.channelId = channelId
-		return this
-	}
-
-	fun withSsmId(ssmId: String?): SsmServiceFactory {
-		this.ssmId = ssmId
-		return this
-	}
-
 	fun buildQueryService(): SsmQueryService {
-		return SsmQueryService(SsmRequester(channelId, ssmId, jsonConverter, coopRepository))
+		return SsmQueryService(SsmRequester(jsonConverter, coopRepository))
 	}
 
 	fun buildTxService(ssmCmdSigner: SsmCmdSigner): SsmTxService {
 		return SsmTxService(
-			SsmRequester(channelId, ssmId, jsonConverter, coopRepository),
+			SsmRequester(jsonConverter, coopRepository),
 			ssmCmdSigner
 		)
 	}

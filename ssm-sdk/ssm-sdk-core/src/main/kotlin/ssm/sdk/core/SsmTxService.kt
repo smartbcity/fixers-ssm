@@ -6,11 +6,12 @@ import ssm.chaincode.dsl.model.AgentName
 import ssm.chaincode.dsl.model.Ssm
 import ssm.chaincode.dsl.model.SsmContext
 import ssm.chaincode.dsl.model.SsmSession
-import ssm.sdk.core.ktor.SsmRequester
+import ssm.chaincode.dsl.model.uri.ChaincodeUri
 import ssm.sdk.core.invoke.command.CreateCmd
 import ssm.sdk.core.invoke.command.PerformCmd
 import ssm.sdk.core.invoke.command.RegisterCmd
 import ssm.sdk.core.invoke.command.StartCmd
+import ssm.sdk.core.ktor.SsmRequester
 import ssm.sdk.dsl.InvokeReturn
 import ssm.sdk.dsl.SsmCmd
 import ssm.sdk.dsl.SsmCmdSigned
@@ -32,7 +33,7 @@ class SsmTxService(
 		return cmd.commandToSign()
 	}
 
-	fun start(session: SsmSession): SsmCmd {
+	fun start( session: SsmSession): SsmCmd {
 		val cmd = StartCmd(session)
 		return cmd.commandToSign()
 	}
@@ -43,39 +44,39 @@ class SsmTxService(
 	}
 
 
-	suspend fun sendRegisterUser(agent: Agent, signerName: AgentName): InvokeReturn? {
+	suspend fun sendRegisterUser(chaincodeUri: ChaincodeUri, agent: Agent, signerName: AgentName): InvokeReturn? {
 		logger.info("Register user[${agent.name}] with signer[$signerName]")
-		return signAndSend(signerName) {
+		return signAndSend(chaincodeUri, signerName) {
 			registerUser(agent)
 		}
 	}
 
-	suspend fun sendCreate(ssm: Ssm, signerName: AgentName): InvokeReturn? {
+	suspend fun sendCreate(chaincodeUri: ChaincodeUri, ssm: Ssm, signerName: AgentName): InvokeReturn? {
 		logger.info("Create ssm[${ssm.name}] with signer[$signerName]")
-		return signAndSend(signerName) {
+		return signAndSend(chaincodeUri, signerName) {
 			create(ssm)
 		}
 	}
 
-	suspend fun sendStart(session: SsmSession, signerName: AgentName): InvokeReturn? {
+	suspend fun sendStart(chaincodeUri: ChaincodeUri, session: SsmSession, signerName: AgentName): InvokeReturn? {
 		logger.info("Start session[${session.session}] ssm[${session.ssm}] with signer[$signerName]")
-		return signAndSend(signerName) {
+		return signAndSend(chaincodeUri, signerName) {
 			start(session)
 		}
 	}
 
-	suspend fun sendPerform(action: String, context: SsmContext, signerName: AgentName): InvokeReturn? {
+	suspend fun sendPerform(chaincodeUri: ChaincodeUri, action: String, context: SsmContext, signerName: AgentName): InvokeReturn {
 		logger.info("Perform action[${action}] session[${context.session}] with signer[$signerName]")
-		return signAndSend(signerName) {
+		return signAndSend(chaincodeUri, signerName) {
 			perform(action, context)
 		}
 	}
 
-	suspend fun signAndSend(signerName: AgentName, build: () -> SsmCmd): InvokeReturn? {
-		return build().let {
-			sign(it, signerName)
-		}.let {
-			send(it)
+	suspend fun signAndSend(chaincodeUri: ChaincodeUri, signerName: AgentName, build: () -> SsmCmd): InvokeReturn {
+		return build().let { ssmCmd ->
+			sign(ssmCmd, signerName)
+		}.let { signed ->
+			send(chaincodeUri, signed)
 		}
 	}
 
@@ -83,7 +84,7 @@ class SsmTxService(
 		return ssmCmdSigner.sign(command, signerName)
 	}
 
-	suspend fun send(ssmCommandSigned: SsmCmdSigned): InvokeReturn? {
-		return ssmRequester.invoke(ssmCommandSigned)
+	suspend fun send(chaincodeUri: ChaincodeUri, ssmCommandSigned: SsmCmdSigned): InvokeReturn {
+		return ssmRequester.invoke(chaincodeUri, ssmCommandSigned)
 	}
 }

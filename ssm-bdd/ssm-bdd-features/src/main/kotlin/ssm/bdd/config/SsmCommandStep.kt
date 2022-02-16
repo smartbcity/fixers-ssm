@@ -148,7 +148,7 @@ abstract class SsmCommandStep {
 						iteration = perform.iteration,
 						private = emptyMap()
 					)
-					bag.clientTx(signer).sendPerform(perform.action, context, signer.name)
+					bag.clientTx(signer).sendPerform(bag.chaincodeUri, perform.action, context, signer.name)
 				}
 			}
 		}
@@ -217,5 +217,5 @@ abstract class SsmCommandStep {
 
 	}
 
-	protected abstract suspend fun loadSigner(userName: AgentName, filename: String): SignerUser
+	protected abstract suspend fun loadSigner(agentName: AgentName, filename: String): SignerUser
 }

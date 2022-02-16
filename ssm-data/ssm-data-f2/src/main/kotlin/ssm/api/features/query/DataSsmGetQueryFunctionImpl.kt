@@ -19,6 +19,7 @@ class DataSsmGetQueryFunctionImpl(
 	override suspend fun invoke(msg: Flow<DataSsmGetQueryDTO>): Flow<DataSsmGetQueryResultDTO> =
 		msg.map { payload ->
 			SsmGetQuery(
+				chaincodeUri = payload.ssmUri.burst().chaincodeUri,
 				name = payload.ssmUri.burst().ssmName,
 			).invokeWith(ssmGetQueryFunction)
 				.item
