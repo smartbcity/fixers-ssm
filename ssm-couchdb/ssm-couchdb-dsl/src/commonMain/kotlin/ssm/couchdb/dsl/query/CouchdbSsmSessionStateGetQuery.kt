@@ -21,13 +21,19 @@ import ssm.chaincode.dsl.model.uri.ChaincodeUriDTO
  */
 typealias CouchdbSsmSessionStateGetQueryFunction = F2Function<CouchdbSsmSessionStateGetQueryDTO, CouchdbSsmSessionStateGetQueryResultDTO>
 
-expect interface CouchdbSsmSessionStateGetQueryDTO : Query {
+@Serializable
+@JsExport
+@JsName("CouchdbSsmSessionStateGetQueryDTO")
+interface CouchdbSsmSessionStateGetQueryDTO : Query {
 	val chaincodeUri: ChaincodeUriDTO
 	val ssmName: SsmName?
 	val sessionName: SessionName
 }
 
-expect interface CouchdbSsmSessionStateGetQueryResultDTO : Event {
+@Serializable
+@JsExport
+@JsName("CouchdbSsmSessionStateGetQueryResultDTO")
+interface CouchdbSsmSessionStateGetQueryResultDTO : Event {
 	/**
 	 * Retrieved sessions
 	 */

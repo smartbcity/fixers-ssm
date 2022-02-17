@@ -2,8 +2,12 @@ package ssm.chaincode.dsl.blockchain
 
 import kotlin.js.JsExport
 import kotlin.js.JsName
+import kotlinx.serialization.Serializable
 
-expect interface TransactionDTO {
+@Serializable
+@JsExport
+@JsName("TransactionDTO")
+interface TransactionDTO {
 	/**
 	 * Identifier of the transaction
 	 * @example "c7de3ab6-56e0-4e7d-8fa4-905823ed982e"
@@ -14,7 +18,7 @@ expect interface TransactionDTO {
 	 * [Block] holding the transaction within the blockchain
 	 * @example [Block.blockId]
 	 */
-	val blockId: Long
+	val blockId: BlockId
 
 	/**
 	 * Execution date of the transaction
@@ -67,7 +71,7 @@ expect interface TransactionDTO {
 @JsExport
 class Transaction(
 	override val transactionId: TransactionId,
-	override val blockId: Long,
+	override val blockId: BlockId,
 	override val timestamp: Long,
 	override val isValid: Boolean,
 	override val channelId: String,

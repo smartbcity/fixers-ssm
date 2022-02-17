@@ -13,7 +13,10 @@ typealias ChangeEventId = String
  * @title Database
  * @parent [ssm.couchdb.dsl.CouchdbSsmD2Model]
  */
-expect interface DatabaseChangesDTO {
+@Serializable
+@JsExport
+@JsName("DatabaseChangesDTO")
+interface DatabaseChangesDTO {
 	val changeEventId: ChangeEventId
 	val docType: DocType<*>?
 	val objectId: String

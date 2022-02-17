@@ -7,7 +7,10 @@ import kotlinx.serialization.Serializable
 typealias SsmAction = String
 typealias SsmRole = String
 
-expect interface SsmTransitionDTO {
+@Serializable
+@JsExport
+@JsName("SsmTransitionDTO")
+interface SsmTransitionDTO {
 	/**
 	 * Origin of the transition
 	 * @example 1

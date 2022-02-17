@@ -1,5 +1,8 @@
 package ssm.couchdb.dsl
 
+import kotlin.js.JsExport
+import kotlin.js.JsName
+import kotlinx.serialization.Serializable
 import ssm.couchdb.dsl.query.CouchdbAdminListQueryFunction
 import ssm.couchdb.dsl.query.CouchdbChaincodeListQueryFunction
 import ssm.couchdb.dsl.query.CouchdbDatabaseGetChangesQueryFunction
@@ -22,6 +25,9 @@ import ssm.couchdb.dsl.query.CouchdbUserListQueryFunction
  * @title Query function
  * @parent [CouchdbSsmD2]
  */
+@Serializable
+@JsExport
+@JsName("SsmCouchDbQueries")
 interface SsmCouchDbQueries {
 	fun couchdbDatabaseGetChangesQueryFunction(): CouchdbDatabaseGetChangesQueryFunction
 	fun couchdbDatabaseListQueryFunction(): CouchdbDatabaseListQueryFunction

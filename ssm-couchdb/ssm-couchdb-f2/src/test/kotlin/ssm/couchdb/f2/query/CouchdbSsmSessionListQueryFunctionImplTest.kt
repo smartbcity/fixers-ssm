@@ -25,6 +25,6 @@ internal class CouchdbSsmSessionListQueryFunctionImplTest : FunctionTestBase() {
 			ssm = null,
 			pagination = null
 		).invokeWith(couchdbSsmSessionListQueryFunction)
-		Assertions.assertThat(sessions.page.items).isNotNull
+		Assertions.assertThat(sessions.items).isNotNull
 	}
 }

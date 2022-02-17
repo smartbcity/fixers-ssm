@@ -27,7 +27,10 @@ typealias CouchdbSsmGetQueryFunction = F2Function<CouchdbSsmGetQuery, CouchdbSsm
  * @parent [CouchdbSsmGetQueryFunction]
  * @title Parameters
  */
-expect interface CouchdbSsmGetQueryDTO : Query {
+@Serializable
+@JsExport
+@JsName("CouchdbSsmGetQueryDTO")
+interface CouchdbSsmGetQueryDTO : Query {
 	/**
 	 * The unique id of a channel.
 	 */
@@ -50,7 +53,10 @@ expect interface CouchdbSsmGetQueryDTO : Query {
  * @order 30
  * @title Result
  */
-expect interface CouchdbSsmGetQueryResultDTO: Event {
+@Serializable
+@JsExport
+@JsName("CouchdbSsmGetQueryResultDTO")
+interface CouchdbSsmGetQueryResultDTO: Event {
 	val uri: SsmUri
 	val item: SsmDTO?
 }

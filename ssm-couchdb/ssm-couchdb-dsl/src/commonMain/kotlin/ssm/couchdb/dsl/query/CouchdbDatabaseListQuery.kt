@@ -1,8 +1,6 @@
 package ssm.couchdb.dsl.query
 
 import f2.dsl.cqrs.page.OffsetPaginationDTO
-import f2.dsl.cqrs.page.Page
-import f2.dsl.cqrs.page.PageDTO
 import f2.dsl.cqrs.page.PageQueryDTO
 import f2.dsl.cqrs.page.PageQueryResultDTO
 import f2.dsl.fnc.F2Function
@@ -11,7 +9,6 @@ import kotlin.js.JsName
 import kotlinx.serialization.Serializable
 import ssm.chaincode.dsl.model.ChaincodeId
 import ssm.chaincode.dsl.model.ChannelId
-import ssm.couchdb.dsl.model.Database
 import ssm.couchdb.dsl.model.DatabaseDTO
 
 /**
@@ -27,7 +24,10 @@ typealias CouchdbDatabaseListQueryFunction = F2Function<CouchdbDatabaseListQuery
  * @d2 model
  * @parent [CouchdbDatabaseListQueryFunction]
  */
-expect interface CouchdbDatabaseListQueryDTO : PageQueryDTO {
+@Serializable
+@JsExport
+@JsName("CouchdbDatabaseListQueryDTO")
+interface CouchdbDatabaseListQueryDTO : PageQueryDTO {
 	/**
 	 * The unique id of a channel.
 	 */
@@ -44,8 +44,13 @@ expect interface CouchdbDatabaseListQueryDTO : PageQueryDTO {
  * @title Results
  * @parent [CouchdbDatabaseListQueryFunction]
  */
-expect interface CouchdbDatabaseListQueryResultDTO : PageQueryResultDTO<DatabaseDTO> {
-	override val page: PageDTO<DatabaseDTO>
+@Serializable
+@JsExport
+@JsName("CouchdbDatabaseListQueryResultDTO")
+interface CouchdbDatabaseListQueryResultDTO : PageQueryResultDTO<DatabaseDTO> {
+	override val total: Int
+	override val pagination: OffsetPaginationDTO?
+	override val items: List<DatabaseDTO>
 }
 
 @Serializable
@@ -61,6 +66,7 @@ class CouchdbDatabaseListQuery(
 @JsExport
 @JsName("CouchdbDatabaseListQueryResult")
 class CouchdbDatabaseListQueryResult(
-	override val page: Page<Database>,
 	override val pagination: OffsetPaginationDTO?,
+	override val items: List<DatabaseDTO>,
+	override val total: Int,
 ) : CouchdbDatabaseListQueryResultDTO

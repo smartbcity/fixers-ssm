@@ -28,10 +28,8 @@ class CouchdbDatabaseListQueryFunctionImpl(
 			.toDatabases()
 			.let { list ->
 				CouchdbDatabaseListQueryResult(
-					page = Page(
-						total = total,
-						items = list,
-					),
+					total = total,
+					items = list,
 					pagination = payload.pagination
 				)
 			}

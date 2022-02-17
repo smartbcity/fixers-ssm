@@ -4,7 +4,10 @@ import kotlin.js.JsExport
 import kotlin.js.JsName
 import kotlinx.serialization.Serializable
 
-expect interface SsmSessionDTO : WithPrivate {
+@Serializable
+@JsExport
+@JsName("SsmSessionDTO")
+interface SsmSessionDTO : WithPrivate {
 	/**
 	 * Identifier of the instantiated [SSM][Ssm]
 	 * @example [Ssm.name]

@@ -6,7 +6,10 @@ import kotlinx.serialization.Serializable
 
 typealias SessionName = String
 
-expect interface SsmSessionStateDTO : SsmSessionDTO, WithPrivate {
+@Serializable
+@JsExport
+@JsName("SsmSessionStateDTO")
+interface SsmSessionStateDTO : SsmSessionDTO, WithPrivate {
 	override val ssm: SsmName?
 	override val session: SessionName
 	override val roles: Map<String, String>?

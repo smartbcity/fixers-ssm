@@ -28,7 +28,10 @@ typealias CouchdbSsmListQueryFunction = F2Function<CouchdbSsmListQuery, CouchdbS
  * @parent [CouchdbSsmListQueryFunction]
  * @title Parameters
  */
-expect interface CouchdbSsmListQueryDTO : PageQueryDTO {
+@Serializable
+@JsExport
+@JsName("CouchdbSsmListQueryDTO")
+interface CouchdbSsmListQueryDTO : PageQueryDTO {
 	/**
 	 * The unique id of a channel.
 	 */
@@ -45,8 +48,13 @@ expect interface CouchdbSsmListQueryDTO : PageQueryDTO {
  * @order 30
  * @title Result
  */
-expect interface CouchdbSsmListQueryResultDTO: PageQueryResultDTO<SsmDTO> {
-	override val page: PageDTO<SsmDTO>
+@Serializable
+@JsExport
+@JsName("CouchdbSsmListQueryResultDTO")
+interface CouchdbSsmListQueryResultDTO: PageQueryResultDTO<SsmDTO> {
+	override val pagination: OffsetPaginationDTO?
+	override val items: List<SsmDTO>
+	override val total: Int
 }
 
 @Serializable
@@ -62,6 +70,7 @@ class CouchdbSsmListQuery(
 @JsExport
 @JsName("CouchdbSsmListQueryResult")
 class CouchdbSsmListQueryResult(
-	override val page: Page<Ssm>,
 	override val pagination: OffsetPaginationDTO?,
+	override val items: List<Ssm>,
+	override val total: Int,
 ) : CouchdbSsmListQueryResultDTO

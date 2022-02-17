@@ -1,5 +1,8 @@
 package ssm.chaincode.dsl
 
+import kotlin.js.JsExport
+import kotlin.js.JsName
+import kotlinx.serialization.Serializable
 import ssm.chaincode.dsl.query.SsmGetAdminFunction
 import ssm.chaincode.dsl.query.SsmGetQueryFunction
 import ssm.chaincode.dsl.query.SsmGetSessionLogsQueryFunction
@@ -26,6 +29,9 @@ import ssm.chaincode.dsl.query.SsmListUserQueryFunction
  * @title Query function
  * @parent [ssm.chaincode.dsl.SsmChaincodeD2]
  */
+@Serializable
+@JsExport
+@JsName("SsmChaincodeQueries")
 interface SsmChaincodeQueries {
 	fun ssmGetAdminFunction(): SsmGetAdminFunction
 	fun ssmGetQueryFunction(): SsmGetQueryFunction

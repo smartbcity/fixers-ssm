@@ -22,14 +22,20 @@ typealias CouchdbChaincodeListQueryFunction = F2Function<CouchdbChaincodeListQue
  * @d2 model
  * @parent [CouchdbChaincodeListQueryFunction]
  */
-expect interface CouchdbChaincodeListQueryDTO : Query
+@Serializable
+@JsExport
+@JsName("CouchdbChaincodeListQueryDTO")
+interface CouchdbChaincodeListQueryDTO : Query
 
 /**
  * @d2 model
  * @title Get all chaincodes: Result
  * @parent [CouchdbChaincodeListQueryFunction]
  */
-expect interface CouchdbChaincodeListQueryResultDTO : Event {
+@Serializable
+@JsExport
+@JsName("CouchdbChaincodeListQueryResultDTO")
+interface CouchdbChaincodeListQueryResultDTO : Event {
 	/**
 	 * The name of the database.
 	 */

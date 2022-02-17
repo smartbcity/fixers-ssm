@@ -4,7 +4,10 @@ import kotlin.js.JsExport
 import kotlin.js.JsName
 import kotlinx.serialization.Serializable
 
-expect interface SsmGrantDTO {
+@Serializable
+@JsExport
+@JsName("SsmGrantDTO")
+interface SsmGrantDTO {
 	val user: String
 	val iteration: Int
 	val credits: Map<String, CreditDTO>
@@ -19,7 +22,10 @@ data class SsmGrant(
 	val credits: Map<String, Credit>,
 )
 
-expect interface CreditDTO {
+@Serializable
+@JsExport
+@JsName("CreditDTO")
+interface CreditDTO {
 	val amount: Int
 }
 

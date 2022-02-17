@@ -2,6 +2,7 @@ package ssm.chaincode.dsl.model.uri
 
 import kotlin.js.JsExport
 import kotlin.js.JsName
+import kotlinx.serialization.Serializable
 import kotlinx.serialization.Transient
 import ssm.chaincode.dsl.model.ChaincodeId
 import ssm.chaincode.dsl.model.ChannelId
@@ -11,14 +12,17 @@ typealias SsmVersion = String
 
 const val DEFAULT_VERSION = "1.0.0"
 
+@Serializable
+@JsExport
 @JsName("SsmUriDTO")
-expect interface SsmUriDTO {
+interface SsmUriDTO {
 	val uri: String
 }
 
 fun SsmUriDTO.burst() = SsmUri(uri)
 fun SsmUriDTO.asChaincodeUri() = SsmUri(uri).chaincodeUri
 
+@Serializable
 @JsExport
 @JsName("SsmUri")
 data class SsmUri(override val uri: String): SsmUriDTO {

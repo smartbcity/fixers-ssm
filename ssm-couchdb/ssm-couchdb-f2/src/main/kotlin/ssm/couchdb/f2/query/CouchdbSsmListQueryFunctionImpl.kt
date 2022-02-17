@@ -19,10 +19,8 @@ class CouchdbSsmListQueryFunctionImpl(
 			.fetchAllByDocType(chainCodeDbName(payload.channelId, payload.chaincodeId), DocType.Ssm)
 			.let{ list ->
 				CouchdbSsmListQueryResult(
-					page = Page(
-						items = list,
-						total = list.size
-					),
+					items = list,
+					total = list.size,
 					pagination = payload.pagination
 				)
 			}

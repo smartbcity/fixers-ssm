@@ -1,5 +1,7 @@
 package ssm.couchdb.dsl.model
 
+import kotlin.js.JsExport
+import kotlin.js.JsName
 import kotlin.reflect.KClass
 import kotlinx.serialization.Serializable
 import ssm.chaincode.dsl.model.Agent
@@ -8,6 +10,10 @@ import ssm.chaincode.dsl.model.SsmGrant
 import ssm.chaincode.dsl.model.SsmSessionState
 
 typealias DocTypeName = String
+
+@Serializable
+@JsExport
+@JsName("DocType")
 sealed class DocType<T : Any>(
 	val name: DocTypeName,
 	val clazz: KClass<T>,
@@ -21,6 +27,8 @@ sealed class DocType<T : Any>(
 }
 
 @Serializable
+@JsExport
+@JsName("ChaincodeLscc")
 @Suppress("ConstructorParameterNaming")
 class ChaincodeLscc(
 	val _id: ChaincodeId,

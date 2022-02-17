@@ -12,7 +12,10 @@ import kotlinx.serialization.Serializable
  */
 typealias SsmName = String
 
-expect interface SsmDTO {
+@Serializable
+@JsExport
+@JsName("SsmDTO")
+interface SsmDTO {
 	/**
 	 * The unique identifier of a ssm.
 	 */

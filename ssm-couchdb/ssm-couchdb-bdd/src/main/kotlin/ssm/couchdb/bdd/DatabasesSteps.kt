@@ -35,7 +35,7 @@ class DatabasesSteps : En {
 			runBlocking {
 				databases = CouchdbSsmQueriesFunctionImpl(config).couchdbDatabaseListQueryFunction().invoke(
 					CouchdbDatabaseListQuery()
-				).page.items
+				).items
 			}
 		}
 
@@ -54,7 +54,7 @@ class DatabasesSteps : En {
 				}
 				databases = CouchdbSsmQueriesFunctionImpl(config).couchdbDatabaseListQueryFunction().invoke(
 					query
-				).page.items
+				).items
 			}
 		}
 
@@ -87,7 +87,7 @@ class DatabasesSteps : En {
 						channelId = chaincode.channelId,
 						chaincodeId = chaincode.id,
 						pagination = null
-					)).page.items
+					)).items
 			}
 		}
 		Then("I do not found ssm") {

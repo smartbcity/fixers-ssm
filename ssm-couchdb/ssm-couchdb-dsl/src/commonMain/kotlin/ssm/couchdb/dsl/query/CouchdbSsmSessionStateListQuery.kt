@@ -1,8 +1,6 @@
 package ssm.couchdb.dsl.query
 
 import f2.dsl.cqrs.page.OffsetPaginationDTO
-import f2.dsl.cqrs.page.Page
-import f2.dsl.cqrs.page.PageDTO
 import f2.dsl.cqrs.page.PageQueryDTO
 import f2.dsl.cqrs.page.PageQueryResultDTO
 import f2.dsl.fnc.F2Function
@@ -10,7 +8,6 @@ import kotlin.js.JsExport
 import kotlin.js.JsName
 import kotlinx.serialization.Serializable
 import ssm.chaincode.dsl.model.SsmName
-import ssm.chaincode.dsl.model.SsmSessionState
 import ssm.chaincode.dsl.model.SsmSessionStateDTO
 import ssm.chaincode.dsl.model.uri.ChaincodeUri
 import ssm.chaincode.dsl.model.uri.ChaincodeUriDTO
@@ -24,7 +21,10 @@ import ssm.chaincode.dsl.model.uri.ChaincodeUriDTO
  */
 typealias CouchdbSsmSessionStateListQueryFunction = F2Function<CouchdbSsmSessionStateListQueryDTO, CouchdbSsmSessionStateListQueryResultDTO>
 
-expect interface CouchdbSsmSessionStateListQueryDTO : PageQueryDTO {
+@Serializable
+@JsExport
+@JsName("CouchdbSsmSessionStateListQueryDTO")
+interface CouchdbSsmSessionStateListQueryDTO : PageQueryDTO {
 	/**
 	 * The unique uri of a channel.
 	 */
@@ -35,11 +35,18 @@ expect interface CouchdbSsmSessionStateListQueryDTO : PageQueryDTO {
 	val ssm: SsmName?
 }
 
-expect interface CouchdbSsmSessionStateListQueryResultDTO : PageQueryResultDTO<SsmSessionStateDTO> {
+@Serializable
+@JsExport
+@JsName("CouchdbSsmSessionStateListQueryResultDTO")
+interface CouchdbSsmSessionStateListQueryResultDTO : PageQueryResultDTO<SsmSessionStateDTO> {
 	/**
 	 * Retrieved sessions
 	 */
-	override val page: PageDTO<SsmSessionStateDTO>
+	override val pagination: OffsetPaginationDTO?
+	/**
+	 * Retrieved sessions
+	 */
+	override val items: List<SsmSessionStateDTO>
 }
 
 /**
@@ -65,6 +72,7 @@ class CouchdbSsmSessionStateListQuery(
 @JsExport
 @JsName("CouchdbSsmSessionStateListQueryResult")
 class CouchdbSsmSessionStateListQueryResult(
-	override val page: Page<SsmSessionState>,
 	override val pagination: OffsetPaginationDTO?,
+	override val total: Int,
+	override val items: List<SsmSessionStateDTO>,
 ) : CouchdbSsmSessionStateListQueryResultDTO

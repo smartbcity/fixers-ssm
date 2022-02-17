@@ -4,7 +4,10 @@ import kotlin.js.JsExport
 import kotlin.js.JsName
 import kotlinx.serialization.Serializable
 
-expect interface IdentitiesInfoDTO {
+@Serializable
+@JsExport
+@JsName("IdentitiesInfoDTO")
+interface IdentitiesInfoDTO {
 	/**
 	 * TODO
 	 * @example "2e3900b7-76f4-4828-9742-31bd39015de6"

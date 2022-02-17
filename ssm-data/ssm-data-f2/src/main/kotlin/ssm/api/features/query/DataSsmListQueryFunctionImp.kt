@@ -23,8 +23,8 @@ class DataSsmListQueryFunctionImp(
 	private suspend fun CouchdbSsmListQuery.queryEachChannel(chaincode: ChaincodeUri): Flow<DataSsm> =
 		invokeWith(couchdbSsmListQueryFunction)
 			.let { result ->
-				result.page.items.asFlow().map {
-					it.toDataSsm(chaincode)
+				result.items.asFlow().map { ssm ->
+					ssm.toDataSsm(chaincode)
 				}
 			}.filterNotNull()
 

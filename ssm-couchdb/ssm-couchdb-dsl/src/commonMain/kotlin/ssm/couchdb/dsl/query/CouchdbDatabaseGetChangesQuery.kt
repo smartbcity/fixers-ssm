@@ -27,7 +27,10 @@ typealias CouchdbDatabaseGetChangesQueryFunction = F2Function<CouchdbDatabaseGet
  * @d2 model
  * @parent [CouchdbDatabaseGetQueryFunction]
  */
-expect interface CouchdbDatabaseGetChangesQueryDTO : Query {
+@Serializable
+@JsExport
+@JsName("CouchdbDatabaseGetChangesQueryDTO")
+interface CouchdbDatabaseGetChangesQueryDTO : Query {
 	/**
 	 * The unique id of a channel.
 	 */
@@ -59,7 +62,10 @@ expect interface CouchdbDatabaseGetChangesQueryDTO : Query {
  * @title Get Database: Result
  * @parent [CouchdbDatabaseGetQueryFunction]
  */
-expect interface CouchdbDatabaseGetChangesQueryResultDTO : Event {
+@Serializable
+@JsExport
+@JsName("CouchdbDatabaseGetChangesQueryResultDTO")
+interface CouchdbDatabaseGetChangesQueryResultDTO : Event {
 	/**
 	 * The name of the database.
 	 */

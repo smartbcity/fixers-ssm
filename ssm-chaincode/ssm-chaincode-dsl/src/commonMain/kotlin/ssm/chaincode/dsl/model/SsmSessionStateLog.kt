@@ -5,7 +5,10 @@ import kotlin.js.JsName
 import kotlinx.serialization.Serializable
 import ssm.chaincode.dsl.blockchain.TransactionId
 
-expect interface SsmSessionStateLogDTO {
+@Serializable
+@JsExport
+@JsName("SsmSessionStateLogDTO")
+interface SsmSessionStateLogDTO {
 	/**
 	 * Id of the [Transaction][ssm.chaincode.dsl.blockchain.Transaction] the state is originated from
 	 * @example [ssm.chaincode.dsl.blockchain.Transaction.transactionId]

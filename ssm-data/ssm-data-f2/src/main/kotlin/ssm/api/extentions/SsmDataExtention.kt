@@ -5,7 +5,9 @@ import ssm.chaincode.dsl.blockchain.Transaction
 import ssm.chaincode.dsl.blockchain.TransactionId
 import ssm.chaincode.dsl.model.SessionName
 import ssm.chaincode.dsl.model.Ssm
+import ssm.chaincode.dsl.model.SsmDTO
 import ssm.chaincode.dsl.model.SsmSessionStateLog
+import ssm.chaincode.dsl.model.SsmTransition
 import ssm.chaincode.dsl.model.uri.ChaincodeUri
 import ssm.chaincode.dsl.model.uri.DEFAULT_VERSION
 import ssm.chaincode.dsl.model.uri.SsmUri
@@ -17,9 +19,19 @@ import ssm.chaincode.dsl.query.SsmGetTransactionQueryFunction
 import ssm.data.dsl.model.DataChannel
 import ssm.data.dsl.model.DataSsm
 
-fun Ssm.toDataSsm(burst: ChaincodeUri): DataSsm {
+fun SsmDTO.toDataSsm(burst: ChaincodeUri): DataSsm {
 	return DataSsm(
-		ssm = this,
+		ssm = Ssm(
+			name = this.name,
+			transitions = this.transitions.map { transition ->
+				SsmTransition(
+					from = transition.from,
+					to = transition.to,
+					role = transition.role,
+					action = transition.action
+				)
+			}
+		),
 		version = DEFAULT_VERSION,
 		channel = DataChannel(burst.channelId),
 		uri = burst.toSsmUri(this.name)

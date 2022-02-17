@@ -24,7 +24,10 @@ typealias CouchdbAdminListQueryFunction = F2Function<CouchdbAdminListQueryDTO, C
  * @d2 model
  * @parent [CouchdbAdminListQueryFunction]
  */
-expect interface CouchdbAdminListQueryDTO : Query {
+@Serializable
+@JsExport
+@JsName("CouchdbAdminListQueryDTO")
+interface CouchdbAdminListQueryDTO : Query {
 	/**
 	 * The unique id of a chaincode.
 	 */
@@ -36,7 +39,10 @@ expect interface CouchdbAdminListQueryDTO : Query {
  * @title Get all admins: Result
  * @parent [CouchdbAdminListQueryFunction]
  */
-expect interface CouchdbAdminListQueryResultDTO : Event {
+@Serializable
+@JsExport
+@JsName("CouchdbAdminListQueryResultDTO")
+interface CouchdbAdminListQueryResultDTO : Event {
 	/**
 	 * Names of the admin.
 	 */

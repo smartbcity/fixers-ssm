@@ -13,7 +13,10 @@ typealias DatabaseName = String
  * @title Database
  * @parent [ssm.couchdb.dsl.CouchdbSsmD2Model]
  */
-expect interface DatabaseDTO {
+@Serializable
+@JsExport
+@JsName("DatabaseDTO")
+interface DatabaseDTO {
 	/**
 	 * Name of the database
 	 * @example "smartbase_ssm"

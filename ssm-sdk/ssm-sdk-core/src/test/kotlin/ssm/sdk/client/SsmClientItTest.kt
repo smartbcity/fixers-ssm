@@ -206,7 +206,7 @@ class SsmClientItTest {
 		)
 		privateMessage = context.private
 		val transactionEvent = tx.sendPerform(chaincodeUri,"Sell", context, signerUser2.name)
-		assertThatTransactionExists(transactionEvent!!)
+		assertThatTransactionExists(transactionEvent)
 	}
 
 	@Order(110)
@@ -237,7 +237,7 @@ class SsmClientItTest {
 	@Order(120)
 	fun performBuy() = runBlocking<Unit> {
 		val context = SsmContext(sessionName, "Deal !", 1, emptyMap())
-		val transactionEvent = tx.sendPerform(chaincodeUri,"Buy", context, signerUser1.name)!!
+		val transactionEvent = tx.sendPerform(chaincodeUri,"Buy", context, signerUser1.name)
 		assertThatTransactionExists(transactionEvent)
 	}
 

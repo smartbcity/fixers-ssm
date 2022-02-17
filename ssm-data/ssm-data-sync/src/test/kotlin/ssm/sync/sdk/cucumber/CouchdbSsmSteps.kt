@@ -117,7 +117,7 @@ class CouchdbSsmSteps : SsmQueryStep(), En {
 	override suspend fun listSessions(ssmUri: SsmUri): List<SessionName> {
 		return CouchdbSsmSessionStateListQuery(chaincodeUri = bag.chaincodeUri)
 			.invokeWith(couchdbSsmQueriesFunctions.couchdbSsmSessionStateListQueryFunction())
-			.page.items
+			.items
 			.map { it.session }
 	}
 
@@ -127,7 +127,7 @@ class CouchdbSsmSteps : SsmQueryStep(), En {
 			channelId = bag.chaincodeUri.channelId,
 			chaincodeId = bag.chaincodeUri.chaincodeId
 		).invokeWith(couchdbSsmQueriesFunctions.couchdbSsmListQueryFunction())
-			.page.items.map { it.name }
+			.items.map { it.name }
 	}
 
 	override suspend fun listUsers(): List<String> {

@@ -4,9 +4,12 @@ import kotlin.js.JsExport
 import kotlin.js.JsName
 import kotlinx.serialization.Serializable
 
-typealias BlockId = Long
+typealias BlockId = String
 
-expect interface BlockDTO {
+@Serializable
+@JsExport
+@JsName("BlockDTO")
+interface BlockDTO {
 	/**
 	 * Identifier of the block
 	 * @example 10

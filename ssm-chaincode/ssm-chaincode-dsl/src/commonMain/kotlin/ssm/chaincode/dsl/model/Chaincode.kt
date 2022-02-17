@@ -12,7 +12,10 @@ import kotlinx.serialization.Serializable
  */
 typealias ChaincodeId = String
 
-expect interface ChaincodeDTO {
+@Serializable
+@JsExport
+@JsName("ChaincodeDTO")
+interface ChaincodeDTO {
 	val id: ChaincodeId
 	val channelId: ChannelId
 }

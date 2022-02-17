@@ -7,13 +7,13 @@ import ssm.data.dsl.model.DataSsmSessionDTO
 
 @JsExport
 @JsName("DataSsmSessionGetQueryDTO")
-actual external interface DataSsmSessionGetQueryDTO : DataQueryDTO {
+actual interface DataSsmSessionGetQueryDTO : DataQueryDTO {
 	actual val sessionName: String
 	actual override val ssmUri: SsmUriDTO
 }
 
 @JsExport
 @JsName("DataSsmSessionGetQueryResultDTO")
-actual external interface DataSsmSessionGetQueryResultDTO : Event {
+actual interface DataSsmSessionGetQueryResultDTO : Event {
 	actual val item: DataSsmSessionDTO?
 }

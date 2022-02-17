@@ -27,10 +27,8 @@ class CouchdbSsmSessionStateListQueryFunctionImpl(
 				DocType.State, filters
 			).let { list ->
 				CouchdbSsmSessionStateListQueryResult(
-					page = Page(
-						items = list,
-						total = list.size
-					),
+					items = list,
+					total = list.size,
 					pagination = payload.pagination
 				)
 			}

@@ -6,7 +6,10 @@ import kotlinx.serialization.Serializable
 
 typealias AgentName = String
 
-expect interface SsmAgentDTO {
+@Serializable
+@JsExport
+@JsName("SsmAgentDTO")
+interface SsmAgentDTO {
 	/**
 	 * Identifier of the agent
 	 * @example "Adam"
