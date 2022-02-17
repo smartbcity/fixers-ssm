@@ -17,7 +17,10 @@ import ssm.data.dsl.model.DataSsmDTO
  */
 typealias DataChaincodeListQueryFunction = F2Function<DataChaincodeListQuery, DataChaincodeListQueryResult>
 
-expect interface DataChaincodeListQueryDTO
+@Serializable
+@JsExport
+@JsName("DataChaincodeListQueryDTO")
+interface DataChaincodeListQueryDTO
 
 /**
  * @d2 query
@@ -29,7 +32,10 @@ expect interface DataChaincodeListQueryDTO
 @JsName("DataChaincodeListQuery")
 class DataChaincodeListQuery : DataChaincodeListQueryDTO
 
-expect interface DataChaincodeListQueryResultDTO {
+@Serializable
+@JsExport
+@JsName("DataChaincodeListQueryResultDTO")
+interface DataChaincodeListQueryResultDTO {
 	/**
 	 * List of all retrieved SSMs
 	 */

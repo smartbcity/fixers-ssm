@@ -1,5 +1,8 @@
 package ssm.data.dsl
 
+import kotlin.js.JsExport
+import kotlin.js.JsName
+import kotlinx.serialization.Serializable
 import ssm.data.dsl.features.query.DataChaincodeListQuery
 import ssm.data.dsl.features.query.DataChaincodeListQueryFunction
 import ssm.data.dsl.features.query.DataSsmGetQueryFunction
@@ -22,7 +25,9 @@ import ssm.data.dsl.features.query.DataSsmSessionLogListQueryFunction
  * @parent [ssm.data.dsl.DataSsmD2]
  * @title Synthesis and global objects of the API
  */
-expect interface SsmApiQueryFunctions {
+@JsExport
+@JsName("SsmApiQueryFunctions")
+interface SsmApiQueryFunctions {
 	fun dataChaincodeListQueryFunction(): DataChaincodeListQueryFunction
 	fun dataSsmListQueryFunction(): DataSsmListQueryFunction
 	fun dataSsmGetQueryFunction(): DataSsmGetQueryFunction

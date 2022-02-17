@@ -5,7 +5,10 @@ import kotlin.js.JsName
 import kotlinx.serialization.Serializable
 import ssm.chaincode.dsl.model.ChannelId
 
-expect interface DataChannelDTO {
+@Serializable
+@JsExport
+@JsName("DataChannelDTO")
+interface DataChannelDTO {
 	/**
 	 * Identifier
 	 * @example "channel-smartb"

@@ -20,7 +20,10 @@ import ssm.data.dsl.model.DataSsmSessionStateDTO
  */
 typealias DataSsmSessionLogGetQueryFunction = F2Function<DataSsmSessionLogGetQueryDTO, DataSsmSessionLogGetQueryResultDTO>
 
-expect interface DataSsmSessionLogGetQueryDTO : DataQueryDTO {
+@Serializable
+@JsExport
+@JsName("DataSsmSessionLogGetQueryDTO")
+interface DataSsmSessionLogGetQueryDTO : DataQueryDTO {
 	/**
 	 * Identifier of the session to retrieve
 	 * @example [ssm.data.dsl.model.DataSsmSession.sessionName]
@@ -49,7 +52,10 @@ class DataSsmSessionLogGetQuery(
 	override val ssmUri: SsmUri,
 ) : DataSsmSessionLogGetQueryDTO
 
-expect interface DataSsmSessionLogGetQueryResultDTO {
+@Serializable
+@JsExport
+@JsName("DataSsmSessionLogGetQueryResultDTO")
+interface DataSsmSessionLogGetQueryResultDTO {
 	/**
 	 * The retrieved session state and transaction
 	 */

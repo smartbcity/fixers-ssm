@@ -4,11 +4,11 @@ import f2.dsl.cqrs.Command
 import f2.dsl.cqrs.Event
 import kotlin.js.JsExport
 import kotlin.js.JsName
-import kotlinx.serialization.Serializable
 import ssm.chaincode.dsl.blockchain.TransactionId
-import ssm.chaincode.dsl.model.uri.ChaincodeUri
 import ssm.chaincode.dsl.model.uri.ChaincodeUriDTO
 
+@JsExport
+@JsName("SsmCommandDTO")
 interface SsmCommandDTO : Command {
 	/**
 	 * The uri of a chaincode.
@@ -16,7 +16,8 @@ interface SsmCommandDTO : Command {
 	val chaincodeUri: ChaincodeUriDTO
 }
 
-
+@JsExport
+@JsName("SsmCommandResultDTO")
 interface SsmCommandResultDTO : Event {
 	/**
 	 * Identifier of the transaction
@@ -32,7 +33,6 @@ interface SsmCommandResultDTO : Event {
  * @parent [ssm.chaincode.dsl.SsmChaincodeD2Model]
  * @title SSM-CHAINCODE/InvokeReturn
  */
-@Serializable
 @JsExport
 @JsName("SsmCommandResult")
 data class SsmCommandResult(

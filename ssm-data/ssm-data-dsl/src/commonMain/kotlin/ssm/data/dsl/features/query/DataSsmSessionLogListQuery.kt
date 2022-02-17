@@ -18,7 +18,10 @@ import ssm.data.dsl.model.DataSsmSessionState
  */
 typealias DataSsmSessionLogListQueryFunction = F2Function<DataSsmSessionLogListQueryDTO, DataSsmSessionLogListQueryResultDTO>
 
-expect interface DataSsmSessionLogListQueryDTO : DataQueryDTO {
+@Serializable
+@JsExport
+@JsName("DataSsmSessionLogListQueryDTO")
+interface DataSsmSessionLogListQueryDTO : DataQueryDTO {
 	/**
 	 * Identifier of the session to retrieve
 	 * @example "DataSsmSessionId"
@@ -40,7 +43,10 @@ class DataSsmSessionLogListQuery(
 	override val ssmUri: SsmUri,
 ) : DataSsmSessionLogListQueryDTO
 
-expect interface DataSsmSessionLogListQueryResultDTO {
+@Serializable
+@JsExport
+@JsName("DataSsmSessionLogListQueryResultDTO")
+interface DataSsmSessionLogListQueryResultDTO {
 	/**
 	 * All retrieved logs of the given session
 	 */

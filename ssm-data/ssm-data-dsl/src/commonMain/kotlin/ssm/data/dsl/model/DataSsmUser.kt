@@ -6,7 +6,10 @@ import kotlinx.serialization.Serializable
 import ssm.chaincode.dsl.model.Agent
 import ssm.chaincode.dsl.model.SsmAgentDTO
 
-expect interface DataSsmUserDTO {
+@Serializable
+@JsExport
+@JsName("DataSsmUserDTO")
+interface DataSsmUserDTO {
 	/**
 	 * Agent able to interact with an SSM
 	 */

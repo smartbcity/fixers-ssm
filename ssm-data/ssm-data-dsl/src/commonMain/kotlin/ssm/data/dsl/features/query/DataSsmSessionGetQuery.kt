@@ -20,7 +20,10 @@ import ssm.data.dsl.model.DataSsmSessionDTO
  */
 typealias DataSsmSessionGetQueryFunction = F2Function<DataSsmSessionGetQueryDTO, DataSsmSessionGetQueryResultDTO>
 
-expect interface DataSsmSessionGetQueryDTO : DataQueryDTO {
+@Serializable
+@JsExport
+@JsName("DataSsmSessionGetQueryDTO")
+interface DataSsmSessionGetQueryDTO : DataQueryDTO {
 	/**
 	 * Identifier of the session to retrieve
 	 * @example [DataSsmSession.sessionName]
@@ -42,7 +45,10 @@ class DataSsmSessionGetQuery(
 	override val ssmUri: SsmUri,
 ) : DataSsmSessionGetQueryDTO
 
-expect interface DataSsmSessionGetQueryResultDTO: Event {
+@Serializable
+@JsExport
+@JsName("DataSsmSessionGetQueryResultDTO")
+interface DataSsmSessionGetQueryResultDTO: Event {
 	/**
 	 * The retrieved session if it exists
 	 */
