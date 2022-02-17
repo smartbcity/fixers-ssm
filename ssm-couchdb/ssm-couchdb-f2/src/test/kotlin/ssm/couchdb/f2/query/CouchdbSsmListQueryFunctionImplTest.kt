@@ -21,6 +21,6 @@ internal class CouchdbSsmListQueryFunctionImplTest : FunctionTestBase() {
 		).invokeWith(couchdbSsmListQueryFunctionImpl)
 
 		Assertions.assertThat(ssmList).isNotNull
-		Assertions.assertThat(ssmList.page.list).isNotNull
+		Assertions.assertThat(ssmList.page.items).isNotNull
 	}
 }

@@ -30,7 +30,7 @@ class CouchdbDatabaseListQueryFunctionImpl(
 				CouchdbDatabaseListQueryResult(
 					page = Page(
 						total = total,
-						list = list,
+						items = list,
 					),
 					pagination = payload.pagination
 				)

@@ -31,7 +31,7 @@ class DataSsmSessionListQueryFunctionImpl(
 				ssm = payload.ssmUri.burst().ssmName,
 				pagination = null
 			).invokeWith(couchdbSsmSessionStateListQueryFunction)
-				.page.list
+				.page.items
 				.filter { sessionState -> sessionState.session.isNotBlank() }
 				.map { sessionState ->
 					DataSsmSessionConvertQuery(

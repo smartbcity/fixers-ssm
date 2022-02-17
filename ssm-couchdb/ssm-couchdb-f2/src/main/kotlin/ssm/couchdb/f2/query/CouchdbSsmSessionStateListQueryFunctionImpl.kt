@@ -28,7 +28,7 @@ class CouchdbSsmSessionStateListQueryFunctionImpl(
 			).let { list ->
 				CouchdbSsmSessionStateListQueryResult(
 					page = Page(
-						list = list,
+						items = list,
 						total = list.size
 					),
 					pagination = payload.pagination

@@ -20,7 +20,7 @@ class CouchdbSsmListQueryFunctionImpl(
 			.let{ list ->
 				CouchdbSsmListQueryResult(
 					page = Page(
-						list = list,
+						items = list,
 						total = list.size
 					),
 					pagination = payload.pagination
