@@ -4,7 +4,7 @@ import kotlin.js.JsExport
 import kotlin.js.JsName
 import kotlinx.serialization.Serializable
 import ssm.chaincode.dsl.model.Agent
-import ssm.chaincode.dsl.model.SsmAgentDTO
+import ssm.chaincode.dsl.model.AgentDTO
 
 @Serializable
 @JsExport
@@ -13,7 +13,7 @@ interface DataSsmUserDTO {
 	/**
 	 * Agent able to interact with an SSM
 	 */
-	val agent: SsmAgentDTO
+	val agent: AgentDTO
 }
 
 /**

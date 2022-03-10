@@ -1,4 +1,5 @@
 import city.smartb.gradle.dependencies.FixersPluginVersions
+import city.smartb.gradle.dependencies.FixersVersions
 import city.smartb.gradle.dependencies.Scope
 import city.smartb.gradle.dependencies.add
 
@@ -9,11 +10,11 @@ object PluginVersions {
 }
 
 object Versions {
-	const val springFramework = "5.3.14"
+	const val springFramework = FixersVersions.Spring.framework
+	const val slf4j = FixersVersions.Logging.slf4j
 	const val cloudant = "0.0.34"
 	const val bouncycastleVersion = "1.61"
-	const val jacksonKotlin = "2.13.0"
-	const val slf4j = "1.7.35"
+	const val jacksonKotlin = "2.13.2"
 	const val f2 = PluginVersions.fixers
 }
 

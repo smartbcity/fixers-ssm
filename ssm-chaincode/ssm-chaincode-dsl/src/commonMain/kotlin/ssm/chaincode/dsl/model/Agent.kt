@@ -8,8 +8,8 @@ typealias AgentName = String
 
 @Serializable
 @JsExport
-@JsName("SsmAgentDTO")
-interface SsmAgentDTO {
+@JsName("AgentDTO")
+interface AgentDTO {
 	/**
 	 * Identifier of the agent
 	 * @example "Adam"
@@ -35,11 +35,11 @@ interface SsmAgentDTO {
  */
 @Serializable
 @JsExport
-@JsName("SsmAgent")
+@JsName("Agent")
 data class Agent(
 	override val name: AgentName,
 	override val pub: ByteArray,
-) : SsmAgentDTO {
+) : AgentDTO {
 
 	override fun equals(other: Any?): Boolean {
 		if (this === other) return true
