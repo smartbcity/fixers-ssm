@@ -8,7 +8,7 @@ plugins {
 
 	id("city.smartb.fixers.gradle.config") version PluginVersions.fixers
 	id("city.smartb.fixers.gradle.sonar") version PluginVersions.fixers
-	id("city.smartb.fixers.gradle.d2") version PluginVersions.fixers
+	id("city.smartb.fixers.gradle.d2") version PluginVersions.d2
 }
 
 allprojects {
