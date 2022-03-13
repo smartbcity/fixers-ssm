@@ -1,10 +1,10 @@
 import city.smartb.gradle.dependencies.FixersPluginVersions
 import city.smartb.gradle.dependencies.FixersVersions
+import city.smartb.gradle.dependencies.FixersDependencies
 import city.smartb.gradle.dependencies.Scope
-import city.smartb.gradle.dependencies.add
 
 object PluginVersions {
-	const val fixers = "0.4.1"
+	val fixers = FixersPluginVersions.fixers
 	const val d2 = "0.3.1"
 	const val kotlin = FixersPluginVersions.kotlin
 	const val npmPublish = FixersPluginVersions.npmPublish
@@ -13,14 +13,13 @@ object PluginVersions {
 object Versions {
 	const val springFramework = FixersVersions.Spring.framework
 	const val slf4j = FixersVersions.Logging.slf4j
+	const val jacksonKotlin = FixersVersions.Json.jacksonKotlin
+	val f2 = PluginVersions.fixers
+
 	const val cloudant = "0.0.34"
 	const val bouncycastleVersion = "1.61"
-	const val jacksonKotlin = "2.13.1"
-	const val f2 = PluginVersions.fixers
 }
 
 object Dependencies {
-	fun slf4j(scope: Scope) = scope.add(
-		"org.slf4j:slf4j-api:${Versions.slf4j}",
-	)
+	fun slf4j(scope: Scope) = FixersDependencies.Jvm.Logging.slf4j(scope)
 }

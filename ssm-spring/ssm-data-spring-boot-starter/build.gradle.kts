@@ -14,7 +14,7 @@ dependencies {
 	api("city.smartb.f2:f2-spring-boot-starter-function:${Versions.f2}")
 	kapt("org.springframework.boot:spring-boot-configuration-processor:${FixersVersions.Spring.boot}")
 
-	city.smartb.gradle.dependencies.FixersDependencies.Jvm.Kotlin.slf4j(::implementation)
+	Dependencies.slf4j(::implementation)
 
 	testImplementation(project(":ssm-bdd:ssm-bdd-spring-autoconfigure"))
 }
