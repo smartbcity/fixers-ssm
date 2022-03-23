@@ -73,7 +73,7 @@ abstract class SsmQueryStep {
 				).contains(ssmName.contextualize(bag))
 			}
 		}
-		Then("Session {string} of {string} is in the list") {  sessionName: SessionName, ssmName: SsmName ->
+		Then("Session {string} of {string} is in the list") { sessionName: SessionName, ssmName: SsmName ->
 			runBlocking {
 				Assertions.assertThat(
 					listSessions(bag.chaincodeUri.toSsmUri(ssmName))
