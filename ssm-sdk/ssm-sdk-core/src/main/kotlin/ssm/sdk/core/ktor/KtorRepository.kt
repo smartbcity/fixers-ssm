@@ -1,20 +1,23 @@
 package ssm.sdk.core.ktor
 
 import io.ktor.client.HttpClient
+import io.ktor.client.call.body
 import io.ktor.client.engine.cio.CIO
-import io.ktor.client.features.json.JacksonSerializer
-import io.ktor.client.features.json.JsonFeature
+import io.ktor.client.plugins.contentnegotiation.ContentNegotiation
 import io.ktor.client.request.HttpRequestBuilder
 import io.ktor.client.request.get
 import io.ktor.client.request.header
 import io.ktor.client.request.parameter
 import io.ktor.client.request.post
+import io.ktor.client.request.setBody
 import io.ktor.http.ContentType
 import io.ktor.http.contentType
+import io.ktor.http.path
 import ssm.chaincode.dsl.model.ChaincodeId
 import ssm.chaincode.dsl.model.ChannelId
 import ssm.sdk.core.auth.AuthCredentials
 import ssm.sdk.core.auth.BearerTokenAuthCredentials
+import io.ktor.serialization.jackson.jackson
 
 
 class KtorRepository(
@@ -30,10 +33,9 @@ class KtorRepository(
 	}
 
 	val client = HttpClient(CIO) {
-		install(JsonFeature) {
-			serializer = JacksonSerializer()
+		install(ContentNegotiation) {
+			jackson()
 		}
-
 	}
 
 	suspend fun query(
@@ -51,7 +53,7 @@ class KtorRepository(
 			chaincodeId?.let { parameter(CHAINCODE_ID_PROPS, chaincodeId) }
 			parameter(FCN_PROPS, fcn)
 			parameter(ARGS_PROPS, args.first())
-		}
+		}.body()
 	}
 
 	suspend fun getBlock(blockId: Long, channelId: ChannelId?): String {
@@ -62,18 +64,17 @@ class KtorRepository(
 			url {
 				path("blocks", blockId.toString())
 			}
-		}
+		}.body()
 	}
 
 	suspend fun getTransaction(txId: String, channelId: ChannelId?): String {
 		return client.get(baseUrl) {
 			addAuth()
-
 			channelId?.let { parameter("channelId", channelId) }
 			url {
 				path("transactions", txId)
 			}
-		}
+		}.body()
 	}
 
 	suspend fun invoke(
@@ -87,14 +88,14 @@ class KtorRepository(
 			addAuth()
 
 			contentType(ContentType.Application.Json)
-			body = mapOf(
+			setBody(mapOf(
 				CMD_PROPS to cmd,
 				FCN_PROPS to fcn,
 				ARGS_PROPS to args,
 				CHANNEL_ID_PROPS to channelId,
 				CHAINCODE_ID_PROPS to chaincodeId,
-			)
-		}
+			))
+		}.body()
 	}
 
 	private fun HttpRequestBuilder.addAuth() {
