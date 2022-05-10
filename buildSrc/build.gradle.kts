@@ -8,7 +8,6 @@ repositories {
 	maven { url = uri("https://oss.sonatype.org/content/repositories/snapshots") }
 }
 
-
 dependencies {
-	implementation("city.smartb.fixers.gradle:dependencies:0.8.0")
+	implementation("city.smartb.fixers.gradle:dependencies:experimental-SNAPSHOT")
 }
