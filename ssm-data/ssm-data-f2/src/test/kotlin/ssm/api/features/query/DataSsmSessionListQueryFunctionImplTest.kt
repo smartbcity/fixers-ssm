@@ -30,6 +30,6 @@ internal class DataSsmSessionListQueryFunctionImplTest {
 		val result = DataSsmSessionListQuery(
 			ssmUri = ssmListResult.items.first().uri,
 		).invokeWith(function)
-		Assertions.assertThat(result.items).isEmpty()
+		Assertions.assertThat(result.items).isNotEmpty()
 	}
 }

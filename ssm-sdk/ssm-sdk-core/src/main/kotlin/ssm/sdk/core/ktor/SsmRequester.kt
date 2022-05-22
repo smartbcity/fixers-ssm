@@ -62,7 +62,9 @@ class SsmRequester(
 		logger.info(
 			"Query the blockchain in chaincode[${chaincodeUri.uri}] with fcn[${args.fcn}] with args:${args.args}",
 		)
-		return request.let { jsonConverter.toCompletableObjects(clazz, it) }
+		return request.let { response ->
+			jsonConverter.toCompletableObjects(clazz, response)
+		}
 	}
 
 	@Throws(Exception::class)

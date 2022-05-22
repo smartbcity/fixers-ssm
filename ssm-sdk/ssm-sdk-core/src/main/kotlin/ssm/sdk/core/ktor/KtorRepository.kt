@@ -13,11 +13,11 @@ import io.ktor.client.request.setBody
 import io.ktor.http.ContentType
 import io.ktor.http.contentType
 import io.ktor.http.path
+import io.ktor.serialization.jackson.jackson
 import ssm.chaincode.dsl.model.ChaincodeId
 import ssm.chaincode.dsl.model.ChannelId
 import ssm.sdk.core.auth.AuthCredentials
 import ssm.sdk.core.auth.BearerTokenAuthCredentials
-import io.ktor.serialization.jackson.jackson
 
 
 class KtorRepository(
@@ -25,6 +25,7 @@ class KtorRepository(
 	private val authCredentials: AuthCredentials?,
 ) {
 	companion object {
+		const val PATH = "/"
 		const val CMD_PROPS = "cmd"
 		const val CHANNEL_ID_PROPS = "channelid"
 		const val CHAINCODE_ID_PROPS = "chaincodeid"
@@ -45,9 +46,8 @@ class KtorRepository(
 		channelId: ChannelId?,
 		chaincodeId: ChaincodeId?,
 	): String {
-		return client.get(baseUrl) {
+		return client.get(baseUrl + PATH) {
 			addAuth()
-
 			parameter(CMD_PROPS, cmd)
 			channelId?.let { parameter(CHANNEL_ID_PROPS, channelId) }
 			chaincodeId?.let { parameter(CHAINCODE_ID_PROPS, chaincodeId) }
@@ -88,18 +88,20 @@ class KtorRepository(
 			addAuth()
 
 			contentType(ContentType.Application.Json)
-			setBody(mapOf(
-				CMD_PROPS to cmd,
-				FCN_PROPS to fcn,
-				ARGS_PROPS to args,
-				CHANNEL_ID_PROPS to channelId,
-				CHAINCODE_ID_PROPS to chaincodeId,
-			))
+			setBody(
+				mapOf(
+					CMD_PROPS to cmd,
+					FCN_PROPS to fcn,
+					ARGS_PROPS to args,
+					CHANNEL_ID_PROPS to channelId,
+					CHAINCODE_ID_PROPS to chaincodeId,
+				)
+			)
 		}.body()
 	}
 
 	private fun HttpRequestBuilder.addAuth() {
-		when(authCredentials) {
+		when (authCredentials) {
 			is BearerTokenAuthCredentials -> header("Authorization", "Bearer ${authCredentials.getBearerToken()}")
 		}
 	}
