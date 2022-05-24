@@ -41,7 +41,7 @@ class SsmListSsmQuery(
 class SsmListSsmResult(
 	/**
 	 * Names of all known SSMs
-	 * @example ["ProductLogistic", "Delivery", "Mobility"]
+	 * @example [["ProductLogistic", "Delivery", "Mobility"]]
 	 */
 	override val items: Array<SsmName>,
 ) : SsmItemsResultDTO<SsmName>

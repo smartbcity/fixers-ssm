@@ -1,4 +1,0 @@
-
-
-## Fetch all chaincodes  
-

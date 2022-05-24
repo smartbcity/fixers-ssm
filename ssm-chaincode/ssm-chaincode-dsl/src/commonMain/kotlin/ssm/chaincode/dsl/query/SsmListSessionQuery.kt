@@ -41,7 +41,7 @@ class SsmListSessionQuery(
 class SsmListSessionResult(
 	/**
 	 * Names of all sessions
-	 * @example ["49b6566c-5616-4ca2-a94d-e3038a05f28e", "7f3af888-cb6f-4cc4-9471-8b75cf771e2e"]
+	 * @example [["49b6566c-5616-4ca2-a94d-e3038a05f28e", "7f3af888-cb6f-4cc4-9471-8b75cf771e2e"]]
 	 */
 	override val items: Array<SessionName>,
 ) : SsmItemsResultDTO<SessionName>

@@ -1,0 +1,14 @@
+import { CodeHighlighter, DescriptedCode } from '@smartb/g2-documentation'
+import SsmGetTransactionQueryResultDesc from './desc.md'
+import SsmGetTransactionQueryResultVisualJson from './visualJson.json'
+
+<DescriptedCode
+  leftElement={<SsmGetTransactionQueryResultDesc />}
+  rightElement={
+    <CodeHighlighter
+      object={SsmGetTransactionQueryResultVisualJson}
+      language={"json"}
+      title={"Example"}
+    />
+  }
+/>

@@ -11,3 +11,4 @@ package-kotlin:
 
 package-storybook:
 	@docker build -f ${STORYBOOK_DOCKERFILE} -t ${STORYBOOK_IMG} .
+    @docker push ${STORYBOOK_IMG}

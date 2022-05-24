@@ -1,0 +1,17 @@
+import { CodeHighlighter, DescriptedCode } from '@smartb/g2-documentation'
+import CouchdbSsmD2Desc from './desc.md'
+import CouchdbSsmD2VisualJson from './visualJson.json'
+import SsmCouchDbQueriesIndex from '../ssm-couch-db-queries/index.mdx'
+
+<DescriptedCode
+  leftElement={<CouchdbSsmD2Desc />}
+  rightElement={
+    <CodeHighlighter
+      object={CouchdbSsmD2VisualJson}
+      language={"json"}
+      title={"Example"}
+    />
+  }
+/>
+
+<SsmCouchDbQueriesIndex />

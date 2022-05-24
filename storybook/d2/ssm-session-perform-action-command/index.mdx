@@ -1,0 +1,14 @@
+import { CodeHighlighter, DescriptedCode } from '@smartb/g2-documentation'
+import SsmSessionPerformActionCommandDesc from './desc.md'
+import SsmSessionPerformActionCommandVisualJson from './visualJson.json'
+
+<DescriptedCode
+  leftElement={<SsmSessionPerformActionCommandDesc />}
+  rightElement={
+    <CodeHighlighter
+      object={SsmSessionPerformActionCommandVisualJson}
+      language={"json"}
+      title={"Example"}
+    />
+  }
+/>

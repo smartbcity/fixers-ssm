@@ -1,0 +1,14 @@
+import { CodeHighlighter, DescriptedCode } from '@smartb/g2-documentation'
+import SsmGetSessionLogsQueryDesc from './desc.md'
+import SsmGetSessionLogsQueryVisualJson from './visualJson.json'
+
+<DescriptedCode
+  leftElement={<SsmGetSessionLogsQueryDesc />}
+  rightElement={
+    <CodeHighlighter
+      object={SsmGetSessionLogsQueryVisualJson}
+      language={"json"}
+      title={"Example"}
+    />
+  }
+/>

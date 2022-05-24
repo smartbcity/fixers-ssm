@@ -1,0 +1,14 @@
+import { CodeHighlighter, DescriptedCode } from '@smartb/g2-documentation'
+import SsmListUserQueryDesc from './desc.md'
+import SsmListUserQueryVisualJson from './visualJson.json'
+
+<DescriptedCode
+  leftElement={<SsmListUserQueryDesc />}
+  rightElement={
+    <CodeHighlighter
+      object={SsmListUserQueryVisualJson}
+      language={"json"}
+      title={"Example"}
+    />
+  }
+/>

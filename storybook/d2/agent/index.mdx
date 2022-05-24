@@ -1,0 +1,14 @@
+import AgentDesc from './desc.md'
+import AgentVisualJson from './visualJson.json'
+import { CodeHighlighter, DescriptedCode } from '@smartb/g2-documentation'
+
+<DescriptedCode
+  leftElement={<AgentDesc />}
+  rightElement={
+    <CodeHighlighter
+      object={AgentVisualJson}
+      language={"json"}
+      title={"Example"}
+    />
+  }
+/>

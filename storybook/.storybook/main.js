@@ -1,17 +1,21 @@
 module.exports = {
-  "stories": [
-    "../stories/**/*.stories.mdx",
-    "../stories/**/*.stories.@(js|jsx|ts|tsx)"
+  stories: [
+    "../**/*.stories.mdx",
+    "../**/*.stories.@(js|jsx|ts|tsx)",
   ],
-  "addons": [
+  addons: [
     {
       name: "@storybook/addon-docs",
       options: {
         configureJSX: true,
-        transcludeMarkdown: true
-      }
+        transcludeMarkdown: true,
+      },
     },
     "@storybook/addon-links",
-    "@storybook/addon-essentials"
-  ]
-}
+    "@storybook/addon-essentials",
+    "storybook-react-i18next",
+  ],
+  features: {
+    emotionAlias: false,
+  },
+};

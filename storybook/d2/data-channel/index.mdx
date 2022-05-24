@@ -1,0 +1,14 @@
+import { CodeHighlighter, DescriptedCode } from '@smartb/g2-documentation'
+import DataChannelDesc from './desc.md'
+import DataChannelVisualJson from './visualJson.json'
+
+<DescriptedCode
+  leftElement={<DataChannelDesc />}
+  rightElement={
+    <CodeHighlighter
+      object={DataChannelVisualJson}
+      language={"json"}
+      title={"Example"}
+    />
+  }
+/>

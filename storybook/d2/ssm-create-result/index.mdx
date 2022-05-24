@@ -1,0 +1,14 @@
+import { CodeHighlighter, DescriptedCode } from '@smartb/g2-documentation'
+import SsmCreateResultDesc from './desc.md'
+import SsmCreateResultVisualJson from './visualJson.json'
+
+<DescriptedCode
+  leftElement={<SsmCreateResultDesc />}
+  rightElement={
+    <CodeHighlighter
+      object={SsmCreateResultVisualJson}
+      language={"json"}
+      title={"Example"}
+    />
+  }
+/>

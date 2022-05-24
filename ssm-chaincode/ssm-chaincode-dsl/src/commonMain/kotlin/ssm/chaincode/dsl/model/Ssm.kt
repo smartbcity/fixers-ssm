@@ -23,7 +23,7 @@ interface SsmDTO {
 
 	/**
 	 * The definition of the State Machine
-	 * @example [
+	 * @example [[
 	 * 	{
 	 * 		"from": 0,
 	 * 		"to": 1,
@@ -40,7 +40,7 @@ interface SsmDTO {
 	 * 	    "role": "Buyer",
 	 * 	    "action": "Buy"
 	 * 	}
-	 * ]
+	 * ]]
 	 */
 	val transitions: List<SsmTransitionDTO>
 }

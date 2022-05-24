@@ -1,0 +1,14 @@
+import BlockDesc from './desc.md'
+import BlockVisualJson from './visualJson.json'
+import { CodeHighlighter, DescriptedCode } from '@smartb/g2-documentation'
+
+<DescriptedCode
+  leftElement={<BlockDesc />}
+  rightElement={
+    <CodeHighlighter
+      object={BlockVisualJson}
+      language={"json"}
+      title={"Example"}
+    />
+  }
+/>

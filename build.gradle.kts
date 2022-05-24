@@ -30,9 +30,6 @@ subprojects {
 				description = "Aggregate all ssm data source to optimize request"
 				url = "https://gitlab.smartb.city/fixers/ssm"
 			}
-			d2 {
-				outputDirectory = file("docs/stories/d2")
-			}
 		}
 	}
 	plugins.withType(dev.petuska.npm.publish.NpmPublishPlugin::class.java).whenPluginAdded {
@@ -58,5 +55,11 @@ tasks {
 	create<com.moowork.gradle.node.yarn.YarnTask>("storybook") {
 		dependsOn("yarn_install")
 		args = listOf("storybook")
+	}
+}
+
+fixers {
+	d2 {
+		outputDirectory = file("storybook/d2/")
 	}
 }

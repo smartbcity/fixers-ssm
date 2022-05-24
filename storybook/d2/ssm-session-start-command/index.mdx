@@ -1,0 +1,14 @@
+import { CodeHighlighter, DescriptedCode } from '@smartb/g2-documentation'
+import SsmSessionStartCommandDesc from './desc.md'
+import SsmSessionStartCommandVisualJson from './visualJson.json'
+
+<DescriptedCode
+  leftElement={<SsmSessionStartCommandDesc />}
+  rightElement={
+    <CodeHighlighter
+      object={SsmSessionStartCommandVisualJson}
+      language={"json"}
+      title={"Example"}
+    />
+  }
+/>

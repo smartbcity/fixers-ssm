@@ -1,0 +1,14 @@
+import { CodeHighlighter, DescriptedCode } from '@smartb/g2-documentation'
+import CouchdbSsmGetQueryResultDTODesc from './desc.md'
+import CouchdbSsmGetQueryResultDTOVisualJson from './visualJson.json'
+
+<DescriptedCode
+  leftElement={<CouchdbSsmGetQueryResultDTODesc />}
+  rightElement={
+    <CodeHighlighter
+      object={CouchdbSsmGetQueryResultDTOVisualJson}
+      language={"json"}
+      title={"Example"}
+    />
+  }
+/>

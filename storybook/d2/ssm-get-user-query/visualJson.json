@@ -1,0 +1,4 @@
+{
+  "chaincodeUri" : "chaincode:sandbox:thessm",
+  "name" : "Chuck"
+}
