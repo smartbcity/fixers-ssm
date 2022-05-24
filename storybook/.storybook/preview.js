@@ -17,6 +17,18 @@ const defaultTheme = {
 };
 
 export const parameters = {
+  options: {
+    storySort: {
+      order: [
+        "Getting started",
+        "SSM-TX",
+        ["General", "Configuration", "SSM", "Session"],
+        "SSM-CHAINCODE",
+        "SSM-COUCHDB",
+        ["General", "Configuration", "Model", "Query functions"],
+      ]
+    }
+  },
   docs: {
     container: StorybookCanvas
   }
