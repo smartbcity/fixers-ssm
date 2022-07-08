@@ -15,6 +15,5 @@ class SsmListAdminQueryFunctionImpl(
 		queryService.listAdmins(payload.chaincodeUri).let { items ->
 			SsmListAdminResult(items.toTypedArray())
 		}
-
 	}
 }

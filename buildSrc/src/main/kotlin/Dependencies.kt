@@ -6,7 +6,7 @@ import city.smartb.gradle.dependencies.add
 
 object PluginVersions {
 	val fixers = FixersPluginVersions.fixers
-	const val d2 = "0.8.2"
+	val d2 = FixersPluginVersions.fixers
 	const val kotlin = FixersPluginVersions.kotlin
 	const val npmPublish = FixersPluginVersions.npmPublish
 }
@@ -16,11 +16,11 @@ object Versions {
 	const val slf4j = FixersVersions.Logging.slf4j
 	const val jacksonKotlin = FixersVersions.Json.jacksonKotlin
 	val f2 = PluginVersions.fixers
-	val ktor = "2.0.1"
+	val ktor = FixersVersions.Kotlin.ktor
 
 
 	const val cloudant = "0.0.34"
-	const val bouncycastleVersion = "1.61"
+	const val bouncycastleVersion = "1.70"
 }
 
 object Dependencies {
@@ -29,6 +29,7 @@ object Dependencies {
 	fun ktor(scope: Scope) = scope.add(
 		"io.ktor:ktor-client-core:${Versions.ktor}",
 		"io.ktor:ktor-client-content-negotiation:${Versions.ktor}",
+		"io.ktor:ktor-client-logging:${Versions.ktor}",
 		"io.ktor:ktor-client-cio:${Versions.ktor}",
 		"io.ktor:ktor-serialization-kotlinx-json:${Versions.ktor}",
 		"io.ktor:ktor-serialization-jackson:${Versions.ktor}"

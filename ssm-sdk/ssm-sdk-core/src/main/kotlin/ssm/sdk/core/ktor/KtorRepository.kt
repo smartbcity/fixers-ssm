@@ -1,15 +1,16 @@
 package ssm.sdk.core.ktor
 
 import io.ktor.client.HttpClient
-import io.ktor.client.call.body
 import io.ktor.client.engine.cio.CIO
 import io.ktor.client.plugins.contentnegotiation.ContentNegotiation
+import io.ktor.client.plugins.logging.Logging
 import io.ktor.client.request.HttpRequestBuilder
 import io.ktor.client.request.get
 import io.ktor.client.request.header
 import io.ktor.client.request.parameter
 import io.ktor.client.request.post
 import io.ktor.client.request.setBody
+import io.ktor.client.statement.bodyAsText
 import io.ktor.http.ContentType
 import io.ktor.http.contentType
 import io.ktor.http.path
@@ -34,6 +35,7 @@ class KtorRepository(
 	}
 
 	val client = HttpClient(CIO) {
+		install(Logging)
 		install(ContentNegotiation) {
 			jackson()
 		}
@@ -53,7 +55,7 @@ class KtorRepository(
 			chaincodeId?.let { parameter(CHAINCODE_ID_PROPS, chaincodeId) }
 			parameter(FCN_PROPS, fcn)
 			parameter(ARGS_PROPS, args.first())
-		}.body()
+		}.bodyAsText()
 	}
 
 	suspend fun getBlock(blockId: Long, channelId: ChannelId?): String {
@@ -64,7 +66,7 @@ class KtorRepository(
 			url {
 				path("blocks", blockId.toString())
 			}
-		}.body()
+		}.bodyAsText()
 	}
 
 	suspend fun getTransaction(txId: String, channelId: ChannelId?): String {
@@ -74,7 +76,7 @@ class KtorRepository(
 			url {
 				path("transactions", txId)
 			}
-		}.body()
+		}.bodyAsText()
 	}
 
 	suspend fun invoke(
@@ -97,12 +99,13 @@ class KtorRepository(
 					CHAINCODE_ID_PROPS to chaincodeId,
 				)
 			)
-		}.body()
+		}.bodyAsText()
 	}
 
 	private fun HttpRequestBuilder.addAuth() {
 		when (authCredentials) {
 			is BearerTokenAuthCredentials -> header("Authorization", "Bearer ${authCredentials.getBearerToken()}")
+			else -> return
 		}
 	}
 
