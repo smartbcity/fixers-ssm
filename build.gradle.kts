@@ -23,16 +23,6 @@ allprojects {
 }
 
 subprojects {
-	plugins.withType(city.smartb.fixers.gradle.config.ConfigPlugin::class.java).whenPluginAdded {
-		fixers {
-			bundle {
-				id = "ssm-data"
-				name = "Ssm Data"
-				description = "Aggregate all ssm data source to optimize request"
-				url = "https://gitlab.smartb.city/fixers/ssm"
-			}
-		}
-	}
 	plugins.withType(dev.petuska.npm.publish.NpmPublishPlugin::class.java).whenPluginAdded {
 		the<dev.petuska.npm.publish.extension.NpmPublishExtension>().apply {
 			organization.set("smartb")
@@ -62,5 +52,11 @@ tasks {
 fixers {
 	d2 {
 		outputDirectory = file("storybook/d2/")
+	}
+	bundle {
+		id = "ssm-data"
+		name = "Ssm Data"
+		description = "Aggregate all ssm data source to optimize request"
+		url = "https://gitlab.smartb.city/fixers/ssm"
 	}
 }
