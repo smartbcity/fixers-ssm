@@ -1,6 +1,5 @@
 package ssm.couchdb.f2.query
 
-import f2.dsl.cqrs.page.Page
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
 import ssm.couchdb.client.CouchdbSsmClient

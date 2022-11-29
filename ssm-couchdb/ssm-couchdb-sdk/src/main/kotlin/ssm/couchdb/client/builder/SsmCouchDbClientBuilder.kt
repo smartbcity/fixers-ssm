@@ -1,6 +1,5 @@
 package ssm.couchdb.client.builder
 
-import com.ibm.cloud.cloudant.v1.Cloudant
 import com.ibm.cloud.sdk.core.security.BasicAuthenticator
 import ssm.couchdb.client.CouchdbSsmClient
 import ssm.sdk.json.JSONConverter

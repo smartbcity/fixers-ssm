@@ -1,6 +1,5 @@
 package ssm.couchdb.f2.query
 
-import f2.dsl.cqrs.page.Page
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.asFlow
 import kotlinx.coroutines.flow.filter

@@ -15,7 +15,6 @@ import com.ibm.cloud.sdk.core.http.Response
 import com.ibm.cloud.sdk.core.service.exception.NotFoundException
 import kotlin.coroutines.resume
 import kotlin.coroutines.suspendCoroutine
-import kotlinx.coroutines.coroutineScope
 import ssm.chaincode.dsl.model.SessionName
 import ssm.chaincode.dsl.model.SsmName
 import ssm.couchdb.client.builder.CloudantFixed

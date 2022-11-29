@@ -2,7 +2,6 @@ package ssm.chaincode.f2.features.command
 
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
-import ssm.chaincode.dsl.config.ChaincodeSsmConfig
 import ssm.chaincode.dsl.model.uri.burst
 import ssm.chaincode.f2.utils.SsmException
 import ssm.sdk.core.SsmTxService

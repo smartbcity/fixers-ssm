@@ -2,8 +2,6 @@ package ssm.data.dsl
 
 import kotlin.js.JsExport
 import kotlin.js.JsName
-import kotlinx.serialization.Serializable
-import ssm.data.dsl.features.query.DataChaincodeListQuery
 import ssm.data.dsl.features.query.DataChaincodeListQueryFunction
 import ssm.data.dsl.features.query.DataSsmGetQueryFunction
 import ssm.data.dsl.features.query.DataSsmListQueryFunction
