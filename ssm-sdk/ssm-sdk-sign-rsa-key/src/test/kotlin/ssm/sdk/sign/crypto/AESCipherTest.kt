@@ -10,6 +10,7 @@ import java.security.NoSuchAlgorithmException
 import java.util.Base64
 import javax.crypto.SecretKey
 import org.assertj.core.api.Assertions
+import org.assertj.core.api.recursive.comparison.RecursiveComparisonConfiguration
 import org.bouncycastle.crypto.CryptoException
 import org.junit.jupiter.api.Test
 import ssm.sdk.sign.FileUtils
@@ -59,6 +60,11 @@ internal class AESCipherTest {
 		val key: SecretKey = AESCipher.generateSecretKey()
 		val encodedKey = Base64.getEncoder().encodeToString(key.encoded)
 		val keyBuilded: SecretKey = AESCipher.secretKeyFromBase64(encodedKey)
-		Assertions.assertThat(key).isEqualToComparingFieldByField(keyBuilded)
+		Assertions.assertThat(key).usingRecursiveComparison(RecursiveComparisonConfiguration.builder().withIgnoredFields("key").build())
+			.isEqualTo(keyBuilded)
+		Assertions.assertThat(key.algorithm).isEqualTo(keyBuilded.algorithm)
+		Assertions.assertThat(key.encoded).isEqualTo(keyBuilded.encoded)
+		Assertions.assertThat(key.format).isEqualTo(keyBuilded.format)
+
 	}
 }

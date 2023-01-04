@@ -1,2 +1,0 @@
-org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
-ssm.tx.session.start.spring.autoconfigure.SsmSessionStartAutoConfiguration

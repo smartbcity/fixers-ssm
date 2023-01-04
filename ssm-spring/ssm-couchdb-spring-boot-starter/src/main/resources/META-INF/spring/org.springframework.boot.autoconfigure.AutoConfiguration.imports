@@ -1,0 +1,2 @@
+ssm.couchdb.spring.autoconfigure.CouchdbSsmAutoConfiguration
+ssm.couchdb.spring.autoconfigure.CouchdbSsmF2AutoConfiguration

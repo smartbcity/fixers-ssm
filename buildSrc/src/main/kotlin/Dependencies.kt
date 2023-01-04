@@ -12,7 +12,7 @@ object PluginVersions {
 }
 
 object Versions {
-	const val springFramework = FixersVersions.Spring.framework
+//	const val springFramework = FixersVersions.Spring.framework
 	const val slf4j = FixersVersions.Logging.slf4j
 	const val jacksonKotlin = FixersVersions.Json.jacksonKotlin
 	val f2 = PluginVersions.fixers

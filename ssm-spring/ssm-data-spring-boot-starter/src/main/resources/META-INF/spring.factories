@@ -1,3 +1,0 @@
-org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
-ssm.data.spring.autoconfigure.DataSsmAutoConfiguration,\
-ssm.data.spring.autoconfigure.DataSsmF2AutoConfiguration

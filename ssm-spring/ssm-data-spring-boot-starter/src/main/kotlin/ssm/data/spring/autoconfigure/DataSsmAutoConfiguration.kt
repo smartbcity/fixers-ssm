@@ -1,7 +1,5 @@
 package ssm.data.spring.autoconfigure
 
-import f2.dsl.fnc.f2Function
-import f2.dsl.fnc.invoke
 import org.slf4j.LoggerFactory
 import org.springframework.boot.autoconfigure.condition.ConditionalOnBean
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean
