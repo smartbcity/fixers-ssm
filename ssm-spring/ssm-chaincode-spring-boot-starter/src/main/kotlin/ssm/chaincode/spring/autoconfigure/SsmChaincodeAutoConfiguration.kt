@@ -6,7 +6,7 @@ import org.springframework.boot.context.properties.EnableConfigurationProperties
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
 import ssm.chaincode.dsl.SsmChaincodeQueries
-import ssm.chaincode.dsl.config.ChaincodeSsmConfig
+import ssm.chaincode.dsl.config.SsmChaincodeConfig
 import ssm.chaincode.dsl.query.SsmGetAdminFunction
 import ssm.chaincode.dsl.query.SsmGetQueryFunction
 import ssm.chaincode.dsl.query.SsmGetSessionLogsQueryFunction
@@ -27,11 +27,11 @@ class SsmChaincodeAutoConfiguration {
 	@Bean
 	fun ssmChaincodeConfig(
 		ssmChaincodeProperties: SsmChaincodeProperties
-	): ChaincodeSsmConfig = ssmChaincodeProperties.chaincode
+	): SsmChaincodeConfig = ssmChaincodeProperties.chaincode
 
 	@Bean
 	fun ssmChaincodeQueryFunctions(
-		ssmChaincodeConfig: ChaincodeSsmConfig
+		ssmChaincodeConfig: SsmChaincodeConfig
 	): ChaincodeSsmQueriesImpl = ChaincodeSsmQueriesImpl(ssmChaincodeConfig)
 }
 

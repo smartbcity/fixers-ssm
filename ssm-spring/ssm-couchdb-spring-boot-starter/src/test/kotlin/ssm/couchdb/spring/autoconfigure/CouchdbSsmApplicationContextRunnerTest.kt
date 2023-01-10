@@ -5,7 +5,7 @@ import org.junit.jupiter.api.Test
 import org.springframework.cloud.function.context.FunctionCatalog
 import ssm.bdd.spring.autoconfigure.ApplicationContextBuilder
 import ssm.bdd.spring.autoconfigure.ApplicationContextRunnerBuilder
-import ssm.couchdb.dsl.config.CouchdbSsmConfig
+import ssm.couchdb.dsl.config.SsmCouchdbConfig
 
 
 class CouchdbSsmApplicationContextRunnerTest {
@@ -18,7 +18,7 @@ class CouchdbSsmApplicationContextRunnerTest {
 				SsmChaincodeConfigTest.localDockerComposeParams
 			).run { context ->
 				assertThat(context).hasSingleBean(FunctionCatalog::class.java)
-				assertThat(context).hasSingleBean(CouchdbSsmProperties::class.java)
+				assertThat(context).hasSingleBean(SsmCouchdbProperties::class.java)
 				assertThat(context).hasBean(CouchdbSsmF2AutoConfiguration::couchdbDatabaseListQueryFunction.name)
 				assertThat(context).hasBean(CouchdbSsmF2AutoConfiguration::couchdbDatabaseGetQueryFunction.name)
 				assertThat(context).hasBean(CouchdbSsmF2AutoConfiguration::couchdbSsmListQueryFunction.name)
@@ -39,7 +39,7 @@ class CouchdbSsmApplicationContextRunnerTest {
 
 
 	object SsmChaincodeConfigTest {
-		val localDockerCompose = CouchdbSsmConfig(
+		val localDockerCompose = SsmCouchdbConfig(
 			url = "http://localhost:5984",
 			username = "couchdb",
 			password = "couchdb",

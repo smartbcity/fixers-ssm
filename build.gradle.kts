@@ -2,6 +2,8 @@ plugins {
 	kotlin("plugin.spring") version PluginVersions.kotlin apply false
 	kotlin("plugin.serialization") version PluginVersions.kotlin apply false
 	kotlin("kapt") version PluginVersions.kotlin apply false
+	id("org.springframework.boot") version PluginVersions.springBoot apply false
+	id("org.graalvm.buildtools.native") version PluginVersions.graalvm apply false
 
 	id("dev.petuska.npm.publish") version PluginVersions.npmPublish apply false
 	id("com.moowork.node") version "1.2.0"

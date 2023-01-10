@@ -1,7 +1,7 @@
 package ssm.chaincode.f2
 
 import ssm.chaincode.dsl.SsmChaincodeQueries
-import ssm.chaincode.dsl.config.ChaincodeSsmConfig
+import ssm.chaincode.dsl.config.SsmChaincodeConfig
 import ssm.chaincode.dsl.query.SsmGetAdminFunction
 import ssm.chaincode.dsl.query.SsmGetQueryFunction
 import ssm.chaincode.dsl.query.SsmGetSessionLogsQueryFunction
@@ -27,8 +27,8 @@ import ssm.sdk.core.SsmSdkConfig
 import ssm.sdk.core.SsmServiceFactory
 
 class ChaincodeSsmQueriesImpl(
-	config: ChaincodeSsmConfig,
-	private val ssmQueryService: SsmQueryService = SsmServiceFactory.builder(SsmSdkConfig(config.url)).buildQueryService()
+    config: SsmChaincodeConfig,
+    private val ssmQueryService: SsmQueryService = SsmServiceFactory.builder(SsmSdkConfig(config.url)).buildQueryService()
 ): SsmChaincodeQueries {
 
 	override fun ssmGetAdminFunction(): SsmGetAdminFunction {

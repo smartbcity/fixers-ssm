@@ -5,7 +5,7 @@ import io.cucumber.java8.En
 import io.cucumber.java8.Scenario
 import kotlinx.coroutines.runBlocking
 import org.assertj.core.api.Assertions
-import ssm.chaincode.dsl.config.ChaincodeSsmConfig
+import ssm.chaincode.dsl.config.SsmChaincodeConfig
 import ssm.chaincode.dsl.model.SessionName
 import ssm.chaincode.dsl.model.SsmAction
 import ssm.chaincode.dsl.model.SsmName
@@ -19,13 +19,13 @@ import ssm.chaincode.dsl.model.uri.toSsmUri
 abstract class SsmQueryStep {
 
 	lateinit var bag: SsmCucumberBag
-	lateinit var config: ChaincodeSsmConfig
+	lateinit var config: SsmChaincodeConfig
 
 	@Suppress("LongMethod")
 	fun En.prepareSteps() {
 		Before { scenario: Scenario ->
 			bag = SsmCucumberBag.init(scenario)
-			config = ChaincodeSsmConfig(
+			config = SsmChaincodeConfig(
 				bag.config.baseUrl
 			)
 		}

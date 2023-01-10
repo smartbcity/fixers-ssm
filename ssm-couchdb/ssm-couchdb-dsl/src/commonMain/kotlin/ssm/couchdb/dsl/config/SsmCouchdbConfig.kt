@@ -6,30 +6,30 @@ package ssm.couchdb.dsl.config
  * @title CouchdbConfig
  * @parent [ssm.couchdb.dsl.CouchdbSsmD2Configuration]
  */
-data class CouchdbSsmConfig(
+data class SsmCouchdbConfig(
 	/**
 	 * URL of the machine hosting the database
 	 * @example "http://peer.sandbox.smartb.network:9000"
 	 */
-	val url: CouchdbUrl,
+	val url: String,
 
 	/**
 	 * Username to log into the service handling the database
 	 * @example "admin"
 	 */
-	val username: CouchdbUsername,
+	val username: String,
 
 	/**
 	 * Password to log into the service handling the database
 	 * @example "admin"
 	 */
-	val password: CouchdbPassword,
+	val password: String,
 
 	/**
 	 * Name of the service handling the database
 	 * @example "ssm-couchdb"
 	 */
-	val serviceName: CouchdbServiceName,
+	val serviceName: String,
 )
 
 typealias CouchdbUrl = String
