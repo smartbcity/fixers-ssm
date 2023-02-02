@@ -19,10 +19,10 @@ class CouchdbSsmApplicationContextRunnerTest {
 			).run { context ->
 				assertThat(context).hasSingleBean(FunctionCatalog::class.java)
 				assertThat(context).hasSingleBean(SsmCouchdbProperties::class.java)
-				assertThat(context).hasBean(CouchdbSsmF2AutoConfiguration::couchdbDatabaseListQueryFunction.name)
-				assertThat(context).hasBean(CouchdbSsmF2AutoConfiguration::couchdbDatabaseGetQueryFunction.name)
-				assertThat(context).hasBean(CouchdbSsmF2AutoConfiguration::couchdbSsmListQueryFunction.name)
-				assertThat(context).hasBean(CouchdbSsmF2AutoConfiguration::couchdbSsmSessionStateListQueryFunction.name)
+				assertThat(context).hasBean(SsmCouchdbF2AutoConfiguration::couchdbDatabaseListQueryFunction.name)
+				assertThat(context).hasBean(SsmCouchdbF2AutoConfiguration::couchdbDatabaseGetQueryFunction.name)
+				assertThat(context).hasBean(SsmCouchdbF2AutoConfiguration::couchdbSsmListQueryFunction.name)
+				assertThat(context).hasBean(SsmCouchdbF2AutoConfiguration::couchdbSsmSessionStateListQueryFunction.name)
 			}
 	}
 
@@ -32,7 +32,7 @@ class CouchdbSsmApplicationContextRunnerTest {
 			types = arrayOf(ApplicationContextBuilder.SimpleConfiguration::class.java),
 			config = SsmChaincodeConfigTest.localDockerComposeParams
 		)
-		assertThat(context.getBean(CouchdbSsmF2AutoConfiguration::couchdbDatabaseListQueryFunction.name)).isNotNull
+		assertThat(context.getBean(SsmCouchdbF2AutoConfiguration::couchdbDatabaseListQueryFunction.name)).isNotNull
 		val catalog = context.getBean(FunctionCatalog::class.java)
 		assertThat(catalog).isNotNull
 	}

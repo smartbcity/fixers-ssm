@@ -1,5 +1,6 @@
 package ssm.couchdb.spring.autoconfigure
 
+import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.autoconfigure.condition.ConditionalOnBean
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty
 import org.springframework.boot.context.properties.EnableConfigurationProperties
@@ -36,59 +37,60 @@ class SsmCouchdbAutoConfiguration {
 
 }
 
-@ConditionalOnBean(SsmCouchdbConfig::class)
 @Configuration(proxyBeanMethods = false)
-class CouchdbSsmF2AutoConfiguration(
-	private val ssmCouchDbQueries: SsmCouchDbQueries
-) : SsmCouchDbQueries {
+@ConditionalOnBean(SsmCouchDbQueries::class)
+class SsmCouchdbF2AutoConfiguration {
+
+	@Autowired
+	private lateinit var ssmCouchDbQueries: SsmCouchDbQueries
 
 	@Bean
-	override fun couchdbDatabaseGetChangesQueryFunction(): CouchdbDatabaseGetChangesQueryFunction {
+	fun couchdbDatabaseGetChangesQueryFunction(): CouchdbDatabaseGetChangesQueryFunction {
 		return ssmCouchDbQueries.couchdbDatabaseGetChangesQueryFunction()
 	}
 
 	@Bean
-	override fun couchdbDatabaseListQueryFunction(): CouchdbDatabaseListQueryFunction {
+	fun couchdbDatabaseListQueryFunction(): CouchdbDatabaseListQueryFunction {
 		return ssmCouchDbQueries.couchdbDatabaseListQueryFunction()
 	}
 
 	@Bean
-	override fun couchdbDatabaseGetQueryFunction(): CouchdbDatabaseGetQueryFunction {
+	fun couchdbDatabaseGetQueryFunction(): CouchdbDatabaseGetQueryFunction {
 		return ssmCouchDbQueries.couchdbDatabaseGetQueryFunction()
 	}
 
 	@Bean
-	override fun couchdbChaincodeListQueryFunction(): CouchdbChaincodeListQueryFunction {
+	fun couchdbChaincodeListQueryFunction(): CouchdbChaincodeListQueryFunction {
 		return ssmCouchDbQueries.couchdbChaincodeListQueryFunction()
 	}
 
 	@Bean
-	override fun couchdbAdminListQueryFunction(): CouchdbAdminListQueryFunction {
+	fun couchdbAdminListQueryFunction(): CouchdbAdminListQueryFunction {
 		return ssmCouchDbQueries.couchdbAdminListQueryFunction()
 	}
 
 	@Bean
-	override fun couchdbUserListQueryFunction(): CouchdbUserListQueryFunction {
+	fun couchdbUserListQueryFunction(): CouchdbUserListQueryFunction {
 		return ssmCouchDbQueries.couchdbUserListQueryFunction()
 	}
 
 	@Bean
-	override fun couchdbSsmGetQueryFunction(): CouchdbSsmGetQueryFunction {
+	fun couchdbSsmGetQueryFunction(): CouchdbSsmGetQueryFunction {
 		return ssmCouchDbQueries.couchdbSsmGetQueryFunction()
 	}
 
 	@Bean
-	override fun couchdbSsmListQueryFunction(): CouchdbSsmListQueryFunction {
+	fun couchdbSsmListQueryFunction(): CouchdbSsmListQueryFunction {
 		return ssmCouchDbQueries.couchdbSsmListQueryFunction()
 	}
 
 	@Bean
-	override fun couchdbSsmSessionStateListQueryFunction(): CouchdbSsmSessionStateListQueryFunction {
+	fun couchdbSsmSessionStateListQueryFunction(): CouchdbSsmSessionStateListQueryFunction {
 		return ssmCouchDbQueries.couchdbSsmSessionStateListQueryFunction()
 	}
 
 	@Bean
-	override fun couchdbSsmSessionStateGetQueryFunction(): CouchdbSsmSessionStateGetQueryFunction {
+	fun couchdbSsmSessionStateGetQueryFunction(): CouchdbSsmSessionStateGetQueryFunction {
 		return ssmCouchDbQueries.couchdbSsmSessionStateGetQueryFunction()
 	}
 }

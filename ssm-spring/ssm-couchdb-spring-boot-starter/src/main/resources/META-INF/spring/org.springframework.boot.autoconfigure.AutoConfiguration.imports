@@ -1,2 +1,2 @@
-ssm.couchdb.spring.autoconfigure.CouchdbSsCouchdbSsmF2AutoConfigurationmAutoConfiguration
-ssm.couchdb.spring.autoconfigure.CouchdbSsmF2AutoConfiguration
+ssm.couchdb.spring.autoconfigure.SsmCouchdbAutoConfiguration
+ssm.couchdb.spring.autoconfigure.SsmCouchdbF2AutoConfiguration
