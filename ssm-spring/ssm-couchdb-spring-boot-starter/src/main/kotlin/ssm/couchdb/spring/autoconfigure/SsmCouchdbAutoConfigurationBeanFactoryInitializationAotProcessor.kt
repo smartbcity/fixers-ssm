@@ -8,7 +8,6 @@ import org.springframework.beans.factory.aot.BeanFactoryInitializationAotProcess
 import org.springframework.beans.factory.aot.BeanFactoryInitializationCode
 import org.springframework.beans.factory.config.ConfigurableListableBeanFactory
 import org.springframework.util.ReflectionUtils
-import ssm.chaincode.dsl.config.SsmChaincodeConfig
 import ssm.couchdb.dsl.config.SsmCouchdbConfig
 
 class SsmCouchdbAutoConfigurationBeanFactoryInitializationAotProcessor : BeanFactoryInitializationAotProcessor {
