@@ -3,7 +3,7 @@ package ssm.couchdb.f2
 import ssm.couchdb.client.CouchdbSsmClient
 import ssm.couchdb.client.builder.SsmCouchDbBasicAuth
 import ssm.couchdb.dsl.SsmCouchDbQueries
-import ssm.couchdb.dsl.config.CouchdbSsmConfig
+import ssm.couchdb.dsl.config.SsmCouchdbConfig
 import ssm.couchdb.dsl.query.CouchdbAdminListQueryFunction
 import ssm.couchdb.dsl.query.CouchdbChaincodeListQueryFunction
 import ssm.couchdb.dsl.query.CouchdbDatabaseGetChangesQueryFunction
@@ -26,7 +26,7 @@ import ssm.couchdb.f2.query.CouchdbSsmSessionStateListQueryFunctionImpl
 import ssm.couchdb.f2.query.CouchdbUserListQueryFunctionImpl
 
 class CouchdbSsmQueriesFunctionImpl(
-	config: CouchdbSsmConfig
+	config: SsmCouchdbConfig
 ) : SsmCouchDbQueries {
 
 	private val couchdbClient = CouchdbSsmClient.builder()

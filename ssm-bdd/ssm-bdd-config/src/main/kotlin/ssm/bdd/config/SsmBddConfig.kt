@@ -1,8 +1,8 @@
 package ssm.bdd.config
 
-import ssm.chaincode.dsl.config.ChaincodeSsmConfig
+import ssm.chaincode.dsl.config.SsmChaincodeConfig
 import ssm.chaincode.dsl.model.uri.ChaincodeUri
-import ssm.couchdb.dsl.config.CouchdbSsmConfig
+import ssm.couchdb.dsl.config.SsmCouchdbConfig
 import ssm.data.dsl.config.DataSsmConfig
 
 object SsmBddConfig {
@@ -73,9 +73,9 @@ object SsmBddConfig {
 						.orIfGitlab(Commune.Chaincode.chaincodeUri)
 				)
 			}
-		val config: ChaincodeSsmConfig
+		val config: SsmChaincodeConfig
 			get() {
-				return ChaincodeSsmConfig(url = url)
+				return SsmChaincodeConfig(url = url)
 			}
 	}
 
@@ -104,9 +104,9 @@ object SsmBddConfig {
 					.orIfGitlabEnv(Commune.Couchdb.password)
 			}
 
-		val config: CouchdbSsmConfig
+		val config: SsmCouchdbConfig
 			get() {
-				return CouchdbSsmConfig(
+				return SsmCouchdbConfig(
 					url = url,
 					username = username,
 					password = password,

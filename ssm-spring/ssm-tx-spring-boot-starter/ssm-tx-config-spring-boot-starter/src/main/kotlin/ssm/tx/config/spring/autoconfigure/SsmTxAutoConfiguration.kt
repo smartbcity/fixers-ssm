@@ -6,7 +6,7 @@ import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty
 import org.springframework.boot.context.properties.EnableConfigurationProperties
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
-import ssm.chaincode.dsl.config.ChaincodeSsmConfig
+import ssm.chaincode.dsl.config.SsmChaincodeConfig
 import ssm.sdk.core.SsmQueryService
 import ssm.sdk.core.SsmSdkConfig
 import ssm.sdk.core.SsmServiceFactory
@@ -20,8 +20,8 @@ class SsmTxAutoConfiguration {
 
 	@Bean
 	@ConditionalOnProperty(prefix = "ssm.chaincode", name = ["url"])
-	@ConditionalOnMissingBean(ChaincodeSsmConfig::class)
-	fun chaincodeSsmConfig(ssmTxCreateProperties: SsmTxProperties): ChaincodeSsmConfig =
+	@ConditionalOnMissingBean(SsmChaincodeConfig::class)
+	fun chaincodeSsmConfig(ssmTxCreateProperties: SsmTxProperties): SsmChaincodeConfig =
 		ssmTxCreateProperties.chaincode!!
 
 	@Bean
@@ -34,20 +34,20 @@ class SsmTxAutoConfiguration {
 	}
 
 	@Bean
-	@ConditionalOnBean(value = [SsmCmdSigner::class, ChaincodeSsmConfig::class])
+	@ConditionalOnBean(value = [SsmCmdSigner::class, SsmChaincodeConfig::class])
 	@ConditionalOnMissingBean(SsmTxService::class)
-	fun ssmTxService(ssmCmdSigner: SsmCmdSigner, chaincodeSsmConfig: ChaincodeSsmConfig): SsmTxService {
+	fun ssmTxService(ssmCmdSigner: SsmCmdSigner, ssmChaincodeConfig: SsmChaincodeConfig): SsmTxService {
 		return SsmServiceFactory.builder(
-			SsmSdkConfig(chaincodeSsmConfig.url)
+			SsmSdkConfig(ssmChaincodeConfig.url)
 		).buildTxService(ssmCmdSigner)
 	}
 
 	@Bean
-	@ConditionalOnBean(value = [ChaincodeSsmConfig::class])
+	@ConditionalOnBean(value = [SsmChaincodeConfig::class])
 	@ConditionalOnMissingBean(SsmQueryService::class)
-	fun ssmQueryService(chaincodeSsmConfig: ChaincodeSsmConfig): SsmQueryService {
+	fun ssmQueryService(ssmChaincodeConfig: SsmChaincodeConfig): SsmQueryService {
 		return SsmServiceFactory.builder(
-			SsmSdkConfig(chaincodeSsmConfig.url)
+			SsmSdkConfig(ssmChaincodeConfig.url)
 		).buildQueryService()
 	}
 }

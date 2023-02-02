@@ -16,7 +16,7 @@ class DataApplicationContextRunnerTest {
 		ApplicationContextRunnerBuilder()
 			.buildContext(TestConfiguration.localDockerComposeParams).run { context ->
 				assertThat(context).hasSingleBean(FunctionCatalog::class.java)
-				assertThat(context).hasSingleBean(DataSsmProperties::class.java)
+				assertThat(context).hasSingleBean(SsmDataProperties::class.java)
 				assertThat(context).hasBean(SsmApiQueryFunctions::dataChaincodeListQueryFunction.name)
 				assertThat(context).hasBean(SsmApiQueryFunctions::dataSsmListQueryFunction.name)
 				assertThat(context).hasBean(SsmApiQueryFunctions::dataSsmGetQueryFunction.name)

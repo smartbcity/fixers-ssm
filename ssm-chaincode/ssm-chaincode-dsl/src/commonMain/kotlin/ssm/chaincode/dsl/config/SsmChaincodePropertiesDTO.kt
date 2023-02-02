@@ -24,6 +24,6 @@ interface SsmChaincodePropertiesDTO {
 @Serializable
 @JsExport
 @JsName("ChaincodeSsmConfig")
-class ChaincodeSsmConfig(
+class SsmChaincodeConfig(
 	override val url: String,
 ) : SsmChaincodePropertiesDTO

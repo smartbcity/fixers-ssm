@@ -6,7 +6,7 @@ import org.springframework.boot.context.properties.EnableConfigurationProperties
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
 import ssm.couchdb.dsl.SsmCouchDbQueries
-import ssm.couchdb.dsl.config.CouchdbSsmConfig
+import ssm.couchdb.dsl.config.SsmCouchdbConfig
 import ssm.couchdb.dsl.query.CouchdbAdminListQueryFunction
 import ssm.couchdb.dsl.query.CouchdbChaincodeListQueryFunction
 import ssm.couchdb.dsl.query.CouchdbDatabaseGetChangesQueryFunction
@@ -20,23 +20,23 @@ import ssm.couchdb.dsl.query.CouchdbUserListQueryFunction
 import ssm.couchdb.f2.CouchdbSsmQueriesFunctionImpl
 
 @ConditionalOnProperty(prefix = "ssm.couchdb", name = ["url"])
-@EnableConfigurationProperties(CouchdbSsmProperties::class)
+@EnableConfigurationProperties(SsmCouchdbProperties::class)
 @Configuration(proxyBeanMethods = false)
-class CouchdbSsmAutoConfiguration {
+class SsmCouchdbAutoConfiguration {
 
 	@Bean
 	fun couchdbConfig(
-		ssmCouchdbProperties: CouchdbSsmProperties,
-	): CouchdbSsmConfig = ssmCouchdbProperties.couchdb
+		ssmCouchdbProperties: SsmCouchdbProperties,
+	): SsmCouchdbConfig = ssmCouchdbProperties.couchdb
 
 	@Bean
 	fun ssmCouchDbQueries(
-		ssmCouchdbConfig: CouchdbSsmConfig,
+		ssmCouchdbConfig: SsmCouchdbConfig,
 	): SsmCouchDbQueries = CouchdbSsmQueriesFunctionImpl(ssmCouchdbConfig)
 
 }
 
-@ConditionalOnBean(CouchdbSsmConfig::class)
+@ConditionalOnBean(SsmCouchdbConfig::class)
 @Configuration(proxyBeanMethods = false)
 class CouchdbSsmF2AutoConfiguration(
 	private val ssmCouchDbQueries: SsmCouchDbQueries

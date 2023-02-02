@@ -1,7 +1,7 @@
 package ssm.data.dsl.config
 
-import ssm.chaincode.dsl.config.ChaincodeSsmConfig
-import ssm.couchdb.dsl.config.CouchdbSsmConfig
+import ssm.chaincode.dsl.config.SsmChaincodeConfig
+import ssm.couchdb.dsl.config.SsmCouchdbConfig
 
 /**
  * @d2 model
@@ -12,10 +12,10 @@ data class DataSsmConfig(
 	/**
 	 * Configuration for couchdb.
 	 */
-	val couchdb: CouchdbSsmConfig,
+	val couchdb: SsmCouchdbConfig,
 	/**
 	 *  Configuration for couchdb.
 	 */
-	val chaincode: ChaincodeSsmConfig,
+	val chaincode: SsmChaincodeConfig,
 
 	)

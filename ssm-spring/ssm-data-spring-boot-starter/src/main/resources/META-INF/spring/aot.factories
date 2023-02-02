@@ -1,0 +1,2 @@
+org.springframework.beans.factory.aot.BeanFactoryInitializationAotProcessor=\
+ssm.data.spring.autoconfigure.SsmDataAutoConfigurationBeanFactoryInitializationAotProcessor

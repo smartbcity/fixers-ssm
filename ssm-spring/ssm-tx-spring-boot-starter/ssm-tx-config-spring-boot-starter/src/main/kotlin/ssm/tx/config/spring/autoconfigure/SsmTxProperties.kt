@@ -1,12 +1,12 @@
 package ssm.tx.config.spring.autoconfigure
 
 import org.springframework.boot.context.properties.ConfigurationProperties
-import ssm.chaincode.dsl.config.ChaincodeSsmConfig
+import ssm.chaincode.dsl.config.SsmChaincodeConfig
 import ssm.sdk.sign.model.SignerAdmin
 
 @ConfigurationProperties(prefix = "ssm")
 data class SsmTxProperties(
-	val chaincode: ChaincodeSsmConfig?,
+	val chaincode: SsmChaincodeConfig?,
 	val signer: SignerFileConfig?,
 ) {
 	class SignerFileConfig(

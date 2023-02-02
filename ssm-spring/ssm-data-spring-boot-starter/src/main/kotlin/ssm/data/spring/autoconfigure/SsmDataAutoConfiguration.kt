@@ -8,8 +8,8 @@ import org.springframework.boot.context.properties.EnableConfigurationProperties
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
 import ssm.api.DataSsmQueryFunctionImpl
-import ssm.chaincode.dsl.config.ChaincodeSsmConfig
-import ssm.couchdb.dsl.config.CouchdbSsmConfig
+import ssm.chaincode.dsl.config.SsmChaincodeConfig
+import ssm.couchdb.dsl.config.SsmCouchdbConfig
 import ssm.data.dsl.SsmApiQueryFunctions
 import ssm.data.dsl.config.DataSsmConfig
 import ssm.data.dsl.features.query.DataChaincodeListQueryFunction
@@ -23,36 +23,36 @@ import ssm.sync.sdk.SsmSyncF2Builder
 import ssm.sync.sdk.SyncSsmCommandFunction
 
 
-@EnableConfigurationProperties(DataSsmProperties::class)
+@EnableConfigurationProperties(SsmDataProperties::class)
 @Configuration(proxyBeanMethods = false)
 class DataSsmAutoConfiguration {
 
 	private val logger = LoggerFactory.getLogger(DataSsmAutoConfiguration::class.java)
 
 	@Bean
-	@ConditionalOnMissingBean(CouchdbSsmConfig::class)
+	@ConditionalOnMissingBean(SsmCouchdbConfig::class)
 	@ConditionalOnProperty(prefix = "ssm.couchdb", name = ["url"])
-	fun couchdbSsmConfig(dataSsmProperties: DataSsmProperties): CouchdbSsmConfig? {
-		logger.debug("Configuration of ${DataSsmAutoConfiguration::couchdbSsmConfig.name}...")
+	fun dataCouchdbSsmConfig(dataSsmProperties: SsmDataProperties): SsmCouchdbConfig? {
+		logger.debug("Configuration of ${DataSsmAutoConfiguration::dataCouchdbSsmConfig.name}...")
 		return dataSsmProperties.couchdb
 	}
 	@Bean
-	@ConditionalOnMissingBean(ChaincodeSsmConfig::class)
+	@ConditionalOnMissingBean(SsmChaincodeConfig::class)
 	@ConditionalOnProperty(prefix = "ssm.chaincode", name = ["url"])
-	fun ssmChaincodeConfig(dataSsmProperties: DataSsmProperties): ChaincodeSsmConfig? {
+	fun ssmChaincodeConfig(dataSsmProperties: SsmDataProperties): SsmChaincodeConfig? {
 		logger.debug("Configuration of ${DataSsmAutoConfiguration::ssmChaincodeConfig.name}...")
 		return dataSsmProperties.chaincode
 	}
 
 	@Bean
 	@ConditionalOnMissingBean(DataSsmConfig::class)
-	@ConditionalOnBean(value = [CouchdbSsmConfig::class, ChaincodeSsmConfig::class])
+	@ConditionalOnBean(value = [SsmCouchdbConfig::class, SsmChaincodeConfig::class])
 	fun dataSsmConfig(
-		couchdbSsmConfig: CouchdbSsmConfig,
-		chaincodeSsmConfig: ChaincodeSsmConfig
+		ssmCouchdbConfig: SsmCouchdbConfig,
+		ssmChaincodeConfig: SsmChaincodeConfig
 	): DataSsmConfig {
 		logger.debug("Configuration of ${DataSsmAutoConfiguration::dataSsmConfig.name}...")
-		return DataSsmConfig(couchdbSsmConfig, chaincodeSsmConfig)
+		return DataSsmConfig(ssmCouchdbConfig, ssmChaincodeConfig)
 	}
 
 	@Bean

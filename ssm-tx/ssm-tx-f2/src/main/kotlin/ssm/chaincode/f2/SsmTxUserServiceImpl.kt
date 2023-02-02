@@ -1,6 +1,6 @@
 package ssm.chaincode.f2
 
-import ssm.chaincode.dsl.config.ChaincodeSsmConfig
+import ssm.chaincode.dsl.config.SsmChaincodeConfig
 import ssm.chaincode.f2.features.command.SsmTxSessionPerformActionFunctionImpl
 import ssm.sdk.core.SsmTxService
 import ssm.tx.dsl.SsmTxUserFunctions
@@ -13,7 +13,7 @@ class SsmTxUserServiceImpl(
 ) : SsmTxUserFunctions {
 
 
-	override fun ssmTxSessionPerformActionFunction(config: ChaincodeSsmConfig): SsmTxSessionPerformActionFunction {
+	override fun ssmTxSessionPerformActionFunction(config: SsmChaincodeConfig): SsmTxSessionPerformActionFunction {
 		return ssmTxSessionPerformActionFunction
 	}
 
