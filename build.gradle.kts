@@ -53,7 +53,7 @@ tasks {
 
 fixers {
 	d2 {
-		outputDirectory = file("storybook/d2/")
+		outputDirectory = file("storybook/stories/d2/")
 	}
 	bundle {
 		id = "ssm-data"

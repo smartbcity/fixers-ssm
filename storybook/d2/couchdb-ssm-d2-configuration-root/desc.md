@@ -1,9 +1,0 @@
-
-
-# Configuration
-
-
-
-Configuration needed to connect to the database. 
-
-

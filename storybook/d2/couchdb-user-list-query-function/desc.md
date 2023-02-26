@@ -1,9 +1,0 @@
-
-
-## Fetch all admins
-
-
-
-
-
-

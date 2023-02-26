@@ -6,7 +6,7 @@ import ssm.couchdb.dsl.config.SsmCouchdbConfig
 /**
  * @d2 model
  * @title SSM Configuration
- * @parent [ssm.data.dsl.SsmDataD2]
+ * @parent [ssm.data.dsl.DataSsmD2]
  */
 data class DataSsmConfig(
 	/**

@@ -1,9 +1,0 @@
-
-
-## Get all chaincode: Parameters
-
-
-
-
-
-
