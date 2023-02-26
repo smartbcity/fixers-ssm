@@ -1,0 +1,22 @@
+import { CodeHighlighter, SegmentedContainer } from '@smartb/g2-documentation'
+import SsmCouchdbConfigDesc from './desc.mdx'
+import SsmCouchdbConfigVisualJson from './visualJson.json'
+
+<SegmentedContainer
+  leftElement={<SsmCouchdbConfigDesc />}
+  leftContainerProps={{}}
+  rightElement={
+    <CodeHighlighter
+      object={SsmCouchdbConfigVisualJson}
+      language={"json"}
+      title={"CouchdbConfig"}
+    />
+  }
+  rightContainerProps={{}}
+/>
+
+<div
+  class={"spacer"}
+/>
+
+

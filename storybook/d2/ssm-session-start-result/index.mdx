@@ -1,14 +1,16 @@
-import { CodeHighlighter, DescriptedCode } from '@smartb/g2-documentation'
-import SsmSessionStartResultDesc from './desc.md'
+import { CodeHighlighter, SegmentedContainer } from '@smartb/g2-documentation'
+import SsmSessionStartResultDesc from './desc.mdx'
 import SsmSessionStartResultVisualJson from './visualJson.json'
 
-<DescriptedCode
+<SegmentedContainer
   leftElement={<SsmSessionStartResultDesc />}
+  leftContainerProps={{}}
   rightElement={
     <CodeHighlighter
       object={SsmSessionStartResultVisualJson}
       language={"json"}
-      title={"Example"}
+      title={"Start Session: Response"}
     />
   }
+  rightContainerProps={{}}
 />

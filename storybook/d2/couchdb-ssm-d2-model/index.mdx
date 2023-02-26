@@ -1,19 +1,27 @@
-import { CodeHighlighter, DescriptedCode } from '@smartb/g2-documentation'
-import CouchdbSsmD2ModelDesc from './desc.md'
+import { CodeHighlighter, SegmentedContainer } from '@smartb/g2-documentation'
+import CouchdbSsmD2ModelDesc from './desc.mdx'
 import CouchdbSsmD2ModelVisualJson from './visualJson.json'
 import DatabaseChangesDTOIndex from '../database-changes-d-t-o/index.mdx'
 import DatabaseDTOIndex from '../database-d-t-o/index.mdx'
 
-<DescriptedCode
+<SegmentedContainer
   leftElement={<CouchdbSsmD2ModelDesc />}
+  leftContainerProps={{}}
   rightElement={
     <CodeHighlighter
       object={CouchdbSsmD2ModelVisualJson}
       language={"json"}
-      title={"Example"}
+      title={"CouchdbSsmD2Model"}
     />
   }
+  rightContainerProps={{}}
 />
+
+<div
+  class={"spacer"}
+/>
+
+
 
 <DatabaseChangesDTOIndex />
 

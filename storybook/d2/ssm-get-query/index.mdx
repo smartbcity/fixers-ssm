@@ -1,14 +1,16 @@
-import { CodeHighlighter, DescriptedCode } from '@smartb/g2-documentation'
-import SsmGetQueryDesc from './desc.md'
+import { CodeHighlighter, SegmentedContainer } from '@smartb/g2-documentation'
+import SsmGetQueryDesc from './desc.mdx'
 import SsmGetQueryVisualJson from './visualJson.json'
 
-<DescriptedCode
+<SegmentedContainer
   leftElement={<SsmGetQueryDesc />}
+  leftContainerProps={{}}
   rightElement={
     <CodeHighlighter
       object={SsmGetQueryVisualJson}
       language={"json"}
-      title={"Example"}
+      title={"Get SSM: Parameters"}
     />
   }
+  rightContainerProps={{}}
 />

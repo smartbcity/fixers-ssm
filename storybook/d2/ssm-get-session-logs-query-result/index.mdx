@@ -1,14 +1,16 @@
-import { CodeHighlighter, DescriptedCode } from '@smartb/g2-documentation'
-import SsmGetSessionLogsQueryResultDesc from './desc.md'
+import { CodeHighlighter, SegmentedContainer } from '@smartb/g2-documentation'
+import SsmGetSessionLogsQueryResultDesc from './desc.mdx'
 import SsmGetSessionLogsQueryResultVisualJson from './visualJson.json'
 
-<DescriptedCode
+<SegmentedContainer
   leftElement={<SsmGetSessionLogsQueryResultDesc />}
+  leftContainerProps={{}}
   rightElement={
     <CodeHighlighter
       object={SsmGetSessionLogsQueryResultVisualJson}
       language={"json"}
-      title={"Example"}
+      title={"Get Session Logs: Result"}
     />
   }
+  rightContainerProps={{}}
 />

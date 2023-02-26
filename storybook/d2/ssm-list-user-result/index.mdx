@@ -1,14 +1,16 @@
-import { CodeHighlighter, DescriptedCode } from '@smartb/g2-documentation'
-import SsmListUserResultDesc from './desc.md'
+import { CodeHighlighter, SegmentedContainer } from '@smartb/g2-documentation'
+import SsmListUserResultDesc from './desc.mdx'
 import SsmListUserResultVisualJson from './visualJson.json'
 
-<DescriptedCode
+<SegmentedContainer
   leftElement={<SsmListUserResultDesc />}
+  leftContainerProps={{}}
   rightElement={
     <CodeHighlighter
       object={SsmListUserResultVisualJson}
       language={"json"}
-      title={"Example"}
+      title={"List Users: Result"}
     />
   }
+  rightContainerProps={{}}
 />

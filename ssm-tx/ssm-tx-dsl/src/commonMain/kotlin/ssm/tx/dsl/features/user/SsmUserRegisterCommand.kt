@@ -9,7 +9,7 @@ import ssm.tx.dsl.features.SsmCommandDTO
 import ssm.tx.dsl.features.SsmCommandResultDTO
 
 /**
- * Creates an SSM
+ * A new user is registered by an admin, Agent structure is signed with the admin private key.
  * @d2 function
  * @parent [ssm.tx.dsl.SsmTxD2Command]
  * @title Register User

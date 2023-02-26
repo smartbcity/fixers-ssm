@@ -1,14 +1,16 @@
-import { CodeHighlighter, DescriptedCode } from '@smartb/g2-documentation'
-import SsmUserGrantCommandDesc from './desc.md'
+import { CodeHighlighter, SegmentedContainer } from '@smartb/g2-documentation'
+import SsmUserGrantCommandDesc from './desc.mdx'
 import SsmUserGrantCommandVisualJson from './visualJson.json'
 
-<DescriptedCode
+<SegmentedContainer
   leftElement={<SsmUserGrantCommandDesc />}
+  leftContainerProps={{}}
   rightElement={
     <CodeHighlighter
       object={SsmUserGrantCommandVisualJson}
       language={"json"}
-      title={"Example"}
+      title={"Grant User: Parameters"}
     />
   }
+  rightContainerProps={{}}
 />

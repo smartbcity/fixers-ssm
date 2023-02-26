@@ -44,16 +44,16 @@ implementation("city.smartb.ssm:ssm-couchdb-f2:${Versions.ssm}")
 ```
 > Note: All functions are implemented as Spring Beans, so they can be instantiated with Dependency Injection mechanism
 
-## SSM-Tx
+## SSM-Data
 
-[SSM-Tx](/docs/ssm-tx-general--page) uses the two previous modules to provide more complex and detailed queries.
+[SSM-Data](/docs/ssm-tx-general--page) uses the two previous modules to provide more complex and detailed queries.
 
 **Import with Gradle**
 ```kotlin
 // Data models and query function definitions
-implementation("city.smartb.ssm:ssm-tx-dsl:${Versions.ssm}")
+implementation("city.smartb.ssm:ssm-data-dsl:${Versions.ssm}")
 
 // Implementation of query functions defined in ssm-couchdb-dsl
-implementation("city.smartb.ssm:ssm-tx-f2:${Versions.ssm}")
+implementation("city.smartb.ssm:ssm-data-f2:${Versions.ssm}")
 ```
 > Note: All functions are implemented as Spring Beans, so they can be instantiated with Dependency Injection mechanism

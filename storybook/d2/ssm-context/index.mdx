@@ -1,14 +1,22 @@
-import { CodeHighlighter, DescriptedCode } from '@smartb/g2-documentation'
-import SsmContextDesc from './desc.md'
+import { CodeHighlighter, SegmentedContainer } from '@smartb/g2-documentation'
+import SsmContextDesc from './desc.mdx'
 import SsmContextVisualJson from './visualJson.json'
 
-<DescriptedCode
+<SegmentedContainer
   leftElement={<SsmContextDesc />}
+  leftContainerProps={{}}
   rightElement={
     <CodeHighlighter
       object={SsmContextVisualJson}
       language={"json"}
-      title={"Example"}
+      title={"SsmContext"}
     />
   }
+  rightContainerProps={{}}
 />
+
+<div
+  class={"spacer"}
+/>
+
+

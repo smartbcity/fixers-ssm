@@ -1,17 +1,25 @@
-import { CodeHighlighter, DescriptedCode } from '@smartb/g2-documentation'
-import CouchdbSsmConfigIndex from '../couchdb-ssm-config/index.mdx'
-import CouchdbSsmD2ConfigurationDesc from './desc.md'
+import { CodeHighlighter, SegmentedContainer } from '@smartb/g2-documentation'
+import CouchdbSsmD2ConfigurationDesc from './desc.mdx'
 import CouchdbSsmD2ConfigurationVisualJson from './visualJson.json'
+import SsmCouchdbConfigIndex from '../ssm-couchdb-config/index.mdx'
 
-<DescriptedCode
+<SegmentedContainer
   leftElement={<CouchdbSsmD2ConfigurationDesc />}
+  leftContainerProps={{}}
   rightElement={
     <CodeHighlighter
       object={CouchdbSsmD2ConfigurationVisualJson}
       language={"json"}
-      title={"Example"}
+      title={"CouchdbSsmD2Configuration"}
     />
   }
+  rightContainerProps={{}}
 />
 
-<CouchdbSsmConfigIndex />
+<div
+  class={"spacer"}
+/>
+
+
+
+<SsmCouchdbConfigIndex />

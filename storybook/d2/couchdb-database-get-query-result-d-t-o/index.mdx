@@ -1,14 +1,22 @@
-import { CodeHighlighter, DescriptedCode } from '@smartb/g2-documentation'
-import CouchdbDatabaseGetQueryResultDTODesc from './desc.md'
+import { CodeHighlighter, SegmentedContainer } from '@smartb/g2-documentation'
+import CouchdbDatabaseGetQueryResultDTODesc from './desc.mdx'
 import CouchdbDatabaseGetQueryResultDTOVisualJson from './visualJson.json'
 
-<DescriptedCode
+<SegmentedContainer
   leftElement={<CouchdbDatabaseGetQueryResultDTODesc />}
+  leftContainerProps={{}}
   rightElement={
     <CodeHighlighter
       object={CouchdbDatabaseGetQueryResultDTOVisualJson}
       language={"json"}
-      title={"Example"}
+      title={"Get Database: Result"}
     />
   }
+  rightContainerProps={{}}
 />
+
+<div
+  class={"spacer"}
+/>
+
+

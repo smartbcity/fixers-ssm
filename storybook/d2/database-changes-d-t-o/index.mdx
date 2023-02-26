@@ -1,14 +1,16 @@
-import { CodeHighlighter, DescriptedCode } from '@smartb/g2-documentation'
-import DatabaseChangesDTODesc from './desc.md'
+import { CodeHighlighter, SegmentedContainer } from '@smartb/g2-documentation'
+import DatabaseChangesDTODesc from './desc.mdx'
 import DatabaseChangesDTOVisualJson from './visualJson.json'
 
-<DescriptedCode
+<SegmentedContainer
   leftElement={<DatabaseChangesDTODesc />}
+  leftContainerProps={{}}
   rightElement={
     <CodeHighlighter
       object={DatabaseChangesDTOVisualJson}
       language={"json"}
-      title={"Example"}
+      title={"Database"}
     />
   }
+  rightContainerProps={{}}
 />

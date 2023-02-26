@@ -1,14 +1,16 @@
-import { CodeHighlighter, DescriptedCode } from '@smartb/g2-documentation'
-import CouchdbSsmSessionStateGetQueryResultDesc from './desc.md'
+import { CodeHighlighter, SegmentedContainer } from '@smartb/g2-documentation'
+import CouchdbSsmSessionStateGetQueryResultDesc from './desc.mdx'
 import CouchdbSsmSessionStateGetQueryResultVisualJson from './visualJson.json'
 
-<DescriptedCode
+<SegmentedContainer
   leftElement={<CouchdbSsmSessionStateGetQueryResultDesc />}
+  leftContainerProps={{}}
   rightElement={
     <CodeHighlighter
       object={CouchdbSsmSessionStateGetQueryResultVisualJson}
       language={"json"}
-      title={"Example"}
+      title={"Get Sessions: Result"}
     />
   }
+  rightContainerProps={{}}
 />

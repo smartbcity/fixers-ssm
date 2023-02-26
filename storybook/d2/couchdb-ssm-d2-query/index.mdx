@@ -1,10 +1,10 @@
-import { CodeHighlighter, DescriptedCode } from '@smartb/g2-documentation'
+import { CodeHighlighter, SegmentedContainer } from '@smartb/g2-documentation'
 import CouchdbAdminListQueryFunctionIndex from '../couchdb-admin-list-query-function/index.mdx'
 import CouchdbChaincodeListQueryFunctionIndex from '../couchdb-chaincode-list-query-function/index.mdx'
 import CouchdbDatabaseGetChangesQueryFunctionIndex from '../couchdb-database-get-changes-query-function/index.mdx'
 import CouchdbDatabaseGetQueryFunctionIndex from '../couchdb-database-get-query-function/index.mdx'
 import CouchdbDatabaseListQueryFunctionIndex from '../couchdb-database-list-query-function/index.mdx'
-import CouchdbSsmD2QueryDesc from './desc.md'
+import CouchdbSsmD2QueryDesc from './desc.mdx'
 import CouchdbSsmD2QueryVisualJson from './visualJson.json'
 import CouchdbSsmGetQueryFunctionIndex from '../couchdb-ssm-get-query-function/index.mdx'
 import CouchdbSsmListQueryFunctionIndex from '../couchdb-ssm-list-query-function/index.mdx'
@@ -12,16 +12,24 @@ import CouchdbSsmSessionStateGetQueryFunctionIndex from '../couchdb-ssm-session-
 import CouchdbSsmSessionStateListQueryFunctionIndex from '../couchdb-ssm-session-state-list-query-function/index.mdx'
 import CouchdbUserListQueryFunctionIndex from '../couchdb-user-list-query-function/index.mdx'
 
-<DescriptedCode
+<SegmentedContainer
   leftElement={<CouchdbSsmD2QueryDesc />}
+  leftContainerProps={{}}
   rightElement={
     <CodeHighlighter
       object={CouchdbSsmD2QueryVisualJson}
       language={"json"}
-      title={"Example"}
+      title={"CouchdbSsmD2Query"}
     />
   }
+  rightContainerProps={{}}
 />
+
+<div
+  class={"spacer"}
+/>
+
+
 
 <CouchdbDatabaseListQueryFunctionIndex />
 

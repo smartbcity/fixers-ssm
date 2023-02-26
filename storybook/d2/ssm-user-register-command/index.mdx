@@ -1,14 +1,16 @@
-import { CodeHighlighter, DescriptedCode } from '@smartb/g2-documentation'
-import SsmUserRegisterCommandDesc from './desc.md'
+import { CodeHighlighter, SegmentedContainer } from '@smartb/g2-documentation'
+import SsmUserRegisterCommandDesc from './desc.mdx'
 import SsmUserRegisterCommandVisualJson from './visualJson.json'
 
-<DescriptedCode
+<SegmentedContainer
   leftElement={<SsmUserRegisterCommandDesc />}
+  leftContainerProps={{}}
   rightElement={
     <CodeHighlighter
       object={SsmUserRegisterCommandVisualJson}
       language={"json"}
-      title={"Example"}
+      title={"Register User: Parameters"}
     />
   }
+  rightContainerProps={{}}
 />

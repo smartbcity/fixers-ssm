@@ -11,8 +11,6 @@ class SsmTxUserServiceImpl(
 	private val ssmTxSessionPerformActionFunction: SsmTxSessionPerformActionFunctionImpl =
 		SsmTxSessionPerformActionFunctionImpl(ssmTxService),
 ) : SsmTxUserFunctions {
-
-
 	override fun ssmTxSessionPerformActionFunction(config: SsmChaincodeConfig): SsmTxSessionPerformActionFunction {
 		return ssmTxSessionPerformActionFunction
 	}

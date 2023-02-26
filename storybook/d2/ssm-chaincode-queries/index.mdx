@@ -1,14 +1,22 @@
-import { CodeHighlighter, DescriptedCode } from '@smartb/g2-documentation'
-import SsmChaincodeQueriesDesc from './desc.md'
+import { CodeHighlighter, SegmentedContainer } from '@smartb/g2-documentation'
+import SsmChaincodeQueriesDesc from './desc.mdx'
 import SsmChaincodeQueriesVisualJson from './visualJson.json'
 
-<DescriptedCode
+<SegmentedContainer
   leftElement={<SsmChaincodeQueriesDesc />}
+  leftContainerProps={{}}
   rightElement={
     <CodeHighlighter
       object={SsmChaincodeQueriesVisualJson}
       language={"json"}
-      title={"Example"}
+      title={"Query function"}
     />
   }
+  rightContainerProps={{}}
 />
+
+<div
+  class={"spacer"}
+/>
+
+

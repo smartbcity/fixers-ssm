@@ -1,14 +1,16 @@
-import { CodeHighlighter, DescriptedCode } from '@smartb/g2-documentation'
-import SsmListSessionQueryDesc from './desc.md'
+import { CodeHighlighter, SegmentedContainer } from '@smartb/g2-documentation'
+import SsmListSessionQueryDesc from './desc.mdx'
 import SsmListSessionQueryVisualJson from './visualJson.json'
 
-<DescriptedCode
+<SegmentedContainer
   leftElement={<SsmListSessionQueryDesc />}
+  leftContainerProps={{}}
   rightElement={
     <CodeHighlighter
       object={SsmListSessionQueryVisualJson}
       language={"json"}
-      title={"Example"}
+      title={"List Sessions: Parameters"}
     />
   }
+  rightContainerProps={{}}
 />

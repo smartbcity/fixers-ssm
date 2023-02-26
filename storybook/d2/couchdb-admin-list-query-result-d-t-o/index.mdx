@@ -1,14 +1,22 @@
-import { CodeHighlighter, DescriptedCode } from '@smartb/g2-documentation'
-import CouchdbAdminListQueryResultDTODesc from './desc.md'
+import { CodeHighlighter, SegmentedContainer } from '@smartb/g2-documentation'
+import CouchdbAdminListQueryResultDTODesc from './desc.mdx'
 import CouchdbAdminListQueryResultDTOVisualJson from './visualJson.json'
 
-<DescriptedCode
+<SegmentedContainer
   leftElement={<CouchdbAdminListQueryResultDTODesc />}
+  leftContainerProps={{}}
   rightElement={
     <CodeHighlighter
       object={CouchdbAdminListQueryResultDTOVisualJson}
       language={"json"}
-      title={"Example"}
+      title={"Get all admins: Result"}
     />
   }
+  rightContainerProps={{}}
 />
+
+<div
+  class={"spacer"}
+/>
+
+

@@ -27,7 +27,7 @@ class SsmTxAdminServiceImpl(
 		return ssmUserGrantFunction
 	}
 
-	override fun ssmTxUserRegisterFunction(): SsmTxUserRegisterFunction {
+		override fun ssmTxUserRegisterFunction(): SsmTxUserRegisterFunction {
 		return ssmUserRegisterFunction
 	}
 

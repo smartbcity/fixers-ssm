@@ -1,14 +1,16 @@
-import { CodeHighlighter, DescriptedCode } from '@smartb/g2-documentation'
-import SsmCreateCommandDesc from './desc.md'
+import { CodeHighlighter, SegmentedContainer } from '@smartb/g2-documentation'
+import SsmCreateCommandDesc from './desc.mdx'
 import SsmCreateCommandVisualJson from './visualJson.json'
 
-<DescriptedCode
+<SegmentedContainer
   leftElement={<SsmCreateCommandDesc />}
+  leftContainerProps={{}}
   rightElement={
     <CodeHighlighter
       object={SsmCreateCommandVisualJson}
       language={"json"}
-      title={"Example"}
+      title={"Create SSM: Parameters"}
     />
   }
+  rightContainerProps={{}}
 />

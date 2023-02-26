@@ -1,14 +1,16 @@
-import { CodeHighlighter, DescriptedCode } from '@smartb/g2-documentation'
-import SsmInitdResultDesc from './desc.md'
+import { CodeHighlighter, SegmentedContainer } from '@smartb/g2-documentation'
+import SsmInitdResultDesc from './desc.mdx'
 import SsmInitdResultVisualJson from './visualJson.json'
 
-<DescriptedCode
+<SegmentedContainer
   leftElement={<SsmInitdResultDesc />}
+  leftContainerProps={{}}
   rightElement={
     <CodeHighlighter
       object={SsmInitdResultVisualJson}
       language={"json"}
-      title={"Example"}
+      title={"Initialize SSM: Response"}
     />
   }
+  rightContainerProps={{}}
 />

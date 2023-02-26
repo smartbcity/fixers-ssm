@@ -1,14 +1,16 @@
-import { CodeHighlighter, DescriptedCode } from '@smartb/g2-documentation'
-import SsmGetTransactionQueryResultDesc from './desc.md'
+import { CodeHighlighter, SegmentedContainer } from '@smartb/g2-documentation'
+import SsmGetTransactionQueryResultDesc from './desc.mdx'
 import SsmGetTransactionQueryResultVisualJson from './visualJson.json'
 
-<DescriptedCode
+<SegmentedContainer
   leftElement={<SsmGetTransactionQueryResultDesc />}
+  leftContainerProps={{}}
   rightElement={
     <CodeHighlighter
       object={SsmGetTransactionQueryResultVisualJson}
       language={"json"}
-      title={"Example"}
+      title={"Get a transaction: Result"}
     />
   }
+  rightContainerProps={{}}
 />
