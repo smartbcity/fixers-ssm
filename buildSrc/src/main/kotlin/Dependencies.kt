@@ -20,8 +20,7 @@ object Versions {
 	val f2 = PluginVersions.fixers
 	val ktor = FixersVersions.Kotlin.ktor
 
-
-	const val cloudant = "0.0.34"
+	const val cloudant = "0.3.1"
 	const val bouncycastleVersion = "1.70"
 }
 
