@@ -1,7 +1,7 @@
 module.exports = {
   stories: [
-    "../**/*.stories.mdx",
-    "../**/*.stories.@(js|jsx|ts|tsx)",
+    "../d2/**/*.stories.mdx",
+    "../d2/**/*.stories.@(js|jsx|ts|tsx)",
   ],
   addons: [
     {
@@ -17,6 +17,6 @@ module.exports = {
   ],
   features: {
     emotionAlias: false,
-    // buildStoriesJson: true
+    storyStoreV7: true,
   },
 };
