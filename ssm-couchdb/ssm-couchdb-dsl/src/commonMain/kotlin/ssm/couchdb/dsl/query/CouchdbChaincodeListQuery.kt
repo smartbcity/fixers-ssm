@@ -15,7 +15,8 @@ import ssm.chaincode.dsl.model.uri.ChaincodeUriDTO
  * @order 20
  * @parent [ssm.couchdb.dsl.CouchdbSsmD2Query]
  */
-typealias CouchdbChaincodeListQueryFunction = F2Function<CouchdbChaincodeListQueryDTO, CouchdbChaincodeListQueryResultDTO>
+typealias CouchdbChaincodeListQueryFunction
+		= F2Function<CouchdbChaincodeListQueryDTO, CouchdbChaincodeListQueryResultDTO>
 
 /**
  * @title Get all chaincode: Parameters

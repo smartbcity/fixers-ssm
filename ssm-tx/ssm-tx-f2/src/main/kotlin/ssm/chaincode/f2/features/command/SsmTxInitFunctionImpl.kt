@@ -30,7 +30,10 @@ class SsmTxInitFunctionImpl(
 	}
 
 	private suspend fun initSsm(chaincodeUri: ChaincodeUri, ssm: Ssm, signerName: AgentName): InvokeReturn? {
-		return createIfNotExist(ssm, { queryService.getSsm(chaincodeUri, ssm.name) }, { this.createSsm(chaincodeUri, it, signerName) })
+		return createIfNotExist(ssm,
+			{ queryService.getSsm(chaincodeUri, ssm.name) },
+			{ this.createSsm(chaincodeUri, it, signerName) }
+		)
 	}
 
 	private suspend fun initUser(chaincodeUri: ChaincodeUri, user: Agent, signerName: AgentName): InvokeReturn? {

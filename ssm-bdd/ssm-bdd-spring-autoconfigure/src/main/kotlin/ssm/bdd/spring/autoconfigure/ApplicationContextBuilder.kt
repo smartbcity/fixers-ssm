@@ -8,7 +8,9 @@ import org.springframework.context.support.GenericApplicationContext
 
 class ApplicationContextBuilder {
 
-	fun create(types: Array<Class<*>>, profile: Array<String> = emptyArray(), config: Map<String, String>): GenericApplicationContext {
+	fun create(
+		types: Array<Class<*>>, profile: Array<String> = emptyArray(), config: Map<String, String>
+	): GenericApplicationContext {
 		return SpringApplicationBuilder(*types)
 			.profiles(*profile)
 			.withConfig(config)

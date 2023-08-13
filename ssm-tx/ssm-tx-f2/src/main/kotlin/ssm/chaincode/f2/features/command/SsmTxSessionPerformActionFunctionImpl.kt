@@ -15,7 +15,9 @@ class SsmTxSessionPerformActionFunctionImpl(
 	override suspend fun invoke(
 		msg: Flow<SsmSessionPerformActionCommand>
 	): Flow<SsmSessionPerformActionResult> = msg.map { payload ->
-		ssmTxService.sendPerform(payload.chaincodeUri.burst(), payload.action, payload.context, payload.signerName).let { result ->
+		ssmTxService.sendPerform(
+			payload.chaincodeUri.burst(), payload.action, payload.context, payload.signerName
+		).let { result ->
 			SsmSessionPerformActionResult(result.transactionId)
 		}
 	}

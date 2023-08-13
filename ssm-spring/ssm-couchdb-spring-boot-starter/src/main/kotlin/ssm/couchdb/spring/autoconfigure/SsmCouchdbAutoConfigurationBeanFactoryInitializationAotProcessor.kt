@@ -12,7 +12,8 @@ import ssm.couchdb.dsl.config.SsmCouchdbConfig
 
 class SsmCouchdbAutoConfigurationBeanFactoryInitializationAotProcessor : BeanFactoryInitializationAotProcessor {
     override fun processAheadOfTime(bf: ConfigurableListableBeanFactory): BeanFactoryInitializationAotContribution {
-        return  BeanFactoryInitializationAotContribution { ctx: GenerationContext, code: BeanFactoryInitializationCode? ->
+        return  BeanFactoryInitializationAotContribution {
+            ctx: GenerationContext, code: BeanFactoryInitializationCode? ->
             val hints = ctx.runtimeHints
             val method: Method = ReflectionUtils.findMethod(
                 SsmCouchdbAutoConfiguration::class.java,

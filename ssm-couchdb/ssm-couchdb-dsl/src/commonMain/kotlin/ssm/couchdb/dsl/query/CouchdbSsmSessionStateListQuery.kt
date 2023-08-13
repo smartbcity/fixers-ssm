@@ -19,7 +19,8 @@ import ssm.chaincode.dsl.model.uri.ChaincodeUriDTO
  * @order 40
  * @title List Sessions
  */
-typealias CouchdbSsmSessionStateListQueryFunction = F2Function<CouchdbSsmSessionStateListQueryDTO, CouchdbSsmSessionStateListQueryResultDTO>
+typealias CouchdbSsmSessionStateListQueryFunction
+		= F2Function<CouchdbSsmSessionStateListQueryDTO, CouchdbSsmSessionStateListQueryResultDTO>
 
 @Serializable
 @JsExport

@@ -9,7 +9,8 @@ import org.springframework.beans.factory.config.ConfigurableListableBeanFactory
 class RsaKeyAotProcessor : BeanFactoryInitializationAotProcessor {
 
     override fun processAheadOfTime(bf: ConfigurableListableBeanFactory): BeanFactoryInitializationAotContribution {
-        return  BeanFactoryInitializationAotContribution { ctx: GenerationContext, code: BeanFactoryInitializationCode? ->
+        return  BeanFactoryInitializationAotContribution {
+            ctx: GenerationContext, code: BeanFactoryInitializationCode? ->
             val hints = ctx.runtimeHints
             hints.resources().registerPattern("user/adam")
             hints.resources().registerPattern("user/adam.pub")

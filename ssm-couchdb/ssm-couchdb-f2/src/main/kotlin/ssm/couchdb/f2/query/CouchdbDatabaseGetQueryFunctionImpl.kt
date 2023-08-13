@@ -17,7 +17,9 @@ class CouchdbDatabaseGetQueryFunctionImpl(
 
 	private fun DatabaseInformation.asDatabase() = Database(this.dbName)
 
-	override suspend fun invoke(msg: Flow<CouchdbDatabaseGetQueryDTO>): Flow<CouchdbDatabaseGetQueryResultDTO> = msg.map { payload ->
+	override suspend fun invoke(
+		msg: Flow<CouchdbDatabaseGetQueryDTO>
+	): Flow<CouchdbDatabaseGetQueryResultDTO> = msg.map { payload ->
 		try {
 			CouchdbDatabaseGetQueryResult(
 				item = couchdbClient.getDatabase(chainCodeDbName(payload.channelId, payload.chaincodeId)).asDatabase()

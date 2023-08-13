@@ -21,7 +21,9 @@ class CouchdbChaincodeListQueryFunctionImpl(
 		const val DB_LSCC = "_lscc"
 	}
 
-	override suspend fun invoke(msg: Flow<CouchdbChaincodeListQueryDTO>): Flow<CouchdbChaincodeListQueryResultDTO> = msg.map { _ ->
+	override suspend fun invoke(
+		msg: Flow<CouchdbChaincodeListQueryDTO>
+	): Flow<CouchdbChaincodeListQueryResultDTO> = msg.map { _ ->
 		couchdbClient.cloudant.allDbs.execute()
 			.result
 			.asFlow()

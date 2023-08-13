@@ -20,7 +20,8 @@ import ssm.couchdb.dsl.model.DatabaseChangesDTO
  * @order 20
  * @parent [ssm.couchdb.dsl.CouchdbSsmD2Query]
  */
-typealias CouchdbDatabaseGetChangesQueryFunction = F2Function<CouchdbDatabaseGetChangesQueryDTO, CouchdbDatabaseGetChangesQueryResultDTO>
+typealias CouchdbDatabaseGetChangesQueryFunction
+		= F2Function<CouchdbDatabaseGetChangesQueryDTO, CouchdbDatabaseGetChangesQueryResultDTO>
 
 /**
  * @title Get Database: Parameters

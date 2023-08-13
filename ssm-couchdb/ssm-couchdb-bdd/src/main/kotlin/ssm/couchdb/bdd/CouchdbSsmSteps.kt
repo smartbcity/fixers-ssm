@@ -44,7 +44,8 @@ class CouchdbSsmSteps : SsmQueryStep(), En {
 				println(lastChanges)
 			}
 		}
-		Then("Changes for session {string} for {string} is") { sessionName: SessionName, ssmName: SsmName, dataTable: DataTable ->
+		Then("Changes for session {string} for {string} is")
+			{ sessionName: SessionName, ssmName: SsmName, dataTable: DataTable ->
 			runBlocking {
 				delay(timeMillis = 1500)
 				lastChanges = getChanges(bag.chaincodeUri, ssmName.contextualize(bag), sessionName.contextualize(bag))

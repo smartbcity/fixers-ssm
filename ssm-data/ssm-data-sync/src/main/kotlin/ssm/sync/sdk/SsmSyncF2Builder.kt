@@ -12,8 +12,10 @@ object SsmSyncF2Builder {
 		return SyncSsmCommandFunctionImpl(
 			dataSsmGetQueryFunction = dataSsmQueryFunctionImpl.dataSsmGetQueryFunction(),
 			dataSsmSessionLogListQueryFunction = dataSsmQueryFunctionImpl.dataSsmSessionLogListQueryFunction(),
-			couchdbSsmSessionStateGetQueryFunction = couchDbDatabaseGetChangesQueryFunction.couchdbSsmSessionStateGetQueryFunction(),
-			couchdbDatabaseGetChangesQueryFunction = couchDbDatabaseGetChangesQueryFunction.couchdbDatabaseGetChangesQueryFunction()
+			couchdbSsmSessionStateGetQueryFunction
+				= couchDbDatabaseGetChangesQueryFunction.couchdbSsmSessionStateGetQueryFunction(),
+			couchdbDatabaseGetChangesQueryFunction
+				= couchDbDatabaseGetChangesQueryFunction.couchdbDatabaseGetChangesQueryFunction()
 		)
 	}
 }

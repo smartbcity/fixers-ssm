@@ -15,7 +15,9 @@ class CouchdbSsmSessionStateListQueryFunctionImpl(
 	private val couchdbClient: CouchdbSsmClient,
 ) : CouchdbSsmSessionStateListQueryFunction {
 
-	override suspend fun invoke(msg: Flow<CouchdbSsmSessionStateListQueryDTO>): Flow<CouchdbSsmSessionStateListQueryResultDTO> =
+	override suspend fun invoke(
+		msg: Flow<CouchdbSsmSessionStateListQueryDTO>
+	): Flow<CouchdbSsmSessionStateListQueryResultDTO> =
 		msg.map { payload ->
 			val filters = payload.ssm?.let { ssm ->
 				mapOf(SsmSessionStateDTO::ssm.name to ssm)

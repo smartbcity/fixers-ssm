@@ -16,7 +16,8 @@ import ssm.data.dsl.model.DataSsmSessionState
  * @order 40
  * @title List Session Logs
  */
-typealias DataSsmSessionLogListQueryFunction = F2Function<DataSsmSessionLogListQueryDTO, DataSsmSessionLogListQueryResultDTO>
+typealias DataSsmSessionLogListQueryFunction
+		= F2Function<DataSsmSessionLogListQueryDTO, DataSsmSessionLogListQueryResultDTO>
 
 @Serializable
 @JsExport

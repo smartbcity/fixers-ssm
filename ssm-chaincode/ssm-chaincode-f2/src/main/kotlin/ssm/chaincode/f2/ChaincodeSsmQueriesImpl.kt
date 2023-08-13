@@ -28,7 +28,8 @@ import ssm.sdk.core.SsmServiceFactory
 
 class ChaincodeSsmQueriesImpl(
     config: SsmChaincodeConfig,
-    private val ssmQueryService: SsmQueryService = SsmServiceFactory.builder(SsmSdkConfig(config.url)).buildQueryService()
+    private val ssmQueryService: SsmQueryService
+		= SsmServiceFactory.builder(SsmSdkConfig(config.url)).buildQueryService()
 ): SsmChaincodeQueries {
 
 	override fun ssmGetAdminFunction(): SsmGetAdminFunction {

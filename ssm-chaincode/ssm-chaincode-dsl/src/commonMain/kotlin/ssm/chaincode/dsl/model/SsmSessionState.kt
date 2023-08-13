@@ -34,8 +34,10 @@ interface SsmSessionStateDTO : SsmSessionDTO, WithPrivate {
 }
 
 /**
- * The Session State represents a snapshot of a session on a given state machine. It holds the current state index, public and private data relevant to the SSM session.
- * The iteration is incremented at every transition. The originating transition allows to track the session history in the ledger.
+ * The Session State represents a snapshot of a session on a given state machine.
+ * It holds the current state index, public and private data relevant to the SSM session.
+ * The iteration is incremented at every transition.
+ * The originating transition allows to track the session history in the ledger.
  * @d2 model
  * @parent [SsmSession]
  * @order 10

@@ -21,7 +21,9 @@ class CloudantFixed(
 	authenticator: Authenticator
 ) : Cloudant(serviceName, authenticator) {
 
-	fun postChanges(postChangesOptions: PostChangesOptions, ssm: SsmName?, session: SessionName?): ServiceCall<ChangesResult> {
+	fun postChanges(
+		postChangesOptions: PostChangesOptions, ssm: SsmName?, session: SessionName?
+	): ServiceCall<ChangesResult> {
 		Validator.notNull(
 			postChangesOptions,
 			"postChangesOptions cannot be null"

@@ -65,7 +65,9 @@ class SsmTxService(
 		}
 	}
 
-	suspend fun sendPerform(chaincodeUri: ChaincodeUri, action: String, context: SsmContext, signerName: AgentName): InvokeReturn {
+	suspend fun sendPerform(
+		chaincodeUri: ChaincodeUri, action: String, context: SsmContext, signerName: AgentName
+	): InvokeReturn {
 		logger.info("Perform action[${action}] session[${context.session}] with signer[$signerName]")
 		return signAndSend(chaincodeUri, signerName) {
 			perform(action, context)

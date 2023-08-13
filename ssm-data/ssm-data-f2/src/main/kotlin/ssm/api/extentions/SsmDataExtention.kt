@@ -58,7 +58,6 @@ suspend fun SessionName.getSessionLogs(
 			ssmName = ssmUri.ssmName
 		).invokeWith(ssmGetSessionLogsQueryFunction).logs
 	} catch (e: Exception) {
-		e.printStackTrace()
 		emptyList()
 	}
 }

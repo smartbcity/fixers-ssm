@@ -83,7 +83,9 @@ abstract class SsmQueryStep {
 		Then("Session {string} for {string} have current state origin {string} current {string} iteration {string}")
 		{ sessionName: SessionName, ssmName: SsmName,origin: String, current: String, iteration: String ->
 			runBlocking {
-				Assertions.assertThat(getSession(bag.chaincodeUri.toSsmUri(ssmName), sessionName)).hasFieldOrProperty(SsmSessionState::origin.name)
+				Assertions.assertThat(
+					getSession(bag.chaincodeUri.toSsmUri(ssmName), sessionName)
+				).hasFieldOrProperty(SsmSessionState::origin.name)
 					.isEqualTo(origin)
 					.hasFieldOrProperty(SsmSessionState::current.name).isEqualTo(current)
 					.hasFieldOrProperty(SsmSessionState::iteration.name).isEqualTo(iteration)
@@ -130,9 +132,11 @@ abstract class SsmQueryStep {
 			}
 		}
 
-		Then("The session {string} for {string} have logs") { sessionName: SessionName, ssmName: SsmName, table: DataTable ->
+		Then("The session {string} for {string} have logs")
+		{ sessionName: SessionName, ssmName: SsmName, table: DataTable ->
 			runBlocking {
-				val logs = logSession(bag.chaincodeUri.toSsmUri(ssmName), sessionName.contextualize(bag)).sortedBy { it.state.iteration }
+				val logs = logSession(bag.chaincodeUri.toSsmUri(ssmName), sessionName.contextualize(bag))
+					.sortedBy { it.state.iteration }
 				table.asCucumberSessionLog().forEachIndexed { index, clog ->
 					val log = logs[index]
 					Assertions.assertThat(log.state.origin?.action).isEqualTo(clog.originAction)

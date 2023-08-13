@@ -16,7 +16,9 @@ class CouchdbDatabaseListQueryFunctionImpl(
 	private val couchdbClient: CouchdbSsmClient,
 ) : CouchdbDatabaseListQueryFunction {
 
-	override suspend fun invoke(msg: Flow<CouchdbDatabaseListQueryDTO>): Flow<CouchdbDatabaseListQueryResultDTO> = msg.map { payload ->
+	override suspend fun invoke(
+		msg: Flow<CouchdbDatabaseListQueryDTO>
+	): Flow<CouchdbDatabaseListQueryResultDTO> = msg.map { payload ->
 		val total = 0
 		val filter = listOfNotNull(payload.channelId, "_", payload.chaincodeId).joinToString()
 
